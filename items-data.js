@@ -2928,7 +2928,7 @@ const ITEMS_DATA = {
             craftableItem: false,
             damage: "1d10",
             statModifiers: { magic: 2, accuracy: 2 },
-            specialEffects: ["All Fire spells cost 1 less stamina and have +10% status effect chance"],
+            specialEffects: ["All Fire spells cost 1 less stamina and have +10% increased status effect chance"],
             enchantmentSlots: 2,
             desc: "A staff wreathed in flames. +2 Magic, +2 Accuracy. Damage: 1d10. Effect: Fire spell enchantment",
             icon: "🔥",

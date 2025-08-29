@@ -258,8 +258,16 @@ class UIComponents {
         }
 
         setupInputListener('sidebar-item-search', () => this.filterSidebarItemList())
-        setupSelectListener('sidebar-item-category', () => this.filterSidebarItemList())
+        setupInputListener('sidebar-item-name-search', () => this.filterSidebarItemList())
+        setupInputListener('sidebar-item-desc-search', () => this.filterSidebarItemList())
         setupSelectListener('sidebar-item-type', () => this.filterSidebarItemList())
+        setupSelectListener('sidebar-item-rarity', () => this.filterSidebarItemList())
+
+        // Clear filters button
+        const clearFiltersBtn = document.getElementById('clear-item-filters-btn')
+        if (clearFiltersBtn) {
+            clearFiltersBtn.addEventListener('click', () => this.clearItemFilters())
+        }
 
         // Skill category selection (use event delegation with protection)
         const categoryHandler = (e) => {
@@ -4638,7 +4646,7 @@ class UIComponents {
                 ${damageTagHtml}
                 <span class="tooltip-price ${isAffordable ? '' : 'expensive'}">${priceText}</span>
             </div>
-            <div class="tooltip-description">${itemData.desc}</div>
+            <div class="tooltip-description">${this.getEnhancedItemDescription(itemData)}</div>
             ${statBonusesHtml ? `<div class="tooltip-stats">${statBonusesHtml}</div>` : ''}
             <div class="tooltip-rarity ${itemData.rarity}">${itemData.rarity}</div>
         `
@@ -4749,7 +4757,7 @@ class UIComponents {
                 <span class="tooltip-name">${itemData.name}</span>
                 ${isEquipped ? `<span class="tooltip-equipped">EQUIPPED</span>` : ''}
             </div>
-            <div class="tooltip-description">${itemData.desc}</div>
+            <div class="tooltip-description">${this.getEnhancedItemDescription(itemData)}</div>
             ${damageHtml}
             ${statBonusesHtml ? `<div class="tooltip-stats">${statBonusesHtml}</div>` : ''}
             ${effectsHtml}
@@ -5104,7 +5112,7 @@ class UIComponents {
                     <div class="tooltip-type">${this.formatItemType(item.type)}</div>
                 </div>
                 
-                <div class="tooltip-description">${item.desc}</div>
+                                    <div class="tooltip-description">${this.getEnhancedItemDescription(item)}</div>
                 
                 <div class="tooltip-stats">
                     ${this.renderCraftingTooltipStats(item)}
@@ -5388,7 +5396,7 @@ class UIComponents {
                     <span class="loot-item-name" style="color: ${color};">${item.name}</span>
                 </div>
                 <div class="loot-item-rarity" style="color: ${color};">${item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)} ${item.type}</div>
-                <div class="loot-item-desc">${item.desc}</div>
+                <div class="loot-item-desc">${this.getEnhancedItemDescription(item)}</div>
             </div>
         `
     }
@@ -7001,7 +7009,7 @@ class UIComponents {
                 
                 ${item.desc ? `
                     <div class="item-description">
-                        ${item.desc}
+                        ${this.getEnhancedItemDescription(item)}
                     </div>
                 ` : ''}
                 
@@ -7388,28 +7396,65 @@ class UIComponents {
         this.renderSidebarItemList(allItems)
     }
 
-    // Filter sidebar item list based on search and category
+    // Filter sidebar item list based on search, type, and rarity
     filterSidebarItemList() {
-        const searchTerm = document.getElementById('sidebar-item-search')?.value.toLowerCase() || ''
-        const selectedCategory = document.getElementById('sidebar-item-category')?.value || 'all'
+        // Handle both single search box and separate name/description search boxes
+        const singleSearchBox = document.getElementById('sidebar-item-search')
+        const nameSearchBox = document.getElementById('sidebar-item-name-search')
+        const descSearchBox = document.getElementById('sidebar-item-desc-search')
+
+        let nameSearchTerm = ''
+        let descSearchTerm = ''
+
+        if (singleSearchBox) {
+            // Single search box - search both name and description
+            const searchTerm = singleSearchBox.value.toLowerCase()
+            nameSearchTerm = searchTerm
+            descSearchTerm = searchTerm
+        } else if (nameSearchBox && descSearchBox) {
+            // Separate search boxes
+            nameSearchTerm = nameSearchBox.value.toLowerCase()
+            descSearchTerm = descSearchBox.value.toLowerCase()
+        }
+
         const selectedType = document.getElementById('sidebar-item-type')?.value || 'all'
+        const selectedRarity = document.getElementById('sidebar-item-rarity')?.value || 'all'
 
         const allItems = this.getAllAvailableItems()
 
         let filteredItems = allItems.filter(item => {
-            const matchesSearch = item.name.toLowerCase().includes(searchTerm) ||
-                item.desc.toLowerCase().includes(searchTerm)
-
-            const matchesCategory = selectedCategory === 'all' ||
-                this.getItemAdminCategory(item) === selectedCategory
+            const matchesNameSearch = nameSearchTerm === '' ||
+                item.name.toLowerCase().includes(nameSearchTerm)
+            const matchesDescSearch = descSearchTerm === '' ||
+                item.desc.toLowerCase().includes(descSearchTerm)
 
             const matchesType = selectedType === 'all' ||
                 this.getItemType(item) === selectedType
 
-            return matchesSearch && matchesCategory && matchesType
+            const matchesRarity = selectedRarity === 'all' ||
+                (item.rarity || 'common') === selectedRarity
+
+            return matchesNameSearch && matchesDescSearch && matchesType && matchesRarity
         })
 
         this.renderSidebarItemList(filteredItems)
+    }
+
+    // Clear all item filters
+    clearItemFilters() {
+        const searchInput = document.getElementById('sidebar-item-search')
+        const nameSearchInput = document.getElementById('sidebar-item-name-search')
+        const descSearchInput = document.getElementById('sidebar-item-desc-search')
+        const typeSelect = document.getElementById('sidebar-item-type')
+        const raritySelect = document.getElementById('sidebar-item-rarity')
+
+        if (searchInput) searchInput.value = ''
+        if (nameSearchInput) nameSearchInput.value = ''
+        if (descSearchInput) descSearchInput.value = ''
+        if (typeSelect) typeSelect.value = 'all'
+        if (raritySelect) raritySelect.value = 'all'
+
+        this.filterSidebarItemList()
     }
 
     // Render the filtered item list in sidebar
@@ -7453,7 +7498,7 @@ class UIComponents {
                         <div class="sidebar-item-category">${categoryLabel}</div>
                     </div>
                 </div>
-                <div class="sidebar-item-desc">${item.desc}</div>
+                <div class="sidebar-item-desc">${this.getEnhancedItemDescription(item)}</div>
                 <div class="sidebar-item-actions">
                     <button class="btn btn-tiny btn-primary" onclick="uiComponents.grantItemToCharacter('${item.id}', 1)">
                         +1
@@ -7472,6 +7517,24 @@ class UIComponents {
                 ${item.value ? `<div class="sidebar-item-value">Value: ${this.formatItemValue(item.value)}</div>` : ''}
             </div>
         `
+    }
+
+    // Generate enhanced item description that includes special effects
+    getEnhancedItemDescription(item) {
+        let description = item.desc || ''
+
+        // Remove basic "Effect:" descriptions since we show the full special effects below
+        description = description.replace(/\s*Effect:\s*[^.]+\.?\s*$/, '')
+
+        // Add special effects if they exist
+        if (item.specialEffects && item.specialEffects.length > 0) {
+            description += '\n\n✨ Special Effects:'
+            for (const effect of item.specialEffects) {
+                description += `\n• ${effect}`
+            }
+        }
+
+        return description
     }
 
     // Get all items from all sources
@@ -7524,37 +7587,75 @@ class UIComponents {
 
     // Determine admin category for an item
     getItemAdminCategory(item) {
-        if (item.profession) return 'profession'
+        // Check if item is craftable
+        if (item.craftableItem === true) return 'craftable'
+
+        // Check if item is shop item
+        if (item.shopItem === true) return 'shop'
+
+        // Check item type for categorization
+        if (item.type === 'weapon') return 'weapons'
+        if (item.type === 'armor') return 'armor'
+        if (item.type === 'ring' || item.type === 'amulet' || item.type === 'accessory') return 'accessories'
         if (item.type === 'quest_item') return 'quest_items'
-        if (item.type === 'artifact' || item.type === 'relic' || item.type === 'tool') return 'artifacts'
         if (item.type === 'consumable' || item.type === 'herb' || item.type === 'food') return 'consumables'
-        if (item.type === 'ingredient') return 'materials'
-        return 'materials' // default
+        if (item.type === 'ingredient' || item.type === 'material') return 'materials'
+
+        // Check subcategory for weapons/armor
+        if (item.subcategory && ['swords', 'bows', 'staves', 'axes', 'daggers', 'hammers'].includes(item.subcategory)) return 'weapons'
+        if (item.subcategory && ['light_armor', 'medium_armor', 'heavy_armor'].includes(item.subcategory)) return 'armor'
+
+        // Default based on type
+        if (item.type === 'weapon') return 'weapons'
+        if (item.type === 'armor') return 'armor'
+
+        return 'materials' // default fallback
     }
 
     // Determine item type for filtering
     getItemType(item) {
+        // Check subcategory first for special cases
+        if (item.subcategory === 'Food') return 'food'
+
+        // Direct type mapping
         if (item.type === 'weapon' || item.type === 'craftable_weapon') return 'weapon'
         if (item.type === 'armor' || item.type === 'craftable_armor') return 'armor'
+        if (item.type === 'ring') return 'ring'
+        if (item.type === 'amulet') return 'amulet'
+        if (item.type === 'accessory') return 'accessory'
         if (item.type === 'ingredient') return 'ingredient'
         if (item.type === 'consumable') return 'consumable'
-        if (item.type === 'enchantment') return 'enchantment'
         if (item.type === 'quest_item' || item.type === 'artifact' || item.type === 'relic') return 'quest_item'
-        return 'ingredient' // default for materials
+        if (item.type === 'material') return 'material'
+
+        // Check subcategory for weapons/armor
+        if (item.subcategory && ['swords', 'bows', 'staves', 'axes', 'daggers', 'hammers'].includes(item.subcategory)) return 'weapon'
+        if (item.subcategory && ['light_armor', 'medium_armor', 'heavy_armor'].includes(item.subcategory)) return 'armor'
+
+        // Default based on category structure
+        if (item.subcategory === 'rings') return 'ring'
+        if (item.subcategory === 'amulets') return 'amulet'
+        if (item.subcategory === 'accessories') return 'accessory'
+
+        return 'material' // default fallback
     }
 
     // Get visual tag for item type
     getItemTypeTag(item) {
         const type = this.getItemType(item)
         const tags = {
-            weapon: '??',
-            armor: '???',
-            ingredient: '??',
-            consumable: '??',
-            enchantment: '?',
-            quest_item: '??'
+            weapon: '⚔️',
+            armor: '🛡️',
+            ring: '💍',
+            amulet: '📿',
+            accessory: '✨',
+            ingredient: '🌿',
+            food: '🍎',
+            consumable: '🧪',
+            quest_item: '📜',
+            material: '🔧'
         }
-        return tags[type] || '??'
+        return tags[type] || '📦'
     }
 
     // Get item type display name
@@ -7563,10 +7664,14 @@ class UIComponents {
         const names = {
             weapon: 'Weapon',
             armor: 'Armor',
+            ring: 'Ring',
+            amulet: 'Amulet',
+            accessory: 'Accessory',
             ingredient: 'Ingredient',
+            food: 'Food',
             consumable: 'Consumable',
-            enchantment: 'Enchantment',
-            quest_item: 'Quest Item'
+            quest_item: 'Quest Item',
+            material: 'Material'
         }
         return names[type] || 'Item'
     }
@@ -7620,7 +7725,7 @@ class UIComponents {
                         </button>
                     </div>
                 </div>
-                <div class="admin-item-desc">${item.desc}</div>
+                <div class="admin-item-desc">${this.getEnhancedItemDescription(item)}</div>
                 ${item.value ? `<div class="admin-item-value">Value: ${this.formatItemValue(item.value)}</div>` : ''}
             </div>
         `

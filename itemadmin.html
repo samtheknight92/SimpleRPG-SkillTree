@@ -174,20 +174,36 @@
             <p>Grant items to the current character</p>
             
             <div class="admin-filters">
-                <input type="text" id="sidebar-item-search" placeholder="Search items..." class="input-field">
+                <!-- Separate search bars for name and description -->
+                <input type="text" id="sidebar-item-name-search" placeholder="Search by item name..." class="input-field">
+                <input type="text" id="sidebar-item-desc-search" placeholder="Search by description..." class="input-field">
                 
+                <!-- Updated type filter to match new item structure -->
                 <select id="sidebar-item-type" class="input-field">
                     <option value="all">All Types</option>
                     <option value="weapon">⚔️ Weapons</option>
                     <option value="armor">🛡️ Armor</option>
+                    <option value="ring">💍 Rings</option>
+                    <option value="amulet">📿 Amulets</option>
+                    <option value="accessory">✨ Accessories</option>
                     <option value="food">🍎 Food</option>
                     <option value="consumable">🧪 Consumables</option>
-                    <option value="enhancement">✨ Enhancements</option>
                     <option value="quest_item">📜 Quest Items</option>
+                    <option value="material">🔧 Materials</option>
+                </select>
+                
+                <!-- Rarity filter -->
+                <select id="sidebar-item-rarity" class="input-field">
+                    <option value="all">All Rarities</option>
+                    <option value="common">Common</option>
+                    <option value="uncommon">Uncommon</option>
+                    <option value="rare">Rare</option>
+                    <option value="epic">Epic</option>
+                    <option value="legendary">Legendary</option>
                 </select>
                 
                 <div class="admin-quick-actions">
-                    <!-- Item admin controls would go here if needed -->
+                    <button id="clear-item-filters-btn" class="btn btn-small btn-secondary">Clear Filters</button>
                 </div>
             </div>
             
