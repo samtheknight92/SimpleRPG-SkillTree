@@ -1,0 +1,43 @@
+/* Shop Section Box - matches weapon subcategory style for all shop sections, now in a responsive 2-column grid */
+.shop-section-box {
+    background: linear-gradient(135deg, #232347, #18182e);
+    border: 2px solid #ffd700;
+    border-radius: 16px;
+    padding: 24px 18px 18px 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.10), 0 2px 8px rgba(0,0,0,0.18);
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.shop-section-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 32px;
+    margin-bottom: 32px;
+}
+
+.shop-section-box h4 {
+    color: #ffd700;
+    font-size: 22px;
+    margin-bottom: 18px;
+    margin-top: 0;
+    text-align: left;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 1100px) {
+    .shop-section-grid {
+        grid-template-columns: 1fr;
+        gap: 18px 0;
+    }
+    .shop-section-box {
+        padding: 14px 6px 10px 6px;
+        border-radius: 10px;
+    }
+    .shop-section-box h4 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+}

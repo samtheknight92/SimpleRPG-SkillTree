@@ -1,0 +1,165 @@
+================================================================================
+                           RPG SKILL TREE - GAME MASTER GUIDE
+================================================================================
+
+OVERVIEW
+--------
+This web application is a comprehensive character management system for tabletop 
+RPG campaigns. As the Game Master, you have additional tools and controls to 
+manage the game world, monsters, and player progression.
+
+GETTING STARTED
+---------------
+1. Open the webapp in your web browser
+2. Enable DEV MODE by clicking the "DEV MODE" button in the character panel
+3. DEV MODE gives you access to:
+   - All skill categories (including monster skills)
+   - Bypass skill prerequisites
+   - Monster creation and management
+   - Item administration
+   - Character manipulation tools
+
+CHARACTER CREATION OVERSIGHT
+-----------------------------
+When players create characters, they will:
+1. Choose a name and optional folder organization
+2. Select a race (each race has unique abilities and skill trees)
+3. Allocate starting stats (HP, Stamina, Strength, Magic Power, Accuracy)
+4. Start with 50 Lumens (the game's skill currency)
+
+RACE OVERVIEW FOR PLAYERS
+--------------------------
+• ELF: Accuracy and forest abilities, nature magic
+• DWARF: Crafting expertise, enhanced durability
+• HUMAN: Cross-cultural learning (can learn Tier 1 skills from other races)
+• ORC: Combat prowess, intimidation, berserker abilities
+• DRAGONBORN: Elemental powers, draconic heritage, breath weapons
+• HALFLING: Luck manipulation, stealth, support abilities
+• TIEFLING: Dark magic, fire resistance, infernal heritage
+• DROW: Shadow magic, web abilities, underground adaptation
+• GNOLL: Pack tactics, scavenging, savage combat
+
+SKILL SYSTEM MANAGEMENT
+-----------------------
+Skills are organized by:
+• TIERS: 1-5 (higher tiers require lower tier prerequisites)
+• CATEGORIES: Weapons, Magic, Professions, Racial, Fusion
+• COST: Increases with tier (5L for Tier 1, up to 25L for Tier 5)
+
+As GM, you can:
+- Award Lumens for quest completion, roleplay, problem-solving
+- Grant skills directly in DEV MODE for story reasons
+- Create custom fusion skills when players meet specific requirements
+- Adjust character stats for balance
+
+LUMEN ECONOMY GUIDELINES
+------------------------
+Suggested Lumen awards:
+• Minor quest completion: 5-10 Lumens
+• Major quest milestone: 15-25 Lumens
+• Excellent roleplay: 3-5 Lumens
+• Creative problem solving: 5-10 Lumens
+• Session participation: 2-5 Lumens
+
+Remember: Humans earn 10% more Lumens due to their "Ambitious Spirit" trait
+
+MONSTER SYSTEM
+--------------
+In DEV MODE, you can:
+1. Create monster characters (check "This is a Monster" during creation)
+2. Use Monster Presets for quick setup
+3. Access Elemental Affinity skills for magical creatures
+4. Scale monster HP and abilities to challenge players
+
+Monster Features:
+• Elemental Resistances/Weaknesses
+• Special monster-only skills
+• Simplified stat progression
+• Quick preset loading
+
+SHOP & ECONOMY
+--------------
+The shop system includes:
+• Weapons and armor by tier
+• Crafting materials
+• Consumables (potions, tools)
+• Tier-gated equipment (players must unlock access)
+
+As GM you can:
+- Control what items are available in shops
+- Adjust prices for your campaign economy
+- Add custom items through the Item Admin panel
+- Grant items directly to characters
+
+CRAFTING OVERSIGHT
+------------------
+Players can craft:
+• Enhanced weapons and armor
+• Consumables and tools
+• Fusion items (combining multiple components)
+
+Monitor crafting to ensure:
+- Players have required skills and materials
+- Crafted items don't break game balance
+- Resource scarcity maintains challenge
+
+COMBAT CONSIDERATIONS
+---------------------
+The system tracks:
+• HP (Health Points)
+• Stamina (for special abilities)
+• Status Effects (buffs/debuffs)
+• Elemental Resistances
+
+During combat:
+- Many skills have Stamina costs (manage resource consumption)
+- Status effects can stack and interact
+- Elemental damage types matter for resistances
+- Some skills are once-per-combat or once-per-day
+
+DEV MODE TOOLS
+--------------
+• Skip Prerequisites: Allow any skill purchase
+• Monster Access: Create and manage monster characters
+• Item Admin: Add/modify items and equipment
+• Stat Manipulation: Adjust character stats directly
+• Race Removal: Remove character race (for testing)
+• Unlimited Resources: Bypass resource costs
+
+CAMPAIGN INTEGRATION
+--------------------
+• NOTES SYSTEM: Encourage players to use the Notes tab for character development
+• CHARACTER SHEETS: All stats, skills, and equipment in one place
+• INVENTORY TRACKING: Automatic weight and encumbrance calculations
+• PROGRESSION TRACKING: Clear skill trees show character growth paths
+
+BALANCE TIPS
+------------
+1. Don't let players hoard Lumens - encourage spending on character growth
+2. Challenge diverse skill builds with varied encounter types
+3. Use elemental weaknesses/resistances for tactical depth
+4. Fusion skills should require rare materials or special circumstances
+5. Monitor cross-cultural learning (humans) to prevent overpowering
+
+TROUBLESHOOTING
+---------------
+• If skills aren't appearing: Check prerequisites and character race restrictions
+• If shop items are missing: Verify character has unlocked required tiers
+• If crafting fails: Check material availability and required skills
+• For dev issues: Toggle DEV MODE off and on to refresh
+
+STORY INTEGRATION
+-----------------
+Use the system's features to enhance narrative:
+• Racial skills reflect cultural backgrounds and training
+• Fusion skills can represent unique discoveries or training
+• Status effects can reflect curses, blessings, or environmental factors
+• Equipment tiers can gate access to legendary artifacts
+
+Remember: The system supports your story - don't let mechanics override good 
+storytelling and player agency. Use DEV MODE to make adjustments that serve 
+the narrative and ensure everyone has fun!
+
+================================================================================
+                              HAPPY GAMING!
+================================================================================

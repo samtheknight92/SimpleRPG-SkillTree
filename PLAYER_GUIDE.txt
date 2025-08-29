@@ -1,0 +1,215 @@
+================================================================================
+                           RPG SKILL TREE - PLAYER GUIDE
+================================================================================
+
+WELCOME TO YOUR CHARACTER MANAGEMENT SYSTEM!
+----------------------------------------------
+This web application helps you create, manage, and develop your RPG character
+throughout your campaign. Everything you need is organized into easy-to-use tabs.
+
+GETTING STARTED
+---------------
+1. Open the webapp in your web browser
+2. Click "New Character" to create your first character
+3. Choose a name and optionally organize characters into folders
+4. Select your race carefully - this determines your abilities!
+5. Allocate your starting stats (you have limited points to spend)
+6. Start playing with 50 Lumens (skill currency)
+
+CHOOSING YOUR RACE
+------------------
+Each race has unique advantages and special abilities:
+
+🧝 ELF: Masters of accuracy and nature
+- Bonus accuracy with ranged weapons and spells
+- Forest movement and nature magic
+- Enhanced perception and grace
+
+🪓 DWARF: Legendary crafters and warriors  
+- Expert crafting abilities and bonuses
+- Enhanced durability and toughness
+- Stone and metal work specialization
+
+👤 HUMAN: Adaptable and determined
+- Can learn Tier 1 skills from OTHER races! 
+- 10% more Lumens from all sources
+- Free weapon skill at character creation
+- Note: "Jack of all trades, master of none"
+
+⚔️ ORC: Fierce warriors and intimidating presence
+- Combat expertise and berserker abilities
+- Intimidation and presence skills
+- Raw physical power
+
+🐉 DRAGONBORN: Draconic heritage and elemental power
+- Choose elemental affinity (Fire, Ice, Lightning, Earth, Wind, Water, Darkness, Light)
+- Breath weapons and draconic senses
+- Resistance to your chosen element
+
+🍯 HALFLING: Lucky and sneaky
+- Luck manipulation abilities
+- Stealth and evasion skills  
+- Support abilities for the party
+
+😈 TIEFLING: Infernal heritage and dark magic
+- Fire resistance and heat immunity
+- Dark magic and illusion skills
+- Intimidating presence
+
+🕷️ DROW: Shadow magic and underground adaptation
+- Darkness and shadow manipulation
+- Web-based abilities
+- Underground survival skills
+
+🐺 GNOLL: Pack tactics and savage instincts
+- Pack hunting abilities
+- Scavenging and survival skills
+- Savage combat techniques
+
+NAVIGATION - THE TOP TABS
+--------------------------
+📊 SKILLS: View and purchase new abilities
+📈 STATS: See your character's statistics and progression  
+👤 CHARACTER: Complete character sheet and equipment
+🛒 SHOP: Buy weapons, armor, and items
+⚒️ CRAFTING: Create enhanced equipment and items
+📝 NOTES: Keep track of your character's story and campaign notes
+
+SKILL SYSTEM
+------------
+Skills are your character's abilities and are organized by:
+
+TIERS (1-5): Higher tiers are more powerful but require lower tiers first
+- Tier 1: 5 Lumens - Basic abilities
+- Tier 2: 10 Lumens - Intermediate abilities  
+- Tier 3: 15 Lumens - Advanced abilities
+- Tier 4: 20 Lumens - Expert abilities
+- Tier 5: 25 Lumens - Master abilities
+
+CATEGORIES:
+• WEAPONS: Combat skills for different weapon types
+• MAGIC: Spellcasting and magical abilities
+• PROFESSIONS: Crafting, social, and utility skills
+• RACIAL: Unique skills based on your chosen race
+• FUSION: Special combined skills (unlocked through gameplay)
+
+EARNING LUMENS
+--------------
+You earn Lumens (skill currency) through:
+• Completing quests and objectives
+• Good roleplay and character development
+• Creative problem solving
+• Participating actively in sessions
+• Achieving campaign milestones
+
+💡 TIP: Humans earn 10% more Lumens than other races!
+
+SPECIAL: HUMAN CROSS-CULTURAL LEARNING
+---------------------------------------
+If you play a Human:
+1. First, learn "Human Determination" (your racial Tier 1 skill)
+2. This unlocks "Cross-Cultural Learning"
+3. You can then purchase Tier 1 skills from ANY other race!
+4. These appear with their source race marked (e.g. "Skill Name (🧝 Elf)")
+
+This makes humans incredibly versatile but they don't get advanced racial abilities like other races.
+
+EQUIPMENT & INVENTORY
+---------------------
+Your character can equip:
+• Weapons (primary and secondary)
+• Armor (head, chest, legs, feet)
+• Accessories (rings, amulets, etc.)
+
+The system automatically tracks:
+- Equipment bonuses to your stats
+- Weight and encumbrance
+- Item conditions and durability
+
+SHOP SYSTEM
+-----------
+The shop offers:
+• Weapons and armor organized by tier
+• Crafting materials
+• Consumables (healing potions, tools, etc.)
+
+💡 TIP: You must unlock higher tiers through character progression!
+
+CRAFTING SYSTEM
+---------------
+Create enhanced equipment by:
+1. Learning crafting skills (like Smithing, Alchemy)
+2. Gathering required materials
+3. Using the crafting interface to combine components
+4. Creating items better than shop-bought equivalents
+
+Some recipes require rare materials or special locations!
+
+CHARACTER DEVELOPMENT TIPS
+---------------------------
+1. SPECIALIZE: Focus on 2-3 skill categories for effectiveness
+2. PREREQUISITES: Plan your skill progression - check what skills require others
+3. BALANCE: Don't neglect basic stats in favor of flashy abilities
+4. TEAM SYNERGY: Coordinate with party members to cover different roles
+5. ROLEPLAY: Use the Notes tab to develop your character's personality and backstory
+
+COMBAT ESSENTIALS
+-----------------
+• HP: Your health - when it reaches 0, you're unconscious
+• STAMINA: Required for many special abilities - manage it carefully!
+• STATUS EFFECTS: Track buffs, debuffs, and conditions
+• ELEMENTAL TYPES: Some creatures resist or are weak to certain elements
+
+Many skills have Stamina costs, so don't spam your best abilities!
+
+NOTES SYSTEM
+------------
+Use the Notes tab to track:
+• Character backstory and personality traits
+• Important NPCs and their relationships to your character
+• Quest details and plot threads
+• Personal goals and motivations
+• Session highlights and character development
+• Combat strategies and party tactics
+
+The notes auto-save as you type and are specific to each character.
+
+ORGANIZATION TIPS
+-----------------
+• Use character folders to organize multiple characters
+• Keep your Notes updated for easy reference
+• Review your character sheet before each session
+• Plan your next skill purchases based on your character's goals
+• Communicate with your GM about character development ideas
+
+TROUBLESHOOTING
+---------------
+• Can't buy a skill? Check if you meet the prerequisites
+• Missing items in shop? You may need to unlock higher tiers through progression
+• Skills grayed out? Make sure you have enough Lumens and meet requirements
+• Crafting not working? Verify you have the required skills and materials
+
+ETIQUETTE & EXPECTATIONS
+------------------------
+• Keep your character sheet updated
+• Communicate major character decisions with your GM
+• Use the system to enhance roleplay, not replace it
+• Help other players learn the system
+• Have fun and be creative with your character development!
+
+ADVANCED FEATURES
+-----------------
+As you play, you may encounter:
+• FUSION SKILLS: Special abilities created by combining specific skills
+• STATUS EFFECTS: Temporary bonuses or penalties
+• ELEMENTAL INTERACTIONS: Strategic use of damage types
+• ENCHANTED EQUIPMENT: Magical items with special properties
+
+Your GM will introduce these concepts as they become relevant to your campaign.
+
+================================================================================
+                        ENJOY YOUR ADVENTURE!
+================================================================================
+
+Remember: This system supports your character and story - don't let the numbers
+get in the way of having fun and creating memorable moments with your friends!

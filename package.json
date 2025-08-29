@@ -1,0 +1,13 @@
+{
+  "name": "rpg-skill-tree",
+  "version": "1.0.0",
+  "description": "RPG Skill Tree System",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

@@ -1,0 +1,963 @@
+/* Modern Character Selection System - Concept Design Match */
+
+/* Folder Management Styles */
+.folder-controls {
+    display: none; /* Hide old folder controls - now in panel header */
+}
+
+.folder-section {
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+}
+
+.folder-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: transparent;
+    color: #cccccc;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: none;
+    transition: background-color 0.2s;
+}
+
+.folder-header:hover {
+    background: #333333;
+}
+
+.folder-toggle {
+    display: none; /* No toggle arrows in this design */
+}
+
+.folder-name {
+    flex: 1;
+    margin-right: 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.folder-name::before {
+    content: "📁";
+    font-size: 16px;
+}
+
+.character-count {
+    display: none; /* Hide character count */
+}
+
+.folder-delete-btn {
+    display: inline-block; /* Show delete button */
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 2px;
+    transition: background 0.2s ease;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.folder-delete-btn:hover {
+    background: rgba(255, 107, 107, 0.2);
+}
+
+.folder-content {
+    overflow: visible;
+    transition: none;
+    max-height: none;
+}
+
+.folder-content.expanded,
+.folder-content.collapsed {
+    max-height: none;
+}
+
+.empty-folder {
+    padding: 16px 20px;
+    text-align: left;
+    color: #666;
+    font-style: italic;
+    font-size: 13px;
+}
+
+/* Character Cards - Concept Design */
+.character-item {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    position: relative;
+    gap: 12px;
+    border-bottom: 1px solid #333333;
+}
+
+.character-item:hover {
+    background: #333333;
+}
+
+.character-item:last-child {
+    border-bottom: 1px solid #333333;
+}
+
+.character-item.active {
+    background: #404040;
+}
+
+.character-item.active:hover {
+    background: #4a4a4a;
+}
+
+/* Monster character styling */
+.character-item.monster-character {
+    background: transparent;
+}
+
+.character-item.monster-character:hover {
+    background: #333333;
+}
+
+.character-item.monster-character.active {
+    background: #404040;
+}
+
+/* Character Avatar */
+.character-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #555555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    border: 2px solid #666666;
+}
+
+/* Character Info */
+.character-main-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.character-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+.character-subtitle {
+    display: none; /* Hide subtitle in this design */
+}
+
+/* Level Badge */
+.character-level-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.character-level-badge.level-green {
+    background: #4a7c59;
+    color: #ffffff;
+}
+
+.character-level-badge.level-blue {
+    background: #4a7c9a;
+    color: #ffffff;
+}
+
+.character-level-badge.level-orange {
+    background: #b8860b;
+    color: #ffffff;
+}
+
+.character-level-badge.level-purple {
+    background: #8a4fbf;
+    color: #ffffff;
+}
+
+/* Character Menu */
+.character-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.character-menu-btn {
+    background: transparent;
+    color: #888888;
+    border: none;
+    padding: 4px;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.character-item:hover .character-menu-btn {
+    opacity: 1;
+}
+
+.character-menu-btn:hover {
+    background: #404040;
+    color: #ffffff;
+}
+
+/* Stats row and other complex elements - hide for clean design */
+.character-stats-row,
+.character-actions-row,
+.character-card-header {
+    display: none;
+}
+
+/* Use simplified structure */
+.character-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Character Menu Dropdown - Concept Style */
+.character-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #2b2b2b;
+    border: 1px solid #404040;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    min-width: 160px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+}
+
+.menu-item:hover {
+    background: #404040;
+}
+
+.menu-item.disabled {
+    color: #666;
+    cursor: not-allowed;
+}
+
+.menu-item.disabled:hover {
+    background: transparent;
+}
+
+.menu-item.danger {
+    color: #ff6b6b;
+}
+
+.menu-item.danger:hover {
+    background: #404040;
+}
+
+.menu-separator {
+    height: 1px;
+    background: #404040;
+    margin: 4px 0;
+}
+
+.menu-section-header {
+    padding: 8px 16px;
+    color: #888;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #333;
+}
+
+.folder-item {
+    font-size: 13px;
+    padding: 8px 16px 8px 24px;
+}
+
+.folder-item.current-folder {
+    background: #404040;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Hide legacy elements */
+.race-badge, .level-badge, .lumens-badge, .hp-badge, .stamina-badge,
+.character-details, .race-info, .char-stats, .character-actions,
+.folder-select, .character-single-line, .last-played {
+    display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .character-item {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .character-card-header {
+        gap: 0.8rem;
+    }
+    
+    .character-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .character-name {
+        font-size: 1rem;
+    }
+    
+    .character-stats-row {
+        gap: 0.5rem;
+    }
+    
+    .stat-badge {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Character Menu Dropdown - Enhanced */
+.character-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: linear-gradient(135deg, #2a2a4e, #1e1e3f);
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    min-width: 140px;
+    max-width: 160px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    color: #e0e0e0;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-weight: 500;
+}
+
+.menu-item:hover {
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+}
+
+.menu-item:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.menu-item:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.menu-item.disabled {
+    color: #888;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.menu-item.disabled:hover {
+    background: transparent;
+    color: #888;
+}
+
+.menu-item.danger {
+    color: #ff6b6b;
+}
+
+.menu-item.danger:hover {
+    background: rgba(255, 107, 107, 0.15);
+    color: #ff8888;
+}
+
+.menu-separator {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    margin: 0.5rem 0;
+}
+
+.menu-section-header {
+    padding: 0.6rem 1rem;
+    color: #ffd700;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: rgba(255, 215, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.folder-item {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem 0.6rem 1.5rem;
+}
+
+.folder-item.current-folder {
+    background: rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.folder-item.current-folder:hover {
+    background: rgba(255, 215, 0, 0.2);
+    cursor: default;
+}
+
+/* Drag and Drop Styles - Enhanced */
+.character-item[draggable="true"] {
+    cursor: grab;
+}
+
+.character-item[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.folder-section.drag-over {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+}
+
+/* Legacy support for old styles that might still be referenced */
+.race-badge, .level-badge, .lumens-badge {
+    display: inline-block;
+    padding: 0.03rem 0.15rem;
+    border-radius: 2px;
+    font-size: 0.55rem;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1;
+    min-width: auto;
+}
+
+.race-badge {
+    background: #2d4a9a;
+    color: #fff;
+}
+
+.character-details {
+    margin: 0;
+    font-size: 0.75rem;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.race-info {
+    margin: 0 0 0.25rem;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.char-stats {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.character-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.folder-select {
+    padding: 0.25rem;
+    font-size: 0.8rem;
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 3px;
+    width: 120px;
+}
+
+.folder-select option {
+    background: #1a1a1a;
+    color: #fff;
+}
+.folder-section {
+    margin-bottom: 1.5rem;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    background: #1a1a1a;
+}
+
+.folder-title {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background: #2a2a2a;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+}
+
+.character-item {
+    display: block;
+    padding: 0.3rem 0.6rem;
+    border-bottom: 1px solid #2a2a2a;
+    background: #1a1a1a;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    position: relative;
+    min-height: auto;
+}
+
+.character-item:hover {
+    background: #252525;
+}
+
+.character-item:last-child {
+    border-bottom: none;
+}
+
+.character-item.active {
+    background: #1e3a8a; /* Blue for selected non-monster */
+}
+
+.character-item.active:hover {
+    background: #2563eb; /* Lighter blue on hover */
+}
+
+/* Monster character styling */
+.character-item.monster-character {
+    background: #166534; /* Green for non-selected monster */
+}
+
+.character-item.monster-character:hover {
+    background: #22c55e; /* Lighter green on hover */
+}
+
+.character-item.monster-character.active {
+    background: #0891b2; /* Turquoise for selected monster */
+}
+
+.character-info {
+    width: 100%;
+}
+
+.character-single-line {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    width: 100%;
+    height: 1.2rem; /* Force specific height to match folder header */
+}
+
+.race-icon {
+    font-size: 0.3rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.character-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fff;
+    flex: 1;
+    min-width: 0; /* Allow text truncation if needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.character-details {
+    margin: 0;
+    font-size: 0.75rem;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.race-badge, .level-badge, .lumens-badge {
+    display: inline-block;
+    padding: 0.03rem 0.15rem;
+    border-radius: 2px;
+    font-size: 0.55rem;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1;
+    min-width: auto;
+}
+
+.btn-icon {
+    padding: 0.05rem 0.15rem;
+    min-width: auto;
+    width: auto;
+    height: 1rem;
+    font-size: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.btn-icon svg {
+    width: 10px;
+    height: 10px;
+}
+
+/* Drag and Drop Styles */
+.character-item[draggable="true"] {
+    cursor: grab;
+}
+
+.character-item[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.folder-section.drag-over {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+/* Character Menu Styles */
+.character-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.character-menu-btn {
+    background: linear-gradient(135deg, #4a4a6e, #3a3a5e);
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    padding: 0.03rem 0.15rem;
+    font-size: 0.55rem;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 14px;
+    height: 0.9rem;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    line-height: 1;
+}
+
+.character-menu-btn:hover {
+    background: linear-gradient(135deg, #5a5a7e, #4a4a6e);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.character-menu-dropdown {
+    background: linear-gradient(135deg, #2a2a4e, #1e1e3f);
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    min-width: 140px;
+    max-width: 160px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.8rem;
+    color: #e0e0e0;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-weight: 500;
+}
+
+.menu-item:hover {
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+}
+
+.menu-item:first-child {
+    border-radius: 6px 6px 0 0;
+}
+
+.menu-item:last-child {
+    border-radius: 0 0 6px 6px;
+}
+
+.menu-item.disabled {
+    color: #888;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.menu-item.disabled:hover {
+    background: transparent;
+    color: #888;
+}
+
+.menu-item.danger {
+    color: #ff6b6b;
+}
+
+.menu-item.danger:hover {
+    background: rgba(255, 107, 107, 0.15);
+    color: #ff8888;
+}
+
+.menu-separator {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    margin: 0.25rem 0;
+}
+
+.menu-section-header {
+    padding: 0.4rem 0.8rem;
+    color: #ffd700;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: rgba(255, 215, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.folder-item {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem 0.4rem 1.2rem;
+}
+
+.folder-item.current-folder {
+    background: rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.folder-item.current-folder:hover {
+    background: rgba(255, 215, 0, 0.2);
+    cursor: default;
+}
+
+.race-badge {
+    background: #2d4a9a;
+    color: #fff;
+}
+
+.level-badge {
+    background: #4a7c2d;
+    color: #fff;
+}
+
+.lumens-badge {
+    background: #9a6d2d;
+    color: #fff;
+}
+
+.race-info {
+    margin: 0 0 0.25rem;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.char-stats {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.last-played {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.character-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.folder-select {
+    padding: 0.25rem;
+    font-size: 0.8rem;
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 3px;
+    width: 120px;
+}
+
+.folder-select option {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* Race Selection Dialog */
+.race-selection-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 1rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.race-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.race-card {
+    padding: 1rem;
+    background: #2a2a2a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.race-card:hover {
+    background: #333;
+    border-color: #444;
+}
+
+.race-card.selected {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 1px #0066cc;
+}
+
+.race-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.race-icon {
+    font-size: 1.5rem;
+}
+
+.race-name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.race-desc {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.4;
+}
+
+.race-traits {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.race-trait {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.race-trait-icon {
+    flex-shrink: 0;
+}
+
+/* Override styles.css character-item styling for consistent compact design */
+.character-list .character-item.monster-character {
+    border: none;
+    border-bottom: 1px solid #2a2a2a;
+    background: #166534 !important; /* Green for non-selected monster */
+}
+
+.character-list .character-item.monster-character:hover {
+    background: #22c55e !important; /* Lighter green on hover */
+}
+
+.character-list .character-item.monster-character.active {
+    background: #0891b2 !important; /* Turquoise for selected monster */
+    color: #ffffff;
+}
+
+.character-list .character-item.active {
+    background: #1e3a8a !important; /* Blue for selected non-monster */
+    color: #ffffff;
+}

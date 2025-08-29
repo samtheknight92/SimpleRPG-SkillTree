@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1400, initial-scale=1.0, user-scalable=yes">
+    <title>RPG Skill Tree System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="character-list.css">
+    <!-- Dice Roller Widget -->
+    <link rel="stylesheet" href="styles-dice-roller.css">
+    <!-- Tier-Based Skill Tree Connections -->
+    <link rel="stylesheet" href="skill-connections.css">
+        <style>
+            /* Extra mobile tweaks for accessibility */
+            html, body {
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+            button, .btn, .nav-tab, .skill-category, .skill-tab {
+                min-height: 44px;
+                min-width: 44px;
+                font-size: 1.1em;
+            }
+            input, select {
+                font-size: 1.1em;
+            }
+            @media (max-width: 480px) {
+                .top-nav, .main-content, .side-panel, .item-admin-sidebar {
+                    font-size: 1em;
+                }
+                .nav-buttons, .lumens-display, .currency-display {
+                    flex-direction: column;
+                    gap: 8px;
+                }
+                .nav-tab, .btn, .action-btn {
+                    width: 100%;
+                    margin-bottom: 6px;
+                }
+                .side-panel, .item-admin-sidebar {
+                    width: 100vw !important;
+                    left: 0 !important;
+                    max-width: 100vw;
+                }
+                .modal-content, .dialog-content {
+                    min-width: unset;
+                    max-width: 95vw;
+                    padding: 10px;
+                }
+                .skill-node {
+                    width: 95vw !important;
+                    max-width: 95vw !important;
+                }
+                    /* Hide sidebars by default on mobile */
+                    .side-panel,
+                    .item-admin-sidebar {
+                        display: none !important;
+                    }
+                    .side-panel.open,
+                    .item-admin-sidebar.open {
+                        display: flex !important;
+                    }
+                    #hamburger {
+                        display: flex !important;
+                        position: fixed;
+                        top: 10px;
+                        left: 10px;
+                        z-index: 2001;
+                    }
+                    .main-content {
+                        margin-left: 0 !important;
+                    }
+                    body {
+                        overflow-x: hidden;
+                    }
+                    /* Make dice roller floating button bigger */
+                    #dice-roller-fab {
+                        font-size: 2em;
+                        right: 10px;
+                        bottom: 10px;
+                    }
+                }
+                /* Always show hamburger on mobile */
+                @media (max-width: 900px) {
+                    #hamburger {
+                        display: flex !important;
+                    }
+                }
+                /* Hide sidebars by default on mobile, show only when .open */
+                @media (max-width: 900px) {
+                    .side-panel,
+                    .item-admin-sidebar {
+                        display: none !important;
+                    }
+                    .side-panel.open,
+                    .item-admin-sidebar.open {
+                        display: flex !important;
+                    }
+                }
+            </style>
+            <script>
+            // Mobile sidebar/hamburger logic
+            document.addEventListener('DOMContentLoaded', function() {
+                function isMobile() {
+                    return window.innerWidth <= 900;
+                }
+                // Hide sidebars by default on mobile
+                function hideSidebars() {
+                    if (isMobile()) {
+                        document.getElementById('side-panel')?.classList.remove('open');
+                        document.getElementById('item-admin-sidebar')?.classList.remove('open');
+                    }
+                }
+                // Show sidebar when hamburger clicked
+                document.getElementById('hamburger')?.addEventListener('click', function() {
+                    var panel = document.getElementById('side-panel');
+                    if (panel) panel.classList.toggle('open');
+                });
+                // Close sidebar on close button
+                document.getElementById('close-sidebar-btn')?.addEventListener('click', function() {
+                    document.getElementById('side-panel')?.classList.remove('open');
+                });
+                // Close item admin sidebar on close button
+                document.getElementById('close-item-sidebar-btn')?.addEventListener('click', function() {
+                    document.getElementById('item-admin-sidebar')?.classList.remove('open');
+                });
+                // Hide sidebars on load if mobile
+                hideSidebars();
+                // Hide sidebars on resize if mobile
+                window.addEventListener('resize', hideSidebars);
+            });
+            </script>
+            }
+        </style>
+</head>
+<body>
+    <!-- Hamburger Menu -->
+    <div id="hamburger" class="hamburger">
+        <span id="hamburger-icon" class="btn-icon" data-icon-category="ui" data-icon-name="settings"></span>
+    </div>
+    
+    <!-- Side Panel for Character Management -->
+    <div id="side-panel" class="side-panel">
+        <!-- Panel Header -->
+        <div class="panel-header">
+            <h3 class="panel-title">Character Selection</h3>
+            <button class="panel-close" id="close-sidebar-btn">✕</button>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="panel-actions">
+            <button class="action-btn" onclick="uiComponents.showCreateFolderDialog()">
+                📁 New Folder
+            </button>
+            <button id="new-character-btn" class="action-btn">
+                👤 New Character
+            </button>
+            <button id="dev-mode-btn" class="action-btn dev-mode-btn" title="Dev Mode">
+                ⚙️
+            </button>
+        </div>
+        
+        <!-- Character List -->
+        <div id="character-list" class="character-list"></div>
+    </div>
+
+    <!-- Item Admin Sidebar -->
+    <div id="item-admin-sidebar" class="item-admin-sidebar">
+        <div class="sidebar-header">
+            <h3>📦 Item Administration</h3>
+            <button id="close-item-sidebar-btn" class="btn btn-small btn-secondary">✕</button>
+        </div>
+        
+        <div class="sidebar-content">
+            <p>Grant items to the current character</p>
+            
+            <div class="admin-filters">
+                <input type="text" id="sidebar-item-search" placeholder="Search items..." class="input-field">
+                
+                <select id="sidebar-item-category" class="input-field">
+                    <option value="all">All Items</option>
+                    <option value="materials">Materials & Ingredients</option>
+                    <option value="consumables">Ready-to-Use Consumables</option>
+                    <option value="artifacts">Archaeological Artifacts</option>
+                    <option value="quest_items">Quest Items</option>
+                    <option value="profession">Profession Items</option>
+                </select>
+                
+                <select id="sidebar-item-type" class="input-field">
+                    <option value="all">All Types</option>
+                    <option value="weapon">⚔️ Weapons</option>
+                    <option value="armor">🛡️ Armor</option>
+                    <option value="ingredient">🌿 Ingredients</option>
+                    <option value="consumable">🧪 Consumables</option>
+                    <option value="enhancement">✨ Enhancements</option>
+                    <option value="quest_item">📜 Quest Items</option>
+                </select>
+                
+                <div class="admin-quick-actions">
+                    <!-- Item admin controls would go here if needed -->
+                </div>
+            </div>
+            
+            <div id="sidebar-item-list" class="sidebar-item-list"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <h1 class="game-title">RPG Skill Tree</h1>
+            <div class="nav-buttons">
+                <button class="nav-tab" data-tab="skills">
+                    <span class="btn-icon" data-icon-category="weapons" data-icon-name="dirk"></span> Skills
+                </button>
+                <button class="nav-tab" data-tab="stats">
+                    <span class="btn-icon" data-icon-category="statusEffects" data-icon-name="enhanced"></span> Stats
+                </button>
+                <button class="nav-tab active" data-tab="character-sheet">
+                    <span class="btn-icon" data-icon-category="characters" data-icon-name="warrior"></span> Character
+                </button>
+                <button class="nav-tab" data-tab="shop">
+                    <span class="btn-icon" data-icon-category="ui" data-icon-name="shop"></span> Shop
+                </button>
+                <button class="nav-tab" data-tab="crafting">
+                    <span class="btn-icon" data-icon-category="skills" data-icon-name="smithing"></span> Crafting
+                </button>
+                <button class="nav-tab" data-tab="notes">
+                    <span class="btn-icon" data-icon-category="ui" data-icon-name="create"></span> Notes
+                </button>
+            </div>
+            <div class="lumens-display">
+                <span id="character-name-display">No Character</span> | 
+                <span id="lumens-display">0 Lumens</span>
+                <button id="remove-lumens-btn" class="btn btn-small">
+                    -
+                </button>
+                <button id="add-lumens-btn" class="btn btn-small">
+                    +
+                </button>
+            </div>
+            <div class="currency-display">
+                <span id="currency-display">
+                    0<span class="currency-icon" data-icon-category="ui" data-icon-name="gold"></span> 
+                    0<span class="currency-icon" data-icon-category="ui" data-icon-name="silver"></span> 
+                    0<span class="currency-icon" data-icon-category="ui" data-icon-name="copper"></span>
+                </span>
+            </div>
+        </nav>
+
+        <!-- Skills Tab -->
+        <div id="skills-tab" class="tab-content">
+            <div class="skill-categories">
+                <button class="skill-category active" data-category="weapons">
+                    <span class="btn-icon" data-icon-category="weapons" data-icon-name="dirk"></span> Weapons
+                </button>
+                <button class="skill-category" data-category="magic">
+                    <span class="btn-icon" data-icon-category="magic" data-icon-name="fire"></span> Magic
+                </button>
+                <button class="skill-category" data-category="professions">
+                    <span class="btn-icon" data-icon-category="skills" data-icon-name="smithing"></span> Professions
+                </button>
+            </div>
+            
+            <div id="skill-tabs" class="skill-tabs"></div>
+            
+            <div id="skill-tree" class="skill-tree"></div>
+        </div>
+
+        <!-- Stats Tab -->
+        <div id="stats-tab" class="tab-content">
+            <div id="stats-content"></div>
+        </div>
+
+        <!-- Character Sheet Tab -->
+        <div id="character-sheet-tab" class="tab-content active">
+            <div id="character-sheet-content"></div>
+        </div>
+
+        <!-- Shop Tab -->
+        <div id="shop-tab" class="tab-content">
+            <div id="shop-content"></div>
+        </div>
+
+        <!-- Crafting Tab -->
+        <div id="crafting-tab" class="tab-content">
+            <div id="crafting-content"></div>
+        </div>
+
+        <!-- Notes Tab -->
+        <div id="notes-tab" class="tab-content">
+            <div id="notes-content"></div>
+        </div>
+
+        <!-- No Character Selected Message -->
+        <div id="no-character-message" class="no-character-message hidden">
+            <h3>No Character Selected</h3>
+            <p>Please create or select a character to begin your adventure!</p>
+        </div>
+    </div>
+
+    <!-- Dice Roller Widget -->
+    <div id="dice-roller-fab" title="Open Dice Roller">🎲</div>
+    <div id="dice-roller-modal">
+      <button id="dice-roller-close" title="Close">×</button>
+      <h2>Advanced Dice Roller</h2>
+      <div id="diceGroups"></div>
+      <button class="add-btn" id="addDiceBtn">+ Add Dice</button>
+      <button class="roll-btn" id="rollBtn">Roll All</button>
+      <div class="dice-results" id="diceResults" style="display:none;"></div>
+    </div>
+
+    <!-- Modal Dialogs -->
+    <!-- New Character Dialog -->
+    <div id="new-character-dialog" class="new-character-dialog" style="display: none;">
+        <div class="dialog-content">
+            <h3>Create New Character</h3>
+            <input type="text" id="character-name-input" placeholder="Enter character name" class="input-field">
+            <div class="dialog-buttons">
+                <button id="create-character-btn" class="btn btn-primary">
+                    <span class="btn-icon" data-icon-category="ui" data-icon-name="create"></span> Create
+                </button>
+                <button id="cancel-character-btn" class="btn btn-secondary">
+                    <span class="btn-icon" data-icon-category="ui" data-icon-name="cancel"></span> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Universal Confirm Modal -->
+    <div id="confirm-modal" class="modal-overlay confirm-modal" style="display: none;">
+        <div class="modal-content">
+            <h3 id="confirm-title">Confirm</h3>
+            <p id="confirm-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-yes-btn" class="btn btn-primary">Yes</button>
+                <button id="confirm-no-btn" class="btn btn-secondary">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Universal Prompt Modal -->
+    <div id="prompt-modal" class="modal-overlay prompt-modal" style="display: none;">
+        <div class="modal-content">
+            <h3 id="prompt-title">Enter Value</h3>
+            <p id="prompt-message"></p>
+            <input type="text" id="prompt-input" class="input-field" placeholder="Enter value...">
+            <div class="modal-buttons">
+                <button id="prompt-ok-btn" class="btn btn-primary">OK</button>
+                <button id="prompt-cancel-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Folder Modal -->
+    <div id="create-folder-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h3>Create New Folder</h3>
+            <p>Enter a name for the new folder:</p>
+            <input type="text" id="folder-name-input" class="input-field" placeholder="Folder name...">
+            <div class="modal-buttons">
+                <button id="create-folder-btn" class="btn btn-primary">Create</button>
+                <button id="cancel-folder-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Race Selection Confirmation Modal -->
+    <div id="race-selection-modal" class="modal-overlay race-selection-modal" style="display: none;">
+        <div class="modal-content">
+            <h3 id="race-selection-title">Confirm Race Selection</h3>
+            <p id="race-selection-message"></p>
+            <div id="race-elemental-choice" style="display: none;">
+                <p>Choose your elemental affinity:</p>
+                <select id="elemental-select" class="input-field">
+                    <option value="">Select element...</option>
+                    <option value="Fire">Fire</option>
+                    <option value="Ice">Ice</option>
+                    <option value="Lightning">Lightning</option>
+                    <option value="Earth">Earth</option>
+                    <option value="Wind">Wind</option>
+                    <option value="Water">Water</option>
+                    <option value="Darkness">Darkness</option>
+                    <option value="Light">Light</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button id="confirm-race-btn" class="btn btn-primary">Confirm Selection</button>
+                <button id="cancel-race-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="icon-mapping.js"></script>
+    <script src="skills-data.js"></script>
+    <script src="dynamic-skills-system.js"></script>
+    <script src="skill-dynamic-bonuses.js"></script>
+    <script src="items-data.js"></script>
+    <script src="status-effects.js"></script>
+    <script src="races-data.js"></script>
+    <script src="monster-system.js"></script>
+    <script src="monster-presets.js"></script>
+    <script src="inventory-system.js"></script>
+    <script src="character-manager.js"></script>
+    <script src="skill-connections.js"></script>
+    <script src="ui-components.js"></script>
+    <script src="game-logic.js"></script>
+    <script src="app.js"></script>
+    <script src="dice-roller-widget.js"></script>
+    <script>
+        // Initialize app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.app = new App();
+            app.init().catch(error => {
+                console.error('Failed to initialize app:', error);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+/* Tier-Based Skill Tree Connections */
+.skill-tree-container {
+    position: relative;
+    overflow: visible;
+}
+
+.skill-row {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+.skill-node {
+    position: relative;
+    z-index: 10;
+}
+
+/* SVG overlay for connection lines */
+.skill-connections-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Connection line styles for smart routing */
+.skill-connection-line {
+    stroke-width: 4;
+    opacity: 0.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    transition: all 0.3s ease;
+}
+
+/* Hover effects for polyline connections */
+.skill-connection-line:hover {
+    stroke-width: 6;
+    opacity: 1;
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* Connection node styles for distributed endpoints */
+.connection-output-node,
+.connection-input-node {
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.connection-output-node:hover,
+.connection-input-node:hover {
+    opacity: 1;
+    r: 4;
+    filter: drop-shadow(0 0 6px currentColor);
+}
+
+/* Connection lines should appear crisp and precise */
+polyline.skill-connection-line {
+    shape-rendering: geometricPrecision;
+    vector-effect: non-scaling-stroke;
+}
+
+/* External prerequisite boxes */
+.external-prerequisite-box {
+    transition: all 0.3s ease;
+}
+
+.external-prerequisite-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    border-color: #4CAF50;
+}
+
+/* Inline external prerequisites section */
+.external-prerequisites-section {
+    font-size: 11px;
+    color: #ddd;
+}
+
+.external-prerequisites-section:before {
+    content: "Prerequisites from other skill trees:";
+    display: block;
+    font-size: 10px;
+    color: #4CAF50;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+/* Inline external prerequisite boxes */
+.inline-external-box:hover {
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 3px 8px rgba(76, 175, 80, 0.5);
+    border-color: #66BB6A;
+    background: linear-gradient(135deg, #3a5a3a, #4a6a4a);
+}
+
+/* Hide external prerequisites section when empty */
+.external-prerequisites-section:empty {
+    display: none;
+}
+
+/* External connection lines */
+.external-connection-line {
+    shape-rendering: geometricPrecision;
+    vector-effect: non-scaling-stroke;
+}
+
+.external-connection-line:hover {
+    stroke-width: 5;
+    opacity: 1;
+}
+
+/* External connection nodes */
+.external-output-node,
+.external-input-node {
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.external-output-node:hover,
+.external-input-node:hover {
+    opacity: 1;
+    r: 5;
+    filter: drop-shadow(0 0 8px #4CAF50);
+}
+
+/* Delete markers for missing skills */
+.delete-marker {
+    transition: all 0.3s ease;
+}
+
+.delete-marker:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(255, 68, 68, 0.5);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Delete marker lines */
+.delete-marker-line {
+    shape-rendering: geometricPrecision;
+    vector-effect: non-scaling-stroke;
+    animation: warning-flash 1.5s infinite;
+}
+
+@keyframes warning-flash {
+    0% { opacity: 0.8; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.8; }
+}
+
+/* Visual indicators for crossing points (when lines cross at 90 degrees) */
+.connection-crossing {
+    stroke: #333;
+    stroke-width: 1;
+    fill: #fff;
+    opacity: 0.8;
+}
+
+/* Ensure no anti-aliasing artifacts on connection lines */
+.skill-connections-svg {
+    shape-rendering: crispEdges;
+}
+
+/* Skill nodes with connections get colored borders */
+.skill-node {
+    transition: all 0.3s ease;
+}
+
+.skill-node:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
