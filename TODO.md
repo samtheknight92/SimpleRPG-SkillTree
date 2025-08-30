@@ -1,11 +1,7 @@
 ## 📝 NOTES FOR FUTURE IMPROVEMENTS (DO NOT IMPLEMENT WITHOUT CONSENT FROM ME):
-- Consider renaming "Enhancement" items to "Enchantments" for better naming consistency
 - Consider adding more utility items and quest items
 - Consider expanding the monster loot system with new items
-- Consider adding item sets and bonuses
-- Consider implementing item durability system
-- Consider adding item rarity tiers (Common, Uncommon, Rare, Epic, Legendary)
-- Consider adding item level requirements
-- Consider implementing item trading system
 - Consider adding item enchantment slots
-- Consider creating item comparison tooltips
+
+To do:
+1. Check why monster loot drops have multiple of the same item?

@@ -1125,7 +1125,8 @@ class MonsterPresets {
                 staff: [],
                 dagger: [],
                 polearm: [],
-                hammer: []
+                hammer: [],
+                unarmed: ['unarmed_beginner']  // Keep unarmed_beginner even on reset
             },
             magic: {
                 fire: [],

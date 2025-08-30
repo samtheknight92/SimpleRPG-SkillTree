@@ -1935,7 +1935,13 @@ class UIComponents {
 
         if (isUnlocked) {
             statusClass = 'unlocked'
-            actionButton = `<button class="btn btn-small btn-danger refund-skill-btn" data-skill-id="${skill.id}">${iconMapper.createIconElement('ui', 'refund', 12)} Refund</button>`
+            // Check if this skill is unrefundable
+            const unrefundableSkills = ['unarmed_beginner']
+            if (unrefundableSkills.includes(skill.id)) {
+                actionButton = `<span class="unrefundable-note">Unrefundable</span>`
+            } else {
+                actionButton = `<button class="btn btn-small btn-danger refund-skill-btn" data-skill-id="${skill.id}">${iconMapper.createIconElement('ui', 'refund', 12)} Refund</button>`
+            }
         } else if (canPurchase) {
             statusClass = 'available'
             const devNote = this.devMode && !prerequisitesMet ? ' (DEV)' : ''
@@ -2526,7 +2532,7 @@ class UIComponents {
         if (!character) return
 
         const category = this.selectedSkillCategory
-        const unlockedSkillIds = characterManager.getAllUnlockedSkillIds(character)
+        const unlockedSkillIds = characterManager.getAllUnlockedSkillIdsForRefund(character)
 
         // Filter skills to only those in the current category
         const categorySkillIds = unlockedSkillIds.filter(skillId => {
@@ -7602,7 +7608,7 @@ class UIComponents {
         if (item.type === 'ingredient' || item.type === 'material') return 'materials'
 
         // Check subcategory for weapons/armor
-        if (item.subcategory && ['swords', 'bows', 'staves', 'axes', 'daggers', 'hammers'].includes(item.subcategory)) return 'weapons'
+        if (item.subcategory && ['swords', 'bows', 'staves', 'axes', 'daggers', 'hammers', 'unarmed'].includes(item.subcategory)) return 'weapons'
         if (item.subcategory && ['light_armor', 'medium_armor', 'heavy_armor'].includes(item.subcategory)) return 'armor'
 
         // Default based on type
@@ -7629,7 +7635,7 @@ class UIComponents {
         if (item.type === 'material') return 'material'
 
         // Check subcategory for weapons/armor
-        if (item.subcategory && ['swords', 'bows', 'staves', 'axes', 'daggers', 'hammers'].includes(item.subcategory)) return 'weapon'
+        if (item.subcategory && ['swords', 'bows', 'staves', 'axes', 'daggers', 'hammers', 'unarmed'].includes(item.subcategory)) return 'weapon'
         if (item.subcategory && ['light_armor', 'medium_armor', 'heavy_armor'].includes(item.subcategory)) return 'armor'
 
         // Default based on category structure

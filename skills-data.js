@@ -234,6 +234,41 @@ const SKILLS_DATA = {
 
       // Tier 5
       { id: 'hammer_mastery', name: 'Hammer Mastery', tier: 5, cost: 25, staminaCost: 0, desc: 'Passive: +4 damage, all attacks cause knockdown, immune to Incapacitated', icon: '👑', prerequisites: { type: 'OR', skills: ['mjolnir_strike', 'apocalypse_slam', 'fortress_buster'] } }
+    ],
+
+    // UNARMED SKILLS (Tier 1-5) - Martial arts and hand-to-hand combat
+    unarmed: [
+      // Tier 0
+      { id: 'unarmed_beginner', name: 'Unarmed Beginner', tier: 0, cost: 0, staminaCost: 0, desc: 'Passive: All characters can do unarmed attacks of 1d4 damage', icon: '👊', prerequisites: { type: 'NONE', skills: [] } },
+
+      // Tier 1
+      { id: 'basic_mix_martial_arts', name: 'Basic Mix Martial Arts', tier: 1, cost: 8, staminaCost: 0, desc: 'Passive: +2 damage to all unarmed attacks', icon: '🥊', prerequisites: { type: 'AND', skills: ['unarmed_beginner'] } },
+      { id: 'basic_combo', name: 'Basic Combo - "The Ol\' 1 - 2"', tier: 1, cost: 8, staminaCost: 0, desc: 'Passive: Can do 2 basic attacks per turn when unarmed', icon: '👊', prerequisites: { type: 'AND', skills: ['unarmed_beginner'] } },
+      { id: 'stance_training', name: 'Stance Training', tier: 1, cost: 8, staminaCost: 0, desc: 'Passive: +1 to accuracy with unarmed attacks', icon: '🧘', prerequisites: { type: 'AND', skills: ['unarmed_beginner'] } },
+
+      // Tier 2
+      { id: 'flurry_of_blows', name: 'Flurry of Blows', tier: 2, cost: 15, staminaCost: 0, desc: 'Passive: Can make 3 Basic attacks per turn when unarmed (upgrade of Basic combo)', icon: '⚡', prerequisites: { type: 'AND', skills: ['basic_combo'] } },
+      { id: 'hardened_fists', name: 'Hardened Fists', tier: 2, cost: 15, staminaCost: 0, desc: 'Passive: Unarmed attacks roll 1d6 each', icon: '💪', prerequisites: { type: 'AND', skills: ['basic_mix_martial_arts'] } },
+      { id: 'defensive_maneuvers', name: 'Defensive Maneuvers', tier: 2, cost: 15, staminaCost: 0, desc: 'Passive: Cannot equip Medium or Heavy Armor, but gain +2 Physical Defence and +2 Magical Defence when unarmed', icon: '🛡️', prerequisites: { type: 'AND', skills: ['stance_training'] } },
+      { id: 'air_fist_blast', name: 'Air Fist Blast', tier: 2, cost: 15, staminaCost: 0, desc: 'Passive: Unarmed attacks can hit targets up to 15 feet away', icon: '💨', prerequisites: { type: 'AND', skills: ['basic_mix_martial_arts'] } },
+
+      // Tier 3
+      { id: 'counter_strike', name: 'Counter Strike', tier: 3, cost: 23, staminaCost: 2, desc: 'Reaction: When hit by a physical attack, can make an unarmed attack as a reaction', icon: '🔄', prerequisites: { type: 'AND', skills: ['flurry_of_blows'] } },
+      { id: 'vital_strike', name: 'Vital Strike', tier: 3, cost: 23, staminaCost: 0, desc: 'Passive: Critical Hits deal 1 extra damage die', icon: '💔', prerequisites: { type: 'AND', skills: ['hardened_fists'] } },
+      { id: 'flow_state', name: 'Flow State', tier: 3, cost: 23, staminaCost: 3, desc: 'Active: +1 to accuracy and damage for each consecutive unarmed attack in a turn (3 Stamina per attack)', icon: '🌀', prerequisites: { type: 'AND', skills: ['vital_strike'] } },
+      { id: 'unbreakable', name: 'Unbreakable', tier: 3, cost: 23, staminaCost: 0, desc: 'Passive: +4 Physical Defence and +4 Magical Defence (upgrade of Defensive Maneuvers)', icon: '💎', prerequisites: { type: 'AND', skills: ['defensive_maneuvers'] } },
+      { id: 'combo_mastery', name: 'Combo Mastery', tier: 3, cost: 23, staminaCost: 0, desc: 'Passive: Can chain up to 4 Basic attacks per turn when unarmed (upgrade of Flurry of Blows)', icon: '⚡', prerequisites: { type: 'AND', skills: ['flurry_of_blows'] } },
+
+      // Tier 4
+      { id: 'perfect_form', name: 'Perfect Form', tier: 4, cost: 30, staminaCost: 0, desc: 'Passive: Unarmed basic attacks deal 1d10 +4 damage (upgrade of Hardened Fists and Basic Mix martial arts)', icon: '✨', prerequisites: { type: 'AND', skills: ['hardened_fists', 'basic_mix_martial_arts'] } },
+      { id: 'death_touch', name: 'Death Touch', tier: 4, cost: 30, staminaCost: 5, desc: 'Active: Attempt to Immobilize a target with an unarmed attack (50% chance, roll 11 or higher)', icon: '💀', prerequisites: { type: 'AND', skills: ['vital_strike'] } },
+      { id: 'whirlwind_strike', name: 'Whirlwind Strike', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Attack all enemies within 10 feet for 2d10 damage + 1d8 wind damage', icon: '🌪️', prerequisites: { type: 'AND', skills: ['combo_mastery'] } },
+      { id: 'face_the_elements', name: 'Face the Elements', tier: 4, cost: 30, staminaCost: 1, desc: 'Reaction: Reduce 3 damage you would take by using 1 Stamina each (up to 30 damage)', icon: '🌪️', prerequisites: { type: 'AND', skills: ['unbreakable'] } },
+      { id: 'pressure_point_mastery', name: 'Pressure Point Mastery', tier: 4, cost: 30, staminaCost: 4, desc: 'Action: Unarmed attacks have a 75% chance (roll 6 or higher) to apply Incapacitated (reference to status-effects.js)', icon: '👆', prerequisites: { type: 'AND', skills: ['death_touch'] } },
+
+      // Tier 5
+      { id: 'unarmed_mastery', name: 'Unarmed Mastery', tier: 5, cost: 38, staminaCost: 0, desc: 'Passive: Unarmed basic attacks deal 2d10 base damage, and gain +4 damage with all unarmed skill attacks, critical hits restore 5 stamina', icon: '👑', prerequisites: { type: 'OR', skills: ['perfect_form', 'whirlwind_strike', 'pressure_point_mastery'] } },
+      { id: 'one_punch_style', name: 'One Punch Style', tier: 5, cost: 38, staminaCost: 30, desc: 'Ultimate: Deal 10d10 damage. If you miss, take 3d10 damage. If you hit, Skip your next turn', icon: '💥', prerequisites: { type: 'AND', skills: ['unarmed_mastery'] } }
     ]
   },
 

@@ -217,9 +217,10 @@ const MONSTER_SYSTEM = {
 
     // Loot categories based on skill types
     lootCategories: {
-        combat: ['weapon_parts', 'armor_scraps', 'combat_essence'],
-        magic: ['mana_crystals', 'spell_components', 'arcane_dust'],
-        utility: ['rare_materials', 'crafting_tools', 'special_items']
+        combat: ['leather_grip', 'leather_strap', 'sharpening_essence', 'defense_essence', 'steel_ingot', 'scale_fragment', 'spear', 'iron_spear', 'leather_boots'],
+        magic: ['arcane_dust', 'crystal_shard', 'vitality_essence', 'fire_essence', 'silver_ingot', 'gold_ingot', 'ironbark_moss', 'apprentice_staff', 'journeyman_staff'],
+        utility: ['metallic_fragments', 'anti_magic_essence', 'segmented_carapace', 'regenerative_tissue', 'training_bow', 'hunter_bow'],
+        defense: ['leather_strap', 'defense_essence', 'steel_ingot', 'scale_fragment', 'metallic_fragments', 'segmented_carapace']
     },
 
     // Generate loot based on monster's skills
@@ -233,7 +234,8 @@ const MONSTER_SYSTEM = {
         const skillCategories = {
             combat: 0,
             magic: 0,
-            utility: 0
+            utility: 0,
+            defense: 0
         }
 
         allSkills.forEach(skillId => {
@@ -543,6 +545,26 @@ const MONSTER_SYSTEM = {
 // Make it available globally
 if (typeof window !== 'undefined') {
     window.MONSTER_SYSTEM = MONSTER_SYSTEM
+}
+
+// Global function for UI to get monster loot items
+window.getMonsterLoot = function (character) {
+    if (!character || !character.isMonster) return []
+
+    // Get loot item IDs from monster system
+    const lootItemIds = MONSTER_SYSTEM.generateLoot(character)
+
+    // Convert IDs to actual item objects
+    const lootItems = lootItemIds.map(itemId => {
+        const item = findItemById(itemId)
+        if (!item) {
+            console.warn(`Monster loot item not found: ${itemId}`)
+            return null
+        }
+        return item
+    }).filter(item => item !== null)
+
+    return lootItems
 }
 
 // For Node.js environments

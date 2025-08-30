@@ -80,7 +80,8 @@ class CharacterManager {
                     staff: [],
                     dagger: [],
                     polearm: [],
-                    hammer: []
+                    hammer: [],
+                    unarmed: ['unarmed_beginner']  // Pre-purchased and unrefundable
                 },
                 magic: {
                     fire: [],
@@ -411,6 +412,10 @@ class CharacterManager {
         }
         if (!character.unlockedSkills.weapons.hammer) {
             character.unlockedSkills.weapons.hammer = []
+        }
+        // Migrate unlockedSkills to include unarmed category
+        if (!character.unlockedSkills.weapons.unarmed) {
+            character.unlockedSkills.weapons.unarmed = ['unarmed_beginner']  // Pre-purchased for all characters
         }
         // Ensure ranged skill tree exists (migration for old bow/crossbow characters)
         if (!character.unlockedSkills.weapons.ranged) {
@@ -1216,6 +1221,15 @@ class CharacterManager {
         return allIds
     }
 
+    // Get all unlocked skill IDs for a character (excluding unrefundable skills)
+    getAllUnlockedSkillIdsForRefund(character) {
+        const allIds = this.getAllUnlockedSkillIds(character)
+
+        // Filter out unrefundable skills
+        const unrefundableSkills = ['unarmed_beginner']
+        return allIds.filter(skillId => !unrefundableSkills.includes(skillId))
+    }
+
     // Check if a specific skill is unlocked for a character
     isSkillUnlocked(character, skillId) {
         const unlockedSkillIds = this.getAllUnlockedSkillIds(character)
@@ -1437,7 +1451,7 @@ class CharacterManager {
     // Calculate total tier points for all unlocked skills
     calculateTierPoints(character) {
         let totalPoints = 0
-        const unlockedSkillIds = this.getAllUnlockedSkillIds(character)
+        const unlockedSkillIds = this.getAllUnlockedSkillIdsForRefund(character)
 
         unlockedSkillIds.forEach(skillId => {
             const skill = findSkillById(skillId)
@@ -2121,7 +2135,7 @@ class CharacterManager {
     // Grant a free Tier 1 weapon skill to humans
     grantFreeWeaponSkill(character) {
         // Get all tier 1 weapon skills
-        const weaponCategories = ['sword', 'axe', 'spear', 'dagger', 'bow', 'staff', 'polearm', 'hammer']
+        const weaponCategories = ['sword', 'axe', 'spear', 'dagger', 'bow', 'staff', 'polearm', 'hammer', 'unarmed']
         const tier1WeaponSkills = []
 
         if (typeof SKILLS_DATA !== 'undefined' && SKILLS_DATA.weapons) {

@@ -897,6 +897,18 @@ body {
     background: #ffd700;
     color: #1a1a2e;
 }
+
+/* Unrefundable skill note */
+.unrefundable-note {
+    color: #ff6b6b;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: italic;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
 .skill-name {
     font-weight: bold;
     color: #e0e0e0;

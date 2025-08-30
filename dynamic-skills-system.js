@@ -182,7 +182,8 @@ class DynamicSkillsSystem {
             'staff': '🪄',
             'dagger': '🗡️',
             'polearm': '🔱',
-            'hammer': '🔨'
+            'hammer': '🔨',
+            'unarmed': '👊'
         }
 
         // Magic subcategory icons
