@@ -405,7 +405,7 @@ const SKILLS_DATA = {
       // Tier 4
       { id: 'hurricane', name: 'Hurricane', tier: 4, cost: 20, staminaCost: 15, upgrade: 'gust', desc: 'Spell: Massive storm 50ft radius (4d6 damage, difficult terrain)', icon: '🌀', prerequisites: { type: 'AND', skills: ['flight', 'tornado'] } },
       { id: 'wind_prison', name: 'Wind Prison', tier: 4, cost: 20, staminaCost: 8, desc: 'Spell: Trap target in air pocket (cannot move or act)', icon: '🟦', prerequisites: { type: 'AND', skills: ['suffocate', 'wind_walk'] } },
-      { id: 'atmospheric_control', name: 'Atmospheric Control', tier: 4, cost: 20, staminaCost: 12, desc: 'Spell: Control weather in 1 mile radius for 1 hour', icon: '⛅', prerequisites: { type: 'AND', skills: ['wind_walk'] } },
+      { id: 'atmospheric_control', name: 'Atmospheric Control', tier: 4, cost: 20, staminaCost: 12, desc: 'Spell: Control weather in the area for 1 hour', icon: '⛅', prerequisites: { type: 'AND', skills: ['wind_walk'] } },
       { id: 'gale_mastery', name: 'Gale Mastery', tier: 4, cost: 20, staminaCost: 0, desc: 'Passive: Master wind magic, enhanced atmospheric control. GRANTS: Wind resistance 50% (-1), Lightning weakness 200% (+1)', icon: '💨', prerequisites: { type: 'AND', skills: ['wind_attunement'] }, elementalType: 'wind' },
 
       // Tier 5
@@ -818,34 +818,6 @@ const SKILLS_DATA = {
       { id: 'solar_staff', name: 'Solar Staff', tier: 4, cost: 20, staminaCost: 8, desc: 'Your staff becomes pure light, dealing 3d6 light damage in an area and healing allies. Has a 75% chance to apply Mind Controlled (status-effects.js lines 67-77; charm variant)', icon: '☀️✨', prerequisites: { type: 'AND', skills: ['light_staff', 'radiant_focus'] }, fusionType: 'staff_light' },
     ],
 
-    utility_combat: [
-      // Profession + Combat combinations
-      {
-        id: 'alchemical_blade', name: 'Alchemical Blade', tier: 4, cost: 20, staminaCost: 5, desc: 'Weapon coated with deadly poison: Apply Poison (escalating damage)', icon: '⚔️⚗️',
-        prerequisites: { type: 'AND', skills: ['blade_mastery', 'poison_crafting'] }, fusionType: 'sword_alchemy'
-      },
-      {
-        id: 'enchanted_arrows', name: 'Enchanted Arrows', tier: 4, cost: 20, staminaCost: 5, desc: 'Arrows with magical effects: Apply Weapon Enchanted status', icon: '🏹✨',
-        prerequisites: { type: 'AND', skills: ['multishot', 'weapon_enchanting'] }, fusionType: 'bow_enchanting'
-      },
-      {
-        id: 'blessed_weapon', name: 'Blessed Weapon', tier: 5, cost: 25, staminaCost: 0, desc: 'Weapon deals radiant damage: Apply Weapon Enchanted vs undead/evil', icon: '⚔️☀️',
-        prerequisites: { type: 'AND', skills: ['weapon_mastery', 'divine_light'] }, fusionType: 'weapon_light'
-      }
-    ],
-
-    monster_fusion: [
-      // Monster + Regular skill combinations
-      {
-        id: 'draconic_breath', name: 'Draconic Breath', tier: 5, cost: 25, staminaCost: 8, desc: 'Fire breath + fire mastery: Apply Burn + Enhanced status', icon: '🐉🔥',
-        prerequisites: { type: 'AND', skills: ['fire_breath', 'fire_mastery'] }, fusionType: 'monster_fire'
-      },
-      {
-        id: 'shadow_strike', name: 'Shadow Strike', tier: 4, cost: 20, staminaCost: 6, desc: 'Teleport + claws: Apply Stealth Mastery then strike', icon: '👥🗡️',
-        prerequisites: { type: 'AND', skills: ['razor_claws', 'monster_shadow_step'] }, fusionType: 'monster_darkness'
-      },
-    ],
-
     pure_magic: [
       // Fire + Ice combinations
       {
@@ -1197,86 +1169,189 @@ const SKILLS_DATA = {
         prerequisites: { type: 'AND', skills: ['purifying_wave', 'tsunami'] }, fusionType: 'water_light'
       }
     ],
-
-    monster_fusion: [
-      // Monster + Regular skill combinations
-      {
-        id: 'draconic_breath', name: 'Draconic Breath', tier: 5, cost: 25, staminaCost: 8, desc: 'Fire breath + fire mastery: Apply Burn + Enhanced status', icon: '🐉🔥',
-        prerequisites: { type: 'AND', skills: ['fire_breath', 'fire_mastery'] }, fusionType: 'monster_fire'
-      },
-      {
-        id: 'shadow_strike', name: 'Shadow Strike', tier: 4, cost: 20, staminaCost: 6, desc: 'Teleport + claws: Apply Stealth Mastery then strike', icon: '👥🗡️',
-        prerequisites: { type: 'AND', skills: ['razor_claws', 'monster_shadow_step'] }, fusionType: 'monster_darkness'
-      },
-      {
-        id: 'arcane_roar', name: 'Arcane Roar', tier: 4, cost: 20, staminaCost: 7, desc: 'Roar + magic: Apply Intimidating Aura + magical damage', icon: '🦁✨',
-        prerequisites: { type: 'AND', skills: ['roar', 'magic_missile'] }, fusionType: 'monster_arcane'
-      }
-    ]
   },
 
-  // ULTIMATE SKILLS - Legendary endgame abilities
-  ultimate: {
-    legendary: [
-      // Monster Summoning
+  // ASCENSION SKILLS - Unique abilities/spells unlocked by character level
+  ascension: {
+    unique: [
+      // 1. FAMILIAR SUMMON
       {
-        id: 'monster_summoning',
-        name: 'Monster Summoning',
-        tier: 5,
+        id: 'familiar_summon',
+        name: 'Familiar Summon',
+        tier: 3,
         cost: 50,
         staminaCost: 20,
-        desc: 'Action (Once per day): Summon a loyal monster companion (Player creates monster character with 50 Lumen to spend). Lasts until dismissed or slain. Can transfer your Lumen to improve companion.',
+        desc: 'Action (Once per day): Summon a loyal Monster companion (Player creates monster character with 50 Lumen to spend). Lasts until dismissed or slain. Can transfer your Lumen to improve companion.',
         icon: '👹',
-        prerequisites: { type: 'OR_WEAPON_MASTERY_AND_DARKNESS', skills: ['sword_mastery', 'axe_mastery', 'polearm_mastery', 'hammer_mastery', 'dagger_mastery', 'ranged_mastery', 'darkness_mastery'] }
+        prerequisites: { type: 'LEVEL', level: 5 }
       },
 
-      // Aetherial Shift
+      // 2. AETHERIAL SHIFT
       {
         id: 'aetherial_shift',
         name: 'Aetherial Shift',
         tier: 4,
         cost: 35,
-        staminaCost: 15,
-        desc: 'Action (3 uses per day): Phase out of reality for 1 round. Immune to all damage, can pass through walls/obstacles. Cannot attack or interact while phased. -2 stamina per extra round maintained.',
+        staminaCost: 30,
+        desc: 'Reaction (Once per combat): When you would take damage, phase out of reality to ignore all damage from that attack. After phasing, you cannot use other Active/Reaction skills until the end of your next turn due to dimensional instability.',
         icon: '👻',
-        prerequisites: { type: 'AND', skills: ['resurrection', 'void_prison', 'wind_walk'] }
+        prerequisites: { type: 'LEVEL', level: 8 }
       },
 
-      // Chronos Rewind
-      {
-        id: 'chronos_rewind',
-        name: 'Chronos Rewind',
-        tier: 5,
-        cost: 40,
-        staminaCost: 12,
-        desc: 'Reaction (Once per encounter): Rewind 1 action/attack. Reroll any dice or make different choice for last action taken (yours or ally). Cannot rewind death or critical story moments.',
-        icon: '⏪',
-        prerequisites: { type: 'ALL_LIGHT_MAGIC', skills: ['light_ray', 'healing_light', 'light_shield', 'resurrection', 'divine_judgment'] }
-      },
-
-      // Ultimate Nova
+      // 3. ULTIMATE NOVA
       {
         id: 'ultimate_nova',
         name: 'Ultimate Nova',
-        tier: 5,
-        cost: 60,
-        staminaCost: 25,
-        desc: 'Action (Once per day): Devastating 100ft radius explosion dealing 8d6 damage (DEX save halves). All creatures in area affected. User gains Exhausted (3 rounds) and cannot use magic for 1 minute.',
-        icon: '💥',
-        prerequisites: { type: 'THREE_TIER5_MAGIC', skills: [] }
+        tier: 4,
+        cost: 50,
+        staminaCost: 30,
+        desc: 'Action: Unleash devastating energy blast in all directions. Does not miss. Deals 3d20 damage to all enemies within 30ft radius. (friendly fire possible) Become "Incapacitated" afterwards.',
+        icon: '⭐',
+        prerequisites: { type: 'LEVEL', level: 10 }
       },
 
-      // Soul Link
+      // 4. MIND SHIELD
       {
-        id: 'soul_link',
-        name: 'Soul Link',
+        id: 'mind_shield',
+        name: 'Mind Shield',
         tier: 4,
-        cost: 30,
+        cost: 45,
+        staminaCost: 0,
+        desc: 'Passive: Immune to mind control, illusions, and psychic damage. Cannot be charmed, frightened, or possessed.',
+        icon: '🛡️',
+        prerequisites: { type: 'LEVEL', level: 8 }
+      },
+
+      // 5. COSMIC AWARENESS
+      {
+        id: 'cosmic_awareness',
+        name: 'Cosmic Awareness',
+        tier: 5,
+        cost: 65,
+        staminaCost: 0,
+        desc: 'Passive: Sense all magical effects, hidden creatures, and dimensional rifts within 100ft. Can see through illusions and invisibility.',
+        icon: '👁️',
+        prerequisites: { type: 'LEVEL', level: 12 }
+      },
+
+      // 6. PROBABILITY SHIFT
+      {
+        id: 'probability_shift',
+        name: 'Probability Shift',
+        tier: 4,
+        cost: 50,
         staminaCost: 10,
-        desc: 'Action (1 hour duration): Link HP pools with willing ally within 30ft. Combine max HP, share all damage/healing equally. If either reaches 0 HP, both fall unconscious. Can be ended early by either participant.',
-        icon: '💕',
-        prerequisites: { type: 'AND', skills: ['soul_steal', 'divine_judgment', 'elixir_of_life'] },
-        alternativePrerequisite: { type: 'OR', skills: ['elixir_of_life', 'grand_alchemist'] }
+        desc: 'Reaction (Once per combat): When you fail a roll, reroll with advantage. Can also force an enemy to reroll a successful attack with disadvantage.',
+        icon: '🎲',
+        prerequisites: { type: 'LEVEL', level: 10 }
+      },
+
+      // 7. INSTINCTIVE DODGE
+      {
+        id: 'instinctive_dodge',
+        name: 'Instinctive Dodge',
+        tier: 3,
+        cost: 30,
+        staminaCost: 1,
+        desc: 'Reaction: Automatically attempt to dodge any attacks that would hit you each round (Require roll higher than enemies Accuracy roll). Cannot dodge attacks that affect an area.',
+        icon: '⚡',
+        prerequisites: { type: 'LEVEL', level: 4 }
+      },
+
+      // 8. BURST OF SPEED
+      {
+        id: 'burst_of_speed',
+        name: 'Burst of Speed',
+        tier: 3,
+        cost: 40,
+        staminaCost: 5,
+        desc: 'Action: Temporarily enhance your movement speed to supernatural levels. Move up to 2x your normal movement distance for 1 round. Cannot be used again on your next turn.',
+        icon: '💨',
+        prerequisites: { type: 'LEVEL', level: 6 }
+      },
+
+      // 9. ANALYZE
+      {
+        id: 'analyze',
+        name: 'Analyze',
+        tier: 4,
+        cost: 35,
+        staminaCost: 5,
+        desc: 'Action: Analyze a target within 30ft to reveal their HP, elemental weaknesses, resistances, and special abilities. Also reveals hidden traps and environmental hazards in the area.',
+        icon: '🔍',
+        prerequisites: { type: 'LEVEL', level: 7 }
+      },
+
+      // 10. ECHO LOCATION
+      {
+        id: 'echo_location',
+        name: 'Echo Location',
+        tier: 3,
+        cost: 35,
+        staminaCost: 10,
+        desc: 'Action: Emit a pulse that reveals all creatures and objects within 50ft radius. Works through darkness and reveals hidden enemies and traps. Does not work through solid walls.',
+        icon: '🔊',
+        prerequisites: { type: 'LEVEL', level: 6 }
+      },
+
+      // 11. PHASE STEP
+      {
+        id: 'phase_step',
+        name: 'Phase Step',
+        tier: 4,
+        cost: 40,
+        staminaCost: 15,
+        desc: 'Action: Instantly teleport up to 30ft in any direction, passing through solid objects. Cannot teleport into occupied spaces.',
+        icon: '👣',
+        prerequisites: { type: 'LEVEL', level: 7 }
+      },
+
+      // 12. MIND READ
+      {
+        id: 'mind_read',
+        name: 'Mind Read',
+        tier: 4,
+        cost: 45,
+        staminaCost: 20,
+        desc: 'Action: Read the recent memories of a creature within 30ft. Gain basic understanding of their desires and intentions. Can understand creatures even if they don\'t speak your language.',
+        icon: '🧠',
+        prerequisites: { type: 'LEVEL', level: 8 }
+      },
+
+      // 13. ETERNAL MOMENT
+      {
+        id: 'eternal_moment',
+        name: 'Eternal Moment',
+        tier: 5,
+        cost: 70,
+        staminaCost: 40,
+        desc: 'Action (Once per day): Stop time and gain 3 additional turns immediately. No creature you attack can activate reaction skills during these turns. After using this skill, you must skip your next turn due to temporal exhaustion.',
+        icon: '⌛',
+        prerequisites: { type: 'LEVEL', level: 12 }
+      },
+
+      // 14. SOUL TRANSFERENCE
+      {
+        id: 'soul_transference',
+        name: 'Soul Transference',
+        tier: 5,
+        cost: 80,
+        staminaCost: 50,
+        desc: 'Action (Once per lifetime): Transfer your consciousness to another body, taking over their form and abilities. Original body becomes comatose. NOTE: Consider implementation challenges and potential for abuse on powerful NPCs.',
+        icon: '💫',
+        prerequisites: { type: 'LEVEL', level: 12 }
+      },
+
+      // 15. GRAVITY MANIPULATION
+      {
+        id: 'gravity_manipulation',
+        name: 'Gravity Manipulation',
+        tier: 3,
+        cost: 30,
+        staminaCost: 12,
+        desc: 'Action: Alter gravity in a 10ft radius. Enemies in the area have their movement speed halved, while allies have their movement speed doubled. Lasts for 2 rounds.',
+        icon: '🌍',
+        prerequisites: { type: 'LEVEL', level: 4 }
       }
     ]
   }

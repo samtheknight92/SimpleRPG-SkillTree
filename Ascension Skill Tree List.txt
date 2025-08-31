@@ -1,0 +1,178 @@
+ASCENSION SKILL TREE LIST
+========================
+
+LEVEL SYSTEM EXPLANATION
+========================
+Character level is calculated based on total points (tier points + stat points):
+
+Level 1: 0-2 points
+Level 2: 3-5 points  
+Level 3: 6-9 points
+Level 4: 10-14 points
+Level 5: 15-20 points
+Level 6: 21-27 points
+Level 7: 28-35 points
+Level 8: 36-44 points
+Level 9: 45-54 points
+Level 10: 55-65 points
+Level 11+: ~12+ points per level
+
+Tier Points: Each skill tier = 1 point (Tier 1 = 1 point, Tier 2 = 2 points, etc.)
+Stat Points: Each stat upgrade = 1 point (above starting values)
+
+Starting Values:
+- HP: 10, Stamina: 10, Strength: -3, Magic Power: -3, Speed: 2, Physical Defence: 8, Magical Defence: 8, Accuracy: -3
+
+CURRENT ASCENSION SKILLS
+========================
+
+1. FAMILIAR SUMMON (Was MONSTER SUMMONING)
+   - ID: Familiar_summon
+   - Tier: 3
+   - Cost: 50 Lumen
+   - Stamina Cost: 20
+   - Level Requirement: 5+
+   - Icon: 👹
+   - Description: Action (Once per day): Summon a loyal Monster companion (Player creates monster character with 50 Lumen to spend). Lasts until dismissed or slain. Can transfer your Lumen to improve companion.
+
+2. AETHERIAL SHIFT
+    - ID: aetherial_shift
+    - Tier: 4
+    - Cost: 35 Lumen
+    - Stamina Cost: 30
+    - Level Requirement: 8+
+    - Icon: 👻
+    - Description: Reaction (Once per combat): When you would take damage, phase out of reality to ignore all damage from that attack. After phasing, you cannot use other Active/Reaction skills until the after of your next turn due to dimensional instability.
+
+3. ULTIMATE NOVA
+   - ID: ultimate_nova
+   - Tier: 4
+   - Cost: 50 Lumen
+   - Stamina Cost: 30
+   - Level Requirement: 10+
+   - Icon: ⭐
+       - Description: Action: Unleash devastating energy blast in all directions. Does not miss. Deals 3d20 damage to all enemies within 30ft radius. (friendly fire possible) Become "Incapacitated" afterwards.
+
+4. MIND SHIELD -YES
+   - ID: mind_shield
+   - Tier: 4
+   - Cost: 45 Lumen
+   - Stamina Cost: 0
+   - Level Requirement: 8+
+   - Icon: 🛡️
+   - Description: Passive: Immune to mind control, illusions, and psychic damage. Cannot be charmed, frightened, or possessed.
+
+5. COSMIC AWARENESS -YES
+   - ID: cosmic_awareness
+   - Tier: 5
+   - Cost: 65 Lumen
+   - Stamina Cost: 0
+   - Level Requirement: 12+
+   - Icon: 👁️
+       - Description: Passive: Sense all magical effects, hidden creatures, and dimensional rifts within 100ft. Can see through illusions and invisibility.
+
+6. PROBABILITY SHIFT -YES 
+   - ID: probability_shift
+   - Tier: 4
+   - Cost: 50 Lumen
+   - Stamina Cost: 10
+   - Level Requirement: 10+
+   - Icon: 🎲
+   - Description: Reaction (Once per combat): When you fail a roll, reroll with advantage. Can also force an enemy to reroll a successful attack with disadvantage.
+
+7. INSTINCTIVE DODGE -YES
+   - ID: instinctive_dodge
+   - Tier: 3
+   - Cost: 30 Lumen
+   - Stamina Cost: 1
+   - Level Requirement: 4+
+   - Icon: ⚡
+   - Description: Reaction: Automatically attempt to dodge any attacks that would hit you each round (Require roll higher than enemies Accuracy roll). Cannot dodge attacks that affect an area.
+
+8. BURST OF SPEED -YES
+   - ID: burst_of_speed
+   - Tier: 3
+   - Cost: 40 Lumen
+   - Stamina Cost: 5
+   - Level Requirement: 6+
+   - Icon: 💨
+   - Description: Action: Temporarily enhance your movement speed to supernatural levels. Move up to 2x your normal movement distance for 1 round. Cannot be used again on your next turn.
+
+9. ANALYZE -YES
+   - ID: analyze
+   - Tier: 4
+   - Cost: 35 Lumen
+   - Stamina Cost: 5
+   - Level Requirement: 7+
+   - Icon: 🔍
+       - Description: Action: Analyze a target within 30ft to reveal their HP, elemental weaknesses, resistances, and special abilities. Also reveals hidden traps and environmental hazards in the area.
+
+10. ECHO LOCATION -YES
+    - ID: echo_location
+    - Tier: 3
+    - Cost: 35 Lumen
+    - Stamina Cost: 10
+    - Level Requirement: 6+
+    - Icon: 🔊
+    - Description: Action: Emit a pulse that reveals all creatures and objects within 50ft radius. Works through darkness and reveals hidden enemies and traps. Does not work through solid walls.
+
+11. PHASE STEP -Keep but Similar to Shadowstep dagger skill - Add attack to Shadowstep instead
+    - ID: phase_step
+    - Tier: 4
+    - Cost: 40 Lumen
+    - Stamina Cost: 15
+    - Level Requirement: 7+
+    - Icon: 👣
+    - Description: Action: Instantly teleport up to 30ft in any direction, passing through solid objects. Cannot teleport into occupied spaces.
+
+12. MIND READ -YES
+    - ID: mind_read
+    - Tier: 4
+    - Cost: 45 Lumen
+    - Stamina Cost: 20
+    - Level Requirement: 8+
+    - Icon: 🧠
+    - Description: Action: Read the recent memories of a creature within 30ft. Gain basic understanding of their desires and intentions. Can understand creatures even if they don't speak your language.
+
+13. ETERNAL MOMENT -YES
+    - ID: eternal_moment
+    - Tier: 5
+    - Cost: 70 Lumen
+    - Stamina Cost: 40
+    - Level Requirement: 12+
+    - Icon: ⌛
+    - Description: Action (Once per day): Stop time and gain 3 additional turns immediately. No creature you attack can activate reaction skills during these turns. After using this skill, you must skip your next turn due to temporal exhaustion.
+
+14. SOUL TRANSFERENCE -MAYBE (Implementation concerns - could be used on boss characters)
+    - ID: soul_transference
+    - Tier: 5
+    - Cost: 80 Lumen
+    - Stamina Cost: 50
+    - Level Requirement: 12+
+    - Icon: 💫
+    - Description: Action (Once per lifetime): Transfer your consciousness to another body, taking over their form and abilities. Original body becomes comatose. NOTE: Consider implementation challenges and potential for abuse on powerful NPCs.
+
+15. GRAVITY MANIPULATION -YES
+    - ID: gravity_manipulation
+    - Tier: 3
+    - Cost: 30 Lumen
+    - Stamina Cost: 12
+    - Level Requirement: 4+
+    - Icon: 🌍
+    - Description: Action: Alter gravity in a 10ft radius. Enemies in the area have their movement speed halved, while allies have their movement speed doubled. Lasts for 2 round.
+
+
+TIER SYSTEM
+============================
+- Tier 3: Level 3-6 (Early-game abilities)
+- Tier 4: Level 7-10 (Mid-game abilities)  
+- Tier 5: Level 11+ (End-game abilities)
+
+TIER GUIDELINES
+============================
+- Tier 3: Basic utility and early unique abilities
+- Tier 4: Powerful combat and utility skills
+- Tier 5: Ultimate abilities and game-changing powers
+
+Consider the power level and impact of each skill when assigning tiers.
+Higher tiers should correspond to more powerful or game-changing abilities.

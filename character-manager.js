@@ -33,7 +33,7 @@ class CharacterManager {
                 strength: -3,        // Physical damage modifier (-3 to +15)
                 magicPower: -3,      // Magical damage modifier (-3 to +15)
                 accuracy: -3,        // Hit chance modifier (-3 to +8)
-                speed: 2,            // Turn order, walk speed, evasion (auto-adds 25% to AC) - minimum 2 for 10m movement
+                speed: 2,            // Turn order, walk speed, evasion (auto-adds 25% to AC) - minimum 2 for 10ft movement
                 physicalDefence: 8,  // Physical AC (starting at 8)
                 magicalDefence: 8    // Magical AC (starting at 8)
             },
@@ -113,8 +113,8 @@ class CharacterManager {
                     utility_combat: [],
                     monster_fusion: []
                 },
-                ultimate: {  // Ultimate endgame skills with legendary power
-                    legendary: []
+                ascension: {  // Ascension endgame skills with unique power
+                    unique: []
                 },
                 racial: {    // Racial skills organized by race
                     elven: [],
@@ -529,10 +529,10 @@ class CharacterManager {
             character.unlockedSkills.fusion.pure_magic = []
         }
 
-        // Migrate to include ultimate skills system
-        if (!character.unlockedSkills.ultimate) {
-            character.unlockedSkills.ultimate = {
-                legendary: []
+        // Migrate to include ascension skills system
+        if (!character.unlockedSkills.ascension) {
+            character.unlockedSkills.ascension = {
+                unique: []
             }
         }
 
@@ -597,7 +597,7 @@ class CharacterManager {
             }
         }
 
-        // Migrate speed minimum to 2 (10m movement)
+        // Migrate speed minimum to 2 (10ft movement)
         if (character.stats.speed < 2) {
             character.stats.speed = 2  // Ensure minimum speed for basic movement
         }
@@ -991,6 +991,15 @@ class CharacterManager {
             }
         } else if (category === 'monster') {
             unlockedSkillsArray = character.unlockedSkills.monster[subcategory]
+        } else if (category === 'ascension') {
+            // Ensure ascension skills structure exists
+            if (!character.unlockedSkills.ascension) {
+                character.unlockedSkills.ascension = {}
+            }
+            if (!character.unlockedSkills.ascension[subcategory]) {
+                character.unlockedSkills.ascension[subcategory] = []
+            }
+            unlockedSkillsArray = character.unlockedSkills.ascension[subcategory]
         } else {
             unlockedSkillsArray = character.unlockedSkills[category][subcategory]
         }
@@ -1046,9 +1055,18 @@ class CharacterManager {
             }
         }
 
+        // Check ascension skills (nested structure like other categories)
+        if (SKILLS_DATA.ascension) {
+            for (const skillsArray of Object.values(SKILLS_DATA.ascension)) {
+                if (skillsArray.some(skill => skill.id === skillId)) {
+                    return 'ascension'
+                }
+            }
+        }
+
         // Check other categories (nested structure)
         for (const [category, subcategories] of Object.entries(SKILLS_DATA)) {
-            if (category === 'monster' || category === 'fusion') continue // Already checked above
+            if (category === 'monster' || category === 'fusion' || category === 'ascension') continue // Already checked above
 
             for (const [subcategory, skills] of Object.entries(subcategories)) {
                 if (skills.some(skill => skill.id === skillId)) {
@@ -1100,9 +1118,18 @@ class CharacterManager {
             }
         }
 
+        // Check ascension skills (have subcategories)
+        if (SKILLS_DATA.ascension) {
+            for (const [subcategory, skills] of Object.entries(SKILLS_DATA.ascension)) {
+                if (skills.some(skill => skill.id === skillId)) {
+                    return subcategory
+                }
+            }
+        }
+
         // Check other categories (nested structure)
         for (const [category, subcategories] of Object.entries(SKILLS_DATA)) {
-            if (category === 'monster' || category === 'fusion') continue // Already handled above
+            if (category === 'monster' || category === 'fusion' || category === 'ascension') continue // Already handled above
 
             for (const [subcategory, skills] of Object.entries(subcategories)) {
                 if (skills.some(skill => skill.id === skillId)) {
@@ -1183,6 +1210,10 @@ class CharacterManager {
             const tier5MagicMasteries = ['fire_supremacy', 'ice_supremacy', 'lightning_supremacy', 'earth_supremacy', 'wind_mastery', 'water_mastery', 'light_mastery', 'darkness_mastery']
             const unlockedMasteries = tier5MagicMasteries.filter(masteryId => unlockedSkillIds.includes(masteryId))
             return unlockedMasteries.length >= 3
+        } else if (skill.prerequisites.type === 'LEVEL') {
+            // Requires character to be at a certain level
+            const characterLevel = this.calculateLevel(this.calculateTierPoints(character) + this.calculateStatPoints(character))
+            return characterLevel >= skill.prerequisites.level
         }
 
         return false
@@ -1252,6 +1283,8 @@ class CharacterManager {
             unlockedSkillsArray = character.unlockedSkills.racial[subcategory]
         } else if (category === 'monster') {
             unlockedSkillsArray = character.unlockedSkills.monster[subcategory]
+        } else if (category === 'ascension') {
+            unlockedSkillsArray = character.unlockedSkills.ascension[subcategory]
         } else {
             unlockedSkillsArray = character.unlockedSkills[category][subcategory]
         }
@@ -1280,6 +1313,15 @@ class CharacterManager {
                 depUnlockedSkillsArray = character.unlockedSkills.racial[depSubcategory]
             } else if (depCategory === 'monster') {
                 depUnlockedSkillsArray = character.unlockedSkills.monster[depSubcategory]
+            } else if (depCategory === 'ascension') {
+                // Ensure ascension skills structure exists for dependents
+                if (!character.unlockedSkills.ascension) {
+                    character.unlockedSkills.ascension = {}
+                }
+                if (!character.unlockedSkills.ascension[depSubcategory]) {
+                    character.unlockedSkills.ascension[depSubcategory] = []
+                }
+                depUnlockedSkillsArray = character.unlockedSkills.ascension[depSubcategory]
             } else {
                 depUnlockedSkillsArray = character.unlockedSkills[depCategory][depSubcategory]
             }
@@ -1590,19 +1632,19 @@ class CharacterManager {
         return false
     }
 
-    // Check if any ultimate skills are available for a character
-    hasAvailableUltimateSkills(character) {
+    // Check if any ascension skills are available for a character
+    hasAvailableAscensionSkills(character) {
         const allUnlockedSkills = this.getAllUnlockedSkillIds(character)
 
-        // Check each ultimate skill to see if prerequisites are met
-        for (const [categoryName, ultimateCategory] of Object.entries(SKILLS_DATA.ultimate)) {
-            for (const ultimateSkill of ultimateCategory) {
+        // Check each ascension skill to see if prerequisites are met
+        for (const [categoryName, ascensionCategory] of Object.entries(SKILLS_DATA.ascension)) {
+            for (const ascensionSkill of ascensionCategory) {
                 // Skip if already unlocked
-                const isAlreadyUnlocked = this.isSkillUnlocked(character, ultimateSkill.id)
+                const isAlreadyUnlocked = this.isSkillUnlocked(character, ascensionSkill.id)
                 if (isAlreadyUnlocked) continue
 
                 // Check if prerequisites are met
-                const prereqsMet = this.validateSkillPrerequisites(character, ultimateSkill.id)
+                const prereqsMet = this.validateSkillPrerequisites(character, ascensionSkill.id)
                 if (prereqsMet) {
                     return true
                 }
@@ -1612,11 +1654,11 @@ class CharacterManager {
         return false
     }
 
-    // Check if any ultimate skills are unlocked for a character  
-    hasUnlockedUltimateSkills(character) {
-        if (!character.unlockedSkills.ultimate) return false
-        for (const ultimateCategory of Object.values(character.unlockedSkills.ultimate)) {
-            if (ultimateCategory.length > 0) {
+    // Check if any ascension skills are unlocked for a character  
+    hasUnlockedAscensionSkills(character) {
+        if (!character.unlockedSkills.ascension) return false
+        for (const ascensionCategory of Object.values(character.unlockedSkills.ascension)) {
+            if (ascensionCategory.length > 0) {
                 return true
             }
         }

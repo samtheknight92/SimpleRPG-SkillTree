@@ -52,6 +52,10 @@ class DynamicSkillsSystem {
             return this.getFusionSubcategories(character, devMode)
         }
 
+        if (category === 'ascension') {
+            return this.getAscensionSubcategories(character, devMode)
+        }
+
         // For standard categories, return the subcategories
         if (window.SKILLS_DATA[category]) {
             return Object.keys(window.SKILLS_DATA[category])
@@ -112,6 +116,26 @@ class DynamicSkillsSystem {
     }
 
     /**
+     * Get ascension subcategories (level-gated unique skills)
+     */
+    getAscensionSubcategories(character, devMode) {
+        if (!window.SKILLS_DATA.ascension) {
+            return []
+        }
+
+        const subcategories = Object.keys(window.SKILLS_DATA.ascension)
+
+        if (devMode) {
+            return subcategories
+        }
+
+        // Filter to only show categories with available skills based on level
+        return subcategories.filter(subcategory =>
+            this.hasAscensionSkillsInCategory(character, subcategory)
+        )
+    }
+
+    /**
      * Check if character has fusion skills available in a category
      */
     hasFusionSkillsInCategory(character, subcategory) {
@@ -125,6 +149,23 @@ class DynamicSkillsSystem {
         return fusionSkills.some(skill => {
             // Check if fusion skill is available based on prerequisites
             return this.isFusionSkillAvailable(skill, unlockedSkills)
+        })
+    }
+
+    /**
+     * Check if character has ascension skills available in a category
+     */
+    hasAscensionSkillsInCategory(character, subcategory) {
+        if (!character || !window.SKILLS_DATA.ascension?.[subcategory]) {
+            return false
+        }
+
+        const ascensionSkills = window.SKILLS_DATA.ascension[subcategory]
+        const characterLevel = characterManager.calculateLevel(characterManager.calculateTierPoints(character) + characterManager.calculateStatPoints(character))
+
+        return ascensionSkills.some(skill => {
+            // Check if ascension skill is available based on level requirements
+            return skill.prerequisites?.type === 'LEVEL' && characterLevel >= skill.prerequisites.level
         })
     }
 
@@ -161,7 +202,8 @@ class DynamicSkillsSystem {
             'professions': '🔨 Professions',
             'racial': '🏛️ Racial',
             'monster': '👹 Monster',
-            'fusion': '💫 Fusion'
+            'fusion': '💫 Fusion',
+            'ascension': '⭐ Ascension'
         }
 
         return displayNames[category] || this.capitalizeFirst(category)
@@ -282,6 +324,11 @@ class DynamicSkillsSystem {
 
         if (category === 'fusion') {
             const subcategories = this.getFusionSubcategories(character, devMode)
+            return subcategories.length > 0
+        }
+
+        if (category === 'ascension') {
+            const subcategories = this.getAscensionSubcategories(character, devMode)
             return subcategories.length > 0
         }
 

@@ -874,7 +874,8 @@ class UIComponents {
             'professions': 'smithing',
             'racial': 'crown',
             'monster': 'monster',
-            'fusion': 'star'
+            'fusion': 'star',
+            'ascension': 'star'
         }
         return iconMap[category] || 'default'
     }
@@ -1819,6 +1820,23 @@ class UIComponents {
             }
 
             unlockedSkills = character.unlockedSkills.monster[this.selectedSkillSubcategory]
+        } else if (this.selectedSkillCategory === 'ascension') {
+            // Special handling for ascension skills (level-gated unique skills)
+            skills = SKILLS_DATA.ascension[this.selectedSkillSubcategory]
+
+            // Initialize ascension skills structure if needed
+            if (!character.unlockedSkills.ascension) {
+                character.unlockedSkills.ascension = {
+                    unique: []
+                }
+            }
+
+            // Ensure this subcategory exists in unlockedSkills
+            if (!character.unlockedSkills.ascension[this.selectedSkillSubcategory]) {
+                character.unlockedSkills.ascension[this.selectedSkillSubcategory] = []
+            }
+
+            unlockedSkills = character.unlockedSkills.ascension[this.selectedSkillSubcategory]
         } else {
             skills = SKILLS_DATA[this.selectedSkillCategory][this.selectedSkillSubcategory]
             unlockedSkills = character.unlockedSkills[this.selectedSkillCategory][this.selectedSkillSubcategory]
@@ -1986,6 +2004,38 @@ class UIComponents {
             return '<span class="prereq-none">No prerequisites</span>'
         }
 
+        // Handle level-based prerequisites
+        if (skill.prerequisites.type === 'LEVEL') {
+            return `<span class="prereq-list">Requires: Level ${skill.prerequisites.level}+</span>`
+        }
+
+        // Handle special prerequisite types
+        if (skill.prerequisites.type === 'THREE_TIER5_MAGIC') {
+            const tier5MagicMasteries = ['fire_supremacy', 'ice_supremacy', 'lightning_supremacy', 'earth_supremacy', 'wind_mastery', 'water_mastery', 'light_mastery', 'darkness_mastery']
+            const prereqSkills = tier5MagicMasteries.map(skillId => {
+                const prereqSkill = findSkillById(skillId)
+                return prereqSkill ? prereqSkill.name : skillId
+            })
+            return `<span class="prereq-list">Requires: Any 3 of: ${prereqSkills.join(', ')}</span>`
+        } else if (skill.prerequisites.type === 'ALL_LIGHT_MAGIC') {
+            const lightMagicSpells = ['heal', 'cure', 'blessing', 'holy_light', 'light_mastery']
+            const prereqSkills = lightMagicSpells.map(skillId => {
+                const prereqSkill = findSkillById(skillId)
+                return prereqSkill ? prereqSkill.name : skillId
+            })
+            return `<span class="prereq-list">Requires: All: ${prereqSkills.join(', ')}</span>`
+        } else if (skill.prerequisites.type === 'OR_WEAPON_MASTERY_AND_DARKNESS') {
+            const weaponMasteries = ['sword_mastery', 'bow_mastery', 'staff_mastery', 'dagger_mastery']
+            const weaponPrereqSkills = weaponMasteries.map(skillId => {
+                const prereqSkill = findSkillById(skillId)
+                return prereqSkill ? prereqSkill.name : skillId
+            })
+            const darknessPrereqSkill = findSkillById('darkness_mastery')
+            const darknessName = darknessPrereqSkill ? darknessPrereqSkill.name : 'darkness_mastery'
+            return `<span class="prereq-list">Requires: Any weapon mastery (${weaponPrereqSkills.join(', ')}) AND ${darknessName}</span>`
+        }
+
+        // Handle standard AND/OR prerequisites
         const prereqSkills = skill.prerequisites.skills.map(skillId => {
             const prereqSkill = findSkillById(skillId)
             if (!prereqSkill) return skillId
@@ -2653,7 +2703,7 @@ class UIComponents {
                 <!-- Mobility & Defense Group -->
                 <div class="stat-group">
                     <h3>${iconMapper.createIconElement('armor', 'armor', 16)} Mobility & Defense</h3>
-                    ${this.renderStatUpgrade('speed', stats.speed, character.lumens, 'Speed (1 = 5m movement)')}
+                    ${this.renderStatUpgrade('speed', stats.speed, character.lumens, 'Speed (1 = 5ft movement)')}
                     ${this.renderStatUpgrade('physicalDefence', stats.physicalDefence, character.lumens, 'Physical Defence')}
                     ${this.renderStatUpgrade('magicalDefence', stats.magicalDefence, character.lumens, 'Magical Defence')}
                 </div>
@@ -2684,7 +2734,7 @@ class UIComponents {
                     </div>
                     <div class="stat-display">
                         <span class="stat-name">Movement Speed</span>
-                        <span class="stat-value">${this.getTotalMovementSpeed(character)}m</span>
+                        <span class="stat-value">${this.getTotalMovementSpeed(character)}ft</span>
                         <span class="stat-formula">(${this.getMovementSpeedFormula(character)})</span>
                     </div>
                 </div>
@@ -2871,7 +2921,7 @@ class UIComponents {
                         </div>
                         <div class="stat-item">
                             <span class="stat-name">Movement Speed</span>
-                            <span class="stat-value">${this.getTotalMovementSpeed(character)}m</span>
+                            <span class="stat-value">${this.getTotalMovementSpeed(character)}ft</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-name">Physical Defence</span>
@@ -4895,32 +4945,51 @@ class UIComponents {
         // Build prerequisites info
         let prereqHtml = ''
         if (skill.prerequisites.type !== 'NONE') {
-            const prereqSkills = skill.prerequisites.skills.map(skillId => {
-                const prereqSkill = findSkillById(skillId)
-                const isPrereqUnlocked = prereqSkill && unlockedSkillsArray.includes(skillId)
-                const status = isPrereqUnlocked ? '✅' : '❌'
+            if (skill.prerequisites.type === 'LEVEL') {
+                // Handle level-based prerequisites
+                const characterLevel = characterManager.calculateLevel(characterManager.calculateTierPoints(character) + characterManager.calculateStatPoints(character))
+                const isLevelMet = characterLevel >= skill.prerequisites.level
+                const status = isLevelMet ? '✅' : '❌'
 
-                if (!prereqSkill) return skillId
+                prereqHtml = `<div class="tooltip-prerequisites">
+                    <strong>Prerequisites:</strong><br>
+                    ${status} Character Level ${skill.prerequisites.level}+ (Current: ${characterLevel})
+                </div>`
+            } else if (skill.prerequisites.skills && Array.isArray(skill.prerequisites.skills)) {
+                // Handle skill-based prerequisites
+                const prereqSkills = skill.prerequisites.skills.map(skillId => {
+                    const prereqSkill = findSkillById(skillId)
+                    const isPrereqUnlocked = prereqSkill && unlockedSkillsArray.includes(skillId)
+                    const status = isPrereqUnlocked ? '✅' : '❌'
 
-                // Check if this prerequisite is from a different skill tree
-                const skillTreeInfo = this.findSkillTreeInfo(skillId)
-                let skillDisplayName = prereqSkill.name
+                    if (!prereqSkill) return skillId
 
-                if (skillTreeInfo) {
-                    const categoryName = skillTreeInfo.category === 'racial'
-                        ? `${skillTreeInfo.subcategory.charAt(0).toUpperCase() + skillTreeInfo.subcategory.slice(1)} Racial`
-                        : `${skillTreeInfo.category.charAt(0).toUpperCase() + skillTreeInfo.category.slice(1)} → ${skillTreeInfo.subcategory.charAt(0).toUpperCase() + skillTreeInfo.subcategory.slice(1)}`
+                    // Check if this prerequisite is from a different skill tree
+                    const skillTreeInfo = this.findSkillTreeInfo(skillId)
+                    let skillDisplayName = prereqSkill.name
 
-                    skillDisplayName = `${prereqSkill.name} <span style="color: #888; font-size: 0.9em;">(${categoryName})</span>`
-                }
+                    if (skillTreeInfo) {
+                        const categoryName = skillTreeInfo.category === 'racial'
+                            ? `${skillTreeInfo.subcategory.charAt(0).toUpperCase() + skillTreeInfo.subcategory.slice(1)} Racial`
+                            : `${skillTreeInfo.category.charAt(0).toUpperCase() + skillTreeInfo.category.slice(1)} → ${skillTreeInfo.subcategory.charAt(0).toUpperCase() + skillTreeInfo.subcategory.slice(1)}`
 
-                return `${status} ${skillDisplayName}`
-            })
-            const connector = skill.prerequisites.type === 'AND' ? ' AND ' : ' OR '
-            prereqHtml = `<div class="tooltip-prerequisites">
-                <strong>Prerequisites:</strong><br>
-                ${prereqSkills.join('<br>' + connector + ' ')}
-            </div>`
+                        skillDisplayName = `${prereqSkill.name} <span style="color: #888; font-size: 0.9em;">(${categoryName})</span>`
+                    }
+
+                    return `${status} ${skillDisplayName}`
+                })
+                const connector = skill.prerequisites.type === 'AND' ? ' AND ' : ' OR '
+                prereqHtml = `<div class="tooltip-prerequisites">
+                    <strong>Prerequisites:</strong><br>
+                    ${prereqSkills.join('<br>' + connector + ' ')}
+                </div>`
+            } else {
+                // Handle other prerequisite types
+                prereqHtml = `<div class="tooltip-prerequisites">
+                    <strong>Prerequisites:</strong><br>
+                    Special requirements (see skill description)
+                </div>`
+            }
         }
 
         // Create tooltip element
@@ -5259,9 +5328,9 @@ class UIComponents {
 
         // Format the formula
         if (breakdown.length > 0) {
-            return `(${baseSpeed} + ${breakdown.join(' + ')}) � 5m = ${totalSpeed} � 5m`
+            return `(${baseSpeed} + ${breakdown.join(' + ')}) � 5ft = ${totalSpeed} � 5ft`
         } else {
-            return `${baseSpeed} speed � 5m`
+            return `${baseSpeed} speed � 5ft`
         }
     }
 

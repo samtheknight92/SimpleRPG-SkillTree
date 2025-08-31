@@ -3,5 +3,3 @@
 - Consider expanding the monster loot system with new items
 - Consider adding item enchantment slots
 
-To do:
-1. Check why monster loot drops have multiple of the same item?
