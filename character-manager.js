@@ -1706,7 +1706,17 @@ class CharacterManager {
         const storedFolders = this.getStoredFolders()
         storedFolders.forEach(folder => characterFolders.add(folder))
 
-        return Array.from(characterFolders).sort()
+        const result = Array.from(characterFolders).sort()
+
+        // Debug logging
+        console.log('getAllFolders debug:', {
+            characterFolders: Array.from(characterFolders),
+            storedFolders: storedFolders,
+            result: result,
+            resultLength: result.length
+        })
+
+        return result
     }
 
     // Get stored folders from localStorage
@@ -1764,6 +1774,9 @@ class CharacterManager {
         if (!storedFolders.includes(trimmedName)) {
             storedFolders.push(trimmedName)
             this.saveStoredFolders(storedFolders)
+            console.log('createFolder debug: Created folder', trimmedName, 'Stored folders:', storedFolders)
+        } else {
+            console.log('createFolder debug: Folder already exists', trimmedName)
         }
 
         return true

@@ -14,14 +14,14 @@ class MonsterPresets {
                 description: 'A basic melee monster with sword skills and light armor',
                 builtIn: true,
                 stats: {
-                    hp: 20,
-                    stamina: 15,
-                    strength: 8,
-                    magicPower: 5,
-                    speed: 8,
-                    physicalDefence: 8,
+                    hp: 12,
+                    stamina: 12,
+                    strength: -1,
+                    magicPower: -3,
+                    speed: 4,
+                    physicalDefence: 10,
                     magicalDefence: 8,
-                    accuracy: 1
+                    accuracy: -1
                 },
                 unlockedSkills: {
                     weapons: {
@@ -65,7 +65,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 50, silver: 2, gold: 0 },
+                currency: { Gil: 10 },
                 isMonster: true
             },
             {
@@ -74,14 +74,14 @@ class MonsterPresets {
                 description: 'A spellcaster specializing in fire magic',
                 builtIn: true,
                 stats: {
-                    hp: 15,
-                    stamina: 25,
-                    strength: 6,
-                    magicPower: 8,
-                    speed: 10,
+                    hp: 10,
+                    stamina: 15,
+                    strength: -3,
+                    magicPower: 2,
+                    speed: 2,
                     physicalDefence: 8,
                     magicalDefence: 12,
-                    accuracy: 2
+                    accuracy: 0
                 },
                 unlockedSkills: {
                     weapons: {
@@ -125,7 +125,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 100, silver: 5, gold: 1 },
+                currency: { Gil: 105 },
                 isMonster: true
             },
             {
@@ -134,14 +134,14 @@ class MonsterPresets {
                 description: 'A heavily defended warrior with strong defensive capabilities',
                 builtIn: true,
                 stats: {
-                    hp: 35,
-                    stamina: 20,
-                    strength: 8,
-                    magicPower: 3,
-                    speed: 6,
-                    physicalDefence: 15,
+                    hp: 15,
+                    stamina: 12,
+                    strength: 0,
+                    magicPower: -3,
+                    speed: 2,
+                    physicalDefence: 14,
                     magicalDefence: 8,
-                    accuracy: 0
+                    accuracy: -2
                 },
                 unlockedSkills: {
                     weapons: {
@@ -185,7 +185,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 200, silver: 8, gold: 2 },
+                currency: { Gil: 208 },
                 isMonster: true
             },
             {
@@ -194,14 +194,14 @@ class MonsterPresets {
                 description: 'A fast, agile monster with dagger skills and stealth abilities',
                 builtIn: true,
                 stats: {
-                    hp: 18,
-                    stamina: 30,
-                    strength: 8,
-                    magicPower: 8,
-                    speed: 12,
+                    hp: 10,
+                    stamina: 15,
+                    strength: -1,
+                    magicPower: -2,
+                    speed: 6,
                     physicalDefence: 8,
                     magicalDefence: 8,
-                    accuracy: 3
+                    accuracy: 2
                 },
                 unlockedSkills: {
                     weapons: {
@@ -245,7 +245,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 150, silver: 6, gold: 1 },
+                currency: { Gil: 156 },
                 isMonster: true
             },
             {
@@ -254,14 +254,14 @@ class MonsterPresets {
                 description: 'A magical creature with powerful ice magic and frost abilities',
                 builtIn: true,
                 stats: {
-                    hp: 25,
-                    stamina: 35,
-                    strength: 8,
-                    magicPower: 8,
-                    speed: 12,
+                    hp: 12,
+                    stamina: 15,
+                    strength: -2,
+                    magicPower: 3,
+                    speed: 2,
                     physicalDefence: 8,
-                    magicalDefence: 16,
-                    accuracy: 1
+                    magicalDefence: 14,
+                    accuracy: 0
                 },
                 unlockedSkills: {
                     weapons: {
@@ -305,7 +305,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 300, silver: 12, gold: 3 },
+                currency: { Gil: 312 },
                 isMonster: true
             },
 
@@ -316,14 +316,14 @@ class MonsterPresets {
                 description: 'A diseased and aggressive rat - the weakest of monsters',
                 builtIn: true,
                 stats: {
-                    hp: 6,
+                    hp: 8,
                     stamina: 8,
-                    strength: -1,
+                    strength: -2,
                     magicPower: -3,
-                    speed: 8,
+                    speed: 4,
                     physicalDefence: 8,
                     magicalDefence: 8,
-                    accuracy: 0
+                    accuracy: -2
                 },
                 unlockedSkills: {
                     weapons: {
@@ -367,7 +367,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 15, silver: 0, gold: 0 },
+                currency: { Gil: 2 },
                 isMonster: true
             },
             {
@@ -376,14 +376,14 @@ class MonsterPresets {
                 description: 'A young, inexperienced goblin - weaker than a warrior',
                 builtIn: true,
                 stats: {
-                    hp: 14,
-                    stamina: 12,
-                    strength: 3,
-                    magicPower: -1,
-                    speed: 10,
+                    hp: 10,
+                    stamina: 10,
+                    strength: -2,
+                    magicPower: -3,
+                    speed: 4,
                     physicalDefence: 8,
                     magicalDefence: 8,
-                    accuracy: 2
+                    accuracy: 0
                 },
                 unlockedSkills: {
                     weapons: {
@@ -427,7 +427,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 35, silver: 1, gold: 0 },
+                currency: { Gil: 6 },
                 isMonster: true
             },
             {
@@ -436,14 +436,14 @@ class MonsterPresets {
                 description: 'A seasoned goblin leader with enhanced combat abilities',
                 builtIn: true,
                 stats: {
-                    hp: 32,
-                    stamina: 22,
-                    strength: 8,
-                    magicPower: 8,
-                    speed: 8,
+                    hp: 14,
+                    stamina: 14,
+                    strength: 1,
+                    magicPower: 0,
+                    speed: 3,
                     physicalDefence: 12,
                     magicalDefence: 10,
-                    accuracy: 1
+                    accuracy: 0
                 },
                 unlockedSkills: {
                     weapons: {
@@ -487,7 +487,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 85, silver: 4, gold: 0 },
+                currency: { Gil: 17 },
                 isMonster: true
             },
             {
@@ -496,14 +496,14 @@ class MonsterPresets {
                 description: 'An undead soldier risen from the grave',
                 builtIn: true,
                 stats: {
-                    hp: 22,
-                    stamina: 15,
-                    strength: 8,
-                    magicPower: 3,
-                    speed: 6,
-                    physicalDefence: 10,
+                    hp: 12,
+                    stamina: 12,
+                    strength: 0,
+                    magicPower: -2,
+                    speed: 2,
+                    physicalDefence: 12,
                     magicalDefence: 8,
-                    accuracy: 0
+                    accuracy: -1
                 },
                 unlockedSkills: {
                     weapons: {
@@ -547,7 +547,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 60, silver: 2, gold: 0 },
+                currency: { Gil: 12 },
                 isMonster: true
             },
             {
@@ -556,14 +556,14 @@ class MonsterPresets {
                 description: 'A large arachnid with web attacks and venomous bite',
                 builtIn: true,
                 stats: {
-                    hp: 20,
-                    stamina: 18,
-                    strength: 8,
-                    magicPower: 6,
-                    speed: 12,
+                    hp: 12,
+                    stamina: 12,
+                    strength: -1,
+                    magicPower: -1,
+                    speed: 6,
                     physicalDefence: 8,
                     magicalDefence: 8,
-                    accuracy: 3
+                    accuracy: 2
                 },
                 unlockedSkills: {
                     weapons: {
@@ -607,7 +607,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 55, silver: 2, gold: 0 },
+                currency: { Gil: 11 },
                 isMonster: true
             },
             {
@@ -616,14 +616,14 @@ class MonsterPresets {
                 description: 'A fierce orc warrior driven by battle fury',
                 builtIn: true,
                 stats: {
-                    hp: 38,
-                    stamina: 25,
-                    strength: 8,
-                    magicPower: 2,
-                    speed: 8,
-                    physicalDefence: 10,
+                    hp: 16,
+                    stamina: 14,
+                    strength: 3,
+                    magicPower: -3,
+                    speed: 3,
+                    physicalDefence: 12,
                     magicalDefence: 8,
-                    accuracy: 0
+                    accuracy: -1
                 },
                 unlockedSkills: {
                     weapons: {
@@ -667,7 +667,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 90, silver: 4, gold: 0 },
+                currency: { Gil: 18 },
                 isMonster: true
             },
 
@@ -678,14 +678,14 @@ class MonsterPresets {
                 description: 'A large, fierce wolf summoned by Pack Leader - strong and loyal',
                 builtIn: true,
                 stats: {
-                    hp: 16,
-                    stamina: 20,
-                    strength: 8,
-                    magicPower: 4,
-                    speed: 12,
+                    hp: 12,
+                    stamina: 12,
+                    strength: 1,
+                    magicPower: -2,
+                    speed: 4,
                     physicalDefence: 8,
                     magicalDefence: 8,
-                    accuracy: 2
+                    accuracy: 1
                 },
                 unlockedSkills: {
                     weapons: {
@@ -729,7 +729,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 50, silver: 2, gold: 0 },
+                currency: { Gil: 10 },
                 isMonster: true
             },
             {
@@ -738,14 +738,14 @@ class MonsterPresets {
                 description: 'A dark, stealthy creature summoned by Pack Leader - fast and sneaky',
                 builtIn: true,
                 stats: {
-                    hp: 12,
-                    stamina: 25,
-                    strength: 8,
-                    magicPower: 8,
-                    speed: 12,
+                    hp: 10,
+                    stamina: 14,
+                    strength: -1,
+                    magicPower: 0,
+                    speed: 6,
                     physicalDefence: 8,
                     magicalDefence: 8,
-                    accuracy: 3
+                    accuracy: 2
                 },
                 unlockedSkills: {
                     weapons: {
@@ -789,7 +789,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 40, silver: 1, gold: 0 },
+                currency: { Gil: 6 },
                 isMonster: true
             },
             {
@@ -798,14 +798,14 @@ class MonsterPresets {
                 description: 'A sturdy burrowing creature summoned by Pack Leader - defensive and persistent',
                 builtIn: true,
                 stats: {
-                    hp: 20,
-                    stamina: 15,
-                    strength: 8,
-                    magicPower: 6,
-                    speed: 8,
-                    physicalDefence: 10,
+                    hp: 14,
+                    stamina: 12,
+                    strength: 0,
+                    magicPower: -1,
+                    speed: 2,
+                    physicalDefence: 12,
                     magicalDefence: 8,
-                    accuracy: 1
+                    accuracy: 0
                 },
                 unlockedSkills: {
                     weapons: {
@@ -849,7 +849,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 45, silver: 1, gold: 0 },
+                currency: { Gil: 7 },
                 isMonster: true
             },
             {
@@ -858,14 +858,14 @@ class MonsterPresets {
                 description: 'A small aerial creature summoned by Pack Leader - fast and magical',
                 builtIn: true,
                 stats: {
-                    hp: 10,
-                    stamina: 30,
-                    strength: 2,
-                    magicPower: 8,
-                    speed: 12,
+                    hp: 8,
+                    stamina: 15,
+                    strength: -3,
+                    magicPower: 2,
+                    speed: 6,
                     physicalDefence: 8,
                     magicalDefence: 12,
-                    accuracy: 4
+                    accuracy: 3
                 },
                 unlockedSkills: {
                     weapons: {
@@ -909,7 +909,7 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 30, silver: 1, gold: 0 },
+                currency: { Gil: 5 },
                 isMonster: true
             },
             {
@@ -918,14 +918,14 @@ class MonsterPresets {
                 description: 'A powerful summoned protector - the strongest Pack Leader creature',
                 builtIn: true,
                 stats: {
-                    hp: 28,
-                    stamina: 18,
-                    strength: 8,
-                    magicPower: 6,
-                    speed: 12,
-                    physicalDefence: 12,
+                    hp: 16,
+                    stamina: 12,
+                    strength: 2,
+                    magicPower: -1,
+                    speed: 3,
+                    physicalDefence: 14,
                     magicalDefence: 8,
-                    accuracy: 1
+                    accuracy: 0
                 },
                 unlockedSkills: {
                     weapons: {
@@ -969,7 +969,489 @@ class MonsterPresets {
                         pure_magic: []
                     }
                 },
-                currency: { copper: 60, silver: 2, gold: 0 },
+                currency: { Gil: 12 },
+                isMonster: true
+            },
+
+            // NEW HIGHER LEVEL MONSTERS
+            {
+                id: 'veteran_warrior',
+                name: 'Veteran Warrior',
+                description: 'A seasoned fighter with years of combat experience',
+                builtIn: true,
+                stats: {
+                    hp: 16,
+                    stamina: 14,
+                    strength: 2,
+                    magicPower: -2,
+                    speed: 4,
+                    physicalDefence: 12,
+                    magicalDefence: 10,
+                    accuracy: 1
+                },
+                unlockedSkills: {
+                    weapons: {
+                        sword: ['sword_basics', 'quick_strike', 'sword_stance', 'parry'],
+                        ranged: [],
+                        axe: ['axe_basics'],
+                        staff: [],
+                        dagger: [],
+                        polearm: [],
+                        hammer: []
+                    },
+                    magic: {
+                        fire: [],
+                        ice: [],
+                        lightning: [],
+                        earth: [],
+                        wind: [],
+                        water: [],
+                        darkness: [],
+                        light: []
+                    },
+                    professions: {
+                        smithing: [],
+                        alchemy: [],
+                        enchanting: [],
+                        cooking: [],
+                        archaeology: [],
+                        herbalism: []
+                    },
+                    monster: {
+                        combat: ['claws', 'bite_attack', 'monster_charge_attack'],
+                        defense: ['tough_skin', 'rock_skin'],
+                        magic: ['roar'],
+                        utility: []
+                    },
+                    fusion: {
+                        ranged_magic: [],
+                        melee_magic: [],
+                        utility_combat: [],
+                        monster_fusion: [],
+                        pure_magic: []
+                    }
+                },
+                currency: { Gil: 25 },
+                isMonster: true
+            },
+            {
+                id: 'battle_mage',
+                name: 'Battle Mage',
+                description: 'A warrior-mage hybrid with both combat and magical prowess',
+                builtIn: true,
+                stats: {
+                    hp: 14,
+                    stamina: 16,
+                    strength: 1,
+                    magicPower: 3,
+                    speed: 3,
+                    physicalDefence: 10,
+                    magicalDefence: 14,
+                    accuracy: 1
+                },
+                unlockedSkills: {
+                    weapons: {
+                        sword: ['sword_basics', 'quick_strike'],
+                        ranged: [],
+                        axe: [],
+                        staff: ['staff_basics', 'spell_power'],
+                        dagger: [],
+                        polearm: [],
+                        hammer: []
+                    },
+                    magic: {
+                        fire: ['fire_spark', 'fireball'],
+                        ice: ['frost_touch'],
+                        lightning: ['spark'],
+                        earth: [],
+                        wind: [],
+                        water: [],
+                        darkness: [],
+                        light: []
+                    },
+                    professions: {
+                        smithing: [],
+                        alchemy: [],
+                        enchanting: [],
+                        cooking: [],
+                        archaeology: [],
+                        herbalism: []
+                    },
+                    monster: {
+                        combat: ['claws'],
+                        defense: ['magical_resistance'],
+                        magic: ['fire_breath', 'ice_breath'],
+                        utility: []
+                    },
+                    fusion: {
+                        ranged_magic: [],
+                        melee_magic: [],
+                        utility_combat: [],
+                        monster_fusion: [],
+                        pure_magic: []
+                    }
+                },
+                currency: { Gil: 30 },
+                isMonster: true
+            },
+            {
+                id: 'elite_guard',
+                name: 'Elite Guard',
+                description: 'A highly trained defensive specialist with superior armor',
+                builtIn: true,
+                stats: {
+                    hp: 18,
+                    stamina: 16,
+                    strength: 3,
+                    magicPower: -1,
+                    speed: 3,
+                    physicalDefence: 16,
+                    magicalDefence: 12,
+                    accuracy: 0
+                },
+                unlockedSkills: {
+                    weapons: {
+                        sword: ['sword_basics', 'quick_strike', 'sword_stance', 'parry'],
+                        ranged: [],
+                        axe: ['axe_basics', 'heavy_swing'],
+                        staff: [],
+                        dagger: [],
+                        polearm: ['polearm_basics'],
+                        hammer: []
+                    },
+                    magic: {
+                        fire: [],
+                        ice: [],
+                        lightning: [],
+                        earth: [],
+                        wind: [],
+                        water: [],
+                        darkness: [],
+                        light: []
+                    },
+                    professions: {
+                        smithing: [],
+                        alchemy: [],
+                        enchanting: [],
+                        cooking: [],
+                        archaeology: [],
+                        herbalism: []
+                    },
+                    monster: {
+                        combat: ['claws', 'bite_attack', 'monster_charge_attack', 'rend'],
+                        defense: ['tough_skin', 'rock_skin', 'metal_skin'],
+                        magic: ['roar'],
+                        utility: []
+                    },
+                    fusion: {
+                        ranged_magic: [],
+                        melee_magic: [],
+                        utility_combat: [],
+                        monster_fusion: [],
+                        pure_magic: []
+                    }
+                },
+                currency: { Gil: 45 },
+                isMonster: true
+            },
+            {
+                id: 'shadow_assassin',
+                name: 'Shadow Assassin',
+                description: 'A deadly stealth specialist with advanced assassination techniques',
+                builtIn: true,
+                stats: {
+                    hp: 12,
+                    stamina: 18,
+                    strength: 2,
+                    magicPower: 1,
+                    speed: 8,
+                    physicalDefence: 10,
+                    magicalDefence: 12,
+                    accuracy: 4
+                },
+                unlockedSkills: {
+                    weapons: {
+                        sword: [],
+                        ranged: [],
+                        axe: [],
+                        staff: [],
+                        dagger: ['dagger_basics', 'light_step', 'dual_wield'],
+                        polearm: [],
+                        hammer: []
+                    },
+                    magic: {
+                        fire: [],
+                        ice: [],
+                        lightning: [],
+                        earth: [],
+                        wind: [],
+                        water: [],
+                        darkness: ['shadow_bolt', 'shadow_step'],
+                        light: []
+                    },
+                    professions: {
+                        smithing: [],
+                        alchemy: [],
+                        enchanting: [],
+                        cooking: [],
+                        archaeology: [],
+                        herbalism: []
+                    },
+                    monster: {
+                        utility: ['camouflage', 'climb', 'stealth'],
+                        combat: ['venomous_claws', 'pounce', 'backstab'],
+                        defense: [],
+                        magic: []
+                    },
+                    fusion: {
+                        ranged_magic: [],
+                        melee_magic: [],
+                        utility_combat: [],
+                        monster_fusion: [],
+                        pure_magic: []
+                    }
+                },
+                currency: { Gil: 50 },
+                isMonster: true
+            },
+            {
+                id: 'elemental_lord',
+                name: 'Elemental Lord',
+                description: 'A master of multiple elements with devastating magical power',
+                builtIn: true,
+                stats: {
+                    hp: 16,
+                    stamina: 18,
+                    strength: -1,
+                    magicPower: 6,
+                    speed: 4,
+                    physicalDefence: 10,
+                    magicalDefence: 16,
+                    accuracy: 2
+                },
+                unlockedSkills: {
+                    weapons: {
+                        sword: [],
+                        ranged: [],
+                        axe: [],
+                        staff: ['staff_basics', 'spell_power', 'staff_mastery'],
+                        dagger: [],
+                        polearm: [],
+                        hammer: []
+                    },
+                    magic: {
+                        fire: ['fire_spark', 'fireball', 'fire_mastery'],
+                        ice: ['frost_touch', 'ice_shard', 'freeze'],
+                        lightning: ['spark', 'lightning_bolt'],
+                        earth: ['stone_spear'],
+                        wind: ['gust'],
+                        water: ['water_jet'],
+                        darkness: ['shadow_bolt'],
+                        light: ['light_beam']
+                    },
+                    professions: {
+                        smithing: [],
+                        alchemy: [],
+                        enchanting: [],
+                        cooking: [],
+                        archaeology: [],
+                        herbalism: []
+                    },
+                    monster: {
+                        magic: ['fire_breath', 'ice_breath', 'lightning_breath', 'teleport'],
+                        defense: ['magical_resistance', 'elemental_barrier'],
+                        combat: [],
+                        utility: ['elemental_sight']
+                    },
+                    fusion: {
+                        ranged_magic: [],
+                        melee_magic: [],
+                        utility_combat: [],
+                        monster_fusion: [],
+                        pure_magic: []
+                    }
+                },
+                currency: { Gil: 60 },
+                isMonster: true
+            },
+            {
+                id: 'berserker_chief',
+                name: 'Berserker Chief',
+                description: 'A powerful orc leader with enhanced berserker abilities',
+                builtIn: true,
+                stats: {
+                    hp: 20,
+                    stamina: 18,
+                    strength: 5,
+                    magicPower: -2,
+                    speed: 4,
+                    physicalDefence: 14,
+                    magicalDefence: 10,
+                    accuracy: 1
+                },
+                unlockedSkills: {
+                    weapons: {
+                        sword: ['sword_basics', 'quick_strike', 'sword_stance'],
+                        ranged: [],
+                        axe: ['axe_basics', 'heavy_swing', 'cleave', 'axe_mastery'],
+                        staff: [],
+                        dagger: [],
+                        polearm: ['polearm_basics'],
+                        hammer: ['hammer_basics']
+                    },
+                    magic: {
+                        fire: ['fire_spark'],
+                        ice: [],
+                        lightning: [],
+                        earth: [],
+                        wind: [],
+                        water: [],
+                        darkness: [],
+                        light: []
+                    },
+                    professions: {
+                        smithing: [],
+                        alchemy: [],
+                        enchanting: [],
+                        cooking: [],
+                        archaeology: [],
+                        herbalism: []
+                    },
+                    monster: {
+                        combat: ['claws', 'bite_attack', 'monster_charge_attack', 'rend', 'monster_berserker_rage'],
+                        defense: ['tough_skin', 'rock_skin'],
+                        magic: ['roar', 'battle_cry'],
+                        utility: []
+                    },
+                    fusion: {
+                        ranged_magic: [],
+                        melee_magic: [],
+                        utility_combat: [],
+                        monster_fusion: [],
+                        pure_magic: []
+                    }
+                },
+                currency: { Gil: 65 },
+                isMonster: true
+            },
+            {
+                id: 'ancient_dragon',
+                name: 'Ancient Dragon',
+                description: 'A legendary dragon with centuries of power and wisdom',
+                builtIn: true,
+                stats: {
+                    hp: 24,
+                    stamina: 20,
+                    strength: 6,
+                    magicPower: 5,
+                    speed: 5,
+                    physicalDefence: 18,
+                    magicalDefence: 18,
+                    accuracy: 3
+                },
+                unlockedSkills: {
+                    weapons: {
+                        sword: [],
+                        ranged: [],
+                        axe: [],
+                        staff: [],
+                        dagger: [],
+                        polearm: [],
+                        hammer: []
+                    },
+                    magic: {
+                        fire: ['fire_spark', 'fireball', 'fire_mastery'],
+                        ice: ['frost_touch', 'ice_shard', 'freeze'],
+                        lightning: ['spark', 'lightning_bolt'],
+                        earth: ['stone_spear'],
+                        wind: ['gust', 'wind_blade'],
+                        water: ['water_jet'],
+                        darkness: ['shadow_bolt'],
+                        light: ['light_beam']
+                    },
+                    professions: {
+                        smithing: [],
+                        alchemy: [],
+                        enchanting: [],
+                        cooking: [],
+                        archaeology: [],
+                        herbalism: []
+                    },
+                    monster: {
+                        combat: ['claws', 'bite_attack', 'monster_charge_attack', 'rend'],
+                        defense: ['tough_skin', 'rock_skin', 'metal_skin', 'dragon_scales'],
+                        magic: ['fire_breath', 'ice_breath', 'lightning_breath', 'fear_aura'],
+                        utility: ['flight', 'dragon_sight']
+                    },
+                    fusion: {
+                        ranged_magic: [],
+                        melee_magic: [],
+                        utility_combat: [],
+                        monster_fusion: [],
+                        pure_magic: []
+                    }
+                },
+                currency: { Gil: 80 },
+                isMonster: true
+            },
+            {
+                id: 'void_walker',
+                name: 'Void Walker',
+                description: 'A mysterious entity that exists between dimensions',
+                builtIn: true,
+                stats: {
+                    hp: 18,
+                    stamina: 20,
+                    strength: 3,
+                    magicPower: 7,
+                    speed: 6,
+                    physicalDefence: 12,
+                    magicalDefence: 20,
+                    accuracy: 4
+                },
+                unlockedSkills: {
+                    weapons: {
+                        sword: [],
+                        ranged: [],
+                        axe: [],
+                        staff: ['staff_basics', 'spell_power', 'staff_mastery'],
+                        dagger: [],
+                        polearm: [],
+                        hammer: []
+                    },
+                    magic: {
+                        fire: ['fire_spark', 'fireball'],
+                        ice: ['frost_touch', 'ice_shard'],
+                        lightning: ['spark', 'lightning_bolt'],
+                        earth: ['stone_spear'],
+                        wind: ['gust', 'wind_blade'],
+                        water: ['water_jet'],
+                        darkness: ['shadow_bolt', 'shadow_step', 'void_magic'],
+                        light: ['light_beam']
+                    },
+                    professions: {
+                        smithing: [],
+                        alchemy: [],
+                        enchanting: [],
+                        cooking: [],
+                        archaeology: [],
+                        herbalism: []
+                    },
+                    monster: {
+                        magic: ['void_breath', 'teleport', 'paralyzing_gaze', 'void_pull'],
+                        defense: ['void_barrier', 'phase_shift'],
+                        combat: ['void_claws'],
+                        utility: ['void_walk', 'dimensional_sight']
+                    },
+                    fusion: {
+                        ranged_magic: [],
+                        melee_magic: [],
+                        utility_combat: [],
+                        monster_fusion: [],
+                        pure_magic: []
+                    }
+                },
+                currency: { Gil: 90 },
                 isMonster: true
             }
         ]
@@ -1012,6 +1494,7 @@ class MonsterPresets {
                 stats: { ...character.stats },
                 unlockedSkills: JSON.parse(JSON.stringify(character.unlockedSkills)), // Deep copy
                 currency: { ...character.currency },
+                equipment: { ...character.equipped },
                 isMonster: true
             }
 
@@ -1176,6 +1659,14 @@ class MonsterPresets {
         character.activeToggleSkills = []
         character.statusEffects = []
 
+        // Reset equipment
+        character.equipped = {
+            primaryWeapon: null,
+            secondaryWeapon: null,
+            armor: null,
+            accessory: null
+        }
+
         // Reset currency to starting amount
         character.currency = {
             copper: 200,
@@ -1196,6 +1687,14 @@ class MonsterPresets {
         // Apply unlocked skills (deep copy to avoid reference issues)
         character.unlockedSkills = JSON.parse(JSON.stringify(preset.unlockedSkills))
 
+        // Apply equipment if specified in preset
+        if (preset.equipment) {
+            character.equipped = this.loadEquipmentData(preset.equipment)
+        } else {
+            // Set default equipment based on monster type and level
+            character.equipped = this.loadEquipmentData(this.getDefaultEquipmentForMonster(preset))
+        }
+
         // Set monster status
         character.isMonster = true
 
@@ -1209,6 +1708,255 @@ class MonsterPresets {
 
         // Update totals
         character.totalSkillsUnlocked = this.countTotalSkills(character.unlockedSkills)
+    }
+
+    // Get default equipment for monster based on type and level
+    getDefaultEquipmentForMonster(preset) {
+        const level = this.calculatePresetLevel(preset)
+        const name = preset.name.toLowerCase()
+
+        // Base equipment structure
+        const equipment = {
+            primaryWeapon: null,
+            secondaryWeapon: null,
+            armor: null,
+            accessory: null
+        }
+
+        // Determine equipment based on monster type and level
+        if (name.includes('goblin')) {
+            if (name.includes('warrior')) {
+                equipment.primaryWeapon = { id: "rusty_sword" }
+                equipment.armor = { id: "cloth_robes" }
+            } else if (name.includes('scout')) {
+                // Scout has ranged and dagger skills, so give them a dagger
+                equipment.primaryWeapon = { id: "iron_dagger" }
+                equipment.armor = { id: "leather_vest" }
+            } else if (name.includes('chief')) {
+                equipment.primaryWeapon = { id: "iron_sword" }
+                equipment.armor = { id: "leather_armor" }
+            }
+        } else if (name.includes('fire mage') || name.includes('ice elemental')) {
+            equipment.primaryWeapon = { id: "apprentice_staff" }
+            equipment.armor = { id: "cloth_robes" }
+        } else if (name.includes('armored guard')) {
+            equipment.primaryWeapon = { id: "iron_sword" }
+            equipment.armor = { id: "studded_leather" }
+        } else if (name.includes('swift assassin')) {
+            equipment.primaryWeapon = { id: "iron_dagger" }
+            equipment.armor = { id: "leather_vest" }
+        } else if (name.includes('skeletal warrior')) {
+            equipment.primaryWeapon = { id: "rusty_sword" }
+            equipment.armor = { id: "cloth_robes" }
+        } else if (name.includes('orc berserker')) {
+            equipment.primaryWeapon = { id: "iron_axe" }
+            equipment.armor = { id: "leather_armor" }
+        } else if (name.includes('giant spider')) {
+            // Spiders don't use weapons - they have natural weapons
+            equipment.armor = { id: "cloth_robes" }
+        } else if (name.includes('veteran warrior')) {
+            equipment.primaryWeapon = { id: "steel_sword" }
+            equipment.armor = { id: "studded_leather" }
+        } else if (name.includes('battle mage')) {
+            equipment.primaryWeapon = { id: "iron_sword" }
+            equipment.secondaryWeapon = { id: "apprentice_staff" }
+            equipment.armor = { id: "leather_vest" }
+        } else if (name.includes('elite guard')) {
+            equipment.primaryWeapon = { id: "steel_sword" }
+            equipment.armor = { id: "iron_plate_armor" }
+        } else if (name.includes('shadow assassin')) {
+            equipment.primaryWeapon = { id: "steel_dagger" }
+            equipment.armor = { id: "scouts_leather" }
+        } else if (name.includes('elemental lord')) {
+            equipment.primaryWeapon = { id: "arcane_staff" }
+            equipment.armor = { id: "cloth_robes" }
+        } else if (name.includes('berserker chief')) {
+            equipment.primaryWeapon = { id: "steel_axe" }
+            equipment.armor = { id: "iron_plate_armor" }
+        } else if (name.includes('ancient dragon')) {
+            // Dragons don't use weapons - they have natural weapons
+            equipment.armor = { id: "dragon_scales" }
+        } else if (name.includes('void walker')) {
+            // Void entities don't need physical weapons
+            equipment.armor = { id: "shadowmeld_armor" }
+        } else if (name.includes('dire wolf') || name.includes('shadow hound') || name.includes('earth badger') || name.includes('wind sprite') || name.includes('guardian bear')) {
+            // Summoned creatures don't use weapons - they have natural abilities
+            equipment.armor = { id: "cloth_robes" }
+        } else {
+            // Default equipment for unknown monsters
+            if (level <= 3) {
+                equipment.primaryWeapon = { id: "rusty_sword" }
+                equipment.armor = { id: "cloth_robes" }
+            } else if (level <= 6) {
+                equipment.primaryWeapon = { id: "iron_sword" }
+                equipment.armor = { id: "leather_armor" }
+            } else if (level <= 9) {
+                equipment.primaryWeapon = { id: "steel_sword" }
+                equipment.armor = { id: "studded_leather" }
+            } else {
+                equipment.primaryWeapon = { id: "steel_sword" }
+                equipment.armor = { id: "iron_plate_armor" }
+            }
+        }
+
+        return equipment
+    }
+
+    // Load full equipment data from item IDs
+    loadEquipmentData(equipmentIds) {
+        const equipment = {
+            primaryWeapon: null,
+            secondaryWeapon: null,
+            armor: null,
+            accessory: null
+        }
+
+        // Load full item data for each equipped item
+        if (equipmentIds.primaryWeapon && equipmentIds.primaryWeapon.id) {
+            const item = this.findItemById(equipmentIds.primaryWeapon.id)
+            if (item) {
+                equipment.primaryWeapon = { ...item }
+            }
+        }
+
+        if (equipmentIds.secondaryWeapon && equipmentIds.secondaryWeapon.id) {
+            const item = this.findItemById(equipmentIds.secondaryWeapon.id)
+            if (item) {
+                equipment.secondaryWeapon = { ...item }
+            }
+        }
+
+        if (equipmentIds.armor && equipmentIds.armor.id) {
+            const item = this.findItemById(equipmentIds.armor.id)
+            if (item) {
+                equipment.armor = { ...item }
+            }
+        }
+
+        if (equipmentIds.accessory && equipmentIds.accessory.id) {
+            const item = this.findItemById(equipmentIds.accessory.id)
+            if (item) {
+                equipment.accessory = { ...item }
+            }
+        }
+
+        return equipment
+    }
+
+    // Find item by ID (helper function)
+    findItemById(itemId) {
+        // Check if ITEMS_DATA is available globally
+        if (window.ITEMS_DATA) {
+            // Search in weapons
+            if (window.ITEMS_DATA.weapons && window.ITEMS_DATA.weapons[itemId]) {
+                return window.ITEMS_DATA.weapons[itemId]
+            }
+            // Search in armor
+            if (window.ITEMS_DATA.armor && window.ITEMS_DATA.armor[itemId]) {
+                return window.ITEMS_DATA.armor[itemId]
+            }
+            // Search in accessories
+            if (window.ITEMS_DATA.accessories && window.ITEMS_DATA.accessories[itemId]) {
+                return window.ITEMS_DATA.accessories[itemId]
+            }
+        }
+
+        // Fallback: try to find the item using the global findItemById function if it exists
+        if (window.findItemById) {
+            return window.findItemById(itemId)
+        }
+
+        console.warn(`Item not found: ${itemId}`)
+        return null
+    }
+
+    // Calculate preset level (same as UI components)
+    calculatePresetLevel(preset) {
+        const stats = preset.stats
+
+        // Calculate stat points (same as character manager)
+        const statPoints = this.calculateStatPointsForPreset(stats)
+
+        // Calculate skill points (same as character manager)
+        const skillPoints = this.calculateSkillPointsForPreset(preset.unlockedSkills)
+
+        // Total points
+        const totalPoints = statPoints + skillPoints
+
+        // Use the same level calculation as character manager
+        return this.calculateLevel(totalPoints)
+    }
+
+    // Calculate stat points for preset (same logic as character manager)
+    calculateStatPointsForPreset(stats) {
+        let totalPoints = 0
+
+        // Calculate points for each stat (same as character manager logic)
+        Object.entries(stats).forEach(([statName, currentValue]) => {
+            if (statName === 'accuracy') return // Skip accuracy for now
+
+            let points = 0
+            let baseValue = 10 // Base value for HP/Stamina
+            let minValue = 10  // Min value for HP/Stamina
+
+            if (statName === 'strength' || statName === 'magicPower') {
+                baseValue = -3
+                minValue = -3
+            } else if (statName === 'speed') {
+                baseValue = 2
+                minValue = 2
+            } else if (statName === 'physicalDefence' || statName === 'magicalDefence') {
+                baseValue = 8
+                minValue = 8
+            }
+
+            // Calculate points from base to current value
+            if (currentValue > baseValue) {
+                points = currentValue - baseValue
+            } else if (currentValue < baseValue) {
+                points = Math.abs(currentValue - baseValue) // Negative stats still cost points
+            }
+
+            totalPoints += points
+        })
+
+        return totalPoints
+    }
+
+    // Calculate skill points for preset (same logic as character manager)
+    calculateSkillPointsForPreset(unlockedSkills) {
+        let totalPoints = 0
+
+        if (unlockedSkills) {
+            Object.values(unlockedSkills).forEach(category => {
+                if (typeof category === 'object') {
+                    Object.values(category).forEach(skillArray => {
+                        if (Array.isArray(skillArray)) {
+                            totalPoints += skillArray.length * 2 // Each skill = 2 points (same as character manager)
+                        }
+                    })
+                }
+            })
+        }
+
+        return totalPoints
+    }
+
+    // Calculate level from total points (same as character manager)
+    calculateLevel(totalPoints) {
+        if (totalPoints <= 2) return 1        // Level 1: 0-2 points
+        if (totalPoints <= 5) return 2        // Level 2: 3-5 points
+        if (totalPoints <= 9) return 3        // Level 3: 6-9 points
+        if (totalPoints <= 14) return 4       // Level 4: 10-14 points
+        if (totalPoints <= 20) return 5       // Level 5: 15-20 points
+        if (totalPoints <= 27) return 6       // Level 6: 21-27 points
+        if (totalPoints <= 35) return 7       // Level 7: 28-35 points
+        if (totalPoints <= 44) return 8       // Level 8: 36-44 points
+        if (totalPoints <= 54) return 9       // Level 9: 45-54 points
+        if (totalPoints <= 65) return 10      // Level 10: 55-65 points
+
+        // For levels beyond 10, continue the pattern (~12+ points per level)
+        return Math.floor((totalPoints - 65) / 12) + 11
     }
 
     // Generate unique name by checking for duplicates and adding numbers

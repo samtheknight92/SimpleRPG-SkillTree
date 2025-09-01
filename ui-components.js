@@ -938,12 +938,12 @@ class UIComponents {
 
             html += `
                 <div class="folder-section">
-                    <div class="folder-header" onclick="uiComponents.toggleFolder('${folderName}')">
+                    <div class="folder-header" onclick="uiComponents.toggleFolder('${folderName.replace(/'/g, "\\'")}')">
                         <span class="folder-toggle ${isExpanded ? 'expanded' : 'collapsed'}">${isExpanded ? '?' : '?'}</span>
                         <span class="folder-name">${folderName}</span>
                         <span class="character-count">(${folderCharacters.length})</span>
                         ${folderName !== 'Default' ? `
-                            <button class="btn btn-tiny folder-delete-btn" onclick="uiComponents.deleteFolderDialog('${folderName}')" title="Delete Folder">
+                            <button class="btn btn-tiny folder-delete-btn" onclick="uiComponents.deleteFolderDialog('${folderName.replace(/'/g, "\\'")}')" title="Delete Folder">
                                 🗑️
                             </button>
                         ` : ''}
@@ -968,7 +968,7 @@ class UIComponents {
                                      data-character-stamina="${char.stats?.stamina || 0}"
                                      data-character-total-skills="${summary.totalSkills || 0}"
                                      data-character-last-played="${summary.lastPlayed || 'Never'}"
-                                     onclick="uiComponents.selectCharacter('${char.id}')"
+                                     onclick="uiComponents.selectCharacter('${char.id.replace(/'/g, "\\'")}')"
                                      draggable="true"
                                      ondragstart="uiComponents.dragCharacterStart(event)"
                                      ondragover="uiComponents.dragCharacterOver(event)"
@@ -985,7 +985,7 @@ class UIComponents {
                                             📊 Lv. ${summary.level}
                                         </div>
                                         <div class="character-menu">
-                                            <button class="character-menu-btn" onclick="uiComponents.toggleCharacterMenu('${char.id}', event); event.stopPropagation();" title="Character Menu">
+                                            <button class="character-menu-btn" onclick="uiComponents.toggleCharacterMenu('${char.id.replace(/'/g, "\\'")}', event); event.stopPropagation();" title="Character Menu">
                                                 ⚙️
                                             </button>
                                         </div>
@@ -1291,6 +1291,15 @@ class UIComponents {
 
         if (!character) return
 
+        // Debug logging
+        console.log('showMoveCharacterDialog debug:', {
+            folders: folders,
+            foldersLength: folders.length,
+            folderNames: folders.map(f => f),
+            character: character.name,
+            characterFolder: character.folder
+        })
+
         let options = folders.map(folder =>
             `<option value="${folder}" ${character.folder === folder ? 'selected' : ''}>${folder}</option>`
         ).join('')
@@ -1389,7 +1398,7 @@ class UIComponents {
             const isCurrentFolder = folder === currentFolder
             return `
                 <div class="menu-item folder-item ${isCurrentFolder ? 'current-folder' : ''}" 
-                     onclick="uiComponents.moveCharacterToFolderFromMenu('${characterId}', '${folder}')">
+                     onclick="uiComponents.moveCharacterToFolderFromMenu('${characterId.replace(/'/g, "\\'")}', '${folder.replace(/'/g, "\\'")}')">
                     ?? ${folder} ${isCurrentFolder ? '(current)' : ''}
                 </div>
             `
@@ -1397,14 +1406,14 @@ class UIComponents {
 
         // Create menu content with folder list instead of single "Move to Folder" button
         const menuContent = `
-            <div class="menu-item ${isActive ? 'disabled' : ''}" onclick="if (!this.classList.contains('disabled')) { uiComponents.selectCharacterFromMenu('${characterId}') }">
+            <div class="menu-item ${isActive ? 'disabled' : ''}" onclick="if (!this.classList.contains('disabled')) { uiComponents.selectCharacterFromMenu('${characterId.replace(/'/g, "\\'")}') }">
                 Select Character
             </div>
             <div class="menu-separator"></div>
             <div class="menu-section-header">Move to Folder:</div>
             ${folderItems}
             <div class="menu-separator"></div>
-            <div class="menu-item danger" onclick="uiComponents.deleteCharacterFromMenu('${characterId}')">
+            <div class="menu-item danger" onclick="uiComponents.deleteCharacterFromMenu('${characterId.replace(/'/g, "\\'")}')">
                 Delete Character
             </div>
         `
@@ -2884,7 +2893,7 @@ class UIComponents {
                     ${character.isMonster ? `
                     <div class="summary-item monster-drop">
                         <span class="label">Lumen Drop (if defeated):</span>
-                        <span class="value">${Math.max(1, Math.floor(summary.totalSpent * 0.1))}L</span>
+                        <span class="value">${Math.max(1, Math.floor(summary.totalSpent * 0.2))}L</span>
                     </div>
                     ` : ''}
                 </div>
@@ -3270,29 +3279,75 @@ class UIComponents {
 
     // Calculate the level of a monster preset based on stats and skills
     calculatePresetLevel(preset) {
-        // Base level calculation similar to character summary
+        // Use the same calculation as character level
         const stats = preset.stats
-        const baseStatTotal = 70 // 7 stats * 10 base each
-        const bonusStats = (stats.hp + stats.stamina + stats.strength + stats.magicPower +
-            stats.speed + stats.physicalDefence + stats.magicalDefence) - baseStatTotal
 
-        // Count total skills
-        let totalSkills = 0
-        if (preset.unlockedSkills) {
-            Object.values(preset.unlockedSkills).forEach(category => {
+        // Calculate stat points (same as character manager)
+        const statPoints = this.calculateStatPointsForPreset(stats)
+
+        // Calculate skill points (same as character manager)
+        const skillPoints = this.calculateSkillPointsForPreset(preset.unlockedSkills)
+
+        // Total points
+        const totalPoints = statPoints + skillPoints
+
+        // Use the same level calculation as character manager
+        return characterManager.calculateLevel(totalPoints)
+    }
+
+    // Calculate stat points for preset (same logic as character manager)
+    calculateStatPointsForPreset(stats) {
+        let totalPoints = 0
+
+        // Calculate points for each stat (same as character manager logic)
+        Object.entries(stats).forEach(([statName, currentValue]) => {
+            if (statName === 'accuracy') return // Skip accuracy for now
+
+            let points = 0
+            let baseValue = 10 // Base value for HP/Stamina
+            let minValue = 10  // Min value for HP/Stamina
+
+            if (statName === 'strength' || statName === 'magicPower') {
+                baseValue = -3
+                minValue = -3
+            } else if (statName === 'speed') {
+                baseValue = 2
+                minValue = 2
+            } else if (statName === 'physicalDefence' || statName === 'magicalDefence') {
+                baseValue = 8
+                minValue = 8
+            }
+
+            // Calculate points from base to current value
+            if (currentValue > baseValue) {
+                points = currentValue - baseValue
+            } else if (currentValue < baseValue) {
+                points = Math.abs(currentValue - baseValue) // Negative stats still cost points
+            }
+
+            totalPoints += points
+        })
+
+        return totalPoints
+    }
+
+    // Calculate skill points for preset (same logic as character manager)
+    calculateSkillPointsForPreset(unlockedSkills) {
+        let totalPoints = 0
+
+        if (unlockedSkills) {
+            Object.values(unlockedSkills).forEach(category => {
                 if (typeof category === 'object') {
                     Object.values(category).forEach(skillArray => {
                         if (Array.isArray(skillArray)) {
-                            totalSkills += skillArray.length
+                            totalPoints += skillArray.length * 2 // Each skill = 2 points (same as character manager)
                         }
                     })
                 }
             })
         }
 
-        // Calculate level: base 1 + stat bonuses/10 + skills/2 (similar to character summary logic)
-        const level = Math.max(1, Math.floor(1 + (bonusStats / 10) + (totalSkills / 2)))
-        return level
+        return totalPoints
     }
 
     // Setup monster preset event listeners
@@ -5423,7 +5478,7 @@ class UIComponents {
     // Render monster loot section for inventory
     renderMonsterLootSection(character) {
         const characterSummary = characterManager.getCharacterSummary(character)
-        const lumenDrop = Math.max(1, Math.floor(characterSummary.totalSpent * 0.1))
+        const lumenDrop = Math.max(1, Math.floor(characterSummary.totalSpent * 0.2))
         const lootItems = getMonsterLoot(character)
 
         return `

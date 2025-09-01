@@ -36,7 +36,7 @@ const SKILLS_DATA = {
       { id: 'sword_beginner', name: 'Sword Beginner', tier: 0, cost: 5, staminaCost: 0, desc: 'Passive: You can now equip a sword', icon: '⚔️', prerequisites: { type: 'NONE', skills: [] } },
 
       // Tier 1
-      { id: 'sword_basics', name: 'Sword Basics', tier: 1, cost: 5, staminaCost: 0, desc: '+1 attack bonus with swords, learn basic combat maneuvers', icon: '⚔️', prerequisites: { type: 'AND', skills: ['sword_beginner'] } },
+      { id: 'sword_basics', name: 'Sword Basics', tier: 1, cost: 5, staminaCost: 0, desc: 'Passive: +1 attack bonus with swords, learn basic combat maneuvers', icon: '⚔️', prerequisites: { type: 'AND', skills: ['sword_beginner'] } },
       { id: 'sword_stance', name: 'Sword Stance', tier: 1, cost: 5, staminaCost: 0, desc: 'Passive: Proper fighting stance: +1 Physical Defence while wielding a sword', icon: '🛡️', prerequisites: { type: 'AND', skills: ['sword_beginner'] } },
 
       // Tier 2
@@ -146,7 +146,7 @@ const SKILLS_DATA = {
       { id: 'reality_tear', name: 'Reality Tear', tier: 4, cost: 20, staminaCost: 10, desc: 'Action: Create dimensional rift (Teleport anywhere within 100ft)', icon: '🌀', prerequisites: { type: 'AND', skills: ['dispel_ward'] } },
 
       // Tier 5
-      { id: 'staff_mastery', name: 'Staff Mastery', tier: 5, cost: 25, staminaCost: 0, desc: 'Passive: +4 magic power, can cast two spells per turn (once per day)', icon: '👑', prerequisites: { type: 'OR', skills: ['arcane_mastery', 'staff_of_power', 'reality_tear'] } }
+      { id: 'staff_mastery', name: 'Staff Mastery', tier: 5, cost: 25, staminaCost: 0, desc: 'Passive: +4 magic power, can cast two spells per turn', icon: '👑', prerequisites: { type: 'OR', skills: ['arcane_mastery', 'staff_of_power', 'reality_tear'] } }
     ],
 
     // DAGGER SKILLS (Tier 1-5) - Speed and precision weapon
