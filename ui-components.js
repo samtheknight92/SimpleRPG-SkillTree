@@ -56,6 +56,9 @@ class UIComponents {
         }
     }
 
+    // Flag to prevent multiple event listener setup
+    _eventListenersSetup = false
+
     // Setup handlers for dynamically generated buttons
     setupDynamicButtonHandlers() {
         // Store handler reference for proper cleanup
@@ -141,6 +144,13 @@ class UIComponents {
     }
 
     setupEventListeners() {
+        // Prevent multiple event listener setup
+        if (this._eventListenersSetup) {
+            console.log('Event listeners already set up, skipping...')
+            return
+        }
+        this._eventListenersSetup = true
+
         // Hamburger menu toggle
         this.setupButtonListener('hamburger', (e) => {
             const sidePanel = document.getElementById('side-panel')
@@ -197,40 +207,7 @@ class UIComponents {
             })
         }
 
-        // Clean up any existing HP/Stamina listeners to prevent duplicates
-        if (this.hpStaminaHandlers) {
-            document.removeEventListener('click', this.hpStaminaHandlers.hp, true)
-            document.removeEventListener('click', this.hpStaminaHandlers.stamina, true)
-        }
-
-        // HP and Stamina adjustment buttons (moved from dynamicButtonHandler to prevent double activation)
-        const hpHandler = (e) => {
-            if (e.target.classList.contains('hp-decrease-btn') || e.target.classList.contains('hp-increase-btn')) {
-                e.preventDefault()
-                e.stopPropagation()
-                e.stopImmediatePropagation()
-                const action = e.target.dataset.action
-                const type = e.target.dataset.type
-                this.adjustTestingValue(action, type)
-            }
-        }
-
-        const staminaHandler = (e) => {
-            if (e.target.classList.contains('stamina-decrease-btn') || e.target.classList.contains('stamina-increase-btn')) {
-                e.preventDefault()
-                e.stopPropagation()
-                e.stopImmediatePropagation()
-                const action = e.target.dataset.action
-                const type = e.target.dataset.type
-                this.adjustTestingValue(action, type)
-            }
-        }
-
-        document.addEventListener('click', hpHandler, true)
-        document.addEventListener('click', staminaHandler, true)
-
-        // Store handlers for cleanup
-        this.hpStaminaHandlers = { hp: hpHandler, stamina: staminaHandler }
+        // HP/Stamina handlers removed - now handled in consolidated event listener below
 
         // Item admin sidebar search and category filters
         const setupInputListener = (elementId, handler) => {
@@ -346,35 +323,56 @@ class UIComponents {
             }
         })
 
-        // HP/Stamina testing buttons
+        // Status effects and testing buttons (consolidated to prevent double activation)
         document.addEventListener('click', (e) => {
+            // HP/Stamina testing buttons
             if (e.target.classList.contains('hp-decrease-btn') ||
                 e.target.classList.contains('hp-increase-btn') ||
                 e.target.classList.contains('stamina-decrease-btn') ||
                 e.target.classList.contains('stamina-increase-btn')) {
+                e.preventDefault()
+                e.stopPropagation()
+                e.stopImmediatePropagation()
                 this.adjustTestingValue(e.target.dataset.action, e.target.dataset.type)
+                return
             }
-        })
 
-        // Status effects process turn button
-        document.addEventListener('click', (e) => {
+            // Status effects process turn button
             if (e.target.id === 'process-effects-btn') {
-                this.processStatusEffects()
-            }
-        })
+                console.log('Process turn button clicked at:', new Date().toISOString())
+                console.log('Button event listeners:', e.target.onclick, e.target.getEventListeners ? e.target.getEventListeners('click') : 'N/A')
+                console.log('Button render time:', e.target.dataset.renderTime)
 
-        // Status effect buttons
-        document.addEventListener('click', (e) => {
+                // Check for duplicate buttons
+                const allButtons = document.querySelectorAll('#process-effects-btn')
+                if (allButtons.length > 1) {
+                    console.warn('Multiple process-effects-btn buttons found:', allButtons.length)
+                }
+
+                e.preventDefault()
+                e.stopPropagation()
+                e.stopImmediatePropagation()
+                this.processStatusEffects()
+                return
+            }
+
+            // Status effect buttons
             if (e.target.classList.contains('status-btn')) {
+                e.preventDefault()
+                e.stopPropagation()
+                e.stopImmediatePropagation()
                 const effectId = e.target.dataset.effect
                 this.toggleStatusEffect(effectId)
+                return
             }
-        })
 
-        // Clear all status effects button
-        document.addEventListener('click', (e) => {
+            // Clear all status effects button
             if (e.target.id === 'clear-all-effects-btn') {
+                e.preventDefault()
+                e.stopPropagation()
+                e.stopImmediatePropagation()
                 this.clearAllStatusEffects()
+                return
             }
         })
 
@@ -3093,7 +3091,7 @@ class UIComponents {
                                 </div>
 
                                 <div class="status-actions">
-                                    <button id="process-effects-btn" class="btn btn-primary">${iconMapper.createIconElement('ui', 'process_turn', 12)} Process Turn</button>
+                                    <button id="process-effects-btn" class="btn btn-primary" data-render-time="${Date.now()}">${iconMapper.createIconElement('ui', 'process_turn', 12)} Process Turn</button>
                                     <button id="clear-all-effects-btn" class="btn btn-danger">${iconMapper.createIconElement('ui', 'clear_effects', 12)} Clear All</button>
                                 </div>
                             </div>
@@ -6496,6 +6494,16 @@ class UIComponents {
 
     // Process status effects (testing)
     processStatusEffects() {
+        // Debounce check to prevent double processing
+        const now = Date.now()
+        if (this._lastProcessTurn && (now - this._lastProcessTurn < 500)) {
+            console.log('Process turn debounced - too soon since last call')
+            return
+        }
+        this._lastProcessTurn = now
+
+        console.log('Processing status effects turn at:', new Date().toISOString())
+
         const character = characterManager.getCurrentCharacter()
         if (!character || !window.inventorySystem) return
 
@@ -6607,6 +6615,13 @@ class UIComponents {
 
     // Clear all status effects
     clearAllStatusEffects() {
+        // Debounce check to prevent double clearing
+        const now = Date.now()
+        if (this._lastClearAll && (now - this._lastClearAll < 500)) {
+            return
+        }
+        this._lastClearAll = now
+
         const character = characterManager.getCurrentCharacter()
         if (!character) return
 
