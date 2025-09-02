@@ -229,7 +229,7 @@ class InventorySystem {
     getWeaponCategory(subcategory) {
         const categoryMap = {
             'swords': 'sword',
-            'bows': 'Bow',
+            'bows': 'ranged',
             'axes': 'axe',
             'staves': 'staff',
             'daggers': 'dagger',

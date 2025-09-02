@@ -1796,7 +1796,16 @@ class UIComponents {
         } else if (this.selectedSkillCategory === 'fusion') {
             // Special handling for fusion skills - only show available ones (unless dev mode)
             skills = SKILLS_DATA[this.selectedSkillCategory][this.selectedSkillSubcategory]
-            unlockedSkills = character.unlockedSkills[this.selectedSkillCategory][this.selectedSkillSubcategory]
+
+            // Ensure fusion subcategory exists in unlockedSkills
+            if (!character.unlockedSkills.fusion) {
+                character.unlockedSkills.fusion = {}
+            }
+            if (!character.unlockedSkills.fusion[this.selectedSkillSubcategory]) {
+                character.unlockedSkills.fusion[this.selectedSkillSubcategory] = []
+            }
+
+            unlockedSkills = character.unlockedSkills.fusion[this.selectedSkillSubcategory]
 
             // Filter fusion skills based on availability (only show if unlocked or can unlock)
             // Skip filtering in dev mode to show all skills
@@ -1945,7 +1954,15 @@ class UIComponents {
         } else {
             // Add defensive checks to ensure the skill category and subcategory exist
             const categorySkills = character.unlockedSkills[this.selectedSkillCategory] || {}
-            unlockedSkillsArray = categorySkills[this.selectedSkillSubcategory] || []
+
+            // Map weapon subcategories to character structure (same as in unlockSkill)
+            const weaponSubcategoryMap = {
+                'Bow': 'ranged',
+                'Crossbow': 'ranged'
+            }
+            const mappedSubcategory = weaponSubcategoryMap[this.selectedSkillSubcategory] || this.selectedSkillSubcategory
+
+            unlockedSkillsArray = categorySkills[mappedSubcategory] || []
         }
 
         const isUnlocked = unlockedSkillsArray.includes(skill.id)
@@ -2891,7 +2908,7 @@ class UIComponents {
                     ${character.isMonster ? `
                     <div class="summary-item monster-drop">
                         <span class="label">Lumen Drop (if defeated):</span>
-                        <span class="value">${Math.max(1, Math.floor(summary.totalSpent * 0.2))}L</span>
+                        <span class="value">${this.calculateMonsterLumenDrop(summary.totalSpent)}L</span>
                     </div>
                     ` : ''}
                 </div>
@@ -5476,7 +5493,22 @@ class UIComponents {
     // Render monster loot section for inventory
     renderMonsterLootSection(character) {
         const characterSummary = characterManager.getCharacterSummary(character)
-        const lumenDrop = Math.max(1, Math.floor(characterSummary.totalSpent * 0.2))
+
+        // Calculate player count for lumen drop scaling
+        const allCharacters = characterManager.getAllCharacters()
+        const playerCount = allCharacters.filter(char => !char.isMonster).length
+
+        // Calculate drop percentage based on player count
+        let dropPercentage = 0.10 // 10% for 1 player (default)
+        if (playerCount >= 6) {
+            dropPercentage = 0.25 // 25% for 6+ players
+        } else if (playerCount >= 4) {
+            dropPercentage = 0.20 // 20% for 4-5 players
+        } else if (playerCount >= 2) {
+            dropPercentage = 0.15 // 15% for 2-3 players
+        }
+
+        const lumenDrop = Math.max(1, Math.floor(characterSummary.totalSpent * dropPercentage))
         const lootItems = getMonsterLoot(character)
 
         return `
@@ -5503,6 +5535,25 @@ class UIComponents {
                 </div>
             </div>
         `
+    }
+
+    // Calculate monster lumen drop based on player count
+    calculateMonsterLumenDrop(totalSpent) {
+        // Calculate player count for lumen drop scaling
+        const allCharacters = characterManager.getAllCharacters()
+        const playerCount = allCharacters.filter(char => !char.isMonster).length
+
+        // Calculate drop percentage based on player count
+        let dropPercentage = 0.10 // 10% for 1 player (default)
+        if (playerCount >= 6) {
+            dropPercentage = 0.25 // 25% for 6+ players
+        } else if (playerCount >= 4) {
+            dropPercentage = 0.20 // 20% for 4-5 players
+        } else if (playerCount >= 2) {
+            dropPercentage = 0.15 // 15% for 2-3 players
+        }
+
+        return Math.max(1, Math.floor(totalSpent * dropPercentage))
     }
 
     // Render individual loot item with description

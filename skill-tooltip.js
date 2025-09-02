@@ -3,12 +3,12 @@
 
 class SkillTooltip {
     constructor() {
-        this.tooltip = null;
-        this.isVisible = false;
-        this.fadeTimeout = null;
-        this.currentNode = null;
-        
-        this.init();
+        this.tooltip = null
+        this.isVisible = false
+        this.fadeTimeout = null
+        this.currentNode = null
+
+        this.init()
     }
 
     /**
@@ -16,21 +16,21 @@ class SkillTooltip {
      */
     init() {
         // Create tooltip element if it doesn't exist
-        this.tooltip = document.getElementById('radial-skill-tooltip');
-        
+        this.tooltip = document.getElementById('radial-skill-tooltip')
+
         if (!this.tooltip) {
-            this.tooltip = document.createElement('div');
-            this.tooltip.id = 'radial-skill-tooltip';
-            this.tooltip.className = 'radial-skill-tooltip';
-            document.body.appendChild(this.tooltip);
+            this.tooltip = document.createElement('div')
+            this.tooltip.id = 'radial-skill-tooltip'
+            this.tooltip.className = 'radial-skill-tooltip'
+            document.body.appendChild(this.tooltip)
         }
 
         // Hide initially
-        this.hide();
-        
+        this.hide()
+
         // Add global event listeners for cleanup
-        document.addEventListener('scroll', () => this.hide());
-        window.addEventListener('resize', () => this.hide());
+        document.addEventListener('scroll', () => this.hide())
+        window.addEventListener('resize', () => this.hide())
     }
 
     /**
@@ -41,49 +41,49 @@ class SkillTooltip {
      * @param {Object} character - Current character (for unlock status)
      */
     show(node, x, y, character = null) {
-        if (!node || !this.tooltip) return;
+        if (!node || !this.tooltip) return
 
-        this.currentNode = node;
-        
+        this.currentNode = node
+
         // Build tooltip content
-        const content = this.buildTooltipContent(node, character);
-        this.tooltip.innerHTML = content;
+        const content = this.buildTooltipContent(node, character)
+        this.tooltip.innerHTML = content
 
         // Position tooltip
-        this.positionTooltip(x, y);
+        this.positionTooltip(x, y)
 
         // Show tooltip
-        this.tooltip.style.display = 'block';
-        this.tooltip.style.opacity = '0';
-        
+        this.tooltip.style.display = 'block'
+        this.tooltip.style.opacity = '0'
+
         // Fade in
-        clearTimeout(this.fadeTimeout);
+        clearTimeout(this.fadeTimeout)
         this.fadeTimeout = setTimeout(() => {
             if (this.tooltip) {
-                this.tooltip.style.opacity = '1';
+                this.tooltip.style.opacity = '1'
             }
-        }, 10);
+        }, 10)
 
-        this.isVisible = true;
+        this.isVisible = true
     }
 
     /**
      * Hide tooltip
      */
     hide() {
-        if (!this.tooltip || !this.isVisible) return;
+        if (!this.tooltip || !this.isVisible) return
 
-        this.tooltip.style.opacity = '0';
-        
-        clearTimeout(this.fadeTimeout);
+        this.tooltip.style.opacity = '0'
+
+        clearTimeout(this.fadeTimeout)
         this.fadeTimeout = setTimeout(() => {
             if (this.tooltip) {
-                this.tooltip.style.display = 'none';
+                this.tooltip.style.display = 'none'
             }
-        }, 200);
+        }, 200)
 
-        this.isVisible = false;
-        this.currentNode = null;
+        this.isVisible = false
+        this.currentNode = null
     }
 
     /**
@@ -93,46 +93,46 @@ class SkillTooltip {
      * @returns {string} HTML content
      */
     buildTooltipContent(node, character) {
-        const isUnlocked = this.isSkillUnlocked(node, character);
-        const canUnlock = this.canUnlockSkill(node, character);
-        const prereqsMet = this.arePrerequisitesMet(node, character);
-        
+        const isUnlocked = this.isSkillUnlocked(node, character)
+        const canUnlock = this.canUnlockSkill(node, character)
+        const prereqsMet = this.arePrerequisitesMet(node, character)
+
         // Status indicators
-        let statusClass = 'locked';
-        let statusText = 'Locked';
-        let statusIcon = '🔒';
-        
+        let statusClass = 'locked'
+        let statusText = 'Locked'
+        let statusIcon = '🔒'
+
         if (isUnlocked) {
-            statusClass = 'unlocked';
-            statusText = 'Unlocked';
-            statusIcon = '✅';
+            statusClass = 'unlocked'
+            statusText = 'Unlocked'
+            statusIcon = '✅'
         } else if (canUnlock) {
-            statusClass = 'available';
-            statusText = 'Available';
-            statusIcon = '🟡';
+            statusClass = 'available'
+            statusText = 'Available'
+            statusIcon = '🟡'
         } else if (!prereqsMet) {
-            statusClass = 'prerequisites-unmet';
-            statusText = 'Prerequisites Not Met';
-            statusIcon = '❌';
+            statusClass = 'prerequisites-unmet'
+            statusText = 'Prerequisites Not Met'
+            statusIcon = '❌'
         }
 
         // Build prerequisites list
-        const prereqsHtml = this.buildPrerequisitesHtml(node, character);
-        
+        const prereqsHtml = this.buildPrerequisitesHtml(node, character)
+
         // Format cost display
-        const costDisplay = node.cost > 0 ? `${node.cost} Lumens` : 'Free';
-        
+        const costDisplay = node.cost > 0 ? `${node.cost} Lumens` : 'Free'
+
         // Keystone indicator
-        const keystoneHtml = node.keystone ? 
-            '<div class="tooltip-keystone">👑 Keystone Skill</div>' : '';
+        const keystoneHtml = node.keystone ?
+            '<div class="tooltip-keystone">👑 Keystone Skill</div>' : ''
 
         // Element indicator
-        const elementHtml = node.element ? 
-            `<div class="tooltip-element">Element: ${node.element}</div>` : '';
+        const elementHtml = node.element ?
+            `<div class="tooltip-element">Element: ${node.element}</div>` : ''
 
         // Stamina cost
-        const staminaHtml = node.staminaCost > 0 ? 
-            `<div class="tooltip-stamina">Stamina Cost: ${node.staminaCost}</div>` : '';
+        const staminaHtml = node.staminaCost > 0 ?
+            `<div class="tooltip-stamina">Stamina Cost: ${node.staminaCost}</div>` : ''
 
         return `
             <div class="tooltip-header">
@@ -167,7 +167,7 @@ class SkillTooltip {
                     ${this.buildActionsHtml(node, character, canUnlock)}
                 </div>
             </div>
-        `;
+        `
     }
 
     /**
@@ -178,19 +178,19 @@ class SkillTooltip {
      */
     buildPrerequisitesHtml(node, character) {
         if (!node.prerequisites || node.prerequisites.length === 0) {
-            return '<div class="tooltip-prerequisites">No prerequisites</div>';
+            return '<div class="tooltip-prerequisites">No prerequisites</div>'
         }
 
         const prereqsList = node.prerequisites.map(prereqId => {
-            const isPrereqMet = this.isSkillUnlocked({ id: prereqId }, character);
-            const statusIcon = isPrereqMet ? '✅' : '❌';
-            const statusClass = isPrereqMet ? 'met' : 'unmet';
-            
+            const isPrereqMet = this.isSkillUnlocked({ id: prereqId }, character)
+            const statusIcon = isPrereqMet ? '✅' : '❌'
+            const statusClass = isPrereqMet ? 'met' : 'unmet'
+
             return `<li class="prereq-item ${statusClass}">
                 <span class="prereq-status">${statusIcon}</span>
                 <span class="prereq-name">${this.formatSkillName(prereqId)}</span>
-            </li>`;
-        }).join('');
+            </li>`
+        }).join('')
 
         return `
             <div class="tooltip-prerequisites">
@@ -199,7 +199,7 @@ class SkillTooltip {
                     ${prereqsList}
                 </ul>
             </div>
-        `;
+        `
     }
 
     /**
@@ -211,11 +211,11 @@ class SkillTooltip {
      */
     buildActionsHtml(node, character, canUnlock) {
         if (!character) {
-            return '<div class="tooltip-action-hint">Select a character to see actions</div>';
+            return '<div class="tooltip-action-hint">Select a character to see actions</div>'
         }
 
         if (this.isSkillUnlocked(node, character)) {
-            return '<div class="tooltip-action-hint">✅ Skill already unlocked</div>';
+            return '<div class="tooltip-action-hint">✅ Skill already unlocked</div>'
         }
 
         if (canUnlock) {
@@ -223,10 +223,10 @@ class SkillTooltip {
                 <div class="tooltip-action-hint">
                     💡 <strong>Shift+Click</strong> to unlock this skill
                 </div>
-            `;
+            `
         }
 
-        return '<div class="tooltip-action-hint">Cannot unlock yet - check prerequisites and lumens</div>';
+        return '<div class="tooltip-action-hint">Cannot unlock yet - check prerequisites and lumens</div>'
     }
 
     /**
@@ -235,31 +235,31 @@ class SkillTooltip {
      * @param {number} y - Y position
      */
     positionTooltip(x, y) {
-        if (!this.tooltip) return;
+        if (!this.tooltip) return
 
-        const rect = this.tooltip.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        
+        const rect = this.tooltip.getBoundingClientRect()
+        const viewportWidth = window.innerWidth
+        const viewportHeight = window.innerHeight
+
         // Default offset from cursor
-        let left = x + 15;
-        let top = y - 10;
+        let left = x + 15
+        let top = y - 10
 
         // Adjust if tooltip would go off-screen
         if (left + rect.width > viewportWidth) {
-            left = x - rect.width - 15;
+            left = x - rect.width - 15
         }
-        
+
         if (top + rect.height > viewportHeight) {
-            top = y - rect.height + 10;
+            top = y - rect.height + 10
         }
 
         // Ensure tooltip stays on screen
-        left = Math.max(10, Math.min(left, viewportWidth - rect.width - 10));
-        top = Math.max(10, Math.min(top, viewportHeight - rect.height - 10));
+        left = Math.max(10, Math.min(left, viewportWidth - rect.width - 10))
+        top = Math.max(10, Math.min(top, viewportHeight - rect.height - 10))
 
-        this.tooltip.style.left = `${left}px`;
-        this.tooltip.style.top = `${top}px`;
+        this.tooltip.style.left = `${left}px`
+        this.tooltip.style.top = `${top}px`
     }
 
     /**
@@ -269,28 +269,34 @@ class SkillTooltip {
      * @returns {boolean} Whether skill is unlocked
      */
     isSkillUnlocked(node, character) {
-        if (!character || !character.unlockedSkills) return false;
-        
+        if (!character || !character.unlockedSkills) return false
+
+        // Use character manager's isSkillUnlocked for consistency
+        if (window.characterManager && window.characterManager.isSkillUnlocked) {
+            return window.characterManager.isSkillUnlocked(character, node.id)
+        }
+
+        // Fallback to local logic if character manager not available
         // Check all skill categories in character data
         for (const category in character.unlockedSkills) {
-            const categorySkills = character.unlockedSkills[category];
-            
+            const categorySkills = character.unlockedSkills[category]
+
             if (typeof categorySkills === 'object') {
                 for (const subcategory in categorySkills) {
                     if (Array.isArray(categorySkills[subcategory])) {
                         if (categorySkills[subcategory].includes(node.id)) {
-                            return true;
+                            return true
                         }
                     }
                 }
             } else if (Array.isArray(categorySkills)) {
                 if (categorySkills.includes(node.id)) {
-                    return true;
+                    return true
                 }
             }
         }
-        
-        return false;
+
+        return false
     }
 
     /**
@@ -300,16 +306,16 @@ class SkillTooltip {
      * @returns {boolean} Whether skill can be unlocked
      */
     canUnlockSkill(node, character) {
-        if (!character) return false;
-        if (this.isSkillUnlocked(node, character)) return false;
-        
+        if (!character) return false
+        if (this.isSkillUnlocked(node, character)) return false
+
         // Check lumens
-        const hasEnoughLumens = character.lumens >= node.cost;
-        
+        const hasEnoughLumens = character.lumens >= node.cost
+
         // Check prerequisites
-        const prereqsMet = this.arePrerequisitesMet(node, character);
-        
-        return hasEnoughLumens && prereqsMet;
+        const prereqsMet = this.arePrerequisitesMet(node, character)
+
+        return hasEnoughLumens && prereqsMet
     }
 
     /**
@@ -319,12 +325,18 @@ class SkillTooltip {
      * @returns {boolean} Whether prerequisites are met
      */
     arePrerequisitesMet(node, character) {
-        if (!node.prerequisites || node.prerequisites.length === 0) return true;
-        if (!character) return false;
-        
-        return node.prerequisites.every(prereqId => 
+        if (!node.prerequisites || node.prerequisites.length === 0) return true
+        if (!character) return false
+
+        // Use character manager's validateSkillPrerequisites for consistency
+        if (window.characterManager && window.characterManager.validateSkillPrerequisites) {
+            return window.characterManager.validateSkillPrerequisites(character, node.id)
+        }
+
+        // Fallback to local logic if character manager not available
+        return node.prerequisites.every(prereqId =>
             this.isSkillUnlocked({ id: prereqId }, character)
-        );
+        )
     }
 
     /**
@@ -334,11 +346,11 @@ class SkillTooltip {
      */
     formatCategory(category) {
         if (category.startsWith('racial_')) {
-            const race = category.replace('racial_', '');
-            return `${race.charAt(0).toUpperCase() + race.slice(1)} Racial`;
+            const race = category.replace('racial_', '')
+            return `${race.charAt(0).toUpperCase() + race.slice(1)} Racial`
         }
-        
-        return category.charAt(0).toUpperCase() + category.slice(1).replace(/_/g, ' ');
+
+        return category.charAt(0).toUpperCase() + category.slice(1).replace(/_/g, ' ')
     }
 
     /**
@@ -348,7 +360,7 @@ class SkillTooltip {
      */
     formatSkillName(skillId) {
         return skillId.replace(/_/g, ' ')
-                     .replace(/\b\w/g, l => l.toUpperCase());
+            .replace(/\b\w/g, l => l.toUpperCase())
     }
 
     /**
@@ -358,9 +370,9 @@ class SkillTooltip {
      */
     updateIfVisible(node, character) {
         if (this.isVisible && this.currentNode && this.currentNode.id === node.id) {
-            const content = this.buildTooltipContent(node, character);
+            const content = this.buildTooltipContent(node, character)
             if (this.tooltip) {
-                this.tooltip.innerHTML = content;
+                this.tooltip.innerHTML = content
             }
         }
     }
@@ -369,19 +381,19 @@ class SkillTooltip {
      * Destroy tooltip and clean up
      */
     destroy() {
-        this.hide();
-        
+        this.hide()
+
         if (this.tooltip && this.tooltip.parentNode) {
-            this.tooltip.parentNode.removeChild(this.tooltip);
+            this.tooltip.parentNode.removeChild(this.tooltip)
         }
-        
-        clearTimeout(this.fadeTimeout);
-        this.tooltip = null;
-        this.currentNode = null;
+
+        clearTimeout(this.fadeTimeout)
+        this.tooltip = null
+        this.currentNode = null
     }
 }
 
 // Export for use in other modules
 if (typeof window !== 'undefined') {
-    window.SkillTooltip = SkillTooltip;
+    window.SkillTooltip = SkillTooltip
 }
