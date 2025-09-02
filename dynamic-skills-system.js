@@ -173,13 +173,20 @@ class DynamicSkillsSystem {
      * Check if a fusion skill is available based on prerequisites
      */
     isFusionSkillAvailable(skill, unlockedSkills) {
-        if (!skill.fusionRequirements) {
-            return false
+        if (!skill.prerequisites || skill.prerequisites.type === 'NONE') {
+            return true
         }
 
-        // Check if all required skills are unlocked
-        return skill.fusionRequirements.every(reqGroup => {
-            return reqGroup.skills.every(skillId => {
+        // Use character manager's validateSkillPrerequisites for consistency
+        if (window.characterManager && window.characterManager.validateSkillPrerequisites) {
+            // Create a mock character object with the unlocked skills for validation
+            const mockCharacter = { unlockedSkills: unlockedSkills }
+            return window.characterManager.validateSkillPrerequisites(mockCharacter, skill.id)
+        }
+
+        // Fallback to local logic if character manager not available
+        if (skill.prerequisites.type === 'AND') {
+            return skill.prerequisites.skills.every(skillId => {
                 // Find the skill in unlocked skills across all categories
                 return Object.values(unlockedSkills).some(categorySkills =>
                     Object.values(categorySkills).some(subcatSkills =>
@@ -187,7 +194,18 @@ class DynamicSkillsSystem {
                     )
                 )
             })
-        })
+        } else if (skill.prerequisites.type === 'OR') {
+            return skill.prerequisites.skills.some(skillId => {
+                // Find the skill in unlocked skills across all categories
+                return Object.values(unlockedSkills).some(categorySkills =>
+                    Object.values(categorySkills).some(subcatSkills =>
+                        subcatSkills.includes(skillId)
+                    )
+                )
+            })
+        }
+
+        return false
     }
 
     /**

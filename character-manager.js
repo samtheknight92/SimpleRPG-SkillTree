@@ -525,9 +525,12 @@ class CharacterManager {
         }
 
         // Ensure all fusion categories exist (for existing characters)
-        if (!character.unlockedSkills.fusion.pure_magic) {
-            character.unlockedSkills.fusion.pure_magic = []
-        }
+        const fusionSubcategories = ['ranged_magic', 'melee_magic', 'utility_combat', 'monster_fusion', 'pure_magic']
+        fusionSubcategories.forEach(subcategory => {
+            if (!character.unlockedSkills.fusion[subcategory]) {
+                character.unlockedSkills.fusion[subcategory] = []
+            }
+        })
 
         // Migrate to include ascension skills system
         if (!character.unlockedSkills.ascension) {
@@ -955,6 +958,13 @@ class CharacterManager {
         const category = this.findSkillCategory(skillId)
         const subcategory = this.findSkillSubcategory(skillId)
 
+        // Map weapon subcategories to character structure
+        const weaponSubcategoryMap = {
+            'Bow': 'ranged',
+            'Crossbow': 'ranged'
+        }
+        const mappedSubcategory = weaponSubcategoryMap[subcategory] || subcategory
+
         // Handle different skill categories  
         let unlockedSkillsArray
         if (category === 'racial') {
@@ -1001,7 +1011,11 @@ class CharacterManager {
             }
             unlockedSkillsArray = character.unlockedSkills.ascension[subcategory]
         } else {
-            unlockedSkillsArray = character.unlockedSkills[category][subcategory]
+            // Ensure the subcategory exists in the character's unlocked skills
+            if (!character.unlockedSkills[category][mappedSubcategory]) {
+                character.unlockedSkills[category][mappedSubcategory] = []
+            }
+            unlockedSkillsArray = character.unlockedSkills[category][mappedSubcategory]
         }
 
         if (unlockedSkillsArray.includes(skillId)) {
