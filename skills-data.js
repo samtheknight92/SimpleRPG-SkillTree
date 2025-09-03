@@ -33,11 +33,11 @@ const SKILLS_DATA = {
     // SWORD SKILLS (Tier 1-5)
     sword: [
       // Tier 0
-      { id: 'sword_beginner', name: 'Sword Beginner', tier: 0, cost: 5, staminaCost: 0, desc: 'Passive: You can now equip a sword', icon: '⚔️', prerequisites: { type: 'NONE', skills: [] } },
+      { id: 'sword_beginner', name: 'Sword Beginner', tier: 0, cost: 3, staminaCost: 0, desc: 'Passive: You can now equip a sword', icon: '⚔️', prerequisites: { type: 'NONE', skills: [] } },
 
       // Tier 1
-      { id: 'sword_basics', name: 'Sword Basics', tier: 1, cost: 5, staminaCost: 0, desc: 'Passive: +1 attack bonus with swords, learn basic combat maneuvers', icon: '⚔️', prerequisites: { type: 'AND', skills: ['sword_beginner'] } },
-      { id: 'sword_stance', name: 'Sword Stance', tier: 1, cost: 5, staminaCost: 0, desc: 'Passive: Proper fighting stance: +1 Physical Defence while wielding a sword', icon: '🛡️', prerequisites: { type: 'AND', skills: ['sword_beginner'] } },
+      { id: 'sword_basics', name: 'Sword Basics', tier: 1, cost: 8, staminaCost: 0, desc: 'Passive: +1 attack bonus with swords, learn basic combat maneuvers', icon: '⚔️', prerequisites: { type: 'AND', skills: ['sword_beginner'] } },
+      { id: 'sword_stance', name: 'Sword Stance', tier: 1, cost: 8, staminaCost: 0, desc: 'Passive: Proper fighting stance: +1 Physical Defence while wielding a sword', icon: '🛡️', prerequisites: { type: 'AND', skills: ['sword_beginner'] } },
 
       // Tier 2
       { id: 'quick_strike', name: 'Quick Strike', tier: 2, cost: 10, staminaCost: 2, desc: 'Action: Fast sword attack with +2 accuracy bonus', icon: '⚡', prerequisites: { type: 'AND', skills: ['sword_basics'] } },
@@ -62,7 +62,7 @@ const SKILLS_DATA = {
     // RANGED SKILLS (Tier 1-5) - Bows, Crossbows, and Ranged Weapons
     Bow: [
       // Tier 0
-      { id: 'bow_beginner', name: 'Bow Beginner', tier: 0, cost: 5, staminaCost: 0, desc: 'Passive: You can now equip a bow', icon: '🏹', prerequisites: { type: 'NONE', skills: [] } },
+      { id: 'bow_beginner', name: 'Bow Beginner', tier: 0, cost: 3, staminaCost: 0, desc: 'Passive: You can now equip a bow', icon: '🏹', prerequisites: { type: 'NONE', skills: [] } },
 
       // Tier 1
       { id: 'ranged_basics', name: 'Ranged Basics', tier: 1, cost: 5, staminaCost: 0, desc: 'Passive: +1 Damage with Bow weapons, learn proper form and operation', icon: '🏹', prerequisites: { type: 'AND', skills: ['bow_beginner'] } },
@@ -108,7 +108,7 @@ const SKILLS_DATA = {
       // Tier 3
       { id: 'berserker_rage', name: 'Berserker Rage', tier: 3, cost: 15, staminaCost: 5, desc: 'Toggle: +4 Strength and Physical Defence and additional basic attack. Costs 2 stamina per additional turn, lasts max 5 turns. Applies Incapacitated (cannot act 2 turns) after', icon: '😤', prerequisites: { type: 'AND', skills: ['cleave'] } },
       { id: 'crushing_blow', name: 'Crushing Blow', tier: 3, cost: 15, staminaCost: 6, desc: 'Action: 50% chance to apply Incapacitated (cannot act 2 turns) +2 damage on hit', icon: '💥', prerequisites: { type: 'AND', skills: ['armor_break', 'heavy_swing'] } },
-      { id: 'ricochet_axe', name: 'Ricochet Axe', tier: 3, cost: 15, staminaCost: 5, desc: 'Enchantment: Thrown axes bounce to hit 1 additional target within 15ft of original target', icon: '🔄', prerequisites: { type: 'AND', skills: ['throwing_axe'] } },
+      { id: 'ricochet_axe', name: 'Ricochet Axe', tier: 3, cost: 25, staminaCost: 3, desc: 'Toggle: Thrown axes bounce to hit 1 additional target within 15ft of original target. Costs 3 stamina per turn while active.', icon: '🔄', prerequisites: { type: 'AND', skills: ['throwing_axe'] } },
       { id: 'wide_cleave', name: 'Wide Cleave', tier: 3, cost: 15, staminaCost: 7, desc: 'Action: Cleave attack hits all enemies in 15ft arc, each target takes -1 accuracy penalty', icon: '〰️', prerequisites: { type: 'AND', skills: ['cleave'] } },
 
       // Tier 4
@@ -161,7 +161,7 @@ const SKILLS_DATA = {
       // Tier 2
       { id: 'dual_wield', name: 'Dual Wield', tier: 2, cost: 25, staminaCost: 0, desc: 'Passive: When you have a second weapon equipped, you gain +1 attack per turn. If your equipped weapons are not both daggers, you suffer -6 Accuracy on all attacks.', icon: '⚔️', prerequisites: { type: 'AND', skills: ['dagger_basics'] } },
       { id: 'sneak_attack', name: 'Sneak Attack', tier: 2, cost: 10, staminaCost: 4, desc: 'Action: +3 damage when attacking from behind or hidden', icon: '👤', prerequisites: { type: 'AND', skills: ['light_step'] } },
-      { id: 'poison_blade', name: 'Poison Blade', tier: 2, cost: 10, staminaCost: 2, desc: 'Enchantment: Coat daggers with poison (escalating: 1→2→3 damage over 3 turns)', icon: '☠️', prerequisites: { type: 'AND', skills: ['dagger_basics'] } },
+      { id: 'poison_blade', name: 'Poison Blade', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Coat daggers with poison (escalating: 1→2→3 damage over 3 turns). Costs 2 stamina per turn while active.', icon: '☠️', prerequisites: { type: 'AND', skills: ['dagger_basics'] } },
 
       // Tier 3
       { id: 'flurry', name: 'Flurry', tier: 3, cost: 15, staminaCost: 6, desc: 'Action: Make 4 rapid attacks, each at -1 accuracy', icon: '🌪️', prerequisites: { type: 'AND', skills: ['dual_wield'] } },
@@ -1389,9 +1389,19 @@ window.findSkillById = function (id) {
   return null // Return null if skill not found
 }
 
-// Skill cost calculation based on tier (linear scaling)
+// Skill cost calculation based on tier (new tiered pricing system)
 function getSkillCost(tier) {
-  return tier * 5
+  // New tiered pricing system
+  const tierCosts = {
+    0: 3,   // Tier 0: Weapon basics and core proficiencies
+    1: 8,   // Tier 1: Basic combat skills
+    2: 15,  // Tier 2: Intermediate combat skills
+    3: 25,  // Tier 3: Advanced combat skills
+    4: 35,  // Tier 4: Expert-level skills
+    5: 50   // Tier 5: Master-level skills
+  }
+
+  return tierCosts[tier] || (tier * 5) // Fallback to old system for any other tiers
 }
 
 // Get all skills from all categories as a flat array

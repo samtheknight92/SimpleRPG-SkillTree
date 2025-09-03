@@ -16,12 +16,12 @@ class GameLogic {
 
     // Calculate stat upgrade cost based on current value
     getStatUpgradeCost(currentValue, statName) {
-        // Special HP milestone system
+        // Special HP milestone system - keep flat 3L cost
         if (statName === 'hp') {
             return this.getHPUpgradeCost(currentValue)
         }
 
-        // Special Stamina milestone system with higher costs
+        // Special Stamina milestone system - keep flat 5L cost
         if (statName === 'stamina') {
             return this.getStaminaUpgradeCost(currentValue)
         }
@@ -32,6 +32,7 @@ class GameLogic {
             stamina: 10,
             strength: -3,
             magicPower: -3,
+            accuracy: -3,
             speed: 2,
             physicalDefence: 8,
             magicalDefence: 8
@@ -40,8 +41,32 @@ class GameLogic {
         const startingValue = startingValues[statName] || 0
         const upgradeLevel = currentValue - startingValue
 
-        // Progressive cost: 10L, 15L, 22L, 33L, 49L, etc.
-        // Cost is based on how many upgrades above starting value
+        // New tiered pricing system
+        if (upgradeLevel < 0) return 0 // No cost for values below starting values
+
+        // Tier 1 Stats (High Impact) - Max 400L
+        if (statName === 'accuracy') {
+            const costs = [8, 12, 18, 25, 35, 50, 70, 100, 140, 200, 400]
+            return costs[Math.min(upgradeLevel, costs.length - 1)]
+        }
+        if (statName === 'speed') {
+            const costs = [6, 10, 15, 22, 30, 45, 65, 90, 140, 400]
+            return costs[Math.min(upgradeLevel, costs.length - 1)]
+        }
+
+        // Tier 2 Stats (Medium Impact) - Max 300L
+        if (statName === 'strength' || statName === 'magicPower') {
+            const costs = [5, 8, 12, 18, 25, 35, 50, 70, 100, 150, 300]
+            return costs[Math.min(upgradeLevel, costs.length - 1)]
+        }
+
+        // Tier 3 Stats (Low Impact) - Max 200L
+        if (statName === 'physicalDefence' || statName === 'magicalDefence') {
+            const costs = [3, 6, 10, 15, 20, 30, 45, 200]
+            return costs[Math.min(upgradeLevel, costs.length - 1)]
+        }
+
+        // Fallback to old system for any other stats
         return Math.floor(this.baseCosts.statUpgrade * Math.pow(this.progressionRates.statCostMultiplier, upgradeLevel))
     }
 

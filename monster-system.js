@@ -212,49 +212,22 @@ const MONSTER_SYSTEM = {
         return 1.0 // Default to normal damage
     },
 
-    // LOOT GENERATION SYSTEM
-    // ======================
+    // LOOT GENERATION SYSTEM - NEW DYNAMIC SYSTEM
+    // ============================================
 
-    // Loot categories based on skill types
-    lootCategories: {
-        combat: ['leather_grip', 'leather_strap', 'sharpening_essence', 'defense_essence', 'steel_ingot', 'scale_fragment', 'spear', 'iron_spear', 'leather_boots'],
-        magic: ['arcane_dust', 'crystal_shard', 'vitality_essence', 'fire_essence', 'silver_ingot', 'gold_ingot', 'ironbark_moss', 'apprentice_staff', 'journeyman_staff'],
-        utility: ['metallic_fragments', 'anti_magic_essence', 'segmented_carapace', 'regenerative_tissue', 'training_bow', 'hunter_bow'],
-        defense: ['leather_strap', 'defense_essence', 'steel_ingot', 'scale_fragment', 'metallic_fragments', 'segmented_carapace']
-    },
-
-    // Generate loot based on monster's skills
+    // Generate loot using the new dynamic system
     generateLoot(character) {
         if (!character.isMonster) return []
 
-        const allSkills = this.getAllUnlockedSkillIds(character)
-        const loot = []
-
-        // Categorize skills
-        const skillCategories = {
-            combat: 0,
-            magic: 0,
-            utility: 0,
-            defense: 0
+        // Use the new dynamic loot system
+        if (window.MONSTER_LOOT_SYSTEM) {
+            const lootItems = window.MONSTER_LOOT_SYSTEM.generateDynamicLoot(character)
+            return lootItems.map(item => item.id)
         }
 
-        allSkills.forEach(skillId => {
-            const skill = getAllSkills().find(s => s.id === skillId)
-            if (skill && skill.lootType) {
-                skillCategories[skill.lootType]++
-            }
-        })
-
-        // Generate loot based on skill distribution
-        Object.entries(skillCategories).forEach(([category, count]) => {
-            for (let i = 0; i < Math.min(count, 3); i++) {
-                const categoryLoot = this.lootCategories[category]
-                const randomLoot = categoryLoot[Math.floor(Math.random() * categoryLoot.length)]
-                loot.push(randomLoot)
-            }
-        })
-
-        return loot
+        // Fallback to empty array if new system not available
+        console.warn('New monster loot system not available, returning empty loot')
+        return []
     },
 
     // Get all unlocked skill IDs from character
@@ -551,20 +524,14 @@ if (typeof window !== 'undefined') {
 window.getMonsterLoot = function (character) {
     if (!character || !character.isMonster) return []
 
-    // Get loot item IDs from monster system
-    const lootItemIds = MONSTER_SYSTEM.generateLoot(character)
+    // Use the new dynamic loot system
+    if (window.MONSTER_LOOT_SYSTEM) {
+        return window.MONSTER_LOOT_SYSTEM.generateDynamicLoot(character)
+    }
 
-    // Convert IDs to actual item objects
-    const lootItems = lootItemIds.map(itemId => {
-        const item = findItemById(itemId)
-        if (!item) {
-            console.warn(`Monster loot item not found: ${itemId}`)
-            return null
-        }
-        return item
-    }).filter(item => item !== null)
-
-    return lootItems
+    // Fallback to empty array if new system not available
+    console.warn('New monster loot system not available, returning empty loot')
+    return []
 }
 
 // For Node.js environments

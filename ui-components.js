@@ -3926,11 +3926,16 @@ class UIComponents {
                 filteredSkillIds.forEach(skillId => {
                     const skill = findSkillById(skillId)
                     if (skill) {
+                        // Check if it's a toggle skill by description or toggle system
+                        const isToggleByDesc = skill.desc.toLowerCase().includes('toggle:')
+                        const isToggleBySystem = window.TOGGLE_SKILL_SYSTEM && window.TOGGLE_SKILL_SYSTEM.isToggleSkill(skillId)
+                        const isToggleSkill = isToggleByDesc || isToggleBySystem
+
                         allSkills.push({
                             ...skill,
                             category,
                             subcategory,
-                            isToggleSkill: skill.desc.toLowerCase().includes('toggle:'),
+                            isToggleSkill: isToggleSkill,
                             isToggled: characterManager.isSkillToggled(character.id, skillId)
                         })
                     }
@@ -3987,6 +3992,10 @@ class UIComponents {
                         <div class="skill-stats">
                             <span class="skill-cost">Cost: ${skill.cost} lumens</span>
                             ${skill.staminaCost ? `<span class="skill-stamina">Stamina: ${skill.staminaCost}</span>` : ''}
+                            ${skill.isToggleSkill && window.TOGGLE_SKILL_SYSTEM && window.TOGGLE_SKILL_SYSTEM.isToggleSkill(skill.id) ? `
+                                <span class="skill-toggle-cost">Activation: ${window.TOGGLE_SKILL_SYSTEM.getActivationCost(skill.id)} Stamina</span>
+                                <span class="skill-toggle-cost">Maintenance: ${window.TOGGLE_SKILL_SYSTEM.getMaintenanceCost(skill.id)} Stamina/turn</span>
+                            ` : ''}
                         </div>
                     </div>
                 </div>
@@ -5494,21 +5503,24 @@ class UIComponents {
     renderMonsterLootSection(character) {
         const characterSummary = characterManager.getCharacterSummary(character)
 
-        // Calculate player count for lumen drop scaling
-        const allCharacters = characterManager.getAllCharacters()
-        const playerCount = allCharacters.filter(char => !char.isMonster).length
+        // Use the new dynamic loot system if available
+        let lumenDrop = 0
+        let lootAnalysis = null
+        let playerCount = 1
 
-        // Calculate drop percentage based on player count
-        let dropPercentage = 0.10 // 10% for 1 player (default)
-        if (playerCount >= 6) {
-            dropPercentage = 0.25 // 25% for 6+ players
-        } else if (playerCount >= 4) {
-            dropPercentage = 0.20 // 20% for 4-5 players
-        } else if (playerCount >= 2) {
-            dropPercentage = 0.15 // 15% for 2-3 players
+        if (window.MONSTER_LOOT_SYSTEM) {
+            // Calculate player count for lumen drop scaling
+            const allCharacters = characterManager.getAllCharacters()
+            playerCount = allCharacters.filter(char => !char.isMonster).length
+
+            // Use new dynamic system
+            lumenDrop = window.MONSTER_LOOT_SYSTEM.calculateLumenReward(character, playerCount)
+            lootAnalysis = window.MONSTER_LOOT_SYSTEM.getLootAnalysis(character)
+        } else {
+            // Fallback to old system
+            lumenDrop = this.calculateMonsterLumenDrop(characterSummary.totalSpent)
         }
 
-        const lumenDrop = Math.max(1, Math.floor(characterSummary.totalSpent * dropPercentage))
         const lootItems = getMonsterLoot(character)
 
         return `
@@ -5517,8 +5529,42 @@ class UIComponents {
                 <div class="monster-drops-info">
                     <div class="lumen-drop-info">
                         <span class="drop-type">Lumen Reward:</span>
-                        <span class="lumen-amount">${lumenDrop}L</span>
+                        ${window.MONSTER_LOOT_SYSTEM ? `
+                            <div class="lumen-rewards-breakdown">
+                                <div class="lumen-reward-item tier-1">
+                                    <span class="player-count">1 Player:</span>
+                                    <span class="lumen-amount">${window.MONSTER_LOOT_SYSTEM.calculateLumenReward(character, 1)}L</span>
+                                </div>
+                                <div class="lumen-reward-item tier-2">
+                                    <span class="player-count">2-3 Players:</span>
+                                    <span class="lumen-amount">${window.MONSTER_LOOT_SYSTEM.calculateLumenReward(character, 2)}L</span>
+                                </div>
+                                <div class="lumen-reward-item tier-3">
+                                    <span class="player-count">4-5 Players:</span>
+                                    <span class="lumen-amount">${window.MONSTER_LOOT_SYSTEM.calculateLumenReward(character, 4)}L</span>
+                                </div>
+                                <div class="lumen-reward-item tier-4">
+                                    <span class="player-count">6+ Players:</span>
+                                    <span class="lumen-amount">${window.MONSTER_LOOT_SYSTEM.calculateLumenReward(character, 6)}L</span>
+                                </div>
+                            </div>
+                            <div class="lumen-breakdown">
+                                <small>Base: Level ${lootAnalysis?.level || '?'} × 5 = ${(lootAnalysis?.level || 1) * 5}L</small>
+                            </div>
+                        ` : `
+                            <span class="lumen-amount">${lumenDrop}L</span>
+                        `}
                     </div>
+                    
+                    ${window.MONSTER_LOOT_SYSTEM && lootAnalysis ? `
+                        <div class="loot-tier-info">
+                            <span class="drop-type">Loot Tiers:</span>
+                            <div class="loot-tiers-breakdown">
+                                ${this.renderLootTiersBreakdown(lootAnalysis.lootTiers)}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
                     ${lootItems.length > 0 ? `
                         <div class="loot-items-info">
                             <span class="drop-type">Material Drops:</span>
@@ -5537,7 +5583,7 @@ class UIComponents {
         `
     }
 
-    // Calculate monster lumen drop based on player count
+    // Calculate monster lumen drop based on player count (old system)
     calculateMonsterLumenDrop(totalSpent) {
         // Calculate player count for lumen drop scaling
         const allCharacters = characterManager.getAllCharacters()
@@ -5554,6 +5600,40 @@ class UIComponents {
         }
 
         return Math.max(1, Math.floor(totalSpent * dropPercentage))
+    }
+
+    // Get player count multiplier for display
+    getPlayerMultiplier(playerCount) {
+        if (playerCount >= 6) return '2.5×'
+        if (playerCount >= 4) return '2.0×'
+        if (playerCount >= 2) return '1.5×'
+        return '1.0×'
+    }
+
+    // Render loot tiers breakdown
+    renderLootTiersBreakdown(lootTiers) {
+        if (!lootTiers || lootTiers.length === 0) return '<span class="no-tiers">No loot tiers available</span>'
+
+        const tierColors = {
+            'common': '#9E9E9E',
+            'uncommon': '#4CAF50',
+            'rare': '#2196F3',
+            'epic': '#9C27B0',
+            'legendary': '#FF9800'
+        }
+
+        return lootTiers.map(tier => {
+            const color = tierColors[tier.rarity] || '#9E9E9E'
+            const chanceText = tier.chance === 25 ? '25%' : tier.chance === 15 ? '15%' : tier.chance === 10 ? '10%' : tier.chance === 5 ? '5%' : `${tier.chance}%`
+
+            return `
+                <div class="loot-tier-item" style="border-color: ${color};">
+                    <span class="tier-rarity" style="color: ${color};">${tier.rarity.charAt(0).toUpperCase() + tier.rarity.slice(1)}</span>
+                    <span class="tier-count">${tier.count} items</span>
+                    <span class="tier-chance">${chanceText} each</span>
+                </div>
+            `
+        }).join('')
     }
 
     // Render individual loot item with description
@@ -6558,8 +6638,31 @@ class UIComponents {
         const character = characterManager.getCurrentCharacter()
         if (!character || !window.inventorySystem) return
 
+        // Process status effects
         window.inventorySystem.processStatusEffects(character)
-        this.showMessage('Processed status effects', 'success')
+
+        // Process toggle skill maintenance
+        if (window.TOGGLE_SKILL_SYSTEM) {
+            const maintenanceResult = window.TOGGLE_SKILL_SYSTEM.maintainToggleSkills(character)
+
+            if (maintenanceResult.deactivatedSkills.length > 0) {
+                this.showMessage(`Toggle skills deactivated due to insufficient stamina: ${maintenanceResult.deactivatedSkills.join(', ')}`, 'warning')
+            } else if (character.activeToggleSkills && character.activeToggleSkills.length > 0) {
+                const totalCost = window.TOGGLE_SKILL_SYSTEM.getTotalMaintenanceCost(character)
+                this.showMessage(`Maintained toggle skills, consumed ${totalCost} stamina`, 'info')
+            }
+        }
+
+        // Save the character after processing to persist stamina changes
+        characterManager.saveCharacter(character)
+
+        // Update the current character reference to reflect stamina changes
+        if (characterManager.currentCharacter && characterManager.currentCharacter.id === character.id) {
+            characterManager.currentCharacter.stamina = character.stamina
+            characterManager.currentCharacter.activeToggleSkills = character.activeToggleSkills
+        }
+
+        this.showMessage('Processed status effects and toggle skills', 'success')
         this.updateDisplay()
     }
 
