@@ -1308,6 +1308,128 @@ select option:hover {
     color: #ccc;
     line-height: 1.3;
 }
+
+/* New dynamic loot system visualization styles */
+.lumen-breakdown {
+    margin-top: 4px;
+    color: #b0b0b0;
+    font-size: 11px;
+    font-style: italic;
+}
+
+.lumen-rewards-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.lumen-reward-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lumen-reward-item.tier-1 {
+    background: rgba(76, 175, 80, 0.1);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.lumen-reward-item.tier-2 {
+    background: rgba(33, 150, 243, 0.1);
+    border-color: rgba(33, 150, 243, 0.3);
+}
+
+.lumen-reward-item.tier-3 {
+    background: rgba(156, 39, 176, 0.1);
+    border-color: rgba(156, 39, 176, 0.3);
+}
+
+.lumen-reward-item.tier-4 {
+    background: rgba(255, 152, 0, 0.1);
+    border-color: rgba(255, 152, 0, 0.3);
+}
+
+.player-count {
+    color: #ccc;
+    font-size: 12px;
+}
+
+.lumen-reward-item .lumen-amount {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.lumen-reward-item.tier-1 .player-count {
+    color: #4caf50;
+}
+
+.lumen-reward-item.tier-2 .player-count {
+    color: #2196f3;
+}
+
+.lumen-reward-item.tier-3 .player-count {
+    color: #9c27b0;
+}
+
+.lumen-reward-item.tier-4 .player-count {
+    color: #ff9800;
+}
+
+.loot-tier-info {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.loot-tiers-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.loot-tier-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 6px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    font-size: 11px;
+}
+
+.tier-rarity {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.tier-count {
+    color: #ccc;
+    font-size: 10px;
+}
+
+.tier-chance {
+    color: #ffd700;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.no-tiers {
+    color: #999;
+    font-style: italic;
+    font-size: 12px;
+}
 .character-name {
     text-align: center;
     font-size: 36px;
@@ -1630,6 +1752,14 @@ select option:hover {
 .skill-stamina {
     background: rgba(64, 158, 255, 0.1);
     color: #409eff;
+}
+
+.skill-toggle-cost {
+    background: rgba(255, 165, 0, 0.1);
+    color: #ffa500;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
 }
 
 /* Tier-based coloring */

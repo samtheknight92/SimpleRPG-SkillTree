@@ -780,19 +780,24 @@ class CharacterManager {
                 return false
             }
 
-            // Check if this is a toggle skill
-            if (!skill.desc.toLowerCase().includes('toggle:')) {
+            // Check if this is a toggle skill (either by description or toggle system)
+            const isToggleByDesc = skill.desc.toLowerCase().includes('toggle:')
+            const isToggleBySystem = window.TOGGLE_SKILL_SYSTEM && window.TOGGLE_SKILL_SYSTEM.isToggleSkill(skillId)
+
+            if (!isToggleByDesc && !isToggleBySystem) {
                 console.error('Not a toggle skill:', skillId)
                 return false
             }
 
             // First check for any incompatible toggle skills
             const INCOMPATIBLE_SKILLS = {
-                'defensive_stance': ['berserker_rage', 'monster_berserker_rage', 'fortress_stance'],
-                'polearm_defensive_stance': ['berserker_rage', 'monster_berserker_rage', 'fortress_stance'],
-                'berserker_rage': ['defensive_stance', 'polearm_defensive_stance', 'fortress_stance'],
-                'monster_berserker_rage': ['defensive_stance', 'polearm_defensive_stance', 'fortress_stance'],
-                'fortress_stance': ['defensive_stance', 'berserker_rage', 'monster_berserker_rage', 'polearm_defensive_stance']
+                'defensive_stance': ['berserker_rage', 'monster_berserker_rage', 'fortress_stance', 'polearm_defensive_stance'],
+                'polearm_defensive_stance': ['berserker_rage', 'monster_berserker_rage', 'fortress_stance', 'defensive_stance'],
+                'berserker_rage': ['defensive_stance', 'polearm_defensive_stance', 'fortress_stance', 'monster_berserker_rage'],
+                'monster_berserker_rage': ['defensive_stance', 'polearm_defensive_stance', 'fortress_stance', 'berserker_rage'],
+                'fortress_stance': ['defensive_stance', 'berserker_rage', 'monster_berserker_rage', 'polearm_defensive_stance'],
+                'frost_staff': ['fire_staff'],
+                'fire_staff': ['frost_staff']
             }
 
             // Determine if we're turning it on or off
@@ -804,7 +809,19 @@ class CharacterManager {
                 const index = character.activeToggleSkills.indexOf(skillId)
                 character.activeToggleSkills.splice(index, 1)
             } else {
-                // Turning it on - check for incompatible skills first
+                // Turning it on - check stamina costs first
+                if (window.TOGGLE_SKILL_SYSTEM && window.TOGGLE_SKILL_SYSTEM.isToggleSkill(skillId)) {
+                    // Check if character can afford activation cost
+                    if (!window.TOGGLE_SKILL_SYSTEM.canAffordActivation(character, skillId)) {
+                        console.error('Cannot afford activation cost for:', skillId)
+                        return false
+                    }
+
+                    // Consume activation stamina
+                    window.TOGGLE_SKILL_SYSTEM.activateToggleSkill(character, skillId)
+                }
+
+                // Check for incompatible skills first
                 if (INCOMPATIBLE_SKILLS[skillId]) {
                     INCOMPATIBLE_SKILLS[skillId].forEach(incompatibleSkillId => {
                         const index = character.activeToggleSkills.indexOf(incompatibleSkillId)
@@ -820,6 +837,7 @@ class CharacterManager {
             // Update current character if it's the active one
             if (this.currentCharacter && this.currentCharacter.id === characterId) {
                 this.currentCharacter.activeToggleSkills = [...character.activeToggleSkills]
+                this.currentCharacter.stamina = character.stamina // Update stamina
             }
 
             // Save the updated character
