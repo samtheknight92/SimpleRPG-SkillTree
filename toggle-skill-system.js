@@ -18,13 +18,67 @@ const TOGGLE_SKILL_SYSTEM = {
             maintenanceCost: 2,
             description: "Toggle: Fire Staff - Channel fire magic through your staff. Costs 3 Stamina to activate, 2 Stamina per turn to maintain."
         },
+        flame_staff: {
+            name: "Flame Staff",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Staff attacks deal +1d6 Fire Damage and have a 20% chance to apply Burn. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        storm_staff: {
+            name: "Storm Staff",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Staff attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        shadow_staff: {
+            name: "Shadow Staff",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Staff attacks deal +1d6 Darkness Damage and have a 20% chance to apply Mind Controlled (fear variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        light_staff: {
+            name: "Light Staff",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Staff attacks deal +1d6 Light Damage and have a 20% chance to apply Mind Controlled (charm variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
 
         // Sword toggle skills
         defensive_stance: {
             name: "Defensive Stance",
             activationCost: 1,
             maintenanceCost: 1,
-            description: "Toggle: Defensive Stance - +2 Physical Defence but -2 attack damage. Costs 1 Stamina to activate, 1 Stamina per turn to maintain."
+            description: "Toggle: Defensive Stance - +2 Physical Defence but they lose -2 to accuracy against you. Costs 1 Stamina to activate, 1 Stamina per turn to maintain."
+        },
+        flame_edge: {
+            name: "Flame Edge",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Sword attacks deal +1d6 Fire Damage and have a 20% chance to apply Burn. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        frostbrand: {
+            name: "Frostbrand",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Sword attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        storm_blade: {
+            name: "Storm Blade",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Sword attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        shadow_edge: {
+            name: "Shadow Edge",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Sword attacks deal +1d6 Darkness Damage and have a 20% chance to apply Mind Controlled (fear variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        radiant_blade: {
+            name: "Radiant Blade",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Sword attacks deal +1d6 Light Damage and have a 20% chance to apply Mind Controlled (charm variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
         },
 
         // Axe toggle skills
@@ -34,19 +88,85 @@ const TOGGLE_SKILL_SYSTEM = {
             maintenanceCost: 2,
             description: "Toggle: Berserker Rage - +4 Strength and Physical Defence and additional basic attack. Costs 5 Stamina to activate, 2 Stamina per turn to maintain."
         },
+        ricochet_axe: {
+            name: "Ricochet Axe",
+            activationCost: 3,
+            maintenanceCost: 3,
+            description: "Toggle: Ricochet Axe - Thrown axes bounce to hit 1 additional target within 15ft of original target. Costs 3 Stamina to activate, 3 Stamina per turn to maintain."
+        },
+        flame_axe: {
+            name: "Flame Axe",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Axe attacks deal +1d6 Fire Damage and have a 20% chance to apply Burn. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        frost_axe: {
+            name: "Frost Axe",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Axe attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        storm_axe: {
+            name: "Storm Axe",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Axe attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        shadow_axe: {
+            name: "Shadow Axe",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Axe attacks deal +1d6 Darkness Damage and have a 20% chance to apply Mind Controlled (fear variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        light_axe: {
+            name: "Light Axe",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Axe attacks deal +1d6 Light Damage and have a 20% chance to apply Mind Controlled (charm variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
 
         // Polearm toggle skills
         polearm_defensive_stance: {
             name: "Polearm Defensive Stance",
             activationCost: 1,
             maintenanceCost: 1,
-            description: "Toggle: Polearm Defensive Stance - +2 AC but cannot move. Costs 1 Stamina to activate, 1 Stamina per turn to maintain."
+            description: "Toggle: Polearm Defensive Stance - +2 Physical Defence but cannot move. Costs 1 Stamina to activate, 1 Stamina per turn to maintain."
         },
         fortress_stance: {
             name: "Fortress Stance",
             activationCost: 3,
             maintenanceCost: 3,
-            description: "Toggle: Fortress Stance - +4 AC, reflect 50% damage back to attackers. Costs 3 Stamina to activate, 3 Stamina per turn to maintain."
+            description: "Toggle: Fortress Stance - +4 Physical Defence, reflect 50% damage back to attackers. Costs 3 Stamina to activate, 3 Stamina per turn to maintain."
+        },
+        flame_glaive: {
+            name: "Flame Glaive",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Polearm attacks deal +1d6 Fire Damage and have a 20% chance to apply Burn. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        frost_halberd: {
+            name: "Frost Halberd",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Polearm attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        storm_glaive: {
+            name: "Storm Glaive",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Polearm attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        shadow_glaive: {
+            name: "Shadow Glaive",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Polearm attacks deal +1d6 Darkness Damage and have a 20% chance to apply Mind Controlled (fear variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        light_glaive: {
+            name: "Light Glaive",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Polearm attacks deal +1d6 Light Damage and have a 20% chance to apply Mind Controlled (charm variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
         },
 
         // Dagger toggle skills
@@ -56,16 +176,122 @@ const TOGGLE_SKILL_SYSTEM = {
             maintenanceCost: 2,
             description: "Toggle: Poison Blade - Coat daggers with poison (escalating: 1→2→3 damage over 3 turns). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
         },
-
-        // Axe toggle skills
-        ricochet_axe: {
-            name: "Ricochet Axe",
-            activationCost: 3,
-            maintenanceCost: 3,
-            description: "Toggle: Ricochet Axe - Thrown axes bounce to hit 1 additional target within 15ft of original target. Costs 3 Stamina to activate, 3 Stamina per turn to maintain."
+        flame_dagger: {
+            name: "Flame Dagger",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Dagger attacks deal +1d6 Fire Damage and have a 20% chance to apply Burn. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        frost_dagger: {
+            name: "Frost Dagger",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Dagger attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        storm_dagger: {
+            name: "Storm Dagger",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Dagger attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        shadow_dagger: {
+            name: "Shadow Dagger",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Dagger attacks deal +1d6 Darkness Damage and have a 20% chance to apply Mind Controlled (fear variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        light_dagger: {
+            name: "Light Dagger",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Dagger attacks deal +1d6 Light Damage and have a 20% chance to apply Mind Controlled (charm variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
         },
 
-        // Add more toggle skills as needed
+        // Hammer toggle skills
+        flame_hammer: {
+            name: "Flame Hammer",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Hammer attacks deal +1d6 Fire Damage and have a 20% chance to apply Burn. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        frost_hammer: {
+            name: "Frost Hammer",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Hammer attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        storm_hammer: {
+            name: "Storm Hammer",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Hammer attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        shadow_hammer: {
+            name: "Shadow Hammer",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Hammer attacks deal +1d6 Darkness Damage and have a 20% chance to apply Mind Controlled (fear variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        radiant_hammer: {
+            name: "Radiant Hammer",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Hammer attacks deal +1d6 Light Damage and have a 20% chance to apply Mind Controlled (charm variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+
+        // Bow toggle skills
+        flame_arrow: {
+            name: "Flame Arrow",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Ranged attacks deal +1d6 Fire Damage and have a 20% chance to apply Burn. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        frost_arrow: {
+            name: "Frost Arrow",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Ranged attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        storm_arrow: {
+            name: "Storm Arrow",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Ranged attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated. Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        shadow_arrow: {
+            name: "Shadow Arrow",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Ranged attacks deal +1d6 Darkness Damage and have a 20% chance to apply Mind Controlled (fear variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+        light_arrow: {
+            name: "Light Arrow",
+            activationCost: 2,
+            maintenanceCost: 2,
+            description: "Toggle: Ranged attacks deal +1d6 Light Damage and have a 20% chance to apply Mind Controlled (charm variant). Costs 2 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+
+        // Racial toggle skills
+        drow_poison: {
+            name: "Drow Poison",
+            activationCost: 3,
+            maintenanceCost: 1,
+            description: "Toggle: Drow Poison - Coat weapons with drow poison for entire combat encounter (medium chance of Daze effect + 1d4 poison damage). Costs 3 Stamina to activate, 1 Stamina per turn to maintain."
+        },
+        runic_weapon: {
+            name: "Runic Weapon",
+            activationCost: 8,
+            maintenanceCost: 2,
+            description: "Toggle: Runic Weapon - Inscribe runes on weapon (+2d6 damage, bypasses resistances for 10 attacks). Costs 8 Stamina to activate, 2 Stamina per turn to maintain."
+        },
+
+        // Magic toggle skills
+        phoenix_form: {
+            name: "Phoenix Form",
+            activationCost: 10,
+            maintenanceCost: 5,
+            description: "Toggle: Phoenix Form - Transform into phoenix form. All basic attacks gain +1d4 Fire Damage. Costs 10 Stamina to activate, 5 Stamina per turn to maintain."
+        }
     },
 
     // Check if a skill is a toggle skill

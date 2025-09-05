@@ -468,7 +468,7 @@ class App {
                             <li>🗡️ Weapon Skills: Master swords, bows, and axes</li>
                             <li>🔮 Magic Schools: Fire, ice, and lightning magic</li>
                             <li>🔨 Professions: Smithing, alchemy, and enchanting</li>
-                            <li>📊 Progressive Stats: Strength, intelligence, and speed</li>
+                            <li>📊 Progressive Stats: Strength, Magic Defence, and speed</li>
                             <li>💾 Auto-Save: Your progress is automatically saved</li>
                         </ul>
                     </div>
@@ -513,7 +513,7 @@ class App {
                     <h3>Stats System</h3>
                     <ul>
                         <li><strong>Strength:</strong> Increases health (HP = 10 + STR × 4)</li>
-                        <li><strong>Intelligence:</strong> Increases stamina (STA = 10 + INT × 4)</li>
+                        <li><strong>Magic Defence:</strong> Increases stamina (STA = 10 + MD × 4)</li>
                         <li><strong>Speed:</strong> Increases armor class (AC = 10 + SPD ÷ 4)</li>
                     </ul>
                     

@@ -10,9 +10,9 @@ try {
             icon: "🧝",
             description: "Masters of Magic and Nature with keen senses, magical affinity, and natural longevity.",
             passiveTraits: [
-                "Keen Senses: +1 Accuracy for detecting hidden enemies and precise attacks",
-                "Magical Affinity: +1 Magic Power when using staves or wands",
-                "Elven Longevity: Immune to aging and disease status effects"
+                "Keen Senses: +1 Accuracy when using a bow",
+                "Magical Affinity: +1 Magic Power when using staves",
+                "Elven Longevity: Immune to Cursed and Poison status effects"
             ],
             statModifiers: {
                 magicPower: 1,
@@ -28,7 +28,7 @@ try {
             description: "Masters of Craft and Stone with natural resilience, stone sense, and craftsman heritage.",
             passiveTraits: [
                 "Stone Sense: Can detect traps, secret doors, and structural weaknesses",
-                "Dwarven Resilience: Immune to poison status effects",
+                "Dwarven Resilience: Immune to Poison status effects",
                 "Master Craftsman: All crafting recipes require 1 less material (minimum 1)"
             ],
             statModifiers: {
@@ -45,7 +45,7 @@ try {
             description: "Masters of Luck and Stealth with natural fortune, small size advantages, and brave hearts.",
             passiveTraits: [
                 "Lucky: Can reroll any natural 1 on dice (once per combat/encounter)",
-                "Small & Nimble: Can move through larger creature spaces, +1 Speed",
+                "Small & Nimble: Can move through other creature spaces, Enemies have disadvantage to hit when doing an opportunity attack on you",
                 "Brave Heart: Immune to fear and intimidation status effects"
             ],
             statModifiers: {
@@ -61,12 +61,12 @@ try {
             icon: "👹",
             description: "Masters of Fury and Might with savage attacks, relentless endurance, and powerful build.",
             passiveTraits: [
-                "Savage Critical: Critical hits deal +1 extra damage die",
+                "Savage Critical: Rolls of 18-20 are considered Critical Hits and deal +1 extra damage die",
                 "Relentless Endurance: When reduced to 0 HP, drop to 1 HP instead (once per day)",
-                "Powerful Build: +1 damage with melee weapons, +2 carrying capacity"
+                "Powerful Build: additional +1 Strength"
             ],
             statModifiers: {
-                strength: 2,
+                strength: 3,
                 hp: 1
             },
             exclusiveSkills: ["orcish_fury", "intimidating_roar", "blood_frenzy", "unstoppable_charge", "warchief_presence"]
@@ -78,8 +78,8 @@ try {
             icon: "👤",
             description: "Jack of all trades, master of none. Humans don't develop advanced racial techniques, instead learning from other cultures through adaptability and determination.",
             passiveTraits: [
-                "Versatile Learning: Gain one free Tier 1 weapon skill upon character creation",
-                "Ambitious Spirit: Earn 10% more Lumens from all sources",
+                "Versatile Learning: All Weapon beginner skills are unlocked upon creation",
+                "Ambitious Spirit: Can choose to go first in initiative (Only one human per team can use this per combat)",
                 "Cross-Cultural Learning: Can learn Tier 1 skills from other races' skill trees"
             ],
             statModifiers: {
@@ -152,7 +152,7 @@ try {
             passiveTraits: [
                 "Pack Tactics: +1 Accuracy when an ally is adjacent to the same target",
                 "Keen Smell: Can track creatures and detect invisible/hidden enemies nearby",
-                "Savage Instincts: +1 damage against enemies below 50% HP"
+                "Savage Instincts: +1 Physical damage against enemies below 50% HP"
             ],
             statModifiers: {
                 strength: 1,
@@ -188,7 +188,7 @@ try {
                 tier: 1,
                 cost: 5,
                 staminaCost: 0,
-                desc: 'Passive: +1 accuracy with ranged weapons and spells',
+                desc: 'Passive: +1 accuracy when Bow or Staff weapons are equipped',
                 icon: '🎯',
                 prerequisites: { type: 'NONE', skills: [] },
                 race: 'elf'
@@ -200,7 +200,7 @@ try {
                 tier: 2,
                 cost: 10,
                 staminaCost: 3,
-                desc: 'Action: Move through natural terrain without movement penalty, +2 stealth in forests',
+                desc: 'Action: Move through natural terrain without movement penalty, gain advantage on rolls to stay hidden in forests',
                 icon: '🌲',
                 prerequisites: { type: 'AND', skills: ['elven_accuracy'] },
                 race: 'elf'
@@ -236,7 +236,7 @@ try {
                 tier: 5,
                 cost: 25,
                 staminaCost: 12,
-                desc: 'Ultimate: Summon starfall in 30ft radius (4d8 light damage, heals allies 2d6)',
+                desc: 'Ultimate: Summon starfall in 30ft radius (4d8 light damage, heals allies 2d6 HP)',
                 icon: '⭐',
                 prerequisites: { type: 'AND', skills: ['elven_high_magic'] },
                 race: 'elf'
@@ -251,7 +251,7 @@ try {
                 tier: 1,
                 cost: 5,
                 staminaCost: 0,
-                desc: 'Passive: +5 max HP, resistance to knockdown effects',
+                desc: 'Passive: +5 HP, resistance to knockdown effects',
                 icon: '💪',
                 prerequisites: { type: 'NONE', skills: [] },
                 race: 'dwarf'
@@ -263,7 +263,7 @@ try {
                 tier: 2,
                 cost: 10,
                 staminaCost: 0,
-                desc: 'Passive: Crafted weapons/armor gain +1 enchantment slot and +1 to all stat bonuses',
+                desc: 'Passive: Crafted weapons/armor gain +1 enchantment slot and +1 to all crafted item stats',
                 icon: '🔨',
                 prerequisites: { type: 'AND', skills: ['dwarven_toughness'] },
                 race: 'dwarf'
@@ -275,7 +275,7 @@ try {
                 tier: 3,
                 cost: 15,
                 staminaCost: 5,
-                desc: 'Action: Charge 20ft ignoring difficult terrain (+3 damage, knockdown on hit)',
+                desc: 'Action: Charge 20ft ignoring difficult terrain (+3 Physical damage, knockdown on hit)',
                 icon: '🏔️',
                 prerequisites: { type: 'AND', skills: ['forge_blessing'] },
                 race: 'dwarf'
@@ -287,7 +287,7 @@ try {
                 tier: 4,
                 cost: 20,
                 staminaCost: 8,
-                desc: 'Enchantment: Inscribe runes on weapon (+2d6 damage, bypasses resistances for 10 attacks)',
+                desc: 'Toggle: Inscribe runes on weapon (+1d6 damage, bypasses Elemental resistances) Costs 8 Stamina to activate, 2 Stamina per turn to maintain',
                 icon: '🔤',
                 prerequisites: { type: 'AND', skills: ['mountain_charge'] },
                 race: 'dwarf'
@@ -299,7 +299,7 @@ try {
                 tier: 5,
                 cost: 25,
                 staminaCost: 10,
-                desc: 'Toggle: Channel ancient dwarven spirits (+4 Strength, +3 AC, +5 crafting bonus)',
+                desc: 'Toggle: Channel ancient dwarven spirits (+4 Strength, +3 Physical Defence) Costs 10 Stamina to activate, 5 Stamina per turn to maintain',
                 icon: '👑',
                 prerequisites: { type: 'AND', skills: ['runic_weapon'] },
                 race: 'dwarf'
@@ -326,7 +326,7 @@ try {
                 tier: 2,
                 cost: 10,
                 staminaCost: 4,
-                desc: 'Action: Attack from stealth gains +3 attack roll',
+                desc: 'Action: Attack from stealth gains +3 accuracy',
                 icon: '🤫',
                 prerequisites: { type: 'AND', skills: ['lucky_dodge'] },
                 race: 'halfling'
@@ -362,7 +362,7 @@ try {
                 tier: 5,
                 cost: 25,
                 staminaCost: 0,
-                desc: 'Passive: Reroll any failed save or critical failure, allies within 10ft gain the same effect',
+                desc: 'Passive: Reroll any failed resistance check or critical failure, allies within 10ft gain the same effect',
                 icon: '⭐',
                 prerequisites: { type: 'AND', skills: ['miraculous_escape'] },
                 race: 'halfling'
@@ -389,7 +389,7 @@ try {
                 tier: 2,
                 cost: 10,
                 staminaCost: 4,
-                desc: 'Action: 15ft cone, apply Mind Controlled (fear variant) for 2 turns',
+                desc: 'Action: 15ft cone, apply Mind Control (fear variant) for 2 turns',
                 icon: '🦁',
                 prerequisites: { type: 'AND', skills: ['orcish_fury'] },
                 race: 'orc'
@@ -401,7 +401,7 @@ try {
                 tier: 3,
                 cost: 15,
                 staminaCost: 0,
-                desc: 'Passive: When an enemy dies within 30ft, gain +2 damage for rest of combat (stackable up to +10 damage)',
+                desc: 'Passive: When an enemy dies within 30ft, gain +2 Physical damage for rest of combat (stackable up to +10 damage)',
                 icon: '🩸',
                 prerequisites: { type: 'AND', skills: ['intimidating_roar'] },
                 race: 'orc'
@@ -425,7 +425,7 @@ try {
                 tier: 5,
                 cost: 25,
                 staminaCost: 10,
-                desc: 'Aura: Allies within 20ft gain +2 damage and immunity to fear effects',
+                desc: 'Aura: Allies within 20ft gain +2 Physical damage and immunity to fear effects',
                 icon: '👑',
                 prerequisites: { type: 'AND', skills: ['unstoppable_charge'] },
                 race: 'orc'
@@ -440,7 +440,7 @@ try {
                 tier: 1,
                 cost: 5,
                 staminaCost: 0,
-                desc: 'Passive: +1 to all saving throws, resistance to Incapacitated. Unlocks Cross-Cultural Learning.',
+                desc: 'Passive: When your health drops below 5HP, gain +1 Physical and Magical Defence. Unlocks Cross-Cultural Learning.',
                 icon: '�',
                 prerequisites: { type: 'NONE', skills: [] },
                 race: 'human'
@@ -468,7 +468,7 @@ try {
                 tier: 2,
                 cost: 10,
                 staminaCost: 4,
-                desc: 'Action: Project intimidating aura (enemies within 10ft must save vs fear)',
+                desc: 'Action: Project intimidating aura (enemies within 10ft must resist fear)',
                 icon: '👁️',
                 prerequisites: { type: 'AND', skills: ['breath_weapon'] },
                 race: 'dragonborn'
@@ -531,7 +531,7 @@ try {
                 tier: 2,
                 cost: 10,
                 staminaCost: 0,
-                desc: 'Passive: Immunity to fire, resistance to Dark elemental damage, +2 max stamina',
+                desc: 'Passive: Resistance to Darkness elemental damage, +2 max stamina',
                 icon: '😈',
                 prerequisites: { type: 'AND', skills: ['hellish_rebuke'] },
                 race: 'tiefling'
@@ -543,7 +543,7 @@ try {
                 tier: 3,
                 cost: 15,
                 staminaCost: 8,
-                desc: 'Action: Offer deal to enemy (they take -2 to all rolls but you take +1 damage from them)',
+                desc: 'Action: Offer deal to enemy (they take -2 to all rolls but you take +1 Physical damage from them)',
                 icon: '📜',
                 prerequisites: { type: 'AND', skills: ['infernal_constitution'] },
                 race: 'tiefling'
@@ -567,7 +567,7 @@ try {
                 tier: 5,
                 cost: 25,
                 staminaCost: 12,
-                desc: 'Ultimate: Create 30ft radius hellish terrain for 5 turns (enemies take 1d8 fire damage when in terrain, allies gain Enhanced Effect while in terrain)',
+                desc: 'Ultimate: Create 30ft radius hellish terrain for 5 turns (enemies take 1d8 fire damage when in terrain, allies gain +2 Physical damage while in terrain)',
                 icon: '🔥',
                 prerequisites: { type: 'AND', skills: ['summon_imp'] },
                 race: 'tiefling'
@@ -582,7 +582,7 @@ try {
                 tier: 1,
                 cost: 5,
                 staminaCost: 0,
-                desc: 'Passive: +3 stealth in dim light or darkness, darkvision extends to 150ft',
+                desc: 'Passive: +3 damage with Darkness Magic skills, darkvision extends to 150ft',
                 icon: '🌑',
                 prerequisites: { type: 'NONE', skills: [] },
                 race: 'drow'
@@ -594,7 +594,7 @@ try {
                 tier: 2,
                 cost: 10,
                 staminaCost: 3,
-                desc: 'Enchantment: Coat weapons with drow poison for entire combat encounter (medium chance of Daze (Incapacitated) effect + 1d4 poison damage)',
+                desc: 'Toggle: Coat weapons with drow poison for entire combat encounter (medium chance of Daze effect + 1d4 poison damage) Costs 3 Stamina to activate, 1 Stamina per turn to maintain',
                 icon: '☠️',
                 prerequisites: { type: 'AND', skills: ['shadow_affinity'] },
                 race: 'drow'
@@ -645,7 +645,7 @@ try {
                 tier: 1,
                 cost: 5,
                 staminaCost: 0,
-                desc: 'Passive: When ally hits same target, your next attack gains +2 damage',
+                desc: 'Passive: When ally hits same target, your next attack gains +2 Physical damage',
                 icon: '🐺',
                 prerequisites: { type: 'NONE', skills: [] },
                 race: 'gnoll'
@@ -669,7 +669,7 @@ try {
                 tier: 3,
                 cost: 15,
                 staminaCost: 6,
-                desc: 'Action: Rally allies within 30ft (+2 damage for 5 turns, immune to Mind Control)',
+                desc: 'Action: Rally allies within 30ft (+2 Physical damage for 5 turns, immune to Mind Control)',
                 icon: '🌙',
                 prerequisites: { type: 'AND', skills: ['savage_bite'] },
                 race: 'gnoll'

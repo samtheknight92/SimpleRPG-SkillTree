@@ -90,7 +90,7 @@ class IconMapper {
                 enhanced_mobility: 'boot.png',
                 enhanced_strength: 'sword_shield.png',
                 enhanced_dexterity: 'bow_and_arrow.png',
-                enhanced_intelligence: 'magic_staff.png',
+                enhanced_magicDefence: 'magic_staff.png',
 
                 // Special Abilities
                 stealth_mastery: 'dark_cape.png',

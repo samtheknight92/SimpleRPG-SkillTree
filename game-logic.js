@@ -442,14 +442,14 @@ class GameLogic {
         const masteryLevels = this.getMasteryLevels(character)
 
         // Determine primary focus
-        const highestStat = Math.max(stats.strength, stats.intelligence, stats.speed)
+        const highestStat = Math.max(stats.strength, stats.magicDefence, stats.speed)
         let buildType = 'balanced'
 
-        if (stats.strength === highestStat && stats.strength > stats.intelligence + 3) {
+        if (stats.strength === highestStat && stats.strength > stats.magicDefence + 3) {
             buildType = 'warrior'
-        } else if (stats.intelligence === highestStat && stats.intelligence > stats.strength + 3) {
+        } else if (stats.magicDefence === highestStat && stats.magicDefence > stats.strength + 3) {
             buildType = 'mage'
-        } else if (stats.speed === highestStat && stats.speed > Math.max(stats.strength, stats.intelligence) + 3) {
+        } else if (stats.speed === highestStat && stats.speed > Math.max(stats.strength, stats.magicDefence) + 3) {
             buildType = 'rogue'
         }
 
@@ -472,10 +472,10 @@ class GameLogic {
                 suggestions.push({
                     type: 'focus',
                     title: 'Mage Build Detected',
-                    description: 'Consider focusing on magic skills and intelligence upgrades',
+                    description: 'Consider focusing on magic skills and Magic Defence upgrades',
                     recommendations: [
                         'Specialize in one magic school first',
-                        'Increase intelligence for more stamina',
+                        'Increase Magic Defence for more stamina',
                         'Learn utility spells for versatility'
                     ]
                 })
@@ -515,7 +515,7 @@ class GameLogic {
                 title: 'High Stamina Usage',
                 description: 'Your skills require a lot of stamina relative to your pool',
                 recommendations: [
-                    'Consider increasing Intelligence for more stamina',
+                    'Consider increasing Magic Defence for more stamina',
                     'Look for stamina-efficient skills',
                     'Balance active and passive abilities'
                 ]
@@ -608,7 +608,7 @@ class GameLogic {
         const suggestions = []
 
         // Check for extremely unbalanced stats
-        const stats = [character.stats.strength, character.stats.intelligence, character.stats.speed]
+        const stats = [character.stats.strength, character.stats.magicDefence, character.stats.speed]
         const maxStat = Math.max(...stats)
         const minStat = Math.min(...stats)
 
@@ -631,7 +631,7 @@ class GameLogic {
         // Check stamina efficiency
         const staminaEff = this.getStaminaEfficiency(character)
         if (staminaEff.activeSkills > 0 && staminaEff.efficiency < 2) {
-            issues.push('Low stamina efficiency - consider increasing Intelligence')
+            issues.push('Low stamina efficiency - consider increasing Magic Defence')
         }
 
         // Check for no skills unlocked

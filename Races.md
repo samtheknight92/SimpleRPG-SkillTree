@@ -170,7 +170,7 @@ orcish: [
 ## 👤 **HUMANS** - *Masters of Adaptability and Determination*
 
 ### **Racial Passive Traits:**
-- **Versatile**: Learn a Tier 1 Weapon skill for free apon creation.
+- **Versatile**: All Weapon beginner skills unlocked upon creation.
 - **Ambitious**: Earn money 10% faster from all sources
 - **Adaptable**: Can learn basic tier-1 skills from any race (but not higher tiers)
 

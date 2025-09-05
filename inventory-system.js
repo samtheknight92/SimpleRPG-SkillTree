@@ -368,7 +368,11 @@ class InventorySystem {
 
         // Update max HP/Stamina if equipment affects them
         if (character.equipmentBonuses.hp !== 0) {
-            const newMaxHp = Math.max(1, character.stats.hp + character.equipmentBonuses.hp)
+            // Get skill bonuses for HP
+            const skillBonuses = window.skillBonusSystem ? window.skillBonusSystem.getAllBonuses(character) : {}
+            const skillHpBonus = skillBonuses.hp || 0
+
+            const newMaxHp = Math.max(1, character.stats.hp + character.equipmentBonuses.hp + skillHpBonus)
             const oldMaxHp = character.maxHp
             character.maxHp = newMaxHp
 
@@ -381,7 +385,11 @@ class InventorySystem {
         }
 
         if (character.equipmentBonuses.stamina !== 0) {
-            const newMaxStamina = Math.max(1, character.stats.stamina + character.equipmentBonuses.stamina)
+            // Get skill bonuses for Stamina
+            const skillBonuses = window.skillBonusSystem ? window.skillBonusSystem.getAllBonuses(character) : {}
+            const skillStaminaBonus = skillBonuses.stamina || 0
+
+            const newMaxStamina = Math.max(1, character.stats.stamina + character.equipmentBonuses.stamina + skillStaminaBonus)
             const oldMaxStamina = character.maxStamina
             character.maxStamina = newMaxStamina
 
@@ -406,7 +414,8 @@ class InventorySystem {
             return Math.max(-999, Math.min(9999, total))
         }
 
-        return {
+        // Calculate base stats
+        let stats = {
             hp: safeStat(base.hp, equipment.hp, 0), // HP can't be negative from bonuses
             stamina: safeStat(base.stamina, equipment.stamina, 0),
             strength: safeStat(base.strength, equipment.strength, statusBonuses.strength),
@@ -416,6 +425,39 @@ class InventorySystem {
             magicalDefence: safeStat(base.magicalDefence, equipment.magicalDefence, statusBonuses.magicalDefence),
             accuracy: safeStat(base.accuracy, equipment.accuracy, statusBonuses.accuracy)
         }
+
+
+
+        return stats
+    }
+
+    // Update max HP/Stamina to include all bonuses (equipment + skills)
+    updateMaxHPAndStamina(character) {
+        // Get all bonuses
+        const equipment = character.equipmentBonuses || {}
+        const skillBonuses = window.skillBonusSystem ? window.skillBonusSystem.getAllBonuses(character) : {}
+
+        // Calculate new max HP
+        const newMaxHp = Math.max(1, character.stats.hp + (equipment.hp || 0) + (skillBonuses.hp || 0))
+        const oldMaxHp = character.maxHp
+        character.maxHp = newMaxHp
+
+        // Cap current HP if it exceeds new max
+        if (character.hp > newMaxHp) {
+            character.hp = newMaxHp
+        }
+
+        // Calculate new max Stamina
+        const newMaxStamina = Math.max(1, character.stats.stamina + (equipment.stamina || 0) + (skillBonuses.stamina || 0))
+        const oldMaxStamina = character.maxStamina
+        character.maxStamina = newMaxStamina
+
+        // Cap current Stamina if it exceeds new max
+        if (character.stamina > newMaxStamina) {
+            character.stamina = newMaxStamina
+        }
+
+        return { oldMaxHp, newMaxHp, oldMaxStamina, newMaxStamina }
     }
 
     // Get stat bonuses from status effects
@@ -1322,7 +1364,7 @@ class InventorySystem {
                     <button class="element-btn" data-element="earth" data-icon="🌍" title="${isImmunityItem ? 'Earth Immunity + Wind/Lightning Weakness' : 'Earth Resistance + Wind Weakness'}">Earth</button>
                     <button class="element-btn" data-element="wind" data-icon="🌪️" title="${isImmunityItem ? 'Wind Immunity + Lightning/Water Weakness' : 'Wind Resistance + Lightning Weakness'}">Wind</button>
                     <button class="element-btn" data-element="light" data-icon="☀️" title="${isImmunityItem ? 'Light Immunity + Dark/Light Weakness' : 'Light Resistance + Dark Weakness'}">Light</button>
-                    <button class="element-btn" data-element="dark" data-icon="🌑" title="${isImmunityItem ? 'Dark Immunity + Light/Dark Weakness' : 'Dark Resistance + Light Weakness'}">Dark</button>
+                    <button class="element-btn" data-element="darkness" data-icon="🌑" title="${isImmunityItem ? 'Darkness Immunity + Light/Darkness Weakness' : 'Darkness Resistance + Light Weakness'}">Darkness</button>
                 </div>
                 
                 <div class="modal-buttons">
@@ -1545,8 +1587,8 @@ class InventorySystem {
             earth: 'lightning', // Earth immunity -> Lightning weakness (sky vs ground)
             water: 'wind',    // Water immunity -> Wind weakness (still vs moving)
             wind: 'water',    // Wind immunity -> Water weakness (moving vs still)
-            light: 'dark',    // Light immunity -> Dark weakness (opposite)
-            dark: 'light'     // Dark immunity -> Light weakness (opposite)
+            light: 'darkness',    // Light immunity -> Darkness weakness (opposite)
+            darkness: 'light'     // Darkness immunity -> Light weakness (opposite)
         }
 
         return secondWeaknesses[chosenElement] || 'fire' // fallback

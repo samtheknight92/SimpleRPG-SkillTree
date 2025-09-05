@@ -64,7 +64,7 @@ class DynamicSkillBonusSystem {
 
             // Health/Stamina
             'hp': /\+(\d+)\s+(?:hp|health|hit\s+points)/gi,
-            'stamina': /\+(\d+)\s+(?:stamina|stam)/gi,
+            'stamina': /\+(\d+)\s+(?:max\s+)?(?:stamina|stam)/gi,
 
             // Special stats
             'stealth': /\+(\d+)\s+(?:stealth|stealth\s+checks)/gi,
@@ -124,6 +124,15 @@ class DynamicSkillBonusSystem {
             'axe': /(?:while|when|with|wielding|equipped)\s+(?:a\s+)?axe/gi,
             'hammer': /(?:while|when|with|wielding|equipped)\s+(?:a\s+)?hammer/gi,
             'polearm': /(?:while|when|with|wielding|equipped)\s+(?:a\s+)?polearm/gi
+        }
+
+        // Check for multiple weapon requirements (e.g., "Bow or Staff")
+        const multiWeaponPattern = /(?:when|while|with|wielding|equipped)\s+([^,]+)\s+or\s+([^,]+)/gi
+        const multiWeaponMatch = desc.match(multiWeaponPattern)
+        if (multiWeaponMatch) {
+            // For now, we'll treat multi-weapon requirements as "any of these weapons"
+            // This could be enhanced to check if ANY of the weapons are equipped
+            equipmentRequirement = 'multi'
         }
 
         let equipmentRequirement = null
@@ -291,7 +300,24 @@ class DynamicSkillBonusSystem {
                 // Check if this skill has equipment requirements
                 if (skillBonus.condition) {
                     // Skill has equipment requirements - check if they're met
-                    if (equippedWeaponType === skillBonus.condition) {
+                    let conditionMet = false
+
+                    if (skillBonus.condition === 'multi') {
+                        // Multi-weapon requirement (e.g., "Bow or Staff")
+                        // Check if any of the weapons are equipped
+                        const primaryWeapon = character.equipped?.primaryWeapon
+                        const secondaryWeapon = character.equipped?.secondaryWeapon
+
+                        if (primaryWeapon && (primaryWeapon.subcategory === 'bows' || primaryWeapon.subcategory === 'staves')) {
+                            conditionMet = true
+                        } else if (secondaryWeapon && (secondaryWeapon.subcategory === 'bows' || secondaryWeapon.subcategory === 'staves')) {
+                            conditionMet = true
+                        }
+                    } else if (equippedWeaponType === skillBonus.condition) {
+                        conditionMet = true
+                    }
+
+                    if (conditionMet) {
                         // Apply conditional bonuses
                         for (const [stat, bonus] of Object.entries(skillBonus.bonuses)) {
                             if (bonuses.hasOwnProperty(stat)) {
@@ -336,6 +362,20 @@ class DynamicSkillBonusSystem {
 
         // Add bonuses from active toggle skills
         const activeToggleSkills = character.activeToggleSkills || []
+
+        // Apply Human Determination racial ability
+        if (character.race === 'human' && character.hp <= 5) {
+            // Check if character has the human_determination skill
+            const hasHumanDetermination = character.unlockedSkills &&
+                character.unlockedSkills.racial &&
+                character.unlockedSkills.racial.human &&
+                character.unlockedSkills.racial.human.includes('human_determination')
+
+            if (hasHumanDetermination) {
+                bonuses.physicalDefence += 1
+                bonuses.magicalDefence += 1
+            }
+        }
         const filteredToggleSkills = this.filterUpgradedSkills(activeToggleSkills, allUnlockedSkills)
 
         for (const skillId of filteredToggleSkills) {

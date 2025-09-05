@@ -151,7 +151,7 @@ const STATUS_EFFECTS_DATA = {
         duration: 8,
         potency: 3,
         icon: "💪",
-        desc: "All physical stats +2 (Str, Spd, AC). Combines multiple enchantment effects.",
+        desc: "All physical stats +2 (Str, Spd, Physical Defence). Combines multiple enchantment effects.",
         statModifiers: { strength: 2, speed: 2, armorClass: 2 },
         stackable: false,
         source: ["berserker_rage", "bull_strength", "haste", "magic_enchantment"]
@@ -193,7 +193,7 @@ const STATUS_EFFECTS_DATA = {
         duration: 6,
         potency: 3,
         icon: "🛡️",
-        desc: "Absorb next 3 attacks (no damage). +3 AC against everything else.",
+        desc: "Absorb next 3 attacks (no damage). +3 Physical Defence against everything else.",
         attacksBlocked: 3,
         statModifiers: { armorClass: 3 },
         stackable: false,
@@ -249,7 +249,7 @@ const STATUS_EFFECTS_DATA = {
         duration: 999,
         potency: 2,
         icon: "👹",
-        desc: "Enemies within 30ft must save vs mind control when they see you. Your presence is terrifying.",
+        desc: "Enemies within 30ft must resist mind control when they see you. Your presence is terrifying.",
         auraRange: 30,
         auraEffect: "mind_controlled",
         stackable: false,
@@ -407,23 +407,23 @@ const STATUS_EFFECTS_DATA = {
         source: ["light_resistance", "radiant_shield", "elemental_protection"]
     },
 
-    dark_resistance: {
-        id: "dark_resistance",
-        name: "Dark Resistance",
+    darkness_resistance: {
+        id: "darkness_resistance",
+        name: "Darkness Resistance",
         type: "elementalResistance",
         duration: 999,
         potency: 1,
         icon: "🌑",
-        desc: "Take 50% less damage from dark attacks. Immune to fear effects.",
+        desc: "Take 50% less damage from darkness attacks. Immune to fear effects.",
         getDamageReduction: function () {
             const resistanceLevel = -this.potency
-            if (resistanceLevel <= -3) return { dark: 0 } // Immunity
-            else if (resistanceLevel === -2) return { dark: 0.25 } // 75% resistance
-            else return { dark: 0.5 } // 50% resistance (default)
+            if (resistanceLevel <= -3) return { darkness: 0 } // Immunity
+            else if (resistanceLevel === -2) return { darkness: 0.25 } // 75% resistance
+            else return { darkness: 0.5 } // 50% resistance (default)
         },
         immunities: ["mind_controlled"],
         stackable: false,
-        source: ["dark_resistance", "shadow_shield", "elemental_protection"]
+        source: ["darkness_resistance", "shadow_shield", "elemental_protection"]
     },
 
     // Elemental Weakness Effects
@@ -555,22 +555,22 @@ const STATUS_EFFECTS_DATA = {
         source: ["light_weakness", "elemental_vulnerability"]
     },
 
-    dark_weakness: {
-        id: "dark_weakness",
-        name: "Dark Weakness",
+    darkness_weakness: {
+        id: "darkness_weakness",
+        name: "Darkness Weakness",
         type: "elementalWeakness",
         duration: 999,
         potency: 1,
         icon: "🌑",
-        desc: "Take 50% more damage from dark attacks. Vulnerable to fear effects.",
+        desc: "Take 50% more damage from darkness attacks. Vulnerable to fear effects.",
         getDamageIncrease: function () {
-            if (this.potency >= 3) return { dark: 999 } // Instant kill
-            else if (this.potency === 2) return { dark: 3 } // 400% damage
-            else return { dark: 1 } // 200% damage (default)
+            if (this.potency >= 3) return { darkness: 999 } // Instant kill
+            else if (this.potency === 2) return { darkness: 3 } // 400% damage
+            else return { darkness: 1 } // 200% damage (default)
         },
         vulnerabilities: ["mind_controlled"],
         stackable: false,
-        source: ["dark_weakness", "elemental_vulnerability"]
+        source: ["darkness_weakness", "elemental_vulnerability"]
     }
 }
 
