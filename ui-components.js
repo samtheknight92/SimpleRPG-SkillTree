@@ -2728,8 +2728,8 @@ class UIComponents {
                 <div class="stat-group">
                     <h3>${iconMapper.createIconElement('armor', 'armor', 16)} Mobility & Defense</h3>
                     ${this.renderStatUpgrade('speed', stats.speed, character.lumens, 'Speed (1 = 5ft movement)')}
-                    ${this.renderStatUpgrade('physicalDefence', stats.physicalDefence, character.lumens, 'Physical Defence')}
-                    ${this.renderStatUpgrade('magicalDefence', stats.magicalDefence, character.lumens, 'Magical Defence')}
+                    ${this.renderStatUpgrade('physicalDefence', effectiveStats.physicalDefence, character.lumens, 'Physical Defence')}
+                    ${this.renderStatUpgrade('magicalDefence', effectiveStats.magicalDefence, character.lumens, 'Magical Defence')}
                 </div>
             </div>
             
@@ -2814,6 +2814,11 @@ class UIComponents {
         if (!character) {
             container.innerHTML = '<p class="no-character">Please select a character to view character sheet</p>'
             return
+        }
+
+        // Update max HP/Stamina to include skill bonuses
+        if (window.inventorySystem) {
+            window.inventorySystem.updateMaxHPAndStamina(character)
         }
 
         // Run migration for Guardian Shield type change

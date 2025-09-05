@@ -401,6 +401,9 @@ class CharacterManager {
         }
 
         // Migrate unlockedSkills to include new weapon categories
+        if (!character.unlockedSkills.weapons.sword) {
+            character.unlockedSkills.weapons.sword = []
+        }
         if (!character.unlockedSkills.weapons.staff) {
             character.unlockedSkills.weapons.staff = []
         }
@@ -412,6 +415,12 @@ class CharacterManager {
         }
         if (!character.unlockedSkills.weapons.hammer) {
             character.unlockedSkills.weapons.hammer = []
+        }
+        if (!character.unlockedSkills.weapons.bow) {
+            character.unlockedSkills.weapons.bow = []
+        }
+        if (!character.unlockedSkills.weapons.axe) {
+            character.unlockedSkills.weapons.axe = []
         }
         // Migrate unlockedSkills to include unarmed category
         if (!character.unlockedSkills.weapons.unarmed) {
@@ -1450,7 +1459,7 @@ class CharacterManager {
         }
 
         // Validate stats
-        const requiredStats = ['strength', 'intelligence', 'speed', 'health', 'stamina', 'armorClass']
+        const requiredStats = ['strength', 'magicDefence', 'speed', 'health', 'stamina', 'armorClass']
         for (const stat of requiredStats) {
             if (typeof data.stats[stat] !== 'number') {
                 return false
@@ -1965,7 +1974,7 @@ class CharacterManager {
                 break
 
             case 'human':
-                // Versatile Learning: Free weapon skill (granted immediately)
+                // Versatile Learning: All weapon beginner skills (granted immediately)
                 this.grantFreeWeaponSkill(character)
                 // Ambitious Spirit: 10% more lumens (handled in lumen calculations)
                 // Cross-Cultural Learning: Learn other race tier-1 skills (handled in skill purchase)
@@ -2219,18 +2228,18 @@ class CharacterManager {
         return updatedCount
     }
 
-    // Grant a free Tier 1 weapon skill to humans
+    // Grant all Tier 0 weapon skills to humans (Versatile Learning racial ability)
     grantFreeWeaponSkill(character) {
-        // Get all tier 1 weapon skills
-        const weaponCategories = ['sword', 'axe', 'spear', 'dagger', 'bow', 'staff', 'polearm', 'hammer', 'unarmed']
-        const tier1WeaponSkills = []
+        // Get all tier 0 weapon skills (beginner skills)
+        const weaponCategories = ['sword', 'bow', 'axe', 'staff', 'dagger', 'polearm', 'hammer', 'unarmed']
+        const tier0WeaponSkills = []
 
         if (typeof SKILLS_DATA !== 'undefined' && SKILLS_DATA.weapons) {
             weaponCategories.forEach(category => {
                 if (SKILLS_DATA.weapons[category]) {
-                    const tier1Skills = SKILLS_DATA.weapons[category].filter(skill => skill.tier === 1)
-                    tier1Skills.forEach(skill => {
-                        tier1WeaponSkills.push({
+                    const tier0Skills = SKILLS_DATA.weapons[category].filter(skill => skill.tier === 0)
+                    tier0Skills.forEach(skill => {
+                        tier0WeaponSkills.push({
                             skillId: skill.id,
                             category: category,
                             name: skill.name
@@ -2240,15 +2249,20 @@ class CharacterManager {
             })
         }
 
-        if (tier1WeaponSkills.length > 0) {
-            // For now, grant the first sword skill as default
-            // This could be expanded to let players choose
-            const defaultSkill = tier1WeaponSkills.find(skill => skill.category === 'sword') || tier1WeaponSkills[0]
-            if (defaultSkill && !character.unlockedSkills.weapons[defaultSkill.category].includes(defaultSkill.skillId)) {
-                character.unlockedSkills.weapons[defaultSkill.category].push(defaultSkill.skillId)
-                console.log(`Human racial bonus: Granted free skill ${defaultSkill.name}`)
+        // Grant all Tier 0 weapon skills to the human character
+        tier0WeaponSkills.forEach(skill => {
+            // Ensure the weapon category exists
+            if (!character.unlockedSkills.weapons[skill.category]) {
+                character.unlockedSkills.weapons[skill.category] = []
             }
-        }
+
+            if (!character.unlockedSkills.weapons[skill.category].includes(skill.skillId)) {
+                character.unlockedSkills.weapons[skill.category].push(skill.skillId)
+                console.log(`Human racial bonus: Granted free skill ${skill.name}`)
+            }
+        })
+
+        console.log(`Human Versatile Learning: Granted ${tier0WeaponSkills.length} Tier 0 weapon skills`)
     }
 
     // Set dragonborn elemental heritage

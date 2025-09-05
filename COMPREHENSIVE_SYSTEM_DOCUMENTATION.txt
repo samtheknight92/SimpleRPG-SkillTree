@@ -147,7 +147,7 @@ character = {
     },
     
     racialPassiveTraits: [
-        "Versatile Learning: Free Tier 1 weapon skill",
+        "Versatile Learning: All Weapon beginner skills unlocked upon creation",
         "Ambitious Spirit: 10% more Lumens"
     ],
     
@@ -280,12 +280,12 @@ DETAILED RACE DESCRIPTIONS
 - **Stat Bonuses**: 
   - +1 HP, +1 Stamina, +1 Accuracy
 - **Racial Abilities**:
-  - Versatile Learning: Gain one free Tier 1 weapon skill upon character creation
+  - Versatile Learning: All Weapon beginner skills unlocked upon creation
   - Ambitious Spirit: Earn 10% more Lumens from all sources
   - Cross-Cultural Learning: Can learn Tier 1 skills from other races' skill trees
 - **Starting Skills**: Human Determination (Tier 1 foundation skill)
 - **Passive Traits**: 
-  - "Versatile Learning: Free Tier 1 weapon skill at character creation"
+  - "Versatile Learning: All Weapon beginner skills unlocked upon creation"
   - "Ambitious Spirit: 10% more Lumens from all activities"
   - "Cross-Cultural Learning: Access to other racial Tier 1 skills"
 - **Exclusive Skills**: Human Determination tree (leadership and adaptability)
@@ -459,22 +459,22 @@ Primary combat abilities organized by weapon type:
 - Tier 0: Sword Beginner (3 Lumens) - Basic sword proficiency
 - Tier 1: Sword Basics (8 Lumens) - Enhanced sword techniques
 - Tier 2: Power Strike (15 Lumens) - Enhanced damage attack
-- Tier 3: Blade Mastery (25 Lumens) - Advanced sword techniques
-- Tier 4: Master Parry (35 Lumens) - Reflect melee attacks back at attacker
-- Tier 4: Whirlwind Strike (35 Lumens) - Spinning attack hits all enemies within 10ft
-- Tier 4: Piercing Thrust (35 Lumens) - Ignores armor completely, critical hit on 17-20
-- Tier 5: Sword Mastery (50 Lumens) - Passive: +3 damage with all sword attacks, critical hits restore 5 stamina
+- Tier 3: Blade Mastery (23 Lumens) - Advanced sword techniques
+- Tier 4: Master Parry (30 Lumens) - Reflect melee attacks back at attacker
+- Tier 4: Whirlwind Strike (30 Lumens) - Spinning attack hits all enemies within 10ft
+- Tier 4: Piercing Thrust (30 Lumens) - Ignores armor completely, critical hit on 17-20
+- Tier 5: Sword Mastery (38 Lumens) - Passive: +3 damage with all sword attacks, critical hits restore 5 stamina
 
 *Bow Skills:*
 - Tier 0: Bow Beginner (3 Lumens) - Basic bow proficiency
 - Tier 1: Archery Basics (8 Lumens) - Enhanced bow techniques
 - Tier 2: Precise Shot (15 Lumens) - Increased accuracy
-- Tier 3: Multi-Shot (25 Lumens) - Attack multiple targets
-- Tier 4: Projectile Barrage (35 Lumens) - Rain projectiles over 20ft radius area
-- Tier 4: Homing Shot (35 Lumens) - Magical projectile that automatically hits target
-- Tier 4: Rapid Fire (35 Lumens) - Fire 4 projectiles in rapid succession
-- Tier 4: Siege Shot (35 Lumens) - Massive projectile pierces through multiple enemies
-- Tier 5: Bow Mastery (50 Lumens) - Passive: +50% range, +3 damage with all bow attacks, critical hits apply additional 2 damage dice
+- Tier 3: Multi-Shot (23 Lumens) - Attack multiple targets
+- Tier 4: Projectile Barrage (30 Lumens) - Rain projectiles over 20ft radius area
+- Tier 4: Homing Shot (30 Lumens) - Magical projectile that automatically hits target
+- Tier 4: Rapid Fire (30 Lumens) - Fire 4 projectiles in rapid succession
+- Tier 4: Siege Shot (30 Lumens) - Massive projectile pierces through multiple enemies
+- Tier 5: Bow Mastery (38 Lumens) - Passive: +50% range, +3 damage with all bow attacks, critical hits apply additional 2 damage dice
 
 *Staff Skills:*
 - Tier 0: Staff Beginner (3 Lumens) - Basic staff combat
@@ -482,43 +482,43 @@ Primary combat abilities organized by weapon type:
 - Tier 2: Arcane Focus (15 Lumens) - Magic power enhancement
 - Tier 2: Frost Staff (15 Lumens) - Toggle: Ice enchantment (2 stamina/turn)
 - Tier 2: Fire Staff (15 Lumens) - Toggle: Fire enchantment (2 stamina/turn)
-- Tier 3: Staff Mastery (25 Lumens) - Advanced magical combat
-- Tier 4: Arcane Mastery (35 Lumens) - Passive: All spells cost -1 stamina (minimum 1)
-- Tier 4: Staff of Power (35 Lumens) - 2-turn charge and unleash stored energy
-- Tier 4: Reality Tear (35 Lumens) - Create dimensional rift for teleportation
-- Tier 5: Staff Mastery (50 Lumens) - Passive: +4 magic power, can cast two spells per turn
+- Tier 3: Staff Mastery (23 Lumens) - Advanced magical combat
+- Tier 4: Arcane Mastery (30 Lumens) - Passive: All spells cost -1 stamina (minimum 1)
+- Tier 4: Staff of Power (30 Lumens) - 2-turn charge and unleash stored energy
+- Tier 4: Reality Tear (30 Lumens) - Create dimensional rift for teleportation
+- Tier 5: Staff Mastery (38 Lumens) - Passive: +4 magic power, can cast two spells per turn
 
 *Axe Skills:*
 - Tier 0: Axe Beginner (3 Lumens) - Basic axe combat
 - Tier 1: Axe Proficiency (8 Lumens) - Enhanced axe techniques
 - Tier 2: Cleave (15 Lumens) - Hit multiple adjacent enemies
-- Tier 2: Ricochet Axe (25 Lumens) - Toggle: Bouncing thrown axes (3 stamina/turn)
-- Tier 3: Berserker Rage (25 Lumens) - Toggle: Combat frenzy (2 stamina/turn)
-- Tier 4: Earthquake Slam (35 Lumens) - Ground slam in 20ft radius, knockdown + damage
-- Tier 4: Whirling Axes (35 Lumens) - Spin attack hits all enemies within 10ft
-- Tier 4: Axe Storm (35 Lumens) - Throw up to 6 axes in all directions
-- Tier 5: Axe Mastery (50 Lumens) - Passive: +3 damage with all axe attacks, all axe attacks have additional 25% Incapacitated chance, critical hits restore 3 stamina
+- Tier 2: Ricochet Axe (15 Lumens) - Toggle: Bouncing thrown axes (3 stamina/turn)
+- Tier 3: Berserker Rage (23 Lumens) - Toggle: Combat frenzy (2 stamina/turn)
+- Tier 4: Earthquake Slam (30 Lumens) - Ground slam in 20ft radius, knockdown + damage
+- Tier 4: Whirling Axes (30 Lumens) - Spin attack hits all enemies within 10ft
+- Tier 4: Axe Storm (30 Lumens) - Throw up to 6 axes in all directions
+- Tier 5: Axe Mastery (38 Lumens) - Passive: +3 damage with all axe attacks, all axe attacks have additional 25% Incapacitated chance, critical hits restore 3 stamina
 
 *Dagger Skills:*
 - Tier 0: Dagger Beginner (3 Lumens) - Basic dagger combat
 - Tier 1: Dagger Basics (8 Lumens) - Enhanced dagger techniques
 - Tier 2: Backstab (15 Lumens) - Sneak attack bonus
 - Tier 2: Poison Blade (15 Lumens) - Toggle: Poison coating (2 stamina/turn)
-- Tier 3: Dual Wielding (25 Lumens) - Two-weapon fighting
-- Tier 4: Thousand Cuts (35 Lumens) - Unleash 8 strikes in blur of motion (auto-hit)
-- Tier 4: Shadow Clone (35 Lumens) - Create mirror image that fights alongside you
-- Tier 4: Assassinate (35 Lumens) - Instant kill on critical hit (works on most enemies)
-- Tier 5: Dagger Mastery (50 Lumens) - Passive: +2 speed, +3 damage, all attacks have 25% critical chance
+- Tier 3: Dual Wielding (23 Lumens) - Two-weapon fighting
+- Tier 4: Thousand Cuts (30 Lumens) - Unleash 8 strikes in blur of motion (auto-hit)
+- Tier 4: Shadow Clone (30 Lumens) - Create mirror image that fights alongside you
+- Tier 4: Assassinate (30 Lumens) - Instant kill on critical hit (works on most enemies)
+- Tier 5: Dagger Mastery (38 Lumens) - Passive: +2 speed, +3 damage, all attacks have 25% critical chance
 
 *Hammer Skills:*
 - Tier 0: Hammer Beginner (3 Lumens) - Basic hammer combat
 - Tier 1: Hammer Training (8 Lumens) - Enhanced hammer techniques
 - Tier 2: Crushing Blow (15 Lumens) - Armor-piercing attack
-- Tier 3: Earthquake Strike (25 Lumens) - Area ground slam
-- Tier 4: Mjolnir Strike (35 Lumens) - Hammer returns after thrown (60ft range, pierces through)
-- Tier 4: Apocalypse Slam (35 Lumens) - Devastating area attack (40ft radius, 4d6 damage)
-- Tier 4: Fortress Buster (35 Lumens) - Destroy any structure or barrier
-- Tier 5: Hammer Mastery (50 Lumens) - Passive: +4 damage, all attacks cause knockdown, immune to Incapacitated
+- Tier 3: Earthquake Strike (23 Lumens) - Area ground slam
+- Tier 4: Mjolnir Strike (30 Lumens) - Hammer returns after thrown (60ft range, pierces through)
+- Tier 4: Apocalypse Slam (30 Lumens) - Devastating area attack (40ft radius, 4d6 damage)
+- Tier 4: Fortress Buster (30 Lumens) - Destroy any structure or barrier
+- Tier 5: Hammer Mastery (38 Lumens) - Passive: +4 damage, all attacks cause knockdown, immune to Incapacitated
 
 **MAGIC SKILLS**
 Supernatural abilities divided by school:
@@ -530,64 +530,64 @@ Supernatural abilities divided by school:
 - Tier 2: Fireball (15 Lumens) - Area fire damage
 - Tier 2: Ice Armor (15 Lumens) - Defensive ice barrier
 - Tier 2: Chain Lightning (15 Lumens) - Multi-target lightning
-- Tier 3: Meteor (25 Lumens) - Massive fire area attack
-- Tier 3: Blizzard (25 Lumens) - Area ice damage over time
-- Tier 3: Thunder Storm (25 Lumens) - Sustained lightning area
-- Tier 4: Meteor (35 Lumens) - Devastating overhead attack (6d6 fire damage, 20ft radius)
-- Tier 4: Inferno (35 Lumens) - Set 100ft radius ablaze (2d6/turn for 1 minute)
-- Tier 4: Fire Tornado (35 Lumens) - Moving 30ft tall fire column (4d6 damage)
-- Tier 4: Absolute Zero (35 Lumens) - Instantly freeze any target (no save, 3 turns)
-- Tier 4: Ice Age (35 Lumens) - Freeze 200ft radius (1d6 cold/turn, all slowed)
-- Tier 4: Glacier (35 Lumens) - Massive 50ft ice wall that moves 20ft/turn
-- Tier 4: Lightning Storm (35 Lumens) - 8 random lightning strikes in 50ft radius (3d6 each)
-- Tier 4: Ball Lightning (35 Lumens) - Slow orb (20ft/turn) explodes for 4d6 in 15ft radius
-- Tier 4: EMP (35 Lumens) - 40ft radius disables all magic for 1 minute
-- Tier 5: Fire Supremacy (50 Lumens) - Become one with fire for 3 rounds (immunity, +50% damage)
-- Tier 5: Ice Supremacy (50 Lumens) - Become one with ice for 3 rounds (immunity, +50% damage)
-- Tier 5: Lightning Supremacy (50 Lumens) - Become one with lightning for 3 rounds (immunity, +50% damage)
+- Tier 3: Meteor (23 Lumens) - Massive fire area attack
+- Tier 3: Blizzard (23 Lumens) - Area ice damage over time
+- Tier 3: Thunder Storm (23 Lumens) - Sustained lightning area
+- Tier 4: Meteor (30 Lumens) - Devastating overhead attack (6d6 fire damage, 20ft radius)
+- Tier 4: Inferno (30 Lumens) - Set 100ft radius ablaze (2d6/turn for 1 minute)
+- Tier 4: Fire Tornado (30 Lumens) - Moving 30ft tall fire column (4d6 damage)
+- Tier 4: Absolute Zero (30 Lumens) - Instantly freeze any target (no save, 3 turns)
+- Tier 4: Ice Age (30 Lumens) - Freeze 200ft radius (1d6 cold/turn, all slowed)
+- Tier 4: Glacier (30 Lumens) - Massive 50ft ice wall that moves 20ft/turn
+- Tier 4: Lightning Storm (30 Lumens) - 8 random lightning strikes in 50ft radius (3d6 each)
+- Tier 4: Ball Lightning (30 Lumens) - Slow orb (20ft/turn) explodes for 4d6 in 15ft radius
+- Tier 4: EMP (30 Lumens) - 40ft radius disables all magic for 1 minute
+- Tier 5: Fire Supremacy (38 Lumens) - Become one with fire for 3 rounds (immunity, +50% damage)
+- Tier 5: Ice Supremacy (38 Lumens) - Become one with ice for 3 rounds (immunity, +50% damage)
+- Tier 5: Lightning Supremacy (38 Lumens) - Become one with lightning for 3 rounds (immunity, +50% damage)
 
 *Divine Magic:*
 - Tier 1: Heal (8 Lumens) - Basic health restoration
 - Tier 1: Bless (8 Lumens) - Temporary stat bonus
 - Tier 2: Greater Heal (15 Lumens) - Enhanced healing
 - Tier 2: Divine Shield (15 Lumens) - Magical protection
-- Tier 3: Resurrection (25 Lumens) - Revive fallen allies
-- Tier 3: Divine Intervention (25 Lumens) - Powerful protection
-- Tier 4: Resurrection (35 Lumens) - Bring ally back to life (once per day)
-- Tier 4: Solar Flare (35 Lumens) - 40ft radius explosion (5d6 radiant damage)
-- Tier 4: Divine Judgment (35 Lumens) - Target takes damage equal to their max HP × 0.5
-- Tier 5: Light Mastery (50 Lumens) - Become one with light for 3 rounds (immunity, +50% damage)
+- Tier 3: Resurrection (23 Lumens) - Revive fallen allies
+- Tier 3: Divine Intervention (23 Lumens) - Powerful protection
+- Tier 4: Resurrection (30 Lumens) - Bring ally back to life (once per day)
+- Tier 4: Solar Flare (30 Lumens) - 40ft radius explosion (5d6 radiant damage)
+- Tier 4: Divine Judgment (30 Lumens) - Target takes damage equal to their max HP × 0.5
+- Tier 5: Light Mastery (38 Lumens) - Become one with light for 3 rounds (immunity, +50% damage)
 
 *Nature Magic:*
 - Tier 1: Thorn Whip (8 Lumens) - Ranged nature attack
 - Tier 1: Bark Skin (8 Lumens) - Natural armor enhancement
 - Tier 2: Entangle (15 Lumens) - Root-based crowd control
 - Tier 2: Animal Companion (15 Lumens) - Summon animal ally
-- Tier 3: Forest Guardian (25 Lumens) - Summon nature protector
-- Tier 4: Mountain Crush (35 Lumens) - Massive boulder falls from sky (5d6 in 20ft radius)
-- Tier 4: Petrify (35 Lumens) - Apply Immobilized (cannot move but can attack + +5 AC for 3 turns)
-- Tier 4: Tectonic Shift (35 Lumens) - Reshape 100ft area terrain for 24 hours
-- Tier 4: Hurricane (35 Lumens) - Massive storm 50ft radius (4d6 damage, difficult terrain)
-- Tier 4: Wind Prison (35 Lumens) - Trap target in air pocket (cannot move or act)
-- Tier 4: Atmospheric Control (35 Lumens) - Control weather in the area for 1 hour
-- Tier 4: Maelstrom (35 Lumens) - 40ft whirlpool pulls enemies in (4d4 damage/turn)
-- Tier 4: Blood Boil (35 Lumens) - Superheat target's blood (5d4 damage, no save)
-- Tier 4: Tsunami (35 Lumens) - Massive wave 100ft long (6d4 damage, reshape terrain)
-- Tier 5: Earth Supremacy (50 Lumens) - Become one with earth for 3 rounds (immunity, +50% damage)
-- Tier 5: Wind Mastery (50 Lumens) - Become one with the wind for 3 rounds (flight, immunity)
-- Tier 5: Water Mastery (50 Lumens) - Become one with water for 3 rounds (immunity, +50% damage)
+- Tier 3: Forest Guardian (23 Lumens) - Summon nature protector
+- Tier 4: Mountain Crush (30 Lumens) - Massive boulder falls from sky (5d6 in 20ft radius)
+- Tier 4: Petrify (30 Lumens) - Apply Immobilized (cannot move but can attack + +5 AC for 3 turns)
+- Tier 4: Tectonic Shift (30 Lumens) - Reshape 100ft area terrain for 24 hours
+- Tier 4: Hurricane (30 Lumens) - Massive storm 50ft radius (4d6 damage, difficult terrain)
+- Tier 4: Wind Prison (30 Lumens) - Trap target in air pocket (cannot move or act)
+- Tier 4: Atmospheric Control (30 Lumens) - Control weather in the area for 1 hour
+- Tier 4: Maelstrom (30 Lumens) - 40ft whirlpool pulls enemies in (4d4 damage/turn)
+- Tier 4: Blood Boil (30 Lumens) - Superheat target's blood (5d4 damage, no save)
+- Tier 4: Tsunami (30 Lumens) - Massive wave 100ft long (6d4 damage, reshape terrain)
+- Tier 5: Earth Supremacy (38 Lumens) - Become one with earth for 3 rounds (immunity, +50% damage)
+- Tier 5: Wind Mastery (38 Lumens) - Become one with the wind for 3 rounds (flight, immunity)
+- Tier 5: Water Mastery (38 Lumens) - Become one with water for 3 rounds (immunity, +50% damage)
 
 *Dark Magic:*
 - Tier 1: Shadow Bolt (8 Lumens) - Basic dark attack
 - Tier 1: Fear (8 Lumens) - Cause terror in enemies
 - Tier 2: Life Drain (15 Lumens) - Steal enemy health
 - Tier 2: Darkness (15 Lumens) - Create area of darkness
-- Tier 3: Death Ray (25 Lumens) - Instant kill attempt
-- Tier 3: Summon Undead (25 Lumens) - Raise skeleton ally
-- Tier 4: Void Prison (35 Lumens) - Banish target to shadow realm (removed for 3 turns)
-- Tier 4: Soul Steal (35 Lumens) - Drain 1 point from all target stats for 24 hours
-- Tier 4: Eclipse (35 Lumens) - 200ft radius darkness, all enemies take 1d6/turn
-- Tier 5: Darkness Mastery (50 Lumens) - Become one with darkness for 3 rounds (immunity, +50% damage)
+- Tier 3: Death Ray (23 Lumens) - Instant kill attempt
+- Tier 3: Summon Undead (23 Lumens) - Raise skeleton ally
+- Tier 4: Void Prison (30 Lumens) - Banish target to shadow realm (removed for 3 turns)
+- Tier 4: Soul Steal (30 Lumens) - Drain 1 point from all target stats for 24 hours
+- Tier 4: Eclipse (30 Lumens) - 200ft radius darkness, all enemies take 1d6/turn
+- Tier 5: Darkness Mastery (38 Lumens) - Become one with darkness for 3 rounds (immunity, +50% damage)
 
 **PROFESSION SKILLS**
 Crafting and utility abilities:
@@ -595,53 +595,53 @@ Crafting and utility abilities:
 *Smithing:*
 - Tier 1: Basic Smithing (8 Lumens) - Craft basic metal items
 - Tier 2: Advanced Smithing (15 Lumens) - Craft enhanced equipment
-- Tier 3: Master Smithing (25 Lumens) - Craft legendary items
-- Tier 4: Legendary Smithing (35 Lumens) - Craft artifacts and unique items
-- Tier 5: Divine Smithing (50 Lumens) - Craft divine and mythical equipment
+- Tier 3: Master Smithing (23 Lumens) - Craft legendary items
+- Tier 4: Legendary Smithing (30 Lumens) - Craft artifacts and unique items
+- Tier 5: Divine Smithing (38 Lumens) - Craft divine and mythical equipment
 
 *Alchemy:*
 - Tier 1: Herb Gathering (8 Lumens) - Find and identify plants
 - Tier 2: Potion Brewing (15 Lumens) - Create magical potions
-- Tier 3: Master Alchemy (25 Lumens) - Create powerful elixirs
-- Tier 4: Legendary Alchemy (35 Lumens) - Create mythical potions and elixirs
-- Tier 5: Divine Alchemy (50 Lumens) - Create divine and reality-altering concoctions
+- Tier 3: Master Alchemy (23 Lumens) - Create powerful elixirs
+- Tier 4: Legendary Alchemy (30 Lumens) - Create mythical potions and elixirs
+- Tier 5: Divine Alchemy (38 Lumens) - Create divine and reality-altering concoctions
 
 *Enchanting:*
-- Tier 1: Basic Enchanting (6 Lumens) - Add minor magic to items
-- Tier 2: Advanced Enchanting (12 Lumens) - Powerful enchantments
-- Tier 3: Artifact Creation (24 Lumens) - Create unique magic items
-- Tier 4: Legendary Enchanting (35 Lumens) - Create mythical and legendary artifacts
-- Tier 5: Divine Enchanting (50 Lumens) - Create divine and reality-altering artifacts
+- Tier 1: Basic Enchanting (8 Lumens) - Add minor magic to items
+- Tier 2: Advanced Enchanting (15 Lumens) - Powerful enchantments
+- Tier 3: Artifact Creation (23 Lumens) - Create unique magic items
+- Tier 4: Legendary Enchanting (30 Lumens) - Create mythical and legendary artifacts
+- Tier 5: Divine Enchanting (38 Lumens) - Create divine and reality-altering artifacts
 
 *Cooking:*
-- Tier 1: Field Cooking (6 Lumens) - Prepare beneficial meals
-- Tier 2: Gourmet Cooking (12 Lumens) - Create stat-boosting food
-- Tier 3: Magical Cuisine (24 Lumens) - Food with magical effects
-- Tier 4: Legendary Cooking (35 Lumens) - Create mythical and legendary feasts
-- Tier 5: Divine Cooking (50 Lumens) - Create divine and reality-altering cuisine
+- Tier 1: Field Cooking (8 Lumens) - Prepare beneficial meals
+- Tier 2: Gourmet Cooking (15 Lumens) - Create stat-boosting food
+- Tier 3: Magical Cuisine (23 Lumens) - Food with magical effects
+- Tier 4: Legendary Cooking (30 Lumens) - Create mythical and legendary feasts
+- Tier 5: Divine Cooking (38 Lumens) - Create divine and reality-altering cuisine
 
 **RACIAL SKILLS**
 Unique abilities tied to character race:
 
 *Human Skills:*
-- Tier 1: Human Determination (5 Lumens) - Foundation skill for cross-cultural learning
+- Tier 1: Human Determination (8 Lumens) - Foundation skill for cross-cultural learning
 - Note: Humans can learn Tier 1 skills from other racial trees after unlocking this
 
 *Elf Skills:*
-- Tier 1: Elven Sight (7 Lumens) - Enhanced perception
-- Tier 1: Forest Knowledge (7 Lumens) - Nature expertise
-- Tier 2: Elven Grace (14 Lumens) - Enhanced agility
-- Tier 3: Timeless Wisdom (21 Lumens) - Ancient knowledge access
-- Tier 4: Elven Supremacy (35 Lumens) - Ultimate elven abilities and mastery
-- Tier 5: Elven Ascension (50 Lumens) - Transcendent elven powers
+- Tier 1: Elven Sight (8 Lumens) - Enhanced perception
+- Tier 1: Forest Knowledge (8 Lumens) - Nature expertise
+- Tier 2: Elven Grace (15 Lumens) - Enhanced agility
+- Tier 3: Timeless Wisdom (23 Lumens) - Ancient knowledge access
+- Tier 4: Elven Supremacy (30 Lumens) - Ultimate elven abilities and mastery
+- Tier 5: Elven Ascension (38 Lumens) - Transcendent elven powers
 
 *Dwarf Skills:*
-- Tier 1: Stone Sense (7 Lumens) - Detect underground features
-- Tier 1: Dwarven Smithing (7 Lumens) - Superior metalworking
-- Tier 2: Mountain Resilience (14 Lumens) - Environmental adaptation
-- Tier 3: Forge Master (21 Lumens) - Legendary crafting ability
-- Tier 4: Dwarven Supremacy (35 Lumens) - Ultimate dwarven abilities and mastery
-- Tier 5: Dwarven Ascension (50 Lumens) - Transcendent dwarven powers
+- Tier 1: Stone Sense (8 Lumens) - Detect underground features
+- Tier 1: Dwarven Smithing (8 Lumens) - Superior metalworking
+- Tier 2: Mountain Resilience (15 Lumens) - Environmental adaptation
+- Tier 3: Forge Master (23 Lumens) - Legendary crafting ability
+- Tier 4: Dwarven Supremacy (30 Lumens) - Ultimate dwarven abilities and mastery
+- Tier 5: Dwarven Ascension (38 Lumens) - Transcendent dwarven powers
 
 *[Additional racial skill trees for Orc, Dragonborn, Halfling, Tiefling, Drow, Gnoll...]*
 
@@ -659,12 +659,12 @@ SKILL UNLOCK MECHANICS
 - **Tier 0 Skills**: 3 Lumens (weapon basics and core proficiencies)
 - **Tier 1 Skills**: 8 Lumens (basic combat skills)
 - **Tier 2 Skills**: 15 Lumens (intermediate combat skills)
-- **Tier 3 Skills**: 25 Lumens (advanced combat skills)
-- **Tier 4 Skills**: 35 Lumens (expert-level skills)
-- **Tier 5 Skills**: 50 Lumens (master-level skills)
+- **Tier 3 Skills**: 23 Lumens (advanced combat skills)
+- **Tier 4 Skills**: 30 Lumens (expert-level skills)
+- **Tier 5 Skills**: 38 Lumens (master-level skills)
 
 **Cross-Cultural Learning (Humans Only):**
-1. Must first unlock "Human Determination" (5 Lumens)
+1. Must first unlock "Human Determination" (8 Lumens)
 2. Can then purchase Tier 1 skills from any racial tree
 3. Cannot advance beyond Tier 1 in non-human racial trees
 4. Costs standard Lumen price for racial skills
@@ -742,21 +742,21 @@ ongoing resource management:
 **Current Toggle Skills:**
 
 *Staff Toggle Skills:*
-- **Frost Staff** (15L): Toggle ice enchantment (2 stamina activation, 2 stamina/turn)
-- **Fire Staff** (15L): Toggle fire enchantment (3 stamina activation, 2 stamina/turn)
+- **Frost Staff** (15 Lumens): Toggle ice enchantment (2 stamina activation, 2 stamina/turn)
+- **Fire Staff** (15 Lumens): Toggle fire enchantment (3 stamina activation, 2 stamina/turn)
 
 *Combat Stance Skills:*
-- **Defensive Stance** (25L): +2 Physical Defence, -2 attack damage (1 stamina/turn)
-- **Berserker Rage** (25L): +4 Strength and Physical Defence, additional attack (2 stamina/turn)
-- **Polearm Defensive Stance** (15L): +2 AC, cannot move (1 stamina/turn)
-- **Fortress Stance** (35L): +4 AC, reflect 50% damage (3 stamina/turn)
+- **Defensive Stance** (25 Lumens): +2 Physical Defence, -2 attack damage (1 stamina/turn)
+- **Berserker Rage** (25 Lumens): +4 Strength and Physical Defence, additional attack (2 stamina/turn)
+- **Polearm Defensive Stance** (15 Lumens): +2 AC, cannot move (1 stamina/turn)
+- **Fortress Stance** (35 Lumens): +4 AC, reflect 50% damage (3 stamina/turn)
 
 *Weapon Enchantment Skills:*
-- **Poison Blade** (15L): Coat daggers with poison (2 stamina/turn)
-- **Ricochet Axe** (25L): Thrown axes bounce to additional targets (3 stamina/turn)
+- **Poison Blade** (15 Lumens): Coat daggers with poison (2 stamina/turn)
+- **Ricochet Axe** (25 Lumens): Thrown axes bounce to additional targets (3 stamina/turn)
 
 *Elemental Weapon Skills:*
-- **Flame/Frost/Storm/Shadow/Light** variants for all weapon types (15L each)
+- **Flame/Frost/Storm/Shadow/Light** variants for all weapon types (15 Lumens each)
 - Each provides +1d6 elemental damage and 20% chance for status effects
 - All cost 2 stamina per turn to maintain
 
@@ -1240,7 +1240,7 @@ The system now uses two distinct currencies for different purposes:
 - **Purpose**: Unlock skills and abilities
 - **Starting Amount**: 150 Lumens
 - **Sources**: Skill usage, monster defeats, quest completion
-- **Uses**: Skill unlocks exclusively (5-25 Lumens per skill)
+- **Uses**: Skill unlocks exclusively (3-38 Lumens per skill)
 
 **GIL (Equipment Currency):**
 - **Purpose**: Purchase equipment and items
@@ -1396,25 +1396,25 @@ CRAFTING SYSTEM STATUS
 **PLANNED CRAFTING CATEGORIES** *(For Future Implementation)*:
 
 **SMITHING SKILLS:**
-- **Tier 1**: Basic Smithing (5 Lumens) - Craft basic metal items
-- **Tier 2**: Advanced Smithing (10 Lumens) - Craft enhanced equipment  
-- **Tier 3**: Master Smithing (15 Lumens) - Craft superior items
-- **Tier 4**: Legendary Smithing (20 Lumens) - Craft legendary equipment
-- **Tier 5**: Divine Smithing (25 Lumens) - Craft artifacts with unlimited enchantments
+- **Tier 1**: Basic Smithing (8 Lumens) - Craft basic metal items
+- **Tier 2**: Advanced Smithing (15 Lumens) - Craft enhanced equipment  
+- **Tier 3**: Master Smithing (23 Lumens) - Craft superior items
+- **Tier 4**: Legendary Smithing (30 Lumens) - Craft legendary equipment
+- **Tier 5**: Divine Smithing (38 Lumens) - Craft artifacts with unlimited enchantments
 
 **ALCHEMY SKILLS:**
-- **Tier 1**: Herb Gathering (5 Lumens) - Find and identify plants
-- **Tier 2**: Potion Brewing (10 Lumens) - Create magical potions
-- **Tier 3**: Advanced Alchemy (15 Lumens) - Create powerful elixirs
-- **Tier 4**: Master Alchemy (20 Lumens) - Create rare alchemical items
-- **Tier 5**: Transmutation (25 Lumens) - Transform base materials
+- **Tier 1**: Herb Gathering (8 Lumens) - Find and identify plants
+- **Tier 2**: Potion Brewing (15 Lumens) - Create magical potions
+- **Tier 3**: Advanced Alchemy (23 Lumens) - Create powerful elixirs
+- **Tier 4**: Master Alchemy (30 Lumens) - Create rare alchemical items
+- **Tier 5**: Transmutation (38 Lumens) - Transform base materials
 
 **ENCHANTING SKILLS:**
-- **Tier 1**: Basic Enchanting (5 Lumens) - Add minor magic to items
-- **Tier 2**: Advanced Enchanting (10 Lumens) - Powerful enchantments
-- **Tier 3**: Master Enchanting (15 Lumens) - Create unique magic items
-- **Tier 4**: Artifact Enchanting (20 Lumens) - Enchant legendary items
-- **Tier 5**: Divine Enchanting (25 Lumens) - Create game-changing artifacts
+- **Tier 1**: Basic Enchanting (8 Lumens) - Add minor magic to items
+- **Tier 2**: Advanced Enchanting (15 Lumens) - Powerful enchantments
+- **Tier 3**: Master Enchanting (23 Lumens) - Create unique magic items
+- **Tier 4**: Artifact Enchanting (30 Lumens) - Enchant legendary items
+- **Tier 5**: Divine Enchanting (38 Lumens) - Create game-changing artifacts
 
 MATERIAL SYSTEM
 ---------------
@@ -4288,7 +4288,7 @@ const racesData = {
             accuracy: 1     // +1 Accuracy bonus
         },
         passiveTraits: [
-            "Versatile Learning: Gain one free Tier 1 weapon skill upon character creation",
+            "Versatile Learning: All Weapon beginner skills unlocked upon creation",
             "Ambitious Spirit: Earn 10% more Lumens from all sources",
             "Cross-Cultural Learning: Can learn Tier 1 skills from other races' skill trees"
         ],
@@ -4656,7 +4656,7 @@ const economicBalance = {
             fusion: 150 // Cost to unlock fusion skill
         },
         equipment: {
-            basic: "5-25 Lumens",
+            basic: "3-38 Lumens",
             advanced: "50-150 Lumens", 
             legendary: "200-500 Lumens"
         },

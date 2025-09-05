@@ -81,25 +81,25 @@ const MONSTER_SYSTEM = {
         // LIGHT MAGIC SKILLS
         light_attunement: {
             resistanceModifiers: { light: -1 },
-            weaknessModifiers: { dark: +1 },
-            description: 'Light Attunement: Light resistance 50% (-1), Dark weakness 200% (+1)'
+            weaknessModifiers: { darkness: +1 },
+            description: 'Light Attunement: Light resistance 50% (-1), Darkness weakness 200% (+1)'
         },
         radiant_mastery: {
             resistanceModifiers: { light: -2, fire: -1 },
-            weaknessModifiers: { dark: +2 },
-            description: 'Radiant Mastery: Light resistance 25% (-2), Fire resistance 50% (-1), Dark weakness 400% (+2)'
+            weaknessModifiers: { darkness: +2 },
+            description: 'Radiant Mastery: Light resistance 25% (-2), Fire resistance 50% (-1), Darkness weakness 400% (+2)'
         },
 
         // DARK MAGIC SKILLS
         dark_attunement: {
-            resistanceModifiers: { dark: -1 },
+            resistanceModifiers: { darkness: -1 },
             weaknessModifiers: { light: +1 },
-            description: 'Dark Attunement: Dark resistance 50% (-1), Light weakness 200% (+1)'
+            description: 'Darkness Attunement: Darkness resistance 50% (-1), Light weakness 200% (+1)'
         },
         void_mastery: {
-            resistanceModifiers: { dark: -2, ice: -1 },
+            resistanceModifiers: { darkness: -2, ice: -1 },
             weaknessModifiers: { light: +2 },
-            description: 'Void Mastery: Dark resistance 25% (-2), Ice resistance 50% (-1), Light weakness 400% (+2)'
+            description: 'Void Mastery: Darkness resistance 25% (-2), Ice resistance 50% (-1), Light weakness 400% (+2)'
         },
 
         // BREATH SKILLS
@@ -140,7 +140,7 @@ const MONSTER_SYSTEM = {
         const totalModifiers = {}
 
         // Initialize all elements to 0 (normal damage)
-        const elements = ['fire', 'ice', 'lightning', 'earth', 'water', 'wind', 'light', 'dark', 'poison']
+        const elements = ['fire', 'ice', 'lightning', 'earth', 'water', 'wind', 'light', 'darkness', 'poison']
         elements.forEach(element => totalModifiers[element] = 0)
 
         // Stack modifiers from all elemental skills
@@ -277,14 +277,14 @@ const MONSTER_SYSTEM = {
             description: 'Amulet of Earth: Earth resistance 50% (-1), Wind weakness 200% (+1)'
         },
         amulet_of_shadows: {
-            resistanceModifiers: { dark: -1 },
+            resistanceModifiers: { darkness: -1 },
             weaknessModifiers: { light: +1 },
-            description: 'Amulet of Shadows: Dark resistance 50% (-1), Light weakness 200% (+1)'
+            description: 'Amulet of Shadows: Darkness resistance 50% (-1), Light weakness 200% (+1)'
         },
         amulet_of_light: {
             resistanceModifiers: { light: -1 },
-            weaknessModifiers: { dark: +1 },
-            description: 'Amulet of Light: Light resistance 50% (-1), Dark weakness 200% (+1)'
+            weaknessModifiers: { darkness: +1 },
+            description: 'Amulet of Light: Light resistance 50% (-1), Darkness weakness 200% (+1)'
         },
 
         // ARMOR SETS
@@ -319,7 +319,7 @@ const MONSTER_SYSTEM = {
     getEquipmentAffinities(character) {
         const affinities = {
             fire: 0, ice: 0, lightning: 0, earth: 0, water: 0, wind: 0,
-            light: 0, dark: 0, poison: 0
+            light: 0, darkness: 0, poison: 0
         }
 
         // Check each equipment slot
@@ -428,7 +428,7 @@ const MONSTER_SYSTEM = {
         }
 
         const totalModifiers = {}
-        const elements = ['fire', 'ice', 'lightning', 'earth', 'water', 'wind', 'light', 'dark', 'poison']
+        const elements = ['fire', 'ice', 'lightning', 'earth', 'water', 'wind', 'light', 'darkness', 'poison']
         elements.forEach(element => totalModifiers[element] = 0)
 
         // Stack modifiers from skills
