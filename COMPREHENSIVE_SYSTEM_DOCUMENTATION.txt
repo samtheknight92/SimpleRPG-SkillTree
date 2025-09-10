@@ -526,25 +526,25 @@ Supernatural abilities divided by school:
 *Elemental Magic:*
 - Tier 1: Fire Bolt (8 Lumens) - Basic fire attack
 - Tier 1: Ice Shard (8 Lumens) - Basic ice attack
-- Tier 1: Lightning Strike (8 Lumens) - Basic lightning attack
+- Tier 1: Thunder Strike (8 Lumens) - Basic thunder attack
 - Tier 2: Fireball (15 Lumens) - Area fire damage
 - Tier 2: Ice Armor (15 Lumens) - Defensive ice barrier
-- Tier 2: Chain Lightning (15 Lumens) - Multi-target lightning
+- Tier 2: Chain Thunder (15 Lumens) - Multi-target thunder
 - Tier 3: Meteor (23 Lumens) - Massive fire area attack
 - Tier 3: Blizzard (23 Lumens) - Area ice damage over time
-- Tier 3: Thunder Storm (23 Lumens) - Sustained lightning area
+- Tier 3: Thunder Storm (23 Lumens) - Sustained thunder area
 - Tier 4: Meteor (30 Lumens) - Devastating overhead attack (6d6 fire damage, 20ft radius)
 - Tier 4: Inferno (30 Lumens) - Set 100ft radius ablaze (2d6/turn for 1 minute)
 - Tier 4: Fire Tornado (30 Lumens) - Moving 30ft tall fire column (4d6 damage)
 - Tier 4: Absolute Zero (30 Lumens) - Instantly freeze any target (no save, 3 turns)
 - Tier 4: Ice Age (30 Lumens) - Freeze 200ft radius (1d6 cold/turn, all slowed)
 - Tier 4: Glacier (30 Lumens) - Massive 50ft ice wall that moves 20ft/turn
-- Tier 4: Lightning Storm (30 Lumens) - 8 random lightning strikes in 50ft radius (3d6 each)
-- Tier 4: Ball Lightning (30 Lumens) - Slow orb (20ft/turn) explodes for 4d6 in 15ft radius
+- Tier 4: Thunder Storm (30 Lumens) - 8 random thunder strikes in 50ft radius (3d6 each)
+- Tier 4: Ball Thunder (30 Lumens) - Slow orb (20ft/turn) explodes for 4d6 in 15ft radius
 - Tier 4: EMP (30 Lumens) - 40ft radius disables all magic for 1 minute
 - Tier 5: Fire Supremacy (38 Lumens) - Become one with fire for 3 rounds (immunity, +50% damage)
 - Tier 5: Ice Supremacy (38 Lumens) - Become one with ice for 3 rounds (immunity, +50% damage)
-- Tier 5: Lightning Supremacy (38 Lumens) - Become one with lightning for 3 rounds (immunity, +50% damage)
+- Tier 5: Thunder Supremacy (38 Lumens) - Become one with thunder for 3 rounds (immunity, +50% damage)
 
 *Divine Magic:*
 - Tier 1: Heal (8 Lumens) - Basic health restoration
@@ -1524,7 +1524,7 @@ ENCHANTMENT INTEGRATION
 
 **Enchantment Types:**
 - **Stat Bonuses**: +1 to +5 increases to character statistics
-- **Elemental Effects**: Fire damage, ice slowing, lightning chains
+- **Elemental Effects**: Fire damage, ice slowing, thunder chains
 - **Special Abilities**: Vampiric healing, critical strike bonuses
 - **Resistance Grants**: Protection from specific damage types
 - **Unique Properties**: Teleportation, invisibility, flight
@@ -1864,7 +1864,7 @@ STATUS EFFECT CATEGORIES
 - **Poisoned**: Take 1d6 poison damage per turn (8 turns)
 - **Bleeding**: Take 1d3 physical damage per turn (6 turns)
 - **Frozen**: Take 1d4 ice damage, -2 Speed (4 turns)
-- **Shocked**: Take 1d4 lightning damage, 25% action failure (3 turns)
+- **Shocked**: Take 1d4 thunder damage, 25% action failure (3 turns)
 
 *Ability Impairment:*
 - **Weakened**: -4 Strength penalty to damage (6 turns)

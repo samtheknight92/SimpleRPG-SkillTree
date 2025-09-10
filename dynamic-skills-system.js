@@ -250,7 +250,7 @@ class DynamicSkillsSystem {
         const magicIcons = {
             'fire': '🔥',
             'ice': '❄️',
-            'lightning': '⚡',
+            'thunder': '⚡',
             'earth': '🌍',
             'wind': '💨',
             'water': '🌊',

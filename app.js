@@ -466,7 +466,7 @@ class App {
                         <h3>Features:</h3>
                         <ul>
                             <li>🗡️ Weapon Skills: Master swords, bows, and axes</li>
-                            <li>🔮 Magic Schools: Fire, ice, and lightning magic</li>
+                            <li>🔮 Magic Schools: Fire, ice, and thunder magic</li>
                             <li>🔨 Professions: Smithing, alchemy, and enchanting</li>
                             <li>📊 Progressive Stats: Strength, Magic Defence, and speed</li>
                             <li>💾 Auto-Save: Your progress is automatically saved</li>

@@ -2,7 +2,13 @@
 
 /* Folder Management Styles */
 .folder-controls {
-    display: none; /* Hide old folder controls - now in panel header */
+    display: flex; /* Show folder controls with multi-selection */
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 12px;
+    padding: 8px 20px;
+    background: #2b2b2b;
+    border-bottom: 1px solid #404040;
 }
 
 .folder-section {
@@ -87,6 +93,55 @@
     font-size: 13px;
 }
 
+/* Multi-Selection Controls */
+.folder-controls .btn {
+    background: #404040;
+    color: #ffffff;
+    border: 1px solid #666666;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.folder-controls .btn:hover {
+    background: #4a4a4a;
+}
+
+.multi-select-btn {
+    background: #444444 !important;
+    color: #cccccc !important;
+    border: 1px solid #666666 !important;
+}
+
+.multi-select-btn.active {
+    background: #0066cc !important;
+    color: #ffffff !important;
+    border-color: #0088ff !important;
+}
+
+.select-all-btn, .clear-selection-btn {
+    background: #555555 !important;
+    color: #cccccc !important;
+    border: 1px solid #777777 !important;
+    font-size: 11px;
+    padding: 4px 8px;
+}
+
+.bulk-delete-btn {
+    background: #cc0000 !important;
+    color: #ffffff !important;
+    border: 1px solid #ff0000 !important;
+    font-weight: bold;
+}
+
+.bulk-delete-btn:hover {
+    background: #ff0000 !important;
+    border-color: #ff3333 !important;
+}
+
 /* Character Cards - Concept Design */
 .character-item {
     display: flex;
@@ -96,7 +151,7 @@
     border: none;
     border-radius: 0;
     background: transparent;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s;
     cursor: pointer;
     position: relative;
     gap: 12px;
@@ -119,6 +174,21 @@
     background: #4a4a4a;
 }
 
+/* Selected character styling */
+.character-item.selected {
+    background: #2a4a6b !important;
+    border-left: 3px solid #0066cc;
+}
+
+.character-item.selected:hover {
+    background: #3a5a7b !important;
+}
+
+.character-item.selected.active {
+    background: #3a5a7b !important;
+    border-left: 3px solid #0088ff;
+}
+
 /* Monster character styling */
 .character-item.monster-character {
     background: transparent;
@@ -130,6 +200,24 @@
 
 .character-item.monster-character.active {
     background: #404040;
+}
+
+/* Character Checkbox */
+.character-checkbox {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.character-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #0066cc;
+}
+
+.character-checkbox input[type="checkbox"]:checked {
+    accent-color: #0088ff;
 }
 
 /* Character Avatar */
@@ -204,31 +292,103 @@
 }
 
 /* Character Menu */
-.character-menu {
-    position: relative;
-    display: inline-block;
+/* Character menu CSS - REMOVED */
+
+/* Bulk move button styling */
+.bulk-move-btn {
+    background: linear-gradient(135deg, #4a4a6e, #3a3a5e);
+    color: #ffd700;
+    border: 1px solid #ffd700;
 }
 
-.character-menu-btn {
-    background: transparent;
-    color: #888888;
-    border: none;
-    padding: 4px;
-    font-size: 16px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: all 0.2s;
-    opacity: 0;
-    transition: opacity 0.2s;
+.bulk-move-btn:hover {
+    background: linear-gradient(135deg, #5a5a7e, #4a4a6e);
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
 }
 
-.character-item:hover .character-menu-btn {
-    opacity: 1;
+/* Import and Copy button styling */
+.import-characters-btn {
+    background: linear-gradient(135deg, #4a6e4a, #3a5e3a);
+    color: #90ee90;
+    border: 1px solid #90ee90;
 }
 
-.character-menu-btn:hover {
-    background: #404040;
+.import-characters-btn:hover {
+    background: linear-gradient(135deg, #5a7e5a, #4a6e4a);
+    box-shadow: 0 2px 8px rgba(144, 238, 144, 0.3);
+}
+
+.bulk-copy-btn {
+    background: linear-gradient(135deg, #6e4a6e, #5e3a5e);
+    color: #dda0dd;
+    border: 1px solid #dda0dd;
+}
+
+.bulk-copy-btn:hover {
+    background: linear-gradient(135deg, #7e5a7e, #6e4a6e);
+    box-shadow: 0 2px 8px rgba(221, 160, 221, 0.3);
+}
+
+/* Modal spacing improvements */
+.modal-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #ffd700;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.modal-body {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.modal-instruction {
+    margin: 0 0 1rem 0;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.folder-select {
+    width: 100%;
+    max-width: 250px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 3px solid #ffd700;
+    border-radius: 8px;
+    background: #1a1a3e;
     color: #ffffff;
+    text-align: center;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.folder-select:focus {
+    outline: none;
+    border-color: #ffed4e;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.modal-actions .btn {
+    min-width: 120px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Stats row and other complex elements - hide for clean design */
@@ -246,22 +406,7 @@
     gap: 12px;
 }
 
-/* Character Menu Dropdown - Concept Style */
-.character-menu-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #2b2b2b;
-    border: 1px solid #404040;
-    border-radius: 6px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    z-index: 10000;
-    min-width: 160px;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    overflow: hidden;
-}
+/* Character Menu Dropdown - REMOVED */
 
 .menu-item {
     display: flex;
@@ -363,24 +508,7 @@
     }
 }
 
-/* Character Menu Dropdown - Enhanced */
-.character-menu-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: linear-gradient(135deg, #2a2a4e, #1e1e3f);
-    border: 2px solid #ffd700;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-    z-index: 10000;
-    min-width: 140px;
-    max-width: 160px;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    overflow: hidden;
-    backdrop-filter: blur(8px);
-}
+/* Character Menu Dropdown - REMOVED */
 
 .menu-item {
     display: flex;
@@ -706,18 +834,7 @@
     transform: translateY(-1px);
 }
 
-.character-menu-dropdown {
-    background: linear-gradient(135deg, #2a2a4e, #1e1e3f);
-    border: 2px solid #ffd700;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    z-index: 10000;
-    min-width: 140px;
-    max-width: 160px;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
+/* Character Menu Dropdown - REMOVED */
 
 .menu-item {
     display: flex;

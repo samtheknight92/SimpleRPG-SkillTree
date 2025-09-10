@@ -328,32 +328,32 @@ const SKILLS_DATA = {
       { id: 'ice_supremacy', name: 'Ice Supremacy', tier: 5, cost: 38, staminaCost: 15, desc: 'Ultimate: Become one with ice for 3 rounds. Gain immunity to Ice Damage, +50% ice spell damage, all attacks apply Weakened, and create frozen terrain (difficult terrain) in 10ft radius. Temperature drops 50°F around you.', icon: '❄️', prerequisites: { type: 'AND', skills: ['absolute_zero', 'ice_age', 'glacier'] } }
     ],
 
-    // LIGHTNING MAGIC (Tier 1-5)
-    lightning: [
+    // THUNDER MAGIC (Tier 1-5)
+    thunder: [
       // Tier 1
-      { id: 'spark', name: 'Spark', tier: 1, cost: 8, staminaCost: 2, desc: 'Active: Small electrical discharge (1d4 Lightning Damage, 20ft)', icon: '⚡', prerequisites: { type: 'NONE', skills: [] } },
-      { id: 'static_charge', name: 'Static Charge', tier: 1, cost: 8, staminaCost: 1, desc: 'Active: Build electrical energy (+1 Lightning Damage to next lightning spell)', icon: '🔋', prerequisites: { type: 'NONE', skills: [] } },
+      { id: 'spark', name: 'Spark', tier: 1, cost: 8, staminaCost: 2, desc: 'Active: Small electrical discharge (1d4 Thunder Damage, 20ft)', icon: '⚡', prerequisites: { type: 'NONE', skills: [] } },
+      { id: 'static_charge', name: 'Static Charge', tier: 1, cost: 8, staminaCost: 1, desc: 'Active: Build electrical energy (+1 Thunder Damage to next thunder spell)', icon: '🔋', prerequisites: { type: 'NONE', skills: [] } },
 
       // Tier 2
-      { id: 'lightning_bolt', name: 'Lightning Bolt', tier: 2, cost: 15, staminaCost: 4, desc: 'Active: Fast electrical line attack (2d6 Lightning Damage, 100ft range)', icon: '⚡', prerequisites: { type: 'AND', skills: ['spark'] } },
+      { id: 'thunder_bolt', name: 'Thunder Bolt', tier: 2, cost: 15, staminaCost: 4, desc: 'Active: Fast electrical line attack (2d6 Thunder Damage, 100ft range)', icon: '⚡', prerequisites: { type: 'AND', skills: ['spark'] } },
       { id: 'shock', name: 'Shock', tier: 2, cost: 15, staminaCost: 3, desc: 'Active: Stun target for 1 turn (resistance negates)', icon: '😵', prerequisites: { type: 'AND', skills: ['static_charge'] } },
-      { id: 'chain_lightning', name: 'Chain Lightning', tier: 2, cost: 15, staminaCost: 5, desc: 'Active: Lightning jumps to 3 additional targets (-1 Lightning Damage each)', icon: '🔗', prerequisites: { type: 'AND', skills: ['spark'] } },
+      { id: 'chain_thunder', name: 'Chain Thunder', tier: 2, cost: 15, staminaCost: 5, desc: 'Active: Thunder jumps to 3 additional targets (-1 Thunder Damage each)', icon: '🔗', prerequisites: { type: 'AND', skills: ['spark'] } },
 
       // Tier 3
-      { id: 'thunder_clap', name: 'Thunder Clap', tier: 3, cost: 23, staminaCost: 6, desc: 'Active: 20ft radius sound blast (2d4 Thunder Damage + deafen 1 turn)', icon: '🔊', prerequisites: { type: 'AND', skills: ['lightning_bolt'] } },
-      { id: 'electric_field', name: 'Electric Field', tier: 3, cost: 23, staminaCost: 8, desc: 'Active: 30ft zone deals 1d6 Lightning Damage to anyone entering (1 min)', icon: '⚡', prerequisites: { type: 'AND', skills: ['shock', 'chain_lightning'] } },
-      { id: 'lightning_attunement', name: 'Lightning Attunement', tier: 3, cost: 23, staminaCost: 0, desc: 'Passive: Become attuned to lightning magic. GRANTS: Lightning resistance 50% (-1), Water weakness 200% (+1)', icon: '⚡', prerequisites: { type: 'AND', skills: ['shock', 'chain_lightning'] }, elementalType: 'lightning' },
-      { id: 'lightning_speed', name: 'Lightning Speed', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: +3 Speed, extra move action (3 turns)', icon: '💨', prerequisites: { type: 'AND', skills: ['shock'] } },
+      { id: 'thunder_clap', name: 'Thunder Clap', tier: 3, cost: 23, staminaCost: 6, desc: 'Active: 20ft radius sound blast (2d4 Thunder Damage + deafen 1 turn)', icon: '🔊', prerequisites: { type: 'AND', skills: ['thunder_bolt'] } },
+      { id: 'electric_field', name: 'Electric Field', tier: 3, cost: 23, staminaCost: 8, desc: 'Active: 30ft zone deals 1d6 Thunder Damage to anyone entering (1 min)', icon: '⚡', prerequisites: { type: 'AND', skills: ['shock', 'chain_thunder'] } },
+      { id: 'thunder_attunement', name: 'Thunder Attunement', tier: 3, cost: 23, staminaCost: 0, desc: 'Passive: Become attuned to thunder magic. GRANTS: Thunder resistance 50% (-1), Water weakness 200% (+1)', icon: '⚡', prerequisites: { type: 'AND', skills: ['shock', 'chain_thunder'] }, elementalType: 'thunder' },
+      { id: 'thunder_speed', name: 'Thunder Speed', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: +3 Speed, extra move action (3 turns)', icon: '💨', prerequisites: { type: 'AND', skills: ['shock'] } },
       { id: 'overcharge', name: 'Overcharge', tier: 3, cost: 23, staminaCost: 7, desc: 'Active: Next spell deals maximum damage (no rolling)', icon: '🔋', prerequisites: { type: 'AND', skills: ['static_charge'] } },
 
       // Tier 4
-      { id: 'lightning_storm', name: 'Lightning Storm', tier: 4, cost: 30, staminaCost: 12, desc: 'Active: 8 random lightning strikes in 50ft radius (3d6 Lightning Damage each)', icon: '⛈️', prerequisites: { type: 'AND', skills: ['thunder_clap', 'electric_field'] } },
-      { id: 'ball_lightning', name: 'Ball Lightning', tier: 4, cost: 30, staminaCost: 10, desc: 'Active: Slow orb (20ft/turn) explodes for 4d6 Lightning Damage in 15ft radius', icon: '⚡', prerequisites: { type: 'AND', skills: ['lightning_speed'] } },
+      { id: 'thunder_storm', name: 'Thunder Storm', tier: 4, cost: 30, staminaCost: 12, desc: 'Active: 8 random thunder strikes in 50ft radius (3d6 Thunder Damage each)', icon: '⛈️', prerequisites: { type: 'AND', skills: ['thunder_clap', 'electric_field'] } },
+      { id: 'ball_thunder', name: 'Ball Thunder', tier: 4, cost: 30, staminaCost: 10, desc: 'Active: Slow orb (20ft/turn) explodes for 4d6 Thunder Damage in 15ft radius', icon: '⚡', prerequisites: { type: 'AND', skills: ['thunder_speed'] } },
       { id: 'emp', name: 'EMP', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: 40ft radius disables all magic for 1 minute', icon: '📵', prerequisites: { type: 'AND', skills: ['overcharge'] } },
-      { id: 'storm_mastery', name: 'Storm Mastery', tier: 4, cost: 30, staminaCost: 0, desc: 'Passive: Master lightning magic, enhanced electrical control. GRANTS: Lightning resistance 50% (-1), Water weakness 200% (+1)', icon: '⚡', prerequisites: { type: 'AND', skills: ['lightning_attunement'] }, elementalType: 'lightning' },
+      { id: 'storm_mastery', name: 'Storm Mastery', tier: 4, cost: 30, staminaCost: 0, desc: 'Passive: Master thunder magic, enhanced electrical control. GRANTS: Thunder resistance 50% (-1), Water weakness 200% (+1)', icon: '⚡', prerequisites: { type: 'AND', skills: ['thunder_attunement'] }, elementalType: 'thunder' },
 
       // Tier 5
-      { id: 'lightning_supremacy', name: 'Lightning Supremacy', tier: 5, cost: 38, staminaCost: 15, desc: 'Ultimate: Become one with lightning for 3 rounds. Gain immunity to Lightning Damage, +50% movement speed, +50% lightning spell damage, all attacks apply Incapacitated, and can teleport 30ft as bonus action each turn.', icon: '⚡', prerequisites: { type: 'AND', skills: ['lightning_storm', 'ball_lightning', 'emp'] } }
+      { id: 'thunder_supremacy', name: 'Thunder Supremacy', tier: 5, cost: 38, staminaCost: 15, desc: 'Ultimate: Become one with thunder for 3 rounds. Gain immunity to Thunder Damage, +50% movement speed, +50% thunder spell damage, all attacks apply Incapacitated, and can teleport 30ft as bonus action each turn.', icon: '⚡', prerequisites: { type: 'AND', skills: ['thunder_storm', 'ball_thunder', 'emp'] } }
     ],
 
     // EARTH MAGIC (Tier 1-5)
@@ -555,16 +555,16 @@ const SKILLS_DATA = {
     magic: [
       // Magical/Breath/Special Abilities (26-40) - Each grants elemental affinity
       { id: 'fire_breath', name: 'Fire Breath', tier: 3, cost: 15, staminaCost: 8, desc: 'Active: 30ft cone, 2d8 Fire Damage + apply Burn (1 dmg/turn + Str -2). Grants fire resistance, ice/water weakness', icon: '🔥', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'fire' },
-      { id: 'ice_breath', name: 'Ice Breath', tier: 3, cost: 15, staminaCost: 8, desc: 'Active: 30ft cone, 2d6 Ice Damage + apply Weakened (all stats -2). Grants ice/water resistance, fire/lightning weakness', icon: '❄️', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'ice' },
+      { id: 'ice_breath', name: 'Ice Breath', tier: 3, cost: 15, staminaCost: 8, desc: 'Active: 30ft cone, 2d6 Ice Damage + apply Weakened (all stats -2). Grants ice/water resistance, fire/thunder weakness', icon: '❄️', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'ice' },
       { id: 'poison_breath', name: 'Poison Breath', tier: 3, cost: 15, staminaCost: 8, desc: 'Active: 25ft cone, 1d8 Poison Damage + apply Poison (escalating 1→2→3 damage). Grants poison resistance, light/fire weakness', icon: '☠️', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'poison' },
-      { id: 'lightning_breath', name: 'Lightning Breath', tier: 3, cost: 15, staminaCost: 8, desc: 'Active: 60ft line, 2d10 Lightning Damage + apply Immobilized (cannot move). Grants lightning resistance, earth/water weakness', icon: '⚡', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'lightning' },
+      { id: 'thunder_breath', name: 'Thunder Breath', tier: 3, cost: 15, staminaCost: 8, desc: 'Active: 60ft line, 2d10 Thunder Damage + apply Immobilized (cannot move). Grants thunder resistance, earth/water weakness', icon: '⚡', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'thunder' },
       { id: 'acid_spit', name: 'Acid Spit', tier: 2, cost: 10, staminaCost: 5, desc: 'Active: Ranged attack: 1d8 Acid Damage + apply Acid Corrosion (armor decay). Grants poison resistance, ice/water weakness', icon: '🟢', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'acid' },
       { id: 'fear_aura', name: 'Fear Aura', tier: 3, cost: 15, staminaCost: 6, desc: 'Passive: Apply Intimidating Aura (enemies must resist Mind Control)', icon: '😨', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic' },
       { id: 'paralyzing_gaze', name: 'Paralyzing Gaze', tier: 4, cost: 20, staminaCost: 10, desc: 'Active: Target within 60ft: Apply Immobilized (cannot move but can attack)', icon: '👁️', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic' },
       { id: 'invisibility', name: 'Invisibility', tier: 4, cost: 20, staminaCost: 12, desc: 'Active: Apply Stealth Mastery (invisible + strong mind control resistance)', icon: '👻', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic' },
       { id: 'teleport', name: 'Teleport', tier: 3, cost: 15, staminaCost: 8, desc: 'Active: Instantly move up to 60ft to visible location', icon: '✨', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic' },
       { id: 'web_shot', name: 'Web Shot', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Ranged: Apply Immobilized (cannot move for 3 turns)', icon: '🕸️', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic' },
-      { id: 'monster_earthquake', name: 'Earthquake', tier: 4, cost: 20, staminaCost: 15, desc: 'Active: 30ft radius: 3d6 Earth Damage, knock prone, difficult terrain. Grants earth resistance, wind/lightning weakness', icon: '🌍', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'earth' },
+      { id: 'monster_earthquake', name: 'Earthquake', tier: 4, cost: 20, staminaCost: 15, desc: 'Active: 30ft radius: 3d6 Earth Damage, knock prone, difficult terrain. Grants earth resistance, wind/thunder weakness', icon: '🌍', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'earth' },
       { id: 'mind_control', name: 'Mind Control', tier: 5, cost: 25, staminaCost: 15, desc: 'Active: Apply Mind Controlled (control enemy actions for 3 turns)', icon: '🧠', prerequisites: { type: 'AND', skills: ['paralyzing_gaze'] }, lootType: 'magic' },
       { id: 'energy_drain', name: 'Energy Drain', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Touch: Apply Weakened (all stats -2) and drain 1d4 stamina', icon: '🖤', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic' },
       { id: 'monster_shadow_step', name: 'Shadow Step', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Move from shadow to shadow within 40ft. Grants darkness resistance, light weakness', icon: '🌑', prerequisites: { type: 'NONE', skills: [] }, lootType: 'magic', elementalType: 'shadow' },
@@ -598,10 +598,10 @@ const SKILLS_DATA = {
       { id: 'frost_arrow', name: 'Frost Arrow', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Ranged attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized (status-effects.js lines 54-64). Costs 2 stamina per turn while active.', icon: '🏹❄️', prerequisites: { type: 'AND', skills: ['quick_draw', 'ice_shard'] }, fusionType: 'bow_ice' },
       { id: 'glacier_volley', name: 'Glacier Volley', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: Fire multiple freezing arrows, each dealing 2d6 Ice Damage. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '❄️🏹', prerequisites: { type: 'AND', skills: ['multi_shot', 'ice_wall'] }, fusionType: 'bow_ice' },
       { id: 'blizzard_shot', name: 'Blizzard Shot', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Fire an arrow that creates a freezing zone, dealing 3d6 Ice Damage. Has a 75% chance to apply Weakened (status-effects.js lines 47-57)', icon: '🌨️❄️', prerequisites: { type: 'AND', skills: ['frost_arrow', 'glacier_volley'] }, fusionType: 'bow_ice' },
-      // Lightning
-      { id: 'storm_arrow', name: 'Storm Arrow', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Ranged attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🏹⚡', prerequisites: { type: 'AND', skills: ['quick_draw', 'spark'] }, fusionType: 'bow_lightning' },
-      { id: 'thunder_volley', name: 'Thunder Volley', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: Fire multiple charged arrows, each dealing 2d6 Lightning Damage. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🏹', prerequisites: { type: 'AND', skills: ['multi_shot', 'thunder_clap'] }, fusionType: 'bow_lightning' },
-      { id: 'lightning_storm', name: 'Lightning Storm', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Fire an arrow that chains lightning between targets, dealing 3d6 Lightning Damage. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_arrow', 'thunder_volley'] }, fusionType: 'bow_lightning' },
+      // Thunder
+      { id: 'storm_arrow', name: 'Storm Arrow', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Ranged attacks deal +1d6 Thunder Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🏹⚡', prerequisites: { type: 'AND', skills: ['quick_draw', 'spark'] }, fusionType: 'bow_thunder' },
+      { id: 'thunder_volley', name: 'Thunder Volley', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: Fire multiple charged arrows, each dealing 2d6 Thunder Damage. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🏹', prerequisites: { type: 'AND', skills: ['multi_shot', 'thunder_clap'] }, fusionType: 'bow_thunder' },
+      { id: 'thunder_storm_arrow', name: 'Thunder Storm Arrow', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Fire an arrow that chains thunder between targets, dealing 3d6 Thunder Damage. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_arrow', 'thunder_volley'] }, fusionType: 'bow_thunder' },
       // Earth
       { id: 'stone_arrow', name: 'Stone Arrow', tier: 2, cost: 15, staminaCost: 3, desc: 'Passive: Ranged attacks deal +1d6 Earth Damage and ignore 2 points of armor.', icon: '🏹🪨', prerequisites: { type: 'AND', skills: ['quick_draw', 'stone_throw'] }, fusionType: 'bow_earth' },
       { id: 'crystal_volley', name: 'Crystal Volley', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: Fire multiple stone arrows, each dealing 2d6 Earth Damage. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '🪨🏹', prerequisites: { type: 'AND', skills: ['multi_shot', 'stone_wall'] }, fusionType: 'bow_earth' },
@@ -635,10 +635,10 @@ const SKILLS_DATA = {
       { id: 'frostbrand', name: 'Frostbrand', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Sword attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized (status-effects.js lines 54-64). Costs 2 stamina per turn while active.', icon: '⚔️❄️', prerequisites: { type: 'AND', skills: ['quick_strike', 'ice_shard'] }, fusionType: 'sword_ice' },
       { id: 'glacial_riposte', name: 'Glacial Riposte', tier: 3, cost: 23, staminaCost: 5, desc: 'Reaction: Parry and counter with a freezing slash, has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '🛡️❄️', prerequisites: { type: 'AND', skills: ['sword_mastery', 'ice_wall'] }, fusionType: 'sword_ice' },
       { id: 'winters_fury', name: "Winter's Fury", tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Unleash a storm of ice, dealing 3d6 Ice Damage to all nearby enemies and has a 75% chance to apply Weakened (status-effects.js lines 47-57)', icon: '🌨️❄️', prerequisites: { type: 'AND', skills: ['frostbrand', 'glacial_riposte'] }, fusionType: 'sword_ice' },
-      // --- LIGHTNING ---
-      { id: 'storm_blade', name: 'Storm Blade', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Sword attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '⚔️⚡', prerequisites: { type: 'AND', skills: ['quick_strike', 'spark'] }, fusionType: 'sword_lightning' },
-      { id: 'thunder_parry', name: 'Thunder Parry', tier: 3, cost: 23, staminaCost: 5, desc: 'Reaction: Parry and release a thunderclap, dealing 2d6 Lightning Damage to the attacker and nearby enemies. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '🛡️⚡', prerequisites: { type: 'AND', skills: ['sword_mastery', 'thunder_clap'] }, fusionType: 'sword_lightning' },
-      { id: 'lightning_surge', name: 'Lightning Surge', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Dash through enemies in a line, dealing 3d6 Lightning Damage. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27) to each target.', icon: '🌩️⚡', prerequisites: { type: 'AND', skills: ['storm_blade', 'thunder_parry'] }, fusionType: 'sword_lightning' },
+      // --- THUNDER ---
+      { id: 'storm_blade', name: 'Storm Blade', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Sword attacks deal +1d6 Thunder Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '⚔️⚡', prerequisites: { type: 'AND', skills: ['quick_strike', 'spark'] }, fusionType: 'sword_thunder' },
+      { id: 'thunder_parry', name: 'Thunder Parry', tier: 3, cost: 23, staminaCost: 5, desc: 'Reaction: Parry and release a thunderclap, dealing 2d6 Thunder Damage to the attacker and nearby enemies. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '🛡️⚡', prerequisites: { type: 'AND', skills: ['sword_mastery', 'thunder_clap'] }, fusionType: 'sword_thunder' },
+      { id: 'thunder_surge', name: 'Thunder Surge', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Dash through enemies in a line, dealing 3d6 Thunder Damage. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27) to each target.', icon: '🌩️⚡', prerequisites: { type: 'AND', skills: ['storm_blade', 'thunder_parry'] }, fusionType: 'sword_thunder' },
       // --- EARTH ---
       { id: 'stonecutter', name: 'Stonecutter', tier: 2, cost: 15, staminaCost: 3, desc: 'Passive: Sword attacks deal +1d6 Earth Damage and ignore 2 points of armor.', icon: '⚔️🪨', prerequisites: { type: 'AND', skills: ['quick_strike', 'stone_throw'] }, fusionType: 'sword_earth' },
       { id: 'earthen_guard', name: 'Earthen Guard', tier: 3, cost: 23, staminaCost: 5, desc: 'Reaction: Parry and create a stone barrier, gaining Enhanced (status-effects.js lines 90-100) for 2 turns', icon: '🛡️🪨', prerequisites: { type: 'AND', skills: ['sword_mastery', 'stone_wall'] }, fusionType: 'sword_earth' },
@@ -669,10 +669,10 @@ const SKILLS_DATA = {
       { id: 'frost_dagger', name: 'Frost Dagger', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Dagger attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized (status-effects.js lines 54-64). Costs 2 stamina per turn while active.', icon: '🗡️❄️', prerequisites: { type: 'AND', skills: ['dual_wield', 'ice_shard'] }, fusionType: 'dagger_ice' },
       { id: 'freezing_strike', name: 'Freezing Strike', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A frigid strike dealing 2d6 Ice Damage. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '❄️🗡️', prerequisites: { type: 'AND', skills: ['vital_strike', 'ice_wall'] }, fusionType: 'dagger_ice' },
       { id: 'arctic_barrage', name: 'Arctic Barrage', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Unleash a flurry of icy strikes dealing 3d6 Ice Damage to a single target. Has a 75% chance to apply Weakened (status-effects.js lines 47-57)', icon: '🌨️❄️', prerequisites: { type: 'AND', skills: ['frost_dagger', 'freezing_strike'] }, fusionType: 'dagger_ice' },
-      // Lightning
-      { id: 'storm_dagger', name: 'Storm Dagger', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Dagger attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🗡️⚡', prerequisites: { type: 'AND', skills: ['dual_wield', 'spark'] }, fusionType: 'dagger_lightning' },
-      { id: 'thunder_strike', name: 'Thunder Strike', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A lightning-fast strike dealing 2d6 Lightning Damage. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🗡️', prerequisites: { type: 'AND', skills: ['vital_strike', 'thunder_clap'] }, fusionType: 'dagger_lightning' },
-      { id: 'storm_flurry', name: 'Storm Flurry', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Chain lightning enhances your daggers, dealing 3d6 Lightning Damage to multiple targets. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_dagger', 'thunder_strike'] }, fusionType: 'dagger_lightning' },
+      // Thunder
+      { id: 'storm_dagger', name: 'Storm Dagger', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Dagger attacks deal +1d6 Thunder Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🗡️⚡', prerequisites: { type: 'AND', skills: ['dual_wield', 'spark'] }, fusionType: 'dagger_thunder' },
+      { id: 'thunder_strike', name: 'Thunder Strike', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A thunder-fast strike dealing 2d6 Thunder Damage. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🗡️', prerequisites: { type: 'AND', skills: ['vital_strike', 'thunder_clap'] }, fusionType: 'dagger_thunder' },
+      { id: 'storm_flurry', name: 'Storm Flurry', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Chain thunder enhances your daggers, dealing 3d6 Thunder Damage to multiple targets. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_dagger', 'thunder_strike'] }, fusionType: 'dagger_thunder' },
       // Earth
       { id: 'stone_dagger', name: 'Stone Dagger', tier: 2, cost: 15, staminaCost: 3, desc: 'Passive: Dagger attacks deal +1d6 Earth Damage and ignore 2 points of armor.', icon: '🗡️🪨', prerequisites: { type: 'AND', skills: ['dual_wield', 'stone_throw'] }, fusionType: 'dagger_earth' },
       { id: 'crystal_strike', name: 'Crystal Strike', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A crystalline strike dealing 2d6 Earth Damage. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '💎🗡️', prerequisites: { type: 'AND', skills: ['vital_strike', 'stone_wall'] }, fusionType: 'dagger_earth' },
@@ -703,10 +703,10 @@ const SKILLS_DATA = {
       { id: 'frost_halberd', name: 'Frost Halberd', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Polearm attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized (status-effects.js lines 54-64). Costs 2 stamina per turn while active.', icon: '🔱❄️', prerequisites: { type: 'AND', skills: ['thrust_attack', 'ice_shard'] }, fusionType: 'polearm_ice' },
       { id: 'glacier_sweep', name: 'Glacier Sweep', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A freezing sweep dealing 2d6 Ice Damage. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '❄️🔱', prerequisites: { type: 'AND', skills: ['sweep_attack', 'ice_wall'] }, fusionType: 'polearm_ice' },
       { id: 'winter_vortex', name: 'Winter Vortex', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Spin your polearm creating an icy vortex, dealing 3d6 Ice Damage. Has a 75% chance to apply Weakened (status-effects.js lines 47-57)', icon: '🌨️❄️', prerequisites: { type: 'AND', skills: ['frost_halberd', 'glacier_sweep'] }, fusionType: 'polearm_ice' },
-      // Lightning
-      { id: 'storm_glaive', name: 'Storm Glaive', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Polearm attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🔱⚡', prerequisites: { type: 'AND', skills: ['thrust_attack', 'spark'] }, fusionType: 'polearm_lightning' },
-      { id: 'thunder_sweep', name: 'Thunder Sweep', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A charged sweep dealing 2d6 Lightning Damage. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🔱', prerequisites: { type: 'AND', skills: ['sweep_attack', 'thunder_clap'] }, fusionType: 'polearm_lightning' },
-      { id: 'lightning_spiral', name: 'Lightning Spiral', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Spin your polearm creating a spiral of lightning, dealing 3d6 Lightning Damage. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_glaive', 'thunder_sweep'] }, fusionType: 'polearm_lightning' },
+      // Thunder
+      { id: 'storm_glaive', name: 'Storm Glaive', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Polearm attacks deal +1d6 Thunder Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🔱⚡', prerequisites: { type: 'AND', skills: ['thrust_attack', 'spark'] }, fusionType: 'polearm_thunder' },
+      { id: 'thunder_sweep', name: 'Thunder Sweep', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A charged sweep dealing 2d6 Thunder Damage. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🔱', prerequisites: { type: 'AND', skills: ['sweep_attack', 'thunder_clap'] }, fusionType: 'polearm_thunder' },
+      { id: 'thunder_spiral', name: 'Thunder Spiral', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Spin your polearm creating a spiral of thunder, dealing 3d6 Thunder Damage. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_glaive', 'thunder_sweep'] }, fusionType: 'polearm_thunder' },
       // Earth
       { id: 'stone_halberd', name: 'Stone Halberd', tier: 2, cost: 15, staminaCost: 3, desc: 'Passive: Polearm attacks deal +1d6 Earth Damage and ignore 2 points of armor.', icon: '🔱🪨', prerequisites: { type: 'AND', skills: ['thrust_attack', 'stone_throw'] }, fusionType: 'polearm_earth' },
       { id: 'earthen_sweep', name: 'Earthen Sweep', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A rocky sweep dealing 2d6 Earth Damage. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '🪨🔱', prerequisites: { type: 'AND', skills: ['sweep_attack', 'stone_wall'] }, fusionType: 'polearm_earth' },
@@ -737,10 +737,10 @@ const SKILLS_DATA = {
       { id: 'frost_hammer', name: 'Frost Hammer', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Hammer attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized (status-effects.js lines 54-64). Costs 2 stamina per turn while active.', icon: '🔨❄️', prerequisites: { type: 'AND', skills: ['armor_crusher', 'ice_shard'] }, fusionType: 'hammer_ice' },
       { id: 'glacial_pound', name: 'Glacial Pound', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A freezing hammer strike that deals 2d6 Ice Damage and creates a field of ice. Enemies in the area become Slowed and have a 40% chance to be Immobilized (status-effects.js lines 54-64)', icon: '❄️🔨', prerequisites: { type: 'AND', skills: ['ground_slam', 'ice_wall'] }, fusionType: 'hammer_ice' },
       { id: 'permafrost_crash', name: 'Permafrost Crash', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: A massive hammer strike that creates an explosion of ice, dealing 3d6 Ice Damage in a large area. Has a 75% chance to apply both Immobilized and Weakened (status-effects.js lines 54-64, 47-57)', icon: '❄️💥', prerequisites: { type: 'AND', skills: ['frost_hammer', 'glacial_pound'] }, fusionType: 'hammer_ice' },
-      // Lightning
-      { id: 'storm_hammer', name: 'Storm Hammer', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Hammer attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🔨⚡', prerequisites: { type: 'AND', skills: ['armor_crusher', 'spark'] }, fusionType: 'hammer_lightning' },
-      { id: 'thunder_slam', name: 'Thunder Slam', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A thunder-charged strike dealing 2d6 Lightning Damage in an area. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🔨', prerequisites: { type: 'AND', skills: ['ground_slam', 'thunder_clap'] }, fusionType: 'hammer_lightning' },
-      { id: 'storm_surge', name: 'Storm Surge', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Channel lightning through your hammer, dealing 3d6 Lightning Damage to all nearby enemies. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_hammer', 'thunder_slam'] }, fusionType: 'hammer_lightning' },
+      // Thunder
+      { id: 'storm_hammer', name: 'Storm Hammer', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Hammer attacks deal +1d6 Thunder Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🔨⚡', prerequisites: { type: 'AND', skills: ['armor_crusher', 'spark'] }, fusionType: 'hammer_thunder' },
+      { id: 'thunder_slam', name: 'Thunder Slam', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A thunder-charged strike dealing 2d6 Thunder Damage in an area. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🔨', prerequisites: { type: 'AND', skills: ['ground_slam', 'thunder_clap'] }, fusionType: 'hammer_thunder' },
+      { id: 'storm_surge', name: 'Storm Surge', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Channel thunder through your hammer, dealing 3d6 Thunder Damage to all nearby enemies. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_hammer', 'thunder_slam'] }, fusionType: 'hammer_thunder' },
       // Earth
       { id: 'earthshaker_hammer', name: 'Earthshaker Hammer', tier: 2, cost: 15, staminaCost: 3, desc: 'Passive: Hammer attacks deal +1d6 Earth Damage and ignore 2 points of armor.', icon: '🔨🪨', prerequisites: { type: 'AND', skills: ['armor_crusher', 'stone_throw'] }, fusionType: 'hammer_earth' },
       { id: 'tectonic_slam', name: 'Tectonic Slam', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A ground-shattering strike dealing 2d6 Earth Damage. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '🪨🔨', prerequisites: { type: 'AND', skills: ['ground_slam', 'stone_wall'] }, fusionType: 'hammer_earth' },
@@ -771,8 +771,8 @@ const SKILLS_DATA = {
       { id: 'frost_axe', name: 'Frost Axe', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Axe attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized (status-effects.js lines 54-64). Costs 2 stamina per turn while active.', icon: '🪓❄️', prerequisites: { type: 'AND', skills: ['cleave', 'ice_shard'] }, fusionType: 'axe_ice' },
       { id: 'frozen_cleave', name: 'Frozen Cleave', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: A freezing cleave attack dealing 2d6 Ice Damage to all adjacent enemies. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '❄️🪓', prerequisites: { type: 'AND', skills: ['wide_cleave', 'ice_wall'] }, fusionType: 'axe_ice' },
       { id: 'avalanche_strike', name: 'Avalanche Strike', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: A massive overhead strike dealing 3d6 Ice Damage in an area. Has a 75% chance to apply Weakened (status-effects.js lines 47-57)', icon: '🌨️❄️', prerequisites: { type: 'AND', skills: ['frost_axe', 'frozen_cleave'] }, fusionType: 'axe_ice' },
-      // Lightning
-      { id: 'storm_axe', name: 'Storm Axe', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Axe attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🪓⚡', prerequisites: { type: 'AND', skills: ['cleave', 'spark'] }, fusionType: 'axe_lightning' },
+      // Thunder
+      { id: 'storm_axe', name: 'Storm Axe', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Axe attacks deal +1d6 Thunder Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🪓⚡', prerequisites: { type: 'AND', skills: ['cleave', 'spark'] }, fusionType: 'axe_thunder' },
       // Earth
       { id: 'stone_axe', name: 'Stone Axe', tier: 2, cost: 15, staminaCost: 3, desc: 'Passive: Axe attacks deal +1d6 Earth Damage and ignore 2 points of armor.', icon: '🪓🪨', prerequisites: { type: 'AND', skills: ['cleave', 'stone_throw'] }, fusionType: 'axe_earth' },
       // Wind
@@ -793,10 +793,10 @@ const SKILLS_DATA = {
       { id: 'frost_staff', name: 'Frost Staff', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Staff attacks deal +1d6 Ice Damage and have a 20% chance to apply Immobilized (status-effects.js lines 54-64). Costs 2 stamina per turn while active.', icon: '🪄❄️', prerequisites: { type: 'AND', skills: ['spell_power', 'ice_shard'] }, fusionType: 'staff_ice' },
       { id: 'glacial_focus', name: 'Glacial Focus', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: Focus ice magic through your staff, dealing 2d6 Ice Damage in a cone. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '❄️🪄', prerequisites: { type: 'AND', skills: ['staff_strike', 'ice_wall'] }, fusionType: 'staff_ice' },
       { id: 'winter_staff', name: 'Winter Staff', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Your staff becomes pure ice, dealing 3d6 Ice Damage in an area. Has a 75% chance to apply both Immobilized and Weakened (status-effects.js lines 54-64, 47-57)', icon: '🌨️❄️', prerequisites: { type: 'AND', skills: ['frost_staff', 'glacial_focus'] }, fusionType: 'staff_ice' },
-      // Lightning
-      { id: 'storm_staff', name: 'Storm Staff', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Staff attacks deal +1d6 Lightning Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🪄⚡', prerequisites: { type: 'AND', skills: ['spell_power', 'spark'] }, fusionType: 'staff_lightning' },
-      { id: 'thunder_focus', name: 'Thunder Focus', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: Channel lightning through your staff, dealing 2d6 Lightning Damage in a cone. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🪄', prerequisites: { type: 'AND', skills: ['staff_strike', 'thunder_clap'] }, fusionType: 'staff_lightning' },
-      { id: 'tempest_staff', name: 'Tempest Staff', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Your staff becomes pure lightning, dealing 3d6 Lightning Damage in an area. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_staff', 'thunder_focus'] }, fusionType: 'staff_lightning' },
+      // Thunder
+      { id: 'storm_staff', name: 'Storm Staff', tier: 2, cost: 15, staminaCost: 2, desc: 'Toggle: Staff attacks deal +1d6 Thunder Damage and have a 20% chance to apply Incapacitated (status-effects.js lines 17-27). Costs 2 stamina per turn while active.', icon: '🪄⚡', prerequisites: { type: 'AND', skills: ['spell_power', 'spark'] }, fusionType: 'staff_thunder' },
+      { id: 'thunder_focus', name: 'Thunder Focus', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: Channel thunder through your staff, dealing 2d6 Thunder Damage in a cone. Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡🪄', prerequisites: { type: 'AND', skills: ['staff_strike', 'thunder_clap'] }, fusionType: 'staff_thunder' },
+      { id: 'tempest_staff', name: 'Tempest Staff', tier: 4, cost: 30, staminaCost: 8, desc: 'Active: Your staff becomes pure thunder, dealing 3d6 Thunder Damage in an area. Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️⚡', prerequisites: { type: 'AND', skills: ['storm_staff', 'thunder_focus'] }, fusionType: 'staff_thunder' },
       // Earth
       { id: 'stone_staff', name: 'Stone Staff', tier: 2, cost: 15, staminaCost: 3, desc: 'Passive: Staff attacks deal +1d6 Earth Damage and ignore 2 points of armor.', icon: '🪄🪨', prerequisites: { type: 'AND', skills: ['spell_power', 'stone_throw'] }, fusionType: 'staff_earth' },
       { id: 'crystal_focus', name: 'Crystal Focus', tier: 3, cost: 23, staminaCost: 5, desc: 'Active: Channel earth magic through your staff, dealing 2d6 Earth Damage in a cone. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '🪨🪄', prerequisites: { type: 'AND', skills: ['staff_strike', 'stone_wall'] }, fusionType: 'staff_earth' },
@@ -836,16 +836,16 @@ const SKILLS_DATA = {
 
       // Fire + Lightning combinations
       {
-        id: 'plasma_bolt', name: 'Plasma Bolt', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Fire an energized bolt dealing 2d4 fire or Lightning Damage (whichever the target is weak to). Has a 20% chance to apply both Burn and Incapacitated (status-effects.js lines 4-14, 17-27)', icon: '⚡🔥',
-        prerequisites: { type: 'AND', skills: ['fireball', 'spark'] }, fusionType: 'fire_lightning'
+        id: 'plasma_bolt', name: 'Plasma Bolt', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Fire an energized bolt dealing 2d4 fire or Thunder Damage (whichever the target is weak to). Has a 20% chance to apply both Burn and Incapacitated (status-effects.js lines 4-14, 17-27)', icon: '⚡🔥',
+        prerequisites: { type: 'AND', skills: ['fireball', 'spark'] }, fusionType: 'fire_thunder'
       },
       {
-        id: 'storm_of_cinders', name: 'Storm of Cinders', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Create a swirling storm of electrified flames dealing 2d6 fire or Lightning Damage (whichever the target is weak to) to an area. Has a 40% chance to apply Burn (status-effects.js lines 4-14)', icon: '🌩️✨',
-        prerequisites: { type: 'AND', skills: ['plasma_bolt', 'thunder_clap'] }, fusionType: 'fire_lightning'
+        id: 'storm_of_cinders', name: 'Storm of Cinders', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Create a swirling storm of electrified flames dealing 2d6 fire or Thunder Damage (whichever the target is weak to) to an area. Has a 40% chance to apply Burn (status-effects.js lines 4-14)', icon: '🌩️✨',
+        prerequisites: { type: 'AND', skills: ['plasma_bolt', 'thunder_clap'] }, fusionType: 'fire_thunder'
       },
       {
-        id: 'fusion_strike', name: 'Fusion Strike', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Channel pure energy to strike all enemies for 3d6 fire or Lightning Damage (whichever each target is weak to). Has a 75% chance to apply both Burn and Incapacitated (status-effects.js lines 4-14, 17-27)', icon: '⚡💥',
-        prerequisites: { type: 'AND', skills: ['storm_of_cinders', 'chain_lightning'] }, fusionType: 'fire_lightning'
+        id: 'fusion_strike', name: 'Fusion Strike', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Channel pure energy to strike all enemies for 3d6 fire or Thunder Damage (whichever each target is weak to). Has a 75% chance to apply both Burn and Incapacitated (status-effects.js lines 4-14, 17-27)', icon: '⚡💥',
+        prerequisites: { type: 'AND', skills: ['storm_of_cinders', 'chain_thunder'] }, fusionType: 'fire_thunder'
       },
 
       // Fire + Earth combinations
@@ -864,16 +864,16 @@ const SKILLS_DATA = {
 
       // Ice + Lightning combinations
       {
-        id: 'static_freeze', name: 'Static Freeze', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Create a field of electrically charged ice dealing 2d4 Ice Damage or Lightning Damage (whichever the target is weak to). Has a 20% chance to apply both Weakened and Incapacitated (status-effects.js lines 47-57, 17-27)', icon: '❄️⚡',
-        prerequisites: { type: 'AND', skills: ['ice_shard', 'spark'] }, fusionType: 'ice_lightning'
+        id: 'static_freeze', name: 'Static Freeze', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Create a field of electrically charged ice dealing 2d4 Ice Damage or Thunder Damage (whichever the target is weak to). Has a 20% chance to apply both Weakened and Incapacitated (status-effects.js lines 47-57, 17-27)', icon: '❄️⚡',
+        prerequisites: { type: 'AND', skills: ['ice_shard', 'spark'] }, fusionType: 'ice_thunder'
       },
       {
-        id: 'crystalline_surge', name: 'Crystalline Surge', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Lightning arcs between ice crystals, dealing 2d6 Ice Damage or Lightning Damage (whichever the target is weak to) in a chain. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '💎⚡',
-        prerequisites: { type: 'AND', skills: ['static_freeze', 'thunder_clap'] }, fusionType: 'ice_lightning'
+        id: 'crystalline_surge', name: 'Crystalline Surge', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Thunder arcs between ice crystals, dealing 2d6 Ice Damage or Thunder Damage (whichever the target is weak to) in a chain. Has a 40% chance to apply Immobilized (status-effects.js lines 54-64)', icon: '💎⚡',
+        prerequisites: { type: 'AND', skills: ['static_freeze', 'thunder_clap'] }, fusionType: 'ice_thunder'
       },
       {
-        id: 'arctic_storm', name: 'Arctic Storm', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Unleash a devastating winter storm dealing 3d6 Ice Damage or Lightning Damage (whichever each target is weak to) to all enemies. Has a 75% chance to apply both Immobilized and Incapacitated (status-effects.js lines 54-64, 17-27)', icon: '❄️🌩️',
-        prerequisites: { type: 'AND', skills: ['crystalline_surge', 'blizzard'] }, fusionType: 'ice_lightning'
+        id: 'arctic_storm', name: 'Arctic Storm', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Unleash a devastating winter storm dealing 3d6 Ice Damage or Thunder Damage (whichever each target is weak to) to all enemies. Has a 75% chance to apply both Immobilized and Incapacitated (status-effects.js lines 54-64, 17-27)', icon: '❄️🌩️',
+        prerequisites: { type: 'AND', skills: ['crystalline_surge', 'blizzard'] }, fusionType: 'ice_thunder'
       },
 
       // Darkness + Light combinations  
@@ -1060,58 +1060,58 @@ const SKILLS_DATA = {
 
       // Lightning + Wind combinations
       {
-        id: 'storm_front', name: 'Storm Front', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Create a moving electrical storm dealing 2d4 Lightning Damage or Wind Damage (whichever the target is weak to). Has a 20% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡💨',
-        prerequisites: { type: 'AND', skills: ['spark', 'gust'] }, fusionType: 'lightning_wind'
+        id: 'storm_front', name: 'Storm Front', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Create a moving electrical storm dealing 2d4 Thunder Damage or Wind Damage (whichever the target is weak to). Has a 20% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡💨',
+        prerequisites: { type: 'AND', skills: ['spark', 'gust'] }, fusionType: 'thunder_wind'
       },
       {
-        id: 'charged_cyclone', name: 'Charged Cyclone', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Form a spinning vortex of electricity dealing 2d6 Lightning Damage or Wind Damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened (status-effects.js lines 17-27, 47-57)', icon: '🌪️⚡',
-        prerequisites: { type: 'AND', skills: ['storm_front', 'wind_barrier'] }, fusionType: 'lightning_wind'
+        id: 'charged_cyclone', name: 'Charged Cyclone', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Form a spinning vortex of electricity dealing 2d6 Thunder Damage or Wind Damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened (status-effects.js lines 17-27, 47-57)', icon: '🌪️⚡',
+        prerequisites: { type: 'AND', skills: ['storm_front', 'wind_barrier'] }, fusionType: 'thunder_wind'
       },
       {
-        id: 'thunderstorm', name: 'Thunderstorm', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Unleash nature\'s fury dealing 3d6 Lightning Damage or Wind Damage (whichever each target is weak to). Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️💨',
-        prerequisites: { type: 'AND', skills: ['charged_cyclone', 'chain_lightning'] }, fusionType: 'lightning_wind'
+        id: 'thunderstorm', name: 'Thunderstorm', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Unleash nature\'s fury dealing 3d6 Thunder Damage or Wind Damage (whichever each target is weak to). Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⛈️💨',
+        prerequisites: { type: 'AND', skills: ['charged_cyclone', 'chain_thunder'] }, fusionType: 'thunder_wind'
       },
 
       // Lightning + Water combinations
       {
-        id: 'conductivity', name: 'Conductivity', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Electrify water dealing 2d4 Lightning Damage or Water Damage (whichever the target is weak to). Has a 20% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡💧',
-        prerequisites: { type: 'AND', skills: ['spark', 'water_splash'] }, fusionType: 'lightning_water'
+        id: 'conductivity', name: 'Conductivity', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Electrify water dealing 2d4 Thunder Damage or Water Damage (whichever the target is weak to). Has a 20% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '⚡💧',
+        prerequisites: { type: 'AND', skills: ['spark', 'water_splash'] }, fusionType: 'thunder_water'
       },
       {
-        id: 'storm_surge', name: 'Storm Surge', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Create a wave of electrified water dealing 2d6 Lightning Damage or Water Damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened (status-effects.js lines 17-27, 47-57)', icon: '🌊⚡',
-        prerequisites: { type: 'AND', skills: ['conductivity', 'water_shield'] }, fusionType: 'lightning_water'
+        id: 'storm_surge', name: 'Storm Surge', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Create a wave of electrified water dealing 2d6 Thunder Damage or Water Damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened (status-effects.js lines 17-27, 47-57)', icon: '🌊⚡',
+        prerequisites: { type: 'AND', skills: ['conductivity', 'water_shield'] }, fusionType: 'thunder_water'
       },
       {
-        id: 'maelstrom_strike', name: 'Maelstrom Strike', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Summon a whirlpool of lightning dealing 3d6 Lightning Damage or Water Damage (whichever each target is weak to). Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '🌊⚡',
-        prerequisites: { type: 'AND', skills: ['storm_surge', 'chain_lightning'] }, fusionType: 'lightning_water'
+        id: 'maelstrom_strike', name: 'Maelstrom Strike', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Summon a whirlpool of thunder dealing 3d6 Thunder Damage or Water Damage (whichever each target is weak to). Has a 75% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '🌊⚡',
+        prerequisites: { type: 'AND', skills: ['storm_surge', 'chain_thunder'] }, fusionType: 'thunder_water'
       },
 
       // Lightning + Darkness combinations
       {
-        id: 'dark_lightning', name: 'Dark Lightning', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Strike with shadowy electricity dealing 2d4 Lightning Damage or Darkness Damage (whichever the target is weak to). Has a 20% chance to apply both Incapacitated and Mind Controlled (status-effects.js lines 17-27, 67-77; fear variant)', icon: '⚡🌑',
-        prerequisites: { type: 'AND', skills: ['spark', 'shadow_bolt'] }, fusionType: 'lightning_darkness'
+        id: 'dark_thunder', name: 'Dark Thunder', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Strike with shadowy electricity dealing 2d4 Thunder Damage or Darkness Damage (whichever the target is weak to). Has a 20% chance to apply both Incapacitated and Mind Controlled (status-effects.js lines 17-27, 67-77; fear variant)', icon: '⚡🌑',
+        prerequisites: { type: 'AND', skills: ['spark', 'shadow_bolt'] }, fusionType: 'thunder_darkness'
       },
       {
-        id: 'void_thunder', name: 'Void Thunder', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Channel darkness through lightning dealing 2d6 Lightning Damage or Darkness Damage (whichever the target is weak to). Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '🌩️🌑',
-        prerequisites: { type: 'AND', skills: ['dark_lightning', 'shadow_armor'] }, fusionType: 'lightning_darkness'
+        id: 'void_thunder', name: 'Void Thunder', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Channel darkness through thunder dealing 2d6 Thunder Damage or Darkness Damage (whichever the target is weak to). Has a 40% chance to apply Incapacitated (status-effects.js lines 17-27)', icon: '🌩️🌑',
+        prerequisites: { type: 'AND', skills: ['dark_thunder', 'shadow_armor'] }, fusionType: 'thunder_darkness'
       },
       {
-        id: 'eclipse_storm', name: 'Eclipse Storm', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Unleash a storm of dark energy dealing 3d6 Lightning Damage or Darkness Damage (whichever each target is weak to). Has a 75% chance to apply both Incapacitated and Mind Controlled (status-effects.js lines 17-27, 67-77; fear variant)', icon: '⚡🌑',
-        prerequisites: { type: 'AND', skills: ['void_thunder', 'chain_lightning'] }, fusionType: 'lightning_darkness'
+        id: 'eclipse_storm', name: 'Eclipse Storm', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Unleash a storm of dark energy dealing 3d6 Thunder Damage or Darkness Damage (whichever each target is weak to). Has a 75% chance to apply both Incapacitated and Mind Controlled (status-effects.js lines 17-27, 67-77; fear variant)', icon: '⚡🌑',
+        prerequisites: { type: 'AND', skills: ['void_thunder', 'chain_thunder'] }, fusionType: 'thunder_darkness'
       },
 
       // Lightning + Light combinations
       {
-        id: 'radiant_bolt', name: 'Radiant Bolt', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Fire a beam of pure energy dealing 2d4 Lightning Damage or Light Damage (whichever the target is weak to). Has a 20% chance to apply Mind Controlled (status-effects.js lines 67-77; charm variant)', icon: '⚡☀️',
-        prerequisites: { type: 'AND', skills: ['spark', 'light_ray'] }, fusionType: 'lightning_light'
+        id: 'radiant_bolt', name: 'Radiant Bolt', tier: 2, cost: 10, staminaCost: 4, desc: 'Active: Fire a beam of pure energy dealing 2d4 Thunder Damage or Light Damage (whichever the target is weak to). Has a 20% chance to apply Mind Controlled (status-effects.js lines 67-77; charm variant)', icon: '⚡☀️',
+        prerequisites: { type: 'AND', skills: ['spark', 'light_ray'] }, fusionType: 'thunder_light'
       },
       {
-        id: 'divine_thunder', name: 'Divine Thunder', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Call down judgment dealing 2d6 Lightning Damage or Light Damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Mind Controlled (status-effects.js lines 17-27, 67-77; charm variant)', icon: '⚡✨',
-        prerequisites: { type: 'AND', skills: ['radiant_bolt', 'light_shield'] }, fusionType: 'lightning_light'
+        id: 'divine_thunder', name: 'Divine Thunder', tier: 3, cost: 15, staminaCost: 6, desc: 'Active: Call down judgment dealing 2d6 Thunder Damage or Light Damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Mind Controlled (status-effects.js lines 17-27, 67-77; charm variant)', icon: '⚡✨',
+        prerequisites: { type: 'AND', skills: ['radiant_bolt', 'light_shield'] }, fusionType: 'thunder_light'
       },
       {
-        id: 'heavens_wrath', name: 'Heaven\'s Wrath', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Channel celestial power dealing 3d6 Lightning Damage or Light Damage (whichever each target is weak to). Has a 75% chance to apply both Incapacitated and Enhanced (status-effects.js lines 17-27, 90-100)', icon: '⚡☀️',
-        prerequisites: { type: 'AND', skills: ['divine_thunder', 'chain_lightning'] }, fusionType: 'lightning_light'
+        id: 'heavens_wrath', name: 'Heaven\'s Wrath', tier: 4, cost: 20, staminaCost: 8, desc: 'Active: Channel celestial power dealing 3d6 Thunder Damage or Light Damage (whichever each target is weak to). Has a 75% chance to apply both Incapacitated and Enhanced (status-effects.js lines 17-27, 90-100)', icon: '⚡☀️',
+        prerequisites: { type: 'AND', skills: ['divine_thunder', 'chain_thunder'] }, fusionType: 'thunder_light'
       },
 
       // Earth + Darkness combinations
@@ -1492,13 +1492,13 @@ const SKILL_INCOMPATIBILITIES = {
   // Some fusion skills are incompatible with certain masteries to prevent game-breaking combinations
   sword_fire_fusion: ['ice_mastery', 'water_mastery'],
   sword_ice_fusion: ['fire_mastery'],
-  bow_lightning_fusion: ['water_mastery'],
+  bow_thunder_fusion: ['water_mastery'],
 
   // Mastery limitations - can't have too many elemental masteries
   fire_mastery: ['ice_mastery', 'water_mastery'],
   ice_mastery: ['fire_mastery'],
-  water_mastery: ['fire_mastery', 'lightning_mastery'],
-  lightning_mastery: ['water_mastery']
+  water_mastery: ['fire_mastery', 'thunder_mastery'],
+  thunder_mastery: ['water_mastery']
 }
 
 // Check if a skill is compatible with already unlocked skills

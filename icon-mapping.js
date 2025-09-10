@@ -208,7 +208,7 @@ class IconMapper {
                 air: 'magic_1.png',
                 wind: 'magic_1.png',
                 ice: 'ice_crystal.png',
-                lightning: 'blue_magic.png',
+                thunder: 'blue_magic.png',
                 light: 'crystal.png',
                 darkness: 'dark_energy_orb.png',
 
@@ -876,7 +876,8 @@ class IconMapper {
         const emojiBackup = emojiFallbacks[category]?.[type] || '📦'
 
         return `<img src="${iconPath}" width="${size}" height="${size}" class="icon ${className}" alt="${type}" 
-                 onerror="this.outerHTML='<span class=\\"icon emoji-icon ${className}\\" style=\\"font-size: ${size}px;\\" title=\\"${type}\\">${emojiBackup}</span>'" />`
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+                 <span class="icon emoji-icon ${className}" style="font-size: ${size}px; display: none;" title="${type}">${emojiBackup}</span>`
     }
 
     // Create inline SVG (for better styling control)

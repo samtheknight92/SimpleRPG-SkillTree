@@ -84,7 +84,7 @@ const MONSTER_LOOT_SYSTEM = {
         // Magic skills
         fire_breath: { type: 'fire', keywords: ['fire', 'flame', 'burn', 'heat', 'magic'] },
         ice_breath: { type: 'ice', keywords: ['ice', 'frost', 'cold', 'freeze', 'magic'] },
-        lightning_breath: { type: 'lightning', keywords: ['lightning', 'thunder', 'spark', 'electric', 'magic'] },
+        thunder_breath: { type: 'thunder', keywords: ['thunder', 'spark', 'electric', 'magic'] },
         poison_breath: { type: 'poison', keywords: ['poison', 'venom', 'toxic', 'magic'] },
         acid_spit: { type: 'acid', keywords: ['acid', 'corrosion', 'magic'] },
         fear_aura: { type: 'dark', keywords: ['fear', 'dark', 'shadow', 'magic'] },
@@ -107,7 +107,7 @@ const MONSTER_LOOT_SYSTEM = {
 
     // Generate dynamic loot based on monster level and skills
     generateDynamicLoot(monster) {
-        if (!monster || !monster.isMonster) return []
+        if (!monster || !monster.isEnemy) return []
 
         const monsterLevel = this.calculateMonsterLevel(monster)
         const monsterSkills = this.getAllMonsterSkills(monster)

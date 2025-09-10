@@ -172,7 +172,7 @@ body {
     text-align: center;
 }
 .folder-controls .btn {
-    font-size: 11px;
+    font-size: 15px;
     padding: 4px 8px;
 }
 /* Character Folders */
@@ -210,7 +210,7 @@ body {
     font-size: 12px;
 }
 .folder-count {
-    font-size: 10px;
+    font-size: 14px;
     color: #999;
     margin-right: 6px;
 }
@@ -222,7 +222,7 @@ body {
     padding: 2px;
     border-radius: 2px;
     transition: background 0.2s ease;
-    font-size: 10px;
+    font-size: 14px;
 }
 .folder-delete:hover {
     background: rgba(255, 107, 107, 0.2);
@@ -242,7 +242,7 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     color: #e0e0e0;
-    font-size: 11px;
+    font-size: 15px;
     min-height: 28px;
     position: relative;
     overflow: hidden;
@@ -317,7 +317,7 @@ body {
 }
 .character-card .character-name {
     font-weight: 500;
-    font-size: 10px;
+    font-size: 14px;
     margin-bottom: 1px;
     white-space: nowrap;
     overflow: hidden;
@@ -443,7 +443,7 @@ body {
     margin-left: 16px;
 }
 .submenu-header {
-    font-size: 11px;
+    font-size: 15px;
     color: #bbb;
     margin-bottom: 4px;
     font-weight: bold;
@@ -509,7 +509,7 @@ body {
     font-size: 14px;
 }
 .tooltip-level {
-    font-size: 11px;
+    font-size: 15px;
     opacity: 0.8;
     margin-top: 1px;
     height: 16px !important;
@@ -604,7 +604,7 @@ body {
     flex-wrap: wrap;
 }
 .character-actions .btn {
-    font-size: 11px;
+    font-size: 15px;
     padding: 4px 8px;
     flex: 1;
     min-width: 50px;
@@ -873,7 +873,7 @@ body {
     transform: translateX(-50%);
     background: #9c27b0;
     color: white;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     padding: 2px 8px;
     border-radius: 10px;
@@ -916,7 +916,7 @@ body {
     font-size: 14px;
 }
 .skill-name .source-race {
-    font-size: 11px;
+    font-size: 15px;
     font-weight: normal;
     color: #a0a0a0;
     font-style: italic;
@@ -1008,6 +1008,26 @@ body {
     background: linear-gradient(45deg, #ff7961, #f44336);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+}
+.btn-success {
+    background: linear-gradient(45deg, #4caf50, #81c784);
+    color: white;
+}
+.btn-success:hover {
+    background: linear-gradient(45deg, #81c784, #4caf50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.btn-info {
+    background: linear-gradient(45deg, #2196f3, #64b5f6);
+    color: white;
+}
+
+.btn-info:hover {
+    background: linear-gradient(45deg, #64b5f6, #2196f3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
 }
 .btn-small {
     padding: 8px 16px;
@@ -1313,7 +1333,7 @@ select option:hover {
 .lumen-breakdown {
     margin-top: 4px;
     color: #b0b0b0;
-    font-size: 11px;
+    font-size: 15px;
     font-style: italic;
 }
 
@@ -1406,7 +1426,7 @@ select option:hover {
     flex-direction: column;
     align-items: center;
     min-width: 80px;
-    font-size: 11px;
+    font-size: 15px;
 }
 
 .tier-rarity {
@@ -1416,12 +1436,12 @@ select option:hover {
 
 .tier-count {
     color: #ccc;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .tier-chance {
     color: #ffd700;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -1656,7 +1676,7 @@ select option:hover {
     right: -6px;
     background: #ffd700;
     color: #1a1a2e;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     padding: 2px 4px;
     border-radius: 10px;
@@ -1688,7 +1708,7 @@ select option:hover {
 .skill-subcategory-tag {
     background: rgba(255, 215, 0, 0.2);
     color: #ffd700;
-    font-size: 10px;
+    font-size: 14px;
     padding: 2px 6px;
     border-radius: 12px;
     line-height: 1;
@@ -1705,7 +1725,7 @@ select option:hover {
     border: none;
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -1738,7 +1758,7 @@ select option:hover {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    font-size: 11px;
+    font-size: 15px;
 }
 
 .skill-cost,
@@ -1759,7 +1779,7 @@ select option:hover {
     color: #ffa500;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 /* Tier-based coloring */
@@ -2387,7 +2407,7 @@ select option:hover {
 
 .dual-wield-indicator {
     color: #4CAF50;
-    font-size: 10px;
+    font-size: 14px;
     font-style: italic;
     margin-bottom: 8px;
     text-align: center;
@@ -2425,7 +2445,7 @@ select option:hover {
 }
 .enchantment-label {
     color: #ffd700;
-    font-size: 11px;
+    font-size: 15px;
     text-transform: uppercase;
     font-weight: bold;
     margin-bottom: 6px;
@@ -2488,7 +2508,7 @@ select option:hover {
     color: #ffd700;
     padding: 6px 8px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     white-space: nowrap;
     z-index: 1000;
     pointer-events: none;
@@ -2671,7 +2691,7 @@ select option:hover {
 .inventory-item.enchantment-item .item-type {
     color: #e74c3c;
     font-weight: 600;
-    font-size: 11px;
+    font-size: 15px;
 }
 .inventory-header {
     display: flex;
@@ -2693,7 +2713,7 @@ select option:hover {
     border: none;
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -2720,7 +2740,7 @@ select option:hover {
     color: #000;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     text-shadow: none;
     margin-left: auto;
@@ -2775,13 +2795,13 @@ select option:hover {
     margin-top: 8px;
 }
 .item-actions .btn {
-    font-size: 11px;
+    font-size: 15px;
     padding: 4px 8px;
     min-width: auto;
 }
 .item-tooltip {
     color: #b0b0b0;
-    font-size: 11px;
+    font-size: 15px;
     margin-top: 6px;
     line-height: 1.3;
 }
@@ -2860,7 +2880,7 @@ select option:hover {
 }
 .effect-turns {
     color: #ffd700;
-    font-size: 11px;
+    font-size: 15px;
     margin-top: 1px;
     height: 16px !important;
     line-height: 12px !important;
@@ -2901,7 +2921,7 @@ select option:hover {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
     padding: 6px 8px;
-    font-size: 11px;
+    font-size: 15px;
     color: #d0d0d0;
 }
 /* Duration Bar */
@@ -2962,7 +2982,7 @@ select option:hover {
 .shop-item .item-name {
     color: #e0e0e0;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 14px;
     line-height: 1.1;
     text-align: center;
     overflow: hidden;
@@ -2982,7 +3002,7 @@ select option:hover {
     padding: 1px 3px !important;
     border-radius: 3px;
     font-weight: bold;
-    font-size: 6px !important;
+    font-size: 10px !important;
     cursor: pointer;
     transition: all 0.2s ease;
     margin-top: 1px;
@@ -3014,7 +3034,7 @@ select option:hover {
 }
 /* Weapon Damage Display */
 .weapon-damage {
-    font-size: 6px !important;
+    font-size: 10px !important;
     color: #ff6b6b;
     font-weight: bold;
     text-align: center;
@@ -3026,7 +3046,7 @@ select option:hover {
 }
 /* Weapon Damage in Character Sheet Equipment */
 .weapon-damage-equipped {
-    font-size: 10px;
+    font-size: 14px;
     color: #ff6b6b;
     font-weight: bold;
     text-align: center;
@@ -3038,7 +3058,7 @@ select option:hover {
 }
 /* Weapon Damage in Inventory */
 .weapon-damage-inventory {
-    font-size: 11px;
+    font-size: 15px;
     color: #ff6b6b;
     font-weight: bold;
     margin: 2px 0;
@@ -3116,7 +3136,7 @@ select option:hover {
     border: 1px solid #4ecdc4;
     border-radius: 4px;
     padding: 2px 6px;
-    font-size: 10px;
+    font-size: 14px;
     color: #4ecdc4;
     margin-right: 4px;
     margin-bottom: 3px;
@@ -3124,7 +3144,7 @@ select option:hover {
 }
 .shop-item-tooltip .tooltip-rarity {
     color: #ffd700;
-    font-size: 10px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 6px;
@@ -3182,7 +3202,7 @@ select option:hover {
     color: white;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -3208,7 +3228,7 @@ select option:hover {
     border: 1px solid #2ecc71;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     color: #2ecc71;
     white-space: nowrap;
 }
@@ -3218,14 +3238,14 @@ select option:hover {
 .inventory-item-tooltip .tooltip-effect {
     display: block;
     color: #f39c12;
-    font-size: 11px;
+    font-size: 15px;
     margin-bottom: 2px;
 }
 .inventory-item-tooltip .tooltip-quantity,
 .inventory-item-tooltip .tooltip-sell-price {
     margin-bottom: 4px;
     color: #95a5a6;
-    font-size: 11px;
+    font-size: 15px;
 }
 .inventory-item-tooltip .tooltip-rarity {
     text-align: center;
@@ -3233,7 +3253,7 @@ select option:hover {
     padding: 4px;
     border-radius: 4px;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 15px;
     margin-top: 8px;
 }
 .inventory-item-tooltip .tooltip-rarity.common { color: #b0b0b0; }
@@ -3428,7 +3448,7 @@ select option:hover {
     color: #e67e22;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     margin: 2px 4px 2px 0;
     display: inline-block;
     border: 1px solid #e67e22;
@@ -3487,7 +3507,7 @@ select option:hover {
 }
 .crafting-item-tooltip .material-count {
     font-family: monospace;
-    font-size: 11px;
+    font-size: 15px;
 }
 .crafting-item-tooltip .tooltip-warning {
     background: rgba(231, 76, 60, 0.2);
@@ -3586,7 +3606,7 @@ select option:hover {
 }
 
 [class$="-subcategory"] .shop-item .item-name {
-    font-size: 6px !important;
+    font-size: 10px !important;
     line-height: 1.0;
 }
 
@@ -3665,7 +3685,7 @@ select option:hover {
     padding: 6px;
 }
 .weapon-subcategory .shop-item .item-name {
-    font-size: 6px !important;
+    font-size: 10px !important;
     line-height: 1.0;
 }
 .weapon-subcategory .shop-item .item-icon {
@@ -3948,7 +3968,7 @@ svg:hover {
     margin-top: 8px;
     padding-top: 6px;
     border-top: 1px solid rgba(255, 215, 0, 0.2);
-    font-size: 11px;
+    font-size: 15px;
     font-style: italic;
     color: #a0a0a0;
     text-align: center;
@@ -4046,7 +4066,7 @@ svg:hover {
 }
 .toggle-button {
     padding: 4px 12px;
-    font-size: 11px;
+    font-size: 15px;
     font-weight: bold;
     border: none;
     border-radius: 4px;
@@ -4142,7 +4162,7 @@ svg:hover {
 }
 .max-display {
     color: #b0b0b0;
-    font-size: 11px;
+    font-size: 15px;
 }
 .status-effects-controls {
     border-top: 1px solid rgba(255, 215, 0, 0.2);
@@ -4161,7 +4181,7 @@ svg:hover {
 }
 .status-button-row .btn {
     padding: 4px 8px;
-    font-size: 11px;
+    font-size: 15px;
 }
 .status-btn.active {
     background: linear-gradient(135deg, #28a745, #20c997) !important;
@@ -4275,7 +4295,7 @@ svg:hover {
 }
 .max-display {
     color: #b0b0b0;
-    font-size: 11px;
+    font-size: 15px;
 }
 .status-effects-controls {
     border-top: 1px solid rgba(155, 89, 182, 0.3);
@@ -4294,7 +4314,7 @@ svg:hover {
 }
 .status-button-row .btn {
     padding: 4px 8px;
-    font-size: 11px;
+    font-size: 15px;
 }
 .active-status-effects h4 {
     color: #9b59b6;
@@ -4385,7 +4405,7 @@ svg:hover {
     border: 1px solid #4ecdc4;
     border-radius: 6px;
     padding: 6px 10px;
-    font-size: 11px;
+    font-size: 15px;
     color: #e0e0e0;
 }
 /* Equipment Column Specific */
@@ -4446,7 +4466,7 @@ svg:hover {
     
     .status-button-row .btn {
         padding: 1px 3px !important;
-        font-size: 10px;
+        font-size: 14px;
     }
 }
 /* ===== SHOP PAGE STYLES ===== */
@@ -4623,7 +4643,7 @@ svg:hover {
 .shop-item .item-name {
     color: #e0e0e0;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 14px;
     line-height: 1.1;
     text-align: center;
     overflow: hidden;
@@ -4643,7 +4663,7 @@ svg:hover {
     padding: 1px 3px !important;
     border-radius: 3px;
     font-weight: bold;
-    font-size: 6px !important;
+    font-size: 10px !important;
     cursor: pointer;
     transition: all 0.2s ease;
     margin-top: 1px;
@@ -4675,7 +4695,7 @@ svg:hover {
 }
 /* Weapon Damage Display */
 .weapon-damage {
-    font-size: 6px !important;
+    font-size: 10px !important;
     color: #ff6b6b;
     font-weight: bold;
     text-align: center;
@@ -4687,7 +4707,7 @@ svg:hover {
 }
 /* Weapon Damage in Character Sheet Equipment */
 .weapon-damage-equipped {
-    font-size: 10px;
+    font-size: 14px;
     color: #ff6b6b;
     font-weight: bold;
     text-align: center;
@@ -4699,7 +4719,7 @@ svg:hover {
 }
 /* Weapon Damage in Inventory */
 .weapon-damage-inventory {
-    font-size: 11px;
+    font-size: 15px;
     color: #ff6b6b;
     font-weight: bold;
     margin: 2px 0;
@@ -4777,7 +4797,7 @@ svg:hover {
     border: 1px solid #4ecdc4;
     border-radius: 4px;
     padding: 2px 6px;
-    font-size: 10px;
+    font-size: 14px;
     color: #4ecdc4;
     margin-right: 4px;
     margin-bottom: 3px;
@@ -4785,7 +4805,7 @@ svg:hover {
 }
 .shop-item-tooltip .tooltip-rarity {
     color: #ffd700;
-    font-size: 10px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 6px;
@@ -4843,7 +4863,7 @@ svg:hover {
     color: white;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -4869,7 +4889,7 @@ svg:hover {
     border: 1px solid #2ecc71;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     color: #2ecc71;
     white-space: nowrap;
 }
@@ -4879,14 +4899,14 @@ svg:hover {
 .inventory-item-tooltip .tooltip-effect {
     display: block;
     color: #f39c12;
-    font-size: 11px;
+    font-size: 15px;
     margin-bottom: 2px;
 }
 .inventory-item-tooltip .tooltip-quantity,
 .inventory-item-tooltip .tooltip-sell-price {
     margin-bottom: 4px;
     color: #95a5a6;
-    font-size: 11px;
+    font-size: 15px;
 }
 .inventory-item-tooltip .tooltip-rarity {
     text-align: center;
@@ -4894,7 +4914,7 @@ svg:hover {
     padding: 4px;
     border-radius: 4px;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 15px;
     margin-top: 8px;
 }
 .inventory-item-tooltip .tooltip-rarity.common { color: #b0b0b0; }
@@ -5089,7 +5109,7 @@ svg:hover {
     color: #e67e22;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     margin: 2px 4px 2px 0;
     display: inline-block;
     border: 1px solid #e67e22;
@@ -5148,7 +5168,7 @@ svg:hover {
 }
 .crafting-item-tooltip .material-count {
     font-family: monospace;
-    font-size: 11px;
+    font-size: 15px;
 }
 .crafting-item-tooltip .tooltip-warning {
     background: rgba(231, 76, 60, 0.2);
@@ -5229,7 +5249,7 @@ svg:hover {
     padding: 6px;
 }
 .weapon-subcategory .shop-item .item-name {
-    font-size: 6px !important;
+    font-size: 10px !important;
     line-height: 1.0;
 }
 .weapon-subcategory .shop-item .item-icon {
@@ -5709,7 +5729,7 @@ svg:hover {
 .shop-section-box .item-name {
     color: #e0e0e0;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 14px;
     line-height: 1.1;
     text-align: center;
     overflow: hidden;
@@ -5729,7 +5749,7 @@ svg:hover {
     padding: 1px 3px !important;
     border-radius: 3px;
     font-weight: bold;
-    font-size: 6px !important;
+    font-size: 10px !important;
     cursor: pointer;
     transition: all 0.2s ease;
     margin-top: 1px;
@@ -5761,7 +5781,7 @@ svg:hover {
 }
 /* Weapon Damage Display */
 .weapon-damage {
-    font-size: 6px !important;
+    font-size: 10px !important;
     color: #ff6b6b;
     font-weight: bold;
     text-align: center;
@@ -5773,7 +5793,7 @@ svg:hover {
 }
 /* Weapon Damage in Character Sheet Equipment */
 .weapon-damage-equipped {
-    font-size: 10px;
+    font-size: 14px;
     color: #ff6b6b;
     font-weight: bold;
     text-align: center;
@@ -5785,7 +5805,7 @@ svg:hover {
 }
 /* Weapon Damage in Inventory */
 .weapon-damage-inventory {
-    font-size: 11px;
+    font-size: 15px;
     color: #ff6b6b;
     font-weight: bold;
     margin: 2px 0;
@@ -5863,7 +5883,7 @@ svg:hover {
     border: 1px solid #4ecdc4;
     border-radius: 4px;
     padding: 2px 6px;
-    font-size: 10px;
+    font-size: 14px;
     color: #4ecdc4;
     margin-right: 4px;
     margin-bottom: 3px;
@@ -5871,7 +5891,7 @@ svg:hover {
 }
 .shop-item-tooltip .tooltip-rarity {
     color: #ffd700;
-    font-size: 10px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 6px;
@@ -5929,7 +5949,7 @@ svg:hover {
     color: white;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -5955,7 +5975,7 @@ svg:hover {
     border: 1px solid #2ecc71;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     color: #2ecc71;
     white-space: nowrap;
 }
@@ -5965,14 +5985,14 @@ svg:hover {
 .inventory-item-tooltip .tooltip-effect {
     display: block;
     color: #f39c12;
-    font-size: 11px;
+    font-size: 15px;
     margin-bottom: 2px;
 }
 .inventory-item-tooltip .tooltip-quantity,
 .inventory-item-tooltip .tooltip-sell-price {
     margin-bottom: 4px;
     color: #95a5a6;
-    font-size: 11px;
+    font-size: 15px;
 }
 .inventory-item-tooltip .tooltip-rarity {
     text-align: center;
@@ -5980,7 +6000,7 @@ svg:hover {
     padding: 4px;
     border-radius: 4px;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 15px;
     margin-top: 8px;
 }
 .inventory-item-tooltip .tooltip-rarity.common { color: #b0b0b0; }
@@ -6175,7 +6195,7 @@ svg:hover {
     color: #e67e22;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     margin: 2px 4px 2px 0;
     display: inline-block;
     border: 1px solid #e67e22;
@@ -6234,7 +6254,7 @@ svg:hover {
 }
 .crafting-item-tooltip .material-count {
     font-family: monospace;
-    font-size: 11px;
+    font-size: 15px;
 }
 .crafting-item-tooltip .tooltip-warning {
     background: rgba(231, 76, 60, 0.2);
@@ -6315,7 +6335,7 @@ svg:hover {
     padding: 6px;
 }
 .weapon-subcategory .shop-item .item-name {
-    font-size: 6px !important;
+    font-size: 10px !important;
     line-height: 1.0;
 }
 .weapon-subcategory .shop-item .item-icon {
@@ -6795,7 +6815,7 @@ svg:hover {
 .shop-section-box .item-name {
     color: #e0e0e0;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 14px;
     line-height: 1.1;
     text-align: center;
     overflow: hidden;
@@ -6815,7 +6835,7 @@ svg:hover {
     padding: 1px 3px !important;
     border-radius: 3px;
     font-weight: bold;
-    font-size: 6px !important;
+    font-size: 10px !important;
     cursor: pointer;
     transition: all 0.2s ease;
     margin-top: 1px;
@@ -6847,7 +6867,7 @@ svg:hover {
 }
 /* Weapon Damage Display */
 .weapon-damage {
-    font-size: 6px !important;
+    font-size: 10px !important;
     color: #ff6b6b;
     font-weight: bold;
     text-align: center;
@@ -6859,7 +6879,7 @@ svg:hover {
 }
 /* Weapon Damage in Character Sheet Equipment */
 .weapon-damage-equipped {
-    font-size: 10px;
+    font-size: 14px;
     color: #ff6b6b;
     font-weight: bold;
     text-align: center;
@@ -6871,7 +6891,7 @@ svg:hover {
 }
 /* Weapon Damage in Inventory */
 .weapon-damage-inventory {
-    font-size: 11px;
+    font-size: 15px;
     color: #ff6b6b;
     font-weight: bold;
     margin: 2px 0;
@@ -6949,7 +6969,7 @@ svg:hover {
     border: 1px solid #4ecdc4;
     border-radius: 4px;
     padding: 2px 6px;
-    font-size: 10px;
+    font-size: 14px;
     color: #4ecdc4;
     margin-right: 4px;
     margin-bottom: 3px;
@@ -6957,7 +6977,7 @@ svg:hover {
 }
 .shop-item-tooltip .tooltip-rarity {
     color: #ffd700;
-    font-size: 10px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 6px;
@@ -7015,7 +7035,7 @@ svg:hover {
     border: 1px solid #ffd700;
     border-radius: 4px;
     padding: 2px 6px;
-    font-size: 10px;
+    font-size: 14px;
     color: #ffd700;
     margin-left: 8px;
     margin-right: 8px;
@@ -7080,7 +7100,7 @@ svg:hover {
 
 /* Universal styling for all subcategories - applies to armor, accessory, and consumable items */
 [class$="-subcategory"] .shop-item .item-name {
-    font-size: 6px !important;
+    font-size: 10px !important;
     line-height: 1.0;
 }
 
@@ -7564,7 +7584,7 @@ svg:hover {
     color: white;
     padding: 2px 8px;
     border-radius: 12px;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -7875,7 +7895,7 @@ svg:hover {
 
 .saved-note-actions .btn {
     padding: 4px 8px;
-    font-size: 11px;
+    font-size: 15px;
     border-radius: 4px;
 }
 
@@ -7883,7 +7903,7 @@ svg:hover {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
-    font-size: 11px;
+    font-size: 15px;
     color: rgba(224, 224, 224, 0.6);
 }
 
@@ -8158,7 +8178,7 @@ svg:hover {
 }
 
 .element-percentage {
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -8226,7 +8246,7 @@ svg:hover {
     padding: 6px 12px;
     background: rgba(15, 52, 96, 0.4);
     border-radius: 20px;
-    font-size: 11px;
+    font-size: 15px;
     color: #b8c5d6;
     border: 1px solid #0f3460;
     transition: all 0.3s ease;
@@ -8269,7 +8289,7 @@ svg:hover {
     }
     
     .element-percentage {
-        font-size: 10px;
+        font-size: 14px;
     }
     
     .affinities-sources {
@@ -8278,7 +8298,7 @@ svg:hover {
     }
     
     .source-item {
-        font-size: 10px;
+        font-size: 14px;
         padding: 4px 8px;
     }
 }
@@ -8311,4 +8331,86 @@ svg:hover {
     to {
         filter: drop-shadow(0 0 12px rgba(0, 255, 136, 0.6));
     }
+}
+
+/* === CHARACTER CREATION OPTIONS === */
+.character-options {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #e0e0e0;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.checkbox-label:hover {
+    color: #ffd700;
+}
+
+.checkbox-input {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ffd700;
+    border-radius: 3px;
+    background: transparent;
+    margin-right: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-input:checked {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    border-color: #ffd700;
+}
+
+.checkbox-input:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    color: #1a1a2e;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.checkbox-input:hover {
+    border-color: #ffed4e;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+/* Message system animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.checkbox-text {
+    user-select: none;
 }

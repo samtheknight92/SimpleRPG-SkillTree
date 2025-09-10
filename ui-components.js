@@ -10,6 +10,10 @@ class UIComponents {
         this.devMode = false // Track dev mode state
         this.toggleInProgress = false // Prevent double-clicking toggle skills
 
+        // Multi-selection state for character deletion
+        this.selectedCharacters = new Set()
+        this.multiSelectMode = false
+
         // Performance optimization: Add caching
         this.renderCache = new Map()
         this.lastRenderState = {}
@@ -190,6 +194,8 @@ class UIComponents {
 
         // Character management buttons
         this.setupButtonListener('new-character-btn', () => this.showNewCharacterDialog())
+        this.setupButtonListener('export-character-btn', () => this.exportCharacter())
+        this.setupButtonListener('import-character-btn', () => this.importCharacter())
         this.setupButtonListener('dev-mode-btn', () => this.toggleDevMode())
         this.setupButtonListener('close-item-sidebar-btn', () => this.hideItemAdminSidebar())
         this.setupButtonListener('create-character-btn', () => this.createNewCharacter())
@@ -204,6 +210,14 @@ class UIComponents {
                     e.preventDefault()
                     this.createNewCharacter()
                 }
+            })
+        }
+
+        // Character import file input
+        const characterImportInput = document.getElementById('character-import-input')
+        if (characterImportInput) {
+            characterImportInput.addEventListener('change', (e) => {
+                this.handleCharacterImport(e)
             })
         }
 
@@ -919,12 +933,39 @@ class UIComponents {
         // Create folder structure
         let html = ''
 
-        // Add folder management controls
+        // Add folder management controls and multi-selection controls
         html += `
             <div class="folder-controls">
                 <button class="btn btn-small folder-add-btn" onclick="uiComponents.showCreateFolderDialog()">
                     + Folder
                 </button>
+                <button class="btn btn-small import-characters-btn" onclick="uiComponents.showImportCharactersDialog()" title="Import Multiple Characters">
+                    📥 Import
+                </button>
+                <button class="btn btn-small multi-select-btn ${this.multiSelectMode ? 'active' : ''}" 
+                        onclick="uiComponents.toggleMultiSelectMode()" 
+                        title="Multi-Select Characters">
+                    ${this.multiSelectMode ? '✓' : '☐'} Select
+                </button>
+                ${this.multiSelectMode ? `
+                    <button class="btn btn-small select-all-btn" onclick="uiComponents.selectAllCharacters()" title="Select All">
+                        Select All
+                    </button>
+                    <button class="btn btn-small clear-selection-btn" onclick="uiComponents.clearSelection()" title="Clear Selection">
+                        Clear
+                    </button>
+                    ${this.selectedCharacters.size > 0 ? `
+                        <button class="btn btn-small btn-danger bulk-delete-btn" onclick="uiComponents.bulkDeleteCharacters()" title="Delete Selected">
+                            🗑️ Delete (${this.selectedCharacters.size})
+                        </button>
+                        <button class="btn btn-small bulk-move-btn" onclick="uiComponents.bulkMoveCharacters()" title="Move Selected to Folder">
+                            📁 Move (${this.selectedCharacters.size})
+                        </button>
+                        <button class="btn btn-small bulk-copy-btn" onclick="uiComponents.bulkCopyCharacters()" title="Copy Selected Characters">
+                            📋 Copy (${this.selectedCharacters.size})
+                        </button>
+                    ` : ''}
+                ` : ''}
             </div>
         `
 
@@ -955,8 +996,13 @@ class UIComponents {
                 const raceDisplay = isMonster ? (raceInfo?.name || 'Monster') : (raceInfo?.name || 'No Race')
                 const raceIcon = raceInfo?.icon || (isMonster ? '??' : '?')
 
+                const isSelected = this.selectedCharacters.has(char.id)
+                const clickHandler = this.multiSelectMode ?
+                    `uiComponents.toggleCharacterSelection('${char.id.replace(/'/g, "\\'")}', event)` :
+                    `uiComponents.selectCharacter('${char.id.replace(/'/g, "\\'")}')`
+
                 return `
-                                <div class="character-item ${isActive ? 'active' : ''} ${isMonster ? 'monster-character' : ''}" 
+                                <div class="character-item ${isActive ? 'active' : ''} ${isMonster ? 'monster-character' : ''} ${isSelected ? 'selected' : ''}" 
                                      data-character-id="${char.id}"
                                      data-character-name="${char.name}"
                                      data-character-race="${raceDisplay}"
@@ -966,11 +1012,19 @@ class UIComponents {
                                      data-character-stamina="${char.stats?.stamina || 0}"
                                      data-character-total-skills="${summary.totalSkills || 0}"
                                      data-character-last-played="${summary.lastPlayed || 'Never'}"
-                                     onclick="uiComponents.selectCharacter('${char.id.replace(/'/g, "\\'")}')"
-                                     draggable="true"
+                                     onclick="${clickHandler}"
+                                     draggable="${!this.multiSelectMode}"
                                      ondragstart="uiComponents.dragCharacterStart(event)"
                                      ondragover="uiComponents.dragCharacterOver(event)"
                                      ondrop="uiComponents.dragCharacterDrop(event)">
+                                    
+                                    ${this.multiSelectMode ? `
+                                        <div class="character-checkbox">
+                                            <input type="checkbox" ${isSelected ? 'checked' : ''} 
+                                                   onchange="uiComponents.toggleCharacterSelection('${char.id.replace(/'/g, "\\'")}', event)"
+                                                   onclick="event.stopPropagation()">
+                                        </div>
+                                    ` : ''}
                                     
                                     <div class="character-info">
                                         <div class="character-avatar">
@@ -982,11 +1036,7 @@ class UIComponents {
                                         <div class="character-level-badge level-${this.getLevelColor(summary.level)}">
                                             📊 Lv. ${summary.level}
                                         </div>
-                                        <div class="character-menu">
-                                            <button class="character-menu-btn" onclick="uiComponents.toggleCharacterMenu('${char.id.replace(/'/g, "\\'")}', event); event.stopPropagation();" title="Character Menu">
-                                                ⚙️
-                                            </button>
-                                        </div>
+                                        <!-- Menu button removed -->
                                     </div>
                                 </div>
                             `
@@ -1030,12 +1080,18 @@ class UIComponents {
     hideNewCharacterDialog() {
         document.getElementById('new-character-dialog').style.display = 'none'
         document.getElementById('character-name-input').value = ''
+        const enemyCheckbox = document.getElementById('character-enemy-checkbox')
+        if (enemyCheckbox) {
+            enemyCheckbox.checked = false
+        }
     }
 
     // Create new character
     createNewCharacter() {
         const nameInput = document.getElementById('character-name-input')
+        const enemyCheckbox = document.getElementById('character-enemy-checkbox')
         const name = nameInput.value.trim()
+        const isEnemy = enemyCheckbox ? enemyCheckbox.checked : false
 
         if (!name) {
             alert('Please enter a character name')
@@ -1043,7 +1099,7 @@ class UIComponents {
         }
 
         try {
-            const character = characterManager.createCharacter(name)
+            const character = characterManager.createCharacter(name, isEnemy)
             characterManager.saveCharacter(character)
             characterManager.loadCharacter(character.id)
 
@@ -1096,6 +1152,199 @@ class UIComponents {
                 this.showMessage(`Character "${character.name}" deleted`, 'success')
             }
         })
+    }
+
+    // Multi-selection methods
+    toggleMultiSelectMode() {
+        this.multiSelectMode = !this.multiSelectMode
+        if (!this.multiSelectMode) {
+            this.selectedCharacters.clear()
+        }
+        this.renderCharacterList()
+    }
+
+    toggleCharacterSelection(characterId, event) {
+        if (event) {
+            event.stopPropagation()
+        }
+
+        if (this.selectedCharacters.has(characterId)) {
+            this.selectedCharacters.delete(characterId)
+        } else {
+            this.selectedCharacters.add(characterId)
+        }
+
+        this.renderCharacterList()
+    }
+
+    selectAllCharacters() {
+        const characters = characterManager.getAllCharacters()
+        this.selectedCharacters.clear()
+        characters.forEach(char => {
+            this.selectedCharacters.add(char.id)
+        })
+        this.renderCharacterList()
+    }
+
+    clearSelection() {
+        this.selectedCharacters.clear()
+        this.renderCharacterList()
+    }
+
+    bulkDeleteCharacters() {
+        if (this.selectedCharacters.size === 0) return
+
+        const characters = characterManager.getAllCharacters()
+        const selectedChars = characters.filter(c => this.selectedCharacters.has(c.id))
+        const characterNames = selectedChars.map(c => c.name).join(', ')
+
+        this.showConfirm(
+            'Delete Multiple Characters',
+            `Are you sure you want to delete ${this.selectedCharacters.size} character(s)?\n\nCharacters to delete:\n${characterNames}\n\nThis cannot be undone.`
+        ).then(confirmed => {
+            if (confirmed) {
+                // Close any open character menus
+                document.querySelectorAll('.character-menu-dropdown').forEach(menu => {
+                    menu.classList.remove('open')
+                })
+
+                const characterIds = Array.from(this.selectedCharacters)
+                const success = characterManager.deleteMultipleCharacters(characterIds)
+
+                if (success) {
+                    this.selectedCharacters.clear()
+                    this.multiSelectMode = false
+                    this.renderCharacterList()
+                    this.updateDisplay()
+                    this.showMessage(`${characterIds.length} character(s) deleted`, 'success')
+                } else {
+                    this.showMessage('Failed to delete characters', 'error')
+                }
+            }
+        })
+    }
+
+    // Export current character
+    exportCharacter() {
+        const currentCharacter = characterManager.getCurrentCharacter()
+
+        if (!currentCharacter) {
+            this.showMessage('No character selected to export', 'error')
+            return
+        }
+
+        try {
+            // Get the character data as JSON
+            const characterData = characterManager.exportCharacter(currentCharacter.id)
+
+            // Create a blob and download it
+            const blob = new Blob([characterData], { type: 'application/json' })
+            const url = URL.createObjectURL(blob)
+
+            // Create a temporary download link
+            const a = document.createElement('a')
+            a.href = url
+            a.download = `${currentCharacter.name.replace(/[^a-zA-Z0-9]/g, '_')}_character.json`
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+
+            // Clean up the URL
+            URL.revokeObjectURL(url)
+
+            this.showMessage(`Character "${currentCharacter.name}" exported successfully!`, 'success')
+        } catch (error) {
+            console.error('Export failed:', error)
+            this.showMessage(`Failed to export character: ${error.message}`, 'error')
+        }
+    }
+
+    // Import character
+    importCharacter() {
+        const fileInput = document.getElementById('character-import-input')
+        if (fileInput) {
+            fileInput.click()
+        }
+    }
+
+    // Handle character import from file
+    handleCharacterImport(event) {
+        const file = event.target.files[0]
+        if (!file) return
+
+        // Reset the file input
+        event.target.value = ''
+
+        const reader = new FileReader()
+        reader.onload = (e) => {
+            try {
+                const characterData = JSON.parse(e.target.result)
+
+                // Validate the character data
+                if (!this.validateCharacterData(characterData)) {
+                    this.showMessage('Invalid character file format', 'error')
+                    return
+                }
+
+                // Check if character with same name already exists
+                const existingCharacters = characterManager.getAllCharacters()
+                const existingCharacter = existingCharacters.find(c => c.name === characterData.name)
+
+                if (existingCharacter) {
+                    this.showConfirm(
+                        'Character Already Exists',
+                        `A character named "${characterData.name}" already exists. Do you want to import this character with a new name?`
+                    ).then(confirmed => {
+                        if (confirmed) {
+                            this.importCharacterWithNewName(characterData)
+                        }
+                    })
+                } else {
+                    this.importCharacterData(characterData)
+                }
+            } catch (error) {
+                console.error('Import failed:', error)
+                this.showMessage(`Failed to import character: ${error.message}`, 'error')
+            }
+        }
+
+        reader.onerror = () => {
+            this.showMessage('Failed to read character file', 'error')
+        }
+
+        reader.readAsText(file)
+    }
+
+    // Import character data
+    importCharacterData(characterData) {
+        try {
+            const importedCharacter = characterManager.importCharacter(characterData)
+            this.renderCharacterList()
+            this.updateDisplay()
+            this.showMessage(`Character "${importedCharacter.name}" imported successfully!`, 'success')
+        } catch (error) {
+            console.error('Import failed:', error)
+            this.showMessage(`Failed to import character: ${error.message}`, 'error')
+        }
+    }
+
+    // Import character with a new name
+    importCharacterWithNewName(characterData) {
+        this.showPrompt(
+            'Enter New Name',
+            `Enter a new name for the imported character "${characterData.name}":`
+        ).then(newName => {
+            if (newName && newName.trim()) {
+                characterData.name = newName.trim()
+                this.importCharacterData(characterData)
+            }
+        })
+    }
+
+    // Validate character data structure
+    validateCharacterData(data) {
+        // Use the character manager's validation method
+        return characterManager.validateCharacterData(data)
     }
 
     // Folder Management Methods
@@ -1260,6 +1509,73 @@ class UIComponents {
         })
     }
 
+    // Show rename character dialog
+    showRenameCharacterDialog(characterId) {
+        const character = characterManager.getAllCharacters().find(c => c.id === characterId)
+        if (!character) {
+            this.showMessage('Character not found', 'error')
+            return
+        }
+
+        this.showModal('rename-character-modal', () => {
+            const input = document.getElementById('rename-character-input')
+            input.value = character.name
+            input.focus()
+            input.select() // Select all text for easy editing
+
+            const renameBtn = document.getElementById('rename-character-btn')
+            const cancelBtn = document.getElementById('cancel-rename-btn')
+
+            // Clean up old listeners
+            renameBtn.replaceWith(renameBtn.cloneNode(true))
+            cancelBtn.replaceWith(cancelBtn.cloneNode(true))
+
+            const handleRename = () => {
+                const newName = input.value.trim()
+                if (newName && newName !== character.name) {
+                    // Check for duplicate names
+                    const existingCharacter = characterManager.getAllCharacters().find(c =>
+                        c.id !== characterId && c.name.toLowerCase() === newName.toLowerCase()
+                    )
+
+                    if (existingCharacter) {
+                        this.showMessage(`A character named "${newName}" already exists`, 'error')
+                        return
+                    }
+
+                    if (characterManager.renameCharacter(characterId, newName)) {
+                        this.renderCharacterList()
+                        this.updateDisplay()
+                        this.showMessage(`Character renamed to "${newName}"`, 'success')
+                        this.hideModal('rename-character-modal')
+                    } else {
+                        this.showMessage('Failed to rename character', 'error')
+                    }
+                } else if (newName === character.name) {
+                    this.hideModal('rename-character-modal')
+                } else {
+                    this.showMessage('Please enter a valid name', 'error')
+                }
+            }
+
+            const handleCancel = () => {
+                this.hideModal('rename-character-modal')
+            }
+
+            // Add new listeners
+            document.getElementById('rename-character-btn').onclick = handleRename
+            document.getElementById('cancel-rename-btn').onclick = handleCancel
+
+            // Add Enter key support
+            input.onkeydown = (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault()
+                    handleRename()
+                }
+            }
+        })
+    }
+
     // Show delete folder confirmation
     async deleteFolderDialog(folderName) {
         const confirmed = await this.showConfirm(
@@ -1364,137 +1680,336 @@ class UIComponents {
         }
     }
 
-    // Character Menu Management
+    // Character Menu Management - REMOVED
 
-    // Toggle character menu dropdown
-    toggleCharacterMenu(characterId, event) {
-        console.log('toggleCharacterMenu called with:', characterId, event)
+    // Menu helper methods - REMOVED
 
-        // Remove any existing menus
-        document.querySelectorAll('.character-menu-dropdown').forEach(menu => {
-            menu.remove()
-        })
+    // renameCharacterFromMenu - REMOVED
 
-        const characters = characterManager.getAllCharacters()
-        const character = characters.find(c => c.id === characterId)
-        const currentChar = characterManager.getCurrentCharacter()
-        const isActive = currentChar && currentChar.id === characterId
+    // showMoveCharacterDialogFromMenu - REMOVED
 
-        if (!character) {
-            console.log('Character not found:', characterId)
+    // Bulk copy characters
+    bulkCopyCharacters() {
+        if (this.selectedCharacters.size === 0) {
+            this.showMessage('No characters selected', 'error')
             return
         }
 
-        console.log('Creating menu for character:', character.name)
-
-        // Get all folders for the folder list
+        // Get all available folders
         const folders = characterManager.getAllFolders()
-        const currentFolder = character.folder || 'Default'
 
-        // Create folder list items
-        const folderItems = folders.map(folder => {
-            const isCurrentFolder = folder === currentFolder
-            return `
-                <div class="menu-item folder-item ${isCurrentFolder ? 'current-folder' : ''}" 
-                     onclick="uiComponents.moveCharacterToFolderFromMenu('${characterId.replace(/'/g, "\\'")}', '${folder.replace(/'/g, "\\'")}')">
-                    ?? ${folder} ${isCurrentFolder ? '(current)' : ''}
+        if (folders.length === 0) {
+            this.showMessage('No folders available. Create a folder first.', 'error')
+            return
+        }
+
+        // Create dialog
+        const dialog = document.createElement('div')
+        dialog.className = 'modal-overlay'
+        dialog.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Copy ${this.selectedCharacters.size} Character(s)</h3>
                 </div>
-            `
-        }).join('')
-
-        // Create menu content with folder list instead of single "Move to Folder" button
-        const menuContent = `
-            <div class="menu-item ${isActive ? 'disabled' : ''}" onclick="if (!this.classList.contains('disabled')) { uiComponents.selectCharacterFromMenu('${characterId.replace(/'/g, "\\'")}') }">
-                Select Character
-            </div>
-            <div class="menu-separator"></div>
-            <div class="menu-section-header">Move to Folder:</div>
-            ${folderItems}
-            <div class="menu-separator"></div>
-            <div class="menu-item danger" onclick="uiComponents.deleteCharacterFromMenu('${characterId.replace(/'/g, "\\'")}')">
-                Delete Character
+                <div class="modal-body">
+                    <p class="modal-instruction">Select destination folder for copies:</p>
+                    <select id="bulk-copy-folder-select" class="form-input folder-select">
+                        <option value="">-- Select Folder --</option>
+                        ${folders.map(folder => `<option value="${folder}">${folder}</option>`).join('')}
+                    </select>
+                    <div style="margin-top: 1rem;">
+                        <label style="color: #e0e0e0; font-size: 0.9rem;">
+                            <input type="checkbox" id="add-copy-suffix" checked style="margin-right: 0.5rem;">
+                            Add "Copy" to character names
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="bulk-copy-confirm" class="btn btn-primary">Copy Characters</button>
+                    <button id="bulk-copy-cancel" class="btn btn-secondary">Cancel</button>
+                </div>
             </div>
         `
 
-        // Create menu element with proper styling
-        const menu = document.createElement('div')
-        menu.className = 'character-menu-dropdown'
-        menu.innerHTML = menuContent
-        menu.style.position = 'absolute'
-        menu.style.zIndex = '99999'
-        menu.style.pointerEvents = 'auto'
+        document.body.appendChild(dialog)
 
-        console.log('Menu element created:', menu)
+        // Handle confirm
+        dialog.querySelector('#bulk-copy-confirm').onclick = () => {
+            const selectedFolder = dialog.querySelector('#bulk-copy-folder-select').value
+            const addSuffix = dialog.querySelector('#add-copy-suffix').checked
 
-        // Append to body
-        document.body.appendChild(menu)
-        console.log('Menu appended to body')
-
-        // Position manually next to the button instead of using updateTooltipPosition
-        const button = event.target.closest('.character-menu-btn')
-        if (button) {
-            const buttonRect = button.getBoundingClientRect()
-            const menuWidth = 200 // approximate width
-            const menuHeight = 250 // approximate height
-
-            // Position to the right of the button with some margin
-            let left = buttonRect.right + 8
-            let top = buttonRect.top
-
-            // Adjust if menu would go off screen
-            if (left + menuWidth > window.innerWidth) {
-                left = buttonRect.left - menuWidth - 8 // Show on left side instead
+            if (!selectedFolder) {
+                this.showMessage('Please select a destination folder', 'error')
+                return
             }
 
-            if (top + menuHeight > window.innerHeight) {
-                top = window.innerHeight - menuHeight - 8
-            }
+            let copiedCount = 0
 
-            menu.style.left = `${left}px`
-            menu.style.top = `${top}px`
+            this.selectedCharacters.forEach(characterId => {
+                const originalCharacter = characterManager.getAllCharacters().find(c => c.id === characterId)
+                if (originalCharacter) {
+                    // Create a copy of the character
+                    const copiedCharacter = JSON.parse(JSON.stringify(originalCharacter))
 
-            console.log('Menu manually positioned at:', left, top)
-        }
+                    // Generate new ID and update name
+                    copiedCharacter.id = characterManager.generateId()
+                    if (addSuffix) {
+                        copiedCharacter.name = originalCharacter.name + ' (Copy)'
+                    }
 
-        // Close menu when clicking outside
-        setTimeout(() => {
-            document.addEventListener('click', function closeMenu(clickEvent) {
-                if (!clickEvent.target.closest('.character-menu-dropdown') && !clickEvent.target.closest('.character-menu-btn')) {
-                    console.log('Closing menu')
-                    menu.remove()
-                    document.removeEventListener('click', closeMenu)
+                    // Set the folder
+                    copiedCharacter.folder = selectedFolder
+                    copiedCharacter.lastModified = new Date().toISOString()
+
+                    // Add to character manager
+                    if (characterManager.addCharacter(copiedCharacter)) {
+                        copiedCount++
+                    }
                 }
             })
-        }, 10)
-    }
 
-    // Helper methods for menu actions
-    selectCharacterFromMenu(characterId) {
-        document.querySelectorAll('.character-menu-dropdown').forEach(menu => menu.remove())
-        this.selectCharacter(characterId)
-    }
+            if (copiedCount > 0) {
+                this.renderCharacterList()
+                this.clearSelection()
+                this.showMessage(`${copiedCount} character(s) copied to "${selectedFolder}"`, 'success')
+            } else {
+                this.showMessage('Failed to copy characters', 'error')
+            }
 
-    deleteCharacterFromMenu(characterId) {
-        document.querySelectorAll('.character-menu-dropdown').forEach(menu => menu.remove())
-        this.deleteCharacter(characterId)
-    }
+            dialog.remove()
+        }
 
-    moveCharacterToFolderFromMenu(characterId, folderName) {
-        document.querySelectorAll('.character-menu-dropdown').forEach(menu => menu.remove())
-        const character = characterManager.getAllCharacters().find(c => c.id === characterId)
+        // Handle cancel
+        dialog.querySelector('#bulk-copy-cancel').onclick = () => {
+            dialog.remove()
+        }
 
-        if (character && characterManager.moveCharacterToFolder(characterId, folderName)) {
-            this.renderCharacterList()
-            this.showMessage(`"${character.name}" moved to "${folderName}"`, 'success')
-        } else {
-            this.showMessage('Failed to move character', 'error')
+        // Close on overlay click
+        dialog.onclick = (e) => {
+            if (e.target === dialog) {
+                dialog.remove()
+            }
         }
     }
 
-    showMoveCharacterDialogFromMenu(characterId) {
-        document.querySelectorAll('.character-menu-dropdown').forEach(menu => menu.remove())
-        this.showMoveCharacterDialog(characterId)
-    }    // Toggle Dev Mode
+    // Bulk move characters to folder
+    bulkMoveCharacters() {
+        if (this.selectedCharacters.size === 0) {
+            this.showMessage('No characters selected', 'error')
+            return
+        }
+
+        // Get all available folders
+        const folders = characterManager.getAllFolders()
+
+        console.log('Available folders for move dialog:', folders)
+
+        if (folders.length === 0) {
+            this.showMessage('No folders available. Create a folder first.', 'error')
+            return
+        }
+
+        // Create dialog
+        const dialog = document.createElement('div')
+        dialog.className = 'modal-overlay'
+        dialog.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Move ${this.selectedCharacters.size} Character(s) to Folder</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-instruction">Select destination folder:</p>
+                    <select id="bulk-move-folder-select" class="form-input folder-select">
+                        <option value="">-- Select Folder --</option>
+                        ${folders.map(folder => `<option value="${folder}">${folder}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button id="bulk-move-confirm" class="btn btn-primary">Move Characters</button>
+                    <button id="bulk-move-cancel" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        `
+
+        document.body.appendChild(dialog)
+
+        // Handle confirm
+        dialog.querySelector('#bulk-move-confirm').onclick = () => {
+            const selectedFolder = dialog.querySelector('#bulk-move-folder-select').value
+            let movedCount = 0
+
+            this.selectedCharacters.forEach(characterId => {
+                if (characterManager.moveCharacterToFolder(characterId, selectedFolder)) {
+                    movedCount++
+                }
+            })
+
+            if (movedCount > 0) {
+                this.renderCharacterList()
+                this.clearSelection()
+                this.showMessage(`${movedCount} character(s) moved to "${selectedFolder}"`, 'success')
+            } else {
+                this.showMessage('Failed to move characters', 'error')
+            }
+
+            dialog.remove()
+        }
+
+        // Handle cancel
+        dialog.querySelector('#bulk-move-cancel').onclick = () => {
+            dialog.remove()
+        }
+
+        // Close on overlay click
+        dialog.onclick = (e) => {
+            if (e.target === dialog) {
+                dialog.remove()
+            }
+        }
+    }
+
+    // Import multiple characters
+    showImportCharactersDialog() {
+        // Get all available folders
+        const folders = characterManager.getAllFolders()
+
+        if (folders.length === 0) {
+            this.showMessage('No folders available. Create a folder first.', 'error')
+            return
+        }
+
+        // Create dialog
+        const dialog = document.createElement('div')
+        dialog.className = 'modal-overlay'
+        dialog.innerHTML = `
+            <div class="modal-content" style="max-width: 600px;">
+                <div class="modal-header">
+                    <h3>Import Multiple Characters</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-instruction">Paste character JSON data (one character per line or array format):</p>
+                    <textarea id="import-characters-textarea" class="form-input" 
+                              style="width: 100%; height: 200px; font-family: monospace; font-size: 12px; 
+                                     background: #1a1a3e; color: #ffffff; border: 2px solid #ffd700; 
+                                     border-radius: 8px; padding: 1rem; resize: vertical;"
+                              placeholder="Paste character JSON data here..."></textarea>
+                    <div style="margin-top: 1rem;">
+                        <p class="modal-instruction">Select destination folder:</p>
+                        <select id="import-folder-select" class="form-input folder-select">
+                            <option value="">-- Select Folder --</option>
+                            ${folders.map(folder => `<option value="${folder}">${folder}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <label style="color: #e0e0e0; font-size: 0.9rem;">
+                            <input type="checkbox" id="validate-import" checked style="margin-right: 0.5rem;">
+                            Validate character data before importing
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="import-confirm" class="btn btn-primary">Import Characters</button>
+                    <button id="import-cancel" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        `
+
+        document.body.appendChild(dialog)
+
+        // Handle confirm
+        dialog.querySelector('#import-confirm').onclick = () => {
+            const textarea = dialog.querySelector('#import-characters-textarea')
+            const selectedFolder = dialog.querySelector('#import-folder-select').value
+            const validateData = dialog.querySelector('#validate-import').checked
+
+            if (!textarea.value.trim()) {
+                this.showMessage('Please paste character data', 'error')
+                return
+            }
+
+            if (!selectedFolder) {
+                this.showMessage('Please select a destination folder', 'error')
+                return
+            }
+
+            try {
+                let characters = []
+                const input = textarea.value.trim()
+
+                // Try to parse as JSON array first
+                if (input.startsWith('[') && input.endsWith(']')) {
+                    characters = JSON.parse(input)
+                } else {
+                    // Try to parse as individual JSON objects (one per line)
+                    const lines = input.split('\n').filter(line => line.trim())
+                    characters = lines.map(line => JSON.parse(line.trim()))
+                }
+
+                if (!Array.isArray(characters)) {
+                    throw new Error('Data must be an array of characters')
+                }
+
+                let importedCount = 0
+                let errors = []
+
+                characters.forEach((char, index) => {
+                    try {
+                        // Validate character structure
+                        if (validateData) {
+                            if (!char.name || !char.race || !char.stats) {
+                                throw new Error(`Character ${index + 1}: Missing required fields (name, race, stats)`)
+                            }
+                        }
+
+                        // Generate new ID and set folder
+                        char.id = characterManager.generateId()
+                        char.folder = selectedFolder
+                        char.lastModified = new Date().toISOString()
+
+                        // Add to character manager
+                        if (characterManager.addCharacter(char)) {
+                            importedCount++
+                        } else {
+                            errors.push(`Character ${index + 1}: Failed to add to system`)
+                        }
+                    } catch (error) {
+                        errors.push(`Character ${index + 1}: ${error.message}`)
+                    }
+                })
+
+                if (importedCount > 0) {
+                    this.renderCharacterList()
+                    this.showMessage(`${importedCount} character(s) imported to "${selectedFolder}"`, 'success')
+
+                    if (errors.length > 0) {
+                        console.warn('Import errors:', errors)
+                        this.showMessage(`${errors.length} character(s) had errors (check console)`, 'warning')
+                    }
+                } else {
+                    this.showMessage('No characters were imported. Check the data format.', 'error')
+                }
+
+            } catch (error) {
+                this.showMessage(`Import failed: ${error.message}`, 'error')
+            }
+
+            dialog.remove()
+        }
+
+        // Handle cancel
+        dialog.querySelector('#import-cancel').onclick = () => {
+            dialog.remove()
+        }
+
+        // Close on overlay click
+        dialog.onclick = (e) => {
+            if (e.target === dialog) {
+                dialog.remove()
+            }
+        }
+    }
+
+    // Toggle Dev Mode
     toggleDevMode() {
         this.devMode = !this.devMode
         const devBtn = document.getElementById('dev-mode-btn')
@@ -2035,7 +2550,7 @@ class UIComponents {
 
         // Handle special prerequisite types
         if (skill.prerequisites.type === 'THREE_TIER5_MAGIC') {
-            const tier5MagicMasteries = ['fire_supremacy', 'ice_supremacy', 'lightning_supremacy', 'earth_supremacy', 'wind_mastery', 'water_mastery', 'light_mastery', 'darkness_mastery']
+            const tier5MagicMasteries = ['fire_supremacy', 'ice_supremacy', 'thunder_supremacy', 'earth_supremacy', 'wind_mastery', 'water_mastery', 'light_mastery', 'darkness_mastery']
             const prereqSkills = tier5MagicMasteries.map(skillId => {
                 const prereqSkill = findSkillById(skillId)
                 return prereqSkill ? prereqSkill.name : skillId
@@ -2600,6 +3115,41 @@ class UIComponents {
         })
     }
 
+    // Toggle enemy status for current character
+    toggleEnemyStatus(character) {
+        if (!character) {
+            this.showMessage('No character selected', 'error')
+            return
+        }
+
+        const newStatus = !character.isEnemy
+        const statusText = newStatus ? 'Enemy' : 'Player'
+        const actionText = newStatus ? 'will drop Lumen when killed' : 'will not drop Lumen when killed'
+
+        this.showConfirm(
+            `Toggle to ${statusText}`,
+            `Are you sure you want to change ${character.name} to ${statusText}?\n\n${character.name} ${actionText}.`
+        ).then(confirmed => {
+            if (confirmed) {
+                try {
+                    // Update the character's enemy status
+                    character.isEnemy = newStatus
+
+                    // Save the character
+                    characterManager.saveCharacter(character)
+
+                    // Refresh the character sheet to update the button
+                    this.renderCharacterSheet()
+                    this.updateCharacterDisplay()
+
+                    this.showMessage(`${character.name} is now a ${statusText}`, 'success')
+                } catch (error) {
+                    this.showMessage(`Error updating enemy status: ${error.message}`, 'error')
+                }
+            }
+        })
+    }
+
     // Mass refund all skills in current category
     massRefundSkills() {
         const character = characterManager.getCurrentCharacter()
@@ -2805,6 +3355,1081 @@ class UIComponents {
         `
     }
 
+    // Render dev mode character selector
+    renderDevModeCharacterSelector() {
+        return `
+            <div class="dev-mode-character-selector" style="margin-bottom: 20px; padding: 15px; background: linear-gradient(135deg, #2a2a4e, #1e1e3f); border-radius: 10px; border: 1px solid #444;">
+                <h3 style="color: #ffd700; margin: 0 0 15px 0; font-size: 16px;">🔧 Dev Mode - Pre-made Character Loader</h3>
+                <div class="character-selector-controls" style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                    <div class="filter-section" style="flex: 1; min-width: 200px;">
+                        <label for="character-type-filter" style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Filter by Type:</label>
+                        <select id="character-type-filter" class="preset-select" style="width: 100%; padding: 5px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+                            <option value="">All Types</option>
+                            <option value="Pedestrian">Pedestrian</option>
+                            <option value="Human Enemies">Human Enemies</option>
+                            <option value="Goblins">Goblins</option>
+                            <option value="Orcs">Orcs</option>
+                            <option value="Dragons">Dragons</option>
+                            <option value="Slimes">Slimes</option>
+                            <option value="Giants">Giants</option>
+                            <option value="Golems">Golems</option>
+                            <option value="Sprites">Sprites</option>
+                            <option value="Serpents">Serpents</option>
+                            <option value="Fish">Fish</option>
+                            <option value="Octopi">Octopi</option>
+                            <option value="Ghosts">Ghosts</option>
+                            <option value="Wyverns">Wyverns</option>
+                            <option value="Angels">Angels</option>
+                            <option value="Devils">Devils</option>
+                            <option value="Shadows">Shadows</option>
+                            <option value="Rats">Rats</option>
+                            <option value="Possessed Items">Possessed Items</option>
+                            <option value="Other Monsters">Other Monsters</option>
+                        </select>
+                    </div>
+                    <div class="search-section" style="flex: 1; min-width: 200px;">
+                        <label for="character-search" style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Search by Name:</label>
+                        <input type="text" id="character-search" placeholder="Enter character name..." style="width: 100%; padding: 5px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+                    </div>
+                </div>
+                <div class="preset-controls" style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; align-items: end;">
+                    <div class="preset-section" style="flex: 1; min-width: 200px;">
+                        <label for="preset-filter" style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Filter by Preset:</label>
+                        <select id="preset-filter" class="preset-select" style="width: 100%; padding: 5px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+                            <option value="">All Characters</option>
+                        </select>
+                    </div>
+                    <div class="preset-buttons" style="display: flex; gap: 5px;">
+                        <button id="save-as-premade-btn" class="btn btn-success" style="padding: 5px 10px; font-size: 12px;">
+                            ⭐ Save as Pre-made Character
+                        </button>
+                        <button id="manage-presets-btn" class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;">
+                            ⚙️ Manage Custom Characters
+                        </button>
+                    </div>
+                </div>
+                <div class="character-list-container" style="max-height: 200px; overflow-y: auto; border: 1px solid #555; border-radius: 4px; background: #222;">
+                    <div id="premade-character-list" class="premade-character-list">
+                        <!-- Character list will be populated here -->
+                    </div>
+                </div>
+            </div>
+        `
+    }
+
+    // Load and populate pre-made character list
+    async loadPremadeCharacters() {
+        if (!this.devMode) return
+
+        const characterList = document.getElementById('premade-character-list')
+        if (!characterList) return
+
+        try {
+            const characters = await this.getPremadeCharacters()
+            this.populateCharacterList(characters)
+            this.setupCharacterSelectorEvents()
+        } catch (error) {
+            console.error('Failed to load pre-made characters:', error)
+            characterList.innerHTML = '<div style="padding: 10px; color: #ff6b6b;">Failed to load pre-made characters</div>'
+        }
+    }
+
+    // Get all pre-made characters from JSON files
+    async getPremadeCharacters() {
+        const characters = []
+
+        // Define the character file paths
+        const characterPaths = [
+            // Pedestrian characters
+            { path: 'Potential Pre-made characters/Pedestrian/', type: 'pedestrian' },
+            // Human enemies
+            { path: 'Potential Pre-made characters/Human Enemies/', type: 'human-enemies' },
+            // Monster families
+            { path: 'Potential Pre-made characters/Common Monsters/Goblin Family/', type: 'goblin' },
+            { path: 'Potential Pre-made characters/Common Monsters/Rodent Family/', type: 'rodent' },
+            { path: 'Potential Pre-made characters/Common Monsters/Slime Family/', type: 'slime' },
+            { path: 'Potential Pre-made characters/Common Monsters/Possessed Items Family/', type: 'possessed-items' },
+            { path: 'Potential Pre-made characters/Common Monsters/Orc Family/', type: 'orc' },
+            { path: 'Potential Pre-made characters/Common Monsters/Giant Family/', type: 'giant' },
+            { path: 'Potential Pre-made characters/Common Monsters/Elemental Golem Family/', type: 'golem' },
+            { path: 'Potential Pre-made characters/Common Monsters/Elemental Sprite Family/', type: 'sprite' },
+            { path: 'Potential Pre-made characters/Common Monsters/Sea Serpent Family/', type: 'serpent' },
+            { path: 'Potential Pre-made characters/Common Monsters/Monster-Fish Family/', type: 'fish' },
+            { path: 'Potential Pre-made characters/Common Monsters/Octopi Family/', type: 'octopi' },
+            { path: 'Potential Pre-made characters/Common Monsters/Ghost Family/', type: 'ghost' },
+            { path: 'Potential Pre-made characters/Common Monsters/Dragon Family/', type: 'dragon' },
+            { path: 'Potential Pre-made characters/Common Monsters/Wyvern Family/', type: 'wyvern' },
+            { path: 'Potential Pre-made characters/Common Monsters/Angel Family/', type: 'angel' },
+            { path: 'Potential Pre-made characters/Common Monsters/Devil Family/', type: 'devil' },
+            { path: 'Potential Pre-made characters/Common Monsters/Shadow Family/', type: 'shadow' }
+        ]
+
+        // For now, we'll use a simplified approach since we can't directly read files from the browser
+        // This would need to be implemented with a server-side solution or by embedding the character data
+        return this.getEmbeddedPremadeCharacters()
+    }
+
+    // Get embedded pre-made character data from the massive character file
+    async getEmbeddedPremadeCharacters() {
+        const characters = []
+
+        // Check if the premade characters data is available
+        if (!window.PREMADE_CHARACTERS_DATA) {
+            console.warn('PREMADE_CHARACTERS_DATA not loaded')
+            return characters
+        }
+
+        // Convert the character data to the format expected by the UI
+        for (const [filename, characterData] of Object.entries(window.PREMADE_CHARACTERS_DATA)) {
+            // Determine character type based on character data
+            let type = 'unknown'
+            const name = characterData.name?.toLowerCase() || ''
+            const race = characterData.race?.toLowerCase() || ''
+            const isMonster = characterData.isMonster || false
+
+            // Human characters (not monsters)
+            if (!isMonster) {
+                if (filename.includes('Pedestrian')) {
+                    type = 'Pedestrian'
+                } else {
+                    type = 'Human Enemies'
+                }
+            } else {
+                // Monster categories
+                if (race === 'goblin' || name.includes('goblin')) type = 'Goblins'
+                else if (race === 'orc' || name.includes('orc')) type = 'Orcs'
+                else if (race === 'dragon' || name.includes('dragon')) type = 'Dragons'
+                else if (race === 'slime' || name.includes('slime')) type = 'Slimes'
+                else if (race === 'giant' || name.includes('giant')) type = 'Giants'
+                else if (race === 'golem' || name.includes('golem')) type = 'Golems'
+                else if (race === 'sprite' || name.includes('sprite')) type = 'Sprites'
+                else if (race === 'serpent' || name.includes('serpent')) type = 'Serpents'
+                else if (race === 'fish' || name.includes('fish')) type = 'Fish'
+                else if (race === 'octopus' || name.includes('octopus')) type = 'Octopi'
+                else if (race === 'ghost' || name.includes('ghost') || name.includes('specter') || name.includes('phantom') || name.includes('banshee') || name.includes('revenant')) type = 'Ghosts'
+                else if (race === 'wyvern' || name.includes('wyvern')) type = 'Wyverns'
+                else if (race === 'angel' || name.includes('angel')) type = 'Angels'
+                else if (race === 'devil' || name.includes('devil') || name.includes('demon')) type = 'Devils'
+                else if (race === 'shadow' || name.includes('shadow')) type = 'Shadows'
+                else if (race === 'rat' || name.includes('rat')) type = 'Rats'
+                else if (name.includes('possessed') || name.includes('cursed') || name.includes('haunted') || name.includes('living') || name.includes('blessed')) type = 'Possessed Items'
+                else type = 'Other Monsters'
+            }
+
+            // Use the character's level directly if available, otherwise calculate it
+            const level = characterData.level || 1
+
+            characters.push({
+                name: characterData.name,
+                level: level,
+                type: type,
+                file: filename,
+                data: characterData,
+                description: this.getCharacterDescription(characterData)
+            })
+        }
+
+        // Add custom pre-made characters from localStorage
+        const customCharacters = this.getCustomPremadeCharacters()
+        for (const [filename, characterData] of Object.entries(customCharacters)) {
+            // Determine character type based on character data
+            let type = 'Custom'
+            const name = characterData.name?.toLowerCase() || ''
+            const race = characterData.race?.toLowerCase() || ''
+            const isMonster = characterData.isMonster || false
+
+            // Use the same type detection logic as embedded characters
+            if (!isMonster) {
+                if (name.includes('pedestrian')) {
+                    type = 'Pedestrian'
+                } else {
+                    type = 'Human Enemies'
+                }
+            } else {
+                // Monster categories
+                if (race === 'goblin' || name.includes('goblin')) type = 'Goblins'
+                else if (race === 'orc' || name.includes('orc')) type = 'Orcs'
+                else if (race === 'dragon' || name.includes('dragon')) type = 'Dragons'
+                else if (race === 'slime' || name.includes('slime')) type = 'Slimes'
+                else if (race === 'giant' || name.includes('giant')) type = 'Giants'
+                else if (race === 'golem' || name.includes('golem')) type = 'Golems'
+                else if (race === 'sprite' || name.includes('sprite')) type = 'Sprites'
+                else if (race === 'serpent' || name.includes('serpent')) type = 'Serpents'
+                else if (race === 'fish' || name.includes('fish')) type = 'Fish'
+                else if (race === 'octopus' || name.includes('octopus')) type = 'Octopi'
+                else if (race === 'ghost' || name.includes('ghost') || name.includes('specter') || name.includes('phantom') || name.includes('banshee') || name.includes('revenant')) type = 'Ghosts'
+                else if (race === 'wyvern' || name.includes('wyvern')) type = 'Wyverns'
+                else if (race === 'angel' || name.includes('angel')) type = 'Angels'
+                else if (race === 'devil' || name.includes('devil') || name.includes('demon')) type = 'Devils'
+                else if (race === 'shadow' || name.includes('shadow')) type = 'Shadows'
+                else if (race === 'rat' || name.includes('rat')) type = 'Rats'
+                else if (name.includes('possessed') || name.includes('cursed') || name.includes('haunted') || name.includes('living') || name.includes('blessed')) type = 'Possessed Items'
+                else type = 'Other Monsters'
+            }
+
+            // Use the character's level directly if available, otherwise calculate it
+            const level = characterData.level || 1
+
+            characters.push({
+                name: characterData.name,
+                level: level,
+                type: type,
+                file: filename,
+                data: characterData,
+                description: characterData.description || this.getCharacterDescription(characterData),
+                isCustom: true // Mark as custom character
+            })
+        }
+
+        return characters
+    }
+
+    // Helper method to generate character descriptions
+    getCharacterDescription(characterData) {
+        if (characterData.isMonster) {
+            return `Level ${characterData.level} ${characterData.race} monster`
+        } else {
+            return `Level ${characterData.level} ${characterData.race} character`
+        }
+    }
+
+    // Populate the character list display
+    populateCharacterList(characters) {
+        const characterList = document.getElementById('premade-character-list')
+        if (!characterList) return
+
+        if (characters.length === 0) {
+            characterList.innerHTML = '<div style="padding: 10px; color: #999;">No pre-made characters found</div>'
+            return
+        }
+
+        const characterItems = characters.map(char => `
+            <div class="character-item" data-type="${char.type}" data-name="${char.name.toLowerCase()}" data-file="${char.file}"
+                 style="padding: 8px 12px; border-bottom: 1px solid #444; transition: background 0.2s; display: flex; align-items: center; gap: 10px;"
+                 onmouseover="this.style.background='#333'" onmouseout="this.style.background='transparent'">
+                <input type="checkbox" class="character-select-checkbox" data-file="${char.file}" 
+                       style="margin: 0; flex-shrink: 0;" onchange="event.stopPropagation()">
+                <div style="flex: 1; cursor: pointer;" onclick="uiComponents.loadPremadeCharacter('${char.file}')">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #fff; font-weight: 500;">${char.name}</span>
+                        <span style="color: #ffd700; font-size: 12px;">Level ${char.level}</span>
+                    </div>
+                    <div style="color: #999; font-size: 11px; margin-top: 2px;">
+                        ${char.type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())} • ${char.description || 'Pre-made character'} ${char.isCustom ? '⭐' : ''}
+                    </div>
+                    <div style="color: #4CAF50; font-size: 10px; margin-top: 1px; font-style: italic;">
+                        Click to load character
+                    </div>
+                </div>
+            </div>
+        `).join('')
+
+        characterList.innerHTML = characterItems
+    }
+
+    // Setup event listeners for character selector
+    setupCharacterSelectorEvents() {
+        const typeFilter = document.getElementById('character-type-filter')
+        const searchInput = document.getElementById('character-search')
+        const presetFilter = document.getElementById('preset-filter')
+        const savePresetBtn = document.getElementById('save-preset-btn')
+        const assignTypeBtn = document.getElementById('assign-type-btn')
+        const managePresetsBtn = document.getElementById('manage-presets-btn')
+
+        if (typeFilter) {
+            typeFilter.addEventListener('change', () => this.filterCharacterList())
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', () => this.filterCharacterList())
+        }
+
+        if (presetFilter) {
+            presetFilter.addEventListener('change', () => this.filterCharacterList())
+        }
+
+        const saveAsPremadeBtn = document.getElementById('save-as-premade-btn')
+        if (saveAsPremadeBtn) {
+            saveAsPremadeBtn.addEventListener('click', () => this.showSaveAsPremadeDialog())
+        }
+
+        if (managePresetsBtn) {
+            managePresetsBtn.addEventListener('click', () => this.showManageCustomCharactersDialog())
+        }
+
+        // Add event listeners to character checkboxes
+        document.querySelectorAll('.character-select-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                // Checkbox change handler - no action needed since we removed preset buttons
+            })
+        })
+
+        // Load saved presets and custom types
+        this.loadPresets()
+        this.updateTypeFilter()
+    }
+
+    // Filter character list based on type, search, and preset
+    filterCharacterList() {
+        const typeFilter = document.getElementById('character-type-filter')
+        const searchInput = document.getElementById('character-search')
+        const presetFilter = document.getElementById('preset-filter')
+        const characterItems = document.querySelectorAll('.character-item')
+
+        const selectedType = typeFilter ? typeFilter.value : ''
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : ''
+        const selectedPreset = presetFilter ? presetFilter.value : ''
+
+        characterItems.forEach(item => {
+            const itemType = item.dataset.type || ''
+            const itemName = item.dataset.name || ''
+            const itemFile = item.dataset.file || ''
+
+            let typeMatch = !selectedType || itemType === selectedType
+            let nameMatch = !searchTerm || itemName.includes(searchTerm)
+            let presetMatch = true
+
+            // Filter by preset
+            if (selectedPreset !== '') {
+                const presets = this.getSavedPresets()
+                const preset = presets.find(p => p.name === selectedPreset)
+                presetMatch = preset && preset.characters.includes(itemFile)
+            }
+
+            // Filter by custom type
+            if (selectedType !== '' && selectedType !== itemType) {
+                const customTypes = this.getCustomTypes()
+                if (customTypes[selectedType]) {
+                    typeMatch = customTypes[selectedType].includes(itemFile)
+                }
+            }
+
+            item.style.display = (typeMatch && nameMatch && presetMatch) ? 'flex' : 'none'
+        })
+    }
+
+    // Load a pre-made character
+    async loadPremadeCharacter(filename) {
+        try {
+            this.showMessage(`Loading pre-made character...`, 'info')
+
+            let characterData = null
+
+            // Check if it's a custom character first
+            const customCharacters = this.getCustomPremadeCharacters()
+            if (customCharacters[filename]) {
+                characterData = customCharacters[filename]
+            } else if (window.PREMADE_CHARACTERS_DATA && window.PREMADE_CHARACTERS_DATA[filename]) {
+                characterData = window.PREMADE_CHARACTERS_DATA[filename]
+            } else {
+                throw new Error(`Character data not found for: ${filename}`)
+            }
+
+            // Generate a new unique ID for the character
+            const newId = 'char_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+
+            // Create a copy of the character data with new ID
+            const newCharacter = {
+                ...characterData,
+                id: newId,
+                name: characterData.name + ' (Copy)', // Add (Copy) to distinguish from original
+                createdAt: new Date().toISOString(),
+                lastPlayed: new Date().toISOString()
+            }
+
+            // Ensure the character has all required properties
+            if (!newCharacter.lumens) newCharacter.lumens = characterData.lumens || 0
+            if (!newCharacter.gil) newCharacter.gil = characterData.gil || 0
+            if (!newCharacter.stats) newCharacter.stats = characterData.stats || {}
+            if (!newCharacter.unlockedSkills) newCharacter.unlockedSkills = characterData.unlockedSkills || {}
+            if (!newCharacter.inventory) newCharacter.inventory = characterData.inventory || []
+            if (!newCharacter.equipped) newCharacter.equipped = characterData.equipped || {}
+
+            // Run character migration to ensure compatibility
+            const migratedCharacter = characterManager.migrateCharacter(newCharacter)
+
+            // Save the new character
+            const success = characterManager.saveCharacter(migratedCharacter)
+
+            if (success) {
+                // Switch to the new character
+                characterManager.loadCharacter(migratedCharacter.id)
+
+                // Update the UI
+                this.renderCharacterList()
+                this.renderCharacterSheet()
+                this.updateDisplay()
+
+                this.showMessage(`Successfully loaded "${migratedCharacter.name}"!`, 'success')
+            } else {
+                throw new Error('Failed to save character')
+            }
+
+        } catch (error) {
+            console.error('Failed to load pre-made character:', error)
+            this.showMessage(`Failed to load pre-made character: ${error.message}`, 'error')
+        }
+    }
+
+    // Helper method to determine character folder based on filename
+    getCharacterFolder(filename) {
+        if (filename.includes('Goblin_')) return 'Common Monsters'
+        if (filename.includes('Mercenary_') || filename.includes('Archer_') || filename.includes('Scout_') || filename.includes('Thief_') || filename.includes('Duelist_')) {
+            return 'Human Enemies'
+        }
+        // Add more mappings as needed
+        return 'Common Monsters'
+    }
+
+    // === PRESET MANAGEMENT FUNCTIONS ===
+
+    // Get saved presets from localStorage
+    getSavedPresets() {
+        try {
+            const presets = localStorage.getItem('characterPresets')
+            return presets ? JSON.parse(presets) : []
+        } catch (error) {
+            console.error('Error loading presets:', error)
+            return []
+        }
+    }
+
+    // Save presets to localStorage
+    savePresets(presets) {
+        try {
+            localStorage.setItem('characterPresets', JSON.stringify(presets))
+        } catch (error) {
+            console.error('Error saving presets:', error)
+        }
+    }
+
+    // Load presets into the filter dropdown
+    loadPresets() {
+        const presetFilter = document.getElementById('preset-filter')
+        if (!presetFilter) return
+
+        const presets = this.getSavedPresets()
+
+        // Clear existing options except "All Characters"
+        presetFilter.innerHTML = '<option value="">All Characters</option>'
+
+        // Add preset options
+        presets.forEach(preset => {
+            const option = document.createElement('option')
+            option.value = preset.name
+            option.textContent = `${preset.name} (${preset.characters.length} characters)`
+            presetFilter.appendChild(option)
+        })
+    }
+
+
+
+    // Save a new preset
+    savePreset(name, characterFiles) {
+        const presets = this.getSavedPresets()
+
+        // Check if preset name already exists
+        if (presets.some(p => p.name === name)) {
+            this.showMessage(`A preset named "${name}" already exists. Please choose a different name.`, 'error')
+            return
+        }
+
+        // Create new preset
+        const newPreset = {
+            name: name,
+            characters: characterFiles,
+            created: new Date().toISOString()
+        }
+
+        presets.push(newPreset)
+        this.savePresets(presets)
+        this.loadPresets()
+
+        // Clear selections
+        document.querySelectorAll('.character-select-checkbox:checked').forEach(cb => cb.checked = false)
+
+        this.showMessage(`Preset "${name}" saved with ${characterFiles.length} characters!`, 'success')
+    }
+
+    // Show manage custom characters dialog
+    showManageCustomCharactersDialog() {
+        const customCharacters = this.getCustomPremadeCharacters()
+
+        if (Object.keys(customCharacters).length === 0) {
+            this.showMessage('No custom pre-made characters found. Create some characters first!', 'info')
+            return
+        }
+
+        // Create character list HTML
+        const characterList = Object.entries(customCharacters).map(([filename, characterData]) => {
+            const createdDate = new Date(characterData.createdAt || Date.now()).toLocaleDateString()
+            const type = this.detectCharacterType(characterData)
+
+            return `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #444;">
+                    <div style="flex: 1;">
+                        <strong style="color: #fff;">${characterData.name}</strong>
+                        <div style="color: #999; font-size: 12px;">Level ${characterData.level} • ${type} • Created: ${createdDate}</div>
+                        ${characterData.description ? `<div style="color: #666; font-size: 11px; font-style: italic;">${characterData.description}</div>` : ''}
+                    </div>
+                    <div style="display: flex; gap: 5px;">
+                        <button onclick="uiComponents.editCustomCharacter('${filename}')" class="btn btn-primary" style="padding: 4px 8px; font-size: 11px;">Edit</button>
+                        <button onclick="uiComponents.deleteCustomCharacter('${filename}')" class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;">Delete</button>
+                    </div>
+                </div>
+            `
+        }).join('')
+
+        // Show modal
+        this.showCustomModal('Manage Custom Characters',
+            `<div style="max-height: 400px; overflow-y: auto;">${characterList}</div>`,
+            [
+                { text: 'Close', class: 'btn-secondary', action: () => this.hideCustomModal() }
+            ]
+        )
+    }
+
+    // Edit a custom character
+    editCustomCharacter(filename) {
+        const customCharacters = this.getCustomPremadeCharacters()
+        const characterData = customCharacters[filename]
+
+        if (!characterData) {
+            this.showMessage('Character not found', 'error')
+            return
+        }
+
+        // Create dialog HTML (similar to save dialog but for editing)
+        const dialogHtml = `
+            <div style="margin-bottom: 15px;">
+                <label style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Character Name:</label>
+                <input type="text" id="edit-character-name" value="${characterData.name}" 
+                       style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Character Type:</label>
+                <select id="edit-character-type" style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+                    <option value="Pedestrian">Pedestrian</option>
+                    <option value="Human Enemies">Human Enemies</option>
+                    <option value="Goblins">Goblins</option>
+                    <option value="Orcs">Orcs</option>
+                    <option value="Dragons">Dragons</option>
+                    <option value="Slimes">Slimes</option>
+                    <option value="Giants">Giants</option>
+                    <option value="Golems">Golems</option>
+                    <option value="Sprites">Sprites</option>
+                    <option value="Serpents">Serpents</option>
+                    <option value="Fish">Fish</option>
+                    <option value="Octopi">Octopi</option>
+                    <option value="Ghosts">Ghosts</option>
+                    <option value="Wyverns">Wyverns</option>
+                    <option value="Angels">Angels</option>
+                    <option value="Devils">Devils</option>
+                    <option value="Shadows">Shadows</option>
+                    <option value="Rats">Rats</option>
+                    <option value="Possessed Items">Possessed Items</option>
+                    <option value="Other Monsters">Other Monsters</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Description (optional):</label>
+                <input type="text" id="edit-character-description" value="${characterData.description || ''}" placeholder="Enter a description for this character..." 
+                       style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+            </div>
+        `
+
+        // Show modal with custom buttons
+        this.showCustomModal('Edit Custom Character', dialogHtml, [
+            { text: 'Save Changes', class: 'btn-primary', action: () => this.saveCustomCharacterEdit(filename) },
+            { text: 'Cancel', class: 'btn-secondary', action: () => this.hideCustomModal() }
+        ])
+
+        // Set current values
+        setTimeout(() => {
+            const typeSelect = document.getElementById('edit-character-type')
+            if (typeSelect) {
+                const detectedType = this.detectCharacterType(characterData)
+                typeSelect.value = detectedType
+            }
+        }, 100)
+    }
+
+    // Save custom character edit
+    saveCustomCharacterEdit(filename) {
+        const nameInput = document.getElementById('edit-character-name')
+        const typeSelect = document.getElementById('edit-character-type')
+        const descriptionInput = document.getElementById('edit-character-description')
+
+        if (!nameInput || !typeSelect) {
+            this.showMessage('Dialog elements not found', 'error')
+            return
+        }
+
+        const characterName = nameInput.value.trim()
+        const description = descriptionInput ? descriptionInput.value.trim() : ''
+
+        if (!characterName) {
+            this.showMessage('Please enter a character name', 'error')
+            return
+        }
+
+        try {
+            const customCharacters = this.getCustomPremadeCharacters()
+            const characterData = customCharacters[filename]
+
+            if (!characterData) {
+                this.showMessage('Character not found', 'error')
+                return
+            }
+
+            // Update the character data
+            characterData.name = characterName
+            characterData.description = description
+            characterData.updatedAt = new Date().toISOString()
+
+            // Save back to localStorage
+            localStorage.setItem('customPremadeCharacters', JSON.stringify(customCharacters))
+
+            // Hide the modal
+            this.hideCustomModal()
+
+            // Show success message
+            this.showMessage(`Character "${characterName}" updated successfully!`, 'success')
+
+            // Refresh the character list
+            this.refreshCharacterList()
+
+        } catch (error) {
+            console.error('Error updating character:', error)
+            this.showMessage(`Failed to update character: ${error.message}`, 'error')
+        }
+    }
+
+    // Delete a custom character
+    deleteCustomCharacter(filename) {
+        const customCharacters = this.getCustomPremadeCharacters()
+        const characterData = customCharacters[filename]
+
+        if (!characterData) {
+            this.showMessage('Character not found', 'error')
+            return
+        }
+
+        if (confirm(`Are you sure you want to delete the character "${characterData.name}"?\n\nThis action cannot be undone.`)) {
+            try {
+                // Remove the character from the custom characters
+                delete customCharacters[filename]
+
+                // Save back to localStorage
+                localStorage.setItem('customPremadeCharacters', JSON.stringify(customCharacters))
+
+                // Show success message
+                this.showMessage(`Character "${characterData.name}" deleted successfully!`, 'success')
+
+                // Refresh the character list
+                this.refreshCharacterList()
+
+                // Close the manage dialog and reopen it to show updated list
+                this.hideCustomModal()
+                setTimeout(() => this.showManageCustomCharactersDialog(), 100)
+
+            } catch (error) {
+                console.error('Error deleting character:', error)
+                this.showMessage(`Failed to delete character: ${error.message}`, 'error')
+            }
+        }
+    }
+
+    // Delete a preset
+    deletePreset(presetName) {
+        if (confirm(`Are you sure you want to delete the preset "${presetName}"?`)) {
+            const presets = this.getSavedPresets()
+            const filteredPresets = presets.filter(p => p.name !== presetName)
+            this.savePresets(filteredPresets)
+            this.loadPresets()
+            this.showMessage(`Preset "${presetName}" deleted`, 'success')
+        }
+    }
+
+    // === CUSTOM TYPE MANAGEMENT FUNCTIONS ===
+
+    // Get saved custom types from localStorage
+    getCustomTypes() {
+        try {
+            const types = localStorage.getItem('characterCustomTypes')
+            return types ? JSON.parse(types) : {}
+        } catch (error) {
+            console.error('Error loading custom types:', error)
+            return {}
+        }
+    }
+
+    // Save custom types to localStorage
+    saveCustomTypes(types) {
+        try {
+            localStorage.setItem('characterCustomTypes', JSON.stringify(types))
+        } catch (error) {
+            console.error('Error saving custom types:', error)
+        }
+    }
+
+
+    // Show dialog to save current active character as a pre-made character
+    showSaveAsPremadeDialog() {
+        const character = characterManager.getCurrentCharacter()
+        if (!character) {
+            this.showMessage('No character is currently active', 'error')
+            return
+        }
+
+        // Create dialog HTML
+        const dialogHtml = `
+            <div style="margin-bottom: 15px;">
+                <label style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Character Name:</label>
+                <input type="text" id="premade-character-name" value="${character.name}" 
+                       style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Character Type:</label>
+                <select id="premade-character-type" style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+                    <option value="Pedestrian">Pedestrian</option>
+                    <option value="Human Enemies">Human Enemies</option>
+                    <option value="Goblins">Goblins</option>
+                    <option value="Orcs">Orcs</option>
+                    <option value="Dragons">Dragons</option>
+                    <option value="Slimes">Slimes</option>
+                    <option value="Giants">Giants</option>
+                    <option value="Golems">Golems</option>
+                    <option value="Sprites">Sprites</option>
+                    <option value="Serpents">Serpents</option>
+                    <option value="Fish">Fish</option>
+                    <option value="Octopi">Octopi</option>
+                    <option value="Ghosts">Ghosts</option>
+                    <option value="Wyverns">Wyverns</option>
+                    <option value="Angels">Angels</option>
+                    <option value="Devils">Devils</option>
+                    <option value="Shadows">Shadows</option>
+                    <option value="Rats">Rats</option>
+                    <option value="Possessed Items">Possessed Items</option>
+                    <option value="Other Monsters">Other Monsters</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="color: #e0e0e0; font-size: 12px; display: block; margin-bottom: 5px;">Description (optional):</label>
+                <input type="text" id="premade-character-description" placeholder="Enter a description for this character..." 
+                       style="width: 100%; padding: 8px; background: #333; color: #fff; border: 1px solid #555; border-radius: 4px;">
+            </div>
+            <div style="color: #ffd700; font-size: 11px; margin-bottom: 10px;">
+                ⚠️ This will save the current character as a new pre-made character that can be loaded by other users.
+            </div>
+        `
+
+        // Show modal with custom buttons
+        this.showCustomModal('Save as Pre-made Character', dialogHtml, [
+            { text: 'Save', class: 'btn-primary', action: () => this.saveAsPremadeCharacter() },
+            { text: 'Cancel', class: 'btn-secondary', action: () => this.hideCustomModal() }
+        ])
+
+        // Set default type based on character data
+        setTimeout(() => {
+            const typeSelect = document.getElementById('premade-character-type')
+            if (typeSelect) {
+                // Auto-detect type based on character data
+                const detectedType = this.detectCharacterType(character)
+                typeSelect.value = detectedType
+            }
+        }, 100)
+    }
+
+    // Detect character type based on character data
+    detectCharacterType(character) {
+        const name = character.name?.toLowerCase() || ''
+        const race = character.race?.toLowerCase() || ''
+        const isMonster = character.isMonster || false
+
+        // Human characters (not monsters)
+        if (!isMonster) {
+            if (name.includes('pedestrian')) {
+                return 'Pedestrian'
+            } else {
+                return 'Human Enemies'
+            }
+        } else {
+            // Monster categories
+            if (race === 'goblin' || name.includes('goblin')) return 'Goblins'
+            else if (race === 'orc' || name.includes('orc')) return 'Orcs'
+            else if (race === 'dragon' || name.includes('dragon')) return 'Dragons'
+            else if (race === 'slime' || name.includes('slime')) return 'Slimes'
+            else if (race === 'giant' || name.includes('giant')) return 'Giants'
+            else if (race === 'golem' || name.includes('golem')) return 'Golems'
+            else if (race === 'sprite' || name.includes('sprite')) return 'Sprites'
+            else if (race === 'serpent' || name.includes('serpent')) return 'Serpents'
+            else if (race === 'fish' || name.includes('fish')) return 'Fish'
+            else if (race === 'octopus' || name.includes('octopus')) return 'Octopi'
+            else if (race === 'ghost' || name.includes('ghost') || name.includes('specter') || name.includes('phantom') || name.includes('banshee') || name.includes('revenant')) return 'Ghosts'
+            else if (race === 'wyvern' || name.includes('wyvern')) return 'Wyverns'
+            else if (race === 'angel' || name.includes('angel')) return 'Angels'
+            else if (race === 'devil' || name.includes('devil') || name.includes('demon')) return 'Devils'
+            else if (race === 'shadow' || name.includes('shadow')) return 'Shadows'
+            else if (race === 'rat' || name.includes('rat')) return 'Rats'
+            else if (name.includes('possessed') || name.includes('cursed') || name.includes('haunted') || name.includes('living') || name.includes('blessed')) return 'Possessed Items'
+            else return 'Other Monsters'
+        }
+    }
+
+    // Save the current character as a pre-made character
+    saveAsPremadeCharacter() {
+        const character = characterManager.getCurrentCharacter()
+        if (!character) {
+            this.showMessage('No character is currently active', 'error')
+            return
+        }
+
+        const nameInput = document.getElementById('premade-character-name')
+        const typeSelect = document.getElementById('premade-character-type')
+        const descriptionInput = document.getElementById('premade-character-description')
+
+        if (!nameInput || !typeSelect) {
+            this.showMessage('Dialog elements not found', 'error')
+            return
+        }
+
+        const characterName = nameInput.value.trim()
+        const characterType = typeSelect.value
+        const description = descriptionInput ? descriptionInput.value.trim() : ''
+
+        if (!characterName) {
+            this.showMessage('Please enter a character name', 'error')
+            return
+        }
+
+        if (!characterType) {
+            this.showMessage('Please select a character type', 'error')
+            return
+        }
+
+        try {
+            // Create a copy of the character data
+            const characterData = JSON.parse(JSON.stringify(character))
+
+            // Update the character data with new name and ensure it has required fields
+            characterData.name = characterName
+            characterData.description = description
+
+            // Ensure the character has all required fields for pre-made characters
+            if (!characterData.isEnemy) {
+                characterData.isEnemy = false
+            }
+            if (!characterData.isMonster) {
+                characterData.isMonster = false
+            }
+            if (!characterData.level) {
+                characterData.level = 1
+            }
+
+            // Generate a unique filename
+            const filename = this.generateCharacterFilename(characterName, characterType)
+
+            // Save to localStorage as a custom pre-made character
+            this.saveCustomPremadeCharacter(filename, characterData)
+
+            // Hide the modal
+            this.hideCustomModal()
+
+            // Show success message
+            this.showMessage(`Character "${characterName}" saved as a pre-made character!`, 'success')
+
+            // Refresh the character list to show the new character
+            this.refreshCharacterList()
+
+        } catch (error) {
+            console.error('Error saving character as pre-made:', error)
+            this.showMessage(`Failed to save character: ${error.message}`, 'error')
+        }
+    }
+
+    // Generate a unique filename for the character
+    generateCharacterFilename(characterName, characterType) {
+        // Create a safe filename from the character name
+        const safeName = characterName.toLowerCase()
+            .replace(/[^a-z0-9\s]/g, '') // Remove special characters
+            .replace(/\s+/g, '_') // Replace spaces with underscores
+            .substring(0, 30) // Limit length
+
+        const timestamp = Date.now()
+        return `custom_${characterType.toLowerCase().replace(/\s+/g, '_')}_${safeName}_${timestamp}`
+    }
+
+    // Save custom pre-made character to localStorage
+    saveCustomPremadeCharacter(filename, characterData) {
+        try {
+            // Get existing custom pre-made characters
+            const customCharacters = this.getCustomPremadeCharacters()
+
+            // Add the new character
+            customCharacters[filename] = characterData
+
+            // Save back to localStorage
+            localStorage.setItem('customPremadeCharacters', JSON.stringify(customCharacters))
+
+            console.log(`Saved custom pre-made character: ${filename}`)
+
+        } catch (error) {
+            console.error('Error saving custom pre-made character:', error)
+            throw error
+        }
+    }
+
+    // Get custom pre-made characters from localStorage
+    getCustomPremadeCharacters() {
+        try {
+            const customCharacters = localStorage.getItem('customPremadeCharacters')
+            return customCharacters ? JSON.parse(customCharacters) : {}
+        } catch (error) {
+            console.error('Error loading custom pre-made characters:', error)
+            return {}
+        }
+    }
+
+    // Refresh the character list to include custom characters
+    refreshCharacterList() {
+        // This will trigger a re-render of the character list
+        // The getEmbeddedPremadeCharacters function will need to be updated to include custom characters
+        this.renderDevModeCharacterSelector()
+        this.loadPremadeCharacters()
+    }
+
+    // Update the type filter dropdown with custom types
+    updateTypeFilter() {
+        const typeFilter = document.getElementById('character-type-filter')
+        if (!typeFilter) return
+
+        const customTypes = this.getCustomTypes()
+        const customTypeNames = Object.keys(customTypes)
+
+        // Remove existing custom type options (keep built-in types)
+        const builtInTypes = ['', 'Pedestrian', 'Human Enemies', 'Goblins', 'Orcs', 'Dragons', 'Slimes', 'Giants', 'Golems', 'Sprites', 'Serpents', 'Fish', 'Octopi', 'Ghosts', 'Wyverns', 'Angels', 'Devils', 'Shadows', 'Rats', 'Possessed Items', 'Other Monsters']
+
+        // Clear and rebuild options
+        typeFilter.innerHTML = ''
+        builtInTypes.forEach(type => {
+            const option = document.createElement('option')
+            option.value = type
+            option.textContent = type || 'All Types'
+            typeFilter.appendChild(option)
+        })
+
+        // Add custom types
+        customTypeNames.forEach(typeName => {
+            const option = document.createElement('option')
+            option.value = typeName
+            option.textContent = `🏷️ ${typeName} (${customTypes[typeName].length})`
+            typeFilter.appendChild(option)
+        })
+    }
+
+    // Show custom modal (helper function)
+    showCustomModal(title, content, buttons) {
+        // This is a simplified version - you might want to enhance this with a proper modal system
+        const modalHtml = `
+            <div id="custom-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+                <div style="background: #2a2a4e; padding: 20px; border-radius: 10px; border: 1px solid #444; max-width: 500px; width: 90%;">
+                    <h3 style="color: #ffd700; margin: 0 0 15px 0;">${title}</h3>
+                    ${content}
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                        ${buttons.map((btn, index) => `<button id="modal-btn-${index}" class="btn ${btn.class}">${btn.text}</button>`).join('')}
+                    </div>
+                </div>
+            </div>
+        `
+
+        document.body.insertAdjacentHTML('beforeend', modalHtml)
+
+        // Add event listeners to buttons
+        buttons.forEach((btn, index) => {
+            const button = document.getElementById(`modal-btn-${index}`)
+            if (button) {
+                button.addEventListener('click', btn.action)
+            }
+        })
+    }
+
+    // Hide custom modal
+    hideCustomModal() {
+        const modal = document.getElementById('custom-modal')
+        if (modal) {
+            modal.remove()
+        }
+    }
+
+    // Show message to user
+    showMessage(message, type = 'info') {
+        // Create message element
+        const messageEl = document.createElement('div')
+        messageEl.className = `message message-${type}`
+        messageEl.textContent = message
+
+        // Style the message
+        messageEl.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            z-index: 10001;
+            max-width: 400px;
+            word-wrap: break-word;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease-out;
+        `
+
+        // Set background color based on type
+        switch (type) {
+            case 'success':
+                messageEl.style.background = 'linear-gradient(45deg, #4caf50, #81c784)'
+                break
+            case 'error':
+                messageEl.style.background = 'linear-gradient(45deg, #f44336, #e57373)'
+                break
+            case 'warning':
+                messageEl.style.background = 'linear-gradient(45deg, #ff9800, #ffb74d)'
+                break
+            case 'info':
+            default:
+                messageEl.style.background = 'linear-gradient(45deg, #2196f3, #64b5f6)'
+                break
+        }
+
+        // Add to page
+        document.body.appendChild(messageEl)
+
+        // Auto-remove after 4 seconds
+        setTimeout(() => {
+            if (messageEl.parentNode) {
+                messageEl.style.animation = 'slideOut 0.3s ease-in'
+                setTimeout(() => {
+                    if (messageEl.parentNode) {
+                        messageEl.remove()
+                    }
+                }, 300)
+            }
+        }, 4000)
+
+        // Add click to dismiss
+        messageEl.addEventListener('click', () => {
+            if (messageEl.parentNode) {
+                messageEl.style.animation = 'slideOut 0.3s ease-in'
+                setTimeout(() => {
+                    if (messageEl.parentNode) {
+                        messageEl.remove()
+                    }
+                }, 300)
+            }
+        })
+    }
+
     // Render character sheet
     renderCharacterSheet() {
         const container = document.getElementById('character-sheet-content')
@@ -2841,20 +4466,19 @@ class UIComponents {
 
         container.innerHTML = `
             <div class="character-overview">
+                ${this.devMode ? this.renderDevModeCharacterSelector() : ''}
                 <div class="character-header">
                     <h2>${character.name}</h2>
                     <div class="character-header-buttons">
                         <button id="show-item-admin-btn" class="btn btn-tertiary">
                             <span class="btn-icon" data-icon-category="ui" data-icon-name="create"></span> Item Admin
                         </button>
+                        <button id="toggle-enemy-btn" class="btn ${character.isEnemy ? 'btn-danger' : 'btn-success'}" title="${character.isEnemy ? 'Currently an Enemy (drops Lumen when killed)' : 'Currently a Player (does not drop Lumen)'}">
+                            <span class="btn-icon" data-icon-category="ui" data-icon-name="${character.isEnemy ? 'skull' : 'shield'}"></span> ${character.isEnemy ? 'Enemy' : 'Player'}
+                        </button>
                         ${this.devMode && character.race && !character.isMonster ? `
                         <button class="btn btn-danger remove-race-btn" title="Dev Mode: Remove Race">
                             ${iconMapper.createIconElement('ui', 'delete', 16)} Remove Race
-                        </button>
-                        ` : ''}
-                        ${character.isMonster ? `
-                        <button id="show-monster-presets-btn" class="btn btn-secondary">
-                            ${iconMapper.createIconElement('ui', 'monster', 16)} Monster Presets
                         </button>
                         ` : ''}
                     </div>
@@ -2862,29 +4486,6 @@ class UIComponents {
                 
                 ${(!character.isMonster || character.race === 'monster') ? this.renderRaceSelection(character) : ''}
                 
-                ${character.isMonster ? `
-                <!-- Monster Presets Section -->
-                <div class="monster-presets-section" style="margin-bottom: 20px;">
-                    <div class="presets-controls">
-                        <div class="preset-dropdown-container">
-                            <label for="monster-preset-select">Quick Load Monster:</label>
-                            <select id="monster-preset-select" class="preset-select">
-                                <option value="">-- Select a Monster Preset --</option>
-                                ${this.renderMonsterPresetOptions()}
-                            </select>
-                            <button id="apply-preset-btn" class="btn btn-primary" disabled>
-                                ${iconMapper.createIconElement('ui', 'load', 16)} Apply Preset
-                            </button>
-                        </div>
-                        <div class="preset-save-container">
-                            <button id="save-preset-btn" class="btn btn-success">
-                                ${iconMapper.createIconElement('ui', 'save', 16)} Save as Preset
-                            </button>
-                            <span class="preset-save-note">Save current monster configuration</span>
-                        </div>
-                    </div>
-                </div>
-                ` : ''}
                 <div class="character-summary">
                     <div class="summary-item">
                         <span class="label">Level:</span>
@@ -2910,7 +4511,7 @@ class UIComponents {
                         <span class="label">Current Investment:</span>
                         <span class="value">${summary.totalSpent}L</span>
                     </div>
-                    ${character.isMonster ? `
+                    ${character.isEnemy ? `
                     <div class="summary-item monster-drop">
                         <span class="label">Lumen Drop (if defeated):</span>
                         <span class="value">${this.calculateMonsterLumenDrop(summary.totalSpent)}L</span>
@@ -3146,13 +4747,16 @@ class UIComponents {
             this.showItemAdminSidebar()
         })
 
+        // Add event listener for Enemy Toggle button
+        document.getElementById('toggle-enemy-btn')?.addEventListener('click', () => {
+            this.toggleEnemyStatus(character)
+        })
+
         // Add event listener for Remove Race button (dev mode)
         document.querySelector('.remove-race-btn')?.addEventListener('click', () => {
             this.removeCharacterRace()
         })
 
-        // Add event listeners for Monster Presets
-        this.setupMonsterPresetEventListeners()
 
         // Initialize skill tooltips
         this.initializeSkillTooltips()
@@ -3162,6 +4766,11 @@ class UIComponents {
 
         // Initialize skills search and filter functionality
         setTimeout(() => this.initializeSkillsFilter(), 100)
+
+        // Load pre-made characters if in dev mode
+        if (this.devMode) {
+            setTimeout(() => this.loadPremadeCharacters(), 100)
+        }
     }
 
     // Render race selection section for character sheet
@@ -3370,32 +4979,6 @@ class UIComponents {
         return totalPoints
     }
 
-    // Setup monster preset event listeners
-    setupMonsterPresetEventListeners() {
-        // Preset selection dropdown
-        const presetSelect = document.getElementById('monster-preset-select')
-        const applyBtn = document.getElementById('apply-preset-btn')
-        const saveBtn = document.getElementById('save-preset-btn')
-
-        if (presetSelect && applyBtn) {
-            presetSelect.addEventListener('change', (e) => {
-                applyBtn.disabled = !e.target.value
-            })
-
-            applyBtn.addEventListener('click', () => {
-                const selectedPresetId = presetSelect.value
-                if (selectedPresetId) {
-                    this.applyMonsterPreset(selectedPresetId)
-                }
-            })
-        }
-
-        if (saveBtn) {
-            saveBtn.addEventListener('click', () => {
-                this.showSavePresetDialog()
-            })
-        }
-    }
 
     // Apply a monster preset to the current character
     applyMonsterPreset(presetId) {
@@ -3442,40 +5025,6 @@ class UIComponents {
         }
     }
 
-    // Show dialog to save current character as preset
-    showSavePresetDialog() {
-        const character = characterManager.getCurrentCharacter()
-        if (!character || !character.isMonster) {
-            alert('Only monster characters can be saved as presets')
-            return
-        }
-
-        if (!window.monsterPresets) {
-            alert('Monster presets system not available')
-            return
-        }
-
-        const name = prompt('Enter a name for this monster preset:', `${character.name} Preset`)
-        if (!name) return
-
-        const description = prompt('Enter a description (optional):', `Based on ${character.name}`)
-
-        try {
-            const savedPreset = window.monsterPresets.saveCustomPreset(name, description || '', character)
-            alert(`Successfully saved preset "${savedPreset.name}"!`)
-
-            // Refresh the preset dropdown
-            const presetSelect = document.getElementById('monster-preset-select')
-            if (presetSelect) {
-                presetSelect.innerHTML = `
-                    <option value="">-- Select a Monster Preset --</option>
-                    ${this.renderMonsterPresetOptions()}
-                `
-            }
-        } catch (error) {
-            alert(`Failed to save preset: ${error.message}`)
-        }
-    }
 
     // Render shop page
     renderShop() {
@@ -3895,7 +5444,7 @@ class UIComponents {
             },
             bows: {
                 title: '🏹 Bows & Ranged',
-                items: ['training_bow', 'hunting_bow', 'crossbow', 'composite_bow', 'lightning_bow', 'elvish_bow', 'crystal_bow', 'storm_bow', 'celestial_bow']
+                items: ['training_bow', 'hunting_bow', 'crossbow', 'composite_bow', 'thunder_bow', 'elvish_bow', 'crystal_bow', 'storm_bow', 'celestial_bow']
             },
             hammers: {
                 title: '🔨 Hammers & Maces',
@@ -5495,7 +7044,7 @@ class UIComponents {
                 </div>
             </div>
             
-            ${character.isMonster ? this.renderMonsterLootSection(character) : ''}
+            ${character.isEnemy ? this.renderMonsterLootSection(character) : ''}
         `
 
         inventoryContainer.innerHTML = html
@@ -5516,7 +7065,7 @@ class UIComponents {
         if (window.MONSTER_LOOT_SYSTEM) {
             // Calculate player count for lumen drop scaling
             const allCharacters = characterManager.getAllCharacters()
-            playerCount = allCharacters.filter(char => !char.isMonster).length
+            playerCount = allCharacters.filter(char => !char.isEnemy).length
 
             // Use new dynamic system
             lumenDrop = window.MONSTER_LOOT_SYSTEM.calculateLumenReward(character, playerCount)
@@ -5530,7 +7079,7 @@ class UIComponents {
 
         return `
             <div class="inventory-section monster-loot-section">
-                <h3>Defeated Monster Drops</h3>
+                <h3>Drops when killed</h3>
                 <div class="monster-drops-info">
                     <div class="lumen-drop-info">
                         <span class="drop-type">Lumen Reward:</span>
@@ -5592,7 +7141,7 @@ class UIComponents {
     calculateMonsterLumenDrop(totalSpent) {
         // Calculate player count for lumen drop scaling
         const allCharacters = characterManager.getAllCharacters()
-        const playerCount = allCharacters.filter(char => !char.isMonster).length
+        const playerCount = allCharacters.filter(char => !char.isEnemy).length
 
         // Calculate drop percentage based on player count
         let dropPercentage = 0.10 // 10% for 1 player (default)
@@ -5667,7 +7216,14 @@ class UIComponents {
 
     // Render equipment slot
     renderEquipmentSlot(character, slotType, icon) {
-        const equippedItem = character.equipped[slotType]
+        let equippedItem = character.equipped[slotType]
+
+        // Handle both old format (item ID string) and new format (full item object)
+        if (equippedItem && typeof equippedItem === 'string') {
+            // Convert item ID to full item object
+            equippedItem = this.findItemById(equippedItem)
+        }
+
         const slotClass = equippedItem ? 'equipment-slot equipped' : 'equipment-slot empty'
 
         // Add dual wield indicator for secondary weapon slot
@@ -5794,7 +7350,7 @@ class UIComponents {
         const elementIcons = {
             fire: '🔥',
             ice: '❄️',
-            lightning: '⚡',
+            thunder: '⚡',
             water: '💧',
             earth: '🌍',
             wind: '🌪️',
@@ -5885,8 +7441,17 @@ class UIComponents {
         let inventoryItems = []
 
         if (Array.isArray(character.inventory)) {
-            // Old format - convert to new format
-            inventoryItems = character.inventory
+            // Old format - enrich with full item data
+            inventoryItems = character.inventory.map(invItem => {
+                const itemData = this.findItemById(invItem.id)
+                if (itemData) {
+                    return {
+                        ...itemData,
+                        quantity: invItem.quantity
+                    }
+                }
+                return invItem // Fallback to original if item not found
+            })
         } else {
             // New format - object with itemId: quantity
             for (const [itemId, quantity] of Object.entries(character.inventory)) {
@@ -7105,7 +8670,7 @@ class UIComponents {
             fire: 'fire',
             ice: 'ice',
             water: 'water',
-            lightning: 'lightning',
+            thunder: 'thunder',
             earth: 'earth',
             wind: 'wind',
             poison: 'necromancy', // Use necromancy icon for poison
@@ -7442,6 +9007,8 @@ class UIComponents {
 
     // Format item type for display
     formatItemType(type) {
+        if (!type) return 'Unknown'
+
         switch (type) {
             case 'craftable_armor': return 'Armor'
             case 'craftable_weapon': return 'Weapon'
@@ -8384,6 +9951,9 @@ class UIComponents {
                 <div class="notes-header">
                     <h2>📝 Notes for ${character.name}</h2>
                     <div class="notes-actions">
+                        <button class="btn btn-info" id="show-instructions-btn" title="View system instructions and help">
+                            ${iconMapper.createIconElement('ui', 'help', 16)} Instructions
+                        </button>
                         <button class="btn btn-secondary" id="manage-saved-notes-btn" title="Manage saved notes">
                             ${iconMapper.createIconElement('ui', 'folder', 16)} Saved Notes
                         </button>
@@ -8436,6 +10006,7 @@ class UIComponents {
         const clearBtn = document.getElementById('clear-notes-btn')
         const saveAsBtn = document.getElementById('save-as-btn')
         const manageSavedBtn = document.getElementById('manage-saved-notes-btn')
+        const showInstructionsBtn = document.getElementById('show-instructions-btn')
         const closeSavedPanelBtn = document.getElementById('close-saved-panel-btn')
         const charCount = document.getElementById('notes-char-count')
         const autoSaveIndicator = document.getElementById('auto-save-indicator')
@@ -8516,6 +10087,11 @@ class UIComponents {
                     }, 300)
                 }
             })
+        })
+
+        // Show instructions
+        showInstructionsBtn?.addEventListener('click', () => {
+            this.showInstructionsDialog()
         })
 
         // Save As button
@@ -8981,6 +10557,119 @@ class UIComponents {
                 `).join('')}
             </div>
         `
+    }
+
+    // Show comprehensive instructions dialog
+    showInstructionsDialog() {
+        const instructionsHtml = `
+            <div style="max-height: 80vh; overflow-y: auto; padding: 20px; line-height: 1.6;">
+                <h2 style="color: #ffd700; margin-bottom: 20px; text-align: center;">📚 RPG Skill Tree System - Instructions</h2>
+                
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🎯 Getting Started</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Create a Character:</strong> Use the hamburger menu (☰) in the sidebar to create a new character</li>
+                        <li><strong>Load Pre-made Characters:</strong> In Dev Mode, use the character selector to load from 166+ pre-made characters</li>
+                        <li><strong>Character Sheet:</strong> View and edit your character's stats, skills, and equipment</li>
+                        <li><strong>Skills Tab:</strong> Browse and unlock skills from the comprehensive skill tree</li>
+                        <li><strong>Stats Tab:</strong> View detailed character statistics and modifiers</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">⚔️ Character Management</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Enemy Toggle:</strong> Use the Enemy/Player button to switch between enemy and player status</li>
+                        <li><strong>Item Admin:</strong> Access the item management system for equipment and inventory</li>
+                        <li><strong>Character Export/Import:</strong> Save and share your characters as JSON files</li>
+                        <li><strong>Character Folders:</strong> Organize characters into custom folders</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">⭐ Custom Pre-made Characters</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Save as Pre-made:</strong> Save your current character as a new pre-made character</li>
+                        <li><strong>Manage Custom Characters:</strong> Edit names, types, and descriptions of your custom characters</li>
+                        <li><strong>Character Types:</strong> Organize characters by type (Goblins, Dragons, Human Enemies, etc.)</li>
+                        <li><strong>Local Storage:</strong> Custom characters are saved locally and persist between sessions</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🎮 Dev Mode Features</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Pre-made Character Loader:</strong> Access 166+ pre-made characters with filtering</li>
+                        <li><strong>Character Search:</strong> Search characters by name or filter by type</li>
+                        <li><strong>Custom Character Management:</strong> Create, edit, and delete your own pre-made characters</li>
+                        <li><strong>Character Categories:</strong> Filter by Pedestrian, Human Enemies, Goblins, Dragons, and more</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">📝 Notes System</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Character Notes:</strong> Keep track of your character's journey and important details</li>
+                        <li><strong>Auto-save:</strong> Notes are automatically saved as you type</li>
+                        <li><strong>Saved Notes:</strong> Save and manage multiple note templates</li>
+                        <li><strong>Character Count:</strong> Track your note length with the character counter</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🛒 Shop System</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Item Purchases:</strong> Buy equipment and items with Gil currency</li>
+                        <li><strong>Currency Management:</strong> Track Gil and Lumen currencies</li>
+                        <li><strong>Equipment System:</strong> Equip weapons, armor, and accessories</li>
+                        <li><strong>Inventory Management:</strong> Organize and manage your character's items</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🎯 Skill System</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Skill Tree:</strong> Comprehensive skill system with prerequisites</li>
+                        <li><strong>Racial Skills:</strong> Unique abilities based on character race</li>
+                        <li><strong>Monster Skills:</strong> Special abilities for monster characters</li>
+                        <li><strong>Weapon Proficiencies:</strong> Skills that match your equipped weapons</li>
+                        <li><strong>Elemental Skills:</strong> Fire, Ice, Thunder, Earth, Wind, Water, Light, and Darkness abilities</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">💡 Tips & Tricks</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Keyboard Shortcuts:</strong> Use F1 for help, F5 to save progress</li>
+                        <li><strong>Character Export:</strong> Share your characters with other players</li>
+                        <li><strong>Dev Mode:</strong> Enable Dev Mode for advanced features and pre-made character access</li>
+                        <li><strong>Auto-save:</strong> The system automatically saves your progress</li>
+                        <li><strong>Character Backup:</strong> Export important characters as backup files</li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🔧 Troubleshooting</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px;">
+                        <li><strong>Character Not Loading:</strong> Check if the character file is valid JSON</li>
+                        <li><strong>Skills Not Showing:</strong> Ensure you have the required prerequisites</li>
+                        <li><strong>Data Loss:</strong> Use the export feature to backup important characters</li>
+                        <li><strong>Performance Issues:</strong> Clear browser cache if the system runs slowly</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 8px; border: 1px solid #ffd700;">
+                    <p style="color: #ffd700; margin: 0; font-weight: bold;">
+                        🎉 Enjoy your RPG Skill Tree experience! Create epic characters and embark on amazing adventures!
+                    </p>
+                </div>
+            </div>
+        `
+
+        // Show modal with custom buttons
+        this.showCustomModal('System Instructions', instructionsHtml, [
+            { text: 'Close', class: 'btn-secondary', action: () => this.hideCustomModal() }
+        ])
     }
 }
 

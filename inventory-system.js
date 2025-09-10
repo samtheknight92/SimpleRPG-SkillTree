@@ -1134,10 +1134,10 @@ class InventorySystem {
         const opposingElements = {
             fire: 'water',
             water: 'fire',
-            ice: 'lightning',
-            lightning: 'earth',
+            ice: 'thunder',
+            thunder: 'earth',
             earth: 'wind',
-            wind: 'lightning',
+            wind: 'thunder',
             light: 'dark',
             dark: 'light'
         }
@@ -1293,11 +1293,11 @@ class InventorySystem {
             // Elemental mastery effects - these are handled by elementalAffinities
             'fire_mastery': null, // Skip this, it's handled by elementalAffinities
             'ice_mastery': null, // Skip this, it's handled by elementalAffinities
-            'lightning_mastery': null, // Skip this, it's handled by elementalAffinities
+            'thunder_mastery': null, // Skip this, it's handled by elementalAffinities
             'earth_mastery': null, // Skip this, it's handled by elementalAffinities
             'void_mastery': null, // Skip this, it's handled by elementalAffinities
             'fire_enchantment': null, // Skip this, it's handled by elementalAffinities
-            'lightning_enchantment': null, // Skip this, it's handled by elementalAffinities
+            'thunder_enchantment': null, // Skip this, it's handled by elementalAffinities
         }
 
         // Extract the effect name from the special effect string
@@ -1359,7 +1359,7 @@ class InventorySystem {
                 <div class="elemental-grid">
                     <button class="element-btn" data-element="fire" data-icon="🔥" title="${isImmunityItem ? 'Fire Immunity + Water/Ice Weakness' : 'Fire Resistance + Water Weakness'}">Fire</button>
                     <button class="element-btn" data-element="ice" data-icon="❄️" title="${isImmunityItem ? 'Ice Immunity + Lightning/Fire Weakness' : 'Ice Resistance + Lightning Weakness'}">Ice</button>
-                    <button class="element-btn" data-element="lightning" data-icon="⚡" title="${isImmunityItem ? 'Lightning Immunity + Earth/Lightning Weakness' : 'Lightning Resistance + Earth Weakness'}">Lightning</button>
+                    <button class="element-btn" data-element="thunder" data-icon="⚡" title="${isImmunityItem ? 'Lightning Immunity + Earth/Lightning Weakness' : 'Lightning Resistance + Earth Weakness'}">Lightning</button>
                     <button class="element-btn" data-element="water" data-icon="💧" title="${isImmunityItem ? 'Water Immunity + Fire/Wind Weakness' : 'Water Resistance + Fire Weakness'}">Water</button>
                     <button class="element-btn" data-element="earth" data-icon="🌍" title="${isImmunityItem ? 'Earth Immunity + Wind/Lightning Weakness' : 'Earth Resistance + Wind Weakness'}">Earth</button>
                     <button class="element-btn" data-element="wind" data-icon="🌪️" title="${isImmunityItem ? 'Wind Immunity + Lightning/Water Weakness' : 'Wind Resistance + Lightning Weakness'}">Wind</button>
@@ -1478,10 +1478,10 @@ class InventorySystem {
         const opposingElements = {
             fire: 'water',
             water: 'fire',
-            ice: 'lightning',
-            lightning: 'earth',
+            ice: 'thunder',
+            thunder: 'earth',
             earth: 'wind',
-            wind: 'lightning',
+            wind: 'thunder',
             light: 'dark',
             dark: 'light'
         }
@@ -1565,7 +1565,7 @@ class InventorySystem {
 
         // Show confirmation message
         const elementNames = {
-            fire: 'Fire', ice: 'Ice', lightning: 'Lightning', water: 'Water',
+            fire: 'Fire', ice: 'Ice', thunder: 'Lightning', water: 'Water',
             earth: 'Earth', wind: 'Wind', light: 'Light', dark: 'Dark'
         }
 
@@ -1583,8 +1583,8 @@ class InventorySystem {
         const secondWeaknesses = {
             fire: 'ice',      // Fire immunity -> Ice weakness (cold vs heat)
             ice: 'fire',      // Ice immunity -> Fire weakness (heat vs cold)
-            lightning: 'earth', // Lightning immunity -> Earth weakness (ground vs sky)
-            earth: 'lightning', // Earth immunity -> Lightning weakness (sky vs ground)
+            thunder: 'earth', // Lightning immunity -> Earth weakness (ground vs sky)
+            earth: 'thunder', // Earth immunity -> Lightning weakness (sky vs ground)
             water: 'wind',    // Water immunity -> Wind weakness (still vs moving)
             wind: 'water',    // Wind immunity -> Water weakness (moving vs still)
             light: 'darkness',    // Light immunity -> Darkness weakness (opposite)
@@ -1626,7 +1626,7 @@ class InventorySystem {
                     <div class="elemental-grid" id="immunity-grid">
                         <button class="element-btn" data-element="fire" data-icon="🔥" title="Fire Immunity">Fire</button>
                         <button class="element-btn" data-element="ice" data-icon="❄️" title="Ice Immunity">Ice</button>
-                        <button class="element-btn" data-element="lightning" data-icon="⚡" title="Lightning Immunity">Lightning</button>
+                        <button class="element-btn" data-element="thunder" data-icon="⚡" title="Lightning Immunity">Lightning</button>
                         <button class="element-btn" data-element="water" data-icon="💧" title="Water Immunity">Water</button>
                         <button class="element-btn" data-element="earth" data-icon="🌍" title="Earth Immunity">Earth</button>
                         <button class="element-btn" data-element="wind" data-icon="🌪️" title="Wind Immunity">Wind</button>
@@ -1640,7 +1640,7 @@ class InventorySystem {
                     <div class="elemental-grid" id="resistance-grid">
                         <button class="element-btn" data-element="fire" data-icon="🔥" title="Fire Resistance">Fire</button>
                         <button class="element-btn" data-element="ice" data-icon="❄️" title="Ice Resistance">Ice</button>
-                        <button class="element-btn" data-element="lightning" data-icon="⚡" title="Lightning Resistance">Lightning</button>
+                        <button class="element-btn" data-element="thunder" data-icon="⚡" title="Lightning Resistance">Lightning</button>
                         <button class="element-btn" data-element="water" data-icon="💧" title="Water Resistance">Water</button>
                         <button class="element-btn" data-element="earth" data-icon="🌍" title="Earth Resistance">Earth</button>
                         <button class="element-btn" data-element="wind" data-icon="🌪️" title="Wind Resistance">Wind</button>
@@ -1735,7 +1735,7 @@ class InventorySystem {
 
                 // Update summary
                 const elementNames = {
-                    fire: 'Fire', ice: 'Ice', lightning: 'Lightning', water: 'Water',
+                    fire: 'Fire', ice: 'Ice', thunder: 'Lightning', water: 'Water',
                     earth: 'Earth', wind: 'Wind', light: 'Light', dark: 'Dark'
                 }
                 modal.querySelector('#immunity-choice span').textContent = elementNames[selectedImmunity]
@@ -1776,7 +1776,7 @@ class InventorySystem {
 
                 // Update summary
                 const elementNames = {
-                    fire: 'Fire', ice: 'Ice', lightning: 'Lightning', water: 'Water',
+                    fire: 'Fire', ice: 'Ice', thunder: 'Lightning', water: 'Water',
                     earth: 'Earth', wind: 'Wind', light: 'Light', dark: 'Dark'
                 }
                 modal.querySelector('#resistance-choice span').textContent = elementNames[selectedResistance]
@@ -1815,10 +1815,10 @@ class InventorySystem {
         const opposingElements = {
             fire: 'water',
             water: 'fire',
-            ice: 'lightning',
-            lightning: 'earth',
+            ice: 'thunder',
+            thunder: 'earth',
             earth: 'wind',
-            wind: 'lightning',
+            wind: 'thunder',
             light: 'dark',
             dark: 'light'
         }
@@ -1870,7 +1870,7 @@ class InventorySystem {
 
         // Show confirmation message
         const elementNames = {
-            fire: 'Fire', ice: 'Ice', lightning: 'Lightning', water: 'Water',
+            fire: 'Fire', ice: 'Ice', thunder: 'Lightning', water: 'Water',
             earth: 'Earth', wind: 'Wind', light: 'Light', dark: 'Dark'
         }
 

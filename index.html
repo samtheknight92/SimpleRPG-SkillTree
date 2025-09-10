@@ -146,9 +146,6 @@
         
         <!-- Action Buttons -->
         <div class="panel-actions">
-            <button class="action-btn" onclick="uiComponents.showCreateFolderDialog()">
-                📁 New Folder
-            </button>
             <button id="new-character-btn" class="action-btn">
                 👤 New Character
             </button>
@@ -159,6 +156,16 @@
         
         <!-- Character List -->
         <div id="character-list" class="character-list"></div>
+        
+        <!-- Character Data Management -->
+        <div class="panel-actions" style="margin-top: auto; padding-top: 10px; border-top: 1px solid #444;">
+            <button id="export-character-btn" class="action-btn" title="Export Character">
+                📤 Export
+            </button>
+            <button id="import-character-btn" class="action-btn" title="Import Character">
+                📥 Import
+            </button>
+        </div>
     </div>
 
     <!-- Item Admin Sidebar -->
@@ -353,6 +360,19 @@
         </div>
     </div>
 
+    <!-- Rename Character Modal -->
+    <div id="rename-character-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h3>Rename Character</h3>
+            <p>Enter a new name for this character:</p>
+            <input type="text" id="rename-character-input" class="input-field" placeholder="Character name...">
+            <div class="modal-buttons">
+                <button id="rename-character-btn" class="btn btn-primary">Rename</button>
+                <button id="cancel-rename-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Race Selection Confirmation Modal -->
     <div id="race-selection-modal" class="modal-overlay race-selection-modal" style="display: none;">
         <div class="modal-content">
@@ -364,7 +384,7 @@
                     <option value="">Select element...</option>
                     <option value="Fire">Fire</option>
                     <option value="Ice">Ice</option>
-                    <option value="Lightning">Lightning</option>
+                    <option value="Thunder">Thunder</option>
                     <option value="Earth">Earth</option>
                     <option value="Wind">Wind</option>
                     <option value="Water">Water</option>
@@ -379,6 +399,9 @@
         </div>
     </div>
 
+    <!-- Hidden file input for character import -->
+    <input type="file" id="character-import-input" accept=".json" style="display: none;">
+
     <!-- Scripts -->
     <script src="icon-mapping.js"></script>
     <script src="skills-data.js"></script>
@@ -392,7 +415,9 @@
     <script src="monster-system.js"></script>
     <script src="monster-presets.js"></script>
     <script src="inventory-system.js"></script>
+    <script src="character-migration.js"></script>
     <script src="character-manager.js"></script>
+    <script src="premade-characters-data.js"></script>
     <script src="skill-connections.js"></script>
     <script src="ui-components.js"></script>
     <script src="game-logic.js"></script>

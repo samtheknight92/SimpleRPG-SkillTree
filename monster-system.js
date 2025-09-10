@@ -26,18 +26,18 @@ const MONSTER_SYSTEM = {
         },
         ice_dominion: {
             resistanceModifiers: { ice: -2, water: -1 },
-            weaknessModifiers: { fire: +1, lightning: +1 },
+            weaknessModifiers: { fire: +1, thunder: +1 },
             description: 'Ice Dominion: Ice resistance 25% (-2), Water resistance 50% (-1), Fire weakness 200% (+1), Lightning weakness 200% (+1)'
         },
 
         // LIGHTNING MAGIC SKILLS
-        lightning_attunement: {
-            resistanceModifiers: { lightning: -1 },
+        thunder_attunement: {
+            resistanceModifiers: { thunder: -1 },
             weaknessModifiers: { earth: +1 },
             description: 'Lightning Attunement: Lightning resistance 50% (-1), Earth weakness 200% (+1)'
         },
         storm_mastery: {
-            resistanceModifiers: { lightning: -2, wind: -1 },
+            resistanceModifiers: { thunder: -2, wind: -1 },
             weaknessModifiers: { earth: +1, water: +1 },
             description: 'Storm Mastery: Lightning resistance 25% (-2), Wind resistance 50% (-1), Earth weakness 200% (+1), Water weakness 200% (+1)'
         },
@@ -50,31 +50,31 @@ const MONSTER_SYSTEM = {
         },
         stone_mastery: {
             resistanceModifiers: { earth: -2, poison: -1 },
-            weaknessModifiers: { wind: +1, lightning: +1 },
+            weaknessModifiers: { wind: +1, thunder: +1 },
             description: 'Stone Mastery: Earth resistance 25% (-2), Poison resistance 50% (-1), Wind weakness 200% (+1), Lightning weakness 200% (+1)'
         },
 
         // WATER MAGIC SKILLS
         water_attunement: {
             resistanceModifiers: { water: -1 },
-            weaknessModifiers: { lightning: +1 },
+            weaknessModifiers: { thunder: +1 },
             description: 'Water Attunement: Water resistance 50% (-1), Lightning weakness 200% (+1)'
         },
         hydro_mastery: {
             resistanceModifiers: { water: -2, ice: -1 },
-            weaknessModifiers: { lightning: +2 },
+            weaknessModifiers: { thunder: +2 },
             description: 'Hydro Mastery: Water resistance 25% (-2), Ice resistance 50% (-1), Lightning weakness 400% (+2)'
         },
 
         // WIND MAGIC SKILLS
         wind_attunement: {
             resistanceModifiers: { wind: -1 },
-            weaknessModifiers: { lightning: +1 },
+            weaknessModifiers: { thunder: +1 },
             description: 'Wind Attunement: Wind resistance 50% (-1), Lightning weakness 200% (+1)'
         },
         gale_mastery: {
             resistanceModifiers: { wind: -1 },
-            weaknessModifiers: { lightning: +1 },
+            weaknessModifiers: { thunder: +1 },
             description: 'Gale Mastery: Wind resistance 50% (-1), Lightning weakness 200% (+1)'
         },
 
@@ -91,7 +91,7 @@ const MONSTER_SYSTEM = {
         },
 
         // DARK MAGIC SKILLS
-        dark_attunement: {
+        darkness_attunement: {
             resistanceModifiers: { darkness: -1 },
             weaknessModifiers: { light: +1 },
             description: 'Darkness Attunement: Darkness resistance 50% (-1), Light weakness 200% (+1)'
@@ -110,7 +110,7 @@ const MONSTER_SYSTEM = {
         },
         ice_breath: {
             resistanceModifiers: { ice: -1, water: -1 },
-            weaknessModifiers: { fire: +1, lightning: +1 },
+            weaknessModifiers: { fire: +1, thunder: +1 },
             description: 'Ice Breath: Ice resistance 50% (-1), Water resistance 50% (-1), Fire weakness 200% (+1), Lightning weakness 200% (+1)'
         },
         poison_breath: {
@@ -118,8 +118,8 @@ const MONSTER_SYSTEM = {
             weaknessModifiers: { light: +1, fire: +1 },
             description: 'Poison Breath: Poison resistance 50% (-1), Light weakness 200% (+1), Fire weakness 200% (+1)'
         },
-        lightning_breath: {
-            resistanceModifiers: { lightning: -1 },
+        thunder_breath: {
+            resistanceModifiers: { thunder: -1 },
             weaknessModifiers: { earth: +1, water: +1 },
             description: 'Lightning Breath: Lightning resistance 50% (-1), Earth weakness 200% (+1), Water weakness 200% (+1)'
         }
@@ -140,7 +140,7 @@ const MONSTER_SYSTEM = {
         const totalModifiers = {}
 
         // Initialize all elements to 0 (normal damage)
-        const elements = ['fire', 'ice', 'lightning', 'earth', 'water', 'wind', 'light', 'darkness', 'poison']
+        const elements = ['fire', 'ice', 'thunder', 'earth', 'water', 'wind', 'light', 'darkness', 'poison']
         elements.forEach(element => totalModifiers[element] = 0)
 
         // Stack modifiers from all elemental skills
@@ -265,7 +265,7 @@ const MONSTER_SYSTEM = {
             description: 'Ring of Ice: Ice resistance 50% (-1), Fire weakness 200% (+1)'
         },
         ring_of_storms: {
-            resistanceModifiers: { lightning: -1 },
+            resistanceModifiers: { thunder: -1 },
             weaknessModifiers: { earth: +1 },
             description: 'Ring of Storms: Lightning resistance 50% (-1), Earth weakness 200% (+1)'
         },
@@ -295,7 +295,7 @@ const MONSTER_SYSTEM = {
         },
         ice_armor: {
             resistanceModifiers: { ice: -2 },
-            weaknessModifiers: { fire: +1, lightning: +1 },
+            weaknessModifiers: { fire: +1, thunder: +1 },
             description: 'Ice Armor: Ice resistance 25% (-2), Fire/Lightning weakness 200% (+1)'
         },
         flame_mail: {
@@ -305,11 +305,11 @@ const MONSTER_SYSTEM = {
         },
         frost_armor: {
             resistanceModifiers: { ice: -2 },
-            weaknessModifiers: { fire: +1, lightning: +1 },
+            weaknessModifiers: { fire: +1, thunder: +1 },
             description: 'Frost Armor: Ice resistance 25% (-2), Fire/Lightning weakness 200% (+1)'
         },
         storm_cloak: {
-            resistanceModifiers: { lightning: -1, wind: -1 },
+            resistanceModifiers: { thunder: -1, wind: -1 },
             weaknessModifiers: { earth: +1 },
             description: 'Storm Cloak: Lightning/Wind resistance 50% (-1), Earth weakness 200% (+1)'
         }
@@ -318,7 +318,7 @@ const MONSTER_SYSTEM = {
     // Get equipment elemental affinities from equipped items
     getEquipmentAffinities(character) {
         const affinities = {
-            fire: 0, ice: 0, lightning: 0, earth: 0, water: 0, wind: 0,
+            fire: 0, ice: 0, thunder: 0, earth: 0, water: 0, wind: 0,
             light: 0, darkness: 0, poison: 0
         }
 
@@ -428,7 +428,7 @@ const MONSTER_SYSTEM = {
         }
 
         const totalModifiers = {}
-        const elements = ['fire', 'ice', 'lightning', 'earth', 'water', 'wind', 'light', 'darkness', 'poison']
+        const elements = ['fire', 'ice', 'thunder', 'earth', 'water', 'wind', 'light', 'darkness', 'poison']
         elements.forEach(element => totalModifiers[element] = 0)
 
         // Stack modifiers from skills

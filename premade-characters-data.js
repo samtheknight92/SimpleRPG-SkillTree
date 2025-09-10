@@ -1,0 +1,20475 @@
+// Pre-made Characters Data
+// This file contains all pre-made character data for the dev mode character selector
+// This eliminates CORS issues and allows direct character loading
+
+window.PREMADE_CHARACTERS_DATA = {
+    // Human Enemies
+    "Mercenary_character.json": {
+        "id": "mercenary_001",
+        "name": "Mercenary",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 25,
+            "strength": 6,
+            "magicPower": 2,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 8,
+            "magicalDefence": 5
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": ["sword_basics", "sword_techniques"],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": ["human_determination"],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 23,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+
+    "Duelist_character.json": {
+        "id": "duelist_001",
+        "name": "Tiefling Duelist",
+        "race": "tiefling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 3,
+            "accuracy": 8,
+            "speed": 7,
+            "physicalDefence": 4,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": ["sword_beginner", "sword_basics", "sword_techniques", "parry"],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": ["fire_spark"],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": ["hellish_rebuke"],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "tiefling": "Infernal Heritage: +2 Magic Power, Fire Resistance"
+        },
+        "racialAbilities": {
+            "tiefling": {
+                "infernal_heritage": "+2 Magic Power, Fire Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 6,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+
+    "Archer_character.json": {
+        "id": "archer_001",
+        "name": "Elven Archer",
+        "race": "elf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 25,
+            "strength": 3,
+            "magicPower": 2,
+            "accuracy": 8,
+            "speed": 6,
+            "physicalDefence": 4,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": ["bow_basics", "quick_draw", "aimed_shot"]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": ["elven_accuracy"],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_bow", "quantity": 1 },
+            { "id": "iron_arrows", "quantity": 20 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_bow",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "elf": "Graceful: +2 Speed, +1 Magic Power"
+        },
+        "racialAbilities": {
+            "elf": {
+                "graceful": "+2 Speed, +1 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+
+    "Scout_character.json": {
+        "id": "scout_001",
+        "name": "Elven Scout",
+        "race": "elf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 24,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 3,
+            "accuracy": 7,
+            "speed": 7,
+            "physicalDefence": 4,
+            "magicalDefence": 5
+        },
+        "lumens": 70,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": ["dagger_beginner"],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": ["bow_basics", "quick_draw"]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": ["elven_accuracy"],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "wooden_bow", "quantity": 1 },
+            { "id": "iron_arrows", "quantity": 15 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_bow",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "elf": "Graceful: +2 Speed, +1 Magic Power"
+        },
+        "racialAbilities": {
+            "elf": {
+                "graceful": "+2 Speed, +1 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+
+    "Thief_character.json": {
+        "id": "thief_001",
+        "name": "Halfling Thief",
+        "race": "halfling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 1,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 3,
+            "magicalDefence": 4
+        },
+        "lumens": 50,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": ["dagger_beginner", "dagger_basics"],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": ["lucky_dodge"],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "halfling": "Lucky: +2 Speed, +1 Accuracy, Lucky trait"
+        },
+        "racialAbilities": {
+            "halfling": {
+                "lucky": "+2 Speed, +1 Accuracy, Lucky trait"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 21,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+
+    // Goblin Family
+    "Goblin_Scout_character.json": {
+        "id": "goblin_scout_001",
+        "name": "Goblin Scout",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 12,
+            "stamina": 20,
+            "strength": 2,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 6,
+            "physicalDefence": 7,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": ["sword_beginner"],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": ["bow_beginner"]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": ["claws"],
+                "magic": [],
+                "utility": ["camouflage"]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_sword", "quantity": 1 },
+            { "id": "shortbow", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_sword",
+            "secondaryWeapon": "shortbow",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby"
+            }
+        },
+        "lootTable": {
+            "weapon": "rusty_sword",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+
+    "Goblin_Warrior_character.json": {
+        "id": "goblin_warrior_001",
+        "name": "Goblin Warrior",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 22,
+            "strength": 4,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 5,
+            "physicalDefence": 10,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": ["sword_basics"],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["tough_skin"],
+                "combat": ["claws", "bite_attack"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "buckler", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "buckler",
+            "armor": "leather_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby"
+            }
+        },
+        "lootTable": {
+            "weapon": "iron_sword",
+            "armor": "leather_armor",
+            "accessory": "buckler"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:16:00.000Z"
+    },
+
+    "Goblin_Thief_character.json": {
+        "id": "goblin_thief_001",
+        "name": "Goblin Thief",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 16,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 1,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 9,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": ["dagger_basics"],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": ["claws"],
+                "magic": [],
+                "utility": ["camouflage"]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "dagger", "quantity": 1 },
+            { "id": "shortbow", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "arrows", "quantity": 20 }
+        ],
+        "equipped": {
+            "primaryWeapon": "dagger",
+            "secondaryWeapon": "shortbow",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby",
+                "stealth": "Natural ability to move quietly and hide"
+            }
+        },
+        "lootTable": {
+            "weapon": "dagger",
+            "armor": "leather_armor",
+            "accessory": "shortbow"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:20:00.000Z"
+    },
+
+    "Goblin_Shaman_character.json": {
+        "id": "goblin_shaman_001",
+        "name": "Goblin Shaman",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 4,
+            "physicalDefence": 8,
+            "magicalDefence": 12
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": ["staff_basics"],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": ["fire_spark"],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": ["healing_light"]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["magical_resistance"],
+                "combat": [],
+                "magic": ["fear_aura"],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "quarterstaff", "quantity": 1 },
+            { "id": "dagger", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "quarterstaff",
+            "secondaryWeapon": "dagger",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby"
+            }
+        },
+        "lootTable": {
+            "weapon": "quarterstaff",
+            "armor": "leather_armor",
+            "accessory": "mana_potion"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 6,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:17:00.000Z"
+    },
+
+    "Goblin_Berserker_character.json": {
+        "id": "goblin_berserker_001",
+        "name": "Goblin Berserker",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 24,
+            "stamina": 30,
+            "strength": 7,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 6,
+            "physicalDefence": 11,
+            "magicalDefence": 7
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": ["axe_basics", "axe_techniques"],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["tough_skin"],
+                "combat": ["monster_berserker_rage", "blood_frenzy"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "throwing_axe", "quantity": 2 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "battleaxe",
+            "secondaryWeapon": "throwing_axe",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby",
+                "berserkerRage": "Becomes stronger when wounded"
+            }
+        },
+        "lootTable": {
+            "weapon": "battleaxe",
+            "armor": "leather_armor",
+            "accessory": "throwing_axe"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 6,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:19:00.000Z"
+    },
+
+    "Alchemist_character.json": {
+        "id": "alchemist_001",
+        "name": "Gnoll Alchemist",
+        "race": "gnoll",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 28,
+            "stamina": 25,
+            "strength": 4,
+            "magicPower": 5,
+            "accuracy": 3,
+            "speed": 4,
+            "physicalDefence": 5,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": ["unarmed_beginner"],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": ["alchemy_basic", "alchemy_advanced"],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": ["pack_coordination"]
+            }
+        },
+        "inventory": [
+            { "id": "health_potion", "quantity": 3 },
+            { "id": "mana_potion", "quantity": 2 },
+            { "id": "poison_antidote", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "gnoll": "Pack Hunter: +2 Strength, +1 Speed"
+        },
+        "racialAbilities": {
+            "gnoll": {
+                "pack_hunter": "+2 Strength, +1 Speed"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+
+    "Assassin_Rogue_character.json": {
+        "id": "assassin_rogue_001",
+        "name": "Assassin Rogue",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 2,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 5,
+            "magicalDefence": 5
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": ["dagger_beginner", "dagger_basics", "light_step"],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": ["shadow_bolt", "darkness_attunement"],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": ["human_determination"],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 2 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "poison_antidote", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "rusty_dagger",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+
+    "Battle_Mage_character.json": {
+        "id": "battle_mage_001",
+        "name": "Battle Mage",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 30,
+            "strength": 5,
+            "magicPower": 6,
+            "accuracy": 4,
+            "speed": 4,
+            "physicalDefence": 6,
+            "magicalDefence": 7
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": ["sword_beginner", "sword_basics"],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": ["fire_spark", "fireball"],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": ["human_determination"],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+
+    "Blue_Slime_character.json": {
+        "id": "blue_slime_001",
+        "name": "Blue Slime",
+        "race": "slime",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 14,
+            "stamina": 15,
+            "strength": 2,
+            "magicPower": 3,
+            "accuracy": 3,
+            "speed": 2,
+            "physicalDefence": 8,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": ["ice_shard"],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["tough_skin"],
+                "combat": ["acid_spit"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "slime": "Can split when damaged (potential system addition)"
+        },
+        "racialAbilities": {
+            "slime": {
+                "gelatinousBody": "Resistant to physical damage",
+                "coldNature": "Immune to cold damage, deals ice damage"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:32:00.000Z"
+    },
+
+    "Ancient_Dragon_character.json": {
+        "id": "ancient_dragon_001",
+        "name": "Ancient Dragon",
+        "race": "dragon",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 20,
+        "experience": 0,
+        "stats": {
+            "hp": 200,
+            "stamina": 100,
+            "strength": 25,
+            "magicPower": 20,
+            "accuracy": 12,
+            "speed": 10,
+            "physicalDefence": 20,
+            "magicalDefence": 20
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": true,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": ["ultimate_dragon_magic", "ultimate_breath", "ancient_knowledge"],
+                "utility": ["god_like_flight"]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragon": "Can fly, ultimate breath weapon"
+        },
+        "racialAbilities": {
+            "dragon": {
+                "flight": "Can fly and move through the air",
+                "breathWeapon": "Possesses the ultimate breath weapon",
+                "ancientWisdom": "Ancient knowledge and wisdom"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:45:00.000Z"
+    },
+
+    // Additional Human Enemies
+    "Bandit_Raider_character.json": {
+        "id": "bandit_raider_001",
+        "name": "Bandit Raider",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 20,
+            "strength": 4,
+            "magicPower": 1,
+            "accuracy": 2,
+            "speed": 3,
+            "physicalDefence": 6,
+            "magicalDefence": 4
+        },
+        "lumens": 50,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": ["sword_beginner", "sword_basics"],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": ["human_determination"],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 16,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+
+    // Pedestrian NPCs
+    "Pedestrian_Human_character.json": {
+        "id": "char_1757285296456_mfwp4q16q",
+        "name": "Pedestrian Human",
+        "level": 1,
+        "folder": "Default",
+        "created": "2025-09-07T22:48:16.456Z",
+        "lastPlayed": "2025-09-07T22:51:16.847Z",
+        "hp": 11,
+        "maxHp": 11,
+        "stamina": 11,
+        "maxStamina": 11,
+        "stats": {
+            "hp": 11,
+            "stamina": 11,
+            "strength": -3,
+            "magicPower": -3,
+            "accuracy": -2,
+            "speed": 2,
+            "physicalDefence": 8,
+            "magicalDefence": 8
+        },
+        "lumens": 135,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp300": false,
+            "hp400": false,
+            "hp500": false
+        },
+        "staminaMilestones": {
+            "stamina15": false,
+            "stamina25": false,
+            "stamina40": false,
+            "stamina60": false
+        },
+        "gil": 65,
+        "isMonster": false,
+        "isEnemy": true,
+        "race": "human",
+        "racialPassiveTraits": [
+            "Versatile Learning: All Weapon beginner skills are unlocked upon creation",
+            "Ambitious Spirit: Can choose to go first in initiative (Only one human per team can use this per combat)",
+            "Cross-Cultural Learning: Can learn Tier 1 skills from other races' skill trees"
+        ],
+        "racialAbilities": {
+            "versatileLearning": true,
+            "ambitiousSpirit": true,
+            "crossCulturalLearning": true
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": ["sword_beginner"],
+                "ranged": [],
+                "axe": ["axe_beginner"],
+                "staff": ["staff_beginner"],
+                "dagger": ["dagger_beginner"],
+                "polearm": ["polearm_beginner"],
+                "hammer": ["hammer_beginner"],
+                "unarmed": ["unarmed_beginner"],
+                "bow": ["bow_beginner"]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": ["cooking_basic"],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "utility_combat": [],
+                "monster_fusion": [],
+                "pure_magic": []
+            },
+            "ascension": {
+                "unique": []
+            },
+            "racial": {
+                "human": [],
+                "elven": [],
+                "dwarven": [],
+                "halfling": [],
+                "orcish": [],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_sword",
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "equipmentBonuses": {
+            "hp": 0,
+            "stamina": 0,
+            "strength": 0,
+            "magicPower": 0,
+            "speed": 0,
+            "physicalDefence": 0,
+            "magicalDefence": 0,
+            "accuracy": 0
+        },
+        "activeToggleSkills": [],
+        "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 15,
+        "lastModified": "2025-09-07T22:51:14.375Z"
+    },
+
+    // Additional Monsters
+    "Orc_Brute_character.json": {
+        "id": "orc_brute_001",
+        "name": "Orc Brute",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 30,
+            "strength": 9,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 2,
+            "physicalDefence": 13,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": ["hammer_basics"],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["tough_skin"],
+                "combat": ["monster_berserker_rage", "gore"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatclub", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatclub",
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Massive damage, area attacks"
+        },
+        "racialAbilities": {
+            "orc": {
+                "massiveDamage": "Deals massive damage with heavy weapons",
+                "areaAttacks": "Can perform area of effect attacks"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatclub",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:50:00.000Z"
+    },
+
+    "Cultist_character.json": {
+        "id": "cultist_001",
+        "name": "Cultist",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 5,
+            "accuracy": 1,
+            "speed": 2,
+            "physicalDefence": 4,
+            "magicalDefence": 7
+        },
+        "lumens": 60,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": ["dagger_beginner"],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": ["shadow_bolt", "darkness_attunement"],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": ["alchemy_basic"],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 },
+            { "id": "poison_antidote", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+
+    "Necromancer_character.json": {
+        "id": "necromancer_001",
+        "name": "Drow Necromancer",
+        "race": "drow",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 35,
+            "strength": 1,
+            "magicPower": 9,
+            "accuracy": 2,
+            "speed": 4,
+            "physicalDefence": 2,
+            "magicalDefence": 9
+        },
+        "lumens": 120,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": ["shadow_bolt", "dark_ritual", "soul_drain", "darkness_attunement"],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": ["alchemy_basic"],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": ["shadow_affinity"],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 4 },
+            { "id": "poison_antidote", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "drow": "Dark Vision: Can see in darkness, +2 Magic Power"
+        },
+        "racialAbilities": {
+            "drow": {
+                "dark_vision": "Can see in darkness, +2 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+
+    "Giant_Rat_character.json": {
+        "id": "giant_rat_001",
+        "name": "Giant Rat",
+        "race": "rat",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 14,
+            "stamina": 18,
+            "strength": 3,
+            "magicPower": 0,
+            "accuracy": 4,
+            "speed": 7,
+            "physicalDefence": 8,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": ["bite_attack", "claws"],
+                "magic": [],
+                "utility": ["pack_leader", "burrow"]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "rat": "Pack Tactics: Advantage when fighting alongside other rats (potential system addition)"
+        },
+        "racialAbilities": {
+            "rat": {
+                "packTactics": "Gains advantage when fighting with other rats nearby",
+                "naturalWeapons": "Uses teeth and claws as natural weapons",
+                "burrowing": "Can dig tunnels and move underground"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:26:00.000Z"
+    },
+
+    "Fire_Giant_character.json": {
+        "id": "fire_giant_001",
+        "name": "Fire Giant",
+        "race": "giant",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 50,
+            "stamina": 40,
+            "strength": 10,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 2,
+            "physicalDefence": 14,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": ["hammer_basics"],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": ["fire_spark", "fireball", "fire_shield", "ignite", "fire_attunement"],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["tough_skin"],
+                "combat": ["fire_breath"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatclub", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatclub",
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "giant": "Fire damage, heat resistance"
+        },
+        "racialAbilities": {
+            "giant": {
+                "fireDamage": "Deals fire damage with attacks",
+                "heatResistance": "Resistant to fire and heat damage"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatclub",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:55:00.000Z"
+    },
+
+    "Earth_Golem_character.json": {
+        "id": "earth_golem_001",
+        "name": "Earth Golem",
+        "race": "golem",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 30,
+            "strength": 9,
+            "magicPower": 3,
+            "accuracy": 4,
+            "speed": 1,
+            "physicalDefence": 16,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": ["stone_throw", "earth_spike", "stone_skin", "earth_attunement"],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["rock_skin", "tough_skin"],
+                "combat": ["monster_earthquake"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "golem": "Earth-aligned, can manipulate stone"
+        },
+        "racialAbilities": {
+            "golem": {
+                "earthAlignment": "Earth-aligned with stone manipulation",
+                "constructNature": "Construct immune to many status effects"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:59:00.000Z"
+    },
+
+    "Pedestrian_Elf_character.json": {
+        "id": "char_1757285490104_l1470osq4",
+        "name": "Pedestrian Elf",
+        "level": 1,
+        "folder": "Default",
+        "created": "2025-09-07T22:51:30.104Z",
+        "lastPlayed": "2025-09-07T22:52:25.498Z",
+        "hp": 10,
+        "maxHp": 10,
+        "stamina": 10,
+        "maxStamina": 10,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -3,
+            "magicPower": -2,
+            "accuracy": -2,
+            "speed": 2,
+            "physicalDefence": 8,
+            "magicalDefence": 8
+        },
+        "lumens": 135,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp300": false,
+            "hp400": false,
+            "hp500": false
+        },
+        "staminaMilestones": {
+            "stamina15": false,
+            "stamina25": false,
+            "stamina40": false,
+            "stamina60": false
+        },
+        "gil": 65,
+        "isMonster": false,
+        "isEnemy": true,
+        "race": "elf",
+        "racialPassiveTraits": [
+            "Keen Senses: +1 Accuracy when using a bow",
+            "Magical Affinity: +1 Magic Power when using staves",
+            "Elven Longevity: Immune to Cursed and Poison status effects"
+        ],
+        "racialAbilities": {
+            "keenSenses": true,
+            "magicalAffinity": true,
+            "elvenLongevity": true
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "ranged": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": ["unarmed_beginner"],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": ["herbalism_basic"]
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "utility_combat": [],
+                "monster_fusion": [],
+                "pure_magic": []
+            },
+            "ascension": {
+                "unique": []
+            },
+            "racial": {
+                "human": [],
+                "elf": ["elven_accuracy"],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "equipmentBonuses": {
+            "hp": 0,
+            "stamina": 0,
+            "strength": 0,
+            "magicPower": 0,
+            "speed": 0,
+            "physicalDefence": 0,
+            "magicalDefence": 0,
+            "accuracy": 0
+        },
+        "activeToggleSkills": [],
+        "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 15,
+        "lastModified": "2025-09-07T22:51:41.703Z"
+    },
+
+    "Green_Slime_character.json": {
+        "id": "green_slime_001",
+        "name": "Green Slime",
+        "race": "slime",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 12,
+            "strength": 2,
+            "magicPower": 1,
+            "accuracy": 3,
+            "speed": 2,
+            "physicalDefence": 7,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["tough_skin"],
+                "combat": ["acid_spit"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "slime": "Can split when damaged (potential system addition)"
+        },
+        "racialAbilities": {
+            "slime": {
+                "gelatinousBody": "Resistant to physical damage",
+                "acidicNature": "Deals acid damage on contact"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:31:00.000Z"
+    },
+
+    "Orc_Chief_character.json": {
+        "id": "orc_chief_001",
+        "name": "Orc Chief",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 32,
+            "stamina": 30,
+            "strength": 7,
+            "magicPower": 2,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 12,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": ["sword_basics", "sword_techniques"],
+                "axe": ["axe_basics", "axe_techniques"],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": ["monster_berserker_rage", "roar", "pack_leader"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatsword", "quantity": 1 },
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "chain_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatsword",
+            "secondaryWeapon": "battleaxe",
+            "armor": "chain_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Inspires other orcs, can call reinforcements"
+        },
+        "racialAbilities": {
+            "orc": {
+                "leadership": "Inspires other orcs in battle",
+                "reinforcements": "Can call for backup"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatsword",
+            "armor": "chain_armor",
+            "accessory": "battleaxe"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:48:00.000Z"
+    },
+
+    "Hill_Giant_character.json": {
+        "id": "hill_giant_001",
+        "name": "Hill Giant",
+        "race": "giant",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 40,
+            "stamina": 35,
+            "strength": 10,
+            "magicPower": 1,
+            "accuracy": 5,
+            "speed": 2,
+            "physicalDefence": 12,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": ["hammer_basics"],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["tough_skin"],
+                "combat": ["monster_charge_attack", "trample"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatclub", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatclub",
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "giant": "Massive damage, can throw boulders"
+        },
+        "racialAbilities": {
+            "giant": {
+                "massiveDamage": "Deals massive damage with strength",
+                "boulderThrowing": "Can throw large rocks as ranged attacks"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatclub",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:52:00.000Z"
+    },
+
+    "Fire_Sprite_character.json": {
+        "id": "fire_sprite_001",
+        "name": "Fire Sprite",
+        "race": "sprite",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 12,
+            "stamina": 20,
+            "strength": 1,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 8,
+            "physicalDefence": 6,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": ["fire_spark", "warm_hands", "fireball"],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": ["fire_breath"],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "sprite": "Fire-aligned, can ignite objects"
+        },
+        "racialAbilities": {
+            "sprite": {
+                "fireAlignment": "Fire-aligned with flame abilities",
+                "etherealNature": "Ethereal form, difficult to hit"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:06:00.000Z"
+    },
+
+    "Water_Golem_character.json": {
+        "id": "water_golem_001",
+        "name": "Water Golem",
+        "race": "golem",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 42,
+            "stamina": 35,
+            "strength": 7,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 3,
+            "physicalDefence": 13,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": ["water_splash", "water_blast", "healing_waters", "water_attunement"],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["tough_skin"],
+                "combat": [],
+                "magic": [],
+                "utility": ["swim"]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "golem": "Water-aligned, can flow through gaps"
+        },
+        "racialAbilities": {
+            "golem": {
+                "waterAlignment": "Water-aligned with liquid abilities",
+                "constructNature": "Construct immune to many status effects"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:04:00.000Z"
+    },
+
+    "Plague_Rat_character.json": {
+        "id": "plague_rat_001",
+        "name": "Plague Rat",
+        "race": "rat",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 22,
+            "strength": 3,
+            "magicPower": 2,
+            "accuracy": 4,
+            "speed": 7,
+            "physicalDefence": 8,
+            "magicalDefence": 9
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": ["immunity_poison"],
+                "combat": ["bite_attack", "claws", "venomous_claws"],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "rat": "Pack Tactics: Advantage when fighting alongside other rats (potential system addition)"
+        },
+        "racialAbilities": {
+            "rat": {
+                "packTactics": "Gains advantage when fighting with other rats nearby",
+                "naturalWeapons": "Uses teeth and claws as natural weapons",
+                "diseaseCarrier": "Carries and spreads diseases"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:28:00.000Z"
+    },
+    "Beast_Tamer_character.json": {
+        "id": "beast_tamer_001",
+        "name": "Gnoll Beast Tamer",
+        "race": "gnoll",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 30,
+            "strength": 5,
+            "magicPower": 3,
+            "accuracy": 4,
+            "speed": 5,
+            "physicalDefence": 5,
+            "magicalDefence": 4
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": [
+                    "pack_coordination"
+                ]
+            }
+        },
+        "inventory": [
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "gnoll": "Pack Hunter: +2 Strength, +1 Speed"
+        },
+        "racialAbilities": {
+            "gnoll": {
+                "pack_hunter": "+2 Strength, +1 Speed"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Berserker_character.json": {
+        "id": "berserker_001",
+        "name": "Berserker",
+        "race": "orc",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 40,
+            "stamina": 30,
+            "strength": 8,
+            "magicPower": 1,
+            "accuracy": 3,
+            "speed": 4,
+            "physicalDefence": 5,
+            "magicalDefence": 3
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [
+                    "axe_basics",
+                    "berserker_rage"
+                ],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_axe", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_axe",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Berserker: +2 Strength, -1 Intelligence"
+        },
+        "racialAbilities": {
+            "orc": {
+                "berserker": "+2 Strength, -1 Intelligence"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Bounty_Hunter_character.json": {
+        "id": "bounty_hunter_001",
+        "name": "Dwarf Bounty Hunter",
+        "race": "dwarf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 30,
+            "strength": 6,
+            "magicPower": 2,
+            "accuracy": 6,
+            "speed": 3,
+            "physicalDefence": 8,
+            "magicalDefence": 5
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": [
+                    "bow_basics",
+                    "quick_draw"
+                ]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [
+                    "dwarven_toughness"
+                ],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "wooden_bow", "quantity": 1 },
+            { "id": "iron_arrows", "quantity": 15 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dwarf": "Resilient: +2 Physical Defence, +1 HP"
+        },
+        "racialAbilities": {
+            "dwarf": {
+                "resilient": "+2 Physical Defence, +1 HP"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Pedestrian_Dwarf_character.json": {
+        "id": "char_1757285705543_jrpijaq3t",
+        "name": "Pedestrian Dwarf",
+        "race": "dwarf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 11,
+            "stamina": 10,
+            "strength": -3,
+            "magicPower": -3,
+            "accuracy": -3,
+            "speed": 2,
+            "physicalDefence": 10,
+            "magicalDefence": 8
+        },
+        "lumens": 135,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp300": false,
+            "hp400": false,
+            "hp500": false
+        },
+        "staminaMilestones": {
+            "stamina15": false,
+            "stamina25": false,
+            "stamina40": false,
+            "stamina60": false
+        },
+        "gil": 65,
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "ranged": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [
+                    "smithing_basic"
+                ],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "utility_combat": [],
+                "monster_fusion": [],
+                "pure_magic": []
+            },
+            "ascension": {
+                "unique": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": ["dwarven_toughness"],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_hammer", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_hammer",
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "equipmentBonuses": {
+            "hp": 0,
+            "stamina": 0,
+            "strength": 0,
+            "magicPower": 0,
+            "speed": 0,
+            "physicalDefence": 0,
+            "magicalDefence": 0,
+            "accuracy": 0
+        },
+        "activeToggleSkills": [],
+        "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 15,
+        "lastModified": "2025-09-07T22:55:16.088Z"
+    },
+    "Pedestrian_Halfling_character.json": {
+        "id": "char_1757285728471_mas2g779q",
+        "name": "Pedestrian Halfling",
+        "race": "halfling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -3,
+            "magicPower": -3,
+            "accuracy": -2,
+            "speed": 4,
+            "physicalDefence": 8,
+            "magicalDefence": 8
+        },
+        "lumens": 135,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp300": false,
+            "hp400": false,
+            "hp500": false
+        },
+        "staminaMilestones": {
+            "stamina15": false,
+            "stamina25": false,
+            "stamina40": false,
+            "stamina60": false
+        },
+        "gil": 65,
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "ranged": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [
+                    "cooking_basic"
+                ],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "utility_combat": [],
+                "monster_fusion": [],
+                "pure_magic": []
+            },
+            "ascension": {
+                "unique": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": ["lucky_dodge"],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "equipmentBonuses": {
+            "hp": 0,
+            "stamina": 0,
+            "strength": 0,
+            "magicPower": 0,
+            "speed": 0,
+            "physicalDefence": 0,
+            "magicalDefence": 0,
+            "accuracy": 0
+        },
+        "activeToggleSkills": [],
+        "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 15,
+        "lastModified": "2025-09-07T22:55:30.880Z"
+    },
+    "Pedestrian_Tiefling_character.json": {
+        "id": "char_1757286325743_y9u0dbnis",
+        "name": "Pedestrian Tiefling",
+        "race": "tiefling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 11,
+            "strength": -3,
+            "magicPower": -2,
+            "accuracy": -3,
+            "speed": 2,
+            "physicalDefence": 8,
+            "magicalDefence": 9
+        },
+        "lumens": 142,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp300": false,
+            "hp400": false,
+            "hp500": false
+        },
+        "staminaMilestones": {
+            "stamina15": false,
+            "stamina25": false,
+            "stamina40": false,
+            "stamina60": false
+        },
+        "gil": 65,
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "ranged": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "utility_combat": [],
+                "monster_fusion": [],
+                "pure_magic": []
+            },
+            "ascension": {
+                "unique": []
+            },
+            "racial": {
+                "tiefling": [
+                    "hellish_rebuke"
+                ],
+                "elven": [],
+                "dwarven": [],
+                "halfling": [],
+                "orcish": [],
+                "human": [],
+                "dragonborn": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "equipmentBonuses": {
+            "hp": 0,
+            "stamina": 0,
+            "strength": 0,
+            "magicPower": 0,
+            "speed": 0,
+            "physicalDefence": 0,
+            "magicalDefence": 0,
+            "accuracy": 0
+        },
+        "activeToggleSkills": [],
+        "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-09-07T23:05:58.407Z"
+    },
+    "Orc_Raider_character.json": {
+        "id": "orc_raider_001",
+        "name": "Orc Raider",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 5,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 4,
+            "physicalDefence": 9,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [
+                    "axe_basics"
+                ],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "tough_skin"
+                ],
+                "combat": [
+                    "intimidation",
+                    "brute_force"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "javelin", "quantity": 3 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "battleaxe",
+            "secondaryWeapon": "javelin",
+            "armor": "leather_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Intimidation, brute force attacks"
+        },
+        "racialAbilities": {
+            "orc": {
+                "intimidation": "Can intimidate enemies",
+                "bruteForce": "Enhanced strength and damage"
+            }
+        },
+        "lootTable": {
+            "weapon": "battleaxe",
+            "armor": "leather_armor",
+            "accessory": "javelin"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:45:00.000Z"
+    },
+    "Red_Slime_character.json": {
+        "id": "red_slime_001",
+        "name": "Red Slime",
+        "race": "slime",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 14,
+            "stamina": 15,
+            "strength": 2,
+            "magicPower": 3,
+            "accuracy": 3,
+            "speed": 2,
+            "physicalDefence": 8,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "burning_touch"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "slime": "Can split when damaged (potential system addition)"
+        },
+        "racialAbilities": {
+            "slime": {
+                "gelatinousBody": "Resistant to physical damage",
+                "fireNature": "Immune to fire damage, deals fire damage"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:33:00.000Z"
+    },
+    "Fire_Golem_character.json": {
+        "id": "fire_golem_001",
+        "name": "Fire Golem",
+        "race": "golem",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 40,
+            "stamina": 30,
+            "strength": 8,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 2,
+            "physicalDefence": 14,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fireball",
+                    "fire_spark",
+                    "fire_shield",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "flame_attacks"
+                ],
+                "magic": [
+                    "heat_generation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "golem": "Fire-aligned, can ignite enemies"
+        },
+        "racialAbilities": {
+            "golem": {
+                "fireAlignment": "Fire-aligned with flame abilities",
+                "constructNature": "Construct immune to many status effects"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:00:00.000Z"
+    },
+    "Con_Artist_character.json": {
+        "id": "con_artist_001",
+        "name": "Tiefling Con Artist",
+        "race": "tiefling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 2,
+            "magicPower": 5,
+            "accuracy": 6,
+            "speed": 6,
+            "physicalDefence": 3,
+            "magicalDefence": 6
+        },
+        "lumens": 70,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [
+                    "hellish_rebuke"
+                ],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "tiefling": "Infernal Heritage: +2 Magic Power, Fire Resistance"
+        },
+        "racialAbilities": {
+            "tiefling": {
+                "infernal_heritage": "+2 Magic Power, Fire Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 16,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Corrupt_Guard_character.json": {
+        "id": "corrupt_guard_001",
+        "name": "Corrupt Guard",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 22,
+            "strength": 5,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 3,
+            "physicalDefence": 8,
+            "magicalDefence": 5
+        },
+        "lumens": 70,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 16,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+    "Crime_Boss_character.json": {
+        "id": "crime_boss_001",
+        "name": "Halfling Crime Boss",
+        "race": "halfling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 35,
+            "strength": 4,
+            "magicPower": 3,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 5,
+            "magicalDefence": 6
+        },
+        "lumens": 120,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner",
+                    "dagger_basics"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [
+                    "lucky_dodge"
+                ],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "halfling": "Lucky: +2 Speed, +1 Accuracy, Lucky trait"
+        },
+        "racialAbilities": {
+            "halfling": {
+                "lucky": "+2 Speed, +1 Accuracy, Lucky trait"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 21,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Cursed_Knight_character.json": {
+        "id": "cursed_knight_001",
+        "name": "Cursed Knight",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 9,
+        "experience": 0,
+        "stats": {
+            "hp": 60,
+            "stamina": 40,
+            "strength": 8,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 3,
+            "physicalDefence": 12,
+            "magicalDefence": 7
+        },
+        "lumens": 200,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics",
+                    "sword_techniques",
+                    "power_strike"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [
+                    "breath_weapon"
+                ],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 4 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: +2 Strength, +1 Magic Power, Elemental Resistance"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconic_heritage": "+2 Strength, +1 Magic Power, Elemental Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 55,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Pedestrian_Dragonborn_fire_character.json": {
+        "id": "char_1757285734767_5a9okc6c4",
+        "name": "Pedestrian Dragonborn-fire",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -2,
+            "magicPower": -3,
+            "accuracy": -3,
+            "speed": 2,
+            "physicalDefence": 9,
+            "magicalDefence": 9
+        },
+        "lumens": 142,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp300": false,
+            "hp400": false,
+            "hp500": false
+        },
+        "staminaMilestones": {
+            "stamina15": false,
+            "stamina25": false,
+            "stamina40": false,
+            "stamina60": false
+        },
+        "gil": 65,
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "ranged": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "utility_combat": [],
+                "monster_fusion": [],
+                "pure_magic": []
+            },
+            "ascension": {
+                "unique": []
+            },
+            "racial": {
+                "dragonborn": [
+                    "breath_weapon"
+                ],
+                "elven": [],
+                "dwarven": [],
+                "halfling": [],
+                "orcish": [],
+                "human": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "equipmentBonuses": {
+            "hp": 0,
+            "stamina": 0,
+            "strength": 0,
+            "magicPower": 0,
+            "speed": 0,
+            "physicalDefence": 0,
+            "magicalDefence": 0,
+            "accuracy": 0
+        },
+        "activeToggleSkills": [],
+        "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-09-07T22:55:57.536Z"
+    },
+    "Pedestrian_Drow_character.json": {
+        "id": "char_1757286370967_qrzcxrk5g",
+        "name": "Pedestrian Drow",
+        "race": "drow",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -3,
+            "magicPower": -2,
+            "accuracy": -3,
+            "speed": 3,
+            "physicalDefence": 8,
+            "magicalDefence": 9
+        },
+        "lumens": 135,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp300": false,
+            "hp400": false,
+            "hp500": false
+        },
+        "staminaMilestones": {
+            "stamina15": false,
+            "stamina25": false,
+            "stamina40": false,
+            "stamina60": false
+        },
+        "gil": 65,
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "ranged": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [
+                    "alchemy_basic"
+                ],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "utility_combat": [],
+                "monster_fusion": [],
+                "pure_magic": []
+            },
+            "ascension": {
+                "unique": []
+            },
+            "racial": {
+                "drow": [
+                    "shadow_affinity"
+                ],
+                "elven": [],
+                "dwarven": [],
+                "halfling": [],
+                "orcish": [],
+                "human": [],
+                "dragonborn": [],
+                "tiefling": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "poison_antidote", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "equipmentBonuses": {
+            "hp": 0,
+            "stamina": 0,
+            "strength": 0,
+            "magicPower": 0,
+            "speed": 0,
+            "physicalDefence": 0,
+            "magicalDefence": 0,
+            "accuracy": 0
+        },
+        "activeToggleSkills": [],
+        "equipment": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 15,
+        "lastModified": "2025-09-07T23:06:26.591Z"
+    },
+    "Orc_Scout_character.json": {
+        "id": "orc_scout_001",
+        "name": "Orc Scout",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 25,
+            "strength": 3,
+            "magicPower": 1,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 7,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_basics"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": [
+                    "camouflage",
+                    "light_step"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "shortsword", "quantity": 1 },
+            { "id": "shortbow", "quantity": 1 },
+            { "id": "throwing_knife", "quantity": 5 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "arrows", "quantity": 20 }
+        ],
+        "equipped": {
+            "primaryWeapon": "shortsword",
+            "secondaryWeapon": "shortbow",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Can scout ahead, stealth attacks"
+        },
+        "racialAbilities": {
+            "orc": {
+                "scouting": "Can scout ahead and gather intelligence",
+                "stealthAttacks": "Can perform stealth attacks"
+            }
+        },
+        "lootTable": {
+            "weapon": "shortsword",
+            "armor": "leather_armor",
+            "accessory": "shortbow"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:49:00.000Z"
+    },
+    "Orc_Shaman_character.json": {
+        "id": "orc_shaman_001",
+        "name": "Orc Shaman",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 25,
+            "strength": 3,
+            "magicPower": 6,
+            "accuracy": 4,
+            "speed": 3,
+            "physicalDefence": 8,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [
+                    "staff_basics"
+                ],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "healing_light"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "quarterstaff", "quantity": 1 },
+            { "id": "dagger", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "quarterstaff",
+            "secondaryWeapon": "dagger",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Can summon spirits, curse enemies"
+        },
+        "racialAbilities": {
+            "orc": {
+                "spiritSummoning": "Can summon spirits to aid in battle",
+                "cursing": "Can curse enemies with dark magic"
+            }
+        },
+        "lootTable": {
+            "weapon": "quarterstaff",
+            "armor": "leather_armor",
+            "accessory": "mana_potion"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:47:00.000Z"
+    },
+    "Orc_Warlord_character.json": {
+        "id": "orc_warlord_001",
+        "name": "Orc Warlord",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 35,
+            "strength": 8,
+            "magicPower": 3,
+            "accuracy": 6,
+            "speed": 4,
+            "physicalDefence": 16,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [
+                    "axe_basics"
+                ],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "monster_berserker_rage",
+                    "roar",
+                    "pack_leader"
+                ],
+                "magic": [],
+                "utility": [
+                    "ancient_knowledge"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatsword", "quantity": 1 },
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "throwing_axe", "quantity": 3 },
+            { "id": "plate_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 },
+            { "id": "health_potion", "quantity": 3 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatsword",
+            "secondaryWeapon": "battleaxe",
+            "armor": "plate_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Commands orc armies, advanced tactics"
+        },
+        "racialAbilities": {
+            "orc": {
+                "armyCommand": "Can command entire orc armies",
+                "advancedTactics": "Uses sophisticated battle strategies"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatsword",
+            "armor": "plate_armor",
+            "accessory": "battleaxe"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:51:00.000Z"
+    },
+    "Doppelganger_character.json": {
+        "id": "doppelganger_001",
+        "name": "Doppelganger",
+        "race": "changeling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 35,
+            "strength": 4,
+            "magicPower": 5,
+            "accuracy": 6,
+            "speed": 6,
+            "physicalDefence": 4,
+            "magicalDefence": 6
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner",
+                    "dagger_basics"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "changeling": "Shape-shifter: Can mimic any humanoid form"
+        },
+        "racialAbilities": {
+            "changeling": {
+                "shape_shifter": "Can mimic any humanoid form"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Elementalist_character.json": {
+        "id": "elementalist_001",
+        "name": "Dragonborn Elementalist",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 35,
+            "strength": 3,
+            "magicPower": 8,
+            "accuracy": 3,
+            "speed": 4,
+            "physicalDefence": 5,
+            "magicalDefence": 8
+        },
+        "lumens": 120,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [
+                    "ice_shard",
+                    "ice_attunement"
+                ],
+                "thunder": [
+                    "spark",
+                    "thunder_bolt",
+                    "static_charge",
+                    "thunder_attunement"
+                ],
+                "earth": [
+                    "earth_spike",
+                    "earth_attunement"
+                ],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [
+                    "breath_weapon"
+                ],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 4 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: +2 Strength, +1 Magic Power, Elemental Resistance"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconic_heritage": "+2 Strength, +1 Magic Power, Elemental Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 32,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Enchanter_character.json": {
+        "id": "enchanter_001",
+        "name": "Elven Enchanter",
+        "race": "elf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 2,
+            "magicPower": 7,
+            "accuracy": 4,
+            "speed": 5,
+            "physicalDefence": 3,
+            "magicalDefence": 8
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "blessing"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [
+                    "enchanting_basic"
+                ],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [
+                    "elven_accuracy"
+                ],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 3 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "elf": "Graceful: +2 Speed, +1 Magic Power"
+        },
+        "racialAbilities": {
+            "elf": {
+                "graceful": "+2 Speed, +1 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Engineer_character.json": {
+        "id": "engineer_001",
+        "name": "Gnome Engineer",
+        "race": "gnome",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 4,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [
+                    "hammer_basics"
+                ],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [
+                    "smithing_basic"
+                ],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_hammer", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_hammer",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "gnome": "Inventive: +2 Magic Power, +1 Accuracy"
+        },
+        "racialAbilities": {
+            "gnome": {
+                "inventive": "+2 Magic Power, +1 Accuracy"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 23,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Gambler_character.json": {
+        "id": "gambler_001",
+        "name": "Tiefling Gambler",
+        "race": "tiefling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 4,
+            "accuracy": 6,
+            "speed": 5,
+            "physicalDefence": 3,
+            "magicalDefence": 5
+        },
+        "lumens": 50,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [
+                    "hellish_rebuke"
+                ],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "tiefling": "Infernal Heritage: +2 Magic Power, Fire Resistance"
+        },
+        "racialAbilities": {
+            "tiefling": {
+                "infernal_heritage": "+2 Magic Power, Fire Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 16,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Gladiator_character.json": {
+        "id": "gladiator_001",
+        "name": "Dragonborn Gladiator",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 35,
+            "strength": 7,
+            "magicPower": 3,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 8,
+            "magicalDefence": 6
+        },
+        "lumens": 120,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics",
+                    "sword_techniques"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [
+                    "breath_weapon"
+                ],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 3 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: +2 Strength, +1 Magic Power, Elemental Resistance"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconic_heritage": "+2 Strength, +1 Magic Power, Elemental Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Heretic_character.json": {
+        "id": "heretic_001",
+        "name": "Elven Heretic",
+        "race": "elf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 30,
+            "strength": 2,
+            "magicPower": 7,
+            "accuracy": 3,
+            "speed": 5,
+            "physicalDefence": 3,
+            "magicalDefence": 8
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [
+                    "elven_accuracy"
+                ],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 3 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "elf": "Graceful: +2 Speed, +1 Magic Power"
+        },
+        "racialAbilities": {
+            "elf": {
+                "graceful": "+2 Speed, +1 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Inquisitor_character.json": {
+        "id": "inquisitor_001",
+        "name": "Inquisitor",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 32,
+            "stamina": 30,
+            "strength": 5,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 3,
+            "physicalDefence": 7,
+            "magicalDefence": 8
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "blessing"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Medic_character.json": {
+        "id": "medic_001",
+        "name": "Combat Medic",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 28,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 4,
+            "physicalDefence": 5,
+            "magicalDefence": 6
+        },
+        "lumens": 70,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": [
+                    "herbalism_basic"
+                ]
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 3 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 23,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Mercenary_character.json": {
+        "id": "mercenary_001",
+        "name": "Mercenary",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 25,
+            "strength": 6,
+            "magicPower": 2,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 8,
+            "magicalDefence": 5
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_basics",
+                    "sword_techniques"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 23,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+    "Monk_character.json": {
+        "id": "monk_001",
+        "name": "Monk",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 40,
+            "strength": 5,
+            "magicPower": 3,
+            "accuracy": 7,
+            "speed": 8,
+            "physicalDefence": 5,
+            "magicalDefence": 6
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner",
+                    "unarmed_basics",
+                    "martial_arts"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Necromancer_character.json": {
+        "id": "necromancer_001",
+        "name": "Drow Necromancer",
+        "race": "drow",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 35,
+            "strength": 1,
+            "magicPower": 9,
+            "accuracy": 2,
+            "speed": 4,
+            "physicalDefence": 2,
+            "magicalDefence": 9
+        },
+        "lumens": 120,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [
+                    "shadow_bolt",
+                    "dark_ritual",
+                    "soul_drain",
+                    "darkness_attunement"
+                ],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [
+                    "alchemy_basic"
+                ],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [
+                    "shadow_affinity"
+                ],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 4 },
+            { "id": "poison_antidote", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "drow": "Dark Vision: Can see in darkness, +2 Magic Power"
+        },
+        "racialAbilities": {
+            "drow": {
+                "dark_vision": "Can see in darkness, +2 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Ninja_character.json": {
+        "id": "ninja_001",
+        "name": "Human Ninja",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 24,
+            "stamina": 35,
+            "strength": 4,
+            "magicPower": 2,
+            "accuracy": 8,
+            "speed": 8,
+            "physicalDefence": 4,
+            "magicalDefence": 5
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner",
+                    "dagger_basics",
+                    "light_step"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 2 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "rusty_dagger",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 55,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Paladin_character.json": {
+        "id": "paladin_001",
+        "name": "Fallen Paladin",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 50,
+            "stamina": 35,
+            "strength": 7,
+            "magicPower": 5,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 10,
+            "magicalDefence": 8
+        },
+        "lumens": 150,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics",
+                    "sword_techniques"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [
+                    "breath_weapon"
+                ],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 3 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: +2 Strength, +1 Magic Power, Elemental Resistance"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconic_heritage": "+2 Strength, +1 Magic Power, Elemental Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 55,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Pirate_character.json": {
+        "id": "pirate_001",
+        "name": "Human Pirate",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 28,
+            "stamina": 30,
+            "strength": 5,
+            "magicPower": 2,
+            "accuracy": 5,
+            "speed": 5,
+            "physicalDefence": 5,
+            "magicalDefence": 4
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "rusty_dagger",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 16,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Ancient_Dragon_character.json": {
+        "id": "ancient_dragon_001",
+        "name": "Ancient Dragon",
+        "race": "dragon",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 20,
+        "experience": 0,
+        "stats": {
+            "hp": 200,
+            "stamina": 100,
+            "strength": 25,
+            "magicPower": 20,
+            "accuracy": 12,
+            "speed": 10,
+            "physicalDefence": 20,
+            "magicalDefence": 20
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": true,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [
+                    "ultimate_dragon_magic",
+                    "ultimate_breath",
+                    "ancient_knowledge"
+                ],
+                "utility": [
+                    "god_like_flight"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragon": "Can fly, ultimate breath weapon"
+        },
+        "racialAbilities": {
+            "dragon": {
+                "flight": "Can fly and move through the air",
+                "breathWeapon": "Possesses the ultimate breath weapon",
+                "ancientWisdom": "Ancient knowledge and wisdom"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:45:00.000Z"
+    },
+    "Crystal_Wyvern_character.json": {
+        "id": "crystal_wyvern_001",
+        "name": "Crystal Wyvern",
+        "race": "wyvern",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 50,
+            "stamina": 45,
+            "strength": 9,
+            "magicPower": 7,
+            "accuracy": 7,
+            "speed": 7,
+            "physicalDefence": 14,
+            "magicalDefence": 13
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "light_ray"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "claws",
+                    "gem_attacks"
+                ],
+                "magic": [
+                    "light_manipulation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "wyvern": "Crystal-aligned, can reflect light"
+        },
+        "racialAbilities": {
+            "wyvern": {
+                "flight": "Can fly and move through the air",
+                "crystalMastery": "Master of crystals and light magic"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:53:00.000Z"
+    },
+    "Cursed_Shield_character.json": {
+        "id": "cursed_shield_001",
+        "name": "Cursed Shield",
+        "race": "possessed_item",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 20,
+            "strength": 3,
+            "magicPower": 4,
+            "accuracy": 4,
+            "speed": 2,
+            "physicalDefence": 16,
+            "magicalDefence": 12
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "damage_reflection",
+                    "shield_mastery"
+                ],
+                "combat": [
+                    "shield_bash"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "possessed_item": "Reflects damage, curses attackers (potential system addition)"
+        },
+        "racialAbilities": {
+            "possessed_item": {
+                "damageReflection": "Reflects damage back to attackers",
+                "cursedNature": "Curses those who attack it"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:40:00.000Z"
+    },
+    "Demon_Prince_character.json": {
+        "id": "demon_prince_001",
+        "name": "Demon Prince",
+        "race": "devil",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 20,
+        "experience": 0,
+        "stats": {
+            "hp": 200,
+            "stamina": 100,
+            "strength": 22,
+            "magicPower": 20,
+            "accuracy": 12,
+            "speed": 8,
+            "physicalDefence": 20,
+            "magicalDefence": 20
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": true,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [
+                    "reality_manipulation",
+                    "ultimate_infernal_magic",
+                    "god_like_power",
+                    "ancient_knowledge"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "devil": "Reality manipulation, ultimate infernal power"
+        },
+        "racialAbilities": {
+            "devil": {
+                "realityManipulation": "Can manipulate reality itself",
+                "ultimatePower": "Ultimate infernal power and god-like abilities"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T01:09:00.000Z"
+    },
+    "Demon_Weapon_character.json": {
+        "id": "demon_weapon_001",
+        "name": "Demon Weapon",
+        "race": "possessed_item",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 24,
+            "stamina": 25,
+            "strength": 6,
+            "magicPower": 5,
+            "accuracy": 6,
+            "speed": 5,
+            "physicalDefence": 10,
+            "magicalDefence": 11
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [
+                    "dark_magic",
+                    "shadow_bolt"
+                ],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "fear"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "possessed_item": "Corrupts enemies, dark-aligned (potential system addition)"
+        },
+        "racialAbilities": {
+            "possessed_item": {
+                "corruption": "Corrupts enemies it strikes",
+                "darkAlignment": "Evil-aligned with dark powers"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:43:00.000Z"
+    },
+    "Desert_Wyvern_character.json": {
+        "id": "desert_wyvern_001",
+        "name": "Desert Wyvern",
+        "race": "wyvern",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 40,
+            "strength": 8,
+            "magicPower": 6,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 12,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "claws"
+                ],
+                "magic": [
+                    "sand_magic",
+                    "desert_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "wyvern": "Heat-resistant, can control sand"
+        },
+        "racialAbilities": {
+            "wyvern": {
+                "flight": "Can fly and move through the air",
+                "desertMastery": "Master of sand and desert magic"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:50:00.000Z"
+    },
+    "Devil_Lord_character.json": {
+        "id": "devil_lord_001",
+        "name": "Devil Lord",
+        "race": "devil",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 14,
+        "experience": 0,
+        "stats": {
+            "hp": 100,
+            "stamina": 70,
+            "strength": 16,
+            "magicPower": 12,
+            "accuracy": 10,
+            "speed": 7,
+            "physicalDefence": 18,
+            "magicalDefence": 16
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "pack_leader"
+                ],
+                "magic": [
+                    "devil_command",
+                    "leadership",
+                    "ultimate_infernal_magic"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "devil": "Commands other devils, leadership"
+        },
+        "racialAbilities": {
+            "devil": {
+                "devilCommand": "Can command and lead other devils",
+                "infernalMastery": "Ultimate infernal powers and leadership"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T01:06:00.000Z"
+    },
+    "Dire_Rat_character.json": {
+        "id": "dire_rat_001",
+        "name": "Dire Rat",
+        "race": "rat",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 20,
+            "strength": 4,
+            "magicPower": 1,
+            "accuracy": 5,
+            "speed": 6,
+            "physicalDefence": 9,
+            "magicalDefence": 7
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "bite_attack",
+                    "claws"
+                ],
+                "magic": [],
+                "utility": [
+                    "pack_leader",
+                    "echolocation"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "rat": "Pack Tactics: Advantage when fighting alongside other rats (potential system addition)"
+        },
+        "racialAbilities": {
+            "rat": {
+                "packTactics": "Gains advantage when fighting with other rats nearby",
+                "naturalWeapons": "Uses teeth and claws as natural weapons",
+                "echolocation": "Can sense surroundings through sound"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:27:00.000Z"
+    },
+    "Dragon_Lord_character.json": {
+        "id": "dragon_lord_001",
+        "name": "Dragon Lord",
+        "race": "dragon",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 18,
+        "experience": 0,
+        "stats": {
+            "hp": 150,
+            "stamina": 80,
+            "strength": 22,
+            "magicPower": 16,
+            "accuracy": 10,
+            "speed": 8,
+            "physicalDefence": 19,
+            "magicalDefence": 18
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "pack_leader"
+                ],
+                "magic": [
+                    "dragon_command",
+                    "leadership",
+                    "ultimate_dragon_magic"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragon": "Commands other dragons, leadership"
+        },
+        "racialAbilities": {
+            "dragon": {
+                "flight": "Can fly and move through the air",
+                "breathWeapon": "Possesses a powerful breath weapon",
+                "dragonCommand": "Can command and lead other dragons"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:46:00.000Z"
+    },
+    "Earth_Golem_character.json": {
+        "id": "earth_golem_001",
+        "name": "Earth Golem",
+        "race": "golem",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 30,
+            "strength": 9,
+            "magicPower": 3,
+            "accuracy": 4,
+            "speed": 1,
+            "physicalDefence": 16,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [
+                    "stone_throw"
+                ],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "defensive_combat",
+                    "tough_skin"
+                ],
+                "combat": [],
+                "magic": [
+                    "stone_manipulation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "golem": "Earth-aligned, can manipulate stone"
+        },
+        "racialAbilities": {
+            "golem": {
+                "earthAlignment": "Earth-aligned with stone manipulation",
+                "constructNature": "Construct immune to many status effects"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:59:00.000Z"
+    },
+    "Electric_Eel_character.json": {
+        "id": "electric_eel_001",
+        "name": "Electric Eel",
+        "race": "fish",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 35,
+            "strength": 5,
+            "magicPower": 6,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 9,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [
+                    "thunder_bolt"
+                ],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "electrical_resistance"
+                ],
+                "combat": [
+                    "electrical_attacks"
+                ],
+                "magic": [
+                    "shock_generation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "fish": "Electrical damage, can shock enemies"
+        },
+        "racialAbilities": {
+            "fish": {
+                "electricalMastery": "Master of electrical attacks",
+                "shockGeneration": "Can generate electrical shocks"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:23:00.000Z"
+    },
+    "Feral_Rat_character.json": {
+        "id": "feral_rat_001",
+        "name": "Feral Rat",
+        "race": "rat",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 8,
+            "stamina": 15,
+            "strength": 1,
+            "magicPower": 0,
+            "accuracy": 3,
+            "speed": 8,
+            "physicalDefence": 6,
+            "magicalDefence": 5
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "bite_attack",
+                    "claws"
+                ],
+                "magic": [],
+                "utility": [
+                    "pack_leader"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "rat": "Pack Tactics: Advantage when fighting alongside other rats (potential system addition)"
+        },
+        "racialAbilities": {
+            "rat": {
+                "packTactics": "Gains advantage when fighting with other rats nearby",
+                "naturalWeapons": "Uses teeth and claws as natural weapons"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:25:00.000Z"
+    },
+    "Fire_Fish_character.json": {
+        "id": "fire_fish_001",
+        "name": "Fire Fish",
+        "race": "fish",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 30,
+            "strength": 5,
+            "magicPower": 5,
+            "accuracy": 5,
+            "speed": 6,
+            "physicalDefence": 9,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "flame_attacks"
+                ],
+                "magic": [
+                    "volcanic_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "fish": "Fire damage, heat resistance"
+        },
+        "racialAbilities": {
+            "fish": {
+                "fireMastery": "Master of fire and heat",
+                "volcanicNature": "Born from volcanic waters"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:25:00.000Z"
+    },
+    "Fire_Giant_character.json": {
+        "id": "fire_giant_001",
+        "name": "Fire Giant",
+        "race": "giant",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 50,
+            "stamina": 40,
+            "strength": 10,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 2,
+            "physicalDefence": 14,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [
+                    "hammer_basics"
+                ],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "fireball",
+                    "fire_shield",
+                    "ignite",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "flame_breath"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatclub", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatclub",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "giant": "Fire damage, heat resistance"
+        },
+        "racialAbilities": {
+            "giant": {
+                "fireDamage": "Deals fire damage with attacks",
+                "heatResistance": "Resistant to fire and heat damage"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatclub",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:55:00.000Z"
+    },
+    "Fire_Golem_character.json": {
+        "id": "fire_golem_001",
+        "name": "Fire Golem",
+        "race": "golem",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 40,
+            "stamina": 30,
+            "strength": 8,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 2,
+            "physicalDefence": 14,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fireball",
+                    "fire_spark",
+                    "fire_shield",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "flame_attacks"
+                ],
+                "magic": [
+                    "heat_generation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "golem": "Fire-aligned, can ignite enemies"
+        },
+        "racialAbilities": {
+            "golem": {
+                "fireAlignment": "Fire-aligned with flame abilities",
+                "constructNature": "Construct immune to many status effects"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:00:00.000Z"
+    },
+    "Fire_Octopus_character.json": {
+        "id": "fire_octopus_001",
+        "name": "Fire Octopus",
+        "race": "octopus",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 55,
+            "stamina": 40,
+            "strength": 8,
+            "magicPower": 7,
+            "accuracy": 6,
+            "speed": 5,
+            "physicalDefence": 14,
+            "magicalDefence": 12
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fireball",
+                    "fire_spark",
+                    "fire_shield",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "flame_attacks"
+                ],
+                "magic": [
+                    "fire_magic"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "octopus": "Fire damage, heat resistance"
+        },
+        "racialAbilities": {
+            "octopus": {
+                "fireMastery": "Master of fire and heat",
+                "volcanicNature": "Born from volcanic depths"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:33:00.000Z"
+    },
+    "Fire_Serpent_character.json": {
+        "id": "fire_serpent_001",
+        "name": "Fire Serpent",
+        "race": "serpent",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 9,
+        "experience": 0,
+        "stats": {
+            "hp": 65,
+            "stamina": 45,
+            "strength": 11,
+            "magicPower": 8,
+            "accuracy": 6,
+            "speed": 5,
+            "physicalDefence": 16,
+            "magicalDefence": 12
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fireball",
+                    "fire_spark",
+                    "fire_shield",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "flame_attacks"
+                ],
+                "magic": [
+                    "volcanic_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "serpent": "Fire damage, heat resistance"
+        },
+        "racialAbilities": {
+            "serpent": {
+                "fireMastery": "Master of fire and heat",
+                "volcanicNature": "Born from volcanic forces"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:18:00.000Z"
+    },
+    "Fire_Sprite_character.json": {
+        "id": "fire_sprite_001",
+        "name": "Fire Sprite",
+        "race": "sprite",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 12,
+            "stamina": 20,
+            "strength": 1,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 8,
+            "physicalDefence": 6,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "flame_attacks"
+                ],
+                "magic": [
+                    "heat_generation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "sprite": "Fire-aligned, can ignite objects"
+        },
+        "racialAbilities": {
+            "sprite": {
+                "fireAlignment": "Fire-aligned with flame abilities",
+                "etherealNature": "Ethereal form, difficult to hit"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:06:00.000Z"
+    },
+    "Forest_Wyvern_character.json": {
+        "id": "forest_wyvern_001",
+        "name": "Forest Wyvern",
+        "race": "wyvern",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 40,
+            "strength": 8,
+            "magicPower": 6,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 12,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "claws"
+                ],
+                "magic": [
+                    "nature_magic",
+                    "plant_control",
+                    "forest_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "wyvern": "Nature-aligned, can control plants"
+        },
+        "racialAbilities": {
+            "wyvern": {
+                "flight": "Can fly and move through the air",
+                "natureMastery": "Master of nature and plant magic"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:49:00.000Z"
+    },
+    "Frost_Giant_character.json": {
+        "id": "frost_giant_001",
+        "name": "Frost Giant",
+        "race": "giant",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 50,
+            "stamina": 40,
+            "strength": 10,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 2,
+            "physicalDefence": 14,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [
+                    "hammer_basics"
+                ],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "cold_resistance"
+                ],
+                "combat": [
+                    "frost_breath"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatclub", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatclub",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "giant": "Cold damage, ice resistance"
+        },
+        "racialAbilities": {
+            "giant": {
+                "coldDamage": "Deals cold damage with attacks",
+                "iceResistance": "Resistant to cold and ice damage"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatclub",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:54:00.000Z"
+    },
+    "Giant_Octopus_character.json": {
+        "id": "giant_octopus_001",
+        "name": "Giant Octopus",
+        "race": "octopus",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 50,
+            "stamina": 40,
+            "strength": 9,
+            "magicPower": 3,
+            "accuracy": 6,
+            "speed": 5,
+            "physicalDefence": 14,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "tentacle_mastery",
+                    "grasping",
+                    "constriction"
+                ],
+                "magic": [],
+                "utility": [
+                    "aquatic"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "octopus": "Can grasp multiple enemies, constriction"
+        },
+        "racialAbilities": {
+            "octopus": {
+                "tentacleMastery": "Master of tentacle attacks",
+                "multiGrasp": "Can grasp multiple enemies simultaneously"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:28:00.000Z"
+    },
+    "Giant_Piranha_character.json": {
+        "id": "giant_piranha_001",
+        "name": "Giant Piranha",
+        "race": "fish",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 30,
+            "strength": 6,
+            "magicPower": 1,
+            "accuracy": 7,
+            "speed": 8,
+            "physicalDefence": 8,
+            "magicalDefence": 5
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "bite_attack",
+                    "pack_leader",
+                    "multiattack"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "fish": "Attacks in swarms, pack coordination"
+        },
+        "racialAbilities": {
+            "fish": {
+                "swarmTactics": "Attacks in coordinated swarms",
+                "packCoordination": "Works with other piranhas"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:21:00.000Z"
+    },
+    "Giant_Rat_character.json": {
+        "id": "giant_rat_001",
+        "name": "Giant Rat",
+        "race": "rat",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 14,
+            "stamina": 18,
+            "strength": 3,
+            "magicPower": 0,
+            "accuracy": 4,
+            "speed": 7,
+            "physicalDefence": 8,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "bite_attack",
+                    "claws"
+                ],
+                "magic": [],
+                "utility": [
+                    "pack_leader",
+                    "burrow"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "rat": "Pack Tactics: Advantage when fighting alongside other rats (potential system addition)"
+        },
+        "racialAbilities": {
+            "rat": {
+                "packTactics": "Gains advantage when fighting with other rats nearby",
+                "naturalWeapons": "Uses teeth and claws as natural weapons",
+                "burrowing": "Can dig tunnels and move underground"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:26:00.000Z"
+    },
+    "Giant_Slime_character.json": {
+        "id": "giant_slime_001",
+        "name": "Giant Slime",
+        "race": "slime",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 30,
+            "strength": 6,
+            "magicPower": 3,
+            "accuracy": 5,
+            "speed": 1,
+            "physicalDefence": 13,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "massive_acid_attack"
+                ],
+                "magic": [],
+                "utility": [
+                    "split_ability",
+                    "area_control"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "slime": "Can split when damaged (potential system addition)"
+        },
+        "racialAbilities": {
+            "slime": {
+                "gelatinousBody": "Resistant to physical damage",
+                "massiveSize": "Large area of effect attacks"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:36:00.000Z"
+    },
+    "Goblin_Berserker_character.json": {
+        "id": "goblin_berserker_001",
+        "name": "Goblin Berserker",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 24,
+            "stamina": 30,
+            "strength": 7,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 6,
+            "physicalDefence": 11,
+            "magicalDefence": 7
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [
+                    "axe_basics"
+                ],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "tough_skin"
+                ],
+                "combat": [
+                    "monster_berserker_rage",
+                    "blood_frenzy"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "throwing_axe", "quantity": 2 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "battleaxe",
+            "secondaryWeapon": "throwing_axe",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby",
+                "berserkerRage": "Becomes stronger when wounded"
+            }
+        },
+        "lootTable": {
+            "weapon": "battleaxe",
+            "armor": "leather_armor",
+            "accessory": "throwing_axe"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:19:00.000Z"
+    },
+    "Goblin_Chief_character.json": {
+        "id": "goblin_chief_001",
+        "name": "Goblin Chief",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 25,
+            "strength": 6,
+            "magicPower": 2,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 14,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "parry"
+                ],
+                "combat": [
+                    "quick_strike",
+                    "roar",
+                    "pack_leader"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "steel_sword", "quantity": 1 },
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "steel_sword",
+            "secondaryWeapon": "battleaxe",
+            "armor": "leather_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby",
+                "leadership": "Can command other goblins in battle"
+            }
+        },
+        "lootTable": {
+            "weapon": "steel_sword",
+            "armor": "leather_armor",
+            "accessory": "battleaxe"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:18:00.000Z"
+    },
+    "Goblin_Scout_character.json": {
+        "id": "goblin_scout_001",
+        "name": "Goblin Scout",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 12,
+            "stamina": 20,
+            "strength": 2,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 6,
+            "physicalDefence": 7,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": [
+                    "bow_beginner"
+                ]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": [
+                    "camouflage"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_sword", "quantity": 1 },
+            { "id": "shortbow", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_sword",
+            "secondaryWeapon": "shortbow",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby"
+            }
+        },
+        "lootTable": {
+            "weapon": "rusty_sword",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Goblin_Shaman_character.json": {
+        "id": "goblin_shaman_001",
+        "name": "Goblin Shaman",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 4,
+            "physicalDefence": 8,
+            "magicalDefence": 12
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [
+                    "staff_basics"
+                ],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "healing_light"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "quarterstaff", "quantity": 1 },
+            { "id": "dagger", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "quarterstaff",
+            "secondaryWeapon": "dagger",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby"
+            }
+        },
+        "lootTable": {
+            "weapon": "quarterstaff",
+            "armor": "leather_armor",
+            "accessory": "mana_potion"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:17:00.000Z"
+    },
+    "Goblin_Thief_character.json": {
+        "id": "goblin_thief_001",
+        "name": "Goblin Thief",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 16,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 1,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 9,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_basics"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "sneak_attack"
+                ],
+                "magic": [],
+                "utility": [
+                    "camouflage"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "dagger", "quantity": 1 },
+            { "id": "shortbow", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "arrows", "quantity": 20 }
+        ],
+        "equipped": {
+            "primaryWeapon": "dagger",
+            "secondaryWeapon": "shortbow",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby",
+                "stealth": "Natural ability to move quietly and hide"
+            }
+        },
+        "lootTable": {
+            "weapon": "dagger",
+            "armor": "leather_armor",
+            "accessory": "shortbow"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:20:00.000Z"
+    },
+    "Goblin_Warrior_character.json": {
+        "id": "goblin_warrior_001",
+        "name": "Goblin Warrior",
+        "race": "goblin",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 22,
+            "strength": 4,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 5,
+            "physicalDefence": 10,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "tough_skin"
+                ],
+                "combat": [
+                    "quick_strike",
+                    "claws"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "buckler", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "buckler",
+            "armor": "leather_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "goblin": "Pack Tactics: Advantage when fighting alongside other goblins (potential system addition)"
+        },
+        "racialAbilities": {
+            "goblin": {
+                "packTactics": "Gains advantage when fighting with other goblins nearby"
+            }
+        },
+        "lootTable": {
+            "weapon": "iron_sword",
+            "armor": "leather_armor",
+            "accessory": "buckler"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:16:00.000Z"
+    },
+    "Golden_Fish_character.json": {
+        "id": "golden_fish_001",
+        "name": "Golden Fish",
+        "race": "fish",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 3,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 6,
+            "physicalDefence": 7,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "bite_attack"
+                ],
+                "magic": [
+                    "luck_magic",
+                    "treasure_generation",
+                    "fortune_enhancement",
+                    "golden_touch"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "fish": "Drops treasure, luck-aligned"
+        },
+        "racialAbilities": {
+            "fish": {
+                "luckMastery": "Master of luck and fortune",
+                "treasureGeneration": "Can generate treasure"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:27:00.000Z"
+    },
+    "Greater_Devil_character.json": {
+        "id": "greater_devil_001",
+        "name": "Greater Devil",
+        "race": "devil",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 60,
+            "stamina": 50,
+            "strength": 12,
+            "magicPower": 8,
+            "accuracy": 8,
+            "speed": 6,
+            "physicalDefence": 15,
+            "magicalDefence": 14
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "powerful_claws"
+                ],
+                "magic": [
+                    "enhanced_infernal_magic",
+                    "fear"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "devil": "Enhanced infernal attacks, evil mastery"
+        },
+        "racialAbilities": {
+            "devil": {
+                "infernalMastery": "Enhanced infernal powers and evil mastery",
+                "devilClaws": "Possesses powerful infernal claws"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T01:05:00.000Z"
+    },
+    "Green_Slime_character.json": {
+        "id": "green_slime_001",
+        "name": "Green Slime",
+        "race": "slime",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 12,
+            "strength": 2,
+            "magicPower": 1,
+            "accuracy": 3,
+            "speed": 2,
+            "physicalDefence": 7,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "acid_attack"
+                ],
+                "magic": [],
+                "utility": [
+                    "basic_movement",
+                    "simple_intelligence"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "slime": "Can split when damaged (potential system addition)"
+        },
+        "racialAbilities": {
+            "slime": {
+                "gelatinousBody": "Resistant to physical damage",
+                "acidicNature": "Deals acid damage on contact"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:31:00.000Z"
+    },
+    "Haunted_Bow_character.json": {
+        "id": "haunted_bow_001",
+        "name": "Haunted Bow",
+        "race": "possessed_item",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 22,
+            "strength": 2,
+            "magicPower": 4,
+            "accuracy": 9,
+            "speed": 6,
+            "physicalDefence": 8,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": [
+                    "bow_basics"
+                ]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "aimed_shot",
+                    "autonomous_aiming"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "possessed_item": "Aims itself, ghost arrows pass through armor (potential system addition)"
+        },
+        "racialAbilities": {
+            "possessed_item": {
+                "selfAiming": "Can aim and fire without a wielder",
+                "ghostArrows": "Arrows pass through armor"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:41:00.000Z"
+    },
+    "Healing_Angel_character.json": {
+        "id": "healing_angel_001",
+        "name": "Healing Angel",
+        "race": "angel",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 9,
+        "experience": 0,
+        "stats": {
+            "hp": 70,
+            "stamina": 55,
+            "strength": 6,
+            "magicPower": 12,
+            "accuracy": 8,
+            "speed": 6,
+            "physicalDefence": 14,
+            "magicalDefence": 18
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "light_ray"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [
+                    "healing_mastery",
+                    "restoration_magic",
+                    "support_abilities",
+                    "healing_light"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "angel": "Ultimate healing, restoration magic"
+        },
+        "racialAbilities": {
+            "angel": {
+                "flight": "Can fly and move through the air",
+                "healingMastery": "Master of healing and restoration magic"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:58:00.000Z"
+    },
+    "Hell_Knight_character.json": {
+        "id": "hell_knight_001",
+        "name": "Hell Knight",
+        "race": "devil",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 10,
+        "experience": 0,
+        "stats": {
+            "hp": 80,
+            "stamina": 60,
+            "strength": 14,
+            "magicPower": 6,
+            "accuracy": 9,
+            "speed": 5,
+            "physicalDefence": 18,
+            "magicalDefence": 12
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "combat_mastery",
+                    "martial_arts",
+                    "infernal_combat"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "devil": "Combat specialist, infernal combat"
+        },
+        "racialAbilities": {
+            "devil": {
+                "combatMastery": "Master of combat and martial arts",
+                "infernalArmor": "Armored infernal warrior"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T01:07:00.000Z"
+    },
+    "Hill_Giant_character.json": {
+        "id": "hill_giant_001",
+        "name": "Hill Giant",
+        "race": "giant",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 40,
+            "stamina": 35,
+            "strength": 10,
+            "magicPower": 1,
+            "accuracy": 5,
+            "speed": 2,
+            "physicalDefence": 12,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [
+                    "hammer_basics"
+                ],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "tough_skin"
+                ],
+                "combat": [
+                    "massive_strength",
+                    "intimidation"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatclub", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatclub",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "giant": "Massive damage, can throw boulders"
+        },
+        "racialAbilities": {
+            "giant": {
+                "massiveDamage": "Deals massive damage with strength",
+                "boulderThrowing": "Can throw large rocks as ranged attacks"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatclub",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:52:00.000Z"
+    },
+    "Ice_Fish_character.json": {
+        "id": "ice_fish_001",
+        "name": "Ice Fish",
+        "race": "fish",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 30,
+            "strength": 5,
+            "magicPower": 5,
+            "accuracy": 5,
+            "speed": 5,
+            "physicalDefence": 10,
+            "magicalDefence": 9
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "chill_touch",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "cold_resistance"
+                ],
+                "combat": [
+                    "frost_attacks"
+                ],
+                "magic": [
+                    "arctic_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "fish": "Cold damage, ice resistance"
+        },
+        "racialAbilities": {
+            "fish": {
+                "iceMastery": "Master of ice and cold",
+                "arcticNature": "Thrives in freezing water"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:24:00.000Z"
+    },
+    "Ice_Golem_character.json": {
+        "id": "ice_golem_001",
+        "name": "Ice Golem",
+        "race": "golem",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 40,
+            "stamina": 30,
+            "strength": 8,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 1,
+            "physicalDefence": 15,
+            "magicalDefence": 11
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "chill_touch",
+                    "ice_armor",
+                    "freeze",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "cold_resistance"
+                ],
+                "combat": [
+                    "frost_attacks"
+                ],
+                "magic": [
+                    "cold_generation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "golem": "Ice-aligned, can freeze enemies"
+        },
+        "racialAbilities": {
+            "golem": {
+                "iceAlignment": "Ice-aligned with frost abilities",
+                "constructNature": "Construct immune to many status effects"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:01:00.000Z"
+    },
+    "Ice_Octopus_character.json": {
+        "id": "ice_octopus_001",
+        "name": "Ice Octopus",
+        "race": "octopus",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 55,
+            "stamina": 40,
+            "strength": 8,
+            "magicPower": 7,
+            "accuracy": 6,
+            "speed": 4,
+            "physicalDefence": 15,
+            "magicalDefence": 13
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "chill_touch",
+                    "ice_armor",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "cold_resistance"
+                ],
+                "combat": [
+                    "frost_attacks"
+                ],
+                "magic": [
+                    "ice_magic"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "octopus": "Cold damage, ice resistance"
+        },
+        "racialAbilities": {
+            "octopus": {
+                "iceMastery": "Master of ice and cold",
+                "arcticNature": "Thrives in freezing waters"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:34:00.000Z"
+    },
+    "Ice_Serpent_character.json": {
+        "id": "ice_serpent_001",
+        "name": "Ice Serpent",
+        "race": "serpent",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 9,
+        "experience": 0,
+        "stats": {
+            "hp": 65,
+            "stamina": 45,
+            "strength": 11,
+            "magicPower": 8,
+            "accuracy": 6,
+            "speed": 4,
+            "physicalDefence": 17,
+            "magicalDefence": 13
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "chill_touch",
+                    "ice_armor",
+                    "freeze",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "cold_resistance"
+                ],
+                "combat": [
+                    "frost_attacks"
+                ],
+                "magic": [
+                    "arctic_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "serpent": "Cold damage, ice resistance"
+        },
+        "racialAbilities": {
+            "serpent": {
+                "iceMastery": "Master of ice and cold",
+                "arcticNature": "Thrives in freezing environments"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:17:00.000Z"
+    },
+    "Ice_Sprite_character.json": {
+        "id": "ice_sprite_001",
+        "name": "Ice Sprite",
+        "race": "sprite",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 12,
+            "stamina": 20,
+            "strength": 1,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 7,
+            "physicalDefence": 7,
+            "magicalDefence": 9
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "chill_touch",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "frost_attacks"
+                ],
+                "magic": [
+                    "cold_generation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "sprite": "Ice-aligned, can freeze water"
+        },
+        "racialAbilities": {
+            "sprite": {
+                "iceAlignment": "Ice-aligned with frost abilities",
+                "etherealNature": "Ethereal form, difficult to hit"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:07:00.000Z"
+    },
+    "Kraken_character.json": {
+        "id": "kraken_001",
+        "name": "Kraken",
+        "race": "octopus",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 18,
+        "experience": 0,
+        "stats": {
+            "hp": 150,
+            "stamina": 80,
+            "strength": 22,
+            "magicPower": 8,
+            "accuracy": 10,
+            "speed": 6,
+            "physicalDefence": 20,
+            "magicalDefence": 12
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "tentacle_mastery",
+                    "massive_strength",
+                    "legendary_power"
+                ],
+                "magic": [],
+                "utility": [
+                    "aquatic"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "octopus": "Legendary power, can grasp ships"
+        },
+        "racialAbilities": {
+            "octopus": {
+                "legendaryPower": "Legendary sea monster with massive power",
+                "shipGrasp": "Can grasp and destroy entire ships"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:29:00.000Z"
+    },
+    "Lesser_Devil_character.json": {
+        "id": "lesser_devil_001",
+        "name": "Lesser Devil",
+        "race": "devil",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 30,
+            "strength": 6,
+            "magicPower": 5,
+            "accuracy": 6,
+            "speed": 5,
+            "physicalDefence": 9,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "claws"
+                ],
+                "magic": [
+                    "fear"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "devil": "Infernal attacks, evil-aligned"
+        },
+        "racialAbilities": {
+            "devil": {
+                "infernalNature": "Infernal creature with evil alignment",
+                "devilClaws": "Possesses infernal claws and attacks"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T01:04:00.000Z"
+    },
+    "Lich_character.json": {
+        "id": "lich_001",
+        "name": "Lich",
+        "race": "ghost",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 16,
+        "experience": 0,
+        "stats": {
+            "hp": 100,
+            "stamina": 60,
+            "strength": 8,
+            "magicPower": 18,
+            "accuracy": 9,
+            "speed": 5,
+            "physicalDefence": 14,
+            "magicalDefence": 20
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [
+                    "ultimate_undead_magic",
+                    "intelligence",
+                    "spell_mastery",
+                    "ancient_knowledge"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "ghost": "Ultimate undead power, intelligent"
+        },
+        "racialAbilities": {
+            "ghost": {
+                "lichMastery": "Ultimate undead spellcaster with ancient knowledge",
+                "phylactery": "Protected by a phylactery that must be destroyed"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:41:00.000Z"
+    },
+    "Light_Angel_character.json": {
+        "id": "light_angel_001",
+        "name": "Light Angel",
+        "race": "angel",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 9,
+        "experience": 0,
+        "stats": {
+            "hp": 70,
+            "stamina": 55,
+            "strength": 8,
+            "magicPower": 11,
+            "accuracy": 8,
+            "speed": 7,
+            "physicalDefence": 15,
+            "magicalDefence": 17
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "light_ray",
+                    "light_beam",
+                    "holy_aura",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "holy_attacks"
+                ],
+                "magic": [
+                    "radiant_abilities",
+                    "light_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "angel": "Light mastery, holy attacks"
+        },
+        "racialAbilities": {
+            "angel": {
+                "flight": "Can fly and move through the air",
+                "lightMastery": "Master of light and holy magic"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:59:00.000Z"
+    },
+    "Light_Sprite_character.json": {
+        "id": "light_sprite_001",
+        "name": "Light Sprite",
+        "race": "sprite",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 15,
+            "stamina": 20,
+            "strength": 1,
+            "magicPower": 5,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 7,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "light_ray",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "holy_attacks"
+                ],
+                "magic": [
+                    "healing_light"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "sprite": "Light-aligned, can heal allies"
+        },
+        "racialAbilities": {
+            "sprite": {
+                "lightAlignment": "Light-aligned with holy abilities",
+                "etherealNature": "Ethereal form, difficult to hit"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:12:00.000Z"
+    },
+    "Living_Staff_character.json": {
+        "id": "living_staff_001",
+        "name": "Living Staff",
+        "race": "possessed_item",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 3,
+            "magicPower": 7,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 9,
+            "magicalDefence": 12
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [
+                    "staff_basics"
+                ],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [
+                    "spell_power",
+                    "magical_enhancement"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "possessed_item": "Casts spells, enhances magic (potential system addition)"
+        },
+        "racialAbilities": {
+            "possessed_item": {
+                "builtInSpells": "Has spells built into the staff",
+                "magicEnhancement": "Enhances magical abilities"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:42:00.000Z"
+    },
+    "Mind_Flayer_character.json": {
+        "id": "mind_flayer_001",
+        "name": "Mind Flayer",
+        "race": "octopus",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 12,
+        "experience": 0,
+        "stats": {
+            "hp": 80,
+            "stamina": 50,
+            "strength": 8,
+            "magicPower": 15,
+            "accuracy": 8,
+            "speed": 6,
+            "physicalDefence": 12,
+            "magicalDefence": 18
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "mental_attacks"
+                ],
+                "magic": [
+                    "mind_control",
+                    "intelligence_enhancement",
+                    "psionic_magic"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "octopus": "Psionic attacks, can control minds"
+        },
+        "racialAbilities": {
+            "octopus": {
+                "psionicMastery": "Master of psionic abilities",
+                "mindControl": "Can control the minds of others"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:30:00.000Z"
+    },
+    "Orc_Brute_character.json": {
+        "id": "orc_brute_001",
+        "name": "Orc Brute",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 30,
+            "strength": 9,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 2,
+            "physicalDefence": 13,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [
+                    "hammer_basics"
+                ],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "tough_skin"
+                ],
+                "combat": [
+                    "massive_strength",
+                    "intimidation"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatclub", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatclub",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Massive damage, area attacks"
+        },
+        "racialAbilities": {
+            "orc": {
+                "massiveDamage": "Deals massive damage with heavy weapons",
+                "areaAttacks": "Can perform area of effect attacks"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatclub",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:50:00.000Z"
+    },
+    "Orc_Chief_character.json": {
+        "id": "orc_chief_001",
+        "name": "Orc Chief",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 32,
+            "stamina": 30,
+            "strength": 7,
+            "magicPower": 2,
+            "accuracy": 5,
+            "speed": 4,
+            "physicalDefence": 12,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [
+                    "axe_basics"
+                ],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "monster_berserker_rage",
+                    "roar",
+                    "pack_leader"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatsword", "quantity": 1 },
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "chain_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatsword",
+            "secondaryWeapon": "battleaxe",
+            "armor": "chain_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Inspires other orcs, can call reinforcements"
+        },
+        "racialAbilities": {
+            "orc": {
+                "leadership": "Inspires other orcs in battle",
+                "reinforcements": "Can call for backup"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatsword",
+            "armor": "chain_armor",
+            "accessory": "battleaxe"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:48:00.000Z"
+    },
+    "Orc_Raider_character.json": {
+        "id": "orc_raider_001",
+        "name": "Orc Raider",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 5,
+            "magicPower": 1,
+            "accuracy": 4,
+            "speed": 4,
+            "physicalDefence": 9,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [
+                    "axe_basics"
+                ],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "tough_skin"
+                ],
+                "combat": [
+                    "intimidation",
+                    "brute_force"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "javelin", "quantity": 3 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "battleaxe",
+            "secondaryWeapon": "javelin",
+            "armor": "leather_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Intimidation, brute force attacks"
+        },
+        "racialAbilities": {
+            "orc": {
+                "intimidation": "Can intimidate enemies",
+                "bruteForce": "Enhanced strength and damage"
+            }
+        },
+        "lootTable": {
+            "weapon": "battleaxe",
+            "armor": "leather_armor",
+            "accessory": "javelin"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:45:00.000Z"
+    },
+    "Orc_Scout_character.json": {
+        "id": "orc_scout_001",
+        "name": "Orc Scout",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 25,
+            "strength": 3,
+            "magicPower": 1,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 7,
+            "magicalDefence": 6
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_basics"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": [
+                    "camouflage",
+                    "light_step"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "shortsword", "quantity": 1 },
+            { "id": "shortbow", "quantity": 1 },
+            { "id": "throwing_knife", "quantity": 5 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "arrows", "quantity": 20 }
+        ],
+        "equipped": {
+            "primaryWeapon": "shortsword",
+            "secondaryWeapon": "shortbow",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Can scout ahead, stealth attacks"
+        },
+        "racialAbilities": {
+            "orc": {
+                "scouting": "Can scout ahead and gather intelligence",
+                "stealthAttacks": "Can perform stealth attacks"
+            }
+        },
+        "lootTable": {
+            "weapon": "shortsword",
+            "armor": "leather_armor",
+            "accessory": "shortbow"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:49:00.000Z"
+    },
+    "Orc_Shaman_character.json": {
+        "id": "orc_shaman_001",
+        "name": "Orc Shaman",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 25,
+            "strength": 3,
+            "magicPower": 6,
+            "accuracy": 4,
+            "speed": 3,
+            "physicalDefence": 8,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [
+                    "staff_basics"
+                ],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "healing_light"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "quarterstaff", "quantity": 1 },
+            { "id": "dagger", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "quarterstaff",
+            "secondaryWeapon": "dagger",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Can summon spirits, curse enemies"
+        },
+        "racialAbilities": {
+            "orc": {
+                "spiritSummoning": "Can summon spirits to aid in battle",
+                "cursing": "Can curse enemies with dark magic"
+            }
+        },
+        "lootTable": {
+            "weapon": "quarterstaff",
+            "armor": "leather_armor",
+            "accessory": "mana_potion"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:47:00.000Z"
+    },
+    "Orc_Warlord_character.json": {
+        "id": "orc_warlord_001",
+        "name": "Orc Warlord",
+        "race": "orc",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 35,
+            "strength": 8,
+            "magicPower": 3,
+            "accuracy": 6,
+            "speed": 4,
+            "physicalDefence": 16,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [
+                    "axe_basics"
+                ],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "monster_berserker_rage",
+                    "roar",
+                    "pack_leader"
+                ],
+                "magic": [],
+                "utility": [
+                    "ancient_knowledge"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "greatsword", "quantity": 1 },
+            { "id": "battleaxe", "quantity": 1 },
+            { "id": "throwing_axe", "quantity": 3 },
+            { "id": "plate_armor", "quantity": 1 },
+            { "id": "leather_helmet", "quantity": 1 },
+            { "id": "health_potion", "quantity": 3 }
+        ],
+        "equipped": {
+            "primaryWeapon": "greatsword",
+            "secondaryWeapon": "battleaxe",
+            "armor": "plate_armor",
+            "accessory": "leather_helmet"
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Commands orc armies, advanced tactics"
+        },
+        "racialAbilities": {
+            "orc": {
+                "armyCommand": "Can command entire orc armies",
+                "advancedTactics": "Uses sophisticated battle strategies"
+            }
+        },
+        "lootTable": {
+            "weapon": "greatsword",
+            "armor": "plate_armor",
+            "accessory": "battleaxe"
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:51:00.000Z"
+    },
+    "Phantom_character.json": {
+        "id": "phantom_001",
+        "name": "Phantom",
+        "race": "ghost",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 35,
+            "strength": 3,
+            "magicPower": 10,
+            "accuracy": 7,
+            "speed": 6,
+            "physicalDefence": 8,
+            "magicalDefence": 16
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "mental_attacks"
+                ],
+                "magic": [
+                    "illusion_magic",
+                    "phantom_creation",
+                    "mind_control"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "ghost": "Can create illusions, mental attacks"
+        },
+        "racialAbilities": {
+            "ghost": {
+                "illusionMastery": "Master of illusions and mental manipulation",
+                "etherealNature": "Ethereal form, can phase through solid objects"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:39:00.000Z"
+    },
+    "Plague_Rat_character.json": {
+        "id": "plague_rat_001",
+        "name": "Plague Rat",
+        "race": "rat",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 22,
+            "strength": 3,
+            "magicPower": 2,
+            "accuracy": 4,
+            "speed": 7,
+            "physicalDefence": 8,
+            "magicalDefence": 9
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "immunity_poison"
+                ],
+                "combat": [
+                    "bite_attack",
+                    "claws",
+                    "venomous_claws"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "rat": "Pack Tactics: Advantage when fighting alongside other rats (potential system addition)"
+        },
+        "racialAbilities": {
+            "rat": {
+                "packTactics": "Gains advantage when fighting with other rats nearby",
+                "naturalWeapons": "Uses teeth and claws as natural weapons",
+                "diseaseCarrier": "Carries and spreads diseases"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:28:00.000Z"
+    },
+    "Red_Slime_character.json": {
+        "id": "red_slime_001",
+        "name": "Red Slime",
+        "race": "slime",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 14,
+            "stamina": 15,
+            "strength": 2,
+            "magicPower": 3,
+            "accuracy": 3,
+            "speed": 2,
+            "physicalDefence": 8,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "heat_resistance"
+                ],
+                "combat": [
+                    "burning_touch"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "slime": "Can split when damaged (potential system addition)"
+        },
+        "racialAbilities": {
+            "slime": {
+                "gelatinousBody": "Resistant to physical damage",
+                "fireNature": "Immune to fire damage, deals fire damage"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:33:00.000Z"
+    },
+    "Sea_Serpent_character.json": {
+        "id": "sea_serpent_001",
+        "name": "Sea Serpent",
+        "race": "serpent",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 55,
+            "stamina": 40,
+            "strength": 10,
+            "magicPower": 6,
+            "accuracy": 6,
+            "speed": 4,
+            "physicalDefence": 15,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [
+                    "water_splash"
+                ],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "constriction"
+                ],
+                "magic": [],
+                "utility": [
+                    "swimming",
+                    "aquatic"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "serpent": "Aquatic, can constrict enemies"
+        },
+        "racialAbilities": {
+            "serpent": {
+                "aquaticNature": "Aquatic creature with swimming abilities",
+                "constriction": "Can constrict and crush enemies"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:14:00.000Z"
+    },
+    "Shadow_Dragon_character.json": {
+        "id": "shadow_dragon_001",
+        "name": "Shadow Dragon",
+        "race": "shadow",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 15,
+        "experience": 0,
+        "stats": {
+            "hp": 120,
+            "stamina": 80,
+            "strength": 18,
+            "magicPower": 14,
+            "accuracy": 10,
+            "speed": 8,
+            "physicalDefence": 18,
+            "magicalDefence": 18
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [
+                    "shadow_bolt",
+                    "dark_bolt",
+                    "shadow_cloak",
+                    "darkness_attunement"
+                ],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "claws"
+                ],
+                "magic": [
+                    "shadow_dragon_magic",
+                    "dark_breath",
+                    "monster_shadow_step"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "shadow": "Shadow-aligned dragon, dark breath"
+        },
+        "racialAbilities": {
+            "shadow": {
+                "flight": "Can fly and move through the air",
+                "breathWeapon": "Possesses dark shadow breath weapon",
+                "shadowMastery": "Master of shadows and darkness"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T01:16:00.000Z"
+    },
+    "Poltergeist_character.json": {
+        "id": "poltergeist_001",
+        "name": "Poltergeist",
+        "race": "ghost",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 30,
+            "strength": 4,
+            "magicPower": 7,
+            "accuracy": 6,
+            "speed": 6,
+            "physicalDefence": 9,
+            "magicalDefence": 13
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "poltergeist_attacks"
+                ],
+                "magic": [
+                    "telekinesis",
+                    "object_manipulation"
+                ],
+                "utility": [
+                    "phase_shift"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "ghost": "Can throw objects, telekinesis"
+        },
+        "racialAbilities": {
+            "ghost": {
+                "telekinesis": "Can manipulate objects with mental power",
+                "etherealNature": "Ethereal form, can phase through solid objects"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:36:00.000Z"
+    },
+    "Possessed_Armor_character.json": {
+        "id": "possessed_armor_001",
+        "name": "Possessed Armor",
+        "race": "possessed_item",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 26,
+            "stamina": 25,
+            "strength": 5,
+            "magicPower": 3,
+            "accuracy": 4,
+            "speed": 3,
+            "physicalDefence": 15,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "defensive_combat",
+                    "armor_mastery"
+                ],
+                "combat": [
+                    "gauntlet_strikes",
+                    "shield_bash"
+                ],
+                "magic": [
+                    "protection_spells"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "full_plate_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "full_plate_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "possessed_item": "High defense, can repair itself (potential system addition)"
+        },
+        "racialAbilities": {
+            "possessed_item": {
+                "emptySuit": "Animated empty armor that fights independently",
+                "selfRepair": "Can repair damage to itself"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "full_plate_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:39:00.000Z"
+    },
+    "Prismatic_Dragon_character.json": {
+        "id": "prismatic_dragon_001",
+        "name": "Prismatic Dragon",
+        "race": "dragon",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 19,
+        "experience": 0,
+        "stats": {
+            "hp": 180,
+            "stamina": 90,
+            "strength": 20,
+            "magicPower": 18,
+            "accuracy": 11,
+            "speed": 9,
+            "physicalDefence": 19,
+            "magicalDefence": 19
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [
+                    "all_element_magic",
+                    "multi_element_breath",
+                    "element_mastery",
+                    "ancient_knowledge"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragon": "All elements, multi-element breath"
+        },
+        "racialAbilities": {
+            "dragon": {
+                "flight": "Can fly and move through the air",
+                "breathWeapon": "Possesses multi-elemental breath weapon",
+                "elementMastery": "Master of all elemental magics"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:47:00.000Z"
+    },
+    "Rat_King_character.json": {
+        "id": "rat_king_001",
+        "name": "Rat King",
+        "race": "rat",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 28,
+            "stamina": 25,
+            "strength": 5,
+            "magicPower": 3,
+            "accuracy": 6,
+            "speed": 5,
+            "physicalDefence": 12,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "bite_attack",
+                    "claws"
+                ],
+                "magic": [],
+                "utility": [
+                    "pack_leader",
+                    "ancient_knowledge"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "rat": "Pack Tactics: Advantage when fighting alongside other rats (potential system addition)"
+        },
+        "racialAbilities": {
+            "rat": {
+                "packTactics": "Gains advantage when fighting with other rats nearby",
+                "naturalWeapons": "Uses teeth and claws as natural weapons",
+                "royalCommand": "Can command and coordinate rat swarms"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:29:00.000Z"
+    },
+    "Revenant_character.json": {
+        "id": "revenant_001",
+        "name": "Revenant",
+        "race": "ghost",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 9,
+        "experience": 0,
+        "stats": {
+            "hp": 50,
+            "stamina": 40,
+            "strength": 6,
+            "magicPower": 8,
+            "accuracy": 7,
+            "speed": 5,
+            "physicalDefence": 12,
+            "magicalDefence": 14
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "undead_attacks",
+                    "blood_frenzy"
+                ],
+                "magic": [
+                    "vengeance_magic",
+                    "undead_enhancement",
+                    "persistence"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "ghost": "Vengeful, persistent"
+        },
+        "racialAbilities": {
+            "ghost": {
+                "vengeance": "Driven by vengeance and cannot be easily destroyed",
+                "etherealNature": "Ethereal form, can phase through solid objects"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:40:00.000Z"
+    },
+    "Archangel_character.json": {
+        "id": "archangel_001",
+        "name": "Archangel",
+        "race": "angel",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 17,
+        "experience": 0,
+        "stats": {
+            "hp": 140,
+            "stamina": 90,
+            "strength": 18,
+            "magicPower": 16,
+            "accuracy": 11,
+            "speed": 8,
+            "physicalDefence": 19,
+            "magicalDefence": 19
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": true,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "pack_leader"
+                ],
+                "magic": [
+                    "leadership",
+                    "command_magic",
+                    "ultimate_power"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "angel": "Commands other angels, leadership"
+        },
+        "racialAbilities": {
+            "angel": {
+                "flight": "Can fly and move through the air",
+                "divineCommand": "Can command and lead other angels"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T01:02:00.000Z"
+    },
+    "Arctic_Wyvern_character.json": {
+        "id": "arctic_wyvern_001",
+        "name": "Arctic Wyvern",
+        "race": "wyvern",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 45,
+            "stamina": 40,
+            "strength": 8,
+            "magicPower": 6,
+            "accuracy": 6,
+            "speed": 6,
+            "physicalDefence": 13,
+            "magicalDefence": 11
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "cold_resistance"
+                ],
+                "combat": [
+                    "claws"
+                ],
+                "magic": [
+                    "arctic_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "wyvern": "Cold-resistant, can control ice"
+        },
+        "racialAbilities": {
+            "wyvern": {
+                "flight": "Can fly and move through the air",
+                "arcticMastery": "Master of ice and arctic magic"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:51:00.000Z"
+    },
+    "Banshee_character.json": {
+        "id": "banshee_001",
+        "name": "Banshee",
+        "race": "ghost",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 40,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 8,
+            "accuracy": 7,
+            "speed": 6,
+            "physicalDefence": 8,
+            "magicalDefence": 14
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "sonic_attacks",
+                    "roar"
+                ],
+                "magic": [
+                    "fear_magic",
+                    "scream_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "ghost": "Sonic damage, fear-inducing"
+        },
+        "racialAbilities": {
+            "ghost": {
+                "screamMastery": "Master of sonic attacks and fear",
+                "etherealNature": "Ethereal form, can phase through solid objects"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:37:00.000Z"
+    },
+    "Blessed_Armor_character.json": {
+        "id": "blessed_armor_001",
+        "name": "Blessed Armor",
+        "race": "possessed_item",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 28,
+            "stamina": 25,
+            "strength": 4,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 3,
+            "physicalDefence": 16,
+            "magicalDefence": 14
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "holy_protection",
+                    "divine_enhancement"
+                ],
+                "combat": [
+                    "holy_strikes"
+                ],
+                "magic": [
+                    "light_magic"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "possessed_item": "Protects against evil, light-aligned (potential system addition)"
+        },
+        "racialAbilities": {
+            "possessed_item": {
+                "holyProtection": "Protects against evil and dark magic",
+                "lightAlignment": "Holy, light-aligned with protective powers"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:44:00.000Z"
+    },
+    "Pedestrian_Dragonborn_Darkness_character.json": {
+        "id": "char_1757285801071_11y5cn9ej",
+        "name": "Pedestrian Dragonborn-darkness",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -2,
+            "magicPower": -3,
+            "accuracy": -3,
+            "speed": 2,
+            "physicalDefence": 9,
+            "magicalDefence": 9
+        },
+        "lumens": 142,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [
+                    "breath_weapon"
+                ],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: Chosen elemental trait: Darkness, Scaled Hide: Resistance to darkness damage, Draconic Senses: Can detect magical auras and see in dim light"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconicElement": "darkness",
+                "elementalResistance": "darkness",
+                "scaledHide": true,
+                "draconicSenses": true
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-09-07T23:03:06.687Z"
+    },
+    "Pedestrian_Dragonborn_Earth_character.json": {
+        "id": "char_1757285785359_lp01hgvdw",
+        "name": "Pedestrian Dragonborn-earth",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -2,
+            "magicPower": -3,
+            "accuracy": -3,
+            "speed": 2,
+            "physicalDefence": 9,
+            "magicalDefence": 9
+        },
+        "lumens": 142,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [
+                    "earth_spike",
+                    "earth_attunement"
+                ],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [
+                    "breath_weapon"
+                ],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_pickaxe", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_pickaxe",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: Chosen elemental trait: Earth, Scaled Hide: Resistance to earth damage, Draconic Senses: Can detect magical auras and see in dim light"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconicElement": "earth",
+                "elementalResistance": "earth",
+                "scaledHide": true,
+                "draconicSenses": true
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-09-07T23:02:06.448Z"
+    },
+    "Pedestrian_Dragonborn_ice_character.json": {
+        "id": "char_1757285776863_rhy7byq98",
+        "name": "Pedestrian Dragonborn-ice",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -2,
+            "magicPower": -3,
+            "accuracy": -3,
+            "speed": 2,
+            "physicalDefence": 9,
+            "magicalDefence": 9
+        },
+        "lumens": 142,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: Chosen elemental trait: Ice, Scaled Hide: Resistance to ice damage, Draconic Senses: Can detect magical auras and see in dim light"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconicElement": "ice",
+                "elementalResistance": "ice",
+                "scaledHide": true,
+                "draconicSenses": true
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-09-07T22:57:03.015Z"
+    },
+    "Pedestrian_Dragonborn_Light_character.json": {
+        "id": "char_1757285803351_ofu2exsed",
+        "name": "Pedestrian Dragonborn-light",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -2,
+            "magicPower": -3,
+            "accuracy": -3,
+            "speed": 2,
+            "physicalDefence": 9,
+            "magicalDefence": 9
+        },
+        "lumens": 142,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: Chosen elemental trait: Light, Scaled Hide: Resistance to light damage, Draconic Senses: Can detect magical auras and see in dim light"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconicElement": "light",
+                "elementalResistance": "light",
+                "scaledHide": true,
+                "draconicSenses": true
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-09-07T23:03:25.936Z"
+    },
+    "Pedestrian_Dragonborn_Thunder_character.json": {
+        "id": "char_1757285783439_12ix38p36",
+        "name": "Pedestrian Dragonborn-thunder",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 1,
+        "experience": 0,
+        "stats": {
+            "hp": 10,
+            "stamina": 10,
+            "strength": -2,
+            "magicPower": -3,
+            "accuracy": -3,
+            "speed": 2,
+            "physicalDefence": 9,
+            "magicalDefence": 9
+        },
+        "lumens": 142,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [
+                    "spark",
+                    "thunder_bolt",
+                    "static_charge",
+                    "thunder_attunement"
+                ],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: Chosen elemental trait: Thunder, Scaled Hide: Resistance to thunder damage, Draconic Senses: Can detect magical auras and see in dim light"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconicElement": "thunder",
+                "elementalResistance": "thunder",
+                "scaledHide": true,
+                "draconicSenses": true
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-09-07T22:57:25.399Z"
+    },
+    "Poisoner_character.json": {
+        "id": "poisoner_001",
+        "name": "Drow Poisoner",
+        "race": "drow",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 30,
+            "strength": 2,
+            "magicPower": 4,
+            "accuracy": 7,
+            "speed": 6,
+            "physicalDefence": 3,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner",
+                    "dagger_basics",
+                    "light_step"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [
+                    "alchemy_basic"
+                ],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [
+                    "shadow_affinity"
+                ],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 2 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "poison_antidote", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "rusty_dagger",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "drow": "Dark Vision: Can see in darkness, +2 Magic Power"
+        },
+        "racialAbilities": {
+            "drow": {
+                "dark_vision": "Can see in darkness, +2 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 55,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Politician_character.json": {
+        "id": "politician_001",
+        "name": "Elven Politician",
+        "race": "elf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 5,
+            "accuracy": 4,
+            "speed": 5,
+            "physicalDefence": 4,
+            "magicalDefence": 7
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [
+                    "elven_accuracy"
+                ],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "elf": "Graceful: +2 Speed, +1 Magic Power"
+        },
+        "racialAbilities": {
+            "elf": {
+                "graceful": "+2 Speed, +1 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 23,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Pyromancer_character.json": {
+        "id": "pyromancer_001",
+        "name": "Tiefling Pyromancer",
+        "race": "tiefling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 30,
+            "strength": 2,
+            "magicPower": 8,
+            "accuracy": 3,
+            "speed": 3,
+            "physicalDefence": 3,
+            "magicalDefence": 8
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "fireball",
+                    "fire_wall"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [
+                    "hellish_rebuke"
+                ],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 3 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "tiefling": "Infernal Heritage: +2 Magic Power, Fire Resistance"
+        },
+        "racialAbilities": {
+            "tiefling": {
+                "infernal_heritage": "+2 Magic Power, Fire Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Scout_character.json": {
+        "id": "scout_001",
+        "name": "Elven Scout",
+        "race": "elf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 24,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 3,
+            "accuracy": 7,
+            "speed": 7,
+            "physicalDefence": 4,
+            "magicalDefence": 5
+        },
+        "lumens": 70,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": [
+                    "bow_basics",
+                    "quick_draw"
+                ]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [
+                    "elven_accuracy"
+                ],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "wooden_bow", "quantity": 1 },
+            { "id": "iron_arrows", "quantity": 15 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_bow",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "elf": "Graceful: +2 Speed, +1 Magic Power"
+        },
+        "racialAbilities": {
+            "elf": {
+                "graceful": "+2 Speed, +1 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Sergeant_character.json": {
+        "id": "sergeant_001",
+        "name": "Dwarven Sergeant",
+        "race": "dwarf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 38,
+            "stamina": 30,
+            "strength": 6,
+            "magicPower": 2,
+            "accuracy": 5,
+            "speed": 3,
+            "physicalDefence": 9,
+            "magicalDefence": 5
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [
+                    "dwarven_toughness"
+                ],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dwarf": "Resilient: +2 Physical Defence, +1 HP"
+        },
+        "racialAbilities": {
+            "dwarf": {
+                "resilient": "+2 Physical Defence, +1 HP"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Alchemist_character.json": {
+        "id": "alchemist_001",
+        "name": "Gnoll Alchemist",
+        "race": "gnoll",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 28,
+            "stamina": 25,
+            "strength": 4,
+            "magicPower": 5,
+            "accuracy": 3,
+            "speed": 4,
+            "physicalDefence": 5,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [
+                    "alchemy_basic",
+                    "alchemy_advanced"
+                ],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": [
+                    "pack_coordination"
+                ]
+            }
+        },
+        "inventory": [
+            { "id": "health_potion", "quantity": 3 },
+            { "id": "mana_potion", "quantity": 2 },
+            { "id": "poison_antidote", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "gnoll": "Pack Hunter: +2 Strength, +1 Speed"
+        },
+        "racialAbilities": {
+            "gnoll": {
+                "pack_hunter": "+2 Strength, +1 Speed"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Archer_character.json": {
+        "id": "archer_001",
+        "name": "Elven Archer",
+        "race": "elf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 25,
+            "strength": 3,
+            "magicPower": 2,
+            "accuracy": 8,
+            "speed": 6,
+            "physicalDefence": 4,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": [
+                    "bow_basics",
+                    "quick_draw",
+                    "aimed_shot"
+                ]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [
+                    "elven_accuracy"
+                ],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_bow", "quantity": 1 },
+            { "id": "iron_arrows", "quantity": 20 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_bow",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "elf": "Graceful: +2 Speed, +1 Magic Power"
+        },
+        "racialAbilities": {
+            "elf": {
+                "graceful": "+2 Speed, +1 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Assassin_Rogue_character.json": {
+        "id": "assassin_rogue_001",
+        "name": "Assassin Rogue",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 2,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 5,
+            "magicalDefence": 5
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner",
+                    "dagger_basics",
+                    "light_step"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 2 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "poison_antidote", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "rusty_dagger",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+    "Bandit_Raider_character.json": {
+        "id": "bandit_raider_001",
+        "name": "Bandit Raider",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 20,
+            "strength": 4,
+            "magicPower": 1,
+            "accuracy": 2,
+            "speed": 3,
+            "physicalDefence": 6,
+            "magicalDefence": 4
+        },
+        "lumens": 50,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 16,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+    "Battle_Mage_character.json": {
+        "id": "battle_mage_001",
+        "name": "Battle Mage",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 6,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 30,
+            "strength": 5,
+            "magicPower": 6,
+            "accuracy": 4,
+            "speed": 4,
+            "physicalDefence": 6,
+            "magicalDefence": 7
+        },
+        "lumens": 100,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Cultist_character.json": {
+        "id": "cultist_001",
+        "name": "Cultist",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 5,
+            "accuracy": 1,
+            "speed": 2,
+            "physicalDefence": 4,
+            "magicalDefence": 7
+        },
+        "lumens": 60,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [
+                    "alchemy_basic"
+                ],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 },
+            { "id": "poison_antidote", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+    "Cursed_Knight_character.json": {
+        "id": "cursed_knight_001",
+        "name": "Cursed Knight",
+        "race": "dragonborn",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 9,
+        "experience": 0,
+        "stats": {
+            "hp": 60,
+            "stamina": 40,
+            "strength": 8,
+            "magicPower": 4,
+            "accuracy": 5,
+            "speed": 3,
+            "physicalDefence": 12,
+            "magicalDefence": 7
+        },
+        "lumens": 200,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics",
+                    "sword_techniques",
+                    "power_strike"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [
+                    "breath_weapon"
+                ],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 4 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dragonborn": "Draconic Heritage: +2 Strength, +1 Magic Power, Elemental Resistance"
+        },
+        "racialAbilities": {
+            "dragonborn": {
+                "draconic_heritage": "+2 Strength, +1 Magic Power, Elemental Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 5,
+        "totalLumensSpent": 55,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Duelist_character.json": {
+        "id": "duelist_001",
+        "name": "Tiefling Duelist",
+        "race": "tiefling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 3,
+            "accuracy": 8,
+            "speed": 7,
+            "physicalDefence": 4,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics",
+                    "sword_techniques",
+                    "parry"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [
+                    "hellish_rebuke"
+                ],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "tiefling": "Infernal Heritage: +2 Magic Power, Fire Resistance"
+        },
+        "racialAbilities": {
+            "tiefling": {
+                "infernal_heritage": "+2 Magic Power, Fire Resistance"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Slave_Trader_character.json": {
+        "id": "slave_trader_001",
+        "name": "Slave Trader",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 25,
+            "strength": 5,
+            "magicPower": 2,
+            "accuracy": 4,
+            "speed": 3,
+            "physicalDefence": 6,
+            "magicalDefence": 4
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "rope", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 1,
+        "totalLumensSpent": 8,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Smuggler_character.json": {
+        "id": "smuggler_001",
+        "name": "Halfling Smuggler",
+        "race": "halfling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 2,
+            "accuracy": 5,
+            "speed": 7,
+            "physicalDefence": 4,
+            "magicalDefence": 4
+        },
+        "lumens": 70,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner",
+                    "dagger_basics"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [
+                    "lucky_dodge"
+                ],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "halfling": "Lucky: +2 Speed, +1 Accuracy, Lucky trait"
+        },
+        "racialAbilities": {
+            "halfling": {
+                "lucky": "+2 Speed, +1 Accuracy, Lucky trait"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 21,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Spearman_character.json": {
+        "id": "spearman_001",
+        "name": "Spearman",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 30,
+            "stamina": 25,
+            "strength": 5,
+            "magicPower": 1,
+            "accuracy": 5,
+            "speed": 3,
+            "physicalDefence": 7,
+            "magicalDefence": 4
+        },
+        "lumens": 70,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [
+                    "polearm_basics",
+                    "defensive_stance"
+                ],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_spear", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_spear",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 23,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Spy_character.json": {
+        "id": "spy_001",
+        "name": "Human Spy",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 4,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 30,
+            "strength": 3,
+            "magicPower": 2,
+            "accuracy": 6,
+            "speed": 6,
+            "physicalDefence": 4,
+            "magicalDefence": 5
+        },
+        "lumens": 70,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner",
+                    "dagger_basics"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 16,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Thief_character.json": {
+        "id": "thief_001",
+        "name": "Halfling Thief",
+        "race": "halfling",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 20,
+            "stamina": 25,
+            "strength": 2,
+            "magicPower": 1,
+            "accuracy": 6,
+            "speed": 7,
+            "physicalDefence": 3,
+            "magicalDefence": 4
+        },
+        "lumens": 50,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [
+                    "dagger_beginner",
+                    "dagger_basics"
+                ],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [
+                    "lucky_dodge"
+                ],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "rusty_dagger", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "rusty_dagger",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "halfling": "Lucky: +2 Speed, +1 Accuracy, Lucky trait"
+        },
+        "racialAbilities": {
+            "halfling": {
+                "lucky": "+2 Speed, +1 Accuracy, Lucky trait"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 21,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Time_Mage_character.json": {
+        "id": "time_mage_001",
+        "name": "Elven Time Mage",
+        "race": "elf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 25,
+            "stamina": 40,
+            "strength": 2,
+            "magicPower": 9,
+            "accuracy": 4,
+            "speed": 6,
+            "physicalDefence": 3,
+            "magicalDefence": 9
+        },
+        "lumens": 150,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "blessing"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [
+                    "enchanting_basic"
+                ],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [
+                    "elven_accuracy"
+                ],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 4 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "elf": "Graceful: +2 Speed, +1 Magic Power"
+        },
+        "racialAbilities": {
+            "elf": {
+                "graceful": "+2 Speed, +1 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Torturer_character.json": {
+        "id": "torturer_001",
+        "name": "Orc Torturer",
+        "race": "orc",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 30,
+            "strength": 7,
+            "magicPower": 2,
+            "accuracy": 4,
+            "speed": 3,
+            "physicalDefence": 6,
+            "magicalDefence": 4
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [
+                    "unarmed_beginner"
+                ],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 },
+            { "id": "rope", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "orc": "Berserker: +2 Strength, -1 Intelligence"
+        },
+        "racialAbilities": {
+            "orc": {
+                "berserker": "+2 Strength, -1 Intelligence"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 16,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Vampire_Hunter_character.json": {
+        "id": "vampire_hunter_001",
+        "name": "Vampire Hunter",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 35,
+            "strength": 6,
+            "magicPower": 4,
+            "accuracy": 7,
+            "speed": 5,
+            "physicalDefence": 6,
+            "magicalDefence": 7
+        },
+        "lumens": 120,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics",
+                    "sword_techniques"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": [
+                    "bow_basics"
+                ]
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "wooden_bow", "quantity": 1 },
+            { "id": "iron_arrows", "quantity": 20 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 2 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 39,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Warlock_character.json": {
+        "id": "warlock_001",
+        "name": "Drow Warlock",
+        "race": "drow",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 7,
+        "experience": 0,
+        "stats": {
+            "hp": 22,
+            "stamina": 35,
+            "strength": 2,
+            "magicPower": 9,
+            "accuracy": 3,
+            "speed": 4,
+            "physicalDefence": 3,
+            "magicalDefence": 8
+        },
+        "lumens": 120,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [
+                    "fire_spark",
+                    "warm_hands",
+                    "fireball",
+                    "fire_attunement"
+                ],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [
+                    "shadow_bolt",
+                    "dark_ritual"
+                ],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [
+                    "shadow_affinity"
+                ],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "wooden_staff", "quantity": 1 },
+            { "id": "health_potion", "quantity": 1 },
+            { "id": "mana_potion", "quantity": 4 }
+        ],
+        "equipped": {
+            "primaryWeapon": "wooden_staff",
+            "secondaryWeapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "drow": "Dark Vision: Can see in darkness, +2 Magic Power"
+        },
+        "racialAbilities": {
+            "drow": {
+                "dark_vision": "Can see in darkness, +2 Magic Power"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 31,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Warlord_Lieutenant_character.json": {
+        "id": "warlord_lieutenant_001",
+        "name": "Warlord Lieutenant",
+        "race": "human",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 8,
+        "experience": 0,
+        "stats": {
+            "hp": 50,
+            "stamina": 35,
+            "strength": 8,
+            "magicPower": 3,
+            "accuracy": 6,
+            "speed": 5,
+            "physicalDefence": 10,
+            "magicalDefence": 7
+        },
+        "lumens": 150,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics",
+                    "sword_techniques",
+                    "power_strike"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 3 },
+            { "id": "mana_potion", "quantity": 2 },
+            { "id": "poison_antidote", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "human": "Versatile: +1 to any two stats of choice"
+        },
+        "racialAbilities": {
+            "human": {
+                "versatility": "Can choose +1 to any two stats"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 46,
+        "lastModified": "2025-01-07T23:10:00.000Z"
+    },
+    "Zealot_character.json": {
+        "id": "zealot_001",
+        "name": "Dwarven Zealot",
+        "race": "dwarf",
+        "isMonster": false,
+        "isEnemy": true,
+        "level": 5,
+        "experience": 0,
+        "stats": {
+            "hp": 35,
+            "stamina": 25,
+            "strength": 6,
+            "magicPower": 3,
+            "accuracy": 4,
+            "speed": 2,
+            "physicalDefence": 8,
+            "magicalDefence": 6
+        },
+        "lumens": 80,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [
+                    "sword_beginner",
+                    "sword_basics"
+                ],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "heal",
+                    "light_attunement"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [
+                    "dwarven_toughness"
+                ],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "iron_sword", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 },
+            { "id": "health_potion", "quantity": 2 },
+            { "id": "mana_potion", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "iron_sword",
+            "secondaryWeapon": "",
+            "armor": "leather_armor",
+            "accessory": ""
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "dwarf": "Resilient: +2 Physical Defence, +1 HP"
+        },
+        "racialAbilities": {
+            "dwarf": {
+                "resilient": "+2 Physical Defence, +1 HP"
+            }
+        },
+        "lootTable": {
+            "weapon": "",
+            "armor": "",
+            "accessory": ""
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 2,
+        "totalLumensSpent": 23,
+        "lastModified": "2025-01-07T23:15:00.000Z"
+    },
+    "Blue_Slime_character.json": {
+        "id": "blue_slime_001",
+        "name": "Blue Slime",
+        "race": "slime",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 2,
+        "experience": 0,
+        "stats": {
+            "hp": 14,
+            "stamina": 15,
+            "strength": 2,
+            "magicPower": 3,
+            "accuracy": 3,
+            "speed": 2,
+            "physicalDefence": 8,
+            "magicalDefence": 8
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [
+                    "ice_shard",
+                    "ice_attunement"
+                ],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "cold_resistance"
+                ],
+                "combat": [
+                    "freezing_touch"
+                ],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "slime": "Can split when damaged (potential system addition)"
+        },
+        "racialAbilities": {
+            "slime": {
+                "gelatinousBody": "Resistant to physical damage",
+                "coldNature": "Immune to cold damage, deals ice damage"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 3,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:32:00.000Z"
+    },
+    "Cherubim_character.json": {
+        "id": "cherubim_001",
+        "name": "Cherubim",
+        "race": "angel",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 11,
+        "experience": 0,
+        "stats": {
+            "hp": 85,
+            "stamina": 70,
+            "strength": 10,
+            "magicPower": 8,
+            "accuracy": 9,
+            "speed": 12,
+            "physicalDefence": 15,
+            "magicalDefence": 14
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "rapid_attacks"
+                ],
+                "magic": [
+                    "speed_mastery",
+                    "swift_flight"
+                ],
+                "utility": [
+                    "light_step"
+                ]
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "angel": "Ultimate speed, swift flight"
+        },
+        "racialAbilities": {
+            "angel": {
+                "flight": "Can fly and move through the air",
+                "speedMastery": "Ultimate speed and swift flight abilities"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T01:01:00.000Z"
+    },
+    "Cloud_Giant_character.json": {
+        "id": "cloud_giant_001",
+        "name": "Cloud Giant",
+        "race": "giant",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 9,
+        "experience": 0,
+        "stats": {
+            "hp": 55,
+            "stamina": 45,
+            "strength": 8,
+            "magicPower": 7,
+            "accuracy": 6,
+            "speed": 3,
+            "physicalDefence": 15,
+            "magicalDefence": 14
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [
+                    "staff_basics"
+                ],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [
+                    "wind_blade"
+                ],
+                "water": [],
+                "darkness": [],
+                "light": []
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [],
+                "magic": [
+                    "weather_control",
+                    "cloud_manipulation"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [
+            { "id": "quarterstaff", "quantity": 1 },
+            { "id": "leather_armor", "quantity": 1 }
+        ],
+        "equipped": {
+            "primaryWeapon": "quarterstaff",
+            "secondaryWeapon": null,
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "giant": "Weather control, intelligent, magical"
+        },
+        "racialAbilities": {
+            "giant": {
+                "weatherControl": "Can control weather patterns",
+                "intelligence": "Highly intelligent and magical"
+            }
+        },
+        "lootTable": {
+            "weapon": "quarterstaff",
+            "armor": "leather_armor",
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:56:00.000Z"
+    },
+    "Crystal_Serpent_character.json": {
+        "id": "crystal_serpent_001",
+        "name": "Crystal Serpent",
+        "race": "serpent",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 11,
+        "experience": 0,
+        "stats": {
+            "hp": 75,
+            "stamina": 50,
+            "strength": 12,
+            "magicPower": 10,
+            "accuracy": 7,
+            "speed": 5,
+            "physicalDefence": 18,
+            "magicalDefence": 16
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": true,
+            "hp50": true,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "light_ray"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [],
+                "combat": [
+                    "gem_attacks"
+                ],
+                "magic": [
+                    "light_manipulation",
+                    "crystal_mastery"
+                ],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "serpent": "Crystal-aligned, can reflect light"
+        },
+        "racialAbilities": {
+            "serpent": {
+                "crystalMastery": "Master of crystals and gems",
+                "lightReflection": "Can reflect and manipulate light"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-08T00:20:00.000Z"
+    },
+    "Crystal_Slime_character.json": {
+        "id": "crystal_slime_001",
+        "name": "Crystal Slime",
+        "race": "slime",
+        "isMonster": true,
+        "isEnemy": true,
+        "level": 3,
+        "experience": 0,
+        "stats": {
+            "hp": 18,
+            "stamina": 18,
+            "strength": 3,
+            "magicPower": 4,
+            "accuracy": 4,
+            "speed": 2,
+            "physicalDefence": 12,
+            "magicalDefence": 10
+        },
+        "lumens": 0,
+        "hpMilestones": {
+            "hp25": false,
+            "hp50": false,
+            "hp100": false,
+            "hp200": false,
+            "hp500": false
+        },
+        "unlockedSkills": {
+            "weapons": {
+                "sword": [],
+                "axe": [],
+                "staff": [],
+                "dagger": [],
+                "polearm": [],
+                "hammer": [],
+                "unarmed": [],
+                "bow": []
+            },
+            "magic": {
+                "fire": [],
+                "ice": [],
+                "thunder": [],
+                "earth": [],
+                "wind": [],
+                "water": [],
+                "darkness": [],
+                "light": [
+                    "light_ray"
+                ]
+            },
+            "professions": {
+                "smithing": [],
+                "alchemy": [],
+                "enchanting": [],
+                "cooking": [],
+                "archaeology": [],
+                "herbalism": []
+            },
+            "monster": {
+                "defense": [
+                    "light_reflection",
+                    "hardness"
+                ],
+                "combat": [],
+                "magic": [],
+                "utility": []
+            },
+            "fusion": {
+                "ranged_magic": [],
+                "melee_magic": [],
+                "defensive_magic": [],
+                "utility_magic": []
+            },
+            "racial": {
+                "human": [],
+                "elf": [],
+                "dwarf": [],
+                "halfling": [],
+                "orc": [
+                    "orcish_fury"
+                ],
+                "dragonborn": [],
+                "tiefling": [],
+                "drow": [],
+                "gnoll": []
+            }
+        },
+        "inventory": [],
+        "equipped": {
+            "primaryWeapon": null,
+            "secondaryWeapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "equippedEnchantments": {
+            "primaryWeapon": [],
+            "secondaryWeapon": [],
+            "armor": [],
+            "accessory": []
+        },
+        "statusEffects": [],
+        "racialPassiveTraits": {
+            "slime": "Can split when damaged (potential system addition)"
+        },
+        "racialAbilities": {
+            "slime": {
+                "gelatinousBody": "Resistant to physical damage",
+                "crystallineNature": "Hardened, reflective surface"
+            }
+        },
+        "lootTable": {
+            "weapon": null,
+            "armor": null,
+            "accessory": null
+        },
+        "achievements": [],
+        "totalSkillsUnlocked": 4,
+        "totalLumensSpent": 0,
+        "lastModified": "2025-01-07T23:35:00.000Z"
+    }
+
+    // Add more characters here as needed...
+    // This is just a sample to demonstrate the structure
+}
