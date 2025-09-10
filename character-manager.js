@@ -8,7 +8,7 @@ class CharacterManager {
     }
 
     // Create a new character with default values
-    createCharacter(name) {
+    createCharacter(name, isEnemy = false) {
         if (!name || name.trim() === '') {
             throw new Error('Character name cannot be empty')
         }
@@ -65,6 +65,7 @@ class CharacterManager {
 
             // Character Type System
             isMonster: false,  // Flag to determine if character is a monster
+            isEnemy: isEnemy,  // Flag to determine if character can drop Lumen when killed
             race: null,        // Selected race (null = no race selected yet, permanent once set)
 
             // Racial Passive Traits System
@@ -86,7 +87,7 @@ class CharacterManager {
                 magic: {
                     fire: [],
                     ice: [],
-                    lightning: [],
+                    thunder: [],
                     earth: [],
                     wind: [],
                     water: [],
@@ -156,9 +157,6 @@ class CharacterManager {
                 magicalDefence: 0,
                 accuracy: 0
             },
-
-            // Status Effects System
-            statusEffects: [],    // Array of active status effects
 
             // Toggle Skills System  
             activeToggleSkills: [],  // Array of currently active toggle skill IDs
@@ -548,6 +546,17 @@ class CharacterManager {
             }
         }
 
+        // Ensure all racial skill categories exist
+        if (!character.unlockedSkills.racial) {
+            character.unlockedSkills.racial = {}
+        }
+        const racialCategories = ['elven', 'dwarven', 'halfling', 'orcish', 'human', 'dragonborn', 'tiefling', 'drow', 'gnoll']
+        racialCategories.forEach(race => {
+            if (!character.unlockedSkills.racial[race]) {
+                character.unlockedSkills.racial[race] = []
+            }
+        })
+
         // Ensure HP/Stamina current values exist and are valid
         if (typeof character.hp !== 'number' || character.hp < 0) {
             character.hp = character.maxHp || character.stats.hp || 10
@@ -614,6 +623,12 @@ class CharacterManager {
             character.stats.speed = 2  // Ensure minimum speed for basic movement
         }
 
+        // Apply automatic character migrations (Lightning → Thunder, etc.)
+        if (window.characterMigration) {
+            const migratedCharacter = window.characterMigration.migrateCharacter(character)
+            return migratedCharacter
+        }
+
         return character
     }
 
@@ -634,6 +649,61 @@ class CharacterManager {
             return true
         } catch (error) {
             console.error('Failed to delete character:', error)
+            return false
+        }
+    }
+
+    // Delete multiple characters by IDs
+    deleteMultipleCharacters(characterIds) {
+        try {
+            const characters = this.getAllCharacters()
+            const filteredCharacters = characters.filter(c => !characterIds.includes(c.id))
+
+            localStorage.setItem(this.storageKey, JSON.stringify(filteredCharacters))
+
+            // If the active character was deleted, clear it
+            if (this.currentCharacter && characterIds.includes(this.currentCharacter.id)) {
+                this.currentCharacter = null
+                localStorage.removeItem(this.activeCharacterKey)
+            }
+
+            return true
+        } catch (error) {
+            console.error('Failed to delete characters:', error)
+            return false
+        }
+    }
+
+    // Rename a character
+    renameCharacter(characterId, newName) {
+        try {
+            const characters = this.getAllCharacters()
+            const characterIndex = characters.findIndex(c => c.id === characterId)
+
+            if (characterIndex === -1) {
+                console.error('Character not found for rename:', characterId)
+                return false
+            }
+
+            // Update the character name
+            characters[characterIndex].name = newName.trim()
+
+            // Update last modified timestamp
+            characters[characterIndex].lastModified = new Date().toISOString()
+
+            // Save to localStorage
+            localStorage.setItem(this.storageKey, JSON.stringify(characters))
+
+            // Update current character if it's the one being renamed
+            if (this.currentCharacter && this.currentCharacter.id === characterId) {
+                this.currentCharacter.name = newName.trim()
+                this.currentCharacter.lastModified = new Date().toISOString()
+                this.saveCharacter(this.currentCharacter)
+            }
+
+            return true
+        } catch (error) {
+            console.error('Failed to rename character:', error)
             return false
         }
     }
@@ -1248,7 +1318,7 @@ class CharacterManager {
             return lightMagicSpells.every(spellId => unlockedSkillIds.includes(spellId))
         } else if (skill.prerequisites.type === 'THREE_TIER5_MAGIC') {
             // Requires any three Tier 5 magic mastery skills
-            const tier5MagicMasteries = ['fire_supremacy', 'ice_supremacy', 'lightning_supremacy', 'earth_supremacy', 'wind_mastery', 'water_mastery', 'light_mastery', 'darkness_mastery']
+            const tier5MagicMasteries = ['fire_supremacy', 'ice_supremacy', 'thunder_supremacy', 'earth_supremacy', 'wind_mastery', 'water_mastery', 'light_mastery', 'darkness_mastery']
             const unlockedMasteries = tier5MagicMasteries.filter(masteryId => unlockedSkillIds.includes(masteryId))
             return unlockedMasteries.length >= 3
         } else if (skill.prerequisites.type === 'LEVEL') {
@@ -1445,7 +1515,10 @@ class CharacterManager {
             throw new Error('Character not found')
         }
 
-        return JSON.stringify(character, null, 2)
+        // Ensure character is fully migrated before export
+        const migratedCharacter = this.migrateCharacter(character)
+
+        return JSON.stringify(migratedCharacter, null, 2)
     }
 
     // Validate character data structure
@@ -1459,7 +1532,7 @@ class CharacterManager {
         }
 
         // Validate stats
-        const requiredStats = ['strength', 'magicDefence', 'speed', 'health', 'stamina', 'armorClass']
+        const requiredStats = ['hp', 'stamina', 'strength', 'magicPower', 'accuracy', 'speed', 'physicalDefence', 'magicalDefence']
         for (const stat of requiredStats) {
             if (typeof data.stats[stat] !== 'number') {
                 return false
@@ -2098,7 +2171,7 @@ class CharacterManager {
 
         // Clear any conflicting elemental affinity skills (from the original toggle logic)
         if (character.unlockedSkills.magic) {
-            const elementalCategories = ['fire', 'ice', 'lightning', 'earth', 'wind', 'water', 'darkness', 'light']
+            const elementalCategories = ['fire', 'ice', 'thunder', 'earth', 'wind', 'water', 'darkness', 'light']
             elementalCategories.forEach(element => {
                 if (character.unlockedSkills.magic[element]) {
                     const affinitySkills = character.unlockedSkills.magic[element].filter(skill =>
@@ -2271,7 +2344,7 @@ class CharacterManager {
             throw new Error('Only dragonborn can choose elemental heritage')
         }
 
-        const validElements = ['fire', 'ice', 'lightning', 'acid', 'wind', 'light', 'dark']
+        const validElements = ['fire', 'ice', 'thunder', 'acid', 'wind', 'light', 'dark']
         if (!validElements.includes(element)) {
             throw new Error(`Invalid element: ${element}. Valid elements: ${validElements.join(', ')}`)
         }
@@ -2360,7 +2433,7 @@ class CharacterManager {
         const modifiers = {}
 
         // Initialize all elements to 0 (normal damage)
-        const elements = ['fire', 'ice', 'lightning', 'earth', 'water', 'wind', 'light', 'darkness', 'poison']
+        const elements = ['fire', 'ice', 'thunder', 'earth', 'water', 'wind', 'light', 'darkness', 'poison']
         elements.forEach(element => modifiers[element] = 0)
 
         if (!character.race) {
@@ -2464,6 +2537,34 @@ class CharacterManager {
         })
 
         return profile
+    }
+
+    // Run batch migration for all characters (utility function)
+    runBatchMigration() {
+        if (!window.characterMigration) {
+            console.error('Character migration system not available')
+            return 0
+        }
+
+        console.log('Running batch migration for all characters...')
+        const migratedCount = window.characterMigration.migrateAllCharacters(this)
+
+        // Update UI if available
+        if (window.uiComponents) {
+            window.uiComponents.renderCharacterList()
+            window.uiComponents.updateDisplay()
+        }
+
+        console.log(`Batch migration complete: ${migratedCount} characters updated`)
+        return migratedCount
+    }
+
+    // Get migration statistics
+    getMigrationStats() {
+        if (!window.characterMigration) {
+            return null
+        }
+        return window.characterMigration.getMigrationStats(this)
     }
 }
 

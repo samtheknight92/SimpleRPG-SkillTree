@@ -74,7 +74,7 @@ class DynamicSkillBonusSystem {
             // Elemental resistances (positive values) - capture both percentage and modifier
             'fireResistance': /(?:fire|flame)\s+resistance\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
             'iceResistance': /(?:ice|cold|frost)\s+resistance\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
-            'lightningResistance': /(?:lightning|electric|electrical)\s+resistance\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
+            'thunderResistance': /(?:thunder|electric|electrical)\s+resistance\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
             'earthResistance': /(?:earth|stone)\s+resistance\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
             'windResistance': /(?:wind|air)\s+resistance\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
             'waterResistance': /(?:water|aqua)\s+resistance\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
@@ -84,7 +84,7 @@ class DynamicSkillBonusSystem {
             // Elemental weaknesses (negative values) - capture both percentage and modifier
             'fireWeakness': /(?:fire|flame)\s+weakness\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
             'iceWeakness': /(?:ice|cold|frost)\s+weakness\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
-            'lightningWeakness': /(?:lightning|electric|electrical)\s+weakness\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
+            'thunderWeakness': /(?:thunder|electric|electrical)\s+weakness\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
             'earthWeakness': /(?:earth|stone)\s+weakness\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
             'windWeakness': /(?:wind|air)\s+weakness\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
             'waterWeakness': /(?:water|aqua)\s+weakness\s+(\d+)%\s*(?:\(([+-]\d+)\))?/gi,
@@ -127,6 +127,8 @@ class DynamicSkillBonusSystem {
         }
 
         // Check for multiple weapon requirements (e.g., "Bow or Staff")
+        let equipmentRequirement = null
+
         const multiWeaponPattern = /(?:when|while|with|wielding|equipped)\s+([^,]+)\s+or\s+([^,]+)/gi
         const multiWeaponMatch = desc.match(multiWeaponPattern)
         if (multiWeaponMatch) {
@@ -134,8 +136,6 @@ class DynamicSkillBonusSystem {
             // This could be enhanced to check if ANY of the weapons are equipped
             equipmentRequirement = 'multi'
         }
-
-        let equipmentRequirement = null
         for (const [equipment, pattern] of Object.entries(equipmentPatterns)) {
             if (desc.match(pattern)) {
                 equipmentRequirement = equipment
@@ -232,9 +232,21 @@ class DynamicSkillBonusSystem {
             'crossbow': 'crossbow'
         }
 
-        // Check weapon name/id for type keywords
-        const weaponName = weapon.name.toLowerCase()
-        const weaponId = weapon.id.toLowerCase()
+        // Handle both weapon objects and weapon ID strings
+        let weaponName = ''
+        let weaponId = ''
+
+        if (typeof weapon === 'string') {
+            // weapon is an ID string
+            weaponId = weapon.toLowerCase()
+            weaponName = weaponId // Use ID as name for string matching
+        } else if (weapon && typeof weapon === 'object') {
+            // weapon is an object
+            weaponName = (weapon.name || '').toLowerCase()
+            weaponId = (weapon.id || '').toLowerCase()
+        } else {
+            return null
+        }
 
         for (const [keyword, type] of Object.entries(weaponTypeMap)) {
             if (weaponName.includes(keyword) || weaponId.includes(keyword)) {
@@ -268,7 +280,7 @@ class DynamicSkillBonusSystem {
             // Elemental resistances and weaknesses
             fireResistance: 0,
             iceResistance: 0,
-            lightningResistance: 0,
+            thunderResistance: 0,
             earthResistance: 0,
             windResistance: 0,
             waterResistance: 0,
@@ -276,7 +288,7 @@ class DynamicSkillBonusSystem {
             lightResistance: 0,
             fireWeakness: 0,
             iceWeakness: 0,
-            lightningWeakness: 0,
+            thunderWeakness: 0,
             earthWeakness: 0,
             windWeakness: 0,
             waterWeakness: 0,

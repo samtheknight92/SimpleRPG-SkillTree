@@ -179,7 +179,7 @@ const STATUS_EFFECTS_DATA = {
         duration: 10,
         potency: 6,
         icon: "⚔️",
-        desc: "Weapon deals +1d6 elemental damage. Choose fire, ice, lightning, or radiant.",
+        desc: "Weapon deals +1d6 elemental damage. Choose fire, ice, thunder, or radiant.",
         elementalDamage: "1d6",
         stackable: false,
         source: ["holy_weapon", "elemental_infusion", "flame_blade", "frost_weapon"]
@@ -312,23 +312,23 @@ const STATUS_EFFECTS_DATA = {
         source: ["ice_resistance", "frost_shield", "elemental_protection"]
     },
 
-    lightning_resistance: {
-        id: "lightning_resistance",
-        name: "Lightning Resistance",
+    thunder_resistance: {
+        id: "thunder_resistance",
+        name: "Thunder Resistance",
         type: "elementalResistance",
         duration: 999,
         potency: 1,
         icon: "⚡",
-        desc: "Take 50% less damage from lightning attacks. Immune to paralysis.",
+        desc: "Take 50% less damage from thunder attacks. Immune to paralysis.",
         getDamageReduction: function () {
             const resistanceLevel = -this.potency
-            if (resistanceLevel <= -3) return { lightning: 0 } // Immunity
-            else if (resistanceLevel === -2) return { lightning: 0.25 } // 75% resistance
-            else return { lightning: 0.5 } // 50% resistance (default)
+            if (resistanceLevel <= -3) return { thunder: 0 } // Immunity
+            else if (resistanceLevel === -2) return { thunder: 0.25 } // 75% resistance
+            else return { thunder: 0.5 } // 50% resistance (default)
         },
         immunities: ["immobilized"],
         stackable: false,
-        source: ["lightning_resistance", "storm_shield", "elemental_protection"]
+        source: ["thunder_resistance", "storm_shield", "elemental_protection"]
     },
 
     water_resistance: {
@@ -465,22 +465,22 @@ const STATUS_EFFECTS_DATA = {
         source: ["ice_weakness", "elemental_vulnerability"]
     },
 
-    lightning_weakness: {
-        id: "lightning_weakness",
-        name: "Lightning Weakness",
+    thunder_weakness: {
+        id: "thunder_weakness",
+        name: "Thunder Weakness",
         type: "elementalWeakness",
         duration: 999,
         potency: 1,
         icon: "⚡",
-        desc: "Take 50% more damage from lightning attacks. Vulnerable to paralysis.",
+        desc: "Take 50% more damage from thunder attacks. Vulnerable to paralysis.",
         getDamageIncrease: function () {
-            if (this.potency >= 3) return { lightning: 999 } // Instant kill
-            else if (this.potency === 2) return { lightning: 3 } // 400% damage
-            else return { lightning: 1 } // 200% damage (default)
+            if (this.potency >= 3) return { thunder: 999 } // Instant kill
+            else if (this.potency === 2) return { thunder: 3 } // 400% damage
+            else return { thunder: 1 } // 200% damage (default)
         },
         vulnerabilities: ["immobilized"],
         stackable: false,
-        source: ["lightning_weakness", "elemental_vulnerability"]
+        source: ["thunder_weakness", "elemental_vulnerability"]
     },
 
     water_weakness: {

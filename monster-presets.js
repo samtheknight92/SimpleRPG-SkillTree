@@ -36,7 +36,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -96,7 +96,7 @@ class MonsterPresets {
                     magic: {
                         fire: ['fire_spark', 'fireball', 'fire_mastery'],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -156,7 +156,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -216,7 +216,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -276,7 +276,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: ['frost_touch', 'ice_shard', 'freeze', 'ice_mastery'],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -338,7 +338,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -398,7 +398,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -458,7 +458,7 @@ class MonsterPresets {
                     magic: {
                         fire: ['fire_spark'],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -518,7 +518,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -578,7 +578,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -638,7 +638,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -700,7 +700,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -760,7 +760,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -820,7 +820,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: ['stone_spear'],
                         wind: [],
                         water: [],
@@ -880,7 +880,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: ['spark'],
+                        thunder: ['spark'],
                         earth: [],
                         wind: ['gust', 'wind_blade'],
                         water: [],
@@ -940,7 +940,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: ['stone_spear'],
                         wind: [],
                         water: [],
@@ -1002,7 +1002,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -1062,7 +1062,7 @@ class MonsterPresets {
                     magic: {
                         fire: ['fire_spark', 'fireball'],
                         ice: ['frost_touch'],
-                        lightning: ['spark'],
+                        thunder: ['spark'],
                         earth: [],
                         wind: [],
                         water: [],
@@ -1122,7 +1122,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -1182,7 +1182,7 @@ class MonsterPresets {
                     magic: {
                         fire: [],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -1242,7 +1242,7 @@ class MonsterPresets {
                     magic: {
                         fire: ['fire_spark', 'fireball', 'fire_mastery'],
                         ice: ['frost_touch', 'ice_shard', 'freeze'],
-                        lightning: ['spark', 'lightning_bolt'],
+                        thunder: ['spark', 'thunder_bolt'],
                         earth: ['stone_spear'],
                         wind: ['gust'],
                         water: ['water_jet'],
@@ -1258,7 +1258,7 @@ class MonsterPresets {
                         herbalism: []
                     },
                     monster: {
-                        magic: ['fire_breath', 'ice_breath', 'lightning_breath', 'teleport'],
+                        magic: ['fire_breath', 'ice_breath', 'thunder_breath', 'teleport'],
                         defense: ['magical_resistance', 'elemental_barrier'],
                         combat: [],
                         utility: ['elemental_sight']
@@ -1302,7 +1302,7 @@ class MonsterPresets {
                     magic: {
                         fire: ['fire_spark'],
                         ice: [],
-                        lightning: [],
+                        thunder: [],
                         earth: [],
                         wind: [],
                         water: [],
@@ -1362,7 +1362,7 @@ class MonsterPresets {
                     magic: {
                         fire: ['fire_spark', 'fireball', 'fire_mastery'],
                         ice: ['frost_touch', 'ice_shard', 'freeze'],
-                        lightning: ['spark', 'lightning_bolt'],
+                        thunder: ['spark', 'thunder_bolt'],
                         earth: ['stone_spear'],
                         wind: ['gust', 'wind_blade'],
                         water: ['water_jet'],
@@ -1380,7 +1380,7 @@ class MonsterPresets {
                     monster: {
                         combat: ['claws', 'bite_attack', 'monster_charge_attack', 'rend'],
                         defense: ['tough_skin', 'rock_skin', 'metal_skin', 'dragon_scales'],
-                        magic: ['fire_breath', 'ice_breath', 'lightning_breath', 'fear_aura'],
+                        magic: ['fire_breath', 'ice_breath', 'thunder_breath', 'fear_aura'],
                         utility: ['flight', 'dragon_sight']
                     },
                     fusion: {
@@ -1422,7 +1422,7 @@ class MonsterPresets {
                     magic: {
                         fire: ['fire_spark', 'fireball'],
                         ice: ['frost_touch', 'ice_shard'],
-                        lightning: ['spark', 'lightning_bolt'],
+                        thunder: ['spark', 'thunder_bolt'],
                         earth: ['stone_spear'],
                         wind: ['gust', 'wind_blade'],
                         water: ['water_jet'],
@@ -1614,7 +1614,7 @@ class MonsterPresets {
             magic: {
                 fire: [],
                 ice: [],
-                lightning: [],
+                thunder: [],
                 earth: [],
                 wind: [],
                 water: [],
