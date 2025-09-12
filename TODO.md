@@ -42,6 +42,8 @@ This task requires a comprehensive audit of all 166 characters in `premade-chara
 - **Custom Character Management System**: Replaced "Save as Preset" with proper custom character management, including edit/delete functionality for user-created pre-made characters
 - **Assign Type Button Removal**: Removed "Assign Type" button from character selector interface to simplify the UI
 - **Comprehensive Instructions System**: Added accessible Instructions button in Notes section with detailed guide covering all system features, character management, custom pre-made characters, Dev Mode, and troubleshooting
+- **TTRPG-Focused Instructions Enhancement**: Completely rewrote System Instructions modal to include comprehensive TTRPG basics, dice mechanics, character stats explanations, enemy management, and gameplay guidance for new players unfamiliar with tabletop RPGs
+- **System Instructions Accuracy Fix**: Corrected System Instructions to accurately reflect the actual character builder/simulator system, removing incorrect TTRPG content and adding proper explanations of Lumen economy, toggle skills, dynamic loot generation, and stat progression mechanics
 
 #### 🎉 **MAJOR MILESTONE ACHIEVED**: 
 **Character Skills Audit & Enhancement is now COMPLETE!** All 166 characters have been thoroughly reviewed and enhanced with appropriate skills. The system now includes:
