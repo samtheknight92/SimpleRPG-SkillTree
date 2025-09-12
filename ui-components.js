@@ -9951,7 +9951,7 @@ class UIComponents {
                 <div class="notes-header">
                     <h2>📝 Notes for ${character.name}</h2>
                     <div class="notes-actions">
-                        <button class="btn btn-info" id="show-instructions-btn" title="View system instructions and help">
+                        <button class="btn" id="show-instructions-btn" title="View system instructions and help" style="background: linear-gradient(135deg, #ff6b35, #f7931e); color: white; font-weight: bold; border: 2px solid #ff8c42; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);">
                             ${iconMapper.createIconElement('ui', 'help', 16)} Instructions
                         </button>
                         <button class="btn btn-secondary" id="manage-saved-notes-btn" title="Manage saved notes">
@@ -10563,8 +10563,20 @@ class UIComponents {
     showInstructionsDialog() {
         const instructionsHtml = `
             <div style="max-height: 80vh; overflow-y: auto; padding: 20px; line-height: 1.6;">
-                <h2 style="color: #ffd700; margin-bottom: 20px; text-align: center;">📚 RPG Skill Tree System - Instructions</h2>
+                <h2 style="color: #ffd700; margin-bottom: 20px; text-align: center;">📚 RPG Skill Tree System - Complete Guide</h2>
                 
+                <div style="margin-bottom: 25px; padding: 15px; background: rgba(76, 175, 80, 0.1); border-radius: 8px; border: 1px solid #4CAF50;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🎮 What is the RPG Skill Tree System?</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        This is a comprehensive <strong>character builder and management system</strong> for creating and developing RPG characters. 
+                        It's designed to help you build characters with deep skill progression, equipment management, and strategic character development.
+                    </p>
+                    <p style="color: #e0e0e0;">
+                        <strong>Key Features:</strong> Lumen-based skill progression, toggle skills with stamina costs, dynamic loot generation, 
+                        crafting systems, and 166+ pre-made characters to use as enemies or inspiration for your own builds.
+                    </p>
+                </div>
+
                 <div style="margin-bottom: 25px;">
                     <h3 style="color: #4CAF50; margin-bottom: 10px;">🎯 Getting Started</h3>
                     <ul style="color: #e0e0e0; margin-left: 20px;">
@@ -10577,90 +10589,166 @@ class UIComponents {
                 </div>
 
                 <div style="margin-bottom: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">⚔️ Character Management</h3>
-                    <ul style="color: #e0e0e0; margin-left: 20px;">
-                        <li><strong>Enemy Toggle:</strong> Use the Enemy/Player button to switch between enemy and player status</li>
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">💎 Understanding the Lumen Economy</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        <strong>Lumens</strong> are the magical currency used to unlock skills and upgrade stats. This system replaces traditional experience points:
+                    </p>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Starting Lumens:</strong> 150 Lumens to begin character development</li>
+                        <li><strong>Skill Costs:</strong> Tier 0 (3L) → Tier 1 (8L) → Tier 2 (15L) → Tier 3 (25L) → Tier 4 (35L) → Tier 5 (50L)</li>
+                        <li><strong>Stat Upgrades:</strong> Progressive costs - HP (3L each), Stamina (5L each), combat stats (5L-400L based on tier)</li>
+                        <li><strong>Earning Lumens:</strong> Defeating enemies gets you Lumen. Quests earn you Money.</li>
+                    </ul>
+                    <p style="color: #e0e0e0;">
+                        <strong>Strategy:</strong> Plan your character build carefully - you can't afford everything! Focus on your character's theme and role.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">📊 Character Stats & Progression</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        Your character's stats determine their capabilities and can be upgraded with Lumens:
+                    </p>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Health (HP):</strong> How much damage you can take - upgrade for 3 Lumens each</li>
+                        <li><strong>Stamina (STA):</strong> Cost to use skills in combat - some skills use more for continuous use (usually toggle skills) - upgrade for 5 Lumens each</li>
+                        <li><strong>Strength:</strong> Physical power for melee combat - When rolling your Physical Damage against others, Add your correct Strength score. - tiered pricing (5L-300L max)</li>
+                        <li><strong>Magic Power:</strong> Magical abilities and spell power - When rolling your Magical Damage against others, Add your correct Magic Power score. - tiered pricing (5L-300L max)</li>
+                        <li><strong>Accuracy:</strong> Hit chance and precision - When rolling to attempt to hit an enemy, add your correct Accuracy score - tiered pricing (8L-400L max)</li>
+                        <li><strong>Speed:</strong> Agility and reflexes - tiered pricing (6L-400L max)</li>
+                        <li><strong>Physical/Magical Defence:</strong> Damage reduction - The "AC" of this version of the games. Each one is separate depending on the attack. The Opponent's roll to hit (+Accuracy and any additional skill bonuses) must EQUAL or be HIGHER than your current Physical/Magical Defence score - tiered pricing (3L-200L max)</li>
+                    </ul>
+                    <p style="color: #e0e0e0;">
+                        <strong>Equipment Bonus:</strong> Items can boost stats beyond your Lumen-purchased limits, making equipment crucial for optimization!
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">👹 Understanding Enemies & Dynamic Loot</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        The system includes 166+ pre-made characters that can be used as enemies with a sophisticated loot generation system:
+                    </p>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Dynamic Loot Generation:</strong> Enemies drop items based on their level and skills - fire monsters drop fire-themed loot!</li>
+                        <li><strong>Monster Level Calculation:</strong> Level = (Total Skills ÷ 3) - higher level monsters drop better loot tiers</li>
+                        <li><strong>Lumen Rewards:</strong> Base reward = Monster Level × 5, scaled by party size (1-6+ players)</li>
+                        <li><strong>Skill-Based Loot:</strong> Monsters with sword skills drop weapons, magic monsters drop magical items</li>
+                        <li><strong>Enemy Toggle:</strong> Switch any character between "Player" and "Enemy" status for testing or encounters</li>
+                    </ul>
+                    <p style="color: #e0e0e0;">
+                        <strong>Loot Tiers:</strong> Common → Uncommon → Rare → Epic, with higher level monsters having better tier chances!
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">⚡ Toggle Skills & Stamina Management</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        <strong>Toggle Skills</strong> are special abilities that require stamina to activate and maintain:
+                    </p>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Activation Cost:</strong> Pay stamina upfront to turn on the skill (e.g., 2-3 stamina)</li>
+                        <li><strong>Maintenance Cost:</strong> Pay stamina each turn to keep it active (e.g., 1-2 stamina per turn)</li>
+                        <li><strong>Auto-Deactivation:</strong> Skills turn off automatically if you can't afford maintenance</li>
+                        <li><strong>Incompatible Skills:</strong> Some skills can't be active together (e.g., Fire Staff vs Frost Staff)</li>
+                        <li><strong>Examples:</strong> Defensive Stance (+2 AC, 1 stamina/turn), Berserker Rage (+4 STR, 2 stamina/turn)</li>
+                    </ul>
+                    <p style="color: #e0e0e0;">
+                        <strong>Strategy:</strong> Manage your stamina carefully - toggle skills are powerful but expensive to maintain!
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🎯 Skill System & Character Progression</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        Skills are the heart of character development in this system:
+                    </p>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Skill Tree:</strong> Comprehensive skill system with prerequisites - unlock basic skills before advanced ones</li>
+                        <li><strong>Racial Skills:</strong> Unique abilities based on character race (Elves get accuracy bonuses, Dwarves get toughness, etc.)</li>
+                        <li><strong>Monster Skills:</strong> Special abilities for monster characters (dragons get breath weapons, goblins get pack tactics)</li>
+                        <li><strong>Weapon Proficiencies:</strong> Skills that match your equipped weapons - you need sword skills to use swords effectively</li>
+                        <li><strong>Elemental Skills:</strong> Fire, Ice, Thunder, Earth, Wind, Water, Light, and Darkness abilities for magical characters</li>
+                    </ul>
+                    <p style="color: #e0e0e0;">
+                        <strong>Spending Lumen:</strong> Use the Lumen you earn from defeating enemies to unlock new skills and make your character more powerful!
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🛒 Equipment & Economy</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        Manage your character's gear and resources:
+                    </p>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Gil Currency:</strong> Buy equipment, weapons, and items from the shop</li>
+                        <li><strong>Lumen Currency:</strong> Magical energy used to unlock new skills and abilities</li>
+                        <li><strong>Equipment System:</strong> Equip weapons, armor, and accessories that boost your stats</li>
+                        <li><strong>Inventory Management:</strong> Organize and manage what your character is carrying</li>
                         <li><strong>Item Admin:</strong> Access the item management system for equipment and inventory</li>
-                        <li><strong>Character Export/Import:</strong> Save and share your characters as JSON files</li>
-                        <li><strong>Character Folders:</strong> Organize characters into custom folders</li>
+                    </ul>
+                    <p style="color: #e0e0e0;">
+                        <strong>Equipment Matters:</strong> Better gear means better stats, which means better dice rolls and more success in adventures!
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">📝 Character Management & Organization</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        Keep track of your characters and their stories:
+                    </p>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Character Notes:</strong> Keep track of your character's journey, backstory, and important details</li>
+                        <li><strong>Character Export/Import:</strong> Save and share your characters as JSON files with other players</li>
+                        <li><strong>Character Folders:</strong> Organize characters into custom folders for different campaigns</li>
+                        <li><strong>Auto-save:</strong> Notes and character data are automatically saved as you type</li>
+                        <li><strong>Character Backup:</strong> Export important characters as backup files to prevent data loss</li>
                     </ul>
                 </div>
 
                 <div style="margin-bottom: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">⭐ Custom Pre-made Characters</h3>
-                    <ul style="color: #e0e0e0; margin-left: 20px;">
-                        <li><strong>Save as Pre-made:</strong> Save your current character as a new pre-made character</li>
-                        <li><strong>Manage Custom Characters:</strong> Edit names, types, and descriptions of your custom characters</li>
-                        <li><strong>Character Types:</strong> Organize characters by type (Goblins, Dragons, Human Enemies, etc.)</li>
-                        <li><strong>Local Storage:</strong> Custom characters are saved locally and persist between sessions</li>
-                    </ul>
-                </div>
-
-                <div style="margin-bottom: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🎮 Dev Mode Features</h3>
-                    <ul style="color: #e0e0e0; margin-left: 20px;">
-                        <li><strong>Pre-made Character Loader:</strong> Access 166+ pre-made characters with filtering</li>
-                        <li><strong>Character Search:</strong> Search characters by name or filter by type</li>
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">⭐ Advanced Features (Dev Mode)</h3>
+                    <p style="color: #e0e0e0; margin-bottom: 10px;">
+                        For Game Masters and advanced users:
+                    </p>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Pre-made Character Loader:</strong> Access 166+ pre-made characters with filtering options</li>
+                        <li><strong>Character Search:</strong> Search characters by name or filter by type (Goblins, Dragons, Human Enemies, etc.)</li>
                         <li><strong>Custom Character Management:</strong> Create, edit, and delete your own pre-made characters</li>
-                        <li><strong>Character Categories:</strong> Filter by Pedestrian, Human Enemies, Goblins, Dragons, and more</li>
+                        <li><strong>Save as Pre-made:</strong> Save your current character as a new pre-made character for reuse</li>
+                        <li><strong>Enemy Toggle:</strong> Switch any character between "Player" and "Enemy" status for combat encounters</li>
+                    </ul>
+                    <p style="color: #e0e0e0;">
+                        <strong>Enable Dev Mode:</strong> Access these advanced features through the settings menu for enhanced character management!
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">💡 Quick Tips for Character Building</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Plan Your Build:</strong> With only 150 starting Lumens, plan your character's focus before spending</li>
+                        <li><strong>Read Skill Descriptions:</strong> Each skill shows stat bonuses, costs, and prerequisites clearly</li>
+                        <li><strong>Balance Investment:</strong> Don't max one stat early - spread investment for better overall performance</li>
+                        <li><strong>Use Pre-made Characters:</strong> Load existing characters to see effective builds and get inspiration</li>
+                        <li><strong>Experiment with Dev Mode:</strong> Enable Dev Mode to test builds without Lumen restrictions</li>
+                        <li><strong>Focus on Synergy:</strong> Choose skills that work together - weapon skills + combat stats, magic skills + magic power</li>
+                        <li><strong>Equipment Matters:</strong> Good equipment can boost stats beyond your Lumen limits - don't ignore the shop!</li>
                     </ul>
                 </div>
 
                 <div style="margin-bottom: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">📝 Notes System</h3>
-                    <ul style="color: #e0e0e0; margin-left: 20px;">
-                        <li><strong>Character Notes:</strong> Keep track of your character's journey and important details</li>
-                        <li><strong>Auto-save:</strong> Notes are automatically saved as you type</li>
-                        <li><strong>Saved Notes:</strong> Save and manage multiple note templates</li>
-                        <li><strong>Character Count:</strong> Track your note length with the character counter</li>
-                    </ul>
-                </div>
-
-                <div style="margin-bottom: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🛒 Shop System</h3>
-                    <ul style="color: #e0e0e0; margin-left: 20px;">
-                        <li><strong>Item Purchases:</strong> Buy equipment and items with Gil currency</li>
-                        <li><strong>Currency Management:</strong> Track Gil and Lumen currencies</li>
-                        <li><strong>Equipment System:</strong> Equip weapons, armor, and accessories</li>
-                        <li><strong>Inventory Management:</strong> Organize and manage your character's items</li>
-                    </ul>
-                </div>
-
-                <div style="margin-bottom: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🎯 Skill System</h3>
-                    <ul style="color: #e0e0e0; margin-left: 20px;">
-                        <li><strong>Skill Tree:</strong> Comprehensive skill system with prerequisites</li>
-                        <li><strong>Racial Skills:</strong> Unique abilities based on character race</li>
-                        <li><strong>Monster Skills:</strong> Special abilities for monster characters</li>
-                        <li><strong>Weapon Proficiencies:</strong> Skills that match your equipped weapons</li>
-                        <li><strong>Elemental Skills:</strong> Fire, Ice, Thunder, Earth, Wind, Water, Light, and Darkness abilities</li>
-                    </ul>
-                </div>
-
-                <div style="margin-bottom: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">💡 Tips & Tricks</h3>
-                    <ul style="color: #e0e0e0; margin-left: 20px;">
-                        <li><strong>Keyboard Shortcuts:</strong> Use F1 for help, F5 to save progress</li>
-                        <li><strong>Character Export:</strong> Share your characters with other players</li>
-                        <li><strong>Dev Mode:</strong> Enable Dev Mode for advanced features and pre-made character access</li>
-                        <li><strong>Auto-save:</strong> The system automatically saves your progress</li>
-                        <li><strong>Character Backup:</strong> Export important characters as backup files</li>
-                    </ul>
-                </div>
-
-                <div style="margin-bottom: 25px;">
-                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🔧 Troubleshooting</h3>
-                    <ul style="color: #e0e0e0; margin-left: 20px;">
-                        <li><strong>Character Not Loading:</strong> Check if the character file is valid JSON</li>
-                        <li><strong>Skills Not Showing:</strong> Ensure you have the required prerequisites</li>
-                        <li><strong>Data Loss:</strong> Use the export feature to backup important characters</li>
+                    <h3 style="color: #4CAF50; margin-bottom: 10px;">🔧 Troubleshooting Common Issues</h3>
+                    <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                        <li><strong>Character Not Loading:</strong> Check if the character file is valid JSON format</li>
+                        <li><strong>Skills Not Showing:</strong> Ensure you have the required prerequisites and enough Lumen</li>
+                        <li><strong>Data Loss:</strong> Use the export feature to backup important characters regularly</li>
                         <li><strong>Performance Issues:</strong> Clear browser cache if the system runs slowly</li>
+                        <li><strong>Can't Find Features:</strong> Enable Dev Mode in settings to access advanced character management tools</li>
                     </ul>
                 </div>
 
                 <div style="text-align: center; margin-top: 30px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 8px; border: 1px solid #ffd700;">
                     <p style="color: #ffd700; margin: 0; font-weight: bold;">
-                        🎉 Enjoy your RPG Skill Tree experience! Create epic characters and embark on amazing adventures!
+                        🎉 Enjoy building epic characters! Experiment with different builds, test strategies, and create the perfect character for your adventures!
                     </p>
                 </div>
             </div>

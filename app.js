@@ -459,31 +459,95 @@ class App {
     showWelcome() {
         const welcomeHTML = `
             <div class="welcome-modal">
-                <div class="welcome-content">
-                    <h2>Welcome to RPG Skill Tree!</h2>
-                    <p>Create your first character to begin your adventure.</p>
-                    <div class="welcome-features">
-                        <h3>Features:</h3>
-                        <ul>
-                            <li>🗡️ Weapon Skills: Master swords, bows, and axes</li>
-                            <li>🔮 Magic Schools: Fire, ice, and thunder magic</li>
-                            <li>🔨 Professions: Smithing, alchemy, and enchanting</li>
-                            <li>📊 Progressive Stats: Strength, Magic Defence, and speed</li>
-                            <li>💾 Auto-Save: Your progress is automatically saved</li>
+                <div class="welcome-content" style="max-width: 800px; max-height: 90vh;">
+                    <h2 style="color: #ffd700; margin-bottom: 20px; text-align: center;">📚 Welcome to RPG Skill Tree System!</h2>
+                    
+                    <div style="margin-bottom: 25px; padding: 15px; background: rgba(76, 175, 80, 0.1); border-radius: 8px; border: 1px solid #4CAF50;">
+                        <h3 style="color: #4CAF50; margin-bottom: 10px;">🎮 What is the RPG Skill Tree System?</h3>
+                        <p style="color: #e0e0e0; margin-bottom: 10px;">
+                            This is a comprehensive <strong>character builder and management system</strong> for creating and developing RPG characters. 
+                            It's designed to help you build characters with deep skill progression, equipment management, and strategic character development.
+                        </p>
+                        <p style="color: #e0e0e0;">
+                            <strong>Key Features:</strong> Lumen-based skill progression, toggle skills with stamina costs, dynamic loot generation, 
+                            crafting systems, and 166+ pre-made characters to use as enemies or inspiration for your own builds.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: #4CAF50; margin-bottom: 10px;">💎 Understanding the Lumen Economy</h3>
+                        <p style="color: #e0e0e0; margin-bottom: 10px;">
+                            <strong>Lumens</strong> are the magical currency used to unlock skills and upgrade stats. This system replaces traditional experience points:
+                        </p>
+                        <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                            <li><strong>Starting Lumens:</strong> 150 Lumens to begin character development</li>
+                            <li><strong>Skill Costs:</strong> Tier 0 (3L) → Tier 1 (8L) → Tier 2 (15L) → Tier 3 (25L) → Tier 4 (35L) → Tier 5 (50L)</li>
+                            <li><strong>Stat Upgrades:</strong> Progressive costs - HP (3L each), Stamina (5L each), combat stats (5L-400L based on tier)</li>
+                            <li><strong>Earning Lumens:</strong> Defeating enemies gets you Lumen. Quests earn you Money.</li>
+                        </ul>
+                        <p style="color: #e0e0e0;">
+                            <strong>Strategy:</strong> Plan your character build carefully - you can't afford everything! Focus on your character's theme and role.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: #4CAF50; margin-bottom: 10px;">📊 Character Stats & Progression</h3>
+                        <p style="color: #e0e0e0; margin-bottom: 10px;">
+                            Your character's stats determine their capabilities and can be upgraded with Lumens:
+                        </p>
+                        <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                            <li><strong>Health (HP):</strong> How much damage you can take - upgrade for 3 Lumens each</li>
+                            <li><strong>Stamina (STA):</strong> Cost to use skills in combat - some skills use more for continuous use (usually toggle skills) - upgrade for 5 Lumens each</li>
+                            <li><strong>Strength:</strong> Physical power for melee combat - When rolling your Physical Damage against others, Add your correct Strength score. - tiered pricing (5L-300L max)</li>
+                            <li><strong>Magic Power:</strong> Magical abilities and spell power - When rolling your Magical Damage against others, Add your correct Magic Power score. - tiered pricing (5L-300L max)</li>
+                            <li><strong>Accuracy:</strong> Hit chance and precision - When rolling to attempt to hit an enemy, add your correct Accuracy score - tiered pricing (8L-400L max)</li>
+                            <li><strong>Speed:</strong> Agility and reflexes - tiered pricing (6L-400L max)</li>
+                            <li><strong>Physical/Magical Defence:</strong> Damage reduction - The "AC" of this version of the games. Each one is separate depending on the attack. The Opponent's roll to hit (+Accuracy and any additional skill bonuses) must EQUAL or be HIGHER than your current Physical/Magical Defence score - tiered pricing (3L-200L max)</li>
+                        </ul>
+                        <p style="color: #e0e0e0;">
+                            <strong>Equipment Bonus:</strong> Items can boost stats beyond your Lumen-purchased limits, making equipment crucial for optimization!
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: #4CAF50; margin-bottom: 10px;">⚡ Toggle Skills & Stamina Management</h3>
+                        <p style="color: #e0e0e0; margin-bottom: 10px;">
+                            <strong>Toggle Skills</strong> are special abilities that require stamina to activate and maintain:
+                        </p>
+                        <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                            <li><strong>Activation Cost:</strong> Pay stamina upfront to turn on the skill (e.g., 2-3 stamina)</li>
+                            <li><strong>Maintenance Cost:</strong> Pay stamina each turn to keep it active (e.g., 1-2 stamina per turn)</li>
+                            <li><strong>Auto-Deactivation:</strong> Skills turn off automatically if you can't afford maintenance</li>
+                            <li><strong>Incompatible Skills:</strong> Some skills can't be active together (e.g., Fire Staff vs Frost Staff)</li>
+                            <li><strong>Examples:</strong> Defensive Stance (+2 AC, 1 stamina/turn), Berserker Rage (+4 STR, 2 stamina/turn)</li>
+                        </ul>
+                        <p style="color: #e0e0e0;">
+                            <strong>Strategy:</strong> Manage your stamina carefully - toggle skills are powerful but expensive to maintain!
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: #4CAF50; margin-bottom: 10px;">💡 Quick Tips for Character Building</h3>
+                        <ul style="color: #e0e0e0; margin-left: 20px; margin-bottom: 10px;">
+                            <li><strong>Plan Your Build:</strong> With only 150 starting Lumens, plan your character's focus before spending</li>
+                            <li><strong>Read Skill Descriptions:</strong> Each skill shows stat bonuses, costs, and prerequisites clearly</li>
+                            <li><strong>Balance Investment:</strong> Don't max one stat early - spread investment for better overall performance</li>
+                            <li><strong>Use Pre-made Characters:</strong> Load existing characters to see effective builds and get inspiration</li>
+                            <li><strong>Experiment with Dev Mode:</strong> Enable Dev Mode to test builds without Lumen restrictions</li>
+                            <li><strong>Focus on Synergy:</strong> Choose skills that work together - weapon skills + combat stats, magic skills + magic power</li>
+                            <li><strong>Equipment Matters:</strong> Good equipment can boost stats beyond your Lumen limits - don't ignore the shop!</li>
                         </ul>
                     </div>
-                    <div class="welcome-shortcuts">
-                        <h3>Keyboard Shortcuts:</h3>
-                        <ul>
-                            <li><kbd>1</kbd> - Skills Tab</li>
-                            <li><kbd>2</kbd> - Stats Tab</li>
-                            <li><kbd>3</kbd> - Character Sheet</li>
-                            <li><kbd>Ctrl+N</kbd> - New Character</li>
-                            <li><kbd>Ctrl+S</kbd> - Save Progress</li>
-                            <li><kbd>F1</kbd> - Help</li>
-                        </ul>
+
+                    <div style="text-align: center; margin-top: 30px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 8px; border: 1px solid #ffd700;">
+                        <p style="color: #ffd700; margin: 0; font-weight: bold;">
+                            🎉 Ready to build epic characters? Click "Get Started" to create your first character!
+                        </p>
                     </div>
-                    <button class="btn btn-primary" onclick="app.closeWelcome()">Get Started</button>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="app.closeWelcome()">Get Started</button>
+                    </div>
                 </div>
             </div>
         `
