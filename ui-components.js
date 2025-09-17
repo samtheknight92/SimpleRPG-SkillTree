@@ -197,6 +197,7 @@ class UIComponents {
         this.setupButtonListener('export-character-btn', () => this.exportCharacter())
         this.setupButtonListener('import-character-btn', () => this.importCharacter())
         this.setupButtonListener('dev-mode-btn', () => this.toggleDevMode())
+        this.setupButtonListener('item-browser-btn', () => this.showItemBrowser())
         this.setupButtonListener('close-item-sidebar-btn', () => this.hideItemAdminSidebar())
         this.setupButtonListener('create-character-btn', () => this.createNewCharacter())
         this.setupButtonListener('cancel-character-btn', () => this.hideNewCharacterDialog())
@@ -2013,14 +2014,21 @@ class UIComponents {
     toggleDevMode() {
         this.devMode = !this.devMode
         const devBtn = document.getElementById('dev-mode-btn')
+        const itemBrowserBtn = document.getElementById('item-browser-btn')
 
         if (this.devMode) {
             devBtn.textContent = 'Dev Mode: ON'
             devBtn.classList.add('active')
+            if (itemBrowserBtn) {
+                itemBrowserBtn.style.display = 'flex'
+                // Re-setup the button listener when it becomes visible
+                this.setupButtonListener('item-browser-btn', () => this.showItemBrowser())
+            }
             this.showMessage('Dev Mode enabled - All skills visible!', 'success')
         } else {
             devBtn.textContent = 'Dev Mode'
             devBtn.classList.remove('active')
+            if (itemBrowserBtn) itemBrowserBtn.style.display = 'none'
             this.showMessage('Dev Mode disabled', 'success')
         }
 
@@ -2029,6 +2037,247 @@ class UIComponents {
         this.renderSkillTabs() // Re-render tabs to show/hide fusion categories
         this.renderSkillTree()
         this.renderCrafting() // Re-render crafting to update material counts
+    }
+
+    // Show Item Browser (Dev Mode only)
+    showItemBrowser() {
+        console.log('showItemBrowser called')
+        if (!this.devMode) {
+            this.showMessage('Item Browser is only available in Dev Mode', 'error')
+            return
+        }
+
+        console.log('Creating modal...')
+        const modal = document.createElement('div')
+        modal.className = 'modal-overlay'
+        modal.innerHTML = `
+            <div class="modal-content" style="max-width: 95vw; max-height: 95vh; width: 1400px; background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); border: 2px solid #ffd700; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.3);">
+                <div class="modal-header" style="background: linear-gradient(90deg, #ffd700, #ffed4e); color: #1a1a2e; padding: 20px; margin: -30px -30px 20px -30px; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);">
+                    <h2 style="margin: 0; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">🔍 Item Browser (Dev Mode)</h2>
+                    <button class="btn-close" onclick="this.closest('.modal-overlay').remove()" style="background: #ff6b6b; color: white; border: none; border-radius: 50%; width: 35px; height: 35px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 10px rgba(255, 107, 107, 0.4); transition: all 0.3s ease;">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="item-browser-controls" style="margin-bottom: 25px; display: flex; gap: 15px; flex-wrap: wrap; padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.3); backdrop-filter: blur(10px);">
+                        <input type="text" id="item-search" placeholder="🔍 Search items..." style="flex: 1; min-width: 250px; padding: 12px 16px; border: 2px solid #4a90e2; border-radius: 8px; background: rgba(0, 0, 0, 0.6); color: white; font-size: 14px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);">
+                        <select id="item-type-filter" style="padding: 12px 16px; border: 2px solid #9b59b6; border-radius: 8px; background: rgba(0, 0, 0, 0.6); color: white; font-size: 14px; min-width: 140px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(155, 89, 182, 0.2);">
+                            <option value="">All Types</option>
+                            <option value="weapon">⚔️ Weapons</option>
+                            <option value="armor">🛡️ Armor</option>
+                            <option value="accessory">💍 Accessories</option>
+                            <option value="consumable">🧪 Consumables</option>
+                            <option value="material">🔧 Materials</option>
+                        </select>
+                        <select id="item-category-filter" style="padding: 12px 16px; border: 2px solid #e74c3c; border-radius: 8px; background: rgba(0, 0, 0, 0.6); color: white; font-size: 14px; min-width: 160px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.2);">
+                            <option value="">All Categories</option>
+                        </select>
+                        <select id="item-rarity-filter" style="padding: 12px 16px; border: 2px solid #f39c12; border-radius: 8px; background: rgba(0, 0, 0, 0.6); color: white; font-size: 14px; min-width: 140px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(243, 156, 18, 0.2);">
+                            <option value="">All Rarities</option>
+                            <option value="common">⚪ Common</option>
+                            <option value="uncommon">🟢 Uncommon</option>
+                            <option value="rare">🔵 Rare</option>
+                            <option value="epic">🟣 Epic</option>
+                            <option value="legendary">🟡 Legendary</option>
+                        </select>
+                        <button class="btn" onclick="uiComponents.clearItemFilters()" style="padding: 12px 20px; background: linear-gradient(135deg, #ff6b6b, #ee5a52); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);">🗑️ Clear Filters</button>
+                    </div>
+                    <div id="item-browser-results" style="max-height: 65vh; overflow-y: auto; padding: 20px; background: rgba(0, 0, 0, 0.2); border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.2); backdrop-filter: blur(5px);">
+                        <div style="text-align: center; color: #ffd700; font-size: 18px; padding: 40px;">
+                            <div style="font-size: 48px; margin-bottom: 20px;">⚡</div>
+                            Loading items...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+        console.log('Appending modal to body...')
+        document.body.appendChild(modal)
+        console.log('Modal appended, setting up listeners...')
+
+        // Set up event listeners
+        this.setupItemBrowserListeners()
+
+        // Add hover effects to inputs and buttons
+        setTimeout(() => {
+            const inputs = modal.querySelectorAll('input, select, button')
+            inputs.forEach(input => {
+                input.addEventListener('mouseenter', function () {
+                    this.style.transform = 'scale(1.02)'
+                })
+                input.addEventListener('mouseleave', function () {
+                    this.style.transform = 'scale(1)'
+                })
+            })
+        }, 100)
+
+        // Load initial items
+        console.log('Loading items...')
+        this.loadItemBrowserItems()
+        console.log('Item Browser setup complete')
+    }
+
+    setupItemBrowserListeners() {
+        const searchInput = document.getElementById('item-search')
+        const typeFilter = document.getElementById('item-type-filter')
+        const categoryFilter = document.getElementById('item-category-filter')
+        const rarityFilter = document.getElementById('item-rarity-filter')
+
+        if (searchInput) {
+            searchInput.addEventListener('input', () => this.filterItemBrowserItems())
+        }
+        if (typeFilter) {
+            typeFilter.addEventListener('change', () => this.updateCategoryFilter())
+        }
+        if (categoryFilter) {
+            categoryFilter.addEventListener('change', () => this.filterItemBrowserItems())
+        }
+        if (rarityFilter) {
+            rarityFilter.addEventListener('change', () => this.filterItemBrowserItems())
+        }
+    }
+
+    loadItemBrowserItems() {
+        if (!window.ITEMS_DATA) {
+            document.getElementById('item-browser-results').innerHTML = '<p>No item data available</p>'
+            return
+        }
+
+        this.allItems = []
+        Object.values(window.ITEMS_DATA).forEach(category => {
+            Object.values(category).forEach(item => {
+                this.allItems.push(item)
+            })
+        })
+
+        this.filterItemBrowserItems()
+    }
+
+    updateCategoryFilter() {
+        const typeFilter = document.getElementById('item-type-filter')
+        const categoryFilter = document.getElementById('item-category-filter')
+
+        if (!typeFilter || !categoryFilter) return
+
+        const selectedType = typeFilter.value
+        const categories = new Set()
+
+        this.allItems.forEach(item => {
+            if (!selectedType || item.type === selectedType) {
+                if (item.subcategory) {
+                    categories.add(item.subcategory)
+                }
+            }
+        })
+
+        categoryFilter.innerHTML = '<option value="">All Categories</option>'
+        Array.from(categories).sort().forEach(category => {
+            categoryFilter.innerHTML += `<option value="${category}">${category}</option>`
+        })
+
+        this.filterItemBrowserItems()
+    }
+
+    filterItemBrowserItems() {
+        const searchInput = document.getElementById('item-search')
+        const typeFilter = document.getElementById('item-type-filter')
+        const categoryFilter = document.getElementById('item-category-filter')
+        const rarityFilter = document.getElementById('item-rarity-filter')
+        const resultsDiv = document.getElementById('item-browser-results')
+
+        if (!searchInput || !resultsDiv) return
+
+        const searchTerm = searchInput.value.toLowerCase()
+        const selectedType = typeFilter?.value || ''
+        const selectedCategory = categoryFilter?.value || ''
+        const selectedRarity = rarityFilter?.value || ''
+
+        const filteredItems = this.allItems.filter(item => {
+            const matchesSearch = !searchTerm ||
+                item.name.toLowerCase().includes(searchTerm) ||
+                item.id.toLowerCase().includes(searchTerm) ||
+                (item.desc && item.desc.toLowerCase().includes(searchTerm))
+
+            const matchesType = !selectedType || item.type === selectedType
+            const matchesCategory = !selectedCategory || item.subcategory === selectedCategory
+            const matchesRarity = !selectedRarity || item.rarity === selectedRarity
+
+            return matchesSearch && matchesType && matchesCategory && matchesRarity
+        })
+
+        this.renderItemBrowserResults(filteredItems)
+    }
+
+    renderItemBrowserResults(items) {
+        const resultsDiv = document.getElementById('item-browser-results')
+        if (!resultsDiv) return
+
+        if (items.length === 0) {
+            resultsDiv.innerHTML = '<p>No items found matching your criteria.</p>'
+            return
+        }
+
+        const html = `
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
+                ${items.map(item => {
+            const rarityColors = {
+                'common': '#95a5a6',
+                'uncommon': '#2ecc71',
+                'rare': '#3498db',
+                'epic': '#9b59b6',
+                'legendary': '#f1c40f'
+            }
+            const rarityColor = rarityColors[item.rarity] || '#95a5a6'
+
+            return `
+                    <div class="item-card" style="
+                        background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 40, 0.9));
+                        border: 2px solid ${rarityColor};
+                        border-radius: 15px;
+                        padding: 20px;
+                        position: relative;
+                        overflow: hidden;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px ${rarityColor}40;
+                    " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px ${rarityColor}60';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px ${rarityColor}40';">
+                        <div style="position: absolute; top: 0; right: 0; background: ${rarityColor}; color: white; padding: 4px 12px; border-radius: 0 15px 0 15px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
+                            ${item.rarity || 'common'}
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div style="font-size: 32px; filter: drop-shadow(0 0 10px ${rarityColor});">${item.icon || '📦'}</div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0; color: #ffd700; font-size: 18px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">${item.name}</h4>
+                                <small style="color: #aaa; font-size: 11px; opacity: 0.8;">ID: ${item.id}</small>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+                            <span style="background: rgba(74, 144, 226, 0.2); color: #4a90e2; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; border: 1px solid #4a90e2;">${item.type}</span>
+                            <span style="background: rgba(155, 89, 182, 0.2); color: #9b59b6; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; border: 1px solid #9b59b6;">${item.subcategory || 'N/A'}</span>
+                        </div>
+                        ${item.price ? `<div style="background: linear-gradient(90deg, rgba(46, 204, 113, 0.2), rgba(39, 174, 96, 0.2)); color: #2ecc71; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #2ecc71;"><strong>💰 Price:</strong> ${item.price} Gil</div>` : ''}
+                        ${item.damage ? `<div style="background: linear-gradient(90deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2)); color: #e74c3c; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #e74c3c;"><strong>⚔️ Damage:</strong> ${item.damage}</div>` : ''}
+                        ${item.statModifiers && Object.keys(item.statModifiers).length > 0 ?
+                    `<div style="background: linear-gradient(90deg, rgba(52, 152, 219, 0.2), rgba(41, 128, 185, 0.2)); color: #3498db; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #3498db;"><strong>📊 Stats:</strong> ${Object.entries(item.statModifiers).map(([stat, value]) => `<span style="color: #5dade2;">${stat}: +${value}</span>`).join(', ')}</div>` : ''}
+                        ${item.craftingMaterials ?
+                    `<div style="background: linear-gradient(90deg, rgba(243, 156, 18, 0.2), rgba(230, 126, 34, 0.2)); color: #f39c12; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #f39c12;"><strong>🔧 Crafting:</strong> ${item.craftingMaterials.map(m => `<span style="color: #f7dc6f;">${m.quantity}x ${m.id}</span>`).join(', ')}</div>` : ''}
+                        ${item.desc ? `<div style="margin-top: 12px; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; font-style: italic; color: #bbb; font-size: 13px; line-height: 1.4; border-left: 3px solid #ffd700;">${item.desc}</div>` : ''}
+                    </div>
+                `}).join('')}
+            </div>
+            <div style="margin-top: 30px; text-align: center; padding: 20px; background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.1)); border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.3);">
+                <div style="color: #ffd700; font-size: 16px; font-weight: bold;">
+                    📊 Showing <span style="color: #4a90e2;">${items.length}</span> of <span style="color: #2ecc71;">${this.allItems.length}</span> items
+                </div>
+            </div>
+        `
+
+        resultsDiv.innerHTML = html
+    }
+
+    clearItemFilters() {
+        document.getElementById('item-search').value = ''
+        document.getElementById('item-type-filter').value = ''
+        document.getElementById('item-category-filter').value = ''
+        document.getElementById('item-rarity-filter').value = ''
+        this.filterItemBrowserItems()
     }
 
     // Render skill categories dynamically based on character type
@@ -7403,30 +7652,9 @@ class UIComponents {
 
     // Helper function to find enchantment by ID
     findEnchantmentById(enchantmentId) {
-        if (typeof ENCHANTMENTS_DATA !== 'undefined') {
-            if (ENCHANTMENTS_DATA.weapons && ENCHANTMENTS_DATA.weapons[enchantmentId]) {
-                return ENCHANTMENTS_DATA.weapons[enchantmentId]
-            }
-            if (ENCHANTMENTS_DATA.armor && ENCHANTMENTS_DATA.armor[enchantmentId]) {
-                return ENCHANTMENTS_DATA.armor[enchantmentId]
-            }
-        }
-
-        // Check ITEMS_DATA for enchantment type items
-        if (typeof window.ITEMS_DATA !== 'undefined') {
-            // Search through each item category
-            for (const categoryKey in window.ITEMS_DATA) {
-                const category = window.ITEMS_DATA[categoryKey]
-                for (const itemKey in category) {
-                    const item = category[itemKey]
-                    if (item.id === enchantmentId && item.type === 'enchantment') {
-                        return item
-                    }
-                }
-            }
-        }
-
-        return null
+        // Search through all enchantments to find the one with matching ID
+        const allEnchantments = getAllEnchantments()
+        return allEnchantments.find(enchantment => enchantment.id === enchantmentId)
     }
 
     // Render inventory items
