@@ -1,0 +1,578 @@
+================================================================================
+                    RPG SKILL TREE SYSTEM - TTRPG GAME MASTER GUIDE
+================================================================================
+
+VERSION: 1.0
+CREATED: December 2024
+PURPOSE: Complete guide for using the RPG Skill Tree character sheets in TTRPG campaigns
+
+================================================================================
+                                TABLE OF CONTENTS
+================================================================================
+
+1. SYSTEM OVERVIEW & CHARACTER SHEET BASICS
+2. COMBAT MECHANICS & DICE ROLLING
+3. CHARACTER STATS & HOW TO USE THEM
+4. PRE-MADE CHARACTERS AS ENEMIES & NPCs
+5. LOOT & REWARD SYSTEM
+6. SKILL SYSTEM & CHARACTER PROGRESSION
+7. RACIAL ABILITIES & SPECIAL FEATURES
+8. EQUIPMENT & INVENTORY MANAGEMENT
+9. SAMPLE ENCOUNTERS & CAMPAIGN IDEAS
+10. TROUBLESHOOTING & BALANCE TIPS
+
+================================================================================
+                    1. SYSTEM OVERVIEW & CHARACTER SHEET BASICS
+================================================================================
+
+WHAT IS THIS SYSTEM?
+-------------------
+The RPG Skill Tree System is a character builder and management tool that creates
+detailed character sheets for TTRPG campaigns. Each character sheet contains:
+
+- Complete stat blocks with combat modifiers
+- Skill trees with prerequisites and costs
+- Equipment and inventory management
+- Racial abilities and special features
+- 166+ pre-made characters ready to use as enemies or NPCs
+
+HOW TO USE CHARACTER SHEETS IN TTRPG:
+------------------------------------
+1. **Player Characters**: Players create characters using the web application
+2. **Export Characters**: Save character data as JSON files
+3. **Import in Campaign**: Load character sheets for reference during games
+4. **Enemy Characters**: Use pre-made characters as combat encounters
+5. **NPCs**: Use pre-made characters as non-player characters
+
+CHARACTER SHEET STRUCTURE:
+-------------------------
+Each character contains:
+- **Basic Info**: Name, race, level, experience
+- **Stats**: HP, Stamina, Strength, Magic Power, Accuracy, Speed, Defenses
+- **Skills**: Unlocked abilities organized by category
+- **Equipment**: Weapons, armor, accessories with stat bonuses
+- **Inventory**: Items, consumables, materials
+- **Notes**: Character backstory, campaign notes, etc.
+
+================================================================================
+                        2. COMBAT MECHANICS & DICE ROLLING
+================================================================================
+
+CORE COMBAT SYSTEM:
+------------------
+This system uses a d20-based combat system with the following mechanics:
+
+**ATTACK ROLLS:**
+- Roll: d20 + Accuracy + Skill Bonuses
+- Target: Must EQUAL or EXCEED enemy's Physical/Magical Defence
+- Critical Hit: Natural 20 = automatic hit + double damage
+
+**DAMAGE CALCULATION:**
+- Physical Damage: Weapon Damage + Strength Modifier
+- Magical Damage: Spell Damage + Magic Power Modifier
+- Defense: Physical/Magical Defence reduces incoming damage
+
+**INITIATIVE:**
+- Order: Highest Speed goes first, If 2 or more are the same, GM decides
+- Surprise: Stealth characters get advantage on first round
+
+DICE ROLLING EXAMPLES:
+--------------------
+**Example 1 - Sword Attack:**
+- Player rolls: d20 + 5 (Accuracy) + 2 (Sword Skill) = 18
+- Enemy Defence: 15
+- Result: HIT! (18 > 15)
+- Damage: d8 (Sword) + 3 (Strength) = 8 damage
+
+**Example 2 - Fireball Spell:**
+- Player rolls: d20 + 4 (Accuracy) + 3 (Fire Magic) = 16
+- Enemy Magical Defence: 14
+- Result: HIT! (16 > 14)
+- Damage: 2d6 (Fireball) + 4 (Magic Power) = 12 damage
+
+**Example 3 - Critical Hit:**
+- Player rolls: Natural 20
+- Result: Automatic hit + Additional Dice Roll
+- Damage: (d8 + 3) + d8 = 19 maximum damage
+
+================================================================================
+                        3. CHARACTER STATS & HOW TO USE THEM
+================================================================================
+
+PRIMARY STATISTICS:
+------------------
+
+**HEALTH (HP):**
+- Function: How much damage character can take
+- Usage: Track during combat, reaches 0 = unconscious
+- Upgrades: Cost 3 Lumens each
+- Equipment: Armor can increase maximum HP
+
+**STAMINA:**
+- Function: Cost to use skills in combat
+- Usage: Some skills cost 2-3 stamina, toggle skills cost per turn
+- Upgrades: Cost 5 Lumens each
+- Recovery: Rest or use stamina potions
+
+**STRENGTH:**
+- Function: Added to Physical Damage rolls
+- Usage: When rolling Physical Damage, add Strength score
+- Range: -3 to +8 (upgradeable with Lumens)
+- Equipment: Weapons and gear can boost beyond limits
+
+**MAGIC POWER:**
+- Function: Added to Magical Damage rolls
+- Usage: When rolling Magical Damage, add Magic Power score
+- Range: -3 to +8 (upgradeable with Lumens)
+- Equipment: Staves and magical items can boost beyond limits
+
+**ACCURACY:**
+- Function: Added to hit attempts
+- Usage: When rolling to hit enemy, add Accuracy score
+- Range: -3 to +8 (upgradeable with Lumens)
+- Critical: Higher accuracy = better chance to hit
+
+**SPEED:**
+- Function: Agility and reflexes
+- Usage: Initiative, dodging, movement
+- Range: 2 to +8 (upgradeable with Lumens)
+- Equipment: Light armor and accessories can boost
+
+**PHYSICAL DEFENCE:**
+- Function: Target number for physical attacks
+- Usage: Enemy's attack roll must EQUAL or EXCEED this number
+- Range: 8 to +8 (upgradeable with Lumens)
+- Equipment: Armor and shields provide major bonuses
+
+**MAGICAL DEFENCE:**
+- Function: Target number for magical attacks
+- Usage: Enemy's spell roll must EQUAL or EXCEED this number
+- Range: 8 to +8 (upgradeable with Lumens)
+- Equipment: Magical items and certain armor types help
+
+STAT MODIFIERS IN GAMEPLAY:
+--------------------------
+- **Positive Stats**: Add to relevant rolls
+- **Negative Stats**: Subtract from relevant rolls
+- **Zero Stats**: No modifier (neutral)
+- **Equipment Bonuses**: Can exceed Lumen-purchased limits
+
+================================================================================
+                    4. PRE-MADE CHARACTERS AS ENEMIES & NPCs
+================================================================================
+
+CHARACTER CATEGORIES:
+--------------------
+
+**HUMAN ENEMIES (46 characters):**
+- Mercenary, Assassin Rogue, Battle Mage, Bandit Raider
+- Tiefling Duelist, Elven Archer, Drow Necromancer
+- Cultist, Vampire Hunter, Warlock, etc.
+- **Use For**: Bandits, cultists, rival adventurers, corrupt guards
+
+**PEDESTRIAN NPCs (16 characters):**
+- Pedestrian Human, Pedestrian Elf, Pedestrian Dwarf
+- Pedestrian Dragonborn (various elements), etc.
+- **Use For**: Townspeople, merchants, quest givers, background characters
+
+**MONSTER FAMILIES (101+ characters):**
+
+**Goblins (14 characters):**
+- Goblin Scout, Goblin Warrior, Goblin Shaman, Goblin Berserker
+- **Use For**: Low-level encounters, dungeon minions, wilderness threats
+
+**Dragons (11 characters):**
+- Fire Dragon, Ice Dragon, Ancient Dragon, Shadow Dragon
+- **Use For**: Major boss encounters, legendary threats, campaign climaxes
+
+**Orcs (14 characters):**
+- Orc Brute, Orc Chief, Orc Warlord, Orc Shaman
+- **Use For**: Tribal enemies, war parties, barbarian hordes
+
+**Giants (8 characters):**
+- Fire Giant, Ice Giant, Hill Giant, Storm Giant
+- **Use For**: Powerful encounters, siege scenarios, wilderness guardians
+
+**Golems (8 characters):**
+- Earth Golem, Fire Golem, Ice Golem, Metal Golem
+- **Use For**: Constructed guardians, magical experiments, dungeon defenders
+
+**Sprites (8 characters):**
+- Fire Sprite, Ice Sprite, Thunder Sprite, Light Sprite
+- **Use For**: Magical encounters, elemental puzzles, nature spirits
+
+**Serpents (8 characters):**
+- Sea Serpent, Ice Serpent, Thunder Serpent, Shadow Serpent
+- **Use For**: Aquatic encounters, wilderness predators, magical beasts
+
+**Devils (6 characters):**
+- Devil Lord, Hell Knight, Infernal Warlock
+- **Use For**: Infernal encounters, demonic cults, hellish planes
+
+**Angels (6 characters):**
+- Light Angel, Celestial Guardian, Divine Herald
+- **Use For**: Divine encounters, celestial allies, heavenly realms
+
+**Shadows (5 characters):**
+- Shadow Dragon, Shadow Knight, Shadow Assassin
+- **Use For**: Undead encounters, dark magic, necromantic threats
+
+**Other Monsters:**
+- Slimes, Rats, Fish, Octopi, Ghosts, Wyverns, Possessed Items
+- **Use For**: Varied encounters, environmental hazards, unique threats
+
+ENCOUNTER BALANCING:
+-------------------
+**Monster Level Calculation:**
+- Level = (Total Skills ÷ 3) + 1
+- Higher level monsters = stronger abilities and better loot
+
+**Recommended Encounters:**
+- **Level 1-3**: Goblins, Rats, Basic Slimes
+- **Level 4-6**: Orcs, Golems, Sprites, Human Enemies
+- **Level 7-10**: Giants, Dragons, Devils, Angels
+- **Level 11+**: Ancient Dragons, High-level Devils, Legendary creatures
+
+================================================================================
+                        5. LOOT & REWARD SYSTEM
+================================================================================
+
+DYNAMIC LOOT GENERATION:
+-----------------------
+When enemies are defeated, they drop loot based on their level and skills:
+
+**Loot Tiers by Monster Level:**
+- **Level 1-3**: 3 Common, 1 Uncommon, 1 Rare items
+- **Level 4-7**: 2 Common, 2 Uncommon, 1 Rare items
+- **Level 8-10**: 3 Uncommon, 2 Rare, 1 Epic items
+- **Level 11+**: 4 Uncommon, 3 Rare, 2 Epic items
+
+**Skill-Based Loot:**
+- Fire monsters drop fire-themed items
+- Sword-wielding enemies drop weapons
+- Magic users drop magical items and essences
+- Defensive creatures drop armor and shields
+
+**Lumen Rewards:**
+- Base: Monster Level × 5 Lumens
+- Party Scaling: 1 player (×1.0), 2-3 players (×1.5), 4-5 players (×2.0), 6+ players (×2.5)
+- Example: Level 5 monster, 4 players = 5 × 5 × 2.0 = 50 Lumens
+
+**Money Rewards:**
+- Quests and story rewards provide Money (Gil)
+- Used for equipment purchases in shops
+- Separate from Lumen (which is for skill progression)
+
+================================================================================
+                        6. SKILL SYSTEM & CHARACTER PROGRESSION
+================================================================================
+
+SKILL CATEGORIES:
+----------------
+
+**WEAPON SKILLS:**
+- Sword, Axe, Staff, Dagger, Polearm, Hammer, Unarmed, Bow
+- Each weapon type has 5 tiers of skills
+- Prerequisites: Must unlock lower tiers before higher ones
+- Costs: 3L → 8L → 15L → 25L → 35L → 50L
+
+**MAGIC SKILLS:**
+- Fire, Ice, Thunder, Earth, Wind, Water, Darkness, Light
+- Elemental spells and abilities
+- Some skills have elemental resistances
+- Toggle skills require stamina maintenance
+
+**PROFESSION SKILLS:**
+- Smithing, Alchemy, Enchanting, Cooking, Archaeology, Herbalism
+- Crafting and utility abilities
+- Can create items and consumables
+- Useful for downtime activities
+
+**RACIAL SKILLS:**
+- Unique to each race
+- Humans can learn Tier 1 skills from other races
+- Provide passive bonuses and special abilities
+- Examples: Elven Accuracy, Dwarven Toughness, Orcish Fury
+
+**MONSTER SKILLS:**
+- Defense, Combat, Magic, Utility categories
+- Special abilities for monster characters
+- Can be used when playing monster characters
+
+**TOGGLE SKILLS:**
+- Special abilities that require stamina to maintain
+- Activation Cost: Pay stamina upfront (2-3 stamina)
+- Maintenance Cost: Pay stamina each turn (1-2 stamina)
+- Auto-deactivate if insufficient stamina
+- Examples: Defensive Stance, Berserker Rage, Fire Staff
+
+SKILL PROGRESSION:
+-----------------
+**Lumen Economy:**
+- Starting Lumens: 150
+- Earned by: Defeating enemies, completing quests
+- Spent on: Unlocking skills, upgrading stats
+
+**Prerequisites:**
+- Must unlock lower tier skills before higher ones
+- Some skills require skills from other categories
+- Racial restrictions apply (except for humans)
+
+**Skill Bonuses:**
+- Each skill provides stat bonuses
+- Bonuses stack with equipment
+- Some skills provide special abilities
+
+================================================================================
+                        7. RACIAL ABILITIES & SPECIAL FEATURES
+================================================================================
+
+RACE OVERVIEW:
+--------------
+
+**HUMAN:**
+- Special Ability: Can learn Tier 1 skills from other races
+- Bonus: 10% more Lumens from all sources
+- Free weapon skill at character creation
+- Stat Modifiers: +1 to all stats
+
+**ELF:**
+- Special Abilities: Keen senses, magical affinity, elven longevity
+- Bonuses: +1 Accuracy (bows), +1 Magic Power (staves)
+- Immunities: Cursed and Poison status effects
+- Skills: Elven Accuracy, Forest Step, Moonbeam
+
+**DWARF:**
+- Special Abilities: Stone sense, dwarven resilience, master craftsman
+- Bonuses: +2 Physical Defence, +1 HP
+- Immunities: Poison status effects
+- Skills: Dwarven Toughness, Forge Blessing, Mountain Charge
+
+**HALFLING:**
+- Special Abilities: Lucky, small & nimble, brave heart
+- Bonuses: +1 Stamina
+- Immunities: Fear and intimidation effects
+- Skills: Lucky Dodge, Stealth Mastery, Second Wind
+
+**ORC:**
+- Special Abilities: Intimidating presence, berserker rage, pack tactics
+- Bonuses: +2 Strength, +1 Physical Defence
+- Skills: Orcish Fury, Intimidating Roar, Berserker Rage
+
+**DRAGONBORN:**
+- Special Abilities: Breath weapon, draconic heritage, elemental resistance
+- Choose Element: Fire, Ice, Thunder, Earth, Wind, Water, Darkness, Light
+- Bonuses: +1 to chosen element's Magic Power, 50% resistance to chosen element
+- Skills: Breath Weapon, Draconic Heritage, Elemental Mastery
+
+**TIEFLING:**
+- Special Abilities: Infernal heritage, darkvision, fire resistance
+- Bonuses: +1 Magic Power, +1 Accuracy
+- Immunities: Fire damage (50% resistance)
+- Skills: Hellish Rebuke, Infernal Heritage, Dark Magic
+
+**DROW:**
+- Special Abilities: Darkvision, web sense, magic resistance
+- Bonuses: +1 Magic Power, +1 Accuracy
+- Skills: Shadow Affinity, Web Mastery, Dark Magic
+
+**GNOLL:**
+- Special Abilities: Pack coordination, scavenger, savage combat
+- Bonuses: +1 Strength, +1 Physical Defence
+- Skills: Pack Coordination, Scavenger, Savage Combat
+
+================================================================================
+                        8. EQUIPMENT & INVENTORY MANAGEMENT
+================================================================================
+
+EQUIPMENT SYSTEM:
+----------------
+
+**Weapon Types:**
+- Swords: Balanced damage, good for most situations
+- Axes: High damage, slower attacks
+- Staves: Magical focus, good for spellcasters
+- Daggers: Fast attacks, good for rogues
+- Polearms: Reach weapons, good for defense
+- Hammers: High damage, good against armor
+- Unarmed: No weapon needed, good for monks
+- Bows: Ranged attacks, good for archers
+
+**Armor Types:**
+- Light Armor: Low protection, no speed penalty
+- Medium Armor: Moderate protection, slight speed penalty
+- Heavy Armor: High protection, significant speed penalty
+- Magical Armor: Special properties and resistances
+
+**Accessories:**
+- Rings: Magical bonuses and special abilities
+- Amulets: Protective properties and resistances
+- Belts: Utility items and stat bonuses
+- Boots: Movement bonuses and special abilities
+
+**Equipment Bonuses:**
+- Can boost stats beyond Lumen-purchased limits
+- Stack with skill bonuses
+- Essential for high-level optimization
+- Can provide special abilities and resistances
+
+INVENTORY MANAGEMENT:
+--------------------
+
+**Item Categories:**
+- Weapons: Combat equipment
+- Armor: Protective equipment
+- Accessories: Special equipment
+- Consumables: Potions, scrolls, food
+- Materials: Crafting components
+- Quest Items: Story-related items
+
+**Carrying Capacity:**
+- Based on Strength stat
+- Heavy items may reduce movement
+- Some items have special storage requirements
+
+**Item Rarity:**
+- Common: Basic equipment, easy to find
+- Uncommon: Better equipment, moderate rarity
+- Rare: Powerful equipment, hard to find
+- Epic: Legendary equipment, very rare
+- Legendary: Mythical equipment, extremely rare
+
+================================================================================
+                        9. SAMPLE ENCOUNTERS & CAMPAIGN IDEAS
+================================================================================
+
+SAMPLE ENCOUNTERS:
+-----------------
+
+**Low-Level Encounter (Level 1-3):**
+- **Enemies**: 3 Goblin Scouts, 1 Goblin Shaman
+- **Loot**: Common weapons, basic armor, health potions
+- **Lumen Reward**: 15-25 Lumens
+- **Challenge**: Moderate, good for new players
+
+**Mid-Level Encounter (Level 4-6):**
+- **Enemies**: 2 Orc Warriors, 1 Orc Shaman
+- **Loot**: Uncommon weapons, magical items, rare materials
+- **Lumen Reward**: 40-60 Lumens
+- **Challenge**: Difficult, requires strategy
+
+**High-Level Encounter (Level 7-10):**
+- **Enemies**: 1 Fire Giant, 2 Fire Sprites
+- **Loot**: Rare weapons, epic armor, magical essences
+- **Lumen Reward**: 80-120 Lumens
+- **Challenge**: Very difficult, requires teamwork
+
+**Boss Encounter (Level 11+):**
+- **Enemies**: 1 Ancient Dragon
+- **Loot**: Epic weapons, legendary armor, divine artifacts
+- **Lumen Reward**: 200+ Lumens
+- **Challenge**: Extreme, campaign climax
+
+CAMPAIGN IDEAS:
+--------------
+
+**The Goblin War:**
+- **Plot**: Goblins are organizing under a powerful shaman
+- **Enemies**: Various goblin types, orc allies, possessed items
+- **Rewards**: Goblin artifacts, tribal knowledge, peace treaties
+
+**The Elemental Crisis:**
+- **Plot**: Elemental forces are disrupting the natural balance
+- **Enemies**: Elemental golems, sprites, dragons
+- **Rewards**: Elemental essences, magical knowledge, elemental mastery
+
+**The Infernal Invasion:**
+- **Plot**: Devils are attempting to corrupt the material plane
+- **Enemies**: Devils, cultists, corrupted creatures
+- **Rewards**: Infernal artifacts, divine blessings, planar knowledge
+
+**The Ancient Awakening:**
+- **Plot**: Ancient dragons are awakening from slumber
+- **Enemies**: Dragons, dragon cultists, draconic creatures
+- **Rewards**: Draconic artifacts, ancient knowledge, legendary status
+
+================================================================================
+                        10. TROUBLESHOOTING & BALANCE TIPS
+================================================================================
+
+COMMON ISSUES:
+--------------
+
+**Characters Too Weak:**
+- Check if they have appropriate equipment
+- Ensure they've spent Lumens on skills and stats
+- Consider giving them better starting equipment
+- Adjust encounter difficulty downward
+
+**Characters Too Strong:**
+- Increase enemy levels and abilities
+- Use higher-level monsters
+- Add environmental challenges
+- Reduce loot rewards
+
+**Combat Too Easy:**
+- Increase enemy Physical/Magical Defence
+- Add more enemies to encounters
+- Use tactical positioning and cover
+- Add status effects and special abilities
+
+**Combat Too Hard:**
+- Decrease enemy defences
+- Reduce enemy damage output
+- Provide healing opportunities
+- Give players tactical advantages
+
+BALANCE TIPS:
+------------
+
+**Encounter Design:**
+- Use multiple weaker enemies instead of one strong enemy
+- Vary enemy types to challenge different character builds
+- Include environmental hazards and tactical elements
+- Provide opportunities for creative problem-solving
+
+**Reward Distribution:**
+- Balance Lumen rewards with character progression needs
+- Provide equipment upgrades regularly
+- Include consumables and utility items
+- Reward creative thinking and roleplay
+
+**Character Progression:**
+- Ensure all players can contribute meaningfully
+- Provide opportunities for different skill trees
+- Balance combat and non-combat challenges
+- Allow for character customization and specialization
+
+**Campaign Pacing:**
+- Start with simple encounters and build complexity
+- Provide downtime for character development
+- Include social and exploration challenges
+- Build toward meaningful climaxes
+
+================================================================================
+                                CONCLUSION
+================================================================================
+
+This system provides a comprehensive framework for running TTRPG campaigns with
+detailed character sheets and pre-made enemies. The key to success is:
+
+1. **Understand the mechanics** - Know how stats, skills, and equipment work
+2. **Use appropriate encounters** - Match enemy levels to party capabilities
+3. **Provide meaningful rewards** - Balance Lumen, Money, and equipment rewards
+4. **Encourage creativity** - Let players use skills and equipment creatively
+5. **Maintain balance** - Adjust difficulty based on party performance
+
+The 166+ pre-made characters provide endless possibilities for encounters,
+NPCs, and campaign scenarios. Use them as inspiration and adapt them to fit
+your campaign's needs.
+
+Remember: The goal is to create an engaging, challenging, and fun experience
+for all players. Use this system as a foundation, but don't be afraid to
+modify and adapt it to suit your specific campaign and players.
+
+Happy gaming!
+
+================================================================================
+

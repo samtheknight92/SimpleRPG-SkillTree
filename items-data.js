@@ -23,7 +23,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A rusty old sword. Basic weapon. Damage: 1d4",
             icon: "⚔️",
-            price: 10,
+            price: 30,
             rarity: "common"
         },
 
@@ -47,7 +47,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A basic iron sword. +2 Strength. Damage: 1d6",
             icon: "⚔️",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
         short_sword: {
@@ -70,7 +70,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A nimble short sword. +1 Speed. Damage: 1d6",
             icon: "⚔️",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -95,7 +95,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A well-forged steel sword. +3 Strength. Damage: 1d8",
             icon: "⚔️",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
         guards_sword: {
@@ -118,7 +118,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A precise guard's sword. +1 Strength, +1 Accuracy. Damage: 1d8",
             icon: "⚔️",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
 
@@ -143,7 +143,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A silver sword with magical properties. +4 Strength, +1 Magic. Damage: 1d8",
             icon: "⚔️",
-            price: 90,
+            price: 180,
             rarity: "uncommon"
         },
         mithril_sword: {
@@ -166,7 +166,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A mithril sword of exceptional quality. +5 Strength, +2 Speed. Damage: 1d10",
             icon: "⚔️",
-            price: 120,
+            price: 240,
             rarity: "uncommon"
         },
         thunder_hammer: {
@@ -189,7 +189,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A hammer crackling with thunder. +6 Strength. Damage: 1d12 + thunder chance",
             icon: "🔨",
-            price: 120,
+            price: 240,
             rarity: "uncommon"
         },
         flame_sword: {
@@ -212,7 +212,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A sword wreathed in flames. +4 Strength, +2 Magic. Damage: 1d8 + 1d4 fire",
             icon: "⚔️",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
         elven_sword: {
@@ -235,7 +235,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An elegant elven blade. +2 Speed. Damage: 1d8. Effect: Stamina restoration",
             icon: "⚔️",
-            price: 90,
+            price: 180,
             rarity: "uncommon"
         },
         pirate_cutlass: {
@@ -258,7 +258,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A curved pirate's blade. +1 Strength, +1 Speed. Damage: 1d8. Effect: Riposte cost reduction",
             icon: "⚔️",
-            price: 90,
+            price: 180,
             rarity: "uncommon"
         },
 
@@ -280,7 +280,7 @@ const ITEMS_DATA = {
             },
             desc: "An ice-enchanted blade. +2 Strength, +1 Magic Power. 10% chance to apply Immobilized. Damage: 1d10",
             icon: "â„ï¸",
-            price: 180,
+            price: 360,
             rarity: "rare"
         },
         shadow_sabre: {
@@ -296,7 +296,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade wreathed in shadows. +2 Speed, +1 Accuracy. Damage: 1d10. Effect: Shadowing",
             icon: "🧪‘",
-            price: 180,
+            price: 360,
             rarity: "rare"
         },
         knights_blade: {
@@ -312,7 +312,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A noble knight's weapon. +3 Strength. Damage: 1d10. Effect: Rally",
             icon: "⚔️",
-            price: 180,
+            price: 360,
             rarity: "rare"
         },
 
@@ -330,7 +330,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A sword light as air. +3 Speed, +2 Strength. Damage: 1d12. Effect: Sweeping Slash cost reduction",
             icon: "🧪ªï¸",
-            price: 320,
+            price: 640,
             rarity: "rare"
         },
         crystal_sword: {
@@ -346,7 +346,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A crystalline blade of power. +2 Strength, +2 Magic Power, +1 Magical Defence. Damage: 1d12. Effect: Stamina drain",
             icon: "💍",
-            price: 320,
+            price: 640,
             rarity: "rare"
         },
         sunblade: {
@@ -362,7 +362,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A radiant sword of light. +2 Strength, +2 Accuracy. Damage: 1d12. Effect: Blinding flash",
             icon: "🔮",
-            price: 320,
+            price: 640,
             rarity: "rare"
         },
         bloodletter: {
@@ -378,7 +378,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A cruel crimson blade. +3 Strength, +1 Speed. Damage: 1d12. Effect: Bleeding",
             icon: "🪨",
-            price: 320,
+            price: 640,
             rarity: "rare"
         },
 
@@ -462,7 +462,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Forged from dragon scales. +4 Strength, +3 Defence. Damage: 2d8. Effect: Fire breath",
             icon: "ðŸ‰",
-            price: 500,
+            price: 1000,
             rarity: "legendary"
         },
         void_sword: {
@@ -478,7 +478,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade from the void realm. +3 Strength, +3 Magic Power, +2 Magical Defence. Damage: 2d8. Effect: Piercing Thrust cost reduction",
             icon: "ðŸ•³ï¸",
-            price: 500,
+            price: 1000,
             rarity: "legendary"
         },
         celestial_sword: {
@@ -494,7 +494,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade blessed by the stars. +4 Strength, +2 Magic Power, +1 Magical Defence. Damage: 2d8. Effect: Starfall",
             icon: "â­",
-            price: 500,
+            price: 1000,
             rarity: "legendary"
         },
 
@@ -512,7 +512,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade that cuts through time itself. +4 Speed, +4 Accuracy, +3 Magic Power. Damage: 2d10. Effect: Double strike",
             icon: "â°",
-            price: 750,
+            price: 1500,
             rarity: "legendary"
         },
         genesis_sword: {
@@ -528,7 +528,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "The first blade, origin of all swords. +5 Strength, +3 Defence. Damage: 2d10. Effect: Genesis wave",
             icon: "🧪Œ",
-            price: 750,
+            price: 1500,
             rarity: "legendary"
         },
 
@@ -553,7 +553,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A rusty old dagger. Basic weapon. Damage: 1d4",
             icon: "⚔️",
-            price: 10,
+            price: 30,
             rarity: "common"
         },
 
@@ -577,7 +577,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A basic iron dagger. +1 Strength, +2 Speed. Damage: 1d4",
             icon: "⚔️",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
         throwing_knife: {
@@ -600,7 +600,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A balanced throwing knife. +1 Accuracy. Damage: 1d6",
             icon: "⚔️",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
 
@@ -625,7 +625,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A quality steel dagger. +2 Strength, +2 Speed. Damage: 1d6",
             icon: "⚔️",
-            price: 45,
+            price: 100,
             rarity: "common"
         },
         parrying_dagger: {
@@ -648,7 +648,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A dagger designed for defense. +1 Speed, +1 Defence. Damage: 1d8",
             icon: "⚔️",
-            price: 50,
+            price: 100,
             rarity: "common"
         },
         hunters_knife: {
@@ -671,7 +671,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A practical hunting blade. +1 Speed, +1 Accuracy. Damage: 1d8",
             icon: "⚔️",
-            price: 50,
+            price: 100,
             rarity: "common"
         },
 
@@ -689,7 +689,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blessed silver dagger. +1 Speed, +1 Defence. Damage: 1d8. Effect: Undead bane",
             icon: "⚔️",
-            price: 75,
+            price: 150,
             rarity: "uncommon"
         },
         elven_stiletto: {
@@ -705,7 +705,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An elegant elven blade. +2 Accuracy. Damage: 1d8. Effect: Precision strike",
             icon: "⚔️",
-            price: 90,
+            price: 180,
             rarity: "uncommon"
         },
 
@@ -722,7 +722,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A rogue's favored weapon. +1 Speed, +1 Strength. Damage: 1d8. Effect: Sneak Attack cost reduction",
             icon: "⚔️",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
 
@@ -739,7 +739,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A dagger crackling with electrical energy. +2 Speed, +1 Accuracy. Damage: 1d8. Effect: Lightning damage",
             icon: "️",
-            price: 85,
+            price: 170,
             rarity: "uncommon"
         },
         life_dagger: {
@@ -755,7 +755,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blessed dagger that heals its wielder. +1 Speed, +2 Accuracy. Damage: 1d8. Effect: Life steal",
             icon: "️",
-            price: 95,
+            price: 190,
             rarity: "uncommon"
         },
 
@@ -773,7 +773,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A dagger wreathed in flames. +2 Speed, +2 Accuracy. 10% chance to apply Burn. Damage: 1d10",
             icon: "⚔️",
-            price: 150,
+            price: 300,
             rarity: "rare"
         },
         frost_needle: {
@@ -789,7 +789,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An icy thin blade. +2 Speed, +1 Magic, +1 Magical Defence. Ice Shards: 25% chance to slow target (-2 Speed for 2 turns). Damage: 1d10",
             icon: "â„ï¸",
-            price: 175,
+            price: 350,
             rarity: "rare"
         },
         shadow_blade: {
@@ -805,7 +805,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade forged from shadow. +3 Speed, +1 Accuracy. Damage: 1d10. Effect: Vanish",
             icon: "🧪‘",
-            price: 200,
+            price: 400,
             rarity: "rare"
         },
         assassins_edge: {
@@ -821,7 +821,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade for silent kills. +2 Accuracy, +1 Strength. Silent Strike: 25% chance target has disadvantage on next attack. Damage: 1d10",
             icon: "⚔️",
-            price: 190,
+            price: 380,
             rarity: "rare"
         },
 
@@ -839,7 +839,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade as swift as wind. +3 Speed, +2 Accuracy. Flurry skill costs 2 less stamina. Damage: 1d12",
             icon: "ðŸ’¨",
-            price: 250,
+            price: 500,
             rarity: "rare"
         },
         crystal_fang: {
@@ -905,7 +905,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A deadly obsidian blade. +3 Speed, +3 Accuracy. Vital Strike skill costs 2 less stamina. Damage: 2d6",
             icon: "📜",
-            price: 200,
+            price: 400,
             rarity: "epic"
         },
         vampiric_dagger: {
@@ -921,7 +921,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A cursed vampiric blade. +3 Speed, +2 Magic, +1 Magical Defence. Damage: 2d6. Effect: Life steal",
             icon: "ðŸ§›",
-            price: 250,
+            price: 500,
             rarity: "epic"
         },
         shrouds_stiletto: {
@@ -937,7 +937,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade wrapped in shadow. +3 Speed, +2 Accuracy, +2 Magical Defence. Enshadowed Pierce: On crit, deal 2d6 Darkness damage. Damage: 2d6",
             icon: "🧪«ï¸",
-            price: 300,
+            price: 600,
             rarity: "epic"
         },
         storm_fang: {
@@ -953,7 +953,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A thunder-charged blade. +3 Speed, +2 Accuracy. Spark skill costs 3 less stamina. Damage: 2d6",
             icon: "âš¡",
-            price: 280,
+            price: 560,
             rarity: "epic"
         },
 
@@ -1003,7 +1003,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A fragment of a fallen star. +4 Speed, +2 Magic. Star Strike: On kill, 20% chance to blind all visible enemies. Damage: 2d8",
             icon: "â­",
-            price: 750,
+            price: 1500,
             rarity: "epic"
         },
 
@@ -1021,7 +1021,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A blade that cuts through time. +5 Speed, +4 Accuracy, +3 Magic. Time Slice: Always attempt to attack 1 more time. Damage: 2d10",
             icon: "â°",
-            price: 1200,
+            price: 2400,
             rarity: "legendary"
         },
         genesis_fang: {
@@ -1037,7 +1037,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "The original dagger, birth of all blades. +5 Speed, +3 Accuracy. Reality Cut: Once per battle, deal 2d8 to all enemies - Gain advantage on next 2 attacks. Damage: 2d10",
             icon: "🧪Œ",
-            price: 750,
+            price: 1500,
             rarity: "legendary"
         },
 
@@ -1063,7 +1063,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A simple training bow. Basic weapon. Damage: 1d4",
             icon: "ðŸ¹",
-            price: 15,
+            price: 30,
             rarity: "common"
         },
 
@@ -1086,7 +1086,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A reliable hunting bow. +1 Accuracy. Damage: 1d6",
             icon: "ðŸ¹",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
         shortbow: {
@@ -1109,7 +1109,7 @@ const ITEMS_DATA = {
             range: "60ft",
             desc: "A nimble short bow. +2 Speed, +1 Accuracy. Damage: 1d6. Range: 60ft",
             icon: "ðŸ¹",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -1132,7 +1132,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A steel-reinforced bow. +2 Accuracy. Damage: 1d8",
             icon: "ðŸ¹",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
         longbow: {
@@ -1156,7 +1156,7 @@ const ITEMS_DATA = {
             range: "80ft",
             desc: "A long-range bow. +3 Speed, +2 Accuracy. Damage: 1d8. Range: 80ft",
             icon: "ðŸ¹",
-            price: 50,
+            price: 100,
             rarity: "common"
         },
         composite_bow: {
@@ -1179,7 +1179,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A composite bow with reinforced design. +1 Accuracy, +1 Strength. Damage: 1d8",
             icon: "ðŸ¹",
-            price: 70,
+            price: 100,
             rarity: "common"
         },
 
@@ -1269,7 +1269,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An elegant elven bow. +2 Accuracy. Damage: 1d8. Effect: Keen Shot",
             icon: "ðŸ¹",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
         ranger_bow: {
@@ -1319,7 +1319,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An ice-cold bow. +2 Accuracy, +1 Magic. Damage: 1d10. Effect: 10% chance to immobilize",
             icon: "ðŸ¹",
-            price: 200,
+            price: 400,
             rarity: "rare"
         },
         shadow_bow: {
@@ -1335,7 +1335,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A bow made of shadows. +3 Accuracy, +1 Speed. Damage: 1d10. Effect: Phase Shot",
             icon: "ðŸ¹",
-            price: 250,
+            price: 500,
             rarity: "rare"
         },
         sniper_bow: {
@@ -1369,7 +1369,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A bow blessed by the winds. +3 Accuracy, +2 Speed. Damage: 1d12. Effect: Multi Shot cost reduction",
             icon: "ðŸ¹",
-            price: 350,
+            price: 700,
             rarity: "rare"
         },
         crystal_bow: {
@@ -1385,7 +1385,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A crystalline bow. +2 Accuracy, +2 Magic. Damage: 1d12. Effect: Energy Drain",
             icon: "ðŸ¹",
-            price: 300,
+            price: 600,
             rarity: "rare"
         },
         storm_bow: {
@@ -1401,7 +1401,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A bow charged with storm energy. +2 Accuracy, +2 Speed. Damage: 1d12. Effect: Thunder Shot",
             icon: "ðŸ¹",
-            price: 400,
+            price: 800,
             rarity: "rare"
         },
         seeking_bow: {
@@ -1483,7 +1483,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A bow crackling with electricity. +3 Accuracy, +2 Speed. Damage: 2d6. Effect: Spark cost reduction",
             icon: "ðŸ¹",
-            price: 750,
+            price: 1500,
             rarity: "epic"
         },
 
@@ -1533,7 +1533,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A bow blessed by the heavens. +4 Accuracy, +2 Magic. Damage: 2d8. Effect: Star Rain",
             icon: "ðŸ¹",
-            price: 1000,
+            price: 2000,
             rarity: "epic"
         },
 
@@ -1551,7 +1551,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A bow that bends time itself. +5 Accuracy, +4 Speed, +3 Magic. Damage: 2d10. Effect: Quantum Shot",
             icon: "ðŸ¹",
-            price: 750,
+            price: 1500,
             rarity: "legendary"
         },
         genesis_bow: {
@@ -1567,7 +1567,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "The first bow, from which all others were made. +5 Accuracy, +3 Speed. Damage: 2d10. Effect: Reality Arrow",
             icon: "ðŸ¹",
-            price: 1400,
+            price: 2800,
             rarity: "legendary"
         },
 
@@ -1593,7 +1593,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A rusty old axe. Basic weapon. Damage: 1d4",
             icon: "🪓",
-            price: 5,
+            price: 30,
             rarity: "common"
         },
 
@@ -1617,7 +1617,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A sturdy iron axe. +3 Strength. Damage: 1d6",
             icon: "🪓",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
         hatchet: {
@@ -1640,7 +1640,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A quick hatchet. +1 Speed. Damage: 1d6",
             icon: "🪓",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -1665,7 +1665,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A steel forged axe. +4 Strength. Damage: 1d8",
             icon: "🪓",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
         battle_axe: {
@@ -1681,7 +1681,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A heavy battle axe. +1 Strength, +1 Speed. Damage: 1d8",
             icon: "🪓",
-            price: 70,
+            price: 100,
             rarity: "common"
         },
         woodsman_axe: {
@@ -1697,7 +1697,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A practical woodsman's axe. +1 Strength, +1 Accuracy. Damage: 1d8",
             icon: "🪓",
-            price: 65,
+            price: 100,
             rarity: "common"
         },
 
@@ -1800,7 +1800,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A fierce viking axe. +1 Strength, +1 Speed. Damage: 1d8. Effect: Cleave cost reduction",
             icon: "🪓",
-            price: 120,
+            price: 240,
             rarity: "uncommon"
         },
 
@@ -1850,7 +1850,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A cleaver made of shadows. +3 Strength, +1 Speed. Damage: 1d10. Effect: Dark Strike",
             icon: "🪓",
-            price: 250,
+            price: 500,
             rarity: "rare"
         },
         berserker_axe: {
@@ -1884,7 +1884,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A cleaver blessed by the winds. +3 Strength, +2 Speed. Damage: 1d12. Effect: Wide Cleave cost reduction",
             icon: "🪓",
-            price: 400,
+            price: 800,
             rarity: "rare"
         },
         crystal_axe: {
@@ -1900,7 +1900,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A crystalline axe. +2 Strength, +2 Magic. Damage: 1d12. Effect: Energy Cleave",
             icon: "🪓",
-            price: 300,
+            price: 600,
             rarity: "rare"
         },
         inferno_axe: {
@@ -1916,7 +1916,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An axe of pure fire. +2 Strength, +2 Speed. Damage: 1d12. Effect: Blazing Trail",
             icon: "🪓",
-            price: 350,
+            price: 700,
             rarity: "rare"
         },
         blood_reaper: {
@@ -1998,7 +1998,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An axe crackling with storms. +3 Strength, +2 Speed. Damage: 2d6. Effect: Storm Axe cost reduction",
             icon: "🪓",
-            price: 750,
+            price: 1500,
             rarity: "epic"
         },
 
@@ -2062,7 +2062,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An axe blessed by the heavens. +4 Strength, +2 Magic. Damage: 2d8. Effect: Solar Flare",
             icon: "🪓",
-            price: 1000,
+            price: 2000,
             rarity: "epic"
         },
 
@@ -2087,7 +2087,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An axe that cleaves through time. +5 Strength, +4 Speed, +3 Magic. Damage: 2d10. Effect: Space Cleave",
             icon: "🪓",
-            price: 750,
+            price: 1500,
             rarity: "legendary"
         },
         genesis_axe: {
@@ -2103,7 +2103,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "The first axe, bringer of the apocalypse. +5 Strength, +3 Speed. Damage: 2d10. Effect: Apocalypse",
             icon: "🪓",
-            price: 1400,
+            price: 2800,
             rarity: "legendary"
         },
 
@@ -2122,7 +2122,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A crude hammer. Basic weapon. Damage: 1d4",
             icon: "🏹",
-            price: 5,
+            price: 30,
             rarity: "common"
         },
 
@@ -2146,7 +2146,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A heavy iron hammer. +3 Strength. Damage: 1d6",
             icon: "🏹",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
         stone_hammer: {
@@ -2169,7 +2169,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A stone-headed hammer. +1 PD. Damage: 1d6",
             icon: "🏹",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -2194,7 +2194,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A steel hammer. +4 Strength. Damage: 1d8",
             icon: "🏹",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
         war_hammer: {
@@ -2210,7 +2210,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A mighty war hammer. +1 Strength, +1 PD. Damage: 1d8",
             icon: "🏹",
-            price: 70,
+            price: 100,
             rarity: "common"
         },
         heavy_mace: {
@@ -2233,7 +2233,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A heavy mace. +1 Strength, +1 Accuracy. Damage: 1d8",
             icon: "🏹",
-            price: 65,
+            price: 100,
             rarity: "common"
         },
 
@@ -2304,7 +2304,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A devastating crusher. +1 Strength, +1 PD. Damage: 1d8. Effect: Thunderstrike cost reduction",
             icon: "🏹",
-            price: 120,
+            price: 240,
             rarity: "uncommon"
         },
         crystal_hammer: {
@@ -2376,7 +2376,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A hammer that bends gravity. +3 Strength, +1 PD. Damage: 1d10. Effect: Ground Pound",
             icon: "🏹",
-            price: 250,
+            price: 500,
             rarity: "rare"
         },
         forge_hammer: {
@@ -2410,7 +2410,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A maul crackling with storms. +3 Strength, +2 PD. Damage: 1d12. Effect: Thunderstrike cost reduction",
             icon: "🏹",
-            price: 400,
+            price: 800,
             rarity: "rare"
         },
         crystal_maul: {
@@ -2426,7 +2426,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A crystalline maul. +2 Strength, +2 Magic. Damage: 1d12. Effect: Resonance",
             icon: "🏹",
-            price: 300,
+            price: 600,
             rarity: "rare"
         },
         quake_hammer: {
@@ -2442,7 +2442,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A hammer that shakes the earth. +2 Strength, +2 PD. Damage: 1d12. Effect: Tremor",
             icon: "🏹",
-            price: 350,
+            price: 700,
             rarity: "rare"
         },
         bone_crusher: {
@@ -2524,7 +2524,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A maul of pure thunder. +3 Strength, +2 PD. Damage: 2d6. Effect: Thunderstrike cost reduction",
             icon: "🏹",
-            price: 750,
+            price: 1500,
             rarity: "epic"
         },
 
@@ -2574,7 +2574,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A maul blessed by the heavens. +4 Strength, +2 Magic. Damage: 2d8. Effect: Meteor Strike",
             icon: "🏹",
-            price: 1000,
+            price: 2000,
             rarity: "epic"
         },
 
@@ -2592,7 +2592,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A hammer that controls time. +5 Strength, +4 PD, +3 Magic. Damage: 2d10. Effect: Time Crush",
             icon: "🏹",
-            price: 750,
+            price: 1500,
             rarity: "legendary"
         },
         genesis_hammer: {
@@ -2608,7 +2608,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "The first hammer, creator of all things. +5 Strength, +3 PD. Damage: 2d10. Effect: World Breaker",
             icon: "🏹",
-            price: 1400,
+            price: 2800,
             rarity: "legendary"
         },
 
@@ -2634,7 +2634,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A simple wooden staff. Basic weapon. Damage: 1d4",
             icon: "🪓",
-            price: 15,
+            price: 30,
             rarity: "common"
         },
 
@@ -2658,7 +2658,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A simple wooden staff. +1 Magic, +1 Speed. Damage: 1d6",
             icon: "🪓",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
         iron_staff: {
@@ -2703,7 +2703,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An improved staff for mages. +1 Magic. Damage: 1d6",
             icon: "🪓",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
         oak_staff: {
@@ -2719,7 +2719,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A staff carved from solid oak. +1 Magic. Damage: 1d6",
             icon: "🪓",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -2743,7 +2743,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A staff made from flexible birch wood. +1 Accuracy. Damage: 1d6",
             icon: "🪓",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
 
@@ -2766,7 +2766,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A staff made from ironwood. +2 Magic. Damage: 1d8",
             icon: "🪓",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
 
@@ -2790,7 +2790,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A reinforced staff for combat mages. +1 Magic, +1 Accuracy. Damage: 1d8",
             icon: "🪓",
-            price: 75,
+            price: 150,
             rarity: "common"
         },
 
@@ -2807,7 +2807,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A staff favored by scholars. +1 Magic, +1 Magical Defense. Damage: 1d8",
             icon: "🪓",
-            price: 90,
+            price: 180,
             rarity: "common"
         },
 
@@ -2825,7 +2825,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A staff inlaid with silver. +1 Magic, +1 Magical Defense. Damage: 1d8. Effect: All spells cost 1 less stamina",
             icon: "🪓",
-            price: 150,
+            price: 300,
             rarity: "uncommon"
         },
         crystal_staff: {
@@ -2887,7 +2887,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An elegant elven staff. +2 Magic. Damage: 1d8. Effect: Spell critical hit enchantment",
             icon: "🪓",
-            price: 175,
+            price: 350,
             rarity: "uncommon"
         },
 
@@ -2922,7 +2922,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A staff wreathed in flames. +2 Magic, +2 Accuracy. Damage: 1d10. Effect: Fire spell enchantment",
             icon: "⚔️",
-            price: 300,
+            price: 600,
             rarity: "rare"
         },
 
@@ -2973,7 +2973,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A staff blessed with healing power. +2 Magic, +1 Magical Defense. Damage: 1d10. Effect: Healing enchantment",
             icon: "âœ¨",
-            price: 350,
+            price: 700,
             rarity: "rare"
         },
 
@@ -3207,7 +3207,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A basic wooden spear. Basic weapon. Damage: 1d4",
             icon: "ðŸ”±",
-            price: 10,
+            price: 30,
             rarity: "common"
         },
 
@@ -3230,7 +3230,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A long military pike. +1 Accuracy. Damage: 1d6",
             icon: "ðŸ”±",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
         halberd: {
@@ -3277,7 +3277,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A spear with an iron tip. +2 Strength, +1 Speed. Damage: 1d8",
             icon: "ðŸ”±",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -3302,7 +3302,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A spear with a steel head. +2 Strength. Damage: 1d8",
             icon: "ðŸ”±",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
 
@@ -3326,7 +3326,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A reinforced steel halberd. +3 Strength, +1 Speed. Damage: 1d10",
             icon: "ðŸ”±",
-            price: 75,
+            price: 150,
             rarity: "common"
         },
 
@@ -3343,7 +3343,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A cavalry lance. +1 Strength, +1 Speed. Damage: 1d8",
             icon: "ðŸ”±",
-            price: 90,
+            price: 180,
             rarity: "common"
         },
 
@@ -3368,7 +3368,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A spear with silver tip. +4 Strength, +2 Accuracy. Damage: 1d10",
             icon: "ðŸ”±",
-            price: 150,
+            price: 300,
             rarity: "uncommon"
         },
         thunder_spear: {
@@ -3430,7 +3430,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "An elegant elven glaive. +2 Speed. Damage: 1d8. Effect: Enhanced critical hits",
             icon: "ðŸ”±",
-            price: 175,
+            price: 350,
             rarity: "uncommon"
         },
 
@@ -3465,7 +3465,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A spear wreathed in flames. +2 Strength, +2 Accuracy. Damage: 1d10. Effect: Burn chance",
             icon: "⚔️",
-            price: 300,
+            price: 600,
             rarity: "rare"
         },
 
@@ -3516,7 +3516,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A noble knight's halberd. +2 Strength, +1 Defense. Damage: 1d10. Effect: Ally inspiration",
             icon: "ðŸ›¡ï¸",
-            price: 350,
+            price: 700,
             rarity: "rare"
         },
 
@@ -3637,7 +3637,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A lance blessed by the heavens. +3 Strength, +2 Defense, +2 Magical Defense. Damage: 2d6. Effect: Holy damage",
             icon: "🧪Ÿ",
-            price: 1000,
+            price: 2000,
             rarity: "epic"
         },
 
@@ -3766,7 +3766,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Simple cloth robes. Basic protection.",
             icon: "ðŸ§¥",
-            price: 15,
+            price: 30,
             rarity: "common"
         },
 
@@ -3789,7 +3789,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "A basic leather vest. +2 Defence, +1 Speed.",
             icon: "ðŸ¥‹",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
         leather_armor: {
@@ -3806,7 +3806,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Basic leather armor. +1 Defence.",
             icon: "ðŸ¥‹",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
         padded_armor: {
@@ -3821,7 +3821,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Light padded armor. +1 Defence, +1 Speed.",
             icon: "ðŸ¥‹",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
 
@@ -3840,7 +3840,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Reinforced leather with metal studs. +2 Defence, +1 Speed.",
             icon: "ðŸ¦º",
-            price: 45,
+            price: 100,
             rarity: "common"
         },
         scouts_leather: {
@@ -3862,7 +3862,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Lightweight scouting armor. +1 Defence, +2 Speed.",
             icon: "ðŸ¦º",
-            price: 45,
+            price: 100,
             rarity: "common"
         },
         hunters_vest: {
@@ -3884,7 +3884,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Practical hunting gear. +1 Defence, +1 Speed, +1 Accuracy.",
             icon: "ðŸ¦º",
-            price: 50,
+            price: 100,
             rarity: "common"
         },
 
@@ -3967,7 +3967,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Elegant elven chainmail. +2 Defence, +2 Speed. Effect: Silent movement",
             icon: "âœ¨",
-            price: 150,
+            price: 300,
             rarity: "uncommon"
         },
 
@@ -4016,7 +4016,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Armor blessed by wind spirits. +2 Defence, +3 Speed. Effect: Speed burst",
             icon: "ðŸ’¨",
-            price: 300,
+            price: 600,
             rarity: "rare"
         },
 
@@ -4180,7 +4180,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Armor of the ice walkers. +4 Defence, +3 Speed, +1 Magical Defence. Effect: Ice immunity",
             icon: "â„ï¸",
-            price: 1000,
+            price: 2000,
             rarity: "epic"
         },
 
@@ -4197,7 +4197,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Ancient artifact robes. +6 Defence, +4 Speed, +2 Accuracy. Effect: Spell reflection",
             icon: "ðŸ“œ",
-            price: 1400,
+            price: 2800,
             rarity: "legendary"
         },
 
@@ -4280,7 +4280,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Basic hide armor. +1 Defence.",
             icon: "ðŸ›¡ï¸",
-            price: 20,
+            price: 30,
             rarity: "common"
         },
 
@@ -4297,7 +4297,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Light chain mail shirt. +2 Defence.",
             icon: "ðŸ›¡ï¸",
-            price: 35,
+            price: 60,
             rarity: "common"
             , craftableItem: true,
             craftingMaterials: ["iron_ingot", "chain_links", "thread"]
@@ -4338,7 +4338,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Iron chainmail armor. +3 Defence, +1 HP.",
             icon: "⚔️",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
         chain_mail: {
@@ -4353,7 +4353,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Full chain mail armor. +2 Defence, +2 HP.",
             icon: "⚔️",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
         scale_mail: {
@@ -4368,7 +4368,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Armor made of overlapping scales. +3 Defence, +1 HP.",
             icon: "⚔️",
-            price: 70,
+            price: 100,
             rarity: "common"
         },
 
@@ -4402,7 +4402,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "High-quality steel scale armor. +3 Defence, +2 HP. Effect: Damage reduction",
             icon: "ðŸ›¡ï¸",
-            price: 150,
+            price: 300,
             rarity: "uncommon"
             , craftableItem: true,
             craftingMaterials: ["steel_ingot", "scale_fragment", "thread"]
@@ -4470,7 +4470,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Masterwork dwarven chainmail. +3 Defence, +1 HP, +1 Stamina. Effect: Stamina recovery",
             icon: "âš’ï¸",
-            price: 175,
+            price: 350,
             rarity: "uncommon"
         },
 
@@ -4511,7 +4511,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Plate forged in molten lava. +4 Defence, +3 HP. Effect: Fire resistance",
             icon: "⚔️",
-            price: 300,
+            price: 600,
             rarity: "rare"
         },
 
@@ -4681,7 +4681,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Blessed paladin armor. +6 Defence, +4 HP, +2 Stamina. Effect: Undead damage",
             icon: "âœ¨",
-            price: 1000,
+            price: 2000,
             rarity: "epic"
         },
 
@@ -4813,7 +4813,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Basic plate armor. +2 Defence.",
             icon: "ðŸ›¡ï¸",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -4852,7 +4852,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Solid iron plate armor. +3 Defence.",
             icon: "ðŸ›¡ï¸",
-            price: 45,
+            price: 100,
             rarity: "common"
             , craftableItem: true,
             craftingMaterials: ["iron_ingot", "leather_strap"]
@@ -4869,7 +4869,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "High-quality steel armor. +3 Defence, +1 Magical Defence.",
             icon: "ðŸ›¡ï¸",
-            price: 50,
+            price: 100,
             rarity: "common"
         },
 
@@ -4886,7 +4886,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Reinforced heavy plate. +4 Defence, +1 HP.",
             icon: "ðŸ›¡ï¸",
-            price: 90,
+            price: 180,
             rarity: "common"
             , craftableItem: true,
             craftingMaterials: ["steel_ingot", "iron_plate", "leather_strap"]
@@ -4904,7 +4904,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Noble knight's full plate. +4 Defence, +2 Magical Defence.",
             icon: "ðŸ›¡ï¸",
-            price: 100,
+            price: 200,
             rarity: "common"
         },
 
@@ -4937,7 +4937,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Massive siege armor. +5 Defence, +3 HP. Effect: Movement immunity",
             icon: "ðŸ¤–",
-            price: 200,
+            price: 400,
             rarity: "uncommon"
         },
         mithril_plate_armor: {
@@ -5012,7 +5012,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Defensive fortress armor. +5 Defence, +4 HP. Effect: Ally defense boost",
             icon: "ðŸ›¡ï¸",
-            price: 190,
+            price: 380,
             rarity: "uncommon"
         },
 
@@ -5045,7 +5045,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Armor of the ancient titans. +7 Defence, +5 HP. Effect: Size increase",
             icon: "â›°ï¸",
-            price: 400,
+            price: 800,
             rarity: "rare"
         },
 
@@ -5094,7 +5094,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Plate forged from adamantine. +8 Defence, +5 HP, +3 Magical Defence. Effect: Critical immunity",
             icon: "💍",
-            price: 750,
+            price: 1500,
             rarity: "rare"
         },
 
@@ -5175,7 +5175,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Armor of the demon lords. +9 Defence, +7 HP, +2 Stamina. Effect: Combat regeneration",
             icon: "ðŸ‘¹",
-            price: 1200,
+            price: 2400,
             rarity: "epic"
         },
 
@@ -5274,7 +5274,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Simple mage robes. +1 Magical Defence.",
             icon: "ðŸ§™â€â™‚ï¸",
-            price: 25,
+            price: 60,
             rarity: "common"
             , craftableItem: true,
             craftingMaterials: ["basic_fabric", "thread", "arcane_dust"]
@@ -5291,7 +5291,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Improved mage robes. +2 Magical Defence, +1 Magic.",
             icon: "ðŸ§™â€â™‚ï¸",
-            price: 45,
+            price: 100,
             rarity: "common"
         },
         scholar_robes: {
@@ -5306,7 +5306,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Academic robes for scholars. +1 Magical Defence, +2 Magic.",
             icon: "ðŸ§™â€â™‚ï¸",
-            price: 50,
+            price: 100,
             rarity: "common"
         },
 
@@ -5323,7 +5323,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Robes of a magical adept. +2 Magical Defence, +2 Magic, +1 Stamina.",
             icon: "ðŸ§™â€â™‚ï¸",
-            price: 90,
+            price: 180,
             rarity: "common"
         },
 
@@ -5339,7 +5339,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Robes woven with elemental magic. +3 Magical Defence, +3 Magic.",
             icon: "⚔️",
-            price: 100,
+            price: 200,
             rarity: "common"
         },
 
@@ -5374,7 +5374,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Silk robes enhanced with magic. +3 Magical Defence, +4 Magic. Effect: Reduced spell costs",
             icon: "âœ¨",
-            price: 200,
+            price: 400,
             rarity: "uncommon"
         },
 
@@ -5408,7 +5408,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Vestments crackling with electricity. +3 Magical Defence, +3 Magic, +2 Stamina. Effect: Lightning enchantment",
             icon: "âš¡",
-            price: 190,
+            price: 380,
             rarity: "uncommon"
         },
 
@@ -5442,7 +5442,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Robes touched by the void. +4 Magical Defence, +4 Magic, +2 HP. Effect: Necrotic enchantment",
             icon: "ðŸ•³ï¸",
-            price: 400,
+            price: 800,
             rarity: "rare"
         },
 
@@ -5491,7 +5491,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Robes that exist across planes. +6 Magical Defence, +6 Magic, +3 Stamina. Effect: Universal spellcasting",
             icon: "🧪Œ",
-            price: 750,
+            price: 1500,
             rarity: "rare"
         },
 
@@ -5572,7 +5572,7 @@ const ITEMS_DATA = {
             enchantmentSlots: 1,
             desc: "Vestments of cosmic oracles. +9 Magical Defence, +7 Magic, +3 HP. Effect: Future sight",
             icon: "ðŸ”®",
-            price: 1200,
+            price: 2400,
             rarity: "epic"
         },
 
@@ -5679,7 +5679,7 @@ const ITEMS_DATA = {
             specialEffects: ["Evasion Training (Enemy close-range attacks have disadvantage on you)"],
             desc: "Reinforced leather armor with metal studs. +2 Defence, +1 Speed. Effect: Evasion Training",
             icon: "ðŸ¥‹",
-            price: 120,
+            price: 240,
             rarity: "uncommon"
         },
 
@@ -5700,7 +5700,7 @@ const ITEMS_DATA = {
             specialEffects: ["Silent Movement (Movement doesn't trigger opportunity attacks)"],
             desc: "Lightweight elven chainmail. +2 Defence, +2 Speed. Effect: Silent Movement",
             icon: "ðŸ¥‹",
-            price: 150,
+            price: 300,
             rarity: "uncommon"
         },
 
@@ -5743,7 +5743,7 @@ const ITEMS_DATA = {
             specialEffects: ["Damage Reduction (Reduce all physical damage by 1)"],
             desc: "Steel scale armor. +3 Defence, +2 HP. Effect: Damage Reduction",
             icon: "ðŸ›¡ï¸",
-            price: 180,
+            price: 360,
             rarity: "uncommon"
         },
 
@@ -5764,7 +5764,7 @@ const ITEMS_DATA = {
             specialEffects: ["Endurance (Recover 1 stamina at start of each turn)"],
             desc: "Dwarven-crafted mail armor. +3 Defence, +1 HP, +1 Stamina. Effect: Endurance",
             icon: "ðŸ›¡ï¸",
-            price: 200,
+            price: 400,
             rarity: "uncommon"
         },
 
@@ -5786,7 +5786,7 @@ const ITEMS_DATA = {
             specialEffects: ["Spell Resistance (Magic attacks have 25% chance to fail)"],
             desc: "Heavy fortress plate armor. +4 Defence, +2 Magical Defence. Effect: Spell Resistance",
             icon: "ðŸ›¡ï¸",
-            price: 250,
+            price: 500,
             rarity: "uncommon"
         },
 
@@ -5807,7 +5807,7 @@ const ITEMS_DATA = {
             specialEffects: ["Turn Undead (Undead within 30ft have disadvantage on attacks)"],
             desc: "Holy paladin armor. +5 Defence, +1 Magical Defence. Effect: Turn Undead",
             icon: "ðŸ›¡ï¸",
-            price: 280,
+            price: 560,
             rarity: "uncommon"
         }
     },
@@ -5826,7 +5826,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A simple copper ring. +1 Defence.",
             icon: "ðŸ’",
-            price: 30,
+            price: 60,
             rarity: "common"
             , craftableItem: true,
             craftingMaterials: ["copper_ingot"]
@@ -5842,7 +5842,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A sturdy iron band. +1 Strength.",
             icon: "ðŸ’",
-            price: 30,
+            price: 60,
             rarity: "common"
             , craftableItem: true,
             craftingMaterials: ["iron_ingot"]
@@ -5864,7 +5864,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "An elegant silver ring. +1 Magic.",
             icon: "ðŸ’",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -5886,7 +5886,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring that enhances physical power. +2 Strength.",
             icon: "ðŸ’",
-            price: 60,
+            price: 120,
             rarity: "uncommon"
         },
         ring_of_precision: {
@@ -5907,7 +5907,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring that improves aim. +2 Accuracy.",
             icon: "ðŸ’",
-            price: 60,
+            price: 120,
             rarity: "uncommon"
         },
         ring_of_swiftness: {
@@ -5921,7 +5921,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring that increases agility. +2 Speed.",
             icon: "ðŸ’",
-            price: 60,
+            price: 120,
             rarity: "uncommon"
         },
         ring_of_vitality: {
@@ -5935,7 +5935,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring that bolsters health. +3 HP.",
             icon: "ðŸ’",
-            price: 60,
+            price: 120,
             rarity: "uncommon"
         },
         ring_of_energy: {
@@ -5949,7 +5949,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring that boosts endurance. +3 Stamina.",
             icon: "ðŸ’",
-            price: 60,
+            price: 120,
             rarity: "uncommon"
         },
 
@@ -5965,7 +5965,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring favored by warriors. +2 Strength, +1 Defence.",
             icon: "ðŸ’",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
         ring_of_the_mage: {
@@ -5985,7 +5985,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring cherished by mages. +2 Magic, +1 Magical Defence.",
             icon: "ðŸ’",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
         silver_ring: {
@@ -6050,7 +6050,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring worn by skilled scouts. +2 Speed, +1 Accuracy.",
             icon: "ðŸ’",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
         ring_of_protection: {
@@ -6101,7 +6101,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A ring that enhances all abilities. +2 to all stats.",
             icon: "ðŸ’",
-            price: 250,
+            price: 500,
             rarity: "rare"
         },
         ring_of_the_elements: {
@@ -6115,7 +6115,7 @@ const ITEMS_DATA = {
             specialEffects: ["Choose elemental resistance"],
             desc: "A ring attuned to elemental forces. +3 Magic, +2 Magical Defence. Effect: Choose elemental resistance.",
             icon: "ðŸ’",
-            price: 300,
+            price: 600,
             rarity: "rare"
         },
         ring_of_perfect_balance: {
@@ -6129,7 +6129,7 @@ const ITEMS_DATA = {
             specialEffects: ["Dual Action (You may use one physical skill and one magical skill in the same turn. You must skip your next turn.)"],
             desc: "A ring that balances physical and magical power. +2 Strength, +2 Magic, +2 Speed. Effect: Dual actions with rest penalty.",
             icon: "ðŸ’",
-            price: 350,
+            price: 700,
             rarity: "rare"
         },
 
@@ -6145,7 +6145,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A basic pendant for protection. +1 Magical Defence.",
             icon: "ðŸ“¿",
-            price: 25,
+            price: 60,
             rarity: "common"
             , craftableItem: true,
             craftingMaterials: ["copper_ingot", "thread"]
@@ -6161,7 +6161,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A charm that boosts vitality. +2 HP.",
             icon: "ðŸ“¿",
-            price: 35,
+            price: 60,
             rarity: "common"
             , craftableItem: true,
             craftingMaterials: ["silver_ingot", "vitality_essence"]
@@ -6177,7 +6177,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A charm that increases endurance. +2 Stamina.",
             icon: "ðŸ“¿",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
 
@@ -6194,7 +6194,7 @@ const ITEMS_DATA = {
             elementalAffinities: { resistances: { fire: -1 } },
             desc: "An amulet that protects against flames. +1 Magical Defence. Effect: Fire resistance.",
             icon: "⚔️",
-            price: 75,
+            price: 150,
             rarity: "uncommon"
             , craftableItem: true,
             craftingMaterials: ["silver_ingot", "fire_essence"]
@@ -6212,7 +6212,7 @@ const ITEMS_DATA = {
             elementalAffinities: { resistances: { ice: -1 } },
             desc: "An amulet that shields from frost. +1 Magical Defence. Effect: Ice resistance.",
             icon: "â„ï¸",
-            price: 75,
+            price: 150,
             rarity: "uncommon"
         },
 
@@ -6235,7 +6235,7 @@ const ITEMS_DATA = {
             elementalAffinities: { resistances: { thunder: -1 } },
             desc: "An amulet that guards against storms. +1 Magical Defence. Effect: Thunder resistance.",
             icon: "âš¡",
-            price: 75,
+            price: 150,
             rarity: "uncommon"
         },
 
@@ -6250,7 +6250,7 @@ const ITEMS_DATA = {
             specialEffects: ["Enhanced Healing (All healing effects increased by 25%)"],
             desc: "An amulet blessed by healers. +2 Magic. Effect: Improved healing.",
             icon: "ðŸ’š",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
 
@@ -6281,7 +6281,7 @@ const ITEMS_DATA = {
             specialEffects: ["Choose 2 resistances"],
             desc: "An amulet attuned to multiple elements. +2 Magical Defence, +1 Magic. Effect: Choose 2 resistances.",
             icon: "🧪ˆ",
-            price: 175,
+            price: 350,
             rarity: "uncommon"
         },
         silver_pendant: {
@@ -6339,7 +6339,7 @@ const ITEMS_DATA = {
             specialEffects: ["Spell Reflection (10% chance to reflect spells back at caster)"],
             desc: "An amulet that turns magic against itself. +3 Magical Defence. Effect: Spell reflection.",
             icon: "ðŸªž",
-            price: 200,
+            price: 400,
             rarity: "uncommon"
         },
 
@@ -6354,7 +6354,7 @@ const ITEMS_DATA = {
             specialEffects: ["Desperation Power (When reduced to 25% HP, gain +1 to all stats)"],
             desc: "An amulet that feeds on life energy. +3 HP, +2 Stamina. Effect: Low HP bonuses.",
             icon: "ðŸ’—",
-            price: 175,
+            price: 350,
             rarity: "uncommon"
         },
 
@@ -6385,7 +6385,7 @@ const ITEMS_DATA = {
             elementalAffinities: { resistances: { light: -1 } },
             desc: "An amulet blessed by divine forces. +2 Magic, +2 Magical Defence. Effect: Light resistance.",
             icon: "âœ¨",
-            price: 200,
+            price: 400,
             rarity: "uncommon"
         },
 
@@ -6431,7 +6431,7 @@ const ITEMS_DATA = {
             specialEffects: ["Universal Resistance (Resist 25% of all elemental damage)"],
             desc: "An amulet that protects against all forces. +5 Magical Defence, +2 Defence. Effect: All elemental resistance.",
             icon: "ðŸ›¡ï¸",
-            price: 400,
+            price: 800,
             rarity: "rare"
         },
 
@@ -6447,7 +6447,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A practical travel cloak. +1 Speed.",
             icon: "ðŸ§¥",
-            price: 45,
+            price: 100,
             rarity: "common"
         },
         scouts_cloak: {
@@ -6468,7 +6468,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A cloak favored by scouts. +1 Accuracy.",
             icon: "ðŸ§¥",
-            price: 45,
+            price: 100,
             rarity: "common"
         },
         simple_cape: {
@@ -6512,7 +6512,7 @@ const ITEMS_DATA = {
             specialEffects: ["Fleet Footed (+10% movement speed)"],
             desc: "A cloak that enhances speed. +2 Speed. Effect: Movement bonus.",
             icon: "ðŸ’¨",
-            price: 90,
+            price: 180,
             rarity: "uncommon"
         },
 
@@ -6585,7 +6585,7 @@ const ITEMS_DATA = {
             specialEffects: ["Elemental Attunement (Choose 1 element for resistance)"],
             desc: "A cloak attuned to elemental forces. +1 Speed, +1 Magical Defence. Effect: Choose resistance.",
             icon: "🧪€",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
 
@@ -6647,7 +6647,7 @@ const ITEMS_DATA = {
             elementalAffinities: { resistances: { fire: -3 } },
             desc: "A cloak wreathed in flames. +2 Speed, +1 Magical Defence. Effect: Fire immunity.",
             icon: "⚔️",
-            price: 250,
+            price: 500,
             rarity: "uncommon"
         },
 
@@ -6763,7 +6763,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "Sturdy leather boots for traveling. +1 Speed.",
             icon: "ðŸ¥¾",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
         travel_boots: {
@@ -6784,7 +6784,7 @@ const ITEMS_DATA = {
             specialEffects: ["Fleet Travel (+5% movement speed)"],
             desc: "Boots designed for long journeys. Effect: Movement speed bonus.",
             icon: "ðŸ‘¢",
-            price: 45,
+            price: 100,
             rarity: "common"
         },
         sturdy_boots: {
@@ -6828,7 +6828,7 @@ const ITEMS_DATA = {
             specialEffects: ["Enhanced Speed (+15% movement speed)"],
             desc: "Boots that enhance natural speed. +2 Speed. Effect: Movement bonus.",
             icon: "ðŸ’¨",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
 
@@ -6891,7 +6891,7 @@ const ITEMS_DATA = {
             specialEffects: ["Super Jump (Can jump twice normal distance)"],
             desc: "Boots that enhance jumping ability. +2 Speed. Effect: Enhanced jumping.",
             icon: "ðŸ¦˜",
-            price: 120,
+            price: 240,
             rarity: "uncommon"
         },
 
@@ -6938,7 +6938,7 @@ const ITEMS_DATA = {
             elementalAffinities: { resistances: { fire: -3 } },
             desc: "Boots that walk through flames. +2 Speed, +1 Defence. Effect: Fire immunity.",
             icon: "⚔️",
-            price: 250,
+            price: 500,
             rarity: "uncommon"
         },
 
@@ -7014,7 +7014,7 @@ const ITEMS_DATA = {
             specialEffects: ["Universal Travel (Can travel to any known location once per day)"],
             desc: "Boots that transcend distance. +5 Speed, +2 Accuracy, +2 Magical Defence. Effect: Dimensional travel.",
             icon: "ðŸš€",
-            price: 500,
+            price: 1000,
             rarity: "rare"
         },
 
@@ -7031,7 +7031,7 @@ const ITEMS_DATA = {
             specialEffects: ["Lucky Break (Reroll one failed roll per battle)"],
             desc: "A coin that brings fortune. Effect: Battle reroll.",
             icon: "ðŸª™",
-            price: 60,
+            price: 120,
             rarity: "common",
             craftableItem: true,
             craftingMaterials: ["gold_ingot", "luck_essence"]
@@ -7048,7 +7048,7 @@ const ITEMS_DATA = {
             specialEffects: ["Navigation (Never get lost)"],
             desc: "A reliable compass for navigation. +1 Accuracy. Effect: Navigation aid.",
             icon: "ðŸ§­",
-            price: 45,
+            price: 100,
             rarity: "common",
             craftableItem: true,
             craftingMaterials: ["iron_ingot", "crystal_shard"]
@@ -7065,7 +7065,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "Weights for strength training. +1 Strength, -1 Speed.",
             icon: "ðŸ‹ï¸",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
 
@@ -7098,7 +7098,7 @@ const ITEMS_DATA = {
             specialEffects: ["Skill Mastery (All skills cost 1 less stamina, minimum 1)"],
             desc: "Gloves that enhance dexterity. +1 Accuracy. Effect: Reduced skill costs.",
             icon: "ðŸ§¤",
-            price: 150,
+            price: 300,
             rarity: "uncommon",
             craftableItem: true,
             craftingMaterials: ["leather", "thread", "precision_essence"]
@@ -7176,7 +7176,7 @@ const ITEMS_DATA = {
             specialEffects: ["Power Strike (All attacks deal +1 damage)"],
             desc: "Gloves that enhance all strikes. +2 Strength, +1 Accuracy. Effect: Universal damage bonus.",
             icon: "ðŸ‘Š",
-            price: 250,
+            price: 500,
             rarity: "uncommon"
         },
 
@@ -7267,7 +7267,7 @@ const ITEMS_DATA = {
             specialEffects: ["Universal Mastery (All abilities cost 1 less stamina and have +5% crit chance)"],
             desc: "A crown of absolute mastery. +4 Magic, +3 Magical Defence, +2 Stamina. Effect: Universal enchantment.",
             icon: "ðŸ‘‘",
-            price: 500,
+            price: 1000,
             rarity: "rare"
         },
 
@@ -7293,7 +7293,7 @@ const ITEMS_DATA = {
             specialEffects: ["Crushing Blow (25% chance to deal +2 damage to armored enemies)"],
             desc: "Heavy club made from dense monster bones. +3 Strength. Crushing attacks have 25% chance to deal +2 damage to armored enemies.",
             icon: "ðŸ¦´",
-            price: 75,
+            price: 150,
             rarity: "common"
         },
 
@@ -7315,7 +7315,7 @@ const ITEMS_DATA = {
             specialEffects: ["Stone Adaptation (Reduces incoming physical damage by 1)"],
             desc: "Armor that adapts like living rock. +4 Defence, +2 HP. Reduces incoming physical damage by 1.",
             icon: "ðŸª¨",
-            price: 200,
+            price: 400,
             rarity: "uncommon"
         },
 
@@ -7338,7 +7338,7 @@ const ITEMS_DATA = {
             specialEffects: ["Armor Pierce (Ignores 2 points of enemy physical defense)", "Bleeding Strike (25% chance to cause bleeding for 2 turns)"],
             desc: "Twin daggers that pierce armor. +3 Speed, +2 Strength. Ignores 2 points of enemy physical defense. 25% chance to cause bleeding for 2 turns.",
             icon: "⚔️",
-            price: 180,
+            price: 360,
             rarity: "uncommon"
         },
 
@@ -7361,7 +7361,7 @@ const ITEMS_DATA = {
             elementalAffinities: { resistances: { fire: -1 } },
             desc: "Armor made from chromatic scales. +4 Defence, +2 Magical Defence, -1 Speed. 50% reduction to fire damage.",
             icon: "ðŸ‰",
-            price: 250,
+            price: 500,
             rarity: "uncommon"
         },
 
@@ -7407,7 +7407,7 @@ const ITEMS_DATA = {
             specialEffects: ["Stunning Blow (20% chance to stun enemy for 1 turn)", "Magic Damage (Deals additional magic damage equal to Magic Power)"],
             desc: "Heavy hammer with crystal head. +4 Strength, +2 Magic Power. 20% chance to stun enemy for 1 turn. Deals additional magic damage equal to Magic Power.",
             icon: "🏹",
-            price: 280,
+            price: 560,
             rarity: "uncommon"
         },
 
@@ -7429,7 +7429,7 @@ const ITEMS_DATA = {
             specialEffects: ["Critical Immunity (Cannot be critically hit)", "Flexible Defense (Reduces incoming damage by 2)"],
             desc: "Flexible armor that prevents critical hits. +6 Defence, +3 HP, +1 Speed. Cannot be critically hit. Reduces incoming damage by 2.",
             icon: "ðŸ¦—",
-            price: 400,
+            price: 800,
             rarity: "rare"
         },
 
@@ -7492,7 +7492,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A simple iron ring. +1 Strength.",
             icon: "ðŸ’",
-            price: 20,
+            price: 30,
             rarity: "common"
         },
         iron_pendant: {
@@ -7512,7 +7512,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A simple iron pendant. +1 Magical Defence.",
             icon: "ðŸ“¿",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
         leather_cloak: {
@@ -7532,7 +7532,7 @@ const ITEMS_DATA = {
             specialEffects: [],
             desc: "A basic leather cloak. +1 Speed, +1 Defence.",
             icon: "ðŸ‘˜",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
         guardian_shield: {
@@ -7578,7 +7578,7 @@ const ITEMS_DATA = {
             effect: { type: "heal", amount: 15, duration: 0 },
             desc: "A basic healing remedy crafted from regenerative tissue and venom sacs. Restores 15 HP instantly.",
             icon: "ðŸ§ª",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
 
@@ -7598,7 +7598,7 @@ const ITEMS_DATA = {
             effect: { type: "heal", amount: 10, duration: 0 },
             desc: "A basic healing potion. Restores 10 HP instantly.",
             icon: "ðŸ§ª",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
 
@@ -7619,7 +7619,7 @@ const ITEMS_DATA = {
             effect: { type: "heal", amount: 25, duration: 0 },
             desc: "A standard healing potion. Restores 25 HP instantly.",
             icon: "ðŸ§ª",
-            price: 50,
+            price: 100,
             rarity: "common"
         },
 
@@ -7640,7 +7640,7 @@ const ITEMS_DATA = {
             effect: { type: "heal", amount: 50, duration: 0 },
             desc: "A powerful healing potion. Restores 50 HP instantly.",
             icon: "ðŸ§ª",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
 
@@ -7661,7 +7661,7 @@ const ITEMS_DATA = {
             effect: { type: "stamina", amount: 10, duration: 0 },
             desc: "A basic stamina potion. Restores 10 Stamina instantly.",
             icon: "âš¡",
-            price: 20,
+            price: 30,
             rarity: "common"
         },
 
@@ -7702,7 +7702,7 @@ const ITEMS_DATA = {
             effect: { type: "restore_stamina", amount: 25, duration: 0 },
             desc: "Energizing potion made from energy glands and thick hide. Restores 25 stamina instantly.",
             icon: "âš¡",
-            price: 30,
+            price: 60,
             rarity: "common"
         },
 
@@ -7724,7 +7724,7 @@ const ITEMS_DATA = {
             effect: { type: "buff", stat: "strength", amount: 3, duration: 300 },
             desc: "A potion that temporarily increases strength. +3 Strength for 5 minutes.",
             icon: "ðŸ’ª",
-            price: 75,
+            price: 150,
             rarity: "uncommon"
         },
 
@@ -7745,7 +7745,7 @@ const ITEMS_DATA = {
             effect: { type: "buff", stat: "speed", amount: 3, duration: 300 },
             desc: "A potion that temporarily increases speed. +3 Speed for 5 minutes.",
             icon: "ðŸƒ",
-            price: 75,
+            price: 150,
             rarity: "uncommon"
         },
 
@@ -7766,7 +7766,7 @@ const ITEMS_DATA = {
             effect: { type: "buff", stat: "accuracy", amount: 3, duration: 300 },
             desc: "A potion that temporarily increases accuracy. +3 Accuracy for 5 minutes.",
             icon: "ðŸŽ¯",
-            price: 75,
+            price: 150,
             rarity: "uncommon"
         },
 
@@ -7787,7 +7787,7 @@ const ITEMS_DATA = {
             effect: { type: "cure_poison", duration: 300 },
             desc: "Neutralizes poison effects using venom sacs and anti-magic essence. Cures poison and provides immunity for 5 minutes.",
             icon: "ðŸ§ª",
-            price: 35,
+            price: 60,
             rarity: "common"
         },
 
@@ -7826,7 +7826,7 @@ const ITEMS_DATA = {
             effect: { type: "light", radius: 30, duration: 600 },
             desc: "A simple torch that provides light. Illuminates 30ft radius for 10 minutes.",
             icon: "⚔️",
-            price: 5,
+            price: 30,
             rarity: "common"
         },
 
@@ -7845,7 +7845,7 @@ const ITEMS_DATA = {
             effect: { type: "climbing", length: 50 },
             desc: "A sturdy rope for climbing and securing. 50ft length.",
             icon: "ðŸª¢",
-            price: 15,
+            price: 30,
             rarity: "common"
         },
 
@@ -7864,7 +7864,7 @@ const ITEMS_DATA = {
             effect: { type: "lockpicking", success_rate: 0.6 },
             desc: "A simple lockpick for opening locks. 60% success rate.",
             icon: "ðŸ”“",
-            price: 20,
+            price: 30,
             rarity: "common"
         },
 
@@ -7907,7 +7907,7 @@ const ITEMS_DATA = {
             effect: { type: "spell", spell: "heal", healing: "2d8", range: 30 },
             desc: "A scroll containing the Heal spell. Restores 2d8 HP to target within 30ft.",
             icon: "ðŸ“œ",
-            price: 60,
+            price: 120,
             rarity: "uncommon"
         },
 
@@ -7929,7 +7929,7 @@ const ITEMS_DATA = {
             effect: { type: "spell", spell: "thunder_bolt", damage: "2d8", range: 60 },
             desc: "A scroll containing the Thunder Bolt spell. Casts 2d8 thunder damage at 60ft range.",
             icon: "ðŸ“œ",
-            price: 70,
+            price: 100,
             rarity: "uncommon"
         },
 
@@ -7971,7 +7971,7 @@ const ITEMS_DATA = {
             effect: { type: "spell", spell: "teleport" },
             desc: "A scroll containing the Teleport spell. Teleports you and allies to a safe location.",
             icon: "ðŸ“œ",
-            price: 1000,
+            price: 2000,
             rarity: "rare"
         },
 
@@ -7993,7 +7993,7 @@ const ITEMS_DATA = {
             effect: { type: "spell", spell: "resurrection", target: "ally" },
             desc: "A scroll containing the Resurrection spell. Revives a fallen ally with 50% HP.",
             icon: "ðŸ“œ",
-            price: 300,
+            price: 600,
             rarity: "epic"
         },
 
@@ -8036,7 +8036,7 @@ const ITEMS_DATA = {
             effect: { type: "spell", spell: "invisibility", duration: 300 },
             desc: "A scroll containing the Invisibility spell. Makes you invisible for 5 minutes.",
             icon: "ðŸ“œ",
-            price: 150,
+            price: 300,
             rarity: "rare"
         },
 
@@ -8057,7 +8057,7 @@ const ITEMS_DATA = {
             effect: { type: "spell", spell: "haste", speed: 3, duration: 300 },
             desc: "A scroll containing the Haste spell. +3 Speed for 5 minutes.",
             icon: "ðŸ“œ",
-            price: 90,
+            price: 180,
             rarity: "uncommon"
         },
 
@@ -8078,7 +8078,7 @@ const ITEMS_DATA = {
             effect: { type: "spell", spell: "protection", defense: 5, duration: 600 },
             desc: "A scroll containing the Protection spell. +5 defense for 10 minutes.",
             icon: "ðŸ“œ",
-            price: 85,
+            price: 170,
             rarity: "uncommon"
         },
 
@@ -8120,7 +8120,7 @@ const ITEMS_DATA = {
             effect: { type: "spell", spell: "summon_familiar", duration: 1800 },
             desc: "A scroll containing the Summon Familiar spell. Summons a magical familiar for 30 minutes.",
             icon: "ðŸ“œ",
-            price: 200,
+            price: 400,
             rarity: "rare"
         },
 
@@ -8161,7 +8161,7 @@ const ITEMS_DATA = {
             effect: { type: "restore", hp: 8, stamina: 5 },
             desc: "Fresh baked bread. Restores 8 HP and 5 Stamina.",
             icon: "ðŸž",
-            price: 5,
+            price: 30,
             rarity: "common"
         },
 
@@ -8202,7 +8202,7 @@ const ITEMS_DATA = {
             effect: { type: "restore", hp: 20, stamina: 12 },
             desc: "A hearty meat stew. Restores 20 HP and 12 Stamina.",
             icon: "ðŸ–",
-            price: 15,
+            price: 30,
             rarity: "common"
         },
 
@@ -8224,7 +8224,7 @@ const ITEMS_DATA = {
             effect: { type: "restore", hp: 35, stamina: 20, lumen: 8 },
             desc: "A luxurious feast fit for royalty. Restores 35 HP, 20 Stamina, and grants 8 Lumen.",
             icon: "ðŸ½ï¸",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
 
@@ -8246,7 +8246,7 @@ const ITEMS_DATA = {
             effect: { type: "buff", stat: "stealth", amount: 5, duration: 300 },
             desc: "A potion that makes you nearly invisible. +5 Stealth for 5 minutes.",
             icon: "ðŸ‘»",
-            price: 120,
+            price: 240,
             rarity: "uncommon"
         },
 
@@ -8267,7 +8267,7 @@ const ITEMS_DATA = {
             effect: { type: "resistance", element: "fire", amount: 50, duration: 600 },
             desc: "A potion that provides fire resistance. 50% fire damage reduction for 10 minutes.",
             icon: "⚔️",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
 
@@ -8309,7 +8309,7 @@ const ITEMS_DATA = {
             effect: { type: "regeneration", amount: 5, duration: 600 },
             desc: "A potion that continuously heals you. Restores 5 HP every 30 seconds for 10 minutes.",
             icon: "ðŸ’š",
-            price: 150,
+            price: 300,
             rarity: "rare"
         },
 
@@ -8330,7 +8330,7 @@ const ITEMS_DATA = {
             effect: { type: "grant", lumen: 10 },
             desc: "A potion that restores magical energy. Grants 10 Lumen.",
             icon: "ðŸ”®",
-            price: 90,
+            price: 180,
             rarity: "uncommon"
         },
 
@@ -8351,7 +8351,7 @@ const ITEMS_DATA = {
             effect: { type: "resistance", element: "ice", amount: 50, duration: 600 },
             desc: "A potion that provides ice resistance. 50% ice damage reduction for 10 minutes.",
             icon: "â„ï¸",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
 
@@ -8372,7 +8372,7 @@ const ITEMS_DATA = {
             effect: { type: "resistance", element: "thunder", amount: 50, duration: 600 },
             desc: "A potion that provides thunder resistance. 50% thunder damage reduction for 10 minutes.",
             icon: "âš¡",
-            price: 100,
+            price: 200,
             rarity: "uncommon"
         },
 
@@ -8393,7 +8393,7 @@ const ITEMS_DATA = {
             effect: { type: "cure", condition: "poison" },
             desc: "A potion that cures poison effects.",
             icon: "ðŸ’Š",
-            price: 60,
+            price: 120,
             rarity: "common"
         },
 
@@ -8435,7 +8435,7 @@ const ITEMS_DATA = {
             effect: { type: "buff", stat: "vision", amount: 1, duration: 1800 },
             desc: "A potion that allows you to see in darkness. +1 Vision for 30 minutes.",
             icon: "ðŸ‘ï¸",
-            price: 70,
+            price: 100,
             rarity: "uncommon"
         },
 
@@ -8456,7 +8456,7 @@ const ITEMS_DATA = {
             effect: { type: "buff", stat: "water_breathing", duration: 600 },
             desc: "A potion that allows you to breathe underwater for 10 minutes.",
             icon: "🧪Š",
-            price: 85,
+            price: 170,
             rarity: "uncommon"
         },
 
@@ -8477,7 +8477,7 @@ const ITEMS_DATA = {
             effect: { type: "buff", stat: "feather_fall", duration: 300 },
             desc: "A potion that makes you fall slowly like a feather for 5 minutes.",
             icon: "ðŸƒ",
-            price: 65,
+            price: 100,
             rarity: "uncommon"
         },
 
@@ -8548,7 +8548,7 @@ const ITEMS_DATA = {
             effect: { type: "restore", hp: 15, stamina: 30, lumens: 5 },
             desc: "Rich chocolate cake with frosting. Restores 15 HP, 30 Stamina, and +5 Lumens.",
             icon: "ðŸ°",
-            price: 75,
+            price: 150,
             rarity: "common"
         }
     },
@@ -8565,7 +8565,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "A leather grip for weapon handles",
             icon: "ðŸŸ«",
-            price: 5,
+            price: 30,
             rarity: "common"
         },
         wooden_handle: {
@@ -8639,7 +8639,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Magical essence for sharpening weapons",
             icon: "âœ¨",
-            price: 15,
+            price: 30,
             rarity: "uncommon"
         },
         sharpening_stone: {
@@ -8664,7 +8664,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Magical essence for enhancing defense",
             icon: "ðŸ›¡ï¸",
-            price: 15,
+            price: 30,
             rarity: "uncommon"
         },
         rune_paper: {
@@ -8677,7 +8677,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Special paper for writing enchantments",
             icon: "ðŸ“œ",
-            price: 10,
+            price: 30,
             rarity: "common"
         },
         polish: {
@@ -8689,7 +8689,7 @@ const ITEMS_DATA = {
             craftableItem: false,
             desc: "Polish for maintaining equipment",
             icon: "ðŸ§½",
-            price: 5,
+            price: 30,
             rarity: "common"
         },
         oil: {
@@ -8726,7 +8726,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of thunder for enchantments",
             icon: "âš¡",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         earth_essence: {
@@ -8739,7 +8739,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of earth for enchantments",
             icon: "🧪",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         wind_essence: {
@@ -8752,7 +8752,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of wind for enchantments",
             icon: "ðŸ’¨",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         water_essence: {
@@ -8765,7 +8765,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of water for enchantments",
             icon: "ðŸ’§",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         magic_essence: {
@@ -8778,7 +8778,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Pure magical essence for enchantments",
             icon: "âœ¨",
-            price: 30,
+            price: 60,
             rarity: "uncommon"
         },
         fire_essence: {
@@ -8790,7 +8790,7 @@ const ITEMS_DATA = {
             craftableItem: false,
             desc: "Essence of fire for enchantments",
             icon: "⚔️",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         shadow_essence: {
@@ -8803,7 +8803,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of shadows for enchantments",
             icon: "🧪‘",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         poison_essence: {
@@ -8816,7 +8816,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of poison for enchantments",
             icon: "â˜ ï¸",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         strength_essence: {
@@ -8829,7 +8829,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of physical strength for enchantments",
             icon: "ðŸ’ª",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         precision_essence: {
@@ -8842,7 +8842,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of accuracy and precision for enchantments",
             icon: "ðŸŽ¯",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         ice_essence: {
@@ -8855,7 +8855,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of ice for enchantments",
             icon: "â„ï¸",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         holy_essence: {
@@ -8868,7 +8868,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of divine light for enchantments",
             icon: "âœ¨",
-            price: 30,
+            price: 60,
             rarity: "uncommon"
         },
         speed_essence: {
@@ -8881,7 +8881,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of swiftness for enchantments",
             icon: "âš¡",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         time_essence: {
@@ -8907,7 +8907,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of water waves for enchantments",
             icon: "🧪Š",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         elven_essence: {
@@ -8920,7 +8920,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of elven magic for enchantments",
             icon: "🧪¿",
-            price: 35,
+            price: 60,
             rarity: "rare"
         },
         dwarven_essence: {
@@ -8933,7 +8933,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of dwarven craftsmanship for enchantments",
             icon: "â›ï¸",
-            price: 35,
+            price: 60,
             rarity: "rare"
         },
         healing_essence: {
@@ -8946,7 +8946,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of healing magic for enchantments",
             icon: "ðŸ’š",
-            price: 30,
+            price: 60,
             rarity: "uncommon"
         },
         iron_essence: {
@@ -8959,7 +8959,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of iron for enchantments",
             icon: "ðŸ”©",
-            price: 15,
+            price: 30,
             rarity: "common"
         },
         crystal_essence: {
@@ -8972,7 +8972,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of crystal for enchantments",
             icon: "💍",
-            price: 30,
+            price: 60,
             rarity: "uncommon"
         },
         mithril_ingot: {
@@ -8985,7 +8985,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "A rare mithril ingot for crafting",
             icon: "⚔️",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
         herbs: {
@@ -9058,7 +9058,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Magical dust for enchantments",
             icon: "âœ¨",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         scale_fragment: {
@@ -9071,7 +9071,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Fragment of dragon or monster scales",
             icon: "ðŸ‰",
-            price: 15,
+            price: 30,
             rarity: "uncommon"
         },
         copper_ingot: {
@@ -9083,7 +9083,7 @@ const ITEMS_DATA = {
             craftableItem: false,
             desc: "Copper ingot for basic crafting",
             icon: "ðŸ”¶",
-            price: 5,
+            price: 30,
             rarity: "common"
         },
         iron_ingot: {
@@ -9108,7 +9108,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Steel ingot for advanced crafting",
             icon: "ðŸ”¶",
-            price: 15,
+            price: 30,
             rarity: "uncommon"
         },
         silver_ingot: {
@@ -9121,7 +9121,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Silver ingot for magical crafting",
             icon: "ðŸ”¶",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         gold_ingot: {
@@ -9134,7 +9134,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Gold ingot for master crafting",
             icon: "ðŸ”¶",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
         leather: {
@@ -9172,7 +9172,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Magical rock fragments for special crafting",
             icon: "ðŸª¨",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         crusher_molars: {
@@ -9198,7 +9198,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Basic training bow for crafting",
             icon: "ðŸ¹",
-            price: 10,
+            price: 30,
             rarity: "common"
         },
         hunter_bow: {
@@ -9211,7 +9211,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Hunter's bow for advanced crafting",
             icon: "ðŸ¹",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         ironbark_moss: {
@@ -9224,7 +9224,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Magical moss for staff crafting",
             icon: "🧪¿",
-            price: 15,
+            price: 30,
             rarity: "uncommon"
         },
         apprentice_staff: {
@@ -9250,7 +9250,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Journeyman staff for expert crafting",
             icon: "ðŸ¦¯",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         spear: {
@@ -9276,7 +9276,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Iron spear for advanced polearm crafting",
             icon: "ðŸ”±",
-            price: 15,
+            price: 30,
             rarity: "uncommon"
         },
         leather_boots: {
@@ -9302,7 +9302,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of mountain strength",
             icon: "ðŸ”ï¸",
-            price: 30,
+            price: 60,
             rarity: "rare"
         },
         luck_essence: {
@@ -9328,7 +9328,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Magical crystal shard for crafting",
             icon: "💍",
-            price: 35,
+            price: 60,
             rarity: "rare"
         },
         vitality_essence: {
@@ -9341,7 +9341,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of life and vitality",
             icon: "â¤ï¸",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         fire_essence: {
@@ -9354,7 +9354,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Essence of fire for magical crafting",
             icon: "⚔️",
-            price: 30,
+            price: 60,
             rarity: "uncommon"
         },
 
@@ -9369,7 +9369,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Metal-infused organic material with natural armor properties",
             icon: "âš™ï¸",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
         anti_magic_essence: {
@@ -9395,7 +9395,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Flexible yet strong armored plates that deflect critical strikes",
             icon: "ðŸ¦€",
-            price: 60,
+            price: 120,
             rarity: "rare"
         },
         regenerative_tissue: {
@@ -9408,7 +9408,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Living tissue that continues to heal even after removal",
             icon: "ðŸ’š",
-            price: 100,
+            price: 200,
             rarity: "epic"
         },
         phoenix_cells: {
@@ -9421,7 +9421,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Miraculous cells that can rapidly regenerate any wound",
             icon: "âœ¨",
-            price: 200,
+            price: 400,
             rarity: "legendary"
         },
         sharp_claws: {
@@ -9434,7 +9434,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Natural claws that retain their sharpness. Useful for crafting weapons",
             icon: "ðŸ¦…",
-            price: 15,
+            price: 30,
             rarity: "common"
         },
         razor_talons: {
@@ -9447,7 +9447,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Incredibly sharp claws that cause bleeding wounds",
             icon: "🪨",
-            price: 30,
+            price: 60,
             rarity: "uncommon"
         },
         venom_sacs: {
@@ -9460,7 +9460,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Poison glands that can be harvested for toxin extraction",
             icon: "ðŸŸ¢",
-            price: 45,
+            price: 100,
             rarity: "rare"
         },
         sharp_fangs: {
@@ -9499,7 +9499,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Sharp spikes from a creature's tail, perfect for projectiles",
             icon: "ðŸ¦‚",
-            price: 25,
+            price: 60,
             rarity: "uncommon"
         },
         combat_coordination_gland: {
@@ -9525,7 +9525,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Internal organ that produces intense fire. Contains fire essence",
             icon: "⚔️",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
         frost_core: {
@@ -9538,7 +9538,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "A crystalline organ that generates freezing temperatures",
             icon: "â„ï¸",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
         toxic_lung_tissue: {
@@ -9551,7 +9551,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Poisonous respiratory tissue that creates deadly toxins",
             icon: "â˜ ï¸",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
         storm_chamber: {
@@ -9564,7 +9564,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Bio-electric organ that generates thunder strikes",
             icon: "âš¡",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
         acid_bladder: {
@@ -9577,7 +9577,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Corrosive organ that produces powerful acid",
             icon: "ðŸŸ¢",
-            price: 35,
+            price: 60,
             rarity: "uncommon"
         },
         terror_essence: {
@@ -9590,7 +9590,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Concentrated fear that radiates from the creature's presence",
             icon: "ðŸ˜¨",
-            price: 45,
+            price: 100,
             rarity: "rare"
         },
         petrifying_eye: {
@@ -9603,7 +9603,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "An eye that retains its paralyzing power even after death",
             icon: "ðŸ‘ï¸",
-            price: 120,
+            price: 240,
             rarity: "epic"
         },
         phase_membrane: {
@@ -9616,7 +9616,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Translucent tissue that can bend light around itself",
             icon: "ðŸ‘»",
-            price: 150,
+            price: 300,
             rarity: "epic"
         },
         dimensional_node: {
@@ -9629,7 +9629,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "A small organ that can tear holes in space-time",
             icon: "âœ¨",
-            price: 180,
+            price: 360,
             rarity: "epic"
         },
         aerial_membrane: {
@@ -9642,7 +9642,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Lightweight wing membrane that defies gravity",
             icon: "ðŸ¦…",
-            price: 250,
+            price: 500,
             rarity: "legendary"
         },
         earth_shaper_claws: {
@@ -9655,7 +9655,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Specialized claws designed for digging through solid rock",
             icon: "ðŸ•³ï¸",
-            price: 35,
+            price: 60,
             rarity: "uncommon"
         },
         adhesive_pads: {
@@ -9668,7 +9668,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Natural climbing pads that stick to any surface",
             icon: "ðŸ§—",
-            price: 20,
+            price: 30,
             rarity: "common"
         },
         gill_slits: {
@@ -9681,7 +9681,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Functional gills that allow underwater breathing",
             icon: "ðŸŠ",
-            price: 30,
+            price: 60,
             rarity: "uncommon"
         },
         sonar_organ: {
@@ -9720,7 +9720,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Chemical signals that command respect from lesser creatures",
             icon: "ðŸº",
-            price: 60,
+            price: 120,
             rarity: "rare"
         },
         scent_glands: {
@@ -9733,7 +9733,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Glands that produce natural scent-masking compounds",
             icon: "ðŸ‘ƒ",
-            price: 15,
+            price: 30,
             rarity: "common"
         },
         giant_essence: {
@@ -9746,7 +9746,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Concentrated essence of giant strength and power",
             icon: "ðŸ”ï¸",
-            price: 90,
+            price: 180,
             rarity: "epic"
         },
         storm_organ: {
@@ -9759,7 +9759,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Bio-electric organ that generates storm energy",
             icon: "🧪©ï¸",
-            price: 65,
+            price: 100,
             rarity: "rare"
         },
         growth_hormone_gland: {
@@ -9785,7 +9785,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Pure spirit energy that exists between dimensions",
             icon: "ðŸ‘»",
-            price: 300,
+            price: 600,
             rarity: "legendary"
         },
         memory_crystal: {
@@ -9798,7 +9798,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Crystallized knowledge from an ancient mind",
             icon: "ðŸ“š",
-            price: 400,
+            price: 800,
             rarity: "legendary"
         },
         nature_essence: {
@@ -9811,7 +9811,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "Pure essence of natural life force, useful for herbalism",
             icon: "🧪±",
-            price: 35,
+            price: 60,
             rarity: "uncommon"
         },
         elemental_heart: {
@@ -9824,7 +9824,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "The core of an elemental being, pulsing with pure elemental energy",
             icon: "ðŸ’“",
-            price: 200,
+            price: 400,
             rarity: "epic"
         },
         void_essence: {
@@ -9850,7 +9850,7 @@ const ITEMS_DATA = {
             monsterItem: true,
             desc: "A crystal that exists outside normal time flow",
             icon: "â°",
-            price: 500,
+            price: 1000,
             rarity: "legendary"
         },
 
@@ -9865,7 +9865,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Fresh mint leaves with a cooling effect. Used in alchemy and cooking",
             icon: "🧪±",
-            price: 5,
+            price: 30,
             rarity: "common"
         },
         moonbell_flower: {
@@ -9878,7 +9878,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "A rare flower that blooms only under moonlight. Highly magical",
             icon: "🧪™",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         crystal_sage: {
@@ -9891,7 +9891,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Sage infused with crystal energy. Enhances mental clarity",
             icon: "💍",
-            price: 50,
+            price: 100,
             rarity: "rare"
         },
         phoenix_petal: {
@@ -9904,7 +9904,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "A petal from the legendary Phoenix Flower. Grants rebirth properties",
             icon: "🧪º",
-            price: 100,
+            price: 200,
             rarity: "epic"
         },
         cave_salt: {
@@ -9917,7 +9917,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Pure salt crystals from deep caves. Preserves and flavors food",
             icon: "ðŸ§‚",
-            price: 10,
+            price: 30,
             rarity: "common"
         },
         fire_spice: {
@@ -9930,7 +9930,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Spicy seasoning that warms the body and soul",
             icon: "🧪¶ï¸",
-            price: 10,
+            price: 30,
             rarity: "uncommon"
         },
         honey_crystal: {
@@ -9943,7 +9943,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Crystallized honey from giant bees. Sweet and energizing",
             icon: "ðŸ¯",
-            price: 20,
+            price: 30,
             rarity: "uncommon"
         },
         aged_wine: {
@@ -9969,7 +9969,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Old parchment with faded writings. Contains forgotten knowledge",
             icon: "ðŸ“œ",
-            price: 30,
+            price: 60,
             rarity: "uncommon"
         },
         runic_stone: {
@@ -9982,7 +9982,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Stone carved with ancient runes. Holds magical power",
             icon: "ðŸ—¿",
-            price: 100,
+            price: 200,
             rarity: "rare"
         },
         timeworn_gear: {
@@ -9995,7 +9995,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Ancient mechanical component. Still functional after centuries",
             icon: "âš™ï¸",
-            price: 100,
+            price: 200,
             rarity: "rare"
         },
         soul_fragment: {
@@ -10008,7 +10008,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Fragment of an ancient soul. Dangerous but powerful",
             icon: "ðŸ‘»",
-            price: 200,
+            price: 400,
             rarity: "epic"
         },
 
@@ -10023,7 +10023,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Natural painkiller. Restores 15 HP instantly",
             icon: "ðŸƒ",
-            price: 25,
+            price: 60,
             rarity: "common"
         },
         energy_berry: {
@@ -10121,7 +10121,7 @@ const ITEMS_DATA = {
             effect: { type: "restore", hp: 25, stamina: 15, lumen: 5 },
             desc: "Magical bread that sustains for days. Restores 25 HP, 15 Stamina, and grants 5 Lumen.",
             icon: "ðŸž",
-            price: 45,
+            price: 100,
             rarity: "rare"
         },
         dwarven_ale: {
@@ -10150,7 +10150,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Ancient compass that always points to treasure. +20% chance to find rare items",
             icon: "ðŸ§­",
-            price: 150,
+            price: 300,
             rarity: "uncommon"
         },
         scholars_monocle: {
@@ -10163,7 +10163,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Magical monocle that reveals hidden knowledge. +15% experience from archaeology",
             icon: "ðŸ”",
-            price: 100,
+            price: 200,
             rarity: "rare"
         },
         time_worn_key: {
@@ -10176,7 +10176,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Ancient key that opens forgotten doors. Required for some ruins",
             icon: "ðŸ—ï¸",
-            price: 200,
+            price: 400,
             rarity: "rare"
         },
         crystal_orb: {
@@ -10189,7 +10189,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Mystical orb that reveals the location of nearby secrets",
             icon: "ðŸ”®",
-            price: 300,
+            price: 600,
             rarity: "epic"
         },
         golden_idol: {
@@ -10202,7 +10202,7 @@ const ITEMS_DATA = {
             discoverableItem: true,
             desc: "Priceless golden statue from a lost civilization. Extremely valuable",
             icon: "ðŸº",
-            price: 1000,
+            price: 2000,
             rarity: "epic"
         },
         royal_seal: {
@@ -10258,6 +10258,884 @@ const ITEMS_DATA = {
             icon: "â—¼ï¸",
             price: 7500,
             rarity: "legendary"
+        }
+    },
+
+    // ENCHANTMENTS - Magical enhancements for weapons and armor
+    // WEAPON ENCHANTMENTS
+    sharpness: {
+        id: "sharpness",
+        name: "Sharpness Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "iron_ingot", quantity: 1 },
+            { id: "sharpening_stone", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "weapon_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "⚔️",
+        desc: "Increases weapon damage by 1d4 and adds +1 Strength",
+        effects: {
+            damageBonus: "1d4",
+            statModifiers: { strength: 1 }
+        }
+    },
+
+    flaming_enchantment: {
+        id: "flaming_enchantment",
+        name: "Flaming Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "fire_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "iron_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "weapon_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "🔥",
+        desc: "Weapon deals +1d6 fire damage and has 20% chance to burn target",
+        effects: {
+            elementalDamage: "1d6 fire",
+            specialEffects: ["Burn (20% chance to apply burn for 2 turns)"],
+            statModifiers: { magicPower: 1 }
+        }
+    },
+
+    // ARMOR ENCHANTMENTS
+    protection_enchantment: {
+        id: "protection_enchantment",
+        name: "Protection Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "iron_ingot", quantity: 1 },
+            { id: "defense_essence", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "armor_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "🛡️",
+        desc: "Increases physical defense by 2",
+        effects: {
+            statModifiers: { physicalDefence: 2 }
+        }
+    },
+
+    accuracy_enchantment: {
+        id: "accuracy_enchantment",
+        name: "Accuracy Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "precision_essence", quantity: 1 },
+            { id: "crystal_shard", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "weapon_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "🎯",
+        desc: "Improves hit chance and precision (+2 Accuracy)",
+        effects: {
+            statModifiers: { accuracy: 2 }
+        }
+    },
+
+    swiftness_enchantment: {
+        id: "swiftness_enchantment",
+        name: "Swiftness Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "wind_essence", quantity: 1 },
+            { id: "steel_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "weapon_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "💨",
+        desc: "Increases attack speed and agility (+2 Speed)",
+        effects: {
+            statModifiers: { speed: 2 }
+        }
+    },
+
+    frost_enchantment: {
+        id: "frost_enchantment",
+        name: "Frost Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "ice_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "iron_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "weapon_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "❄️",
+        desc: "Weapon deals +1d6 ice damage and has 20% chance to slow target",
+        effects: {
+            elementalDamage: "1d6 ice",
+            specialEffects: ["Slow (20% chance to reduce target speed by 2 for 2 turns)"],
+            statModifiers: { magicPower: 1 }
+        }
+    },
+
+    thunder_enchantment: {
+        id: "thunder_enchantment",
+        name: "Thunder Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "thunder_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "iron_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "weapon_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "⚡",
+        desc: "Weapon deals +1d6 thunder damage and has 20% chance to stun target",
+        effects: {
+            elementalDamage: "1d6 thunder",
+            specialEffects: ["Stun (20% chance to stun target for 1 turn)"],
+            statModifiers: { magicPower: 1 }
+        }
+    },
+
+    radiant_enchantment: {
+        id: "radiant_enchantment",
+        name: "Radiant Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "light_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "iron_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "weapon_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "✨",
+        desc: "Weapon deals +1d6 radiant damage and has 20% chance to blind target",
+        effects: {
+            elementalDamage: "1d6 radiant",
+            specialEffects: ["Blind (20% chance to blind target for 1 turn)"],
+            statModifiers: { magicPower: 1 }
+        }
+    },
+
+    vampiric_enchantment: {
+        id: "vampiric_enchantment",
+        name: "Vampiric Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "life_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "steel_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "weapon_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🩸",
+        desc: "Weapon heals wielder for 25% of damage dealt",
+        effects: {
+            specialEffects: ["Life Steal (Heal for 25% of damage dealt)"],
+            statModifiers: { strength: 2, magicPower: 1 }
+        }
+    },
+
+    critical_enchantment: {
+        id: "critical_enchantment",
+        name: "Critical Strike Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "precision_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "steel_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "weapon_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "💥",
+        desc: "Increases critical hit chance by 15% and critical damage by 1d6",
+        effects: {
+            specialEffects: ["Critical Boost (+15% crit chance, +1d6 crit damage)"],
+            statModifiers: { accuracy: 3, strength: 1 }
+        }
+    },
+
+    piercing_enchantment: {
+        id: "piercing_enchantment",
+        name: "Piercing Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "piercing_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "steel_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "weapon_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🗡️",
+        desc: "Weapon ignores 2 points of enemy physical defense",
+        effects: {
+            specialEffects: ["Armor Pierce (Ignores 2 points of physical defense)"],
+            statModifiers: { strength: 2, accuracy: 2 }
+        }
+    },
+
+    magic_resistance_enchantment: {
+        id: "magic_resistance_enchantment",
+        name: "Magic Resistance Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "crystal_shard", quantity: 1 },
+            { id: "magic_essence", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "armor_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "🔮",
+        desc: "Increases magical defense by 2",
+        effects: {
+            statModifiers: { magicalDefence: 2 }
+        }
+    },
+
+    vitality_enchantment: {
+        id: "vitality_enchantment",
+        name: "Vitality Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "life_essence", quantity: 1 },
+            { id: "herbs", quantity: 2 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "armor_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "❤️",
+        desc: "Increases maximum HP by 5",
+        effects: {
+            statModifiers: { hp: 5 }
+        }
+    },
+
+    fire_resistance_enchantment: {
+        id: "fire_resistance_enchantment",
+        name: "Fire Resistance Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "fire_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "defense_essence", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "armor_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "🔥",
+        desc: "Reduces fire damage by 50% and provides immunity to burn",
+        effects: {
+            specialEffects: ["Fire Resistance (50% fire damage reduction)", "Burn Immunity"],
+            statModifiers: { magicalDefence: 1 }
+        }
+    },
+
+    ice_resistance_enchantment: {
+        id: "ice_resistance_enchantment",
+        name: "Ice Resistance Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "ice_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "defense_essence", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "armor_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "❄️",
+        desc: "Reduces ice damage by 50% and provides immunity to slow",
+        effects: {
+            specialEffects: ["Ice Resistance (50% ice damage reduction)", "Slow Immunity"],
+            statModifiers: { magicalDefence: 1 }
+        }
+    },
+
+    thunder_resistance_enchantment: {
+        id: "thunder_resistance_enchantment",
+        name: "Thunder Resistance Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "thunder_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "defense_essence", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "armor_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "⚡",
+        desc: "Reduces thunder damage by 50% and provides immunity to stun",
+        effects: {
+            specialEffects: ["Thunder Resistance (50% thunder damage reduction)", "Stun Immunity"],
+            statModifiers: { magicalDefence: 1 }
+        }
+    },
+
+    regeneration_enchantment: {
+        id: "regeneration_enchantment",
+        name: "Regeneration Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "life_essence", quantity: 3 },
+            { id: "herbs", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "armor_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🌱",
+        desc: "Regenerates 2 HP per turn in combat",
+        effects: {
+            specialEffects: ["Regeneration (Heal 2 HP per turn in combat)"],
+            statModifiers: { hp: 3, stamina: 2 }
+        }
+    },
+
+    spell_warding_enchantment: {
+        id: "spell_warding_enchantment",
+        name: "Spell Warding Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "magic_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "defense_essence", quantity: 2 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "armor_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🔮",
+        desc: "Immune to all magical status effects and reduces magic damage by 25%",
+        effects: {
+            specialEffects: ["Magic Immunity (Immune to all magical status effects)", "Magic Resistance (25% magic damage reduction)"],
+            statModifiers: { magicalDefence: 3 }
+        }
+    },
+
+    fortification_enchantment: {
+        id: "fortification_enchantment",
+        name: "Fortification Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "defense_essence", quantity: 3 },
+            { id: "steel_ingot", quantity: 2 },
+            { id: "crystal_shard", quantity: 2 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "armor_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🏰",
+        desc: "Increases all defenses by 3 and provides immunity to critical hits",
+        effects: {
+            specialEffects: ["Critical Immunity (Cannot be critically hit)"],
+            statModifiers: { physicalDefence: 3, magicalDefence: 3 }
+        }
+    },
+
+    // ADDITIONAL WEAPON ENCHANTMENTS
+    poison_enchantment: {
+        id: "poison_enchantment",
+        name: "Poison Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "poison_essence", quantity: 1 },
+            { id: "herbs", quantity: 2 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "weapon_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "☠️",
+        desc: "Weapon deals +1d4 poison damage over time",
+        effects: {
+            elementalDamage: "1d4 poison",
+            specialEffects: ["Poison (1d4 damage per turn for 3 turns)"],
+            statModifiers: { magicPower: 1 }
+        }
+    },
+
+    force_enchantment: {
+        id: "force_enchantment",
+        name: "Force Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "force_essence", quantity: 1 },
+            { id: "crystal_shard", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "weapon_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "💥",
+        desc: "Increases weapon damage and knockback effect",
+        effects: {
+            statModifiers: { strength: 2 }
+        }
+    },
+
+    shadow_enchantment: {
+        id: "shadow_enchantment",
+        name: "Shadow Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "shadow_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "iron_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "weapon_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "🌑",
+        desc: "Weapon deals +1d6 shadow damage and has 20% chance to cause fear",
+        effects: {
+            elementalDamage: "1d6 shadow",
+            specialEffects: ["Fear (20% chance to cause target to flee for 1 turn)"],
+            statModifiers: { magicPower: 1 }
+        }
+    },
+
+    holy_enchantment: {
+        id: "holy_enchantment",
+        name: "Holy Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "holy_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "iron_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "weapon_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "✨",
+        desc: "Weapon deals +1d6 holy damage and has 20% chance to purify",
+        effects: {
+            elementalDamage: "1d6 holy",
+            specialEffects: ["Purify (20% chance to remove all debuffs from target)"],
+            statModifiers: { magicPower: 1 }
+        }
+    },
+
+    chaos_enchantment: {
+        id: "chaos_enchantment",
+        name: "Chaos Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "magic_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "steel_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "weapon_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🌀",
+        desc: "Weapon deals random elemental damage and has 30% chance for random effect",
+        effects: {
+            specialEffects: ["Chaos (Random 1d6 elemental damage + random status effect)"],
+            statModifiers: { strength: 2, magicPower: 2 }
+        }
+    },
+
+    executioner_enchantment: {
+        id: "executioner_enchantment",
+        name: "Executioner Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "shadow_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "steel_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "weapon_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "⚔️",
+        desc: "Weapon deals +2d6 damage to enemies below 25% HP",
+        effects: {
+            specialEffects: ["Executioner (+2d6 damage vs enemies below 25% HP)"],
+            statModifiers: { strength: 3 }
+        }
+    },
+
+    berserker_enchantment: {
+        id: "berserker_enchantment",
+        name: "Berserker Enchantment",
+        type: "enchantment",
+        subcategory: "Weapon Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "fire_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "steel_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "weapon_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "😡",
+        desc: "Weapon deals +1d6 damage for each 10% HP lost",
+        effects: {
+            specialEffects: ["Berserker (+1d6 damage per 10% HP lost)"],
+            statModifiers: { strength: 2, speed: 1 }
+        }
+    },
+
+    // ADDITIONAL ARMOR ENCHANTMENTS
+    stamina_boost_enchantment: {
+        id: "stamina_boost_enchantment",
+        name: "Stamina Boost Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "magic_essence", quantity: 1 },
+            { id: "crystal_shard", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "armor_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "⚡",
+        desc: "Increases maximum stamina by 5",
+        effects: {
+            statModifiers: { stamina: 5 }
+        }
+    },
+
+    speed_boost_enchantment: {
+        id: "speed_boost_enchantment",
+        name: "Speed Boost Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "wind_essence", quantity: 1 },
+            { id: "steel_ingot", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_basic"],
+        enchantmentType: "armor_enchantment",
+        tier: 1,
+        price: 50,
+        rarity: "common",
+        icon: "💨",
+        desc: "Increases movement and action speed (+2 Speed)",
+        effects: {
+            statModifiers: { speed: 2 }
+        }
+    },
+
+    poison_resistance_enchantment: {
+        id: "poison_resistance_enchantment",
+        name: "Poison Resistance Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "poison_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "defense_essence", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "armor_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "☠️",
+        desc: "Reduces poison damage by 50% and provides immunity to poison",
+        effects: {
+            specialEffects: ["Poison Resistance (50% poison damage reduction)", "Poison Immunity"],
+            statModifiers: { magicalDefence: 1 }
+        }
+    },
+
+    shadow_resistance_enchantment: {
+        id: "shadow_resistance_enchantment",
+        name: "Shadow Resistance Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "shadow_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "defense_essence", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "armor_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "🌑",
+        desc: "Reduces shadow damage by 50% and provides immunity to fear",
+        effects: {
+            specialEffects: ["Shadow Resistance (50% shadow damage reduction)", "Fear Immunity"],
+            statModifiers: { magicalDefence: 1 }
+        }
+    },
+
+    holy_resistance_enchantment: {
+        id: "holy_resistance_enchantment",
+        name: "Holy Resistance Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: true,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "holy_essence", quantity: 2 },
+            { id: "crystal_shard", quantity: 1 },
+            { id: "defense_essence", quantity: 1 }
+        ],
+        requiredSkills: ["enchanting_advanced"],
+        enchantmentType: "armor_enchantment",
+        tier: 2,
+        price: 150,
+        rarity: "uncommon",
+        icon: "✨",
+        desc: "Reduces holy damage by 50% and provides immunity to purify",
+        effects: {
+            specialEffects: ["Holy Resistance (50% holy damage reduction)", "Purify Immunity"],
+            statModifiers: { magicalDefence: 1 }
+        }
+    },
+
+    adaptive_enchantment: {
+        id: "adaptive_enchantment",
+        name: "Adaptive Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "magic_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "defense_essence", quantity: 2 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "armor_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🌈",
+        desc: "Grants 25% resistance to all elemental damage types",
+        effects: {
+            specialEffects: ["Adaptive Resistance (25% resistance to all elements)"],
+            statModifiers: { physicalDefence: 2, magicalDefence: 2 }
+        }
+    },
+
+    phoenix_enchantment: {
+        id: "phoenix_enchantment",
+        name: "Phoenix Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "life_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "life_essence", quantity: 2 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "armor_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🔥",
+        desc: "Revives with 50% HP when reduced to 0 HP (once per combat)",
+        effects: {
+            specialEffects: ["Phoenix Rebirth (Revive at 50% HP when killed, once per combat)"],
+            statModifiers: { hp: 5, stamina: 3 }
+        }
+    },
+
+    guardian_enchantment: {
+        id: "guardian_enchantment",
+        name: "Guardian Enchantment",
+        type: "enchantment",
+        subcategory: "Armor Enchantment",
+        shopItem: false,
+        craftableItem: true,
+        craftingCategory: "Enchanting",
+        craftingMaterials: [
+            { id: "defense_essence", quantity: 3 },
+            { id: "crystal_shard", quantity: 2 },
+            { id: "defense_essence", quantity: 2 }
+        ],
+        requiredSkills: ["enchanting_master"],
+        enchantmentType: "armor_enchantment",
+        tier: 3,
+        price: 400,
+        rarity: "rare",
+        icon: "🛡️",
+        desc: "Reduces all incoming damage by 2 and reflects 25% back to attacker",
+        effects: {
+            specialEffects: ["Damage Reduction (Reduce all damage by 2)", "Damage Reflection (25% damage reflected to attacker)"],
+            statModifiers: { physicalDefence: 4, magicalDefence: 4 }
         }
     }
 }

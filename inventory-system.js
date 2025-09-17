@@ -876,20 +876,9 @@ class InventorySystem {
 
     // Find enchantment by ID
     findEnchantmentById(enchantmentId) {
-        if (typeof ENCHANTMENTS_DATA !== 'undefined') {
-            // Check weapons enchantments
-            if (ENCHANTMENTS_DATA.weapons && ENCHANTMENTS_DATA.weapons[enchantmentId]) {
-                return ENCHANTMENTS_DATA.weapons[enchantmentId]
-            }
-            // Check armor enchantments
-            if (ENCHANTMENTS_DATA.armor && ENCHANTMENTS_DATA.armor[enchantmentId]) {
-                return ENCHANTMENTS_DATA.armor[enchantmentId]
-            }
-        }
-
-
-
-        return null
+        // Search through all enchantments to find the one with matching ID
+        const allEnchantments = getAllEnchantments()
+        return allEnchantments.find(enchantment => enchantment.id === enchantmentId)
     }
 
     // Equip an enchantment to a weapon or armor
