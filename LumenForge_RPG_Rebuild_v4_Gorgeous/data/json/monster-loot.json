@@ -1,0 +1,431 @@
+{
+  "tough_skin": {
+    "id": "thick_hide",
+    "name": "Thick Hide",
+    "icon": "🟫",
+    "desc": "Tough leather from a resilient creature. Can be crafted into basic armor.",
+    "rarity": "common",
+    "type": "material",
+    "price": {
+      "copper": 50
+    }
+  },
+  "rock_skin": {
+    "id": "living_rock_fragments",
+    "name": "Living Rock Fragments",
+    "icon": "🪨",
+    "desc": "Stone-like material that retains some of the creature's defensive properties.",
+    "rarity": "uncommon",
+    "type": "material",
+    "price": {
+      "silver": 2
+    }
+  },
+  "metal_skin": {
+    "id": "metallic_fragments",
+    "name": "Metallic Fragments",
+    "icon": "⚙️",
+    "desc": "Metal-infused organic material with natural armor properties.",
+    "rarity": "rare",
+    "type": "material",
+    "price": {
+      "silver": 8
+    }
+  },
+  "magical_resistance": {
+    "id": "anti_magic_essence",
+    "name": "Anti-Magic Essence",
+    "icon": "🔮",
+    "desc": "A crystalline substance that repels magical energy.",
+    "rarity": "uncommon",
+    "type": "essence",
+    "price": {
+      "silver": 2
+    }
+  },
+  "armored_plates": {
+    "id": "segmented_carapace",
+    "name": "Segmented Carapace",
+    "icon": "🦀",
+    "desc": "Flexible yet strong armored plates that deflect critical strikes.",
+    "rarity": "rare",
+    "type": "material",
+    "price": {
+      "silver": 8
+    }
+  },
+  "regeneration": {
+    "id": "regenerative_tissue",
+    "name": "Regenerative Tissue",
+    "icon": "💚",
+    "desc": "Living tissue that continues to heal even after removal.",
+    "rarity": "epic",
+    "type": "organic",
+    "price": {
+      "silver": 25
+    }
+  },
+  "rapid_healing": {
+    "id": "phoenix_cells",
+    "name": "Phoenix Cells",
+    "icon": "✨",
+    "desc": "Miraculous cells that can rapidly regenerate any wound.",
+    "rarity": "legendary",
+    "type": "organic",
+    "price": {
+      "gold": 2
+    }
+  },
+  "claws": {
+    "id": "sharp_claws",
+    "name": "Sharp Claws",
+    "icon": "🦅",
+    "desc": "Natural claws that retain their sharpness. Useful for crafting weapons.",
+    "rarity": "common",
+    "type": "material",
+    "price": {
+      "copper": 50
+    }
+  },
+  "razor_claws": {
+    "id": "razor_talons",
+    "name": "Razor Talons",
+    "icon": "🩸",
+    "desc": "Incredibly sharp claws that cause bleeding wounds.",
+    "rarity": "uncommon",
+    "type": "material",
+    "price": {
+      "silver": 2
+    }
+  },
+  "venomous_claws": {
+    "id": "venom_sacs",
+    "name": "Venom Sacs",
+    "icon": "🟢",
+    "desc": "Poison glands that can be harvested for toxin extraction.",
+    "rarity": "rare",
+    "type": "organic",
+    "price": {
+      "silver": 8
+    }
+  },
+  "bite_attack": {
+    "id": "sharp_fangs",
+    "name": "Sharp Fangs",
+    "icon": "🦷",
+    "desc": "Pointed teeth perfect for piercing attacks.",
+    "rarity": "common",
+    "type": "material",
+    "price": {
+      "copper": 50
+    }
+  },
+  "crushing_bite": {
+    "id": "crusher_molars",
+    "name": "Crusher Molars",
+    "icon": "💀",
+    "desc": "Massive teeth capable of crushing through armor.",
+    "rarity": "uncommon",
+    "type": "material",
+    "price": {
+      "silver": 2
+    }
+  },
+  "tail_swipe": {
+    "id": "flexible_tail_section",
+    "name": "Flexible Tail Section",
+    "icon": "🦎",
+    "desc": "A section of powerful tail muscle for crafting whips.",
+    "rarity": "common",
+    "type": "material",
+    "price": {
+      "copper": 50
+    }
+  },
+  "spiked_tail": {
+    "id": "tail_spikes",
+    "name": "Tail Spikes",
+    "icon": "🦂",
+    "desc": "Sharp spikes from a creature's tail, perfect for projectiles.",
+    "rarity": "uncommon",
+    "type": "material",
+    "price": {
+      "silver": 2
+    }
+  },
+  "multiattack": {
+    "id": "combat_coordination_gland",
+    "name": "Combat Coordination Gland",
+    "icon": "⚔️",
+    "desc": "A rare gland that enhances reflexes and attack coordination.",
+    "rarity": "epic",
+    "type": "organic",
+    "price": {
+      "silver": 25
+    }
+  },
+  "fire_breath": {
+    "id": "flame_gland",
+    "name": "Flame Gland",
+    "icon": "🔥",
+    "desc": "Internal organ that produces intense fire. Contains fire essence.",
+    "rarity": "rare",
+    "type": "organ",
+    "price": {
+      "silver": 8
+    }
+  },
+  "ice_breath": {
+    "id": "frost_core",
+    "name": "Frost Core",
+    "icon": "❄️",
+    "desc": "A crystalline organ that generates freezing temperatures.",
+    "rarity": "rare",
+    "type": "organ",
+    "price": {
+      "silver": 8
+    }
+  },
+  "poison_breath": {
+    "id": "toxic_lung_tissue",
+    "name": "Toxic Lung Tissue",
+    "icon": "☠️",
+    "desc": "Poisonous respiratory tissue that creates deadly toxins.",
+    "rarity": "rare",
+    "type": "organ",
+    "price": {
+      "silver": 8
+    }
+  },
+  "lightning_breath": {
+    "id": "storm_chamber",
+    "name": "Storm Chamber",
+    "icon": "⚡",
+    "desc": "Bio-electric organ that generates lightning strikes.",
+    "rarity": "rare",
+    "type": "organ",
+    "price": {
+      "silver": 8
+    }
+  },
+  "acid_spit": {
+    "id": "acid_bladder",
+    "name": "Acid Bladder",
+    "icon": "🟢",
+    "desc": "Corrosive organ that produces powerful acid.",
+    "rarity": "uncommon",
+    "type": "organ",
+    "price": {
+      "silver": 2
+    }
+  },
+  "fear_aura": {
+    "id": "terror_essence",
+    "name": "Terror Essence",
+    "icon": "😨",
+    "desc": "Concentrated fear that radiates from the creature's presence.",
+    "rarity": "rare",
+    "type": "essence",
+    "price": {
+      "silver": 8
+    }
+  },
+  "paralyzing_gaze": {
+    "id": "petrifying_eye",
+    "name": "Petrifying Eye",
+    "icon": "👁️",
+    "desc": "An eye that retains its paralyzing power even after death.",
+    "rarity": "epic",
+    "type": "organ",
+    "price": {
+      "silver": 25
+    }
+  },
+  "invisibility": {
+    "id": "phase_membrane",
+    "name": "Phase Membrane",
+    "icon": "👻",
+    "desc": "Translucent tissue that can bend light around itself.",
+    "rarity": "epic",
+    "type": "material",
+    "price": {
+      "silver": 25
+    }
+  },
+  "teleport": {
+    "id": "dimensional_node",
+    "name": "Dimensional Node",
+    "icon": "✨",
+    "desc": "A small organ that can tear holes in space-time.",
+    "rarity": "epic",
+    "type": "organ",
+    "price": {
+      "silver": 25
+    }
+  },
+  "flight": {
+    "id": "aerial_membrane",
+    "name": "Aerial Membrane",
+    "icon": "🦅",
+    "desc": "Lightweight wing membrane that defies gravity.",
+    "rarity": "legendary",
+    "type": "material",
+    "price": {
+      "gold": 2
+    }
+  },
+  "burrow": {
+    "id": "earth_shaper_claws",
+    "name": "Earth Shaper Claws",
+    "icon": "🕳️",
+    "desc": "Specialized claws designed for digging through solid rock.",
+    "rarity": "uncommon",
+    "type": "material",
+    "price": {
+      "silver": 2
+    }
+  },
+  "climb": {
+    "id": "adhesive_pads",
+    "name": "Adhesive Pads",
+    "icon": "🧗",
+    "desc": "Natural climbing pads that stick to any surface.",
+    "rarity": "common",
+    "type": "material",
+    "price": {
+      "copper": 50
+    }
+  },
+  "swim": {
+    "id": "gill_slits",
+    "name": "Gill Slits",
+    "icon": "🏊",
+    "desc": "Functional gills that allow underwater breathing.",
+    "rarity": "uncommon",
+    "type": "organ",
+    "price": {
+      "silver": 2
+    }
+  },
+  "echolocation": {
+    "id": "glowing_crystals",
+    "name": "Glowing Crystals",
+    "icon": "💎",
+    "desc": "Dim crystal shards from minor magical beasts. Used in elixirs and low-tier enchantments.",
+    "rarity": "uncommon",
+    "type": "crystal",
+    "price": {
+      "silver": 2
+    }
+  },
+  "camouflage": {
+    "id": "scent_glands",
+    "name": "Scent Glands",
+    "icon": "👃",
+    "desc": "Musky glands from scavengers and predators. Used in repellents and tracking mixtures.",
+    "rarity": "common",
+    "type": "organic",
+    "price": {
+      "copper": 50
+    }
+  },
+  "pack_leader": {
+    "id": "alpha_pheromones",
+    "name": "Alpha Pheromones",
+    "icon": "🐺",
+    "desc": "Chemical signals that command respect from lesser creatures.",
+    "rarity": "rare",
+    "type": "essence",
+    "price": {
+      "silver": 8
+    }
+  },
+  "size_change": {
+    "id": "growth_hormone_gland",
+    "name": "Growth Hormone Gland",
+    "icon": "📏",
+    "desc": "Gland that controls dramatic size changes.",
+    "rarity": "epic",
+    "type": "organ",
+    "price": {
+      "silver": 25
+    }
+  },
+  "phase_shift": {
+    "id": "ethereal_essence",
+    "name": "Ethereal Essence",
+    "icon": "👻",
+    "desc": "Pure spirit energy that exists between dimensions.",
+    "rarity": "legendary",
+    "type": "essence",
+    "price": {
+      "gold": 2
+    }
+  },
+  "ancient_knowledge": {
+    "id": "memory_crystal",
+    "name": "Memory Crystal",
+    "icon": "📚",
+    "desc": "Crystallized knowledge from an ancient mind.",
+    "rarity": "legendary",
+    "type": "crystal",
+    "price": {
+      "gold": 2
+    }
+  },
+  "nature_communion": {
+    "id": "nature_essence",
+    "name": "Nature Essence",
+    "icon": "🌱",
+    "desc": "Pure essence of natural life force, useful for herbalism.",
+    "rarity": "uncommon",
+    "type": "essence",
+    "price": {
+      "silver": 2
+    }
+  },
+  "elemental_mastery": {
+    "id": "elemental_heart",
+    "name": "Elemental Heart",
+    "icon": "💓",
+    "desc": "The core of an elemental being, pulsing with pure elemental energy.",
+    "rarity": "epic",
+    "type": "organ",
+    "price": {
+      "silver": 25
+    }
+  },
+  "void_magic": {
+    "id": "void_essence",
+    "name": "Void Essence",
+    "icon": "🌌",
+    "desc": "Dark essence from the space between dimensions.",
+    "rarity": "epic",
+    "type": "essence",
+    "price": {
+      "silver": 25
+    }
+  },
+  "time_manipulation": {
+    "id": "time_crystal",
+    "name": "Time Crystal",
+    "icon": "⏰",
+    "desc": "A crystal that exists outside normal time flow.",
+    "rarity": "legendary",
+    "type": "crystal",
+    "price": {
+      "gold": 2
+    }
+  },
+  "monster_charge_attack": {
+    "id": "energy_gland",
+    "name": "Energy Gland",
+    "icon": "⚡",
+    "desc": "Stores burst energy from fast, aggressive beasts. Used in stamina potions and hearty meals.",
+    "rarity": "uncommon",
+    "type": "organic",
+    "price": {
+      "silver": 2
+    }
+  }
+}

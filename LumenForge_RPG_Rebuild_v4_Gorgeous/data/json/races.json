@@ -1,0 +1,224 @@
+{
+  "elf": {
+    "id": "elf",
+    "name": "Elf",
+    "icon": "🧝",
+    "description": "Masters of Magic and Nature with keen senses, magical affinity, and natural longevity.",
+    "passiveTraits": [
+      "Keen Senses: +1 Accuracy for detecting hidden enemies and precise attacks",
+      "Magical Affinity: +1 Magic Power when using staves or wands",
+      "Elven Longevity: Immune to aging and disease status effects"
+    ],
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "equipmentStatModifiers": [
+      {
+        "id": "magical_affinity",
+        "label": "Magical Affinity",
+        "weaponKind": "staff",
+        "statModifiers": {
+          "magicPower": 1
+        }
+      }
+    ],
+    "exclusiveSkills": [
+      "elven_accuracy",
+      "forest_step",
+      "moonbeam",
+      "elven_high_magic",
+      "starlight_mastery"
+    ]
+  },
+  "dwarf": {
+    "id": "dwarf",
+    "name": "Dwarf",
+    "icon": "🧔",
+    "description": "Masters of Craft and Stone with natural resilience, stone sense, and craftsman heritage.",
+    "passiveTraits": [
+      "Stone Sense: Can detect traps, secret doors, and structural weaknesses",
+      "Dwarven Resilience: Immune to poison status effects",
+      "Master Craftsman: All crafting recipes require 1 less material (minimum 1)"
+    ],
+    "statModifiers": {
+      "physicalDefence": 2,
+      "hp": 1
+    },
+    "exclusiveSkills": [
+      "dwarven_toughness",
+      "forge_blessing",
+      "mountain_charge",
+      "runic_weapon",
+      "ancestral_might"
+    ]
+  },
+  "halfling": {
+    "id": "halfling",
+    "name": "Halfling",
+    "icon": "🦶",
+    "description": "Masters of Luck and Stealth with natural fortune, small size advantages, and brave hearts.",
+    "passiveTraits": [
+      "Lucky: Can reroll any natural 1 on dice (once per combat/encounter)",
+      "Small & Nimble: Can move through larger creature spaces, +1 Speed",
+      "Brave Heart: Immune to fear and intimidation status effects"
+    ],
+    "statModifiers": {
+      "speed": 2,
+      "accuracy": 1
+    },
+    "exclusiveSkills": [
+      "lucky_dodge",
+      "sneaky_strike",
+      "fortune_favor",
+      "miraculous_escape",
+      "legendary_luck"
+    ]
+  },
+  "orc": {
+    "id": "orc",
+    "name": "Orc",
+    "icon": "👹",
+    "description": "Masters of Fury and Might with savage attacks, relentless endurance, and powerful build.",
+    "passiveTraits": [
+      "Savage Critical: Critical hits deal +1 extra damage die",
+      "Relentless Endurance: When reduced to 0 HP, drop to 1 HP instead (once per day)",
+      "Powerful Build: +1 damage with melee weapons, +2 carrying capacity"
+    ],
+    "statModifiers": {
+      "strength": 2,
+      "hp": 1
+    },
+    "exclusiveSkills": [
+      "orcish_fury",
+      "intimidating_roar",
+      "blood_frenzy",
+      "unstoppable_charge",
+      "warchief_presence"
+    ]
+  },
+  "human": {
+    "id": "human",
+    "name": "Human",
+    "icon": "👤",
+    "description": "Jack of all trades, master of none. Humans don't develop advanced racial techniques, instead learning from other cultures through adaptability and determination.",
+    "passiveTraits": [
+      "Versatile Learning: Gain one free Tier 1 weapon skill upon character creation",
+      "Ambitious Spirit: Earn 10% more Lumens from all sources",
+      "Cross-Cultural Learning: Can learn Tier 1 skills from other races' skill trees"
+    ],
+    "statModifiers": {
+      "hp": 1,
+      "stamina": 1,
+      "accuracy": 1
+    },
+    "exclusiveSkills": [
+      "human_determination"
+    ]
+  },
+  "dragonborn": {
+    "id": "dragonborn",
+    "name": "Dragonborn",
+    "icon": "🐉",
+    "description": "Masters of Elements and Honor with draconic heritage, scaled hide, and draconic senses.",
+    "passiveTraits": [
+      "Draconic Heritage: Choose elemental affinity (Fire/Ice/Thunder/Earth/Wind/Water/Light/Darkness)",
+      "Scaled Hide: Resistance to chosen element damage",
+      "Draconic Senses: Can detect magical auras and see in dim light"
+    ],
+    "statModifiers": {
+      "physicalDefence": 1,
+      "magicalDefence": 1,
+      "strength": 1
+    },
+    "exclusiveSkills": [
+      "breath_weapon",
+      "draconic_presence",
+      "elemental_mastery",
+      "dragon_wings",
+      "ancient_fury"
+    ]
+  },
+  "tiefling": {
+    "id": "tiefling",
+    "name": "Tiefling",
+    "icon": "😈",
+    "description": "Masters of Chaos and Contracts with infernal heritage, darkvision, and fiendish cunning.",
+    "passiveTraits": [
+      "Infernal Heritage: Immune to fire damage and charm status effects",
+      "Darkvision: Can see in complete darkness as if it were dim light",
+      "Fiendish Cunning: +1 to social manipulation and intimidation"
+    ],
+    "statModifiers": {
+      "magicPower": 1,
+      "magicalDefence": 1,
+      "stamina": 1
+    },
+    "exclusiveSkills": [
+      "hellish_rebuke",
+      "infernal_constitution",
+      "devils_bargain",
+      "summon_imp",
+      "infernal_dominion"
+    ]
+  },
+  "drow": {
+    "id": "drow",
+    "name": "Dark Elf (Drow)",
+    "icon": "🌙",
+    "description": "Masters of Shadow and Poison with superior darkvision, sunlight sensitivity, and poison mastery.",
+    "passiveTraits": [
+      "Superior Darkvision: Perfect vision in complete darkness (extended range)",
+      "Sunlight Sensitivity: -1 Accuracy penalty when fighting in bright sunlight",
+      "Poison Immunity: Immune to all poison damage and poison status effects"
+    ],
+    "statModifiers": {
+      "speed": 1,
+      "magicPower": 1,
+      "magicalDefence": 1
+    },
+    "exclusiveSkills": [
+      "shadow_affinity",
+      "drow_poison",
+      "darkness_spell",
+      "spider_climb",
+      "drow_matron"
+    ]
+  },
+  "gnoll": {
+    "id": "gnoll",
+    "name": "Gnoll",
+    "icon": "🐺",
+    "description": "Masters of Pack Hunting and Savagery with pack tactics, keen smell, and savage instincts.",
+    "passiveTraits": [
+      "Pack Tactics: +1 Accuracy when an ally is adjacent to the same target",
+      "Keen Smell: Can track creatures and detect invisible/hidden enemies nearby",
+      "Savage Instincts: +1 damage against enemies below 50% HP"
+    ],
+    "statModifiers": {
+      "strength": 1,
+      "speed": 1,
+      "hp": 1
+    },
+    "exclusiveSkills": [
+      "pack_coordination",
+      "savage_bite",
+      "howl_of_the_pack",
+      "rampage",
+      "alpha_dominance"
+    ]
+  },
+  "monster": {
+    "id": "monster",
+    "name": "Monster",
+    "icon": "👹",
+    "description": "This is for Enemy characters and Summons.",
+    "passiveTraits": [
+      "Monster Nature: Access to specialized monster skill categories",
+      "Monster Stupidity: No access to Profession Skills/Crafting"
+    ],
+    "statModifiers": {
+      "none": 0
+    },
+    "exclusiveSkills": []
+  }
+}

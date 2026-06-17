@@ -1,0 +1,3563 @@
+// Profession Items Data - Craftable items for each profession using monster materials
+// Items are organized by profession and tier (basic → advanced → expert → master)
+
+const PROFESSION_ITEMS_DATA = {
+    "smithing": {
+        "reinforced_leather_armor": {
+            "id": "reinforced_leather_armor",
+            "name": "Reinforced Leather Armor",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "basic",
+            "statModifiers": {
+                "physicalDefence": 2,
+                "speed": 1
+            },
+            "icon": "🦺",
+            "desc": "Armor reinforced with thick hide. +2 Physical Defence, +1 Speed.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "thick_hide",
+                    "quantity": 3
+                },
+                {
+                    "id": "sharp_claws",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "armourer"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "claw_gauntlets": {
+            "id": "claw_gauntlets",
+            "name": "Claw Gauntlets",
+            "type": "craftable_weapon",
+            "profession": "smithing",
+            "tier": "basic",
+            "statModifiers": {
+                "strength": 2,
+                "speed": 1
+            },
+            "specialEffects": [
+                "bleeding"
+            ],
+            "icon": "🥊",
+            "desc": "Gauntlets with embedded claws. +2 Strength, +1 Speed. Causes bleeding.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "sharp_claws",
+                    "quantity": 4
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "weaponwright"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "bone_buckler": {
+            "id": "bone_buckler",
+            "name": "Bone Buckler",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "basic",
+            "statModifiers": {
+                "physicalDefence": 1,
+                "speed": 2
+            },
+            "specialEffects": [
+                "parry_bonus"
+            ],
+            "icon": "🛡️",
+            "desc": "Small shield made from monster bones. +1 Physical Defence, +2 Speed. Bonus to parrying. GRANTS: Parry Bonus.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "crusher_molars",
+                    "quantity": 3
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "armourer"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "beast_hide_boots": {
+            "id": "beast_hide_boots",
+            "name": "Beast Hide Boots",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "basic",
+            "statModifiers": {
+                "speed": 2,
+                "hp": 1
+            },
+            "specialEffects": [
+                "silent_movement"
+            ],
+            "icon": "👢",
+            "desc": "Boots crafted from tough monster hide. +2 Speed, +1 HP. Move silently. GRANTS: Silent Movement.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "thick_hide",
+                    "quantity": 4
+                },
+                {
+                    "id": "adhesive_pads",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "apprentice_smith"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "fang_dagger": {
+            "id": "fang_dagger",
+            "name": "Fang Dagger",
+            "type": "craftable_weapon",
+            "profession": "smithing",
+            "tier": "basic",
+            "statModifiers": {
+                "strength": 1,
+                "speed": 2
+            },
+            "specialEffects": [
+                "piercing"
+            ],
+            "icon": "🗡️",
+            "desc": "Sharp dagger made from monster fangs. +1 Strength, +2 Speed. High piercing damage.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "sharp_fangs",
+                    "quantity": 3
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "weaponwright"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "bone_club": {
+            "id": "bone_club",
+            "name": "Bone Club",
+            "type": "craftable_weapon",
+            "profession": "smithing",
+            "tier": "basic",
+            "statModifiers": {
+                "strength": 3
+            },
+            "specialEffects": [
+                "crushing"
+            ],
+            "icon": "🦴",
+            "desc": "Heavy club made from dense monster bones. +3 Strength. Crushing attacks.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "crusher_molars",
+                    "quantity": 2
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "weaponwright"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "living_stone_armor": {
+            "id": "living_stone_armor",
+            "name": "Living Stone Armor",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "advanced",
+            "statModifiers": {
+                "physicalDefence": 4,
+                "hp": 2
+            },
+            "specialEffects": [
+                "damage_reduction"
+            ],
+            "icon": "🛡️",
+            "desc": "Armor that adapts like living rock. +4 Physical Defence, +2 HP. Reduces incoming damage. GRANTS: Damage Reduction.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "living_rock_fragments",
+                    "quantity": 5
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 3
+                },
+                {
+                    "id": "sharp_claws",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "master_alloy"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "razor_talon_daggers": {
+            "id": "razor_talon_daggers",
+            "name": "Razor Talon Daggers",
+            "type": "craftable_weapon",
+            "profession": "smithing",
+            "tier": "advanced",
+            "statModifiers": {
+                "speed": 3,
+                "strength": 2
+            },
+            "specialEffects": [
+                "critical_bleeding",
+                "armor_pierce",
+                "bleeding"
+            ],
+            "icon": "🗡️",
+            "desc": "Twin daggers that pierce armor. +3 Speed, +2 Strength. Armor piercing with critical bleeding. GRANTS: Critical Bleeding, Armor Pierce.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "razor_talons",
+                    "quantity": 4
+                },
+                {
+                    "id": "sharp_fangs",
+                    "quantity": 2
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "master_alloy"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "drake_scale_mail": {
+            "id": "drake_scale_mail",
+            "name": "Drake Scale Mail",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "advanced",
+            "statModifiers": {
+                "physicalDefence": 4,
+                "magicalDefence": 2,
+                "speed": -1
+            },
+            "specialEffects": [
+                "fire_resistance"
+            ],
+            "icon": "🦎",
+            "desc": "Armor made from drake scales. +4 Physical Defence, +2 Magical Defence, -1 Speed. Fire resistance.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "drake_scales",
+                    "quantity": 8
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 3
+                },
+                {
+                    "id": "reinforcement_studs",
+                    "quantity": 6
+                }
+            ],
+            "requiredSkills": [
+                "armourer",
+                "master_alloy"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "venom_blade": {
+            "id": "venom_blade",
+            "name": "Venom Blade",
+            "type": "craftable_weapon",
+            "profession": "smithing",
+            "tier": "advanced",
+            "statModifiers": {
+                "strength": 3,
+                "speed": 2
+            },
+            "specialEffects": [
+                "poison",
+                "armor_piercing"
+            ],
+            "icon": "⚔️",
+            "desc": "Blade infused with poison sacs. +3 Strength, +2 Speed. Poison and armor piercing.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "venom_sacs",
+                    "quantity": 4
+                },
+                {
+                    "id": "sharp_fangs",
+                    "quantity": 6
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "weaponwright",
+                "master_alloy"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "crystal_hammer": {
+            "id": "crystal_hammer",
+            "name": "Crystal Hammer",
+            "type": "craftable_weapon",
+            "profession": "smithing",
+            "tier": "advanced",
+            "statModifiers": {
+                "strength": 4,
+                "magicPower": 2
+            },
+            "specialEffects": [
+                "stunning",
+                "magic_damage"
+            ],
+            "icon": "🔨",
+            "desc": "Heavy hammer with crystal head. +4 Strength, +2 Magic Power. Stunning blows deal magic damage.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 3
+                },
+                {
+                    "id": "crusher_molars",
+                    "quantity": 4
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "weaponwright",
+                "master_alloy"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "segmented_carapace_armor": {
+            "id": "segmented_carapace_armor",
+            "name": "Segmented Carapace Armor",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "expert",
+            "statModifiers": {
+                "physicalDefence": 6,
+                "hp": 3,
+                "speed": 1
+            },
+            "specialEffects": [
+                "critical_immunity",
+                "flexible_defense"
+            ],
+            "icon": "🦀",
+            "desc": "Flexible armor that prevents critical hits. +6 Physical Defence, +3 HP, +1 Speed. GRANTS: Critical Immunity, Flexible Defense.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "segmented_carapace",
+                    "quantity": 3
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 4
+                },
+                {
+                    "id": "living_rock_fragments",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "tempered_steel"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "void_steel_blade": {
+            "id": "void_steel_blade",
+            "name": "Void Steel Blade",
+            "type": "craftable_weapon",
+            "profession": "smithing",
+            "tier": "expert",
+            "statModifiers": {
+                "strength": 5,
+                "speed": 3,
+                "magicPower": 2
+            },
+            "specialEffects": [
+                "armor_piercing",
+                "void_damage",
+                "life_steal",
+                "piercing"
+            ],
+            "icon": "🗡️",
+            "desc": "Blade forged from void essence. +5 Strength, +3 Speed, +2 Magic Power. Void damage with life steal. GRANTS: Void Damage, Life Steal, Armor Piercing.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "void_essence",
+                    "quantity": 4
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 6
+                },
+                {
+                    "id": "razor_talons",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "siege_breaker",
+                "tempered_steel"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "guardian_shield": {
+            "id": "guardian_shield",
+            "name": "Guardian Shield",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "expert",
+            "statModifiers": {
+                "physicalDefence": 5,
+                "magicalDefence": 3,
+                "hp": 2
+            },
+            "specialEffects": [
+                "reflect_damage",
+                "magic_barrier"
+            ],
+            "icon": "🛡️",
+            "desc": "Shield that reflects attacks. +5 Physical Defence, +3 Magical Defence, +2 HP. Reflects damage and blocks magic. GRANTS: Reflect Damage, Magic Barrier.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "reflective_scales",
+                    "quantity": 5
+                },
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 4
+                },
+                {
+                    "id": "living_rock_fragments",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "master_alloy",
+                "tempered_steel"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "phoenix_regeneration_armor": {
+            "id": "phoenix_regeneration_armor",
+            "name": "Phoenix Regeneration Armor",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "master",
+            "statModifiers": {
+                "physicalDefence": 8,
+                "hp": 5,
+                "strength": 2
+            },
+            "specialEffects": [
+                "critical_immunity",
+                "damage_reduction",
+                "auto_healing"
+            ],
+            "icon": "✨",
+            "desc": "Legendary armor that regenerates the wearer. +8 Physical Defence, +5 HP, +2 Strength. Auto-healing. GRANTS: Auto Healing, Damage Reduction, Critical Immunity.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 2
+                },
+                {
+                    "id": "segmented_carapace",
+                    "quantity": 2
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 5
+                },
+                {
+                    "id": "regenerative_tissue",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "tempered_steel"
+            ],
+            "price": {
+                "gold": 60
+            }
+        },
+        "dragonheart_sword": {
+            "id": "dragonheart_sword",
+            "name": "Dragonheart Sword",
+            "type": "craftable_weapon",
+            "profession": "smithing",
+            "tier": "master",
+            "statModifiers": {
+                "strength": 6,
+                "speed": 4,
+                "magicPower": 3
+            },
+            "specialEffects": [
+                "critical_strikes",
+                "energy_waves",
+                "dragon_fire"
+            ],
+            "icon": "⚔️",
+            "desc": "Legendary sword containing a dragon's heart. +6 Strength, +4 Speed, +3 Magic Power. Dragon fire attacks. GRANTS: Dragon Fire, Critical Strikes, Energy Waves.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "dragon_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 2
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 8
+                }
+            ],
+            "requiredSkills": [
+                "tempered_steel"
+            ],
+            "price": {
+                "gold": 60
+            }
+        },
+        "titan_plate_armor": {
+            "id": "titan_plate_armor",
+            "name": "Titan Plate Armor",
+            "type": "craftable_armor",
+            "profession": "smithing",
+            "tier": "master",
+            "statModifiers": {
+                "physicalDefence": 10,
+                "magicalDefence": 5,
+                "strength": 3,
+                "hp": 4
+            },
+            "specialEffects": [
+                "damage_immunity",
+                "titan_strength",
+                "immovable"
+            ],
+            "icon": "⚡",
+            "desc": "Armor of the ancient titans. +10 Physical Defence, +5 Magical Defence, +3 Strength, +4 HP. Grants titan-like power. GRANTS: Immovable, Damage Immunity, Titan Strength.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "titan_bones",
+                    "quantity": 3
+                },
+                {
+                    "id": "segmented_carapace",
+                    "quantity": 4
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "living_rock_fragments",
+                    "quantity": 6
+                }
+            ],
+            "requiredSkills": [
+                "tempered_steel"
+            ],
+            "price": {
+                "gold": 60
+            }
+        }
+    },
+    "alchemy": {
+        "healing_salve": {
+            "id": "healing_salve",
+            "name": "Healing Salve",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "basic",
+            "effect": {
+                "type": "heal",
+                "amount": 15
+            },
+            "icon": "🧴",
+            "desc": "A basic healing remedy. Restores 15 HP.",
+            "rarity": "common",
+            "price": {
+                "silver": 12
+            },
+            "materials": [
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                },
+                {
+                    "id": "wild_mint",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "field_medic"
+            ]
+        },
+        "antitoxin_draught": {
+            "id": "antitoxin_draught",
+            "name": "Antitoxin Draught",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "basic",
+            "effect": {
+                "type": "cure_poison",
+                "duration": 300
+            },
+            "icon": "🟢",
+            "desc": "Neutralizes poison effects. Cures poison and provides immunity for 5 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "acid_bladder",
+                    "quantity": 2
+                },
+                {
+                    "id": "wild_mint",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "acid_vials"
+            ],
+            "price": {
+                "silver": 4
+            }
+        },
+        "stamina_potion": {
+            "id": "stamina_potion",
+            "name": "Stamina Potion",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "basic",
+            "effect": {
+                "type": "restore_stamina",
+                "amount": 25
+            },
+            "icon": "🟡",
+            "desc": "Restores 25 stamina instantly.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "energy_berry",
+                    "quantity": 2
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "field_medic"
+            ],
+            "price": {
+                "silver": 4
+            }
+        },
+        "beast_repellent": {
+            "id": "beast_repellent",
+            "name": "Beast Repellent",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "basic",
+            "effect": {
+                "type": "stealth_boost",
+                "duration": 600
+            },
+            "icon": "🦨",
+            "desc": "Makes you less likely to be detected by monsters for 10 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "scent_glands",
+                    "quantity": 2
+                },
+                {
+                    "id": "wild_mint",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "chefs_instinct"
+            ],
+            "price": {
+                "silver": 4
+            }
+        },
+        "minor_magic_elixir": {
+            "id": "minor_magic_elixir",
+            "name": "Minor Magic Elixir",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicPower": 3
+                },
+                "duration": 300
+            },
+            "icon": "🔮",
+            "desc": "Increases Magic Power by 3 for 5 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "ironbark_moss",
+                    "quantity": 1
+                },
+                {
+                    "id": "wild_mint",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "field_medic"
+            ],
+            "price": {
+                "silver": 4
+            }
+        },
+        "flame_resistance_potion": {
+            "id": "flame_resistance_potion",
+            "name": "Flame Resistance Potion",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "advanced",
+            "effect": {
+                "type": "fire_resistance",
+                "amount": 50,
+                "duration": 600
+            },
+            "icon": "🔥",
+            "desc": "Provides 50% fire resistance for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "flame_gland",
+                    "quantity": 2
+                },
+                {
+                    "id": "frost_core",
+                    "quantity": 1
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "transmute_salts"
+            ],
+            "price": {
+                "silver": 90
+            }
+        },
+        "berserker_elixir": {
+            "id": "berserker_elixir",
+            "name": "Berserker Elixir",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 5,
+                    "speed": 3
+                },
+                "duration": 300
+            },
+            "icon": "💪",
+            "desc": "Increases Strength by 5 and Speed by 3 for 5 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "energy_gland",
+                    "quantity": 2
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "explosive_compounds"
+            ],
+            "price": {
+                "silver": 90
+            }
+        },
+        "frost_shield_potion": {
+            "id": "frost_shield_potion",
+            "name": "Frost Shield Potion",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "advanced",
+            "effect": {
+                "type": "magical_barrier",
+                "amount": 30,
+                "duration": 480
+            },
+            "icon": "❄️",
+            "desc": "Creates a magical barrier that absorbs 30 damage for 8 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "frost_core",
+                    "quantity": 2
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "plague_ward"
+            ],
+            "price": {
+                "silver": 90
+            }
+        },
+        "giant_strength_serum": {
+            "id": "giant_strength_serum",
+            "name": "Giant Strength Serum",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 7,
+                    "hp": 15
+                },
+                "duration": 420
+            },
+            "icon": "💪",
+            "desc": "Grants the strength of giants. +7 Strength and +15 HP for 7 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "energy_gland",
+                    "quantity": 2
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "transmute_salts"
+            ],
+            "price": {
+                "silver": 90
+            }
+        },
+        "shadow_step_elixir": {
+            "id": "shadow_step_elixir",
+            "name": "Shadow Step Elixir",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "speed": 6
+                },
+                "bonus_effects": [
+                    "phase_walk"
+                ],
+                "duration": 300
+            },
+            "icon": "👤",
+            "desc": "Enhances speed and allows brief phasing through enemies. +6 Speed for 5 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "phase_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "adhesive_pads",
+                    "quantity": 2
+                },
+                {
+                    "id": "energy_gland",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "volatile_expert"
+            ],
+            "price": {
+                "silver": 90
+            }
+        },
+        "regeneration_elixir": {
+            "id": "regeneration_elixir",
+            "name": "Regeneration Elixir",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "expert",
+            "effect": {
+                "type": "regeneration",
+                "amount": 5,
+                "duration": 600
+            },
+            "icon": "💚",
+            "desc": "Regenerates 5 HP every round for 10 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "regenerative_tissue",
+                    "quantity": 4
+                },
+                {
+                    "id": "storm_organ",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "revival_draft"
+            ],
+            "price": {
+                "gold": 2,
+                "silver": 120
+            }
+        },
+        "void_walker_serum": {
+            "id": "void_walker_serum",
+            "name": "Void Walker Serum",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicPower": 8,
+                    "speed": 5
+                },
+                "bonus_effects": [
+                    "void_phase"
+                ],
+                "duration": 480
+            },
+            "icon": "🌌",
+            "desc": "Grants void walking abilities. +8 Magic Power, +5 Speed for 8 rounds. Can phase through dimensions.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "void_essence",
+                    "quantity": 4
+                },
+                {
+                    "id": "phase_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "storm_organ",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "volatile_expert"
+            ],
+            "price": {
+                "gold": 2,
+                "silver": 120
+            }
+        },
+        "dragon_blood_elixir": {
+            "id": "dragon_blood_elixir",
+            "name": "Dragon Blood Elixir",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 8,
+                    "physicalDefence": 5,
+                    "magicalDefence": 5
+                },
+                "duration": 600
+            },
+            "icon": "🐲",
+            "desc": "Infuses drinker with dragon essence. +8 Strength, +5 Physical Defence, +5 Magical Defence for 10 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "dragon_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "regenerative_tissue",
+                    "quantity": 2
+                },
+                {
+                    "id": "elemental_core",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "volatile_expert"
+            ],
+            "price": {
+                "gold": 2,
+                "silver": 120
+            }
+        },
+        "phoenix_rebirth_elixir": {
+            "id": "phoenix_rebirth_elixir",
+            "name": "Phoenix Rebirth Elixir",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "master",
+            "effect": {
+                "type": "full_restoration",
+                "bonus_effects": [
+                    "temporary_invulnerability"
+                ]
+            },
+            "icon": "✨",
+            "desc": "Legendary elixir that fully restores all stats and grants temporary invulnerability.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 3
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "volatile_expert"
+            ],
+            "price": {
+                "gold": 48
+            }
+        },
+        "immortality_essence": {
+            "id": "immortality_essence",
+            "name": "Immortality Essence",
+            "type": "consumable",
+            "profession": "alchemy",
+            "tier": "master",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "hp": 50,
+                    "stamina": 50,
+                    "magicPower": 10
+                },
+                "bonus_effects": [
+                    "death_immunity"
+                ],
+                "duration": 900
+            },
+            "icon": "♾️",
+            "desc": "The ultimate alchemical creation. +50 HP, +50 Stamina, +10 Magic Power. Immunity to death for 15 rounds.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 5
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 2
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "volatile_expert",
+                "revival_draft"
+            ],
+            "price": {
+                "gold": 48
+            }
+        }
+    },
+    "enchanting": {
+        "weapon_sharpening_stone": {
+            "id": "weapon_sharpening_stone",
+            "name": "Weapon Sharpening Stone",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "basic",
+            "effect": {
+                "type": "weapon_enchant",
+                "stat": "damage",
+                "amount": 2,
+                "duration": 1800
+            },
+            "icon": "🪨",
+            "desc": "Temporarily increases weapon damage by 2 for 30 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "living_rock_fragments",
+                    "quantity": 2
+                },
+                {
+                    "id": "sharp_claws",
+                    "quantity": 1
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "rune_apprentice"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "armor_ward_charm": {
+            "id": "armor_ward_charm",
+            "name": "Armor Ward Charm",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "basic",
+            "effect": {
+                "type": "armor_enchant",
+                "stat": "magical_defence",
+                "amount": 3,
+                "duration": 1800
+            },
+            "icon": "🔮",
+            "desc": "Temporarily increases magical defence by 3 for 30 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "rune_apprentice"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "speed_enhancement_rune": {
+            "id": "speed_enhancement_rune",
+            "name": "Speed Enhancement Rune",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "speed": 2
+                },
+                "duration": 1800
+            },
+            "icon": "⚡",
+            "desc": "Temporarily increases speed by 2 for 30 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "adhesive_pads",
+                    "quantity": 2
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "energy_gland",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "rune_apprentice"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "strength_blessing_stone": {
+            "id": "strength_blessing_stone",
+            "name": "Strength Blessing Stone",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 3
+                },
+                "duration": 1800
+            },
+            "icon": "💪",
+            "desc": "Temporarily increases strength by 3 for 30 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "crusher_molars",
+                    "quantity": 2
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "rune_apprentice"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "elemental_weapon_crystal": {
+            "id": "elemental_weapon_crystal",
+            "name": "Elemental Weapon Crystal",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "advanced",
+            "effect": {
+                "type": "weapon_enchant",
+                "element": "random",
+                "duration": 3600
+            },
+            "icon": "💎",
+            "desc": "Adds random elemental damage to weapons for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "flame_gland",
+                    "quantity": 1
+                },
+                {
+                    "id": "frost_core",
+                    "quantity": 1
+                },
+                {
+                    "id": "storm_organ",
+                    "quantity": 1
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "elemental_ink"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "barrier_crystal": {
+            "id": "barrier_crystal",
+            "name": "Barrier Crystal",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "advanced",
+            "effect": {
+                "type": "magical_shield",
+                "amount": 40,
+                "duration": 2400
+            },
+            "icon": "🔷",
+            "desc": "Creates a magical barrier that absorbs 40 damage for 40 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 3
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 4
+                },
+                {
+                    "id": "reflective_scales",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "ward_scribe"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "soul_enhancement_gem": {
+            "id": "soul_enhancement_gem",
+            "name": "Soul Enhancement Gem",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "hp": 20,
+                    "stamina": 20,
+                    "magicPower": 4
+                },
+                "duration": 2700
+            },
+            "icon": "💎",
+            "desc": "Enhances the soul's capacity. +20 HP, +20 Stamina, +4 Magic Power for 45 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "soul_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "acid_bladder",
+                    "quantity": 1
+                },
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "soul_bind"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "phase_walker_amulet": {
+            "id": "phase_walker_amulet",
+            "name": "Phase Walker Amulet",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "speed": 5
+                },
+                "bonus_effects": [
+                    "wall_phase"
+                ],
+                "duration": 1800
+            },
+            "icon": "🔮",
+            "desc": "Allows brief phasing through walls. +5 Speed for 30 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "phase_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 1
+                },
+                {
+                    "id": "energy_gland",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "elemental_ink"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "spell_amplifier_orb": {
+            "id": "spell_amplifier_orb",
+            "name": "Spell Amplifier Orb",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "expert",
+            "effect": {
+                "type": "spell_power",
+                "amount": 25,
+                "duration": 1200
+            },
+            "icon": "🔵",
+            "desc": "Increases spell power by 25% for 20 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "elemental_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 1
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "storm_organ",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "artifact_shaping"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "reality_anchor": {
+            "id": "reality_anchor",
+            "name": "Reality Anchor",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "physicalDefence": 8,
+                    "magicalDefence": 8
+                },
+                "bonus_effects": [
+                    "status_immunity"
+                ],
+                "duration": 1800
+            },
+            "icon": "⚓",
+            "desc": "Anchors the user to reality. +8 Physical/Magical Defence, immunity to status effects for 30 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 2
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "elemental_core",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "dispel_touch"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "ascension_sigil": {
+            "id": "ascension_sigil",
+            "name": "Ascension Sigil",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 6,
+                    "speed": 6,
+                    "magicPower": 6
+                },
+                "duration": 1200
+            },
+            "icon": "✨",
+            "desc": "Temporarily ascends mortal limits. +6 to Strength, Speed, and Magic Power for 20 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "elemental_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "regenerative_tissue",
+                    "quantity": 2
+                },
+                {
+                    "id": "soul_essence",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "soul_bind"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "transcendence_gem": {
+            "id": "transcendence_gem",
+            "name": "Transcendence Gem",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "master",
+            "effect": {
+                "type": "permanent_enchant",
+                "stats": {
+                    "all": 2
+                }
+            },
+            "icon": "💫",
+            "desc": "Permanently increases all stats by 2. Can only be used once per character.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 2
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 2
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "dispel_touch"
+            ],
+            "price": {
+                "gold": 60
+            }
+        },
+        "godslayer_rune": {
+            "id": "godslayer_rune",
+            "name": "Godslayer Rune",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "master",
+            "effect": {
+                "type": "permanent_enchant",
+                "stats": {
+                    "strength": 5,
+                    "magicPower": 5
+                },
+                "bonus_effects": [
+                    "divine_damage"
+                ]
+            },
+            "icon": "⚡",
+            "desc": "Permanently increases Strength and Magic Power by 5. Deals divine damage. One use per character.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "divine_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 3
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 3
+                },
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 4
+                }
+            ],
+            "requiredSkills": [
+                "dispel_touch",
+                "artifact_shaping"
+            ],
+            "price": {
+                "gold": 60
+            }
+        },
+        "infinity_core": {
+            "id": "infinity_core",
+            "name": "Infinity Core",
+            "type": "enhancement",
+            "profession": "enchanting",
+            "tier": "master",
+            "effect": {
+                "type": "permanent_enchant",
+                "stats": {
+                    "hp": 25,
+                    "stamina": 25,
+                    "physicalDefence": 3,
+                    "magicalDefence": 3
+                }
+            },
+            "icon": "♾️",
+            "desc": "The ultimate enhancement. Permanently increases HP/Stamina by 25, defences by 3. One use per character.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "void_essence",
+                    "quantity": 5
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 2
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 4
+                },
+                {
+                    "id": "soul_essence",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "dispel_touch",
+                "artifact_shaping"
+            ],
+            "price": {
+                "gold": 60
+            }
+        }
+    },
+    "cooking": {
+        "monster_jerky": {
+            "id": "monster_jerky",
+            "name": "Monster Jerky",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_food",
+                "stats": {
+                    "hp": 2
+                },
+                "duration": 3600
+            },
+            "icon": "🥩",
+            "desc": "Dried monster meat. +2 HP for 10 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                },
+                {
+                    "id": "sharp_fangs",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "camp_cook"
+            ],
+            "price": {
+                "silver": 3
+            }
+        },
+        "claw_soup": {
+            "id": "claw_soup",
+            "name": "Claw Soup",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_food",
+                "stats": {
+                    "strength": 2,
+                    "speed": 1
+                },
+                "duration": 2400
+            },
+            "icon": "🍲",
+            "desc": "Hearty soup made from claws. +2 Strength, +1 Speed for 40 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "sharp_claws",
+                    "quantity": 3
+                },
+                {
+                    "id": "crusher_molars",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "camp_cook"
+            ],
+            "price": {
+                "silver": 3
+            }
+        },
+        "energy_steaks": {
+            "id": "energy_steaks",
+            "name": "Energy Steaks",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_food",
+                "stats": {
+                    "stamina": 15
+                },
+                "duration": 3600
+            },
+            "icon": "🥩",
+            "desc": "Grilled monster steaks that restore energy. +15 Stamina for 10 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "flexible_tail_section",
+                    "quantity": 2
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "camp_cook"
+            ],
+            "price": {
+                "silver": 3
+            }
+        },
+        "hunter_bread": {
+            "id": "hunter_bread",
+            "name": "Hunter's Bread",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_food",
+                "stats": {
+                    "speed": 3,
+                    "stamina": 10
+                },
+                "duration": 2700
+            },
+            "icon": "🍞",
+            "desc": "Nutritious bread for long hunts. +3 Speed, +10 Stamina for 45 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                },
+                {
+                    "id": "energy_berry",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "camp_cook"
+            ],
+            "price": {
+                "silver": 3
+            }
+        },
+        "defensive_stew": {
+            "id": "defensive_stew",
+            "name": "Defensive Stew",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_food",
+                "stats": {
+                    "physicalDefence": 2,
+                    "hp": 5
+                },
+                "duration": 3600
+            },
+            "icon": "🍲",
+            "desc": "Hearty stew that toughens the body. +2 Physical Defence, +5 HP for 10 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "thick_hide",
+                    "quantity": 3
+                },
+                {
+                    "id": "crusher_molars",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "camp_cook"
+            ],
+            "price": {
+                "silver": 3
+            }
+        },
+        "regenerative_stew": {
+            "id": "regenerative_stew",
+            "name": "Regenerative Stew",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "advanced",
+            "effect": {
+                "type": "health_regen",
+                "amount": 3,
+                "duration": 1800
+            },
+            "icon": "🍲",
+            "desc": "Stew that promotes healing. Regenerates 3 HP every round for 30 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "ironbark_moss",
+                    "quantity": 1
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "spice_box"
+            ],
+            "price": {
+                "silver": 78
+            }
+        },
+        "spiced_fire_roast": {
+            "id": "spiced_fire_roast",
+            "name": "Spiced Fire Roast",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 4,
+                    "hp": 2
+                },
+                "duration": 2400
+            },
+            "icon": "🔥",
+            "desc": "Fiery roast with exotic spices. +4 Strength, +2 HP for 40 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "sharp_claws",
+                    "quantity": 2
+                },
+                {
+                    "id": "fire_spice",
+                    "quantity": 3
+                },
+                {
+                    "id": "cave_salt",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "hearty_rations"
+            ],
+            "price": {
+                "silver": 78
+            }
+        },
+        "honey_glazed_treats": {
+            "id": "honey_glazed_treats",
+            "name": "Honey Glazed Treats",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "speed": 3,
+                    "magicPower": 2
+                },
+                "duration": 3600
+            },
+            "icon": "🍯",
+            "desc": "Sweet treats that sharpen reflexes. +3 Speed, +2 Magic Power for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "honey_crystal",
+                    "quantity": 2
+                },
+                {
+                    "id": "energy_berry",
+                    "quantity": 4
+                },
+                {
+                    "id": "cave_salt",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "spice_box"
+            ],
+            "price": {
+                "silver": 78
+            }
+        },
+        "crystal_meat_pie": {
+            "id": "crystal_meat_pie",
+            "name": "Crystal Meat Pie",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicPower": 5,
+                    "magicalDefence": 3
+                },
+                "duration": 3600
+            },
+            "icon": "🥧",
+            "desc": "Pie infused with crystal essence. +5 Magic Power, +3 Magical Defence for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 2
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                },
+                {
+                    "id": "energy_gland",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "banquet_planner"
+            ],
+            "price": {
+                "silver": 78
+            }
+        },
+        "warrior_feast": {
+            "id": "warrior_feast",
+            "name": "Warrior's Feast",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 6,
+                    "physicalDefence": 4
+                },
+                "duration": 2700
+            },
+            "icon": "🍖",
+            "desc": "Massive feast for warriors. +6 Strength, +4 Physical Defence for 45 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "crusher_molars",
+                    "quantity": 3
+                },
+                {
+                    "id": "sharp_claws",
+                    "quantity": 2
+                },
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "hearty_rations"
+            ],
+            "price": {
+                "silver": 78
+            }
+        },
+        "swift_hunter_meal": {
+            "id": "swift_hunter_meal",
+            "name": "Swift Hunter Meal",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "speed": 5,
+                    "stamina": 20
+                },
+                "duration": 3600
+            },
+            "icon": "🏃",
+            "desc": "Light meal for agile hunters. +5 Speed, +20 Stamina for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "adhesive_pads",
+                    "quantity": 3
+                },
+                {
+                    "id": "energy_gland",
+                    "quantity": 2
+                },
+                {
+                    "id": "sharp_fangs",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "spice_box"
+            ],
+            "price": {
+                "silver": 78
+            }
+        },
+        "elemental_feast": {
+            "id": "elemental_feast",
+            "name": "Elemental Feast",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "expert",
+            "effect": {
+                "type": "elemental_resistance",
+                "amount": 30,
+                "duration": 7200
+            },
+            "icon": "🍽️",
+            "desc": "A feast providing resistance to all elements. 30% elemental resistance for 20 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "flame_gland",
+                    "quantity": 1
+                },
+                {
+                    "id": "frost_core",
+                    "quantity": 1
+                },
+                {
+                    "id": "storm_organ",
+                    "quantity": 1
+                },
+                {
+                    "id": "crusher_molars",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "chefs_instinct"
+            ],
+            "price": {
+                "gold": 2,
+                "silver": 104
+            }
+        },
+        "dragon_scale_casserole": {
+            "id": "dragon_scale_casserole",
+            "name": "Dragon Scale Casserole",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 8,
+                    "physicalDefence": 6,
+                    "magicalDefence": 4
+                },
+                "duration": 4800
+            },
+            "icon": "🐲",
+            "desc": "Casserole that grants dragon-like resilience. +8 Strength, +6 Physical Defence, +4 Magical Defence for 80 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "drake_scales",
+                    "quantity": 4
+                },
+                {
+                    "id": "dragon_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "elemental_core",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "banquet_planner"
+            ],
+            "price": {
+                "gold": 2,
+                "silver": 104
+            }
+        },
+        "void_essence_broth": {
+            "id": "void_essence_broth",
+            "name": "Void Essence Broth",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicPower": 10,
+                    "speed": 6
+                },
+                "bonus_effects": [
+                    "phase_walk"
+                ],
+                "duration": 3600
+            },
+            "icon": "🌌",
+            "desc": "Mysterious broth from the void. +10 Magic Power, +6 Speed, allows brief phasing for 10 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "void_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "phase_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "storm_organ",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "chefs_instinct"
+            ],
+            "price": {
+                "gold": 2,
+                "silver": 104
+            }
+        },
+        "phoenix_banquet": {
+            "id": "phoenix_banquet",
+            "name": "Phoenix Banquet",
+            "type": "food",
+            "profession": "cooking",
+            "tier": "master",
+            "effect": {
+                "type": "legendary_food",
+                "stats": {
+                    "all": 5
+                },
+                "duration": 14400
+            },
+            "icon": "✨",
+            "desc": "Legendary feast. +5 to all stats for 40 rounds.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 2
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "regenerative_tissue",
+                    "quantity": 3
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "battle_breakfast"
+            ],
+            "price": {
+                "gold": 41
+            }
+        }
+    },
+    "archaeology": {
+        "ancient_coin": {
+            "id": "ancient_coin",
+            "name": "Ancient Coin",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "basic",
+            "effect": {
+                "type": "currency_bonus",
+                "amount": 10
+            },
+            "icon": "🪙",
+            "desc": "An old coin of unknown origin. Increases gold drops by 10%.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "sharp_fangs",
+                    "quantity": 3
+                },
+                {
+                    "id": "crusher_molars",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "artifact_study"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "bone_relic": {
+            "id": "bone_relic",
+            "name": "Bone Relic",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "basic",
+            "effect": {
+                "type": "undead_protection",
+                "amount": 25
+            },
+            "icon": "🦴",
+            "desc": "Ancient bone carved with protective runes. 25% resistance to undead attacks.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "crusher_molars",
+                    "quantity": 4
+                },
+                {
+                    "id": "sharp_fangs",
+                    "quantity": 2
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "artifact_study"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "forgotten_map": {
+            "id": "forgotten_map",
+            "name": "Forgotten Map",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "basic",
+            "effect": {
+                "type": "exploration_bonus",
+                "amount": 15
+            },
+            "icon": "🗺️",
+            "desc": "Ancient map revealing hidden paths. +15% chance to discover new areas.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "thick_hide",
+                    "quantity": 2
+                },
+                {
+                    "id": "flexible_tail_section",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "artifact_study"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "warriors_charm": {
+            "id": "warriors_charm",
+            "name": "Warrior's Charm",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 2,
+                    "physicalDefence": 1
+                },
+                "duration": 3600
+            },
+            "icon": "🔱",
+            "desc": "Ancient charm worn by warriors. +2 Strength, +1 Physical Defence for 10 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "sharp_claws",
+                    "quantity": 2
+                },
+                {
+                    "id": "crusher_molars",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "artifact_study"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "mystic_amulet": {
+            "id": "mystic_amulet",
+            "name": "Mystic Amulet",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicPower": 3,
+                    "magicalDefence": 1
+                },
+                "duration": 3600
+            },
+            "icon": "🔮",
+            "desc": "Ancient amulet of forgotten mages. +3 Magic Power, +1 Magical Defence for 10 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 2
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "living_rock_fragments",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "artifact_study"
+            ],
+            "price": {
+                "silver": 5
+            }
+        },
+        "elemental_tablet": {
+            "id": "elemental_tablet",
+            "name": "Elemental Tablet",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "advanced",
+            "effect": {
+                "type": "elemental_knowledge",
+                "spell_unlock": "elemental_mastery"
+            },
+            "icon": "📜",
+            "desc": "Ancient tablet revealing elemental secrets. Unlocks Elemental Mastery knowledge.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "living_rock_fragments",
+                    "quantity": 3
+                },
+                {
+                    "id": "flame_gland",
+                    "quantity": 1
+                },
+                {
+                    "id": "frost_core",
+                    "quantity": 1
+                },
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "ancient_tongues"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "crystal_resonator": {
+            "id": "crystal_resonator",
+            "name": "Crystal Resonator",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicPower": 6,
+                    "speed": 3
+                },
+                "bonus_effects": [
+                    "mana_regeneration"
+                ],
+                "duration": 4800
+            },
+            "icon": "💎",
+            "desc": "Ancient crystal that resonates with magical energy. +6 Magic Power, +3 Speed, enhanced mana regeneration for 80 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 4
+                },
+                {
+                    "id": "elemental_core",
+                    "quantity": 1
+                },
+                {
+                    "id": "runic_stone",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "trap_sense"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "shadow_walker_mask": {
+            "id": "shadow_walker_mask",
+            "name": "Shadow Walker Mask",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "speed": 5
+                },
+                "bonus_effects": [
+                    "stealth",
+                    "shadow_step"
+                ],
+                "duration": 3600
+            },
+            "icon": "🎭",
+            "desc": "Mask of ancient assassins. +5 Speed, grants stealth and shadow step abilities for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "phase_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "glowing_crystals",
+                    "quantity": 1
+                },
+                {
+                    "id": "ancient_parchment",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "trap_sense"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "titans_legacy": {
+            "id": "titans_legacy",
+            "name": "Titan's Legacy",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 7,
+                    "hp": 15
+                },
+                "bonus_effects": [
+                    "giant_strength"
+                ],
+                "duration": 3600
+            },
+            "icon": "⚡",
+            "desc": "Relic of the ancient titans. +7 Strength, +15 HP, grants titan-like power for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "titan_bones",
+                    "quantity": 2
+                },
+                {
+                    "id": "living_rock_fragments",
+                    "quantity": 3
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "lost_technique"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "ancient_compass": {
+            "id": "ancient_compass",
+            "name": "Ancient Compass",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "advanced",
+            "effect": {
+                "type": "treasure_finding",
+                "amount": 25
+            },
+            "icon": "🧭",
+            "desc": "Mystical compass that points to hidden treasures. +25% chance to find rare items.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "runic_stone",
+                    "quantity": 2
+                },
+                {
+                    "id": "timeworn_gear",
+                    "quantity": 1
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "explosive_compounds"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "scholar_spectacles": {
+            "id": "scholar_spectacles",
+            "name": "Scholar's Spectacles",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "advanced",
+            "effect": {
+                "type": "knowledge_boost",
+                "amount": 30,
+                "duration": 7200
+            },
+            "icon": "👓",
+            "desc": "Ancient spectacles that enhance learning. +30% experience gain for 20 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "ancient_parchment",
+                    "quantity": 3
+                },
+                {
+                    "id": "runic_stone",
+                    "quantity": 1
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "ancient_tongues"
+            ],
+            "price": {
+                "silver": 112
+            }
+        },
+        "time_worn_artifact": {
+            "id": "time_worn_artifact",
+            "name": "Time-Worn Artifact",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "expert",
+            "effect": {
+                "type": "experience_boost",
+                "amount": 25,
+                "duration": 7200
+            },
+            "icon": "⚱️",
+            "desc": "Ancient artifact that accelerates learning. +25% experience gain for 20 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 5
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "replicate_relic"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "dimensional_anchor": {
+            "id": "dimensional_anchor",
+            "name": "Dimensional Anchor",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "physicalDefence": 8,
+                    "magicalDefence": 8
+                },
+                "bonus_effects": [
+                    "dimension_lock"
+                ],
+                "duration": 5400
+            },
+            "icon": "⚓",
+            "desc": "Ancient device that locks reality. +8 Physical/Magical Defence, prevents dimensional interference for 90 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "void_essence",
+                    "quantity": 4
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 3
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "careful_extraction"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "phoenix_crown": {
+            "id": "phoenix_crown",
+            "name": "Phoenix Crown",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "hp": 30,
+                    "magicPower": 8
+                },
+                "bonus_effects": [
+                    "fire_immunity",
+                    "regeneration"
+                ],
+                "duration": 7200
+            },
+            "icon": "👑",
+            "desc": "Crown of an ancient phoenix king. +30 HP, +8 Magic Power, fire immunity and regeneration for 20 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "regenerative_tissue",
+                    "quantity": 3
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 1
+                },
+                {
+                    "id": "metallic_fragments",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "deduction"
+            ],
+            "price": {
+                "gold": 3,
+                "silver": 150
+            }
+        },
+        "primordial_codex": {
+            "id": "primordial_codex",
+            "name": "Primordial Codex",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "master",
+            "effect": {
+                "type": "skill_unlock",
+                "skills": [
+                    "ancient_magic",
+                    "time_manipulation"
+                ]
+            },
+            "icon": "📚",
+            "desc": "The legendary codex of the first civilization. Unlocks ancient magic and time manipulation.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 1
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 2
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 4
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "deduction"
+            ],
+            "price": {
+                "gold": 60
+            }
+        },
+        "genesis_fragment": {
+            "id": "genesis_fragment",
+            "name": "Genesis Fragment",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "master",
+            "effect": {
+                "type": "permanent_enhancement",
+                "stats": {
+                    "hp": 20,
+                    "stamina": 20,
+                    "strength": 3,
+                    "speed": 3,
+                    "magicPower": 3
+                }
+            },
+            "icon": "✨",
+            "desc": "Fragment from the world's creation. Permanently increases HP/Stamina by 20, all other stats by 3. One use per character.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "elemental_heart",
+                    "quantity": 3
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 5
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 4
+                },
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "deduction",
+                "lost_technique"
+            ],
+            "price": {
+                "gold": 60
+            }
+        },
+        "omniscience_tablet": {
+            "id": "omniscience_tablet",
+            "name": "Omniscience Tablet",
+            "type": "artifact",
+            "profession": "archaeology",
+            "tier": "master",
+            "effect": {
+                "type": "skill_unlock",
+                "skills": [
+                    "all_knowledge",
+                    "universal_mastery"
+                ]
+            },
+            "icon": "📜",
+            "desc": "The ultimate archaeological discovery. Unlocks all knowledge skills and universal mastery.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "divine_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 2
+                },
+                {
+                    "id": "void_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 5
+                }
+            ],
+            "requiredSkills": [
+                "deduction",
+                "divine_dig"
+            ],
+            "price": {
+                "gold": 60
+            }
+        }
+    },
+    "herbalism": {
+        "healing_herbs": {
+            "id": "healing_herbs",
+            "name": "Healing Herbs",
+            "type": "consumable",
+            "profession": "herbalism",
+            "tier": "basic",
+            "effect": {
+                "type": "heal",
+                "amount": 10
+            },
+            "icon": "🌿",
+            "desc": "Basic medicinal herbs. Restores 10 HP.",
+            "rarity": "common",
+            "stackable": true,
+            "price": {
+                "silver": 8
+            },
+            "materials": [
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "wild_mint",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "hands_in_soil"
+            ]
+        },
+        "mana_moss": {
+            "id": "mana_moss",
+            "name": "Mana Moss",
+            "type": "consumable",
+            "profession": "herbalism",
+            "tier": "basic",
+            "effect": {
+                "type": "mana_restore",
+                "amount": 15
+            },
+            "icon": "🍀",
+            "desc": "Moss that restores magical energy. Restores 15 MP.",
+            "rarity": "common",
+            "stackable": true,
+            "materials": [
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "anti_magic_essence",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "hands_in_soil"
+            ],
+            "price": {
+                "silver": 4
+            }
+        },
+        "energy_berries": {
+            "id": "energy_berries",
+            "name": "Energy Berries",
+            "type": "consumable",
+            "profession": "herbalism",
+            "tier": "basic",
+            "effect": {
+                "type": "restore_stamina",
+                "amount": 20
+            },
+            "icon": "🫐",
+            "desc": "Sweet berries that restore energy. Restores 20 Stamina.",
+            "rarity": "common",
+            "stackable": true,
+            "materials": [
+                {
+                    "id": "energy_berry",
+                    "quantity": 3
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "hands_in_soil"
+            ],
+            "price": {
+                "silver": 4
+            }
+        },
+        "swift_leaf_tea": {
+            "id": "swift_leaf_tea",
+            "name": "Swift Leaf Tea",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "speed": 2
+                },
+                "duration": 1800
+            },
+            "icon": "🍃",
+            "desc": "Tea made from swift-growing leaves. +2 Speed for 30 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "wild_mint",
+                    "quantity": 2
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "hands_in_soil"
+            ],
+            "price": {
+                "silver": 3
+            }
+        },
+        "protective_bark": {
+            "id": "protective_bark",
+            "name": "Protective Bark",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "basic",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "physicalDefence": 2,
+                    "hp": 5
+                },
+                "duration": 2400
+            },
+            "icon": "🌰",
+            "desc": "Tough bark that provides protection. +2 Physical Defence, +5 HP for 40 rounds.",
+            "rarity": "common",
+            "materials": [
+                {
+                    "id": "tree_bark",
+                    "quantity": 3
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "hands_in_soil"
+            ],
+            "price": {
+                "silver": 3
+            }
+        },
+        "vitality_bloom": {
+            "id": "vitality_bloom",
+            "name": "Vitality Bloom",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "hp": 3,
+                    "strength": 2
+                },
+                "duration": 1800
+            },
+            "icon": "🌺",
+            "desc": "Rare flower that boosts vitality. +3 HP, +2 Strength for 30 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "nature_essence",
+                    "quantity": 3
+                },
+                {
+                    "id": "ironbark_moss",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "preserve_harvest"
+            ],
+            "price": {
+                "silver": 67
+            }
+        },
+        "forest_guardian_tea": {
+            "id": "forest_guardian_tea",
+            "name": "Forest Guardian Tea",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "advanced",
+            "effect": {
+                "type": "nature_attunement",
+                "amount": 30,
+                "duration": 3600
+            },
+            "icon": "🍵",
+            "desc": "Tea blessed by forest spirits. +30% nature magic effectiveness for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "wild_mint",
+                    "quantity": 3
+                },
+                {
+                    "id": "moonbell_flower",
+                    "quantity": 2
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "green_thumb"
+            ],
+            "price": {
+                "silver": 67
+            }
+        },
+        "herbal_antidote": {
+            "id": "herbal_antidote",
+            "name": "Herbal Antidote",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "advanced",
+            "effect": {
+                "type": "cure_all_poisons",
+                "immunity_duration": 1800
+            },
+            "icon": "🧪",
+            "desc": "Powerful antidote that cures all poisons and grants immunity for 30 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "crystal_sage",
+                    "quantity": 2
+                },
+                {
+                    "id": "venom_sacs",
+                    "quantity": 1
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "preserve_harvest"
+            ],
+            "price": {
+                "silver": 67
+            }
+        },
+        "dragons_breath_flower": {
+            "id": "dragons_breath_flower",
+            "name": "Dragon's Breath Flower",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicPower": 6,
+                    "strength": 3
+                },
+                "bonus_effects": [
+                    "fire_magic"
+                ],
+                "duration": 3600
+            },
+            "icon": "🌋",
+            "desc": "Fiery flower that burns with inner flame. +6 Magic Power, +3 Strength, enhances fire magic for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "moonbell_flower",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "crop_rotation"
+            ],
+            "price": {
+                "silver": 67
+            }
+        },
+        "moonlight_lotus": {
+            "id": "moonlight_lotus",
+            "name": "Moonlight Lotus",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicalDefence": 5,
+                    "speed": 4
+                },
+                "bonus_effects": [
+                    "night_vision"
+                ],
+                "duration": 4800
+            },
+            "icon": "🪷",
+            "desc": "Lotus that blooms only in moonlight. +5 Magical Defence, +4 Speed, grants night vision for 80 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "moonbell_flower",
+                    "quantity": 3
+                },
+                {
+                    "id": "crystal_sage",
+                    "quantity": 2
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "green_thumb"
+            ],
+            "price": {
+                "silver": 67
+            }
+        },
+        "giants_root": {
+            "id": "giants_root",
+            "name": "Giant's Root",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "strength": 5,
+                    "hp": 20
+                },
+                "duration": 3600
+            },
+            "icon": "🥕",
+            "desc": "Massive root that grants giant-like strength. +5 Strength, +20 HP for 10 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "tree_bark",
+                    "quantity": 3
+                }
+            ],
+            "requiredSkills": [
+                "green_thumb"
+            ],
+            "price": {
+                "silver": 67
+            }
+        },
+        "ethereal_mushroom": {
+            "id": "ethereal_mushroom",
+            "name": "Ethereal Mushroom",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "advanced",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "speed": 6
+                },
+                "bonus_effects": [
+                    "phase_walk",
+                    "spirit_sight"
+                ],
+                "duration": 2400
+            },
+            "icon": "🍄",
+            "desc": "Ghostly mushroom from another realm. +6 Speed, allows phasing and spirit sight for 40 rounds.",
+            "rarity": "uncommon",
+            "materials": [
+                {
+                    "id": "ghost_moss",
+                    "quantity": 3
+                },
+                {
+                    "id": "phase_essence",
+                    "quantity": 2
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "green_thumb"
+            ],
+            "price": {
+                "silver": 67
+            }
+        },
+        "nature_elixir": {
+            "id": "nature_elixir",
+            "name": "Nature's Elixir",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "expert",
+            "effect": {
+                "type": "full_heal_and_cleanse"
+            },
+            "icon": "🧪",
+            "desc": "Pure essence of nature. Fully heals and removes all negative effects.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "nature_essence",
+                    "quantity": 5
+                },
+                {
+                    "id": "regenerative_tissue",
+                    "quantity": 5
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 1
+                }
+            ],
+            "requiredSkills": [
+                "surgical_touch"
+            ],
+            "price": {
+                "gold": 1,
+                "silver": 89
+            }
+        },
+        "phoenix_bloom": {
+            "id": "phoenix_bloom",
+            "name": "Phoenix Bloom",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "hp": 40,
+                    "magicPower": 8
+                },
+                "bonus_effects": [
+                    "auto_resurrection"
+                ],
+                "duration": 7200
+            },
+            "icon": "🔥",
+            "desc": "Flower reborn from phoenix ashes. +40 HP, +8 Magic Power, auto-resurrection on death for 20 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "regenerative_tissue",
+                    "quantity": 4
+                },
+                {
+                    "id": "flame_petals",
+                    "quantity": 5
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 6
+                }
+            ],
+            "requiredSkills": [
+                "green_thumb"
+            ],
+            "price": {
+                "gold": 1,
+                "silver": 89
+            }
+        },
+        "void_spore": {
+            "id": "void_spore",
+            "name": "Void Spore",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "expert",
+            "effect": {
+                "type": "stat_boost",
+                "stats": {
+                    "magicPower": 10,
+                    "speed": 7
+                },
+                "bonus_effects": [
+                    "void_magic",
+                    "dimension_step"
+                ],
+                "duration": 5400
+            },
+            "icon": "🌌",
+            "desc": "Spore from the void realm. +10 Magic Power, +7 Speed, grants void magic and dimension stepping for 90 rounds.",
+            "rarity": "rare",
+            "materials": [
+                {
+                    "id": "void_essence",
+                    "quantity": 4
+                },
+                {
+                    "id": "ghost_moss",
+                    "quantity": 3
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 5
+                }
+            ],
+            "requiredSkills": [
+                "green_thumb"
+            ],
+            "price": {
+                "gold": 1,
+                "silver": 89
+            }
+        },
+        "world_tree_seed": {
+            "id": "world_tree_seed",
+            "name": "World Tree Seed",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "master",
+            "effect": {
+                "type": "permanent_growth",
+                "stats": {
+                    "all": 3
+                }
+            },
+            "icon": "🌳",
+            "desc": "Seed from the legendary World Tree. Permanently increases all stats by 3.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "nature_essence",
+                    "quantity": 10
+                },
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 3
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 2
+                },
+                {
+                    "id": "time_crystal",
+                    "quantity": 2
+                }
+            ],
+            "requiredSkills": [
+                "bountiful_plot"
+            ],
+            "price": {
+                "gold": 36
+            }
+        },
+        "cosmic_essence_fruit": {
+            "id": "cosmic_essence_fruit",
+            "name": "Cosmic Essence Fruit",
+            "type": "herb",
+            "profession": "herbalism",
+            "tier": "master",
+            "effect": {
+                "type": "permanent_enhancement",
+                "stats": {
+                    "hp": 30,
+                    "stamina": 30,
+                    "physicalDefence": 5,
+                    "magicalDefence": 5,
+                    "magicPower": 5
+                }
+            },
+            "icon": "🌟",
+            "desc": "Fruit that contains the essence of the cosmos. Permanently increases HP/Stamina by 30, defences and Magic Power by 5. One use per character.",
+            "rarity": "legendary",
+            "materials": [
+                {
+                    "id": "cosmic_dust",
+                    "quantity": 3
+                },
+                {
+                    "id": "elemental_heart",
+                    "quantity": 2
+                },
+                {
+                    "id": "phoenix_cells",
+                    "quantity": 3
+                },
+                {
+                    "id": "nature_essence",
+                    "quantity": 10
+                }
+            ],
+            "requiredSkills": [
+                "bountiful_plot"
+            ],
+            "price": {
+                "gold": 36
+            }
+        }
+    }
+}
+
+if (typeof window !== 'undefined') {
+  window.PROFESSION_ITEMS_DATA = PROFESSION_ITEMS_DATA
+}
