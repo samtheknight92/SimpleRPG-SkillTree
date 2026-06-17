@@ -1,0 +1,9508 @@
+// ===========================================
+// -----------------------------------------------------------------------------
+// Status Effect Application Chance Rule (ALL Skills)
+// -----------------------------------------------------------------------------
+// If any skill "may apply" a status effect, the chance is based on the skill's tier:
+//   - Tier 2: 20% chance
+//   - Tier 3: 40% chance
+//   - Tier 4: 75% chance
+//   - Tier 5: 95% chance
+// All status effect chances must be written as:
+//   "Has a X% chance to apply [Status Effect] ([reference to status-effects.js])"
+// Do not invent new status effects or durations; use standard effect names from the Effects list.
+// This rule applies to ALL skills, not just fusion skills.
+// -----------------------------------------------------------------------------
+// SKILL SYSTEM DATA
+// ===========================================
+// 
+// TERMINOLOGY DEFINITIONS:
+// - "Magic Power": Character stat that increases magical spell effectiveness (like Strength for physical)
+// - "Magic Damage": The actual damage output of magical spells (calculated from Magic Power + spell base)  
+// - "Damage": Generic term referring to all attack damage (physical or magical)
+// - Physical Defence (PD) and Magical Defence (MD) are AC values, not damage reduction.
+// - Physical attacks: roll d20 + accuracy vs target PD to hit; damage on hit only.
+// - Magical attacks/spells: roll d20 + accuracy vs target MD to hit; damage on hit only.
+// - "Ignores N Physical/Magical Defence" means treat the target's AC as N lower for that attack.
+//
+// COMBAT: Physical attacks roll d20 + accuracy vs target Physical Defence (PD).
+// Magical attacks/spells roll d20 + accuracy vs target Magical Defence (MD).
+// PD and MD are AC values — meet or beat to hit; damage applies only on a hit.
+// BALANCE NOTES:
+// - Toggle skills have stamina costs and mutual exclusivity
+// - Immunity skills have doubled costs to reflect their power
+// - Weapon-based skills require appropriate equipment
+// ===========================================
+
+// Skills Data - 25+ skills per category with proper tier structure
+const SKILLS_DATA = {
+    "weapons": {
+        "sword": [
+            {
+                "id": "sword_basics",
+                "name": "Sword Basics",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Accuracy while wielding a sword.",
+                "icon": "⚔️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "sword_stance",
+                "name": "Combat Stance",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Physical Defence while wielding a sword.",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "quick_strike",
+                "name": "Quick Strike",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Action: Sword attack. Attack roll d20 + accuracy (+) vs Physical Defence; weapon damage on hit.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "parry",
+                "name": "Parry",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 1,
+                "desc": "Reaction: When hit by a melee attack, roll d20 + accuracy vs the attacker's accuracy; on success, block the hit (no damage).",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_basics",
+                        "sword_stance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "lunge_attack",
+                "name": "Lunge Attack",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Action: Extended-reach sword attack (+5ft range). Attack roll d20 + accuracy vs Physical Defence; weapon damage +1 on hit.",
+                "icon": "🎯",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "riposte",
+                "name": "Riposte",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 2,
+                "desc": "Reaction: After a successful Parry, counter with a Basic Attack (+2 damage on hit). Costs 1 stamina.",
+                "icon": "⚔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "parry",
+                        "quick_strike"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "sweeping_slash",
+                "name": "Sweeping Slash",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 4,
+                "desc": "Action: Wide sword arc. Up to 3 adjacent enemies; separate attack roll (d20 + accuracy vs Physical Defence) vs each; weapon damage on each hit.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "blade_dance",
+                "name": "Blade Dance",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Sword combo of 3 attacks. Each attack roll is d20 + accuracy vs Physical Defence −1; weapon damage +1 on each hit.",
+                "icon": "💃",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "lunge_attack",
+                        "quick_strike"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "defensive_stance",
+                "name": "Defensive Stance",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 1,
+                "desc": "Toggle: +2 Physical Defence and +2 Magical Defence, but −1 damage on your attacks. Costs 1 stamina per turn (max 10 turns).",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "parry"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "master_parry",
+                "name": "Master Parry",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Reaction: On a successful Parry, reflect the melee attack back at the attacker for full damage.",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "riposte",
+                        "defensive_stance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "whirlwind",
+                "name": "Whirlwind Strike",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Spinning sword attack. One attack roll per enemy within 10ft (d20 + accuracy vs Physical Defence −2); weapon damage on each hit. Friendly fire possible.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweeping_slash",
+                        "blade_dance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "piercing_thrust",
+                "name": "Piercing Thrust",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 4,
+                "desc": "Action: Armour-piercing sword thrust. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage. Critical hit on natural 18–20. Target's armour bonuses do not add to Physical Defence against this attack.",
+                "icon": "🎯",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "lunge_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "sword_mastery",
+                "name": "Sword Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: +3 damage on sword hits; critical hits restore 1 stamina.",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "OR",
+                    "skills": [
+                        "master_parry",
+                        "whirlwind",
+                        "piercing_thrust"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "ranged": [
+            {
+                "id": "ranged_basics",
+                "name": "Ranged Basics",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Accuracy while wielding a ranged weapon.",
+                "icon": "🏹",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "steady_aim",
+                "name": "Steady Aim",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +2 accuracy when you didn't move this turn",
+                "icon": "🎯",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "grappling_shot",
+                "name": "Grappling Shot",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Fire a grappling arrow at a surface or creature within 30ft. Pull yourself to it, or pull a target toward you (GM may call for a contest). No damage unless your table combines it with a separate attack.",
+                "icon": "🪝",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ranged_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "aimed_shot",
+                "name": "Aimed Shot",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Action: Ranged weapon attack with extra aim time. Attack roll d20 + accuracy (+3) vs Physical Defence; on a hit, weapon damage +2.",
+                "icon": "🎯",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "steady_aim"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "power_shot",
+                "name": "Power Shot",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Ranged weapon attack at full draw. Attack roll d20 + accuracy (−1) vs Physical Defence; on a hit, weapon damage +4.",
+                "icon": "💪",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ranged_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "covering_fire",
+                "name": "Covering Fire",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Action: Ranged weapon attack (bow) to suppress a foe. d20 + accuracy vs Physical Defence; weapon damage on hit; 40% chance to apply Weakened. Until your next turn, one ally you choose gains +2 accuracy against that target.",
+                "icon": "🤝",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "steady_aim"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "multi_shot",
+                "name": "Multi Shot",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Make 2 ranged weapon attacks as one action. Each attack roll is d20 + accuracy vs that target's Physical Defence; weapon damage on each hit. Target one foe twice or two foes once each.",
+                "icon": "⬇️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "piercing_shot",
+                "name": "Piercing Shot",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 4,
+                "desc": "Action: Fire one ranged weapon shot along a straight line. Separate attack roll (d20 + accuracy) vs each enemy in that line; weapon damage on each hit. Does not ignore Physical Defence.",
+                "icon": "➡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "aimed_shot",
+                        "power_shot"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "explosive_shot",
+                "name": "Explosive Shot",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Action: Ranged weapon attack that detonates on impact. Attack roll d20 + accuracy vs primary target's Physical Defence (−1 accuracy); weapon damage on hit. Each other creature in 10ft: separate attack roll (d20 + accuracy −1) vs each target's Physical Defence; weapon damage on each hit. Friendly fire possible.",
+                "icon": "💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "power_shot",
+                        "explosive_compounds"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "parting_shot",
+                "name": "Parting Shot",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 3,
+                "desc": "Action: Ranged weapon attack (d20 + accuracy vs Physical Defence; weapon damage on hit), then move up to 15ft without provoking opportunity attacks.",
+                "icon": "↩️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "aimed_shot"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "quick_draw",
+                "name": "Quick Draw",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: You may attack with ranged weapons the same turn you move (others cannot).",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "grappling_shot"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "barrage",
+                "name": "Projectile Barrage",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Action: Saturate a 20ft-radius area. One attack roll per enemy inside (d20 + accuracy −3) vs each target's Physical Defence; weapon damage on each hit. Friendly fire possible.",
+                "icon": "🌧️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "explosive_shot"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "homing_shot",
+                "name": "Homing Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 6,
+                "desc": "Action: Ranged weapon attack that automatically hits one chosen target (once per combat) — no attack roll. Weapon damage on hit.",
+                "icon": "🧭",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "piercing_shot"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "rapid_fire",
+                "name": "Rapid Fire",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 5,
+                "desc": "Action: Make 4 ranged weapon attacks. Each attack roll is d20 + accuracy −1 vs Physical Defence; weapon damage on each hit.",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "parting_shot",
+                        "multi_shot"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "siege_shot",
+                "name": "Siege Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 6,
+                "desc": "Action: One heavy ranged weapon shot along a 120ft line. Separate attack roll (d20 + accuracy) vs each enemy in the line; weapon damage on each hit.",
+                "icon": "🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "grappling_shot",
+                        "explosive_shot"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ranged_mastery",
+                "name": "Ranged Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: +50% weapon range, +3 damage on ranged weapon hits, and critical hits do not consume ammunition.",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "OR",
+                    "skills": [
+                        "barrage",
+                        "homing_shot",
+                        "rapid_fire",
+                        "siege_shot"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "axe": [
+            {
+                "id": "axe_basics",
+                "name": "Axe Basics",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Accuracy while wielding an axe.",
+                "icon": "🪓",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "heavy_swing",
+                "name": "Heavy Swing",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 3,
+                "desc": "Action: Overhead axe chop. Attack roll d20 + accuracy () vs Physical Defence; weapon damage +3 on hit.",
+                "icon": "⬇️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "cleave",
+                "name": "Cleave",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Passive: When you kill an enemy, make a Basic Attack against an adjacent foe (costs 1 stamina).",
+                "icon": "〰️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "axe_basics"
+                    ]
+                },
+                "specialEffects": [
+                    "cleave"
+                ]
+            },
+            {
+                "id": "armor_break",
+                "name": "Armor Break",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Action: Sunder armour. On a successful melee attack roll (d20 + accuracy vs Physical Defence), reduce the target's Physical Defence by 2 for 1 day (once per enemy).",
+                "icon": "🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "heavy_swing"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "throwing_axe",
+                "name": "Throwing Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Action: Throw axe (30ft). Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. Axe returns to your hand.",
+                "icon": "🎯",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "axe_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "berserker_rage",
+                "name": "Berserker Rage",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 2,
+                "desc": "Toggle: +2 Strength and +2 Physical Defence. Costs 2 stamina per turn (max 5 turns).",
+                "icon": "😤",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "crushing_blow",
+                "name": "Crushing Blow",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Axe smash. Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. 50% chance to apply Incapacitated (1 turn) and knock prone.",
+                "icon": "💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_break",
+                        "heavy_swing"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ricochet_axe",
+                "name": "Ricochet Axe",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Enhancement: Thrown axe attacks may bounce to one additional target (separate attack roll per target; weapon damage on each hit).",
+                "icon": "🔄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "throwing_axe"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "wide_cleave",
+                "name": "Wide Cleave",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 7,
+                "desc": "Action: Cleave arc (15ft). One attack roll (d20 + accuracy vs Physical Defence) per enemy in the arc; weapon damage on each hit.",
+                "icon": "〰️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "earthquake_slam",
+                "name": "Earthquake Slam",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Action: Ground slam (20ft radius). One attack roll per creature (d20 + accuracy vs Physical Defence −2); weapon damage on each hit; knockdown on hit. Friendly fire possible.",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "crushing_blow"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "whirling_axes",
+                "name": "Whirling Axes",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 11,
+                "desc": "Action: Spin with axes (10ft radius). One attack roll per enemy (d20 + accuracy vs Physical Defence −2); weapon damage on each hit. You may move while spinning. Friendly fire possible.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "berserker_rage",
+                        "wide_cleave"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "axe_storm",
+                "name": "Axe Storm",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Action: Throw 6 axes (360°). Six attack rolls (d20 + accuracy vs Physical Defence); weapon damage on each hit.",
+                "icon": "🌩️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ricochet_axe"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "axe_mastery",
+                "name": "Axe Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: +3 damage on axe hits; axe attacks have a 25% chance to Cleave.",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "OR",
+                    "skills": [
+                        "earthquake_slam",
+                        "whirling_axes",
+                        "axe_storm"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "staff": [
+            {
+                "id": "staff_basics",
+                "name": "Staff Basics",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Magic Power while wielding a staff.",
+                "icon": "🪄",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "mana_focus",
+                "name": "Mana Focus",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: Restore +1 stamina per turn while a staff is equipped.",
+                "icon": "💙",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "spell_power",
+                "name": "Spell Power",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Passive: +2 Magic Power on magical attacks while using a staff.",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "arcane_shield",
+                "name": "Arcane Shield",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Apply Spell Warded to yourself (magical immunity + magical damage halved, 8 turns).",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "mana_focus"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "staff_strike",
+                "name": "Staff Strike",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Action: Melee staff strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d6 + Magic Power damage.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "spell_penetration",
+                "name": "Spell Penetration",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Your spell attack rolls treat the target's Magical Defence as 2 lower.",
+                "icon": "🎯",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power"
+                    ]
+                },
+                "specialEffects": [
+                    "spell_penetration"
+                ]
+            },
+            {
+                "id": "mana_burn",
+                "name": "Mana Burn",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Drain mana. Attack roll d20 + accuracy vs Magical Defence; on a hit, apply Weakened (all stats −2) and drain 1d4+2 stamina from the target.",
+                "icon": "💔",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "arcane_shield"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "elemental_staff",
+                "name": "Elemental Staff",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Imbue staff with Fire, Ice, or Lightning for 10 turns (GM: adds elemental flavour to staff strikes/spells).",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "dispel_ward",
+                "name": "Dispel Ward",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 4,
+                "desc": "Action: Remove all magical effects from one target (ally or enemy).",
+                "icon": "🚫",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "arcane_shield"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "arcane_mastery",
+                "name": "Arcane Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: All spells cost −1 stamina (minimum 1).",
+                "icon": "🧙",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_penetration",
+                        "mana_burn"
+                    ]
+                },
+                "specialEffects": [
+                    "arcane_mastery"
+                ]
+            },
+            {
+                "id": "staff_of_power",
+                "name": "Staff of Power",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Release stored energy (60ft). Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d8 force damage + Magic Power.",
+                "icon": "💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "elemental_staff"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "reality_tear",
+                "name": "Reality Tear",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Action: Open a dimensional rift — teleport anywhere within 100ft.",
+                "icon": "🌀",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dispel_ward"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "staff_mastery",
+                "name": "Staff Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: +4 Magic Power; once per day, cast two spells in one turn.",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "OR",
+                    "skills": [
+                        "arcane_mastery",
+                        "staff_of_power",
+                        "reality_tear"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "dagger": [
+            {
+                "id": "dagger_basics",
+                "name": "Dagger Basics",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Accuracy while wielding a dagger.",
+                "icon": "🗡️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "light_step",
+                "name": "Light Step",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Speed and silent movement while a dagger is equipped.",
+                "icon": "👣",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "dual_wield",
+                "name": "Dual Wield",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Passive: With a dagger in your main hand, unlock an off-hand dagger slot. Basic Attack rolls damage for both daggers.",
+                "icon": "⚔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dagger_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "sneak_attack",
+                "name": "Sneak Attack",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Dagger attack from behind or while hidden. Attack roll d20 + accuracy vs Physical Defence; weapon damage +3 on hit.",
+                "icon": "👤",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_step"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "poison_blade",
+                "name": "Poison Blade",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Enhancement: Coat daggers with poison — escalating 1→2→3 damage over 3 turns on hit (GM).",
+                "icon": "☠️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dagger_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "flurry",
+                "name": "Flurry",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Make 4 dagger attacks. Each attack roll is d20 + accuracy vs Physical Defence −1; weapon damage on each hit.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "shadowstep",
+                "name": "Shadowstep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Teleport behind a target within 30ft. Your next attack qualifies as Sneak Attack.",
+                "icon": "🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sneak_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "vital_strike",
+                "name": "Vital Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 4,
+                "desc": "Action: Dagger vital strike. Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. Critical hit on natural 15–20.",
+                "icon": "💔",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "poison_blade",
+                        "sneak_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "evasion",
+                "name": "Evasion",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: +2 Physical Defence and +2 Magical Defence; GM may allow a dodge roll to avoid area attacks.",
+                "icon": "💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_step"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "thousand_cuts",
+                "name": "Thousand Cuts",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Eight dagger strikes — automatically hit (no attack roll). Weapon damage on each hit.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry",
+                        "vital_strike"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_clone",
+                "name": "Shadow Clone",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 7,
+                "desc": "Action: Create a mirror image that fights alongside you for 5 turns (50% your stats, GM).",
+                "icon": "👥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadowstep",
+                        "evasion"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "assassinate",
+                "name": "Assassinate",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 6,
+                "desc": "Action: Lethal strike. Attack roll d20 + accuracy vs Physical Defence; on a critical hit, instant kill on most enemies (GM discretion).",
+                "icon": "💀",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "dagger_mastery",
+                "name": "Dagger Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: +2 Speed, +3 damage on dagger hits; attacks have 25% critical chance.",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "OR",
+                    "skills": [
+                        "thousand_cuts",
+                        "shadow_clone",
+                        "assassinate"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "polearm": [
+            {
+                "id": "polearm_basics",
+                "name": "Polearm Basics",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Accuracy while wielding a polearm.",
+                "icon": "🔱",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "reach_advantage",
+                "name": "Reach Advantage",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: You may attack enemies 10ft away; they cannot reach you with melee unless they close distance.",
+                "icon": "📏",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "thrust_attack",
+                "name": "Thrust Attack",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Action: Piercing polearm thrust. Attack roll d20 + accuracy vs Physical Defence (treat target Physical Defence as 1 lower); weapon damage +2 on hit.",
+                "icon": "➡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "polearm_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "polearm_defensive_stance",
+                "name": "Defensive Stance",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 1,
+                "desc": "Toggle: +2 Physical Defence and +2 Magical Defence, but you cannot move. Costs 1 stamina per turn (max 10 turns).",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "reach_advantage"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "sweep_attack",
+                "name": "Sweep Attack",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Wide sweep. Up to 3 enemies in front; separate attack roll (d20 + accuracy vs Physical Defence) vs each; weapon damage on each hit.",
+                "icon": "〰️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "polearm_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "spear_wall",
+                "name": "Spear Wall",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Set a 10ft-wide block. Enemies entering the zone are attacked (d20 + accuracy vs Physical Defence); weapon damage on hit.",
+                "icon": "🏗️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "polearm_defensive_stance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "polearm_charge_attack",
+                "name": "Charge Attack",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Charge then strike. Attack roll d20 + accuracy vs Physical Defence; weapon damage +1 per 5ft moved (max +6) on hit.",
+                "icon": "🏃",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "trip_attack",
+                "name": "Trip Attack",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 4,
+                "desc": "Action: Trip with polearm. Attack roll d20 + accuracy vs Physical Defence; on a hit, knock target prone (they lose next turn, GM).",
+                "icon": "🦵",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "phalanx_formation",
+                "name": "Phalanx Formation",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Physical Defence and +1 Magical Defence for each polearm ally within 10ft.",
+                "icon": "👥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "defensive_stance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "impale",
+                "name": "Impale",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Impaling thrust. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 damage and target cannot move for 3 turns.",
+                "icon": "📌",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spear_wall",
+                        "polearm_charge_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "whirlwind_sweep",
+                "name": "Whirlwind Sweep",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 9,
+                "desc": "Action: 360° sweep (15ft). One attack roll per enemy (d20 + accuracy vs Physical Defence −2); weapon damage on each hit. Friendly fire possible.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "trip_attack",
+                        "phalanx_formation"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "fortress_stance",
+                "name": "Fortress Stance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Toggle: +4 Physical Defence and +4 Magical Defence; reflect 50% damage to attackers. Costs 3 stamina per turn (max 5 turns).",
+                "icon": "🏰",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "phalanx_formation"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "polearm_mastery",
+                "name": "Polearm Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: +20ft reach, +3 damage on polearm hits; opportunity attacks when enemies move (GM).",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "OR",
+                    "skills": [
+                        "impale",
+                        "whirlwind_sweep",
+                        "fortress_stance"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "hammer": [
+            {
+                "id": "hammer_basics",
+                "name": "Hammer Basics",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Accuracy while wielding a hammer.",
+                "icon": "🔨",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "heavy_impact",
+                "name": "Heavy Impact",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 3,
+                "desc": "Action: Hammer blow. Attack roll d20 + accuracy () vs Physical Defence; weapon damage +4 on hit.",
+                "icon": "💥",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "armor_crusher",
+                "name": "Armor Crusher",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Passive: Hammer attack rolls treat the target's Physical Defence as 2 lower.",
+                "icon": "💔",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "hammer_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "stunning_blow",
+                "name": "Stunning Blow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Action: Stunning hammer blow. Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. 50% chance to apply Incapacitated (1 turn).",
+                "icon": "⭐",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "heavy_impact"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ground_slam",
+                "name": "Ground Slam",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 8,
+                "desc": "Action: Ground slam (10ft). One attack roll per enemy (d20 + accuracy vs Physical Defence −1); weapon damage on each hit; knockdown on hit. Friendly fire possible.",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "hammer_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "thunderstrike",
+                "name": "Thunderstrike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 7,
+                "desc": "Action: Lightning-infused hammer strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 lightning damage.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "stunning_blow"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "earth_shaker",
+                "name": "Earth Shaker",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 10,
+                "desc": "Action: Earthquake hammer slam (20ft). One attack roll per creature (d20 + accuracy vs Physical Defence −2); weapon damage on each hit; difficult terrain. Friendly fire possible.",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "berserker_swing",
+                "name": "Berserker Swing",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Wild hammer swing. Attack roll d20 + accuracy vs Physical Defence; weapon damage +6 on hit. Until your next turn, −3 Physical Defence and −3 Magical Defence.",
+                "icon": "😤",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "heavy_impact"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "shield_breaker",
+                "name": "Shield Breaker",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Destroy a target's shield and remove Protected status (attack roll vs shield/holder, GM).",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "mjolnir_strike",
+                "name": "Mjolnir Strike",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Action: Throw hammer (60ft line). Attack roll (d20 + accuracy vs Physical Defence) per enemy in the line; weapon damage on each hit. Hammer returns.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thunderstrike",
+                        "earth_shaker"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "apocalypse_slam",
+                "name": "Apocalypse Slam",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "Action: Devastating slam (40ft radius). One attack roll per creature (d20 + accuracy vs Physical Defence −4); on each hit, 4d6 damage. Friendly fire possible.",
+                "icon": "☄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "berserker_swing",
+                        "shield_breaker"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "fortress_buster",
+                "name": "Fortress Buster",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 9,
+                "desc": "Action: Destroy structures or barriers (walls, doors) — no attack roll vs creatures.",
+                "icon": "🏗️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shield_breaker"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "hammer_mastery",
+                "name": "Hammer Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: +4 damage on hammer hits; attacks cause knockdown; immune to Incapacitated.",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "OR",
+                    "skills": [
+                        "mjolnir_strike",
+                        "apocalypse_slam",
+                        "fortress_buster"
+                    ]
+                },
+                "specialEffects": [
+                    "hammer_mastery_passive"
+                ]
+            }
+        ]
+    },
+    "magic": {
+        "fire": [
+            {
+                "id": "fire_spark",
+                "name": "Fire Spark",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 fire damage + Magic Power. 30ft range.",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "warm_hands",
+                "name": "Warm Hands",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 1,
+                "desc": "Spell: Create light (30ft radius) and restore 1 HP",
+                "icon": "🤲",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "fireball",
+                "name": "Fireball",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 Fire damage + Magic Power. 60ft range.",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fire_spark"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "fire_shield",
+                "name": "Fire Shield",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Spell: Apply Protected (absorb 3 attacks + attackers take 1d4 fire damage)",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "warm_hands"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ignite",
+                "name": "Ignite",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Spell: Apply Burn (1 fire damage/turn + Strength -2 for 4 turns)",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fire_spark"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "fire_wall",
+                "name": "Fire Wall",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: Create 30ft wall of flames, blocks passage and damages (2d4/turn)",
+                "icon": "🧱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "explosion",
+                "name": "Explosion",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 9,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage + Magic Power. 15ft.",
+                "icon": "💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball",
+                        "ignite"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "phoenix_form",
+                "name": "Phoenix Form",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Spell: Apply Enhanced Mobility (flight + immunity to immobilization). GRANTS: Fire resistance (50%), Ice weakness (200%)",
+                "icon": "🦅",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fire_shield"
+                    ]
+                },
+                "elementalType": "fire",
+                "specialEffects": []
+            },
+            {
+                "id": "fire_attunement",
+                "name": "Fire Attunement",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Become attuned to fire magic. GRANTS: Fire resistance 50% (-1), Ice weakness 200% (+1)",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fire_shield",
+                        "ignite"
+                    ]
+                },
+                "elementalType": "fire",
+                "specialEffects": [
+                    "fire_resistance",
+                    "ice_weakness"
+                ]
+            },
+            {
+                "id": "fire_whip",
+                "name": "Fire Whip",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Spell: 15ft reach fire lash. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire damage + Magic Power. May grapple (GM).",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fire_wall"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "meteor",
+                "name": "Meteor",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 6d6 fire damage + Magic Power. 20ft radius, -2 accuracy, friendly fire possible.",
+                "icon": "☄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "explosion"
+                    ]
+                },
+                "elementalType": "fire",
+                "specialEffects": []
+            },
+            {
+                "id": "inferno",
+                "name": "Inferno",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "Spell: Area effect. One attack roll per creature (d20 + accuracy vs Magical Defence -4); on each hit, 2d6 damage + Magic Power. GRANTS: Fire resistance (50%), Ice weakness (200%)",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "phoenix_form",
+                        "fire_whip"
+                    ]
+                },
+                "elementalType": "fire",
+                "specialEffects": []
+            },
+            {
+                "id": "fire_tornado",
+                "name": "Fire Tornado",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 11,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 4d6 fire damage + Magic Power. 30ft/turn.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fire_wall",
+                        "explosion"
+                    ]
+                },
+                "elementalType": "fire",
+                "specialEffects": []
+            },
+            {
+                "id": "fire_supremacy",
+                "name": "Fire Supremacy",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Action (3 uses per day): Become one with fire for 3 rounds. Gain immunity to fire damage, +50% fire spell damage, all attacks apply Burn, and regenerate 3 HP/turn. Can ignite objects by touch.",
+                "icon": "�",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "meteor",
+                        "inferno",
+                        "fire_tornado"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "ice": [
+            {
+                "id": "ice_shard",
+                "name": "Ice Shard",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 ice damage + Magic Power. 30ft range.",
+                "icon": "🧊",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "frost_touch",
+                "name": "Frost Touch",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 1,
+                "desc": "Spell: Touch attack. Attack roll d20 + accuracy vs Magical Defence; on a hit, applies Weakened (all stats -2 for 4 turns)",
+                "icon": "❄️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ice_armor",
+                "name": "Ice Armor",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Gain +3 Physical Defence and +3 Magical Defence (raises your AC), immunity to fire damage (10 rounds)",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_touch"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ice_spear",
+                "name": "Ice Spear",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice damage + Magic Power. 60ft.",
+                "icon": "🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_shard"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "freeze",
+                "name": "Freeze",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Spell: Apply Immobilized (cannot move but can attack for 3 turns)",
+                "icon": "🧊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_touch"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ice_wall",
+                "name": "Ice Wall",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: Create 30ft wall of ice (blocks passage, 20 HP)",
+                "icon": "🧱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_armor"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "blizzard",
+                "name": "Blizzard",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Spell: 20ft radius cold storm. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d4 damage + Magic Power. apply Weakened to all inside Friendly fire possible.",
+                "icon": "🌨️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_spear",
+                        "freeze"
+                    ]
+                },
+                "elementalType": "ice",
+                "specialEffects": []
+            },
+            {
+                "id": "ice_attunement",
+                "name": "Ice Attunement",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Become attuned to ice magic. GRANTS: Ice resistance 50% (-1), Fire weakness 200% (+1)",
+                "icon": "❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_armor",
+                        "freeze"
+                    ]
+                },
+                "elementalType": "ice",
+                "specialEffects": [
+                    "ice_resistance",
+                    "fire_weakness"
+                ]
+            },
+            {
+                "id": "ice_prison",
+                "name": "Ice Prison",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 7,
+                "desc": "Spell: Trap one target in ice. Attack roll d20 + accuracy vs Magical Defence; on a hit, target is immobile in ice until the cage takes 15 damage.",
+                "icon": "🔒",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "freeze"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "frost_nova",
+                "name": "Frost Nova",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: Freeze all enemies within 15ft (1 turn + slow)",
+                "icon": "💫",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_wall"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "absolute_zero",
+                "name": "Absolute Zero",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Spell: Instantly freeze any target (no save, 3 turns). GRANTS: Ice resistance (50%), Water resistance (25%), Fire weakness (200%), Lightning weakness (400%)",
+                "icon": "❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_prison"
+                    ]
+                },
+                "elementalType": "ice",
+                "specialEffects": []
+            },
+            {
+                "id": "ice_age",
+                "name": "Ice Age",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 cold damage + Magic Power. 200ft.",
+                "icon": "🧊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "blizzard",
+                        "frost_nova"
+                    ]
+                },
+                "elementalType": "ice",
+                "specialEffects": []
+            },
+            {
+                "id": "glacier",
+                "name": "Glacier",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Spell: Massive 50ft ice wall that moves 20ft/turn. GRANTS: Ice resistance (50%), Water resistance (25%), Fire weakness (200%), Lightning weakness (400%)",
+                "icon": "🏔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_wall"
+                    ]
+                },
+                "elementalType": "ice",
+                "specialEffects": []
+            },
+            {
+                "id": "ice_dominion",
+                "name": "Ice Dominion",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Master ice magic, enhanced ice spell effects. GRANTS: Ice resistance 50% (-1), Fire weakness 200% (+1)",
+                "icon": "❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_attunement"
+                    ]
+                },
+                "elementalType": "ice",
+                "specialEffects": [
+                    "ice_resistance",
+                    "fire_weakness"
+                ]
+            },
+            {
+                "id": "ice_supremacy",
+                "name": "Ice Supremacy",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Action (3 uses per day): Become one with ice for 3 rounds. Gain immunity to ice/cold damage, +50% ice spell damage, all attacks apply Weakened, and create frozen terrain (difficult terrain) in 10ft radius. Temperature drops 50°F around you.",
+                "icon": "❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "absolute_zero",
+                        "ice_age",
+                        "glacier"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "lightning": [
+            {
+                "id": "spark",
+                "name": "Spark",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 lightning damage + Magic Power. 20ft.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "static_charge",
+                "name": "Static Charge",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 1,
+                "desc": "Spell: Build electrical energy (+1 damage to next lightning spell)",
+                "icon": "🔋",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "lightning_bolt",
+                "name": "Lightning Bolt",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 Lightning damage + Magic Power. 100ft range.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spark"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "shock",
+                "name": "Shock",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Spell: Stun target for 1 turn (save negates)",
+                "icon": "😵",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "static_charge"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "chain_lightning",
+                "name": "Chain Lightning",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence per target; on each hit, 2d6 damage + Magic Power.",
+                "icon": "🔗",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spark"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "thunder_clap",
+                "name": "Thunder Clap",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: 20ft radius sound blast. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d4 damage + Magic Power. Friendly fire possible.",
+                "icon": "🔊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "lightning_bolt"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "electric_field",
+                "name": "Electric Field",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Spell: 30ft zone deals 1d6 lightning to anyone entering (1 min)",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shock",
+                        "chain_lightning"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "lightning_attunement",
+                "name": "Lightning Attunement",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Become attuned to lightning magic. GRANTS: Lightning resistance 50% (-1), Water weakness 200% (+1)",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shock",
+                        "chain_lightning"
+                    ]
+                },
+                "elementalType": "lightning",
+                "specialEffects": [
+                    "lightning_resistance",
+                    "water_weakness"
+                ]
+            },
+            {
+                "id": "lightning_speed",
+                "name": "Lightning Speed",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Spell: +3 Speed, extra move action (3 turns)",
+                "icon": "💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shock"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "overcharge",
+                "name": "Overcharge",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 7,
+                "desc": "Spell: Next spell deals maximum damage (no rolling)",
+                "icon": "🔋",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "static_charge"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "lightning_storm",
+                "name": "Lightning Storm",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Fire an arrow that chains lightning between targets, dealing 3d6 lightning damage. Has a 75% chance to apply Incapacitated",
+                "icon": "⛈️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thunder_clap",
+                        "electric_field"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ball_lightning",
+                "name": "Ball Lightning",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Spell: Slow orb (20ft/turn) explodes for 4d6 in 15ft radius",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "lightning_speed"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "emp",
+                "name": "EMP",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Spell: 40ft radius disables all magic for 1 round",
+                "icon": "📵",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "overcharge"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "storm_mastery",
+                "name": "Storm Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Master lightning magic, enhanced electrical control. GRANTS: Lightning resistance 50% (-1), Water weakness 200% (+1)",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "lightning_attunement"
+                    ]
+                },
+                "elementalType": "lightning",
+                "specialEffects": [
+                    "lightning_resistance",
+                    "water_weakness"
+                ]
+            },
+            {
+                "id": "lightning_supremacy",
+                "name": "Lightning Supremacy",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Action (3 uses per day): Become one with lightning for 3 rounds. Gain immunity to lightning damage, +50% movement speed, +50% lightning spell damage, all attacks apply Incapacitated, and can teleport 30ft as bonus action each turn.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "lightning_storm",
+                        "ball_lightning",
+                        "emp"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "earth": [
+            {
+                "id": "stone_throw",
+                "name": "Stone Throw",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 damage + Magic Power. 40ft range.",
+                "icon": "🪨",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "earth_sense",
+                "name": "Earth Sense",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 1,
+                "desc": "Spell: Detect movement through ground (100ft radius)",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "stone_armor",
+                "name": "Stone Armor",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Rock shell (+3 Physical Defence and +3 Magical Defence (AC bonus), -1 Speed for 10 rounds)",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_throw"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "earth_spike",
+                "name": "Earth Spike",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Spell: Ground spike under one target. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth damage + Magic Power and knockdown.",
+                "icon": "⬆️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earth_sense"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "mud_trap",
+                "name": "Mud Trap",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Spell: Create 15ft difficult terrain, slows enemies 50%",
+                "icon": "🟫",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earth_sense"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "stone_wall",
+                "name": "Stone Wall",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: Create 40ft stone barrier (blocks movement, provides cover)",
+                "icon": "🧱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_armor"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "earthquake",
+                "name": "Earthquake",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Spell: 25ft tremor. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d6 earth damage + Magic Power and knockdown.",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earth_spike",
+                        "mud_trap"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "earth_attunement",
+                "name": "Earth Attunement",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Become attuned to earth magic. GRANTS: Earth resistance 50% (-1), Wind weakness 200% (+1)",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_armor",
+                        "mud_trap"
+                    ]
+                },
+                "elementalType": "earth",
+                "specialEffects": [
+                    "earth_resistance",
+                    "wind_weakness"
+                ]
+            },
+            {
+                "id": "stone_spear",
+                "name": "Stone Spear",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 7,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d4 damage + Magic Power. 60ft range.",
+                "icon": "🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earth_spike"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "earth_shield",
+                "name": "Earth Shield",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Spell: Apply Protected (floating stones absorb next 3 attacks completely)",
+                "icon": "🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_armor"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "mountain_crush",
+                "name": "Mountain Crush",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 5d6 damage + Magic Power. 20ft radius.",
+                "icon": "🏔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_wall",
+                        "earthquake"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "petrify",
+                "name": "Petrify",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Spell: Apply Immobilized (cannot move but can attack + +5 Physical Defence and +5 Magical Defence for 3 turns)",
+                "icon": "🗿",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_spear",
+                        "earth_shield"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "tectonic_shift",
+                "name": "Tectonic Shift",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "Spell: Reshape 100ft area terrain for 1 day",
+                "icon": "🌋",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earthquake"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "stone_mastery",
+                "name": "Stone Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Master earth magic, enhanced stone manipulation. GRANTS: Earth resistance 50% (-1), Wind weakness 200% (+1)",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earth_attunement"
+                    ]
+                },
+                "elementalType": "earth",
+                "specialEffects": [
+                    "earth_resistance",
+                    "wind_weakness"
+                ]
+            },
+            {
+                "id": "earth_supremacy",
+                "name": "Earth Supremacy",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Action (3 uses per day): Become one with earth for 3 rounds. Gain immunity to earth damage, +5 Physical Defence and +5 Magical Defence from stone skin, +50% earth spell damage, all attacks apply Immobilized, and can burrow through ground at half speed.",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "mountain_crush",
+                        "petrify",
+                        "tectonic_shift"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "wind": [
+            {
+                "id": "gust",
+                "name": "Gust",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Spell: Wind push (knockback 10ft, extinguish flames)",
+                "icon": "💨",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "feather_fall",
+                "name": "Feather Fall",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 1,
+                "desc": "Spell: Slow falling (no fall damage for 1 round)",
+                "icon": "🪶",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "wind_blade",
+                "name": "Wind Blade",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 damage + Magic Power. 50ft range.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gust"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "levitate",
+                "name": "Levitate",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Spell: Float in air (20ft height, 5 rounds)",
+                "icon": "🎈",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "feather_fall"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "wind_barrier",
+                "name": "Wind Barrier",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Spell: Deflect projectiles (+4 Physical Defence and +4 Magical Defence (AC bonus) vs ranged for 5 turns)",
+                "icon": "🌀",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gust"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "flight",
+                "name": "Flight",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Spell: True flight (60ft speed, 10 rounds)",
+                "icon": "🕊️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "levitate",
+                        "wind_barrier"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "tornado",
+                "name": "Tornado",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 10,
+                "desc": "Spell: 15ft radius whirlwind. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d4 damage + Magic Power. Friendly fire possible.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_blade"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "wind_attunement",
+                "name": "Wind Attunement",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Become attuned to wind magic. GRANTS: Wind resistance 50% (-1), Lightning weakness 200% (+1)",
+                "icon": "💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_barrier",
+                        "wind_blade"
+                    ]
+                },
+                "elementalType": "wind",
+                "specialEffects": [
+                    "wind_resistance",
+                    "lightning_weakness"
+                ]
+            },
+            {
+                "id": "suffocate",
+                "name": "Suffocate",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: Remove air around target (2d4/turn for 3 turns)",
+                "icon": "😵",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_blade"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "wind_walk",
+                "name": "Wind Walk",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Spell: Become incorporeal mist (immune to physical damage)",
+                "icon": "☁️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "levitate"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "hurricane",
+                "name": "Hurricane",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "Summon a devastating storm dealing 3d6 wind or water damage (whichever each target is weak to) to all enemies. Pushes enemies to storm's center",
+                "icon": "🌀",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flight",
+                        "tornado"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "wind_prison",
+                "name": "Wind Prison",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Spell: Trap target in air pocket (cannot move or act)",
+                "icon": "🟦",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "suffocate",
+                        "wind_walk"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "atmospheric_control",
+                "name": "Atmospheric Control",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Spell: Control weather in 1 mile radius for 10 rounds",
+                "icon": "⛅",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_walk"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "gale_mastery",
+                "name": "Gale Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Master wind magic, enhanced atmospheric control. GRANTS: Wind resistance 50% (-1), Lightning weakness 200% (+1)",
+                "icon": "💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_attunement"
+                    ]
+                },
+                "elementalType": "wind",
+                "specialEffects": [
+                    "wind_resistance",
+                    "lightning_weakness"
+                ]
+            },
+            {
+                "id": "wind_mastery",
+                "name": "Wind Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Craft: Action (3 uses per day): Become one with the wind for 3 rounds. Gain flight, immunity to ground effects, +50% movement speed, and all attacks push enemies back 10ft. Can pass through enemy spaces without provoking attacks.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_walk",
+                        "hurricane",
+                        "wind_barrier"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "water": [
+            {
+                "id": "water_splash",
+                "name": "Water Splash",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 Water damage + Magic Power.",
+                "icon": "💧",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "purify_water",
+                "name": "Purify Water",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 1,
+                "desc": "Utility: Clean any liquid, remove poison from drinks",
+                "icon": "🚰",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "water_whip",
+                "name": "Water Whip",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water damage + Magic Power. 20ft reach.",
+                "icon": "🌊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_splash"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "heal_wounds",
+                "name": "Heal Wounds",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Spell: Restore 2d4+2 HP instantly OR apply Regeneration status",
+                "icon": "💚",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "purify_water"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "create_water",
+                "name": "Create Water",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Utility: Summon fresh water (10 gallons), put out fires",
+                "icon": "🫗",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_splash"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "tidal_wave",
+                "name": "Tidal Wave",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Summon a wave of water and debris dealing 3d6 water or earth damage (whichever each target is weak to). Has a 75% chance to apply both Immobilized and Weakened",
+                "icon": "🌊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_whip",
+                        "create_water"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "water_breathing",
+                "name": "Water Breathing",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: Apply Enhanced Mobility (water breathing + swim speed)",
+                "icon": "🫧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "heal_wounds"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "blood_control",
+                "name": "Blood Control",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 7,
+                "desc": "Spell: Apply Mind Controlled (target moves as you direct for 3 turns)",
+                "icon": "🩸",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "heal_wounds"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "water_attunement",
+                "name": "Water Attunement",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Become attuned to water magic. GRANTS: Water resistance 50% (-1), Lightning weakness 200% (+1)",
+                "icon": "💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "heal_wounds",
+                        "create_water"
+                    ]
+                },
+                "elementalType": "water",
+                "specialEffects": [
+                    "water_resistance",
+                    "lightning_weakness"
+                ]
+            },
+            {
+                "id": "water_shield",
+                "name": "Water Shield",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Spell: Apply Protected (flowing barrier absorbs 3 attacks + fire immunity)",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "create_water"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "maelstrom",
+                "name": "Maelstrom",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Spell: 40ft whirlpool (ongoing zone). Attack roll d20 + accuracy vs Magical Defence each turn per creature inside; on a hit, 4d4 water damage + Magic Power.",
+                "icon": "🌀",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "tidal_wave",
+                        "water_breathing"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "blood_boil",
+                "name": "Blood Boil",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Spell: Superheat blood. Attack roll d20 + accuracy vs Magical Defence; on a hit, 5d4 fire damage + Magic Power (no save).",
+                "icon": "🩸",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "blood_control",
+                        "water_shield"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "tsunami",
+                "name": "Tsunami",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 6d4 damage + Magic Power.",
+                "icon": "🌊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_shield"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "hydro_mastery",
+                "name": "Hydro Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Master water magic, enhanced fluid manipulation. GRANTS: Water resistance 50% (-1), Lightning weakness 200% (+1)",
+                "icon": "💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_attunement"
+                    ]
+                },
+                "elementalType": "water",
+                "specialEffects": [
+                    "water_resistance",
+                    "lightning_weakness"
+                ]
+            },
+            {
+                "id": "water_mastery",
+                "name": "Water Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Craft: Action (3 uses per day): Become one with water for 3 rounds. Gain immunity to water damage, can move through any liquid at normal speed, +50% water spell damage, all attacks heal you for 25% of damage dealt, and can breathe underwater indefinitely.",
+                "icon": "🌊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "maelstrom",
+                        "blood_boil",
+                        "tsunami"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "darkness": [
+            {
+                "id": "shadow_bolt",
+                "name": "Shadow Bolt",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 damage + Magic Power. 40ft range.",
+                "icon": "🌑",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "darkvision",
+                "name": "Darkvision",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 1,
+                "desc": "Spell: See in complete darkness (10 rounds)",
+                "icon": "👁️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_step",
+                "name": "Shadow Step",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Applies Shadow Step. Teleport between shadows (60ft range)",
+                "icon": "👤",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_bolt"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "fear",
+                "name": "Fear",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Spell: Apply Mind Controlled (target flees in terror for 3 turns)",
+                "icon": "😱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "darkvision"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "darkness",
+                "name": "Darkness",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Spell: Create 20ft radius of magical darkness",
+                "icon": "⚫",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_bolt"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_duplicate",
+                "name": "Shadow Clone",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Spell: Create dark duplicate (50% your stats, 5 turns)",
+                "icon": "👥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_step",
+                        "darkness"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "nightmare",
+                "name": "Nightmare",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: Assault a sleeping target's mind — automatically hits (no attack roll). 2d6 psychic damage.",
+                "icon": "💭",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fear"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "life_drain",
+                "name": "Life Drain",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 7,
+                "desc": "Spell: Steal 2d4 HP from target, heal yourself same amount",
+                "icon": "🖤",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fear"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "darkness_attunement",
+                "name": "Darkness Attunement",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Become attuned to darkness magic. GRANTS: Darkness resistance 50% (-1), Light weakness 200% (+1)",
+                "icon": "🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fear",
+                        "darkness"
+                    ]
+                },
+                "elementalType": "darkness",
+                "specialEffects": [
+                    "darkness_resistance",
+                    "light_weakness"
+                ]
+            },
+            {
+                "id": "shadow_armor",
+                "name": "Shadow Armor",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Spell: Darkness cloaks you (+3 Physical Defence and +3 Magical Defence (AC bonus), +2 Stealth)",
+                "icon": "🥷",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "darkness"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "void_prison",
+                "name": "Void Prison",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Spell: Banish target to shadow realm (removed for 3 turns)",
+                "icon": "🕳️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_duplicate",
+                        "nightmare"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "soul_steal",
+                "name": "Soul Steal",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Spell: Drain 1 point from all target stats for 1 day",
+                "icon": "👻",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "life_drain",
+                        "shadow_armor"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "eclipse",
+                "name": "Eclipse",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "Perfect balance of light and dark dealing 3d6 darkness or light damage (whichever each target is weak to) to all enemies. Applies Enhanced to allies and has a 75% chance to apply Mind Controlled to enemies",
+                "icon": "🌚",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_armor"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "void_mastery",
+                "name": "Void Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Master darkness magic, enhanced shadow manipulation. GRANTS: Darkness resistance 50% (-1), Light weakness 200% (+1)",
+                "icon": "🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "darkness_attunement"
+                    ]
+                },
+                "elementalType": "darkness",
+                "specialEffects": [
+                    "darkness_resistance",
+                    "light_weakness"
+                ]
+            },
+            {
+                "id": "darkness_mastery",
+                "name": "Darkness Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Craft: Action (3 uses per day): Become one with darkness for 3 rounds. Gain immunity to darkness damage, permanent invisibility while in shadows, +50% darkness spell damage, all attacks apply Mind Controlled (fear), and can phase through walls for 1 turn per use.",
+                "icon": "🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "void_prison",
+                        "soul_steal",
+                        "eclipse"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "light": [
+            {
+                "id": "light_ray",
+                "name": "Light Ray",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Spell: Radiant beam. Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 light damage + Magic Power and blind for 1 turn.",
+                "icon": "☀️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "illuminate",
+                "name": "Illuminate",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 1,
+                "desc": "Spell: Bright light (60ft radius, reveals invisible)",
+                "icon": "💡",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "healing_light",
+                "name": "Healing Light",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Spell: Restore 2d4+3 HP instantly + apply Regeneration (immunity to poison)",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_ray"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "purify",
+                "name": "Purify",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Spell: Applies Purify. Remove poison, disease, and curses",
+                "icon": "🧽",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "illuminate"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "blinding_flash",
+                "name": "Blinding Flash",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Spell: 15ft radius flash blinds all enemies for 1 turn",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_ray"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "holy_weapon",
+                "name": "Holy Weapon",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Spell: Apply Weapon Enchanted (+1d6 radiant damage, extra vs undead)",
+                "icon": "⚔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "healing_light",
+                        "purify"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "sanctuary",
+                "name": "Sanctuary",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Spell: Protected area (enemies cannot enter 20ft radius)",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "purify"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "light_attunement",
+                "name": "Light Attunement",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Become attuned to light magic. GRANTS: Light resistance 50% (-1), Darkness weakness 200% (+1)",
+                "icon": "☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "healing_light",
+                        "purify"
+                    ]
+                },
+                "elementalType": "light",
+                "specialEffects": [
+                    "light_resistance",
+                    "darkness_weakness"
+                ]
+            },
+            {
+                "id": "laser_beam",
+                "name": "Laser Beam",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 7,
+                "desc": "Spell: Concentrated light beam. Attack roll d20 + accuracy vs Magical Defence (treat target Magical Defence as 3 lower); on a hit, 3d6 light damage + Magic Power.",
+                "icon": "🔆",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "blinding_flash"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "light_shield",
+                "name": "Light Shield",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Spell: Radiant barrier (+3 Physical Defence and +3 Magical Defence (AC bonus), reflects dark magic)",
+                "icon": "🌟",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "blinding_flash"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "resurrection",
+                "name": "Resurrection",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "Spell: Bring ally back to life (once per day)",
+                "icon": "🕊️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "holy_weapon",
+                        "sanctuary"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "solar_flare",
+                "name": "Solar Flare",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Spell: 40ft radius explosion. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 5d6 damage + Magic Power. Friendly fire possible.",
+                "icon": "🌟",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "laser_beam",
+                        "light_shield"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "divine_judgment",
+                "name": "Divine Judgment",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, damage equal to half the target's max HP.",
+                "icon": "⚖️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_shield"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "radiant_mastery",
+                "name": "Radiant Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Master light magic, enhanced radiant energy. GRANTS: Light resistance 50% (-1), Darkness weakness 200% (+1)",
+                "icon": "☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_attunement"
+                    ]
+                },
+                "elementalType": "light",
+                "specialEffects": [
+                    "light_resistance",
+                    "darkness_weakness"
+                ]
+            },
+            {
+                "id": "light_mastery",
+                "name": "Light Mastery",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Craft: Action (3 uses per day): Become one with light for 3 rounds. Gain immunity to light/radiant damage, emit bright light (30ft radius blinds enemies), +50% light spell damage, all attacks apply Mind Controlled (charm), and can teleport to any bright light source within 100ft.",
+                "icon": "☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "resurrection",
+                        "solar_flare",
+                        "divine_judgment"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ]
+    },
+    "professions": {
+        "smithing": [
+            {
+                "id": "basic_smithing",
+                "name": "Basic Smithing",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Craft basic tools and weapons (+1 quality to crafted items)",
+                "icon": "🔨",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "weapon_smithing",
+                "name": "Weapon Smithing",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Craft and repair weapons (+1 damage to crafted weapons)",
+                "icon": "⚔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "basic_smithing"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "armor_smithing",
+                "name": "Armor Smithing",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Craft and repair armor (+1 Physical Defence and +1 Magical Defence to crafted armor)",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "basic_smithing"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "enchanted_smithing",
+                "name": "Enchanted Smithing",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Craft: Add minor magical properties (+1 enchantment slot)",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "weapon_smithing",
+                        "armor_smithing"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "alloy_crafting",
+                "name": "Alloy Crafting",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Craft: Create custom alloys (access to mithril and adamantine)",
+                "icon": "⚗️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_smithing"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "legendary_smithing",
+                "name": "Legendary Smithing",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Craft legendary equipment (+3 to all bonuses, 2 enchantment slots)",
+                "icon": "🏆",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "enchanted_smithing",
+                        "alloy_crafting"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "divine_smithing",
+                "name": "Divine Smithing",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Craft artifacts of divine power (unlimited enchantments)",
+                "icon": "☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "legendary_smithing"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "alchemy": [
+            {
+                "id": "basic_alchemy",
+                "name": "Basic Alchemy",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Craft: Mix simple potions (Health potions restore +2 extra HP)",
+                "icon": "🧪",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "poison_brewing",
+                "name": "Poison Brewing",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Craft: Create toxins (Poison deals 1d6 damage/turn for 3 turns)",
+                "icon": "☠️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "basic_alchemy"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "explosive_compounds",
+                "name": "Explosive Compounds",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Create alchemical bombs (3d6 damage, 15ft radius)",
+                "icon": "💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "poison_brewing"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "transmutation",
+                "name": "Transmutation",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Convert materials (Lead to gold, generate 100L per day)",
+                "icon": "🏅",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "basic_alchemy"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "elixir_of_life",
+                "name": "Elixir of Life",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Grant temporary immortality (Cannot die for 1 day)",
+                "icon": "⚱️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "transmutation"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "grand_alchemist",
+                "name": "Grand Alchemist",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Master of all arts (Potions last 1 day instead of permanent)",
+                "icon": "🧙",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "explosive_compounds"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "enchanting": [
+            {
+                "id": "basic_enchanting",
+                "name": "Basic Enchanting",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Craft: Add simple magical effects (+1 to item properties)",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "elemental_infusion",
+                "name": "Elemental Infusion",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Add elemental damage (Fire/Ice/Lightning +1d6 damage)",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "basic_enchanting"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "soul_binding",
+                "name": "Soul Binding",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Bind items to owner (Only you can use enchanted items)",
+                "icon": "👻",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "basic_enchanting"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "artifact_creation",
+                "name": "Artifact Creation",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Create powerful artifacts (3 enchantments per item)",
+                "icon": "🏆",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "elemental_infusion",
+                        "soul_binding"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "archenchanter",
+                "name": "Archenchanter",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Transcendent mastery (Unlimited enchantments per item)",
+                "icon": "🌟",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "artifact_creation"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "cooking": [
+            {
+                "id": "basic_cooking",
+                "name": "Basic Cooking",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Craft: Prepare simple meals (restore 1d4+1 HP when consumed)",
+                "icon": "🍳",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "hearty_meals",
+                "name": "Hearty Meals",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Cook filling food (+2 Stamina for 10 rounds after eating)",
+                "icon": "🍖",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "basic_cooking"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "stat_boosting_food",
+                "name": "Stat Boosting Food",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Specialty dishes (+2 to chosen stat for 20 rounds)",
+                "icon": "💪",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "hearty_meals"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "master_chef",
+                "name": "Master Chef",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Craft: Perfect cuisine (+3 to all stats for 40 rounds)",
+                "icon": "👨‍🍳",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stat_boosting_food"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "culinary_mastery",
+                "name": "Culinary Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Craft: Legendary cooking (all food effects last 1 day)",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stat_boosting_food"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "archaeology": [
+            {
+                "id": "artifact_study",
+                "name": "Artifact Study",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Craft: Identify ancient items (learn item properties and history)",
+                "icon": "🔍",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ancient_knowledge",
+                "name": "Ancient Knowledge",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Learn forgotten skills (gain 1 skill point in any tree)",
+                "icon": "📚",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "artifact_study"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "divine_archaeology",
+                "name": "Divine Archaeology",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Craft: Discover godly relics (communicate with ancient deities)",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ancient_knowledge"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "master_archaeologist",
+                "name": "Master Archaeologist",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Craft: Ultimate discovery (can recreate any lost knowledge or artifact)",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "divine_archaeology"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "herbalism": [
+            {
+                "id": "plant_identification",
+                "name": "Plant Identification",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Recognize useful plants (identify herbs and their properties)",
+                "icon": "🌱",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "herbal_remedies",
+                "name": "Herbal Remedies",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Craft: Create natural medicines (heal 1d6+2 HP with herbs)",
+                "icon": "💚",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "plant_identification"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "healing_salves",
+                "name": "Healing Salves",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Craft: Advanced medicine (create healing items that restore over time)",
+                "icon": "🩹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "plant_identification"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "magical_herbs",
+                "name": "Magical Herbs",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Craft: Cultivate enchanted plants (herbs provide magical effects)",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "herbal_remedies",
+                        "healing_salves"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "herbalism_mastery",
+                "name": "Herbalism Mastery",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Craft: Nature's chosen (immunity to all poisons, plants obey you)",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "magical_herbs"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ]
+    },
+    "monster": {
+        "defense": [
+            {
+                "id": "tough_skin",
+                "name": "Tough Skin",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Passive: +2 Physical Defence.",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "defense",
+                "specialEffects": []
+            },
+            {
+                "id": "rock_skin",
+                "name": "Rock Skin",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Passive: +3 Physical Defence; resist piercing (GM).",
+                "icon": "🗿",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "tough_skin"
+                    ]
+                },
+                "lootType": "defense",
+                "specialEffects": []
+            },
+            {
+                "id": "metal_skin",
+                "name": "Metal Skin",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: +4 Physical Defence; resist slashing (GM).",
+                "icon": "⚙️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "rock_skin"
+                    ]
+                },
+                "lootType": "defense",
+                "specialEffects": []
+            },
+            {
+                "id": "magical_resistance",
+                "name": "Magical Resistance",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Passive: +3 Magical Defence.",
+                "icon": "🔮",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "defense",
+                "specialEffects": []
+            },
+            {
+                "id": "damage_reduction",
+                "name": "Damage Reduction",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Reduce all incoming damage by 2 (applied after a hit).",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "tough_skin",
+                        "magical_resistance"
+                    ]
+                },
+                "specialEffects": [
+                    "damage_reduction"
+                ]
+            },
+            {
+                "id": "regeneration",
+                "name": "Regeneration",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Apply Regeneration status (2 HP/turn + poison resistance) - does not stack with other regeneration",
+                "icon": "💚",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "damage_reduction"
+                    ]
+                },
+                "specialEffects": [
+                    "regeneration"
+                ]
+            },
+            {
+                "id": "rapid_healing",
+                "name": "Rapid Healing",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: Enhanced Regeneration (3 HP/turn + strong DoT resistance) - replaces basic regeneration",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "regeneration"
+                    ]
+                },
+                "specialEffects": [
+                    "rapid_regeneration"
+                ]
+            },
+            {
+                "id": "armored_plates",
+                "name": "Armored Plates",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: +2 Physical Defence and +2 Magical Defence; immune to critical hits.",
+                "icon": "🦀",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "rock_skin"
+                    ]
+                },
+                "lootType": "defense",
+                "specialEffects": [
+                    "critical_immunity"
+                ]
+            },
+            {
+                "id": "spell_turning",
+                "name": "Spell Turning",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "25% chance to reflect spells back at caster",
+                "icon": "🔄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "magical_resistance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "immunity_poison",
+                "name": "Poison Resistance",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Passive: Strong resistance to all poisons and diseases (25% damage from poison effects)",
+                "icon": "☠️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": [
+                    "poison_resistance",
+                    "disease_immunity"
+                ]
+            }
+        ],
+        "combat": [
+            {
+                "id": "claws",
+                "name": "Natural Claws",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 2,
+                "desc": "Action: Claw attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d6+2 slashing damage.",
+                "icon": "🦅",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "combat",
+                "specialEffects": []
+            },
+            {
+                "id": "razor_claws",
+                "name": "Razor Claws",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Action: Claw attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d8+3 slashing damage; causes bleeding (GM).",
+                "icon": "🩸",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "claws"
+                    ]
+                },
+                "lootType": "combat",
+                "specialEffects": []
+            },
+            {
+                "id": "venomous_claws",
+                "name": "Venomous Claws",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 4,
+                "desc": "Action: Claw attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + poison 1d4/turn (GM).",
+                "icon": "🟢",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "razor_claws"
+                    ]
+                },
+                "lootType": "combat",
+                "specialEffects": []
+            },
+            {
+                "id": "bite_attack",
+                "name": "Powerful Bite",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 3,
+                "desc": "Action: Bite. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d8+1 piercing damage.",
+                "icon": "🦷",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "combat",
+                "specialEffects": []
+            },
+            {
+                "id": "crushing_bite",
+                "name": "Crushing Bite",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Bite. Attack roll d20 + accuracy vs Physical Defence (treat Physical Defence as 2 lower); on a hit, 2d6+2 damage.",
+                "icon": "💀",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "bite_attack"
+                    ]
+                },
+                "lootType": "combat",
+                "specialEffects": []
+            },
+            {
+                "id": "tail_swipe",
+                "name": "Tail Swipe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Action: Tail sweep — adjacent enemies. Separate attack roll (d20 + accuracy vs Physical Defence) vs each; 1d6 damage on each hit.",
+                "icon": "🦎",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "combat",
+                "specialEffects": []
+            },
+            {
+                "id": "spiked_tail",
+                "name": "Spiked Tail",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 4,
+                "desc": "Action: Tail strike (10ft reach). Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d10+3 piercing damage.",
+                "icon": "🦂",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "tail_swipe"
+                    ]
+                },
+                "lootType": "combat",
+                "specialEffects": []
+            },
+            {
+                "id": "monster_charge_attack",
+                "name": "Charge Attack",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Action: Charge 20ft and attack. Attack roll d20 + accuracy vs Physical Defence; double weapon/natural damage on hit.",
+                "icon": "🐂",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "monster_berserker_rage",
+                "name": "Berserker Rage",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Toggle: +4 damage, +2 attacks per turn, −2 Physical Defence and −2 Magical Defence for 3 turns.",
+                "icon": "😡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "monster_charge_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "multiattack",
+                "name": "Multiattack",
+                "tier": 4,
+                "cost": 30,
+                "staminaCost": 0,
+                "desc": "Passive: Each turn, make 2 different attacks (each pays its own stamina cost).",
+                "icon": "⚔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "claws",
+                        "bite_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "rend",
+                "name": "Rend",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Passive: If both claw attacks hit the same target in one turn, deal bonus 1d6 damage.",
+                "icon": "🩸",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "razor_claws"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "pounce",
+                "name": "Pounce",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Leap 15ft and attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, knock prone.",
+                "icon": "🦘",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "claws"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "gore",
+                "name": "Gore Attack",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Horn attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d8+2 piercing and push 5ft.",
+                "icon": "🐗",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "trample",
+                "name": "Trample",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Move through enemies; each takes 1d6 damage (GM: attack roll or save as appropriate).",
+                "icon": "🦏",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "monster_charge_attack"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "blood_frenzy",
+                "name": "Blood Frenzy",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: When an enemy drops below 25% HP, gain +3 damage until end of combat.",
+                "icon": "🩸",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "monster_berserker_rage"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "magic": [
+            {
+                "id": "fire_breath",
+                "name": "Fire Breath",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Action: 30ft cone. Attack roll d20 + accuracy vs Magical Defence vs each target; on a hit, 2d8 fire + apply Burn. Grants fire resistance; ice/water weakness.",
+                "icon": "🔥",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "elementalType": "fire",
+                "specialEffects": []
+            },
+            {
+                "id": "ice_breath",
+                "name": "Ice Breath",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Action: 30ft cone. Attack roll d20 + accuracy vs Magical Defence vs each target; on a hit, 2d6 cold + apply Weakened. Grants ice/water resistance; fire/lightning weakness.",
+                "icon": "❄️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "elementalType": "ice",
+                "specialEffects": []
+            },
+            {
+                "id": "poison_breath",
+                "name": "Poison Breath",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Action: 25ft cone. Attack roll d20 + accuracy vs Magical Defence vs each target; on a hit, 1d8 poison + apply Poison. Grants poison resistance; light/fire weakness.",
+                "icon": "☠️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "elementalType": "poison",
+                "specialEffects": []
+            },
+            {
+                "id": "lightning_breath",
+                "name": "Lightning Breath",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Action: 60ft line. Attack roll d20 + accuracy vs Magical Defence vs each target; on a hit, 2d10 lightning + apply Immobilized. Grants lightning resistance; earth/water weakness.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "elementalType": "lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "acid_spit",
+                "name": "Acid Spit",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "Action: Spit acid (ranged). Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d8 acid + apply Acid Corrosion. Grants poison resistance; ice/water weakness.",
+                "icon": "🟢",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "elementalType": "acid",
+                "specialEffects": []
+            },
+            {
+                "id": "fear_aura",
+                "name": "Fear Aura",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Passive: Apply Intimidating Aura (enemies must save vs Mind Control)",
+                "icon": "😨",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "specialEffects": [
+                    "intimidating_aura"
+                ]
+            },
+            {
+                "id": "paralyzing_gaze",
+                "name": "Paralyzing Gaze",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Target within 60ft: Apply Immobilized (cannot move but can attack)",
+                "icon": "👁️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "specialEffects": []
+            },
+            {
+                "id": "invisibility",
+                "name": "Invisibility",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 12,
+                "desc": "Apply Stealth Mastery (invisible + strong mind control resistance)",
+                "icon": "👻",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "specialEffects": []
+            },
+            {
+                "id": "teleport",
+                "name": "Teleport",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 8,
+                "desc": "Instantly move up to 60ft to visible location",
+                "icon": "✨",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "specialEffects": []
+            },
+            {
+                "id": "web_shot",
+                "name": "Web Shot",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Ranged: Apply Immobilized (cannot move for 3 turns)",
+                "icon": "🕸️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "specialEffects": []
+            },
+            {
+                "id": "monster_earthquake",
+                "name": "Earthquake",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 15,
+                "desc": "30ft radius: 3d6 damage, knock prone, difficult terrain. Grants earth resistance, wind/lightning weakness",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "elementalType": "earth",
+                "specialEffects": []
+            },
+            {
+                "id": "mind_control",
+                "name": "Mind Control",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 15,
+                "desc": "Apply Mind Controlled (control enemy actions for 3 turns)",
+                "icon": "🧠",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "paralyzing_gaze"
+                    ]
+                },
+                "lootType": "magic",
+                "specialEffects": []
+            },
+            {
+                "id": "energy_drain",
+                "name": "Energy Drain",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Touch: Apply Weakened (all stats -2) and drain 1d4 stamina",
+                "icon": "🖤",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "specialEffects": []
+            },
+            {
+                "id": "monster_shadow_step",
+                "name": "Shadow Step",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Move from shadow to shadow within 40ft. Grants darkness resistance, light weakness",
+                "icon": "🌑",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "elementalType": "shadow",
+                "specialEffects": []
+            },
+            {
+                "id": "roar",
+                "name": "Terrifying Roar",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 5,
+                "desc": "20ft radius: Apply Mind Controlled (fear variant - enemies flee)",
+                "icon": "🦁",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "magic",
+                "specialEffects": []
+            }
+        ],
+        "utility": [
+            {
+                "id": "monster_flight",
+                "name": "Flight",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: Apply Enhanced Mobility (flight + strong immobilization resistance)",
+                "icon": "🦅",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": [
+                    "enhanced_mobility"
+                ]
+            },
+            {
+                "id": "burrow",
+                "name": "Burrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "Dig through earth at half speed, surprise attacks",
+                "icon": "🕳️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            },
+            {
+                "id": "climb",
+                "name": "Natural Climber",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Climb speed equal to land speed, no checks needed",
+                "icon": "🧗",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            },
+            {
+                "id": "swim",
+                "name": "Aquatic",
+                "tier": 1,
+                "cost": 5,
+                "staminaCost": 0,
+                "desc": "Swim speed, hold breath for 30 rounds",
+                "icon": "🏊",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            },
+            {
+                "id": "echolocation",
+                "name": "Echolocation",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 0,
+                "desc": "See in complete darkness within 60ft",
+                "icon": "🦇",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            },
+            {
+                "id": "camouflage",
+                "name": "Camouflage",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Blend with surroundings: +8 to stealth checks",
+                "icon": "🦎",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            },
+            {
+                "id": "pack_leader",
+                "name": "Pack Leader",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 0,
+                "desc": "Summon 1d4 lesser creatures to fight for 5 turns",
+                "icon": "🐺",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            },
+            {
+                "id": "size_change",
+                "name": "Size Change",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 10,
+                "desc": "Double size for 5 turns: +4 Str, +2 reach, -2 Physical Defence and -2 Magical Defence",
+                "icon": "📏",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            },
+            {
+                "id": "phase_shift",
+                "name": "Phase Shift",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 12,
+                "desc": "Become incorporeal for 3 turns, strong resistance to physical damage (25%)",
+                "icon": "👻",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "invisibility"
+                    ]
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            },
+            {
+                "id": "monster_ancient_knowledge",
+                "name": "Ancient Knowledge",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Passive: Know weakness of any creature (+4 damage vs that type)",
+                "icon": "📚",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "lootType": "utility",
+                "specialEffects": []
+            }
+        ]
+    },
+    "fusion": {
+        "ranged_magic": [
+            {
+                "id": "flame_arrow",
+                "name": "Flame Arrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, ranged attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "icon": "🏹🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "bow_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "inferno_volley",
+                "name": "Inferno Volley",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "🔥🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "fire_wall"
+                    ]
+                },
+                "fusionType": "bow_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "phoenix_shot",
+                "name": "Phoenix Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "🦅🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flame_arrow",
+                        "inferno_volley"
+                    ]
+                },
+                "fusionType": "bow_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "frost_arrow",
+                "name": "Frost Arrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, ranged attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "icon": "🏹❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "bow_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "glacier_volley",
+                "name": "Glacier Volley",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "❄️🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "bow_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "blizzard_shot",
+                "name": "Blizzard Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌨️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_arrow",
+                        "glacier_volley"
+                    ]
+                },
+                "fusionType": "bow_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_arrow",
+                "name": "Storm Arrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, ranged attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "icon": "🏹⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw",
+                        "spark"
+                    ]
+                },
+                "fusionType": "bow_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "thunder_volley",
+                "name": "Thunder Volley",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "⚡🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "thunder_clap"
+                    ]
+                },
+                "fusionType": "bow_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "lightning_storm",
+                "name": "Lightning Storm",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Fire an arrow that chains lightning between targets, dealing 3d6 lightning damage. Has a 75% chance to apply Incapacitated",
+                "icon": "⛈️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_arrow",
+                        "thunder_volley"
+                    ]
+                },
+                "fusionType": "bow_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "stone_arrow",
+                "name": "Stone Arrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "icon": "🏹🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "bow_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "crystal_volley",
+                "name": "Crystal Volley",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "🪨🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "bow_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "mountain_shot",
+                "name": "Mountain Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "🏔️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_arrow",
+                        "crystal_volley"
+                    ]
+                },
+                "fusionType": "bow_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "wind_arrow",
+                "name": "Wind Arrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, ranged attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "icon": "🏹💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw",
+                        "gust"
+                    ]
+                },
+                "fusionType": "bow_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "gale_volley",
+                "name": "Gale Volley",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Fire multiple wind-empowered arrows that curve around obstacles, dealing 2d6 wind damage.",
+                "icon": "💨🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "bow_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "hurricane_shot",
+                "name": "Hurricane Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌪️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_arrow",
+                        "gale_volley"
+                    ]
+                },
+                "fusionType": "bow_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "water_arrow",
+                "name": "Water Arrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Attack roll d20 + accuracy vs Physical Defence; weapon damage ++1d6 water damage and target's Physical Defence is 1 lower for 2 turns on hit",
+                "icon": "🏹�",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "bow_water",
+                "specialEffects": []
+            },
+            {
+                "id": "tide_volley",
+                "name": "Tide Volley",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Fire multiple water arrows, each dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
+                "icon": "💧🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "bow_water",
+                "specialEffects": []
+            },
+            {
+                "id": "tsunami_shot",
+                "name": "Tsunami Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Fire an arrow that creates a wave of water on impact, dealing 3d6 water damage (no status effect)",
+                "icon": "🌊💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_arrow",
+                        "tide_volley"
+                    ]
+                },
+                "fusionType": "bow_water",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_arrow",
+                "name": "Shadow Arrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, ranged attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🏹🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "bow_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_volley",
+                "name": "Void Volley",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "🌑🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "bow_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "eclipse_shot",
+                "name": "Eclipse Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌑✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_arrow",
+                        "void_volley"
+                    ]
+                },
+                "fusionType": "bow_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "light_arrow",
+                "name": "Light Arrow",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, ranged attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🏹☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_draw",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "bow_light",
+                "specialEffects": []
+            },
+            {
+                "id": "radiant_volley",
+                "name": "Radiant Volley",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "☀️🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "bow_light",
+                "specialEffects": []
+            },
+            {
+                "id": "solar_shot",
+                "name": "Solar Shot",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "☀️✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_arrow",
+                        "radiant_volley"
+                    ]
+                },
+                "fusionType": "bow_light",
+                "specialEffects": []
+            }
+        ],
+        "melee_magic": [
+            {
+                "id": "flame_edge",
+                "name": "Flame Edge",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, sword attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "icon": "⚔️🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "sword_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "inferno_parry",
+                "name": "Inferno Parry",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Reaction: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "🛡️🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "fire_wall"
+                    ]
+                },
+                "fusionType": "sword_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "blazing_tempest",
+                "name": "Blazing Tempest",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌪️🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flame_edge",
+                        "inferno_parry"
+                    ]
+                },
+                "fusionType": "sword_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "frostbrand",
+                "name": "Frostbrand",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, sword attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "icon": "⚔️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "sword_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "glacial_riposte",
+                "name": "Glacial Riposte",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Parry and counter with a freezing slash, has a 40% chance to apply Immobilized",
+                "icon": "🛡️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "sword_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "winters_fury",
+                "name": "Winter's Fury",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌨️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frostbrand",
+                        "glacial_riposte"
+                    ]
+                },
+                "fusionType": "sword_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_blade",
+                "name": "Storm Blade",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, sword attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "icon": "⚔️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike",
+                        "spark"
+                    ]
+                },
+                "fusionType": "sword_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "thunder_parry",
+                "name": "Thunder Parry",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Reaction: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "icon": "🛡️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "thunder_clap"
+                    ]
+                },
+                "fusionType": "sword_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "lightning_surge",
+                "name": "Lightning Surge",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌩️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_blade",
+                        "thunder_parry"
+                    ]
+                },
+                "fusionType": "sword_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "stonecutter",
+                "name": "Stonecutter",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, sword attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "icon": "⚔️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "sword_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "earthen_guard",
+                "name": "Earthen Guard",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Parry and create a stone barrier, gaining Enhanced for 2 turns",
+                "icon": "🛡️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "sword_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "quake_slash",
+                "name": "Quake Slash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌋🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stonecutter",
+                        "earthen_guard"
+                    ]
+                },
+                "fusionType": "sword_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "gale_blade",
+                "name": "Gale Blade",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, sword attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "icon": "⚔️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike",
+                        "gust"
+                    ]
+                },
+                "fusionType": "sword_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "cyclone_parry",
+                "name": "Cyclone Parry",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Parry and create a swirling wind barrier, gaining Enhanced Mobility for 1 turn",
+                "icon": "🛡️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "sword_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "tempest_dance",
+                "name": "Tempest Dance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌪️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gale_blade",
+                        "cyclone_parry"
+                    ]
+                },
+                "fusionType": "sword_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "tidecutter",
+                "name": "Tidecutter",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, sword attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "icon": "⚔️💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "sword_water",
+                "specialEffects": []
+            },
+            {
+                "id": "aqua_parry",
+                "name": "Aqua Parry",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Parry and create a wave, healing self for 1d6 HP and pushing attacker back (no status effect)",
+                "icon": "🛡️💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "sword_water",
+                "specialEffects": []
+            },
+            {
+                "id": "maelstrom_slash",
+                "name": "Maelstrom Slash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Unleash a spinning slash that deals 3d6 water damage (no status effect)",
+                "icon": "🌊💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "tidecutter",
+                        "aqua_parry"
+                    ]
+                },
+                "fusionType": "sword_water",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_edge",
+                "name": "Shadow Edge",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, sword attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "⚔️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "sword_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "night_parry",
+                "name": "Night Parry",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Parry and become Stealth Mastery until your next turn",
+                "icon": "🛡️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "sword_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "umbral_onslaught",
+                "name": "Umbral Onslaught",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 darkness damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌑🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_edge",
+                        "night_parry"
+                    ]
+                },
+                "fusionType": "sword_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "radiant_blade",
+                "name": "Radiant Blade",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, sword attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "⚔️☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quick_strike",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "sword_light",
+                "specialEffects": []
+            },
+            {
+                "id": "solar_parry",
+                "name": "Solar Parry",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Parry and unleash a flash of light, healing allies for 1d6 HP (no status effect)",
+                "icon": "🛡️☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "sword_light",
+                "specialEffects": []
+            },
+            {
+                "id": "judgment_slash",
+                "name": "Judgment Slash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Deliver a powerful slash that deals 3d6 light damage and removes all debuffs from allies (no status effect)",
+                "icon": "⚖️☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "radiant_blade",
+                        "solar_parry"
+                    ]
+                },
+                "fusionType": "sword_light",
+                "specialEffects": []
+            },
+            {
+                "id": "flame_dagger",
+                "name": "Flame Dagger",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, dagger attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "icon": "🗡️🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "dagger_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "inferno_strike",
+                "name": "Inferno Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "🔥🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike",
+                        "fire_wall"
+                    ]
+                },
+                "fusionType": "dagger_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "phoenix_dance",
+                "name": "Phoenix Dance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🦅🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flame_dagger",
+                        "inferno_strike"
+                    ]
+                },
+                "fusionType": "dagger_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "frost_dagger",
+                "name": "Frost Dagger",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, dagger attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "icon": "🗡️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "dagger_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "freezing_strike",
+                "name": "Freezing Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
+                "icon": "❄️🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "dagger_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "arctic_barrage",
+                "name": "Arctic Barrage",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌨️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_dagger",
+                        "freezing_strike"
+                    ]
+                },
+                "fusionType": "dagger_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_dagger",
+                "name": "Storm Dagger",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, dagger attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "icon": "🗡️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield",
+                        "spark"
+                    ]
+                },
+                "fusionType": "dagger_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "thunder_strike",
+                "name": "Thunder Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "icon": "⚡🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike",
+                        "thunder_clap"
+                    ]
+                },
+                "fusionType": "dagger_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_flurry",
+                "name": "Storm Flurry",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "icon": "⛈️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_dagger",
+                        "thunder_strike"
+                    ]
+                },
+                "fusionType": "dagger_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "stone_dagger",
+                "name": "Stone Dagger",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, dagger attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "icon": "🗡️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "dagger_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "crystal_strike",
+                "name": "Crystal Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
+                "icon": "💎🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "dagger_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "earthen_assault",
+                "name": "Earthen Assault",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌋🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_dagger",
+                        "crystal_strike"
+                    ]
+                },
+                "fusionType": "dagger_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "wind_dagger",
+                "name": "Wind Dagger",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, dagger attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "icon": "🗡️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield",
+                        "gust"
+                    ]
+                },
+                "fusionType": "dagger_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "zephyr_strike",
+                "name": "Zephyr Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "A wind-enhanced strike dealing 2d6 wind damage and increases your movement speed.",
+                "icon": "💨🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "dagger_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "hurricane_dance",
+                "name": "Hurricane Dance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌪️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_dagger",
+                        "zephyr_strike"
+                    ]
+                },
+                "fusionType": "dagger_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "water_dagger",
+                "name": "Water Dagger",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, dagger attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "icon": "🗡️💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "dagger_water",
+                "specialEffects": []
+            },
+            {
+                "id": "tide_strike",
+                "name": "Tide Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "A flowing strike dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
+                "icon": "🌊🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "dagger_water",
+                "specialEffects": []
+            },
+            {
+                "id": "tsunami_dance",
+                "name": "Tsunami Dance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Your daggers flow like water, dealing 3d6 water damage to multiple targets (no status effect)",
+                "icon": "🌊💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_dagger",
+                        "tide_strike"
+                    ]
+                },
+                "fusionType": "dagger_water",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_dagger",
+                "name": "Shadow Dagger",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, dagger attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🗡️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "dagger_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_strike",
+                "name": "Void Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
+                "icon": "🌑🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "dagger_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "night_dance",
+                "name": "Night Dance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌑✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_dagger",
+                        "void_strike"
+                    ]
+                },
+                "fusionType": "dagger_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "light_dagger",
+                "name": "Light Dagger",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, dagger attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🗡️☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dual_wield",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "dagger_light",
+                "specialEffects": []
+            },
+            {
+                "id": "radiant_strike",
+                "name": "Radiant Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
+                "icon": "✨🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "vital_strike",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "dagger_light",
+                "specialEffects": []
+            },
+            {
+                "id": "dawn_dance",
+                "name": "Dawn Dance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
+                "icon": "☀️✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_dagger",
+                        "radiant_strike"
+                    ]
+                },
+                "fusionType": "dagger_light",
+                "specialEffects": []
+            },
+            {
+                "id": "flame_glaive",
+                "name": "Flame Glaive",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, polearm attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "icon": "🔱🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "polearm_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "blazing_sweep",
+                "name": "Blazing Sweep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage each. Has a 40% chance to apply the listed status.",
+                "icon": "🔥🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack",
+                        "fire_wall"
+                    ]
+                },
+                "fusionType": "polearm_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "solar_lance",
+                "name": "Solar Lance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "☀️🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flame_glaive",
+                        "blazing_sweep"
+                    ]
+                },
+                "fusionType": "polearm_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "frost_halberd",
+                "name": "Frost Halberd",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, polearm attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "icon": "🔱❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "polearm_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "glacier_sweep",
+                "name": "Glacier Sweep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
+                "icon": "❄️🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "polearm_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "winter_vortex",
+                "name": "Winter Vortex",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌨️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_halberd",
+                        "glacier_sweep"
+                    ]
+                },
+                "fusionType": "polearm_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_glaive",
+                "name": "Storm Glaive",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, polearm attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "icon": "🔱⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "spark"
+                    ]
+                },
+                "fusionType": "polearm_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "thunder_sweep",
+                "name": "Thunder Sweep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "icon": "⚡🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack",
+                        "thunder_clap"
+                    ]
+                },
+                "fusionType": "polearm_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "lightning_spiral",
+                "name": "Lightning Spiral",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage. Has a 75% chance to apply the listed status.",
+                "icon": "⛈️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_glaive",
+                        "thunder_sweep"
+                    ]
+                },
+                "fusionType": "polearm_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "stone_halberd",
+                "name": "Stone Halberd",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, polearm attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "icon": "🔱🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "polearm_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "earthen_sweep",
+                "name": "Earthen Sweep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
+                "icon": "🪨🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "polearm_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "tectonic_spiral",
+                "name": "Tectonic Spiral",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌋🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_halberd",
+                        "earthen_sweep"
+                    ]
+                },
+                "fusionType": "polearm_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "wind_glaive",
+                "name": "Wind Glaive",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, polearm attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "icon": "🔱💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "gust"
+                    ]
+                },
+                "fusionType": "polearm_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "cyclone_sweep",
+                "name": "Cyclone Sweep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "A wind-empowered sweep dealing 2d6 wind damage and increasing your movement speed.",
+                "icon": "💨🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "polearm_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "tempest_spiral",
+                "name": "Tempest Spiral",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌪️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_glaive",
+                        "cyclone_sweep"
+                    ]
+                },
+                "fusionType": "polearm_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "water_glaive",
+                "name": "Water Glaive",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, polearm attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "icon": "🔱💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "polearm_water",
+                "specialEffects": []
+            },
+            {
+                "id": "wave_sweep",
+                "name": "Wave Sweep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "A flowing sweep dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
+                "icon": "🌊🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "polearm_water",
+                "specialEffects": []
+            },
+            {
+                "id": "maelstrom_spiral",
+                "name": "Maelstrom Spiral",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Create a spiral of water, dealing 3d6 water damage to all nearby enemies (no status effect)",
+                "icon": "🌊💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_glaive",
+                        "wave_sweep"
+                    ]
+                },
+                "fusionType": "polearm_water",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_glaive",
+                "name": "Shadow Glaive",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, polearm attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🔱🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "polearm_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_sweep",
+                "name": "Void Sweep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
+                "icon": "🌑🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "polearm_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "eclipse_spiral",
+                "name": "Eclipse Spiral",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌑✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_glaive",
+                        "void_sweep"
+                    ]
+                },
+                "fusionType": "polearm_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "light_glaive",
+                "name": "Light Glaive",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, polearm attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🔱☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "polearm_light",
+                "specialEffects": []
+            },
+            {
+                "id": "radiant_sweep",
+                "name": "Radiant Sweep",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
+                "icon": "✨🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sweep_attack",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "polearm_light",
+                "specialEffects": []
+            },
+            {
+                "id": "solar_spiral",
+                "name": "Solar Spiral",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
+                "icon": "☀️✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_glaive",
+                        "radiant_sweep"
+                    ]
+                },
+                "fusionType": "polearm_light",
+                "specialEffects": []
+            },
+            {
+                "id": "flame_hammer",
+                "name": "Flame Hammer",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, hammer attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "icon": "🔨🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "hammer_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "magma_smash",
+                "name": "Magma Smash",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "🌋🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam",
+                        "fire_wall"
+                    ]
+                },
+                "fusionType": "hammer_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "volcanic_eruption",
+                "name": "Volcanic Eruption",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌋💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flame_hammer",
+                        "magma_smash"
+                    ]
+                },
+                "fusionType": "hammer_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "frost_hammer",
+                "name": "Frost Hammer",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, hammer attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "icon": "🔨❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "hammer_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "glacial_pound",
+                "name": "Glacial Pound",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "A freezing hammer strike that deals 2d6 ice damage and creates a field of ice. Enemies in the area become Slowed and have a 40% chance to be Immobilized",
+                "icon": "❄️🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "hammer_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "permafrost_crash",
+                "name": "Permafrost Crash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "icon": "❄️💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_hammer",
+                        "glacial_pound"
+                    ]
+                },
+                "fusionType": "hammer_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_hammer",
+                "name": "Storm Hammer",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, hammer attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "icon": "🔨⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "spark"
+                    ]
+                },
+                "fusionType": "hammer_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "thunder_slam",
+                "name": "Thunder Slam",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "icon": "⚡🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam",
+                        "thunder_clap"
+                    ]
+                },
+                "fusionType": "hammer_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_surge",
+                "name": "Storm Surge",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Create a wave of electrified water dealing 2d6 lightning or water damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened",
+                "icon": "⛈️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_hammer",
+                        "thunder_slam"
+                    ]
+                },
+                "fusionType": "hammer_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "earthshaker_hammer",
+                "name": "Earthshaker Hammer",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, hammer attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "icon": "🔨🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "hammer_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "tectonic_slam",
+                "name": "Tectonic Slam",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
+                "icon": "🪨🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "hammer_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "mountain_crash",
+                "name": "Mountain Crash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "icon": "🏔️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earthshaker_hammer",
+                        "tectonic_slam"
+                    ]
+                },
+                "fusionType": "hammer_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "gale_hammer",
+                "name": "Gale Hammer",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, hammer attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "icon": "🔨💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "gust"
+                    ]
+                },
+                "fusionType": "hammer_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "cyclone_slam",
+                "name": "Cyclone Slam",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply the listed status.",
+                "icon": "💨🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "hammer_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "tempest_crash",
+                "name": "Tempest Crash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌪️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gale_hammer",
+                        "cyclone_slam"
+                    ]
+                },
+                "fusionType": "hammer_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "tide_hammer",
+                "name": "Tide Hammer",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, hammer attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "icon": "🔨💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "hammer_water",
+                "specialEffects": []
+            },
+            {
+                "id": "wave_slam",
+                "name": "Wave Slam",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "A water-empowered strike dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
+                "icon": "🌊🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "hammer_water",
+                "specialEffects": []
+            },
+            {
+                "id": "tsunami_crash",
+                "name": "Tsunami Crash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Create a massive wave with your hammer, dealing 3d6 water damage to all nearby enemies (no status effect)",
+                "icon": "🌊💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "tide_hammer",
+                        "wave_slam"
+                    ]
+                },
+                "fusionType": "hammer_water",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_hammer",
+                "name": "Shadow Hammer",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, hammer attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🔨🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "hammer_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_slam",
+                "name": "Void Slam",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
+                "icon": "🌑🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "hammer_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "eclipse_crash",
+                "name": "Eclipse Crash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌑✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_hammer",
+                        "void_slam"
+                    ]
+                },
+                "fusionType": "hammer_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "radiant_hammer",
+                "name": "Radiant Hammer",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, hammer attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🔨☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "hammer_light",
+                "specialEffects": []
+            },
+            {
+                "id": "solar_slam",
+                "name": "Solar Slam",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
+                "icon": "☀️🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ground_slam",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "hammer_light",
+                "specialEffects": []
+            },
+            {
+                "id": "divine_crash",
+                "name": "Divine Crash",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
+                "icon": "☀️✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "radiant_hammer",
+                        "solar_slam"
+                    ]
+                },
+                "fusionType": "hammer_light",
+                "specialEffects": []
+            },
+            {
+                "id": "flame_axe",
+                "name": "Flame Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, axe attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "icon": "🪓🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "axe_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "inferno_cleave",
+                "name": "Inferno Cleave",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage each. Has a 40% chance to apply the listed status.",
+                "icon": "🔥🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wide_cleave",
+                        "fire_wall"
+                    ]
+                },
+                "fusionType": "axe_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "meteor_strike",
+                "name": "Meteor Strike",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "☄️🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flame_axe",
+                        "inferno_cleave"
+                    ]
+                },
+                "fusionType": "axe_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "frost_axe",
+                "name": "Frost Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, axe attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "icon": "🪓❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "axe_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "frozen_cleave",
+                "name": "Frozen Cleave",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage each. Has a 40% chance to apply the listed status.",
+                "icon": "❄️🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wide_cleave",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "axe_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "avalanche_strike",
+                "name": "Avalanche Strike",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌨️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_axe",
+                        "frozen_cleave"
+                    ]
+                },
+                "fusionType": "axe_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_axe",
+                "name": "Storm Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, axe attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "icon": "🪓⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "spark"
+                    ]
+                },
+                "fusionType": "axe_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "stone_axe",
+                "name": "Stone Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, axe attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "icon": "🪓🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "axe_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "wind_axe",
+                "name": "Wind Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, axe attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "icon": "🪓💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "gust"
+                    ]
+                },
+                "fusionType": "axe_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "water_axe",
+                "name": "Water Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, axe attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "icon": "🪓💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "axe_water",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_axe",
+                "name": "Shadow Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, axe attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🪓🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "axe_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "light_axe",
+                "name": "Light Axe",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, axe attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🪓☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "axe_light",
+                "specialEffects": []
+            },
+            {
+                "id": "flame_staff",
+                "name": "Flame Staff",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, staff attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "icon": "🪄🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "staff_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "inferno_channel",
+                "name": "Inferno Channel",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "🔥🪄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "fire_wall"
+                    ]
+                },
+                "fusionType": "staff_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "phoenix_staff",
+                "name": "Phoenix Staff",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "🦅🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flame_staff",
+                        "inferno_channel"
+                    ]
+                },
+                "fusionType": "staff_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "frost_staff",
+                "name": "Frost Staff",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, staff attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "icon": "🪄❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "staff_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "glacial_focus",
+                "name": "Glacial Focus",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
+                "icon": "❄️🪄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "staff_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "winter_staff",
+                "name": "Winter Staff",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌨️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_staff",
+                        "glacial_focus"
+                    ]
+                },
+                "fusionType": "staff_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_staff",
+                "name": "Storm Staff",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, staff attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "icon": "🪄⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power",
+                        "spark"
+                    ]
+                },
+                "fusionType": "staff_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "thunder_focus",
+                "name": "Thunder Focus",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "icon": "⚡🪄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "thunder_clap"
+                    ]
+                },
+                "fusionType": "staff_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "tempest_staff",
+                "name": "Tempest Staff",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage. Has a 75% chance to apply the listed status.",
+                "icon": "⛈️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_staff",
+                        "thunder_focus"
+                    ]
+                },
+                "fusionType": "staff_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "stone_staff",
+                "name": "Stone Staff",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, staff attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "icon": "🪄🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "staff_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "crystal_focus",
+                "name": "Crystal Focus",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
+                "icon": "🪨🪄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "staff_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "mountain_staff",
+                "name": "Mountain Staff",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "icon": "🏔️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_staff",
+                        "crystal_focus"
+                    ]
+                },
+                "fusionType": "staff_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "wind_staff",
+                "name": "Wind Staff",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, staff attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "icon": "🪄💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power",
+                        "gust"
+                    ]
+                },
+                "fusionType": "staff_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "gale_focus",
+                "name": "Gale Focus",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply the listed status.",
+                "icon": "💨🪄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "staff_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "hurricane_staff",
+                "name": "Hurricane Staff",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌪️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_staff",
+                        "gale_focus"
+                    ]
+                },
+                "fusionType": "staff_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "water_staff",
+                "name": "Water Staff",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 3,
+                "desc": "Toggle: While active, staff attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "icon": "🪄💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "staff_water",
+                "specialEffects": []
+            },
+            {
+                "id": "tide_focus",
+                "name": "Tide Focus",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Channel water magic through your staff, dealing 2d6 water damage in a cone and healing you for half the damage dealt (no status effect)",
+                "icon": "💧🪄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "staff_water",
+                "specialEffects": []
+            },
+            {
+                "id": "tsunami_staff",
+                "name": "Tsunami Staff",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Your staff becomes pure water, dealing 3d6 water damage in an area (no status effect)",
+                "icon": "🌊💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_staff",
+                        "tide_focus"
+                    ]
+                },
+                "fusionType": "staff_water",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_staff",
+                "name": "Shadow Staff",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, staff attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🪄🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "staff_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_focus",
+                "name": "Void Focus",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
+                "icon": "🌑🪄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "staff_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "eclipse_staff",
+                "name": "Eclipse Staff",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
+                "icon": "🌑✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_staff",
+                        "void_focus"
+                    ]
+                },
+                "fusionType": "staff_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "light_staff",
+                "name": "Light Staff",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 2,
+                "desc": "Toggle: While active, staff attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🪄☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spell_power",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "staff_light",
+                "specialEffects": []
+            },
+            {
+                "id": "radiant_focus",
+                "name": "Radiant Focus",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 5,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
+                "icon": "☀️🪄",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "staff_light",
+                "specialEffects": []
+            },
+            {
+                "id": "solar_staff",
+                "name": "Solar Staff",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
+                "icon": "☀️✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_staff",
+                        "radiant_focus"
+                    ]
+                },
+                "fusionType": "staff_light",
+                "specialEffects": []
+            }
+        ],
+        "utility_combat": [
+            {
+                "id": "alchemical_blade",
+                "name": "Alchemical Blade",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 5,
+                "desc": "Weapon coated with deadly poison: Apply Poison (escalating damage)",
+                "icon": "⚔️⚗️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "blade_mastery",
+                        "poison_crafting"
+                    ]
+                },
+                "fusionType": "sword_alchemy",
+                "specialEffects": []
+            },
+            {
+                "id": "enchanted_arrows",
+                "name": "Enchanted Arrows",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 5,
+                "desc": "Arrows with magical effects: Apply Weapon Enchanted status",
+                "icon": "🏹✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multishot",
+                        "weapon_enchanting"
+                    ]
+                },
+                "fusionType": "bow_enchanting",
+                "specialEffects": []
+            },
+            {
+                "id": "blessed_weapon",
+                "name": "Blessed Weapon",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 0,
+                "desc": "Weapon deals radiant damage: Apply Weapon Enchanted vs undead/evil",
+                "icon": "⚔️☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "weapon_mastery",
+                        "divine_light"
+                    ]
+                },
+                "fusionType": "weapon_light",
+                "specialEffects": []
+            }
+        ],
+        "monster_fusion": [
+            {
+                "id": "draconic_breath",
+                "name": "Draconic Breath",
+                "tier": 5,
+                "cost": 25,
+                "staminaCost": 8,
+                "desc": "Fire breath + fire mastery: Apply Burn + Enhanced status",
+                "icon": "🐉🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fire_breath",
+                        "fire_mastery"
+                    ]
+                },
+                "fusionType": "monster_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_strike",
+                "name": "Shadow Strike",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 6,
+                "desc": "Teleport + claws: Apply Stealth Mastery then strike",
+                "icon": "👥🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "razor_claws",
+                        "monster_shadow_step"
+                    ]
+                },
+                "fusionType": "monster_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "arcane_roar",
+                "name": "Arcane Roar",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 7,
+                "desc": "Roar + magic: Apply Intimidating Aura + magical damage",
+                "icon": "🦁✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "roar",
+                        "magic_missile"
+                    ]
+                },
+                "fusionType": "monster_arcane",
+                "specialEffects": []
+            }
+        ],
+        "pure_magic": [
+            {
+                "id": "steam_burst",
+                "name": "Steam Burst",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or ice damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🔥❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "fire_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "thermal_shock",
+                "name": "Thermal Shock",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "icon": "🌡️💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "steam_burst",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "fire_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "conflicting_elements",
+                "name": "Conflicting Elements",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "icon": "☯️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thermal_shock",
+                        "inferno"
+                    ]
+                },
+                "fusionType": "fire_ice",
+                "specialEffects": []
+            },
+            {
+                "id": "plasma_bolt",
+                "name": "Plasma Bolt",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or lightning damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "⚡🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball",
+                        "spark"
+                    ]
+                },
+                "fusionType": "fire_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_of_cinders",
+                "name": "Storm of Cinders",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or lightning damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌩️✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "plasma_bolt",
+                        "thunder_clap"
+                    ]
+                },
+                "fusionType": "fire_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_strike",
+                "name": "Fusion Strike",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
+                "icon": "⚡💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_of_cinders",
+                        "chain_lightning"
+                    ]
+                },
+                "fusionType": "fire_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "magma_surge",
+                "name": "Magma Surge",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🌋🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "fire_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "volcanic_rupture",
+                "name": "Volcanic Rupture",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌋💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "magma_surge",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "fire_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "tectonic_fury",
+                "name": "Tectonic Fury",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire or earth damage (use whichever element the target is weakest to). Has a 75% chance to apply the listed status.",
+                "icon": "🌋⚔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "volcanic_rupture",
+                        "earthquake"
+                    ]
+                },
+                "fusionType": "fire_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "static_freeze",
+                "name": "Static Freeze",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or lightning damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "❄️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_shard",
+                        "spark"
+                    ]
+                },
+                "fusionType": "ice_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "crystalline_surge",
+                "name": "Crystalline Surge",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or lightning damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "💎⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "static_freeze",
+                        "thunder_clap"
+                    ]
+                },
+                "fusionType": "ice_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "arctic_storm",
+                "name": "Arctic Storm",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "icon": "❄️🌩️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "crystalline_surge",
+                        "blizzard"
+                    ]
+                },
+                "fusionType": "ice_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "twilight_balance",
+                "name": "Twilight Balance",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 darkness damage. Has a 20% chance to apply the listed status.",
+                "icon": "🌓✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_bolt",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "darkness_light",
+                "specialEffects": []
+            },
+            {
+                "id": "duality_surge",
+                "name": "Duality Surge",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 darkness or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "☯️✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "twilight_balance",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "darkness_light",
+                "specialEffects": []
+            },
+            {
+                "id": "eclipse",
+                "name": "Eclipse",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Perfect balance of light and dark dealing 3d6 darkness or light damage (whichever each target is weak to) to all enemies. Applies Enhanced to allies and has a 75% chance to apply Mind Controlled to enemies",
+                "icon": "🌑☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "duality_surge",
+                        "dawn_strike"
+                    ]
+                },
+                "fusionType": "darkness_light",
+                "specialEffects": []
+            },
+            {
+                "id": "sandstorm",
+                "name": "Sandstorm",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🌪️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_throw",
+                        "gust"
+                    ]
+                },
+                "fusionType": "earth_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "desert_winds",
+                "name": "Desert Winds",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🏜️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sandstorm",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "earth_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "terra_tempest",
+                "name": "Terra Tempest",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌪️🗿",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "desert_winds",
+                        "earthquake"
+                    ]
+                },
+                "fusionType": "earth_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "typhoon_strike",
+                "name": "Typhoon Strike",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or water damage (use whichever element the target is weakest to).",
+                "icon": "🌊💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gust",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "wind_water",
+                "specialEffects": []
+            },
+            {
+                "id": "monsoon",
+                "name": "Monsoon",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or water damage (use whichever element the target is weakest to). in an area; separate attack roll per target.",
+                "icon": "🌧️🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "typhoon_strike",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "wind_water",
+                "specialEffects": []
+            },
+            {
+                "id": "hurricane",
+                "name": "Hurricane",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Summon a devastating storm dealing 3d6 wind or water damage (whichever each target is weak to) to all enemies. Pushes enemies to storm's center",
+                "icon": "🌀💫",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "monsoon",
+                        "tsunami"
+                    ]
+                },
+                "fusionType": "wind_water",
+                "specialEffects": []
+            },
+            {
+                "id": "mud_slash",
+                "name": "Mud Slash",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "💧🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_splash",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "water_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "quicksand",
+                "name": "Quicksand",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🏖️💫",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "mud_slash",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "water_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "tidal_wave",
+                "name": "Tidal Wave",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Summon a wave of water and debris dealing 3d6 water or earth damage (whichever each target is weak to). Has a 75% chance to apply both Immobilized and Weakened",
+                "icon": "🌊🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "quicksand",
+                        "tsunami"
+                    ]
+                },
+                "fusionType": "water_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "scalding_jet",
+                "name": "Scalding Jet",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "💧🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "fire_water",
+                "specialEffects": []
+            },
+            {
+                "id": "steam_cloud",
+                "name": "Steam Cloud",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or water damage (use whichever element the target is weakest to). in an area; separate attack roll per target. Has a 40% chance to apply the listed status.",
+                "icon": "💨🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "scalding_jet",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "fire_water",
+                "specialEffects": []
+            },
+            {
+                "id": "geyser_burst",
+                "name": "Geyser Burst",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
+                "icon": "⛲🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "steam_cloud",
+                        "inferno"
+                    ]
+                },
+                "fusionType": "fire_water",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_wind",
+                "name": "Shadow Wind",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🌫️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gust",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "wind_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_tempest",
+                "name": "Void Tempest",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌪️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_wind",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "wind_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "dark_cyclone",
+                "name": "Dark Cyclone",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌀🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "void_tempest",
+                        "hurricane"
+                    ]
+                },
+                "fusionType": "wind_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "prismatic_breeze",
+                "name": "Prismatic Breeze",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🌈💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gust",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "wind_light",
+                "specialEffects": []
+            },
+            {
+                "id": "rainbow_gale",
+                "name": "Rainbow Gale",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌈🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "prismatic_breeze",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "wind_light",
+                "specialEffects": []
+            },
+            {
+                "id": "aurora_storm",
+                "name": "Aurora Storm",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🎆💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "rainbow_gale",
+                        "dawn_strike"
+                    ]
+                },
+                "fusionType": "wind_light",
+                "specialEffects": []
+            },
+            {
+                "id": "inferno_cyclone",
+                "name": "Inferno Cyclone",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🔥💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball",
+                        "gust"
+                    ]
+                },
+                "fusionType": "fire_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "heat_vacuum",
+                "name": "Heat Vacuum",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌪️🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "inferno_cyclone",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "fire_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "phoenix_storm",
+                "name": "Phoenix Storm",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🦅🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "heat_vacuum",
+                        "inferno"
+                    ]
+                },
+                "fusionType": "fire_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "shadowflame",
+                "name": "Shadowflame",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🔥🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "fire_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "dark_pyre",
+                "name": "Dark Pyre",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🏮🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadowflame",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "fire_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "hellfire",
+                "name": "Hellfire",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
+                "icon": "👿🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dark_pyre",
+                        "inferno"
+                    ]
+                },
+                "fusionType": "fire_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "glacial_spike",
+                "name": "Glacial Spike",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "❄️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_shard",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "ice_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "permafrost",
+                "name": "Permafrost",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "❄️🌍",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "glacial_spike",
+                        "stone_wall"
+                    ]
+                },
+                "fusionType": "ice_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "avalanche",
+                "name": "Avalanche",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🏔️❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "permafrost",
+                        "blizzard"
+                    ]
+                },
+                "fusionType": "ice_earth",
+                "specialEffects": []
+            },
+            {
+                "id": "frost_current",
+                "name": "Frost Current",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "❄️💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_shard",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "ice_water",
+                "specialEffects": []
+            },
+            {
+                "id": "ice_flow",
+                "name": "Ice Flow",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or water damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌊❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_current",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "ice_water",
+                "specialEffects": []
+            },
+            {
+                "id": "glacier_tsunami",
+                "name": "Glacier Tsunami",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌊❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_flow",
+                        "tsunami"
+                    ]
+                },
+                "fusionType": "ice_water",
+                "specialEffects": []
+            },
+            {
+                "id": "dark_frost",
+                "name": "Dark Frost",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "❄️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_shard",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "ice_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_freeze",
+                "name": "Void Freeze",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌌❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dark_frost",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "ice_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "eternal_winter",
+                "name": "Eternal Winter",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "icon": "❄️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "void_freeze",
+                        "blizzard"
+                    ]
+                },
+                "fusionType": "ice_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "crystal_ray",
+                "name": "Crystal Ray",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "💎☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_shard",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "ice_light",
+                "specialEffects": []
+            },
+            {
+                "id": "aurora_flash",
+                "name": "Aurora Flash",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🎆❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "crystal_ray",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "ice_light",
+                "specialEffects": []
+            },
+            {
+                "id": "diamond_radiance",
+                "name": "Diamond Radiance",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "icon": "💎✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "aurora_flash",
+                        "blizzard"
+                    ]
+                },
+                "fusionType": "ice_light",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_front",
+                "name": "Storm Front",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "⚡💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spark",
+                        "gust"
+                    ]
+                },
+                "fusionType": "lightning_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "charged_cyclone",
+                "name": "Charged Cyclone",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌪️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_front",
+                        "wind_barrier"
+                    ]
+                },
+                "fusionType": "lightning_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "thunderstorm",
+                "name": "Thunderstorm",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "icon": "⛈️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "charged_cyclone",
+                        "chain_lightning"
+                    ]
+                },
+                "fusionType": "lightning_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "conductivity",
+                "name": "Conductivity",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "⚡💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spark",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "lightning_water",
+                "specialEffects": []
+            },
+            {
+                "id": "storm_surge",
+                "name": "Storm Surge",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Create a wave of electrified water dealing 2d6 lightning or water damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened",
+                "icon": "🌊⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "conductivity",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "lightning_water",
+                "specialEffects": []
+            },
+            {
+                "id": "maelstrom_strike",
+                "name": "Maelstrom Strike",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌊⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_surge",
+                        "chain_lightning"
+                    ]
+                },
+                "fusionType": "lightning_water",
+                "specialEffects": []
+            },
+            {
+                "id": "dark_lightning",
+                "name": "Dark Lightning",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d4 lightning or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "⚡🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spark",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "lightning_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_thunder",
+                "name": "Void Thunder",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌩️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dark_lightning",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "lightning_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "eclipse_storm",
+                "name": "Eclipse Storm",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "icon": "⚡🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "void_thunder",
+                        "chain_lightning"
+                    ]
+                },
+                "fusionType": "lightning_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "radiant_bolt",
+                "name": "Radiant Bolt",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "⚡☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spark",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "lightning_light",
+                "specialEffects": []
+            },
+            {
+                "id": "divine_thunder",
+                "name": "Divine Thunder",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "⚡✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "radiant_bolt",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "lightning_light",
+                "specialEffects": []
+            },
+            {
+                "id": "heavens_wrath",
+                "name": "Heaven's Wrath",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "icon": "⚡☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "divine_thunder",
+                        "chain_lightning"
+                    ]
+                },
+                "fusionType": "lightning_light",
+                "specialEffects": []
+            },
+            {
+                "id": "shadow_stone",
+                "name": "Shadow Stone",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🪨🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_throw",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "earth_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "obsidian_strike",
+                "name": "Obsidian Strike",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌑🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_stone",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "earth_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "void_eruption",
+                "name": "Void Eruption",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌋🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "obsidian_strike",
+                        "earthquake"
+                    ]
+                },
+                "fusionType": "earth_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "crystal_light",
+                "name": "Crystal Light",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "💎☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_throw",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "earth_light",
+                "specialEffects": []
+            },
+            {
+                "id": "prismatic_earth",
+                "name": "Prismatic Earth",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌈🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "crystal_light",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "earth_light",
+                "specialEffects": []
+            },
+            {
+                "id": "sacred_ground",
+                "name": "Sacred Ground",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
+                "icon": "⚖️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "prismatic_earth",
+                        "earthquake"
+                    ]
+                },
+                "fusionType": "earth_light",
+                "specialEffects": []
+            },
+            {
+                "id": "abyssal_current",
+                "name": "Abyssal Current",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "🌊🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_splash",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "water_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "deep_surge",
+                "name": "Deep Surge",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌊🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "abyssal_current",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "water_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "drowning_darkness",
+                "name": "Drowning Darkness",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌊🖤",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "deep_surge",
+                        "tsunami"
+                    ]
+                },
+                "fusionType": "water_darkness",
+                "specialEffects": []
+            },
+            {
+                "id": "holy_spring",
+                "name": "Holy Spring",
+                "tier": 2,
+                "cost": 10,
+                "staminaCost": 4,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "icon": "💧✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_splash",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "water_light",
+                "specialEffects": []
+            },
+            {
+                "id": "purifying_wave",
+                "name": "Purifying Wave",
+                "tier": 3,
+                "cost": 15,
+                "staminaCost": 6,
+                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "icon": "🌊✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "holy_spring",
+                        "light_shield"
+                    ]
+                },
+                "fusionType": "water_light",
+                "specialEffects": []
+            },
+            {
+                "id": "blessed_tsunami",
+                "name": "Blessed Tsunami",
+                "tier": 4,
+                "cost": 20,
+                "staminaCost": 8,
+                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
+                "icon": "🌊☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "purifying_wave",
+                        "tsunami"
+                    ]
+                },
+                "fusionType": "water_light",
+                "specialEffects": []
+            }
+        ]
+    },
+    "ascension": {
+        "unique": [
+            {
+                "id": "familiar_summon",
+                "name": "Familiar Summon",
+                "tier": 3,
+                "cost": 50,
+                "staminaCost": 20,
+                "desc": "Action (Once per day): Summon a loyal monster companion (player creates monster character with 50 Lumens to spend). Lasts until dismissed or slain. Can transfer your Lumens to improve companion.",
+                "icon": "👹",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 5
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "aetherial_reflex",
+                "name": "Aetherial Shift",
+                "tier": 4,
+                "cost": 35,
+                "staminaCost": 30,
+                "desc": "Reaction (Once per combat): When you would take damage, phase out of reality to ignore all damage from that attack. After phasing, you cannot use other Active/Reaction skills until the end of your next turn due to dimensional instability.",
+                "icon": "👻",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 8
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "nova_unleashed",
+                "name": "Ultimate Nova",
+                "tier": 4,
+                "cost": 50,
+                "staminaCost": 30,
+                "desc": "Action: Unleash energy in all directions — automatically hits every creature in 30ft (no attack roll). Each takes 3d20 physical damage. Friendly fire possible. Become Incapacitated afterwards.",
+                "icon": "⭐",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 10
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "mind_shield",
+                "name": "Mind Shield",
+                "tier": 4,
+                "cost": 45,
+                "staminaCost": 0,
+                "desc": "Passive: Immune to mind control, illusions, and psychic damage. Cannot be charmed, frightened, or possessed.",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 8
+                },
+                "specialEffects": [
+                    "mind_shield"
+                ]
+            },
+            {
+                "id": "cosmic_awareness",
+                "name": "Cosmic Awareness",
+                "tier": 5,
+                "cost": 65,
+                "staminaCost": 0,
+                "desc": "Passive: Sense all magical effects, hidden creatures, and dimensional rifts within 100ft. Can see through illusions and invisibility.",
+                "icon": "👁️",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 12
+                },
+                "specialEffects": [
+                    "magic_sight"
+                ]
+            },
+            {
+                "id": "probability_shift",
+                "name": "Probability Shift",
+                "tier": 4,
+                "cost": 50,
+                "staminaCost": 10,
+                "desc": "Reaction (Once per combat): When you fail a roll, reroll with advantage. Can also force an enemy to reroll a successful attack with disadvantage.",
+                "icon": "🎲",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 10
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "instinctive_dodge",
+                "name": "Instinctive Dodge",
+                "tier": 3,
+                "cost": 30,
+                "staminaCost": 1,
+                "desc": "Reaction: Automatically attempt to dodge any attacks that would hit you each round (roll higher than enemy Accuracy). Cannot dodge area attacks.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 4
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "burst_of_speed",
+                "name": "Burst of Speed",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action: Move up to 2× your normal movement distance for 1 round. Cannot be used again on your next turn.",
+                "icon": "💨",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 6
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "analyze",
+                "name": "Analyze",
+                "tier": 4,
+                "cost": 35,
+                "staminaCost": 5,
+                "desc": "Action: Analyze a target within 30ft to reveal HP, elemental weaknesses, resistances, and special abilities. Also reveals hidden traps and hazards nearby.",
+                "icon": "🔍",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 7
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "echo_location",
+                "name": "Echo Location",
+                "tier": 3,
+                "cost": 35,
+                "staminaCost": 10,
+                "desc": "Action: Emit a pulse revealing all creatures and objects within 50ft. Works through darkness; does not pass solid walls.",
+                "icon": "🔊",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 6
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "phase_step",
+                "name": "Phase Step",
+                "tier": 4,
+                "cost": 40,
+                "staminaCost": 15,
+                "desc": "Action: Instantly teleport up to 30ft in any direction, passing through solid objects. Cannot teleport into occupied spaces.",
+                "icon": "👣",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 7
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "mind_read",
+                "name": "Mind Read",
+                "tier": 4,
+                "cost": 45,
+                "staminaCost": 20,
+                "desc": "Action: Read recent memories of a creature within 30ft. Understand desires and intentions; comprehend creatures without a shared language.",
+                "icon": "🧠",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 8
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "eternal_moment",
+                "name": "Eternal Moment",
+                "tier": 5,
+                "cost": 70,
+                "staminaCost": 40,
+                "desc": "Action (Once per day): Stop time and gain 3 additional turns. Enemies cannot use reaction skills during these turns. Skip your next turn afterwards due to temporal exhaustion.",
+                "icon": "⌛",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 12
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "soul_transference",
+                "name": "Soul Transference",
+                "tier": 5,
+                "cost": 80,
+                "staminaCost": 50,
+                "desc": "Action (Once per lifetime): Transfer consciousness to another body, taking over their form and abilities. Original body becomes comatose.",
+                "icon": "💫",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 12
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "gravity_manipulation",
+                "name": "Gravity Manipulation",
+                "tier": 3,
+                "cost": 30,
+                "staminaCost": 12,
+                "desc": "Action: Alter gravity in a 10ft radius for 2 rounds. Enemies halve movement speed; allies double movement speed.",
+                "icon": "🌍",
+                "prerequisites": {
+                    "type": "LEVEL",
+                    "level": 4
+                },
+                "specialEffects": []
+            }
+        ]
+    },
+    "ultimate": {
+        "legendary": [
+            {
+                "id": "monster_summoning",
+                "name": "Monster Summoning",
+                "tier": 5,
+                "cost": 50,
+                "staminaCost": 20,
+                "desc": "Action (Once per day): Summon a loyal monster companion (Player creates monster character with 50 Lumen to spend). Lasts until dismissed or slain. Can transfer your Lumen to improve companion.",
+                "icon": "👹",
+                "prerequisites": {
+                    "type": "OR_WEAPON_MASTERY_AND_DARKNESS",
+                    "skills": [
+                        "sword_mastery",
+                        "axe_mastery",
+                        "polearm_mastery",
+                        "hammer_mastery",
+                        "dagger_mastery",
+                        "ranged_mastery",
+                        "darkness_mastery"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "aetherial_shift",
+                "name": "Aetherial Shift",
+                "tier": 4,
+                "cost": 35,
+                "staminaCost": 15,
+                "desc": "Action (3 uses per day): Phase out of reality for 1 round. Immune to all damage, can pass through walls/obstacles. Cannot attack or interact while phased. -2 stamina per extra round maintained.",
+                "icon": "👻",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "resurrection",
+                        "void_prison",
+                        "wind_walk"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "chronos_rewind",
+                "name": "Chronos Rewind",
+                "tier": 5,
+                "cost": 40,
+                "staminaCost": 12,
+                "desc": "Reaction (Once per encounter): Rewind 1 action/attack. Reroll any dice or make different choice for last action taken (yours or ally). Cannot rewind death or critical story moments.",
+                "icon": "⏪",
+                "prerequisites": {
+                    "type": "ALL_LIGHT_MAGIC",
+                    "skills": [
+                        "light_ray",
+                        "healing_light",
+                        "light_shield",
+                        "resurrection",
+                        "divine_judgment"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_nova",
+                "name": "Ultimate Nova",
+                "tier": 5,
+                "cost": 60,
+                "staminaCost": 25,
+                "desc": "Action (Once per day): Devastating 100ft radius explosion dealing 8d6 damage (DEX save halves). All creatures in area affected. User gains Exhausted (3 rounds) and cannot use magic for 1 round.",
+                "icon": "💥",
+                "prerequisites": {
+                    "type": "THREE_TIER5_MAGIC",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "soul_link",
+                "name": "Soul Link",
+                "tier": 4,
+                "cost": 30,
+                "staminaCost": 10,
+                "desc": "Action (10 rounds duration): Link HP pools with willing ally within 30ft. Combine max HP, share all damage/healing equally. If either reaches 0 HP, both fall unconscious. Can be ended early by either participant.",
+                "icon": "💕",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "soul_steal",
+                        "divine_judgment",
+                        "elixir_of_life"
+                    ]
+                },
+                "alternativePrerequisite": {
+                    "type": "OR",
+                    "skills": [
+                        "elixir_of_life",
+                        "grand_alchemist"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ]
+    }
+};
+
+window.SKILLS_DATA = SKILLS_DATA;

@@ -1,0 +1,8164 @@
+[
+  {
+    "premadeId": "alchemist",
+    "name": "Alchemist",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 380,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 16,
+      "strength": -3,
+      "magicPower": 0,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "basic_alchemy",
+      "poison_brewing",
+      "explosive_compounds",
+      "grand_alchemist",
+      "plant_identification",
+      "herbal_remedies",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 6
+      },
+      {
+        "uid": "premade_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 4
+      },
+      {
+        "uid": "premade_herbs_2",
+        "itemId": "herbs",
+        "qty": 8
+      },
+      {
+        "uid": "premade_cloth_robes_3",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": "premade_cloth_robes_3",
+      "accessory": null
+    },
+    "notes": "Field kit of reagents, poisons, and polished healing draughts. Premade NPC archetype: Alchemist."
+  },
+  {
+    "premadeId": "ancient_dragon",
+    "name": "Ancient Dragon",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 50,
+      "stamina": 25,
+      "strength": 7,
+      "magicPower": 7,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 23,
+      "magicalDefence": 23
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fire_breath",
+      "monster_flight",
+      "tail_swipe",
+      "spiked_tail",
+      "razor_claws",
+      "rend",
+      "monster_ancient_knowledge"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_3",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_4",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_6",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_tail_spikes_7",
+        "itemId": "tail_spikes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, tail_spikes. Premade monster/NPC: Ancient Dragon."
+  },
+  {
+    "premadeId": "archangel",
+    "name": "Archangel",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 7,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 18,
+      "magicalDefence": 23
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fear_aura",
+      "spell_turning"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_3",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_4",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_terror_essence_6",
+        "itemId": "terror_essence",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, terror_essence. Premade monster/NPC: Archangel."
+  },
+  {
+    "premadeId": "archer",
+    "name": "Archer",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 14,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "ranged_basics",
+      "grappling_shot",
+      "quick_draw",
+      "multi_shot",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_hunting_bow_1",
+        "itemId": "hunting_bow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_hunting_bow_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Archer."
+  },
+  {
+    "premadeId": "arctic_wyvern",
+    "name": "Arctic Wyvern",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 3,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 17
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "ice_breath",
+      "monster_flight",
+      "tail_swipe"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_frost_core_2",
+        "itemId": "frost_core",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flexible_tail_section_3",
+        "itemId": "flexible_tail_section",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, frost_core, flexible_tail_section. Premade monster/NPC: Arctic Wyvern."
+  },
+  {
+    "premadeId": "assassin_rogue",
+    "name": "Assassin Rogue",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 12,
+      "stamina": 14,
+      "strength": -1,
+      "magicPower": -3,
+      "accuracy": 1,
+      "speed": 5,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "shadow_bolt",
+      "shadow_step",
+      "dagger_basics",
+      "poison_blade",
+      "dual_wield",
+      "flurry",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_bronze_dagger_2",
+        "itemId": "bronze_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_iron_dagger_3",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_studded_leather_4",
+        "itemId": "studded_leather",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_3",
+      "offhand": "premade_bronze_dagger_2",
+      "armor": "premade_studded_leather_4",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Assassin Rogue."
+  },
+  {
+    "premadeId": "bandit_raider",
+    "name": "Bandit Raider",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 160,
+    "gil": 1680,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_1",
+        "itemId": "leather_armor",
+        "qty": 1
+      },
+      {
+        "uid": "premade_health_potion_2",
+        "itemId": "health_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_stamina_potion_3",
+        "itemId": "stamina_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_4",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_5",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_6",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_7",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": "premade_leather_armor_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Bandit Raider."
+  },
+  {
+    "premadeId": "banshee",
+    "name": "Banshee",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "energy_drain",
+      "paralyzing_gaze",
+      "darkvision",
+      "fear",
+      "life_drain"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_2",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Banshee."
+  },
+  {
+    "premadeId": "battle_mage",
+    "name": "Battle Mage",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": 1,
+      "accuracy": -1,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "fire_spark",
+      "fireball",
+      "sword_basics",
+      "quick_strike",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_iron_sword_2",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_3",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_2",
+      "offhand": null,
+      "armor": "premade_cloth_robes_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Battle Mage."
+  },
+  {
+    "premadeId": "beast_tamer",
+    "name": "Beast Tamer",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 15,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "steady_aim",
+      "ranged_basics",
+      "plant_identification",
+      "herbal_remedies",
+      "claws",
+      "pounce",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_herbs_1",
+        "itemId": "herbs",
+        "qty": 5
+      },
+      {
+        "uid": "premade_hunting_bow_2",
+        "itemId": "hunting_bow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_3",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_hunting_bow_2",
+      "offhand": null,
+      "armor": "premade_leather_armor_3",
+      "accessory": null
+    },
+    "notes": "Travels with a trained predator; carries treats and tranquilizer herbs. Premade NPC archetype: Beast Tamer."
+  },
+  {
+    "premadeId": "berserker",
+    "name": "Berserker",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 18,
+      "stamina": 16,
+      "strength": 2,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 3,
+      "physicalDefence": 6,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "axe_basics",
+      "cleave",
+      "berserker_rage",
+      "human_determination"
+    ],
+    "activeToggles": [
+      "berserker_rage"
+    ],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_berserker_potion_0",
+        "itemId": "berserker_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_berserker_axe_1",
+        "itemId": "berserker_axe",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_berserker_axe_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Berserker."
+  },
+  {
+    "premadeId": "blessed_armor",
+    "name": "Blessed Armor",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 18,
+      "stamina": 13,
+      "strength": -1,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "monster_charge_attack",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_1",
+        "itemId": "energy_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, energy_gland, anti_magic_essence, regenerative_tissue. Premade monster/NPC: Blessed Armor."
+  },
+  {
+    "premadeId": "blue_slime",
+    "name": "Blue Slime",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "acid_spit"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_acid_bladder_1",
+        "itemId": "acid_bladder",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Blue Slime."
+  },
+  {
+    "premadeId": "bounty_hunter",
+    "name": "Bounty Hunter",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 15,
+      "stamina": 14,
+      "strength": -1,
+      "magicPower": -3,
+      "accuracy": 1,
+      "speed": 3,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "steady_aim",
+      "aimed_shot",
+      "ranged_basics",
+      "power_shot",
+      "grappling_shot",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_rope_1",
+        "itemId": "rope",
+        "qty": 1
+      },
+      {
+        "uid": "premade_crossbow_2",
+        "itemId": "crossbow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_studded_leather_3",
+        "itemId": "studded_leather",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_crossbow_2",
+      "offhand": null,
+      "armor": "premade_studded_leather_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Bounty Hunter."
+  },
+  {
+    "premadeId": "cherubim",
+    "name": "Cherubim",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 34,
+      "stamina": 22,
+      "strength": 1,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 16,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fear_aura"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_1",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_4",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_5",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_6",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_terror_essence_7",
+        "itemId": "terror_essence",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, terror_essence. Premade monster/NPC: Cherubim."
+  },
+  {
+    "premadeId": "cloud_giant",
+    "name": "Cloud Giant",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 42,
+      "stamina": 22,
+      "strength": 5,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 20,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "monster_charge_attack",
+      "trample",
+      "gore",
+      "monster_earthquake"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_1",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_2",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_4",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_5",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_6",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_7",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_8",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Cloud Giant."
+  },
+  {
+    "premadeId": "con_artist",
+    "name": "Con Artist",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 38500,
+    "stats": {
+      "hp": 12,
+      "stamina": 13,
+      "strength": -3,
+      "magicPower": -2,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "dagger_basics",
+      "poison_blade",
+      "darkvision",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_wine_0",
+        "itemId": "wine",
+        "qty": 2
+      },
+      {
+        "uid": "premade_health_potion_1",
+        "itemId": "health_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_iron_dagger_2",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_3",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_2",
+      "offhand": null,
+      "armor": "premade_cloth_robes_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Con Artist."
+  },
+  {
+    "premadeId": "corrupt_guard",
+    "name": "Corrupt Guard",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 160,
+    "gil": 1680,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_1",
+        "itemId": "leather_armor",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_3",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_4",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_5",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": "premade_leather_armor_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Corrupt Guard."
+  },
+  {
+    "premadeId": "crime_boss",
+    "name": "Crime Boss",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 2,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 18,
+      "magicalDefence": 18
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "razor_claws"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_3",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_4",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland. Premade monster/NPC: Crime Boss."
+  },
+  {
+    "premadeId": "crystal_serpent",
+    "name": "Crystal Serpent",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "bite_attack",
+      "claws",
+      "razor_claws",
+      "venomous_claws",
+      "poison_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_venom_sacs_3",
+        "itemId": "venom_sacs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_toxic_lung_tissue_4",
+        "itemId": "toxic_lung_tissue",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Crystal Serpent."
+  },
+  {
+    "premadeId": "crystal_slime",
+    "name": "Crystal Slime",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "acid_spit"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_acid_bladder_1",
+        "itemId": "acid_bladder",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Crystal Slime."
+  },
+  {
+    "premadeId": "crystal_wyvern",
+    "name": "Crystal Wyvern",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 3,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 17
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "fire_breath",
+      "ice_breath",
+      "lightning_breath",
+      "monster_flight",
+      "tail_swipe"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_2",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_frost_core_3",
+        "itemId": "frost_core",
+        "qty": 1
+      },
+      {
+        "uid": "premade_storm_chamber_4",
+        "itemId": "storm_chamber",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flexible_tail_section_5",
+        "itemId": "flexible_tail_section",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, flame_gland, frost_core, storm_chamber, flexible_tail_section. Premade monster/NPC: Crystal Wyvern."
+  },
+  {
+    "premadeId": "cultist",
+    "name": "Cultist",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 15,
+      "strength": -3,
+      "magicPower": 2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "darkvision",
+      "fear",
+      "life_drain",
+      "shadow_bolt",
+      "darkness",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_wooden_staff_1",
+        "itemId": "wooden_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_wooden_staff_1",
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Chalice, black candles, and forbidden sigils hidden beneath the robes. Premade NPC archetype: Cultist."
+  },
+  {
+    "premadeId": "cursed_knight",
+    "name": "Cursed Knight",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack",
+      "monster_berserker_rage",
+      "pounce"
+    ],
+    "activeToggles": [
+      "monster_berserker_rage"
+    ],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_1",
+        "itemId": "leather_armor",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_2",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_4",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_5",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": "premade_leather_armor_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, razor_talons, energy_gland. Premade monster/NPC: Cursed Knight."
+  },
+  {
+    "premadeId": "cursed_shield",
+    "name": "Cursed Shield",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 18,
+      "stamina": 13,
+      "strength": -1,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "monster_charge_attack",
+      "energy_drain",
+      "paralyzing_gaze"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_1",
+        "itemId": "energy_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_2",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, energy_gland, petrifying_eye. Premade monster/NPC: Cursed Shield."
+  },
+  {
+    "premadeId": "demon_prince",
+    "name": "Demon Prince",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 7,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 18,
+      "magicalDefence": 23
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fire_breath",
+      "energy_drain",
+      "paralyzing_gaze",
+      "mind_control"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_3",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_4",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_6",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_7",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Demon Prince."
+  },
+  {
+    "premadeId": "demon_weapon",
+    "name": "Demon Weapon",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 7,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 18,
+      "magicalDefence": 23
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fire_breath",
+      "energy_drain",
+      "paralyzing_gaze",
+      "mind_control"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_3",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_4",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_6",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_7",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Demon Weapon."
+  },
+  {
+    "premadeId": "desert_wyvern",
+    "name": "Desert Wyvern",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 3,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 17
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "fire_breath",
+      "monster_flight",
+      "tail_swipe"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_2",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flexible_tail_section_3",
+        "itemId": "flexible_tail_section",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, flame_gland, flexible_tail_section. Premade monster/NPC: Desert Wyvern."
+  },
+  {
+    "premadeId": "devil_lord",
+    "name": "Devil Lord",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 7,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 18,
+      "magicalDefence": 23
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fire_breath",
+      "energy_drain",
+      "paralyzing_gaze",
+      "mind_control"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_3",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_4",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_6",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_7",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Devil Lord."
+  },
+  {
+    "premadeId": "dire_rat",
+    "name": "Dire Rat",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Dire Rat."
+  },
+  {
+    "premadeId": "doppelganger",
+    "name": "Doppelganger",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "paralyzing_gaze",
+      "mind_control",
+      "energy_drain",
+      "teleport"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_2",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      },
+      {
+        "uid": "premade_dimensional_node_3",
+        "itemId": "dimensional_node",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, dimensional_node. Premade monster/NPC: Doppelganger."
+  },
+  {
+    "premadeId": "dragon_lord",
+    "name": "Dragon Lord",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 50,
+      "stamina": 25,
+      "strength": 7,
+      "magicPower": 7,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 23,
+      "magicalDefence": 23
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fire_breath",
+      "monster_flight",
+      "tail_swipe",
+      "spiked_tail",
+      "razor_claws",
+      "rend",
+      "monster_ancient_knowledge"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_3",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_4",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_6",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_tail_spikes_7",
+        "itemId": "tail_spikes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, tail_spikes. Premade monster/NPC: Dragon Lord."
+  },
+  {
+    "premadeId": "duelist",
+    "name": "Duelist",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 15,
+      "strength": 0,
+      "magicPower": -3,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "sword_basics",
+      "sword_stance",
+      "parry",
+      "quick_strike",
+      "lunge_attack",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_steel_sword_1",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Duelist."
+  },
+  {
+    "premadeId": "earth_golem",
+    "name": "Earth Golem",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "metal_skin",
+      "monster_earthquake"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_1",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Earth Golem."
+  },
+  {
+    "premadeId": "electric_eel",
+    "name": "Electric Eel",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack",
+      "lightning_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_storm_chamber_2",
+        "itemId": "storm_chamber",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, storm_chamber. Premade monster/NPC: Electric Eel."
+  },
+  {
+    "premadeId": "elementalist",
+    "name": "Elementalist",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 17,
+      "strength": -3,
+      "magicPower": 3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "warm_hands",
+      "fire_shield",
+      "fire_spark",
+      "ignite",
+      "fire_attunement",
+      "fireball",
+      "ice_shard",
+      "ice_spear",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_stamina_potion_0",
+        "itemId": "stamina_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_elemental_staff_1",
+        "itemId": "elemental_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_elemental_staff_1",
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Elementalist."
+  },
+  {
+    "premadeId": "enchanter",
+    "name": "Enchanter",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 12,
+      "stamina": 14,
+      "strength": -3,
+      "magicPower": 2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "basic_enchanting",
+      "elemental_infusion",
+      "soul_binding",
+      "artifact_creation",
+      "archenchanter",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_mystic_staff_2",
+        "itemId": "mystic_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_3",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_mystic_staff_2",
+      "offhand": null,
+      "armor": "premade_cloth_robes_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Enchanter."
+  },
+  {
+    "premadeId": "engineer",
+    "name": "Engineer",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 14,
+      "strength": 0,
+      "magicPower": -3,
+      "accuracy": 0,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "basic_alchemy",
+      "poison_brewing",
+      "explosive_compounds",
+      "basic_smithing",
+      "weapon_smithing",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_ore_1",
+        "itemId": "iron_ore",
+        "qty": 4
+      },
+      {
+        "uid": "premade_crossbow_2",
+        "itemId": "crossbow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_3",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_crossbow_2",
+      "offhand": null,
+      "armor": "premade_leather_armor_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Engineer."
+  },
+  {
+    "premadeId": "feral_rat",
+    "name": "Feral Rat",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Feral Rat."
+  },
+  {
+    "premadeId": "fire_fish",
+    "name": "Fire Fish",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack",
+      "fire_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_2",
+        "itemId": "flame_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flame_gland. Premade monster/NPC: Fire Fish."
+  },
+  {
+    "premadeId": "fire_giant",
+    "name": "Fire Giant",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 42,
+      "stamina": 22,
+      "strength": 5,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 20,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "monster_charge_attack",
+      "trample",
+      "gore",
+      "fire_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_1",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_2",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_4",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_5",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_6",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_7",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_8",
+        "itemId": "energy_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_9",
+        "itemId": "flame_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland, flame_gland. Premade monster/NPC: Fire Giant."
+  },
+  {
+    "premadeId": "fire_golem",
+    "name": "Fire Golem",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "metal_skin",
+      "monster_earthquake"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_1",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Fire Golem."
+  },
+  {
+    "premadeId": "fire_octopus",
+    "name": "Fire Octopus",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack",
+      "tail_swipe"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flexible_tail_section_2",
+        "itemId": "flexible_tail_section",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Fire Octopus."
+  },
+  {
+    "premadeId": "fire_serpent",
+    "name": "Fire Serpent",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "bite_attack",
+      "claws",
+      "razor_claws",
+      "venomous_claws",
+      "poison_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_venom_sacs_3",
+        "itemId": "venom_sacs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_toxic_lung_tissue_4",
+        "itemId": "toxic_lung_tissue",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Fire Serpent."
+  },
+  {
+    "premadeId": "fire_sprite",
+    "name": "Fire Sprite",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 11
+    },
+    "skills": [
+      "tough_skin",
+      "magical_resistance",
+      "teleport",
+      "fire_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_wooden_staff_0",
+        "itemId": "wooden_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_2",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_dimensional_node_4",
+        "itemId": "dimensional_node",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_5",
+        "itemId": "flame_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_wooden_staff_0",
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, flame_gland. Premade monster/NPC: Fire Sprite."
+  },
+  {
+    "premadeId": "forest_wyvern",
+    "name": "Forest Wyvern",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 3,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 17
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "poison_breath",
+      "monster_flight",
+      "tail_swipe"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_toxic_lung_tissue_2",
+        "itemId": "toxic_lung_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flexible_tail_section_3",
+        "itemId": "flexible_tail_section",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, toxic_lung_tissue, flexible_tail_section. Premade monster/NPC: Forest Wyvern."
+  },
+  {
+    "premadeId": "frost_giant",
+    "name": "Frost Giant",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 42,
+      "stamina": 22,
+      "strength": 5,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 20,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "monster_charge_attack",
+      "trample",
+      "gore",
+      "ice_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_1",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_2",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_4",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_5",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_6",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_7",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_8",
+        "itemId": "energy_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_frost_core_9",
+        "itemId": "frost_core",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland, frost_core. Premade monster/NPC: Frost Giant."
+  },
+  {
+    "premadeId": "gambler",
+    "name": "Gambler",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 24800,
+    "stats": {
+      "hp": 12,
+      "stamina": 13,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "dagger_basics",
+      "poison_blade",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_wine_0",
+        "itemId": "wine",
+        "qty": 3
+      },
+      {
+        "uid": "premade_iron_dagger_1",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_1",
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Gambler."
+  },
+  {
+    "premadeId": "giant_octopus",
+    "name": "Giant Octopus",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 18,
+      "stamina": 13,
+      "strength": -1,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack",
+      "tail_swipe"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flexible_tail_section_3",
+        "itemId": "flexible_tail_section",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Giant Octopus."
+  },
+  {
+    "premadeId": "giant_piranha",
+    "name": "Giant Piranha",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 18,
+      "stamina": 13,
+      "strength": -1,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Giant Piranha."
+  },
+  {
+    "premadeId": "giant_rat",
+    "name": "Giant Rat",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 18,
+      "stamina": 13,
+      "strength": -1,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 11,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Giant Rat."
+  },
+  {
+    "premadeId": "giant_slime",
+    "name": "Giant Slime",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 18,
+      "stamina": 13,
+      "strength": -1,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "acid_spit"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_acid_bladder_2",
+        "itemId": "acid_bladder",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Giant Slime."
+  },
+  {
+    "premadeId": "gladiator",
+    "name": "Gladiator",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 18,
+      "stamina": 16,
+      "strength": 1,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 3,
+      "physicalDefence": 11,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "sword_basics",
+      "quick_strike",
+      "sweeping_slash",
+      "lunge_attack",
+      "blade_dance",
+      "whirlwind",
+      "sword_stance",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_steel_sword_2",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_3",
+        "itemId": "chain_mail",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_2",
+      "offhand": null,
+      "armor": "premade_chain_mail_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Gladiator."
+  },
+  {
+    "premadeId": "goblin_berserker",
+    "name": "Goblin Berserker",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 14,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "human_determination",
+      "sword_basics",
+      "quick_strike"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Goblin Berserker."
+  },
+  {
+    "premadeId": "goblin_chief",
+    "name": "Goblin Chief",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 34,
+      "stamina": 22,
+      "strength": 1,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 16,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "razor_claws",
+      "monster_charge_attack",
+      "monster_berserker_rage",
+      "pounce"
+    ],
+    "activeToggles": [
+      "monster_berserker_rage"
+    ],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_1",
+        "itemId": "chain_mail",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_2",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_3",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_4",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_5",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_6",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_7",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_8",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_9",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": "premade_chain_mail_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Goblin Chief."
+  },
+  {
+    "premadeId": "goblin_scout",
+    "name": "Goblin Scout",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 14,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "human_determination",
+      "sword_basics",
+      "quick_strike"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Goblin Scout."
+  },
+  {
+    "premadeId": "goblin_shaman",
+    "name": "Goblin Shaman",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 3,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 17
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "web_shot",
+      "paralyzing_gaze",
+      "mind_control",
+      "claws"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_mystic_staff_0",
+        "itemId": "mystic_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_stamina_potion_2",
+        "itemId": "stamina_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_3",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_4",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_5",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_6",
+        "itemId": "sharp_claws",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_mystic_staff_0",
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, sharp_claws. Premade monster/NPC: Goblin Shaman."
+  },
+  {
+    "premadeId": "goblin_thief",
+    "name": "Goblin Thief",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 14,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "human_determination",
+      "sword_basics",
+      "quick_strike"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Goblin Thief."
+  },
+  {
+    "premadeId": "goblin_warrior",
+    "name": "Goblin Warrior",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 160,
+    "gil": 1680,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_1",
+        "itemId": "leather_armor",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_3",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_4",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_5",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": "premade_leather_armor_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Goblin Warrior."
+  },
+  {
+    "premadeId": "golden_fish",
+    "name": "Golden Fish",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Golden Fish."
+  },
+  {
+    "premadeId": "greater_devil",
+    "name": "Greater Devil",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 34,
+      "stamina": 22,
+      "strength": 1,
+      "magicPower": 5,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 16,
+      "magicalDefence": 20
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fire_breath",
+      "energy_drain",
+      "paralyzing_gaze",
+      "mind_control"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_1",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_4",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_5",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_6",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_7",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_8",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Greater Devil."
+  },
+  {
+    "premadeId": "green_slime",
+    "name": "Green Slime",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "acid_spit"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_acid_bladder_1",
+        "itemId": "acid_bladder",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Green Slime."
+  },
+  {
+    "premadeId": "haunted_bow",
+    "name": "Haunted Bow",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "metal_skin",
+      "monster_charge_attack",
+      "claws",
+      "razor_claws",
+      "energy_drain",
+      "paralyzing_gaze"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_crossbow_0",
+        "itemId": "crossbow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_1",
+        "itemId": "leather_armor",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_2",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_4",
+        "itemId": "energy_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_5",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_6",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_crossbow_0",
+      "offhand": null,
+      "armor": "premade_leather_armor_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, energy_gland, razor_talons, petrifying_eye. Premade monster/NPC: Haunted Bow."
+  },
+  {
+    "premadeId": "healing_angel",
+    "name": "Healing Angel",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -1,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 11
+    },
+    "skills": [
+      "tough_skin",
+      "magical_resistance",
+      "fear_aura",
+      "damage_reduction",
+      "regeneration",
+      "spell_turning"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_terror_essence_2",
+        "itemId": "terror_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, terror_essence, regenerative_tissue. Premade monster/NPC: Healing Angel."
+  },
+  {
+    "premadeId": "hell_knight",
+    "name": "Hell Knight",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 34,
+      "stamina": 22,
+      "strength": 1,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 16,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "razor_claws",
+      "monster_charge_attack",
+      "monster_berserker_rage",
+      "pounce"
+    ],
+    "activeToggles": [
+      "monster_berserker_rage"
+    ],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_1",
+        "itemId": "chain_mail",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_2",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_3",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_4",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_5",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_6",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_7",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_8",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_9",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": "premade_chain_mail_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Hell Knight."
+  },
+  {
+    "premadeId": "heretic",
+    "name": "Heretic",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 15,
+      "strength": -3,
+      "magicPower": 2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "darkvision",
+      "fear",
+      "life_drain",
+      "shadow_bolt",
+      "darkness",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_wooden_staff_1",
+        "itemId": "wooden_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_wooden_staff_1",
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Heretic."
+  },
+  {
+    "premadeId": "hill_giant",
+    "name": "Hill Giant",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 42,
+      "stamina": 22,
+      "strength": 5,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 20,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "monster_charge_attack",
+      "trample",
+      "gore",
+      "monster_earthquake"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_1",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_2",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_4",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_5",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_6",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_7",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_8",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Hill Giant."
+  },
+  {
+    "premadeId": "ice_fish",
+    "name": "Ice Fish",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack",
+      "ice_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_frost_core_2",
+        "itemId": "frost_core",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, frost_core. Premade monster/NPC: Ice Fish."
+  },
+  {
+    "premadeId": "ice_golem",
+    "name": "Ice Golem",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "metal_skin",
+      "monster_earthquake"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_1",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Ice Golem."
+  },
+  {
+    "premadeId": "ice_octopus",
+    "name": "Ice Octopus",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack",
+      "tail_swipe"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flexible_tail_section_2",
+        "itemId": "flexible_tail_section",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Ice Octopus."
+  },
+  {
+    "premadeId": "ice_serpent",
+    "name": "Ice Serpent",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "bite_attack",
+      "claws",
+      "razor_claws",
+      "venomous_claws",
+      "poison_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_venom_sacs_3",
+        "itemId": "venom_sacs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_toxic_lung_tissue_4",
+        "itemId": "toxic_lung_tissue",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Ice Serpent."
+  },
+  {
+    "premadeId": "ice_sprite",
+    "name": "Ice Sprite",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 11
+    },
+    "skills": [
+      "tough_skin",
+      "magical_resistance",
+      "teleport",
+      "ice_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_wooden_staff_0",
+        "itemId": "wooden_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_2",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_dimensional_node_4",
+        "itemId": "dimensional_node",
+        "qty": 1
+      },
+      {
+        "uid": "premade_frost_core_5",
+        "itemId": "frost_core",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_wooden_staff_0",
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, frost_core. Premade monster/NPC: Ice Sprite."
+  },
+  {
+    "premadeId": "inquisitor",
+    "name": "Inquisitor",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 16,
+      "stamina": 15,
+      "strength": -3,
+      "magicPower": 1,
+      "accuracy": 0,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "light_ray",
+      "healing_light",
+      "illuminate",
+      "purify",
+      "holy_weapon",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_steel_sword_1",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_2",
+        "itemId": "chain_mail",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_1",
+      "offhand": null,
+      "armor": "premade_chain_mail_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Inquisitor."
+  },
+  {
+    "premadeId": "kraken",
+    "name": "Kraken",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 50,
+      "stamina": 25,
+      "strength": 7,
+      "magicPower": 2,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 23,
+      "magicalDefence": 18
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "tail_swipe",
+      "spiked_tail",
+      "paralyzing_gaze",
+      "mind_control",
+      "energy_drain",
+      "monster_earthquake"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_3",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_4",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_tail_spikes_6",
+        "itemId": "tail_spikes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_7",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, tail_spikes, petrifying_eye. Premade monster/NPC: Kraken."
+  },
+  {
+    "premadeId": "lesser_devil",
+    "name": "Lesser Devil",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -1,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 11
+    },
+    "skills": [
+      "tough_skin",
+      "fire_breath",
+      "energy_drain",
+      "paralyzing_gaze"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_1",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_2",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, flame_gland, petrifying_eye. Premade monster/NPC: Lesser Devil."
+  },
+  {
+    "premadeId": "lich",
+    "name": "Lich",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 7,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 18,
+      "magicalDefence": 23
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "energy_drain",
+      "paralyzing_gaze",
+      "mind_control",
+      "spell_turning"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_void_staff_0",
+        "itemId": "void_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_stamina_potion_2",
+        "itemId": "stamina_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_3",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_4",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_5",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_6",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_7",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_8",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_9",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_void_staff_0",
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, petrifying_eye. Premade monster/NPC: Lich."
+  },
+  {
+    "premadeId": "light_angel",
+    "name": "Light Angel",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -1,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 11
+    },
+    "skills": [
+      "tough_skin",
+      "magical_resistance",
+      "fear_aura",
+      "damage_reduction",
+      "regeneration",
+      "spell_turning"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_terror_essence_2",
+        "itemId": "terror_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, terror_essence, regenerative_tissue. Premade monster/NPC: Light Angel."
+  },
+  {
+    "premadeId": "light_sprite",
+    "name": "Light Sprite",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 11
+    },
+    "skills": [
+      "tough_skin",
+      "magical_resistance",
+      "teleport",
+      "fear_aura"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_wooden_staff_0",
+        "itemId": "wooden_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_2",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_dimensional_node_4",
+        "itemId": "dimensional_node",
+        "qty": 1
+      },
+      {
+        "uid": "premade_terror_essence_5",
+        "itemId": "terror_essence",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_wooden_staff_0",
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, terror_essence. Premade monster/NPC: Light Sprite."
+  },
+  {
+    "premadeId": "living_staff",
+    "name": "Living Staff",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "monster_charge_attack",
+      "energy_drain"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_wooden_staff_0",
+        "itemId": "wooden_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_2",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_3",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_wooden_staff_0",
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, energy_gland. Premade monster/NPC: Living Staff."
+  },
+  {
+    "premadeId": "medic",
+    "name": "Medic",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 15,
+      "strength": -3,
+      "magicPower": 0,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "light_ray",
+      "healing_light",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 8
+      },
+      {
+        "uid": "premade_herbs_1",
+        "itemId": "herbs",
+        "qty": 10
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Medic."
+  },
+  {
+    "premadeId": "mercenary",
+    "name": "Mercenary",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 17,
+      "stamina": 15,
+      "strength": 0,
+      "magicPower": -3,
+      "accuracy": -1,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "sword_basics",
+      "sword_stance",
+      "parry",
+      "quick_strike",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_2",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_3",
+        "itemId": "chain_mail",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_2",
+      "offhand": null,
+      "armor": "premade_chain_mail_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Mercenary."
+  },
+  {
+    "premadeId": "mind_flayer",
+    "name": "Mind Flayer",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 7,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 18,
+      "magicalDefence": 23
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "paralyzing_gaze",
+      "mind_control",
+      "energy_drain",
+      "teleport"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_void_staff_0",
+        "itemId": "void_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_2",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_4",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_5",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_6",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_7",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_8",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      },
+      {
+        "uid": "premade_dimensional_node_9",
+        "itemId": "dimensional_node",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_void_staff_0",
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, petrifying_eye, dimensional_node. Premade monster/NPC: Mind Flayer."
+  },
+  {
+    "premadeId": "monk",
+    "name": "Monk",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 15,
+      "stamina": 18,
+      "strength": 0,
+      "magicPower": -3,
+      "accuracy": 0,
+      "speed": 5,
+      "physicalDefence": 9,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "hammer_basics",
+      "heavy_impact",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_stone_hammer_1",
+        "itemId": "stone_hammer",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_stone_hammer_1",
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Monk."
+  },
+  {
+    "premadeId": "necromancer",
+    "name": "Necromancer",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 16,
+      "strength": -3,
+      "magicPower": 3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "darkvision",
+      "fear",
+      "life_drain",
+      "shadow_bolt",
+      "shadow_step",
+      "darkness",
+      "shadow_duplicate",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_void_staff_2",
+        "itemId": "void_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_3",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_void_staff_2",
+      "offhand": null,
+      "armor": "premade_cloth_robes_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Necromancer."
+  },
+  {
+    "premadeId": "ninja",
+    "name": "Ninja",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -3,
+      "accuracy": 1,
+      "speed": 6,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "shadow_bolt",
+      "shadow_step",
+      "dagger_basics",
+      "dual_wield",
+      "flurry",
+      "poison_blade",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_stamina_potion_0",
+        "itemId": "stamina_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_bronze_dagger_1",
+        "itemId": "bronze_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_iron_dagger_2",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_studded_leather_3",
+        "itemId": "studded_leather",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_2",
+      "offhand": "premade_bronze_dagger_1",
+      "armor": "premade_studded_leather_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Ninja."
+  },
+  {
+    "premadeId": "orc_brute",
+    "name": "Orc Brute",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 160,
+    "gil": 1680,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_1",
+        "itemId": "leather_armor",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_3",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_4",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_5",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": "premade_leather_armor_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Orc Brute."
+  },
+  {
+    "premadeId": "orc_chief",
+    "name": "Orc Chief",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 34,
+      "stamina": 22,
+      "strength": 1,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 16,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "razor_claws",
+      "monster_charge_attack",
+      "monster_berserker_rage",
+      "pounce"
+    ],
+    "activeToggles": [
+      "monster_berserker_rage"
+    ],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_1",
+        "itemId": "chain_mail",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_2",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_3",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_4",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_5",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_6",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_7",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_8",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_9",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": "premade_chain_mail_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Orc Chief."
+  },
+  {
+    "premadeId": "orc_raider",
+    "name": "Orc Raider",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 160,
+    "gil": 1680,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_1",
+        "itemId": "leather_armor",
+        "qty": 1
+      },
+      {
+        "uid": "premade_health_potion_2",
+        "itemId": "health_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_stamina_potion_3",
+        "itemId": "stamina_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_4",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_5",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_6",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_7",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": "premade_leather_armor_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Orc Raider."
+  },
+  {
+    "premadeId": "orc_scout",
+    "name": "Orc Scout",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 14,
+      "stamina": 14,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "human_determination",
+      "sword_basics",
+      "quick_strike"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Orc Scout."
+  },
+  {
+    "premadeId": "orc_shaman",
+    "name": "Orc Shaman",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 3,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 17
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "web_shot",
+      "paralyzing_gaze",
+      "mind_control",
+      "claws"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_mystic_staff_0",
+        "itemId": "mystic_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      },
+      {
+        "uid": "premade_stamina_potion_2",
+        "itemId": "stamina_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_3",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_4",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_5",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_6",
+        "itemId": "sharp_claws",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_mystic_staff_0",
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, sharp_claws. Premade monster/NPC: Orc Shaman."
+  },
+  {
+    "premadeId": "orc_warlord",
+    "name": "Orc Warlord",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 2,
+      "accuracy": 2,
+      "speed": 4,
+      "physicalDefence": 18,
+      "magicalDefence": 18
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "razor_claws",
+      "monster_charge_attack",
+      "monster_berserker_rage",
+      "pounce"
+    ],
+    "activeToggles": [
+      "monster_berserker_rage"
+    ],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_1",
+        "itemId": "chain_mail",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_2",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_4",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_5",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_6",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_7",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_8",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": "premade_chain_mail_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Orc Warlord."
+  },
+  {
+    "premadeId": "paladin",
+    "name": "Paladin",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 18,
+      "stamina": 16,
+      "strength": 0,
+      "magicPower": 1,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 12,
+      "magicalDefence": 11
+    },
+    "skills": [
+      "light_ray",
+      "healing_light",
+      "illuminate",
+      "purify",
+      "holy_weapon",
+      "sanctuary",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 4
+      },
+      {
+        "uid": "premade_steel_sword_1",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_2",
+        "itemId": "chain_mail",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_1",
+      "offhand": null,
+      "armor": "premade_chain_mail_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Paladin."
+  },
+  {
+    "premadeId": "pedestrian_dragonborn_darkness",
+    "name": "Pedestrian Dragonborn (Darkness)",
+    "race": "dragonborn",
+    "category": "pedestrian",
+    "elementalAffinity": "darkness",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 11,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 9,
+      "magicalDefence": 9
+    },
+    "skills": [
+      "breath_weapon",
+      "draconic_presence",
+      "shadow_bolt",
+      "darkness"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Pedestrian dragonborn with darkness affinity."
+  },
+  {
+    "premadeId": "pedestrian_dragonborn_earth",
+    "name": "Pedestrian Dragonborn (Earth)",
+    "race": "dragonborn",
+    "category": "pedestrian",
+    "elementalAffinity": "earth",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 11,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 9,
+      "magicalDefence": 9
+    },
+    "skills": [
+      "breath_weapon",
+      "draconic_presence",
+      "stone_throw",
+      "earth_sense",
+      "earth_spike"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Pedestrian dragonborn with earth affinity."
+  },
+  {
+    "premadeId": "pedestrian_dragonborn_fire",
+    "name": "Pedestrian Dragonborn (Fire)",
+    "race": "dragonborn",
+    "category": "pedestrian",
+    "elementalAffinity": "fire",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 11,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 9,
+      "magicalDefence": 9
+    },
+    "skills": [
+      "breath_weapon",
+      "draconic_presence",
+      "fire_spark",
+      "fireball"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Pedestrian dragonborn with fire affinity."
+  },
+  {
+    "premadeId": "pedestrian_dragonborn_ice",
+    "name": "Pedestrian Dragonborn (Ice)",
+    "race": "dragonborn",
+    "category": "pedestrian",
+    "elementalAffinity": "ice",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 11,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 9,
+      "magicalDefence": 9
+    },
+    "skills": [
+      "breath_weapon",
+      "draconic_presence",
+      "ice_shard",
+      "ice_spear"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Pedestrian dragonborn with ice affinity."
+  },
+  {
+    "premadeId": "pedestrian_dragonborn_light",
+    "name": "Pedestrian Dragonborn (Light)",
+    "race": "dragonborn",
+    "category": "pedestrian",
+    "elementalAffinity": "light",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 11,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 9,
+      "magicalDefence": 9
+    },
+    "skills": [
+      "breath_weapon",
+      "draconic_presence",
+      "light_ray",
+      "healing_light"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Pedestrian dragonborn with light affinity."
+  },
+  {
+    "premadeId": "pedestrian_dragonborn_thunder",
+    "name": "Pedestrian Dragonborn (Thunder)",
+    "race": "dragonborn",
+    "category": "pedestrian",
+    "elementalAffinity": "thunder",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 11,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 9,
+      "magicalDefence": 9
+    },
+    "skills": [
+      "breath_weapon",
+      "draconic_presence",
+      "spark",
+      "lightning_bolt",
+      "gust"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Pedestrian dragonborn with thunder affinity."
+  },
+  {
+    "premadeId": "pedestrian_drow",
+    "name": "Pedestrian Drow",
+    "race": "drow",
+    "category": "pedestrian",
+    "elementalAffinity": "",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 10,
+      "stamina": 10,
+      "strength": -3,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "shadow_affinity",
+      "drow_poison",
+      "shadow_bolt",
+      "darkvision"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_dagger_1",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade pedestrian drow."
+  },
+  {
+    "premadeId": "pedestrian_dwarf",
+    "name": "Pedestrian Dwarf",
+    "race": "dwarf",
+    "category": "pedestrian",
+    "elementalAffinity": "",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 12,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "dwarven_toughness",
+      "forge_blessing",
+      "sword_basics",
+      "sword_stance",
+      "quick_strike"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade pedestrian dwarf."
+  },
+  {
+    "premadeId": "pedestrian_elf",
+    "name": "Pedestrian Elf",
+    "race": "elf",
+    "category": "pedestrian",
+    "elementalAffinity": "",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 10,
+      "stamina": 11,
+      "strength": -3,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "elven_accuracy",
+      "forest_step",
+      "ranged_basics",
+      "steady_aim",
+      "aimed_shot"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_hunting_bow_1",
+        "itemId": "hunting_bow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_hunting_bow_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade pedestrian elf."
+  },
+  {
+    "premadeId": "pedestrian_halfling",
+    "name": "Pedestrian Halfling",
+    "race": "halfling",
+    "category": "pedestrian",
+    "elementalAffinity": "",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 11,
+      "stamina": 10,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": -2,
+      "speed": 4,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "lucky_dodge",
+      "sneaky_strike",
+      "dagger_basics",
+      "poison_blade"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_dagger_1",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade pedestrian halfling."
+  },
+  {
+    "premadeId": "pedestrian_human",
+    "name": "Pedestrian Human",
+    "race": "human",
+    "category": "pedestrian",
+    "elementalAffinity": "",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 11,
+      "stamina": 11,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "human_determination",
+      "sword_basics",
+      "quick_strike"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade pedestrian human."
+  },
+  {
+    "premadeId": "pedestrian_tiefling",
+    "name": "Pedestrian Tiefling",
+    "race": "tiefling",
+    "category": "pedestrian",
+    "elementalAffinity": "",
+    "lumens": 180,
+    "gil": 7200,
+    "stats": {
+      "hp": 10,
+      "stamina": 10,
+      "strength": -3,
+      "magicPower": -1,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 9
+    },
+    "skills": [
+      "hellish_rebuke",
+      "infernal_constitution",
+      "shadow_bolt",
+      "darkvision"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_wooden_staff_1",
+        "itemId": "wooden_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_wooden_staff_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade pedestrian tiefling."
+  },
+  {
+    "premadeId": "phantom",
+    "name": "Phantom",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 1,
+      "speed": 5,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "energy_drain",
+      "paralyzing_gaze",
+      "darkvision",
+      "fear",
+      "life_drain"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_2",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Phantom."
+  },
+  {
+    "premadeId": "pirate",
+    "name": "Pirate",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 21300,
+    "stats": {
+      "hp": 15,
+      "stamina": 14,
+      "strength": 0,
+      "magicPower": -3,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "ranged_basics",
+      "power_shot",
+      "sword_basics",
+      "quick_strike",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_wine_1",
+        "itemId": "wine",
+        "qty": 3
+      },
+      {
+        "uid": "premade_iron_sword_2",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_training_bow_3",
+        "itemId": "training_bow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_4",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_training_bow_3",
+      "offhand": null,
+      "armor": "premade_leather_armor_4",
+      "accessory": null
+    },
+    "notes": "Cutlass in inventory — swap weapons for melee vs Power Shot. Premade NPC archetype: Pirate."
+  },
+  {
+    "premadeId": "plague_rat",
+    "name": "Plague Rat",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "bite_attack",
+      "claws",
+      "razor_claws",
+      "venomous_claws",
+      "immunity_poison"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_venom_sacs_2",
+        "itemId": "venom_sacs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, venom_sacs. Premade monster/NPC: Plague Rat."
+  },
+  {
+    "premadeId": "poisoner",
+    "name": "Poisoner",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 12,
+      "stamina": 14,
+      "strength": -3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "basic_alchemy",
+      "poison_brewing",
+      "explosive_compounds",
+      "dagger_basics",
+      "poison_blade",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_herbs_1",
+        "itemId": "herbs",
+        "qty": 3
+      },
+      {
+        "uid": "premade_iron_dagger_2",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_3",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_2",
+      "offhand": null,
+      "armor": "premade_leather_armor_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Poisoner."
+  },
+  {
+    "premadeId": "politician",
+    "name": "Politician",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 74700,
+    "stats": {
+      "hp": 12,
+      "stamina": 12,
+      "strength": -3,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "human_determination",
+      "illuminate",
+      "light_ray"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_wine_0",
+        "itemId": "wine",
+        "qty": 4
+      },
+      {
+        "uid": "premade_cloth_robes_1",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": "premade_cloth_robes_1",
+      "accessory": null
+    },
+    "notes": "Fine clothes, sealed letters, and more gold than combat sense. Premade NPC archetype: Politician."
+  },
+  {
+    "premadeId": "poltergeist",
+    "name": "Poltergeist",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "energy_drain",
+      "paralyzing_gaze",
+      "darkvision",
+      "fear",
+      "life_drain"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_2",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Poltergeist."
+  },
+  {
+    "premadeId": "possessed_armor",
+    "name": "Possessed Armor",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "metal_skin",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_2",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, energy_gland. Premade monster/NPC: Possessed Armor."
+  },
+  {
+    "premadeId": "prismatic_dragon",
+    "name": "Prismatic Dragon",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 42,
+      "stamina": 22,
+      "strength": 5,
+      "magicPower": 5,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 20,
+      "magicalDefence": 20
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "fire_breath",
+      "ice_breath",
+      "lightning_breath",
+      "monster_flight",
+      "tail_swipe",
+      "spiked_tail",
+      "razor_claws",
+      "rend"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_1",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_4",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_5",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_6",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flame_gland_7",
+        "itemId": "flame_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_frost_core_8",
+        "itemId": "frost_core",
+        "qty": 1
+      },
+      {
+        "uid": "premade_storm_chamber_9",
+        "itemId": "storm_chamber",
+        "qty": 1
+      },
+      {
+        "uid": "premade_tail_spikes_10",
+        "itemId": "tail_spikes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, frost_core, storm_chamber, tail_spikes. Premade monster/NPC: Prismatic Dragon."
+  },
+  {
+    "premadeId": "pyromancer",
+    "name": "Pyromancer",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 17,
+      "strength": -3,
+      "magicPower": 3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "warm_hands",
+      "fire_shield",
+      "fire_spark",
+      "ignite",
+      "fire_attunement",
+      "fireball",
+      "fire_wall",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_stamina_potion_0",
+        "itemId": "stamina_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_crystal_staff_1",
+        "itemId": "crystal_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_crystal_staff_1",
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Pyromancer."
+  },
+  {
+    "premadeId": "rat_king",
+    "name": "Rat King",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 280,
+    "gil": 11700,
+    "stats": {
+      "hp": 40,
+      "stamina": 25,
+      "strength": 2,
+      "magicPower": 2,
+      "accuracy": 3,
+      "speed": 7,
+      "physicalDefence": 18,
+      "magicalDefence": 18
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "metal_skin",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "rapid_healing",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "crushing_bite"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_metallic_fragments_0",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_phoenix_cells_2",
+        "itemId": "phoenix_cells",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_3",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_crusher_molars_4",
+        "itemId": "crusher_molars",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_5",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, crusher_molars, combat_coordination_gland. Premade monster/NPC: Rat King."
+  },
+  {
+    "premadeId": "red_slime",
+    "name": "Red Slime",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 120,
+    "gil": 840,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "acid_spit"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_acid_bladder_1",
+        "itemId": "acid_bladder",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Red Slime."
+  },
+  {
+    "premadeId": "revenant",
+    "name": "Revenant",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "energy_drain",
+      "paralyzing_gaze"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_petrifying_eye_2",
+        "itemId": "petrifying_eye",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Revenant."
+  },
+  {
+    "premadeId": "scout",
+    "name": "Scout",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 15,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": 1,
+      "speed": 5,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "steady_aim",
+      "covering_fire",
+      "ranged_basics",
+      "grappling_shot",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_hunting_bow_2",
+        "itemId": "hunting_bow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_3",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_hunting_bow_2",
+      "offhand": null,
+      "armor": "premade_leather_armor_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Scout."
+  },
+  {
+    "premadeId": "sea_serpent",
+    "name": "Sea Serpent",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "bite_attack",
+      "claws",
+      "razor_claws",
+      "venomous_claws",
+      "poison_breath"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_venom_sacs_3",
+        "itemId": "venom_sacs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_toxic_lung_tissue_4",
+        "itemId": "toxic_lung_tissue",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Sea Serpent."
+  },
+  {
+    "premadeId": "sergeant",
+    "name": "Sergeant",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 17,
+      "stamina": 15,
+      "strength": 0,
+      "magicPower": -3,
+      "accuracy": 0,
+      "speed": 2,
+      "physicalDefence": 12,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "sword_basics",
+      "sword_stance",
+      "parry",
+      "quick_strike",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_steel_sword_1",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_2",
+        "itemId": "chain_mail",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_1",
+      "offhand": null,
+      "armor": "premade_chain_mail_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Sergeant."
+  },
+  {
+    "premadeId": "shadow_dragon",
+    "name": "Shadow Dragon",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 240,
+    "gil": 8360,
+    "stats": {
+      "hp": 42,
+      "stamina": 22,
+      "strength": 5,
+      "magicPower": 5,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 20,
+      "magicalDefence": 20
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "poison_breath",
+      "energy_drain",
+      "monster_flight",
+      "tail_swipe",
+      "spiked_tail",
+      "razor_claws",
+      "rend"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_1",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_4",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_5",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_6",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_toxic_lung_tissue_7",
+        "itemId": "toxic_lung_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_tail_spikes_8",
+        "itemId": "tail_spikes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, toxic_lung_tissue, tail_spikes. Premade monster/NPC: Shadow Dragon."
+  },
+  {
+    "premadeId": "slave_trader",
+    "name": "Slave Trader",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 160,
+    "gil": 1680,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_2",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_3",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Slave Trader."
+  },
+  {
+    "premadeId": "smuggler",
+    "name": "Smuggler",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 31400,
+    "stats": {
+      "hp": 13,
+      "stamina": 14,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "dagger_basics",
+      "shadow_bolt",
+      "shadow_step",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_wine_1",
+        "itemId": "wine",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_dagger_2",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_studded_leather_3",
+        "itemId": "studded_leather",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_2",
+      "offhand": null,
+      "armor": "premade_studded_leather_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Smuggler."
+  },
+  {
+    "premadeId": "spearman",
+    "name": "Spearman",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 16,
+      "stamina": 15,
+      "strength": 0,
+      "magicPower": -3,
+      "accuracy": -1,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "polearm_basics",
+      "thrust_attack",
+      "polearm_charge_attack",
+      "reach_advantage",
+      "polearm_defensive_stance",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_spear_1",
+        "itemId": "spear",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_2",
+        "itemId": "chain_mail",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_spear_1",
+      "offhand": null,
+      "armor": "premade_chain_mail_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Spearman."
+  },
+  {
+    "premadeId": "spy",
+    "name": "Spy",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 12,
+      "stamina": 15,
+      "strength": -3,
+      "magicPower": -1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "shadow_bolt",
+      "shadow_step",
+      "darkness",
+      "dagger_basics",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_stamina_potion_0",
+        "itemId": "stamina_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_dagger_1",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Spy."
+  },
+  {
+    "premadeId": "thief",
+    "name": "Thief",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 19250,
+    "stats": {
+      "hp": 12,
+      "stamina": 14,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": 0,
+      "speed": 5,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "dagger_basics",
+      "poison_blade",
+      "dual_wield",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 1
+      },
+      {
+        "uid": "premade_lockpick_set_1",
+        "itemId": "lockpick_set",
+        "qty": 1
+      },
+      {
+        "uid": "premade_iron_dagger_2",
+        "itemId": "iron_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_bronze_dagger_3",
+        "itemId": "bronze_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_4",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_dagger_2",
+      "offhand": "premade_bronze_dagger_3",
+      "armor": "premade_leather_armor_4",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Thief."
+  },
+  {
+    "premadeId": "time_mage",
+    "name": "Time Mage",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 12,
+      "stamina": 18,
+      "strength": -3,
+      "magicPower": 2,
+      "accuracy": -1,
+      "speed": 4,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "teleport",
+      "light_ray",
+      "blinding_flash",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_stamina_potion_0",
+        "itemId": "stamina_potion",
+        "qty": 4
+      },
+      {
+        "uid": "premade_arcane_staff_1",
+        "itemId": "arcane_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_arcane_staff_1",
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Hourglass focus and chronomancy wards woven into spell threads. Premade NPC archetype: Time Mage."
+  },
+  {
+    "premadeId": "torturer",
+    "name": "Torturer",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 160,
+    "gil": 1680,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_2",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_3",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Torturer."
+  },
+  {
+    "premadeId": "vampire_hunter",
+    "name": "Vampire Hunter",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 15,
+      "stamina": 15,
+      "strength": -3,
+      "magicPower": 0,
+      "accuracy": 1,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "light_ray",
+      "healing_light",
+      "illuminate",
+      "purify",
+      "holy_weapon",
+      "steady_aim",
+      "aimed_shot",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 4
+      },
+      {
+        "uid": "premade_herbs_1",
+        "itemId": "herbs",
+        "qty": 3
+      },
+      {
+        "uid": "premade_crossbow_2",
+        "itemId": "crossbow",
+        "qty": 1
+      },
+      {
+        "uid": "premade_studded_leather_3",
+        "itemId": "studded_leather",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_crossbow_2",
+      "offhand": null,
+      "armor": "premade_studded_leather_3",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Vampire Hunter."
+  },
+  {
+    "premadeId": "warlock",
+    "name": "Warlock",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 13,
+      "stamina": 16,
+      "strength": -3,
+      "magicPower": 3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "darkvision",
+      "fear",
+      "life_drain",
+      "shadow_bolt",
+      "darkness",
+      "hellish_rebuke",
+      "infernal_constitution",
+      "devils_bargain",
+      "summon_imp",
+      "human_determination"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_stamina_potion_0",
+        "itemId": "stamina_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_void_staff_1",
+        "itemId": "void_staff",
+        "qty": 1
+      },
+      {
+        "uid": "premade_cloth_robes_2",
+        "itemId": "cloth_robes",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_void_staff_1",
+      "offhand": null,
+      "armor": "premade_cloth_robes_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Warlock."
+  },
+  {
+    "premadeId": "warlord_lieutenant",
+    "name": "Warlord Lieutenant",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "claws",
+      "razor_claws",
+      "monster_charge_attack",
+      "monster_berserker_rage",
+      "pounce"
+    ],
+    "activeToggles": [
+      "monster_berserker_rage"
+    ],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_1",
+        "itemId": "leather_armor",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_2",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_3",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_4",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_5",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": "premade_leather_armor_1",
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, razor_talons, energy_gland. Premade monster/NPC: Warlord Lieutenant."
+  },
+  {
+    "premadeId": "water_golem",
+    "name": "Water Golem",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 200,
+    "gil": 5020,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "metal_skin",
+      "monster_earthquake"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_iron_sword_0",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_metallic_fragments_1",
+        "itemId": "metallic_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Water Golem."
+  },
+  {
+    "premadeId": "zealot",
+    "name": "Zealot",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 300,
+    "gil": 15600,
+    "stats": {
+      "hp": 17,
+      "stamina": 15,
+      "strength": 1,
+      "magicPower": 1,
+      "accuracy": -3,
+      "speed": 2,
+      "physicalDefence": 11,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "light_ray",
+      "healing_light",
+      "illuminate",
+      "purify",
+      "holy_weapon",
+      "axe_basics",
+      "cleave",
+      "berserker_rage",
+      "human_determination"
+    ],
+    "activeToggles": [
+      "berserker_rage"
+    ],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 3
+      },
+      {
+        "uid": "premade_battle_axe_1",
+        "itemId": "battle_axe",
+        "qty": 1
+      },
+      {
+        "uid": "premade_chain_mail_2",
+        "itemId": "chain_mail",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_battle_axe_1",
+      "offhand": null,
+      "armor": "premade_chain_mail_2",
+      "accessory": null
+    },
+    "notes": "Premade NPC archetype: Zealot."
+  }
+]

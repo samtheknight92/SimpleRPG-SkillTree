@@ -1,0 +1,2508 @@
+{
+  "burn": {
+    "id": "burn",
+    "name": "Burn",
+    "icon": "🔥",
+    "type": "damageOverTime",
+    "duration": 4,
+    "potency": 1,
+    "desc": "Take 1 fire damage per turn for 4 turns. Strength is reduced by 2 while burning.",
+    "statModifiers": {
+      "strength": -2
+    },
+    "stackable": false,
+    "manual": true
+  },
+  "poison": {
+    "id": "poison",
+    "name": "Poison",
+    "icon": "☠️",
+    "type": "damageOverTime",
+    "duration": 3,
+    "potency": "escalating",
+    "desc": "Escalating toxin damage over 3 turns: 1 damage, then 2, then 3.",
+    "stackable": true,
+    "manual": true
+  },
+  "acid_corrosion": {
+    "id": "acid_corrosion",
+    "name": "Acid Corrosion",
+    "icon": "🧪",
+    "type": "damageOverTime",
+    "duration": 5,
+    "potency": 1,
+    "desc": "Corrosive acid eats through armour: reduce Physical Defence by 1 each turn for 5 turns (stack -1 per turn on the sheet). No direct HP damage unless the GM adds it.",
+    "stackable": true,
+    "statModifiers": {
+      "physicalDefence": -1
+    },
+    "manual": true
+  },
+  "incapacitated": {
+    "id": "incapacitated",
+    "name": "Incapacitated",
+    "icon": "😵",
+    "type": "control",
+    "duration": 2,
+    "potency": 0,
+    "desc": "Cannot take actions. Covers stun, knockout, daze and similar hard-control effects.",
+    "stackable": false,
+    "manual": true
+  },
+  "immobilized": {
+    "id": "immobilized",
+    "name": "Immobilized",
+    "icon": "🧊",
+    "type": "control",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Cannot move, but can still attack/cast if otherwise able. Covers freeze, entangle and paralysis-like roots.",
+    "stackable": false,
+    "manual": true
+  },
+  "mind_controlled": {
+    "id": "mind_controlled",
+    "name": "Mind Controlled",
+    "icon": "🧠",
+    "type": "control",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Mental control variant. Fear forces movement away; charm prevents attacks against the charmer.",
+    "stackable": false,
+    "manual": true
+  },
+  "weakened": {
+    "id": "weakened",
+    "name": "Weakened",
+    "icon": "💔",
+    "type": "statDebuff",
+    "duration": 4,
+    "potency": 2,
+    "desc": "All major stats are reduced by 2 while active. Combines slow, weak and confused style effects.",
+    "statModifiers": {
+      "strength": -2,
+      "speed": -2,
+      "magicPower": -2,
+      "accuracy": -2
+    },
+    "stackable": false,
+    "manual": true
+  },
+  "cursed": {
+    "id": "cursed",
+    "name": "Cursed",
+    "icon": "💀",
+    "type": "statDebuff",
+    "duration": 8,
+    "potency": 1,
+    "desc": "Hexed: -2 Accuracy and -1 Magic Power for 8 turns. Using Stamina abilities also costs 1 extra Stamina while cursed.",
+    "statModifiers": {
+      "accuracy": -2,
+      "magicPower": -1
+    },
+    "stackable": true,
+    "manual": true
+  },
+  "regeneration": {
+    "id": "regeneration",
+    "name": "Regeneration",
+    "icon": "💚",
+    "type": "healOverTime",
+    "duration": 5,
+    "potency": 2,
+    "desc": "Restore 2 HP per turn for 5 turns. Also grants immunity/resistance to poison and disease while active.",
+    "immunities": [
+      "poison"
+    ],
+    "stackable": false,
+    "tickHeal": 2,
+    "manual": true
+  },
+  "hp_regen": {
+    "id": "hp_regen",
+    "name": "HP Regen",
+    "icon": "💚",
+    "type": "healOverTime",
+    "duration": 5,
+    "potency": 1,
+    "desc": "Restore 1 HP at the start of each turn for 5 turns (Process Turn).",
+    "stackable": true,
+    "tickHeal": 1,
+    "manual": true
+  },
+  "stamina_regen": {
+    "id": "stamina_regen",
+    "name": "Stamina Regen",
+    "icon": "🟢",
+    "type": "recovery",
+    "duration": 5,
+    "potency": 1,
+    "desc": "Restore 1 Stamina at the start of each turn for 5 turns (Process Turn).",
+    "stackable": true,
+    "tickStamina": 1,
+    "manual": true
+  },
+  "mana_focus": {
+    "id": "mana_focus",
+    "name": "Mana Focus",
+    "icon": "💙",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Restore 1 Stamina at the start of each turn while a staff or wand is equipped (Mana Focus passive).",
+    "stackable": false,
+    "tickStamina": 1,
+    "manual": true
+  },
+  "enhanced": {
+    "id": "enhanced",
+    "name": "Enhanced",
+    "icon": "💪",
+    "type": "statBuff",
+    "duration": 8,
+    "potency": 2,
+    "desc": "Physical enhancement: Strength +2, Speed +2 and Physical Defence +2 while active.",
+    "statModifiers": {
+      "strength": 2,
+      "speed": 2,
+      "physicalDefence": 2
+    },
+    "stackable": false,
+    "manual": true
+  },
+  "empowered": {
+    "id": "empowered",
+    "name": "Empowered",
+    "icon": "✨",
+    "type": "statBuff",
+    "duration": 6,
+    "potency": 3,
+    "desc": "+3 Magic Power for 6 turns. Magical toggle skills cost 1 less Stamina per turn (minimum 1).",
+    "statModifiers": {
+      "magicPower": 3
+    },
+    "spellCostReduction": 1,
+    "stackable": false,
+    "manual": true
+  },
+  "weapon_enchanted": {
+    "id": "weapon_enchanted",
+    "name": "Weapon Enchanted",
+    "icon": "⚔️",
+    "type": "enhancement",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Weapon attacks deal +1d6 elemental damage (fire, ice, lightning, or radiant — chosen when applied) for 10 turns.",
+    "stackable": false,
+    "manual": true
+  },
+  "protected": {
+    "id": "protected",
+    "name": "Protected",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 6,
+    "potency": 3,
+    "desc": "+3 Physical Defence and +3 Magical Defence for 6 turns. Represents a ward that absorbs incoming blows.",
+    "statModifiers": {
+      "physicalDefence": 3,
+      "magicalDefence": 3
+    },
+    "stackable": false,
+    "manual": true
+  },
+  "spell_warded": {
+    "id": "spell_warded",
+    "name": "Spell Warded",
+    "icon": "🔮",
+    "type": "protection",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+4 Magical Defence for 8 turns. Immune to Charm, Fear, and Weakened from magical sources while active.",
+    "stackable": false,
+    "statModifiers": {
+      "magicalDefence": 4
+    },
+    "immunities": [
+      "charm",
+      "fear",
+      "weakened",
+      "mind_controlled"
+    ],
+    "manual": true
+  },
+  "enhanced_mobility": {
+    "id": "enhanced_mobility",
+    "name": "Enhanced Mobility",
+    "icon": "🦅",
+    "type": "movement",
+    "duration": 10,
+    "potency": 0,
+    "desc": "+2 Speed for 10 turns. Immune to Immobilized while active. Can ignore difficult terrain at normal Speed.",
+    "immunities": [
+      "immobilized"
+    ],
+    "stackable": false,
+    "manual": true
+  },
+  "stealth_mastery": {
+    "id": "stealth_mastery",
+    "name": "Stealth Mastery",
+    "icon": "👻",
+    "type": "utility",
+    "duration": 5,
+    "potency": 0,
+    "desc": "Invisible/hard to target and resistant to mental effects. Perfect sneaky-gremlin mode.",
+    "immunities": [
+      "mind_controlled"
+    ],
+    "stackable": false,
+    "manual": true
+  },
+  "intimidating_aura": {
+    "id": "intimidating_aura",
+    "name": "Intimidating Aura",
+    "icon": "👹",
+    "type": "aura",
+    "duration": 999,
+    "potency": 2,
+    "desc": "Aura (30ft): enemies starting their turn nearby must resist Fear or cannot move toward you willingly.",
+    "stackable": false,
+    "manual": true
+  },
+  "toxic_presence": {
+    "id": "toxic_presence",
+    "name": "Toxic Presence",
+    "icon": "☠️",
+    "type": "aura",
+    "duration": 999,
+    "potency": 1,
+    "desc": "Aura (15ft): enemies nearby take 1 poison pressure damage per turn on Process Turn; allies in the aura gain Poison Immunity while you are the source.",
+    "stackable": false,
+    "manual": true
+  },
+  "fear": {
+    "id": "fear",
+    "name": "Fear",
+    "icon": "😨",
+    "type": "control",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Target must move away, cannot willingly approach, or takes disadvantage while facing the source.",
+    "stackable": false,
+    "manual": true
+  },
+  "charm": {
+    "id": "charm",
+    "name": "Charm",
+    "icon": "💘",
+    "type": "control",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Target cannot attack the charmer and may treat them as friendly until harmed or the effect ends.",
+    "stackable": false,
+    "manual": true
+  },
+  "silenced": {
+    "id": "silenced",
+    "name": "Silenced",
+    "icon": "🤐",
+    "type": "control",
+    "duration": 2,
+    "potency": 0,
+    "desc": "Cannot use voice-based spells, commands, shouts, or sound effects.",
+    "stackable": false,
+    "manual": true
+  },
+  "blinded": {
+    "id": "blinded",
+    "name": "Blinded",
+    "icon": "🙈",
+    "type": "control",
+    "duration": 2,
+    "potency": 0,
+    "desc": "Cannot see. Attacks and perception relying on sight are heavily penalised.",
+    "statModifiers": {
+      "accuracy": -3
+    },
+    "stackable": false,
+    "manual": true
+  },
+  "knockdown": {
+    "id": "knockdown",
+    "name": "Knockdown",
+    "icon": "🌀",
+    "type": "control",
+    "duration": 1,
+    "potency": 0,
+    "desc": "Knocked prone for 1 turn: -2 Accuracy and cannot move until you spend an action to stand.",
+    "stackable": false,
+    "manual": true,
+    "statModifiers": {
+      "accuracy": -2,
+      "speed": -2
+    }
+  },
+  "poison_immunity": {
+    "id": "poison_immunity",
+    "name": "Poison Immunity",
+    "icon": "☠️",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Immune to poison damage and poison status effects.",
+    "immunities": [
+      "poison"
+    ],
+    "stackable": false,
+    "manual": true
+  },
+  "poison_resistance": {
+    "id": "poison_resistance",
+    "name": "Poison Resistance",
+    "icon": "☠️",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Poison damage is halved and you cannot gain new Poison stacks while this lasts. Existing Poison still ticks.",
+    "stackable": false,
+    "manual": true
+  },
+  "disease_immunity": {
+    "id": "disease_immunity",
+    "name": "Disease Immunity",
+    "icon": "🧬",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Immune to disease and poison-based debuffs except legendary sources.",
+    "stackable": false,
+    "immunities": [
+      "poison"
+    ],
+    "manual": true
+  },
+  "fire_resistance": {
+    "id": "fire_resistance",
+    "name": "Fire Resistance",
+    "icon": "🔥",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take half fire damage and cannot gain Burn while this is active. Existing Burn still ticks.",
+    "stackable": false,
+    "immunities": [
+      "burn"
+    ],
+    "manual": true
+  },
+  "undead_bane": {
+    "id": "undead_bane",
+    "name": "Undead Bane",
+    "icon": "☀️",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attacks against undead deal +1d6 radiant damage and have +2 Accuracy against undead targets.",
+    "stackable": false,
+    "manual": false
+  },
+  "burn_on_hit": {
+    "id": "burn_on_hit",
+    "name": "Burn On Hit",
+    "icon": "🔥",
+    "type": "damageOverTime",
+    "duration": 0,
+    "potency": 0,
+    "desc": "On hit: 40% chance (Tier 3+) to apply Burn for 4 turns — 1 fire damage per turn and -2 Strength.",
+    "stackable": false,
+    "manual": false
+  },
+  "freeze_on_hit": {
+    "id": "freeze_on_hit",
+    "name": "Freeze On Hit",
+    "icon": "❄️",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "On hit: 40% chance (Tier 3+) to apply Immobilized for 3 turns — cannot move but may still attack.",
+    "stackable": false,
+    "manual": false
+  },
+  "wind_slash": {
+    "id": "wind_slash",
+    "name": "Wind Slash",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Release a 20ft wind blade for 1d6 slashing damage and push the target 10ft on a hit.",
+    "stackable": false,
+    "manual": false
+  },
+  "bleeding": {
+    "id": "bleeding",
+    "name": "Bleeding",
+    "icon": "🩸",
+    "type": "damageOverTime",
+    "duration": 3,
+    "potency": 1,
+    "desc": "Bleeding wound: lose 1 HP at the start of each turn for 3 turns. Bandaging ends the effect early.",
+    "stackable": false,
+    "tickDamage": 1,
+    "manual": true
+  },
+  "dragon_fire": {
+    "id": "dragon_fire",
+    "name": "Dragon Fire",
+    "icon": "🔥",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attack deals +1d6 fire damage. On hit, 75% chance to apply Burn. Frightened targets take +1 extra fire damage.",
+    "stackable": false,
+    "manual": false
+  },
+  "poison_on_hit": {
+    "id": "poison_on_hit",
+    "name": "Poison On Hit",
+    "icon": "☠️",
+    "type": "damageOverTime",
+    "duration": 0,
+    "potency": 0,
+    "desc": "On hit: 40% chance (Tier 3+) to apply Poison — escalating 1, then 2, then 3 damage over 3 turns.",
+    "stackable": false,
+    "manual": false
+  },
+  "stealth_strike": {
+    "id": "stealth_strike",
+    "name": "Stealth Strike",
+    "icon": "🌑",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "First attack from hidden gains +2 Accuracy and +1d6 damage. Breaks stealth after the attack.",
+    "stackable": false,
+    "manual": false
+  },
+  "critical_strike": {
+    "id": "critical_strike",
+    "name": "Critical Strike",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Critical hits occur on a natural 19–20 and deal +1 weapon damage die on crits.",
+    "stackable": false,
+    "manual": false
+  },
+  "phase_strike": {
+    "id": "phase_strike",
+    "name": "Phase Strike",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "This attack ignores 3 points of Physical Defence and 3 points of Magical Defence.",
+    "stackable": false,
+    "manual": false
+  },
+  "shadow_step": {
+    "id": "shadow_step",
+    "name": "Shadow Step",
+    "icon": "🌑",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Teleport up to 30ft between shadows or dim light. Does not provoke opportunity attacks.",
+    "stackable": false,
+    "manual": true
+  },
+  "time_strike": {
+    "id": "time_strike",
+    "name": "Time Strike",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Once per scene: make an extra weapon attack immediately after this hit lands.",
+    "stackable": false,
+    "manual": false
+  },
+  "piercing": {
+    "id": "piercing",
+    "name": "Piercing",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Ignore 2 points of cover or Physical Defence on this attack.",
+    "stackable": false,
+    "manual": false
+  },
+  "shock_on_hit": {
+    "id": "shock_on_hit",
+    "name": "Shock On Hit",
+    "icon": "⚡",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "On hit: 40% chance (Tier 3+) to apply Incapacitated for 1 turn on a failed endurance save.",
+    "stackable": false,
+    "manual": false
+  },
+  "nature_blessing": {
+    "id": "nature_blessing",
+    "name": "Nature Blessing",
+    "icon": "✦",
+    "type": "special",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Accuracy and +1 Magic Power in natural terrain for 8 turns. Restore 1 HP when you start a turn outdoors.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 2,
+      "magicPower": 1
+    },
+    "tickHeal": 1,
+    "manual": false
+  },
+  "piercing_light": {
+    "id": "piercing_light",
+    "name": "Piercing Light",
+    "icon": "☀️",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attacks ignore darkness penalties and deal +1d4 radiant damage to shadow or undead targets.",
+    "stackable": false,
+    "manual": false
+  },
+  "lightning_arrows": {
+    "id": "lightning_arrows",
+    "name": "Lightning Arrows",
+    "icon": "⚡",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Ranged attacks deal +1d6 lightning damage. On hit, 40% chance to apply Incapacitated for 1 turn.",
+    "stackable": false,
+    "manual": false
+  },
+  "star_arrows": {
+    "id": "star_arrows",
+    "name": "Star Arrows",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Ranged attacks deal +1d6 radiant damage. +2 Accuracy while attacking in darkness.",
+    "stackable": false,
+    "manual": false
+  },
+  "armor_pierce": {
+    "id": "armor_pierce",
+    "name": "Armor Pierce",
+    "icon": "🛡️",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Reduce the target's Physical Defence by 2 for this attack only.",
+    "stackable": false,
+    "manual": false
+  },
+  "holy_strike": {
+    "id": "holy_strike",
+    "name": "Holy Strike",
+    "icon": "☀️",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attack deals +1d6 radiant damage. +2 Accuracy against undead, demons, and creatures of darkness.",
+    "stackable": false,
+    "manual": false
+  },
+  "earthquake": {
+    "id": "earthquake",
+    "name": "Earthquake",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "10ft burst: 2d6 earth damage and apply Knockdown to enemies who fail a Speed save.",
+    "stackable": false,
+    "manual": false
+  },
+  "thunder_strike": {
+    "id": "thunder_strike",
+    "name": "Thunder Strike",
+    "icon": "⚡",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attack deals +1d6 thunder damage. 40% chance to apply Incapacitated for 1 turn.",
+    "stackable": false,
+    "manual": false
+  },
+  "earth_shatter": {
+    "id": "earth_shatter",
+    "name": "Earth Shatter",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attack deals +1d8 earth damage and reduces target Physical Defence by 2 until end of next turn.",
+    "stackable": false,
+    "manual": false
+  },
+  "void_impact": {
+    "id": "void_impact",
+    "name": "Void Impact",
+    "icon": "🌑",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attack deals +1d6 void damage and pushes the target 10ft on a hit.",
+    "stackable": false,
+    "manual": false
+  },
+  "cleave": {
+    "id": "cleave",
+    "name": "Cleave",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "If this attack drops or crits, immediately deal half the rolled damage to one adjacent enemy.",
+    "stackable": false,
+    "manual": false
+  },
+  "double_strike": {
+    "id": "double_strike",
+    "name": "Double Strike",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Make two attack rolls with the same action; the second hit uses the same modifiers but no extra once-per-turn bonuses.",
+    "stackable": false,
+    "manual": false
+  },
+  "lifesteal": {
+    "id": "lifesteal",
+    "name": "Lifesteal",
+    "icon": "💚",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Heal HP equal to half the damage dealt by this attack (rounded down, minimum 1).",
+    "stackable": false,
+    "manual": false
+  },
+  "rage_mode": {
+    "id": "rage_mode",
+    "name": "Rage Mode",
+    "icon": "💪",
+    "type": "special",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Strength and +2 Speed for 8 turns, but -1 Physical Defence while raging.",
+    "stackable": false,
+    "statModifiers": {
+      "strength": 2,
+      "speed": 2,
+      "physicalDefence": -1
+    },
+    "manual": false
+  },
+  "execution": {
+    "id": "execution",
+    "name": "Execution",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Deal +1d6 damage against targets below half HP.",
+    "stackable": false,
+    "manual": false
+  },
+  "chaos_strike": {
+    "id": "chaos_strike",
+    "name": "Chaos Strike",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Add +1d6 damage of a random element (fire, ice, lightning, or void) on each hit.",
+    "stackable": false,
+    "manual": false
+  },
+  "reality_cut": {
+    "id": "reality_cut",
+    "name": "Reality Cut",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Once per scene: this attack ignores all defence and cover. Deals normal weapon damage + 2d6 force.",
+    "stackable": false,
+    "manual": false
+  },
+  "mana_efficiency": {
+    "id": "mana_efficiency",
+    "name": "Mana Efficiency",
+    "icon": "✨",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Toggle and active skills cost 1 less Stamina per turn for 10 turns (minimum 1).",
+    "stackable": false,
+    "manual": false
+  },
+  "drain_mana": {
+    "id": "drain_mana",
+    "name": "Drain Mana",
+    "icon": "✨",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Target loses 1d4+1 Stamina; you regain half that amount (rounded up).",
+    "stackable": false,
+    "manual": false
+  },
+  "elemental_mastery": {
+    "id": "elemental_mastery",
+    "name": "Elemental Mastery",
+    "icon": "✦",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "+2 Magic Power and +1 Accuracy with elemental skills for 10 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "magicPower": 2,
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "cosmic_power": {
+    "id": "cosmic_power",
+    "name": "Cosmic Power",
+    "icon": "✦",
+    "type": "special",
+    "duration": 6,
+    "potency": 0,
+    "desc": "+4 Magic Power and +2 Magical Defence for 6 turns. Legendary cosmic effects only.",
+    "stackable": false,
+    "statModifiers": {
+      "magicPower": 4,
+      "magicalDefence": 2
+    },
+    "manual": false
+  },
+  "creation_magic": {
+    "id": "creation_magic",
+    "name": "Creation Magic",
+    "icon": "✨",
+    "type": "statBuff",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+3 Magic Power for 8 turns. Can shape minor objects or barriers as a narrative effect.",
+    "stackable": false,
+    "statModifiers": {
+      "magicPower": 3
+    },
+    "manual": false
+  },
+  "reach": {
+    "id": "reach",
+    "name": "Reach",
+    "icon": "✦",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Melee reach increases by 5ft for 10 turns.",
+    "stackable": false,
+    "manual": false
+  },
+  "anti_cavalry": {
+    "id": "anti_cavalry",
+    "name": "Anti Cavalry",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+2 Accuracy and +1d6 damage against mounted or charging targets.",
+    "stackable": false,
+    "manual": false
+  },
+  "sweeping_strikes": {
+    "id": "sweeping_strikes",
+    "name": "Sweeping Strikes",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "One melee attack may hit up to 2 adjacent targets at -1 Accuracy each.",
+    "stackable": false,
+    "manual": false
+  },
+  "dragon_slayer": {
+    "id": "dragon_slayer",
+    "name": "Dragon Slayer",
+    "icon": "🐉",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+2 Accuracy and +1d6 damage against dragons and draconic creatures.",
+    "stackable": false,
+    "manual": false
+  },
+  "infinite_reach": {
+    "id": "infinite_reach",
+    "name": "Infinite Reach",
+    "icon": "✦",
+    "type": "special",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Legendary: melee attacks reach 30ft with line of sight for 3 turns.",
+    "stackable": false,
+    "manual": false
+  },
+  "dimension_pierce": {
+    "id": "dimension_pierce",
+    "name": "Dimension Pierce",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Legendary: ignore all physical barriers and 6 points of total defence once per scene.",
+    "stackable": false,
+    "manual": false
+  },
+  "damage_reduction": {
+    "id": "damage_reduction",
+    "name": "Damage Reduction",
+    "icon": "✦",
+    "type": "protection",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Reduce each incoming hit by 1 damage for 10 turns (minimum 0).",
+    "stackable": false,
+    "manual": true
+  },
+  "multiattack": {
+    "id": "multiattack",
+    "name": "Multiattack",
+    "icon": "⚔️",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Each turn, make 2 different attacks (each pays its own stamina cost).",
+    "stackable": false,
+    "manual": false
+  },
+  "quick_draw": {
+    "id": "quick_draw",
+    "name": "Quick Draw",
+    "icon": "⚡",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "You may attack with ranged weapons the same turn you move (others cannot).",
+    "stackable": false,
+    "manual": false
+  },
+  "mana_regeneration": {
+    "id": "mana_regeneration",
+    "name": "Mana Regeneration",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Restore 1 Stamina at the start of each turn while active.",
+    "stackable": false,
+    "tickStamina": 1,
+    "manual": true
+  },
+  "fire_immunity": {
+    "id": "fire_immunity",
+    "name": "Fire Immunity",
+    "icon": "🔥",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Immune to fire damage and Burn while active.",
+    "stackable": false,
+    "immunities": [
+      "burn"
+    ],
+    "manual": false
+  },
+  "cold_aura": {
+    "id": "cold_aura",
+    "name": "Cold Aura",
+    "icon": "❄️",
+    "type": "aura",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Aura (15ft): enemies nearby lose 2 Speed. When an enemy enters or starts their turn in the aura, 40% chance to apply Immobilized.",
+    "stackable": false,
+    "manual": false
+  },
+  "stealth": {
+    "id": "stealth",
+    "name": "Stealth",
+    "icon": "🌑",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+3 Accuracy on stealth attacks and +2 Speed when you did not attack last turn.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 3,
+      "speed": 2
+    },
+    "manual": true
+  },
+  "spell_absorption": {
+    "id": "spell_absorption",
+    "name": "Spell Absorption",
+    "icon": "✨",
+    "type": "protection",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Once while active: negate one spell targeting you and regain Stamina equal to that spell's cost.",
+    "stackable": false,
+    "manual": true
+  },
+  "light_aura": {
+    "id": "light_aura",
+    "name": "Light Aura",
+    "icon": "☀️",
+    "type": "aura",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Aura (20ft): allies gain +1 Accuracy vs Fear and +1 Magical Defence. Undead in the aura take 1 radiant damage per turn (GM tracks on enemies).",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1,
+      "magicalDefence": 1
+    },
+    "manual": false
+  },
+  "haste": {
+    "id": "haste",
+    "name": "Haste",
+    "icon": "💨",
+    "type": "utility",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Speed for 8 turns and +1 extra movement action each turn.",
+    "stackable": false,
+    "statModifiers": {
+      "speed": 2
+    },
+    "manual": true
+  },
+  "burn_aura": {
+    "id": "burn_aura",
+    "name": "Burn Aura",
+    "icon": "🔥",
+    "type": "damageOverTime",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Aura (10ft): adjacent enemies take 1 fire damage per turn on Process Turn (track on enemies). 40% chance to apply Burn when they enter.",
+    "stackable": false,
+    "manual": false
+  },
+  "frost_aura": {
+    "id": "frost_aura",
+    "name": "Frost Aura",
+    "icon": "❄️",
+    "type": "aura",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Aura (15ft): enemies lose 2 Speed nearby. 40% chance to apply Immobilized when they start their turn inside.",
+    "stackable": false,
+    "manual": false
+  },
+  "lightning_bolt": {
+    "id": "lightning_bolt",
+    "name": "Lightning Bolt",
+    "icon": "⚡",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Ranged spell: 2d6 lightning damage in a line. 40% chance to apply Incapacitated for 1 turn on failed save.",
+    "stackable": false,
+    "manual": false
+  },
+  "invisibility": {
+    "id": "invisibility",
+    "name": "Invisibility",
+    "icon": "🌑",
+    "type": "utility",
+    "duration": 5,
+    "potency": 0,
+    "desc": "Cannot be seen normally for 5 turns. +4 Accuracy on the first attack; broken after attacking or taking damage.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 4
+    },
+    "manual": true
+  },
+  "extra_movement": {
+    "id": "extra_movement",
+    "name": "Extra Movement",
+    "icon": "💨",
+    "type": "utility",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Speed and +10ft movement for 8 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "speed": 2
+    },
+    "manual": false
+  },
+  "silent_movement": {
+    "id": "silent_movement",
+    "name": "Silent Movement",
+    "icon": "💨",
+    "type": "utility",
+    "duration": 5,
+    "potency": 0,
+    "desc": "+3 Accuracy on stealth rolls and movement makes no sound for 5 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 3
+    },
+    "manual": false
+  },
+  "immovable": {
+    "id": "immovable",
+    "name": "Immovable",
+    "icon": "✦",
+    "type": "protection",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Cannot be pushed, knocked down, or forcibly moved for 10 turns. +2 Physical Defence while planted.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 2
+    },
+    "manual": false
+  },
+  "flight": {
+    "id": "flight",
+    "name": "Flight",
+    "icon": "☀️",
+    "type": "utility",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Fly at your normal Speed for 10 turns. Immune to ground-based Immobilized.",
+    "stackable": false,
+    "immunities": [
+      "immobilized"
+    ],
+    "manual": true
+  },
+  "spell_resistance": {
+    "id": "spell_resistance",
+    "name": "Spell Resistance",
+    "icon": "✨",
+    "type": "protection",
+    "duration": 10,
+    "potency": 0,
+    "desc": "+3 Magical Defence for 10 turns. Reduce incoming spell damage by half (round down).",
+    "stackable": false,
+    "statModifiers": {
+      "magicalDefence": 3
+    },
+    "manual": true
+  },
+  "stone_skin": {
+    "id": "stone_skin",
+    "name": "Stone Skin",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 10,
+    "potency": 0,
+    "desc": "+3 Physical Defence for 10 turns. Reduce mundane weapon damage by 1 per hit.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 3
+    },
+    "manual": true
+  },
+  "shadow_stealth": {
+    "id": "shadow_stealth",
+    "name": "Shadow Stealth",
+    "icon": "🌑",
+    "type": "utility",
+    "duration": 5,
+    "potency": 0,
+    "desc": "+4 Accuracy in dim light or darkness for 5 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 4
+    },
+    "manual": false
+  },
+  "radiant_aura": {
+    "id": "radiant_aura",
+    "name": "Radiant Aura",
+    "icon": "☀️",
+    "type": "aura",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Aura (20ft): allies gain +1 Magical Defence. Undead in the aura take 1 radiant damage per turn (track on enemies).",
+    "stackable": false,
+    "statModifiers": {
+      "magicalDefence": 1
+    },
+    "manual": false
+  },
+  "nature_resistance": {
+    "id": "nature_resistance",
+    "name": "Nature Resistance",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+2 Physical Defence and +2 Magical Defence in wilderness. Immune to poison plants and weather exhaustion.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "manual": false
+  },
+  "mirror_image": {
+    "id": "mirror_image",
+    "name": "Mirror Image",
+    "icon": "✦",
+    "type": "special",
+    "duration": 8,
+    "potency": 0,
+    "desc": "The next 2 attacks against you have a 50% chance to hit an illusion instead (track uses manually).",
+    "stackable": false,
+    "manual": false
+  },
+  "critical_chance": {
+    "id": "critical_chance",
+    "name": "Critical Chance",
+    "icon": "✦",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Critical hits occur on natural 19–20 for 10 turns.",
+    "stackable": false,
+    "manual": false
+  },
+  "luck": {
+    "id": "luck",
+    "name": "Luck",
+    "icon": "🍀",
+    "type": "statBuff",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Accuracy and +1 Speed for 8 turns — fortune favours the bold.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 2,
+      "speed": 1
+    },
+    "manual": false
+  },
+  "magic_sight": {
+    "id": "magic_sight",
+    "name": "Magic Sight",
+    "icon": "✨",
+    "type": "statBuff",
+    "duration": 10,
+    "potency": 0,
+    "desc": "+3 Accuracy to detect magic, traps, and hidden enchantments for 10 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 3
+    },
+    "manual": false
+  },
+  "identify": {
+    "id": "identify",
+    "name": "Identify",
+    "icon": "👁️",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly identify magical items and active enchantments on touch (utility, not combat).",
+    "stackable": false,
+    "manual": false
+  },
+  "crush": {
+    "id": "crush",
+    "name": "Crush",
+    "icon": "💪",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+2 Strength for this attack and 40% chance to apply Knockdown on hit.",
+    "stackable": false,
+    "manual": false
+  },
+  "spell_memory": {
+    "id": "spell_memory",
+    "name": "Spell Memory",
+    "icon": "✨",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Prepare one additional spell or skill option until your next long rest (narrative +1 prepared ability).",
+    "stackable": false,
+    "manual": false
+  },
+  "keen_sight": {
+    "id": "keen_sight",
+    "name": "Keen Sight",
+    "icon": "👁️",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "+2 Accuracy on perception and ranged attacks for 10 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 2
+    },
+    "manual": false
+  },
+  "steady_hands": {
+    "id": "steady_hands",
+    "name": "Steady Hands",
+    "icon": "✦",
+    "type": "statBuff",
+    "duration": 10,
+    "potency": 0,
+    "desc": "+2 Accuracy on ranged and fine-tool actions for 10 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 2
+    },
+    "manual": true
+  },
+  "long_range_sight": {
+    "id": "long_range_sight",
+    "name": "Long Range Sight",
+    "icon": "👁️",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "+2 Accuracy at long range; ignore the first range penalty band for 10 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 2
+    },
+    "manual": false
+  },
+  "concentration": {
+    "id": "concentration",
+    "name": "Concentration",
+    "icon": "🧿",
+    "type": "statBuff",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Magic Power and +2 Magical Defence while you sustain a channeled spell, toggle stance, or similar ongoing ability.",
+    "stackable": false,
+    "statModifiers": {
+      "magicPower": 2,
+      "magicalDefence": 2
+    },
+    "manual": true
+  },
+  "heal_2": {
+    "id": "heal_2",
+    "name": "Heal 2",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 2 HP when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "heal_5": {
+    "id": "heal_5",
+    "name": "Heal 5",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 5 HP when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "heal_3": {
+    "id": "heal_3",
+    "name": "Heal 3",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 3 HP when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "restore_stamina_2": {
+    "id": "restore_stamina_2",
+    "name": "Restore Stamina 2",
+    "icon": "✦",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 2 Stamina when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "heal_8": {
+    "id": "heal_8",
+    "name": "Heal 8",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 8 HP when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "temp_strength_1": {
+    "id": "temp_strength_1",
+    "name": "Temp Strength 1",
+    "icon": "💪",
+    "type": "statBuff",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+1 Strength for 8 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "strength": 1
+    },
+    "manual": false
+  },
+  "restore_stamina_5": {
+    "id": "restore_stamina_5",
+    "name": "Restore Stamina 5",
+    "icon": "✦",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 5 Stamina when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "temp_magic_1": {
+    "id": "temp_magic_1",
+    "name": "Temp Magic 1",
+    "icon": "✨",
+    "type": "statBuff",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+1 Magic Power for 8 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "magicPower": 1
+    },
+    "manual": false
+  },
+  "heal_25": {
+    "id": "heal_25",
+    "name": "Heal 25",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 25 HP when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "restore_stamina_15": {
+    "id": "restore_stamina_15",
+    "name": "Restore Stamina 15",
+    "icon": "✦",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 15 Stamina when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "heal_50": {
+    "id": "heal_50",
+    "name": "Heal 50",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 50 HP when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "restore_stamina_30": {
+    "id": "restore_stamina_30",
+    "name": "Restore Stamina 30",
+    "icon": "✦",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 30 Stamina when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "temp_strength_3": {
+    "id": "temp_strength_3",
+    "name": "Temp Strength 3",
+    "icon": "💪",
+    "type": "statBuff",
+    "duration": 6,
+    "potency": 0,
+    "desc": "+3 Strength for 6 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "strength": 3
+    },
+    "manual": false
+  },
+  "temp_speed_3": {
+    "id": "temp_speed_3",
+    "name": "Temp Speed 3",
+    "icon": "💨",
+    "type": "statBuff",
+    "duration": 6,
+    "potency": 0,
+    "desc": "+3 Speed for 6 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "speed": 3
+    },
+    "manual": false
+  },
+  "temp_magic_3": {
+    "id": "temp_magic_3",
+    "name": "Temp Magic 3",
+    "icon": "✨",
+    "type": "statBuff",
+    "duration": 6,
+    "potency": 0,
+    "desc": "+3 Magic Power for 6 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "magicPower": 3
+    },
+    "manual": false
+  },
+  "temp_defense_4": {
+    "id": "temp_defense_4",
+    "name": "Temp Defense 4",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 6,
+    "potency": 0,
+    "desc": "+2 Physical Defence and +2 Magical Defence for 6 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "manual": false
+  },
+  "invisibility_5_turns": {
+    "id": "invisibility_5_turns",
+    "name": "Invisibility 5 Turns",
+    "icon": "🌑",
+    "type": "utility",
+    "duration": 5,
+    "potency": 0,
+    "desc": "Invisible for 5 turns: +4 Accuracy on first attack; ends if you attack or take damage.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 4
+    },
+    "manual": false
+  },
+  "fire_immunity_10_turns": {
+    "id": "fire_immunity_10_turns",
+    "name": "Fire Immunity 10 Turns",
+    "icon": "🔥",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Immune to fire damage and Burn for 10 turns.",
+    "stackable": false,
+    "immunities": [
+      "burn"
+    ],
+    "manual": false
+  },
+  "cold_immunity_10_turns": {
+    "id": "cold_immunity_10_turns",
+    "name": "Cold Immunity 10 Turns",
+    "icon": "❄️",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Immune to cold damage and Immobilized from ice for 10 turns.",
+    "stackable": false,
+    "immunities": [
+      "immobilized"
+    ],
+    "manual": false
+  },
+  "temp_strength_5": {
+    "id": "temp_strength_5",
+    "name": "Temp Strength 5",
+    "icon": "💪",
+    "type": "statBuff",
+    "duration": 4,
+    "potency": 0,
+    "desc": "+5 Strength for 4 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "strength": 5
+    },
+    "manual": false
+  },
+  "temp_speed_2": {
+    "id": "temp_speed_2",
+    "name": "Temp Speed 2",
+    "icon": "💨",
+    "type": "statBuff",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Speed for 8 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "speed": 2
+    },
+    "manual": false
+  },
+  "temp_defense_minus_2": {
+    "id": "temp_defense_minus_2",
+    "name": "Temp Defense Minus 2",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 4,
+    "potency": 0,
+    "desc": "-2 Physical Defence and -2 Magical Defence for 4 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": -2,
+      "magicalDefence": -2
+    },
+    "manual": false
+  },
+  "cast_fireball": {
+    "id": "cast_fireball",
+    "name": "Cast Fireball",
+    "icon": "🔥",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Cast Fireball: 3d6 fire damage in a 20ft burst. 75% chance to apply Burn to each failed save target.",
+    "stackable": false,
+    "manual": false
+  },
+  "heal_40": {
+    "id": "heal_40",
+    "name": "Heal 40",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly restore 40 HP when consumed or activated.",
+    "stackable": false,
+    "manual": false
+  },
+  "remove_poison": {
+    "id": "remove_poison",
+    "name": "Remove Poison",
+    "icon": "☠️",
+    "type": "damageOverTime",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Remove Poison and all poison damage-over-time effects immediately.",
+    "stackable": false,
+    "manual": false
+  },
+  "teleport": {
+    "id": "teleport",
+    "name": "Teleport",
+    "icon": "✦",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Instantly move up to 60ft to a visible location. Does not cost a movement action.",
+    "stackable": false,
+    "manual": true
+  },
+  "full_heal": {
+    "id": "full_heal",
+    "name": "Full Heal",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Restore HP to your current maximum immediately.",
+    "stackable": false,
+    "manual": false
+  },
+  "remove_all_debuffs": {
+    "id": "remove_all_debuffs",
+    "name": "Remove All Debuffs",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Remove all negative status effects and stat debuffs immediately.",
+    "stackable": false,
+    "manual": false
+  },
+  "fire_immunity_permanent": {
+    "id": "fire_immunity_permanent",
+    "name": "Fire Immunity Permanent",
+    "icon": "🔥",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Permanent immunity to fire damage and Burn (legendary).",
+    "stackable": false,
+    "immunities": [
+      "burn"
+    ],
+    "manual": false
+  },
+  "permanent_hp_5": {
+    "id": "permanent_hp_5",
+    "name": "Permanent HP 5",
+    "icon": "✦",
+    "type": "statBuff",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Permanently increase maximum HP by 5 after consumption.",
+    "stackable": false,
+    "manual": false
+  },
+  "permanent_strength_2": {
+    "id": "permanent_strength_2",
+    "name": "Permanent Strength 2",
+    "icon": "💪",
+    "type": "statBuff",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Permanently increase base Strength by 2 after consumption.",
+    "stackable": false,
+    "manual": false
+  },
+  "dragon_breath": {
+    "id": "dragon_breath",
+    "name": "Dragon Breath",
+    "icon": "🐉",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Cone (30ft): 3d6 fire damage. 75% chance to apply Burn to each target in the cone.",
+    "stackable": false,
+    "manual": false
+  },
+  "permanent_all_stats_1": {
+    "id": "permanent_all_stats_1",
+    "name": "Permanent All Stats 1",
+    "icon": "✦",
+    "type": "statBuff",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Permanently increase Strength, Magic Power, Accuracy, and Speed by 1 after consumption.",
+    "stackable": false,
+    "manual": false
+  },
+  "regeneration_permanent": {
+    "id": "regeneration_permanent",
+    "name": "Regeneration Permanent",
+    "icon": "💚",
+    "type": "recovery",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Permanent: restore 1 HP at the start of each turn (Process Turn). Legendary.",
+    "stackable": false,
+    "tickHeal": 1,
+    "manual": false
+  },
+  "unlock_doors": {
+    "id": "unlock_doors",
+    "name": "Unlock Doors",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+3 Accuracy on lockpicking and can bypass mundane non-magical locks with tools.",
+    "stackable": false,
+    "manual": false
+  },
+  "climb_assistance": {
+    "id": "climb_assistance",
+    "name": "Climb Assistance",
+    "icon": "✦",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+3 Accuracy on climbing checks and you cannot fall more than 10ft from a failed climb.",
+    "stackable": false,
+    "manual": false
+  },
+  "light_source": {
+    "id": "light_source",
+    "name": "Light Source",
+    "icon": "☀️",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Bright light 20ft and dim light 40ft. Lasts until extinguished (utility).",
+    "stackable": false,
+    "manual": false
+  },
+  "fire_damage": {
+    "id": "fire_damage",
+    "name": "Fire Damage",
+    "icon": "🔥",
+    "type": "damage",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attacks deal +1d4 fire damage while this weapon effect is active.",
+    "stackable": false,
+    "manual": false
+  },
+  "undead_damage": {
+    "id": "undead_damage",
+    "name": "Undead Damage",
+    "icon": "☀️",
+    "type": "damage",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attacks deal +1d6 radiant damage to undead targets.",
+    "stackable": false,
+    "manual": false
+  },
+  "purify": {
+    "id": "purify",
+    "name": "Purify",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Remove Poison, disease, and one minor curse from food, water, or a willing target.",
+    "stackable": false,
+    "manual": false
+  },
+  "parry_bonus": {
+    "id": "parry_bonus",
+    "name": "Parry Bonus",
+    "icon": "✦",
+    "type": "special",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Physical Defence when using a parry or block reaction for 8 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 2
+    },
+    "manual": false
+  },
+  "crushing": {
+    "id": "crushing",
+    "name": "Crushing",
+    "icon": "💪",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+2 Strength for this attack and 40% chance to apply Knockdown on hit.",
+    "stackable": false,
+    "manual": false
+  },
+  "critical_bleeding": {
+    "id": "critical_bleeding",
+    "name": "Critical Bleeding",
+    "icon": "🩸",
+    "type": "damageOverTime",
+    "duration": 3,
+    "potency": 2,
+    "desc": "Critical hit causes deep bleeding: 2 HP lost per turn for 3 turns.",
+    "stackable": false,
+    "tickDamage": 2,
+    "manual": false
+  },
+  "armor_piercing": {
+    "id": "armor_piercing",
+    "name": "Armor Piercing",
+    "icon": "🛡️",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Reduce target Physical Defence by 2 for this attack.",
+    "stackable": false,
+    "manual": false
+  },
+  "stunning": {
+    "id": "stunning",
+    "name": "Stunning",
+    "icon": "✦",
+    "type": "control",
+    "duration": 0,
+    "potency": 0,
+    "desc": "40% chance on hit to apply Incapacitated for 1 turn.",
+    "stackable": false,
+    "manual": false
+  },
+  "magic_damage": {
+    "id": "magic_damage",
+    "name": "Magic Damage",
+    "icon": "✨",
+    "type": "statBuff",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Spells and magical attacks deal +1d4 magic damage while this effect is active.",
+    "stackable": false,
+    "manual": false
+  },
+  "critical_immunity": {
+    "id": "critical_immunity",
+    "name": "Critical Immunity",
+    "icon": "✦",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Critical hits against you become normal hits for 10 turns.",
+    "stackable": false,
+    "manual": false
+  },
+  "flexible_defense": {
+    "id": "flexible_defense",
+    "name": "Flexible Defense",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+2 Physical Defence OR +2 Magical Defence each turn (choose at start of turn) for 8 turns.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "manual": false
+  },
+  "void_damage": {
+    "id": "void_damage",
+    "name": "Void Damage",
+    "icon": "🌑",
+    "type": "damage",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Attacks deal +1d6 void damage, effective against magical barriers.",
+    "stackable": false,
+    "manual": false
+  },
+  "life_steal": {
+    "id": "life_steal",
+    "name": "Life Steal",
+    "icon": "💚",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Heal HP equal to half the damage dealt by this attack (rounded down, minimum 1).",
+    "stackable": false,
+    "manual": false
+  },
+  "reflect_damage": {
+    "id": "reflect_damage",
+    "name": "Reflect Damage",
+    "icon": "✦",
+    "type": "special",
+    "duration": 6,
+    "potency": 0,
+    "desc": "When hit in melee, the attacker takes 2 damage back for 6 turns.",
+    "stackable": false,
+    "manual": false
+  },
+  "magic_barrier": {
+    "id": "magic_barrier",
+    "name": "Magic Barrier",
+    "icon": "✨",
+    "type": "protection",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+3 Magical Defence for 8 turns. The first magical hit each turn is reduced by 3 damage.",
+    "stackable": false,
+    "statModifiers": {
+      "magicalDefence": 3
+    },
+    "manual": true
+  },
+  "auto_healing": {
+    "id": "auto_healing",
+    "name": "Auto Healing",
+    "icon": "💚",
+    "type": "healOverTime",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Restore 1 HP at the start of each turn while equipped or active.",
+    "stackable": false,
+    "tickHeal": 1,
+    "manual": true
+  },
+  "critical_strikes": {
+    "id": "critical_strikes",
+    "name": "Critical Strikes",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Critical hits on 19–20 and crits deal +1 damage die.",
+    "stackable": false,
+    "manual": false
+  },
+  "energy_waves": {
+    "id": "energy_waves",
+    "name": "Energy Waves",
+    "icon": "✦",
+    "type": "special",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Melee attacks release a 15ft energy wave for 1d4 force damage to one secondary target.",
+    "stackable": false,
+    "manual": false
+  },
+  "damage_immunity": {
+    "id": "damage_immunity",
+    "name": "Damage Immunity",
+    "icon": "✦",
+    "type": "special",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Legendary: immune to non-magical weapon damage for 3 turns.",
+    "stackable": false,
+    "manual": false
+  },
+  "titan_strength": {
+    "id": "titan_strength",
+    "name": "Titan Strength",
+    "icon": "💪",
+    "type": "statBuff",
+    "duration": 8,
+    "potency": 0,
+    "desc": "+3 Strength and +2 Physical Defence for 8 turns. Heavy weapons deal +1 damage die.",
+    "stackable": false,
+    "statModifiers": {
+      "strength": 3,
+      "physicalDefence": 2
+    },
+    "manual": false
+  },
+  "sword_training": {
+    "id": "sword_training",
+    "name": "Sword Training",
+    "icon": "⚔️",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Accuracy while wielding a sword.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "ranged_training": {
+    "id": "ranged_training",
+    "name": "Ranged Training",
+    "icon": "🏹",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Accuracy while wielding a ranged weapon.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "axe_training": {
+    "id": "axe_training",
+    "name": "Axe Training",
+    "icon": "🪓",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Accuracy while wielding an axe.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "dagger_training": {
+    "id": "dagger_training",
+    "name": "Dagger Training",
+    "icon": "🗡️",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Accuracy while wielding a dagger.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "polearm_training": {
+    "id": "polearm_training",
+    "name": "Polearm Training",
+    "icon": "🔱",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Accuracy while wielding a polearm.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "hammer_training": {
+    "id": "hammer_training",
+    "name": "Hammer Training",
+    "icon": "🔨",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Accuracy while wielding a hammer.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "combat_stance": {
+    "id": "combat_stance",
+    "name": "Combat Stance",
+    "icon": "🛡️",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Physical Defence while wielding a sword.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 1
+    },
+    "manual": false
+  },
+  "defensive_stance_buff": {
+    "id": "defensive_stance_buff",
+    "name": "Defensive Stance",
+    "icon": "🛡️",
+    "type": "toggleBuff",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Active stance: +2 Physical Defence and +2 Magical Defence, but -1 attack damage.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "manual": false
+  },
+  "berserker_rage_buff": {
+    "id": "berserker_rage_buff",
+    "name": "Berserker Rage",
+    "icon": "😡",
+    "type": "toggleBuff",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Active rage: +2 Strength and +2 Speed, but -1 Physical Defence.",
+    "stackable": false,
+    "statModifiers": {
+      "strength": 2,
+      "speed": 2,
+      "physicalDefence": -1
+    },
+    "manual": false
+  },
+  "fortress_stance_buff": {
+    "id": "fortress_stance_buff",
+    "name": "Fortress Stance",
+    "icon": "🏰",
+    "type": "toggleBuff",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Active fortress stance: +4 Physical Defence and +4 Magical Defence.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 4,
+      "magicalDefence": 4
+    },
+    "manual": false
+  },
+  "stagger": {
+    "id": "stagger",
+    "name": "Stagger",
+    "icon": "💫",
+    "type": "control",
+    "duration": 1,
+    "potency": 0,
+    "desc": "Target is off-balance: -2 Accuracy and cannot use reactions until the end of their next turn.",
+    "statModifiers": {
+      "accuracy": -2
+    },
+    "stackable": false,
+    "manual": true
+  },
+  "exhausted": {
+    "id": "exhausted",
+    "name": "Exhausted",
+    "icon": "😮‍💨",
+    "type": "statDebuff",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Overextended. -1 to all stats and cannot cast spells while exhausted.",
+    "statModifiers": {
+      "strength": -1,
+      "speed": -1,
+      "magicPower": -1,
+      "accuracy": -1
+    },
+    "stackable": false,
+    "manual": true
+  },
+  "staff_training": {
+    "id": "staff_training",
+    "name": "Staff Training",
+    "icon": "🪄",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Magic Power while wielding a staff.",
+    "stackable": false,
+    "statModifiers": {
+      "magicPower": 1
+    },
+    "manual": true
+  },
+  "light_step": {
+    "id": "light_step",
+    "name": "Light Step",
+    "icon": "👣",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Speed and silent movement while wielding daggers.",
+    "stackable": false,
+    "statModifiers": {
+      "speed": 1
+    },
+    "manual": true
+  },
+  "dagger_mastery_passive": {
+    "id": "dagger_mastery_passive",
+    "name": "Dagger Mastery",
+    "icon": "🗡️",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+2 Speed while wielding daggers (Dagger Mastery passive).",
+    "stackable": false,
+    "statModifiers": {
+      "speed": 2
+    },
+    "manual": true
+  },
+  "arcane_mastery": {
+    "id": "arcane_mastery",
+    "name": "Arcane Mastery",
+    "icon": "🧙",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "All spells cost 1 less Stamina (minimum 1).",
+    "stackable": false,
+    "spellCostReduction": 1,
+    "manual": true
+  },
+  "spell_penetration": {
+    "id": "spell_penetration",
+    "name": "Spell Penetration",
+    "icon": "🎯",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Spells ignore 2 points of Magical Defence.",
+    "stackable": false,
+    "manual": true
+  },
+  "mind_shield": {
+    "id": "mind_shield",
+    "name": "Mind Shield",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Immune to mind control, illusions, charm, fear, and possession.",
+    "stackable": false,
+    "immunities": [
+      "mind_controlled",
+      "charm",
+      "fear"
+    ],
+    "manual": true
+  },
+  "hammer_mastery_passive": {
+    "id": "hammer_mastery_passive",
+    "name": "Hammer Mastery",
+    "icon": "🔨",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Immune to Incapacitated while Hammer Mastery is active.",
+    "stackable": false,
+    "immunities": [
+      "incapacitated"
+    ],
+    "manual": true
+  },
+  "elemental_mastery_passive": {
+    "id": "elemental_mastery_passive",
+    "name": "Elemental Mastery",
+    "icon": "✦",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "All attacks deal +1d4 elemental damage of your chosen element; immunity to that element.",
+    "stackable": false,
+    "manual": true
+  },
+  "rapid_regeneration": {
+    "id": "rapid_regeneration",
+    "name": "Rapid Regeneration",
+    "icon": "✨",
+    "type": "healOverTime",
+    "duration": 0,
+    "potency": 3,
+    "desc": "Restore 3 HP per turn (Rapid Healing passive). Strong resistance to damage-over-time.",
+    "stackable": false,
+    "tickHeal": 3,
+    "manual": true
+  },
+  "ice_resistance": {
+    "id": "ice_resistance",
+    "name": "Ice Resistance",
+    "icon": "❄️",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take half ice damage and cannot gain Immobilized from cold while active.",
+    "stackable": false,
+    "immunities": [
+      "immobilized"
+    ],
+    "manual": true
+  },
+  "lightning_resistance": {
+    "id": "lightning_resistance",
+    "name": "Lightning Resistance",
+    "icon": "⚡",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take half lightning damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "earth_resistance": {
+    "id": "earth_resistance",
+    "name": "Earth Resistance",
+    "icon": "🪨",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take half earth damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "wind_resistance": {
+    "id": "wind_resistance",
+    "name": "Wind Resistance",
+    "icon": "💨",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take half wind damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "water_resistance": {
+    "id": "water_resistance",
+    "name": "Water Resistance",
+    "icon": "💧",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take half water damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "darkness_resistance": {
+    "id": "darkness_resistance",
+    "name": "Darkness Resistance",
+    "icon": "🌑",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take half darkness damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "light_resistance": {
+    "id": "light_resistance",
+    "name": "Light Resistance",
+    "icon": "☀️",
+    "type": "protection",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take half light damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "ice_weakness": {
+    "id": "ice_weakness",
+    "name": "Ice Weakness",
+    "icon": "❄️",
+    "type": "vulnerability",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take double ice damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "fire_weakness": {
+    "id": "fire_weakness",
+    "name": "Fire Weakness",
+    "icon": "🔥",
+    "type": "vulnerability",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take double fire damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "lightning_weakness": {
+    "id": "lightning_weakness",
+    "name": "Lightning Weakness",
+    "icon": "⚡",
+    "type": "vulnerability",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take double lightning damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "water_weakness": {
+    "id": "water_weakness",
+    "name": "Water Weakness",
+    "icon": "💧",
+    "type": "vulnerability",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take double water damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "earth_weakness": {
+    "id": "earth_weakness",
+    "name": "Earth Weakness",
+    "icon": "🪨",
+    "type": "vulnerability",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take double earth damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "wind_weakness": {
+    "id": "wind_weakness",
+    "name": "Wind Weakness",
+    "icon": "💨",
+    "type": "vulnerability",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take double wind damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "darkness_weakness": {
+    "id": "darkness_weakness",
+    "name": "Darkness Weakness",
+    "icon": "🌑",
+    "type": "vulnerability",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take double darkness damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "light_weakness": {
+    "id": "light_weakness",
+    "name": "Light Weakness",
+    "icon": "☀️",
+    "type": "vulnerability",
+    "duration": 999,
+    "potency": 0,
+    "desc": "Take double light damage while active.",
+    "stackable": false,
+    "manual": true
+  },
+  "incapacitated_resistance": {
+    "id": "incapacitated_resistance",
+    "name": "Incapacitated Resistance",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Resistance to Incapacitated and similar hard-control effects (Human Determination).",
+    "stackable": false,
+    "immunities": [
+      "incapacitated"
+    ],
+    "manual": true
+  },
+  "knockdown_resistance": {
+    "id": "knockdown_resistance",
+    "name": "Knockdown Resistance",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Resistance to knockdown and prone effects (Dwarven Toughness).",
+    "stackable": false,
+    "immunities": [
+      "knockdown"
+    ],
+    "manual": true
+  },
+  "shadow_affinity_passive": {
+    "id": "shadow_affinity_passive",
+    "name": "Shadow Affinity",
+    "icon": "🌑",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+3 stealth in dim light or darkness; darkvision extends to 150ft.",
+    "stackable": false,
+    "manual": true
+  }
+}
