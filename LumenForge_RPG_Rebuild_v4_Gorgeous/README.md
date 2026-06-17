@@ -1,4 +1,4 @@
-# LumenForge RPG Character Creator
+# LumenForge RPG Character Creator :)
 
 A modular, performance-tuned RPG character companion for tabletop play.
 
