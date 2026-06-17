@@ -136,9 +136,12 @@ export function characterEffectSources(character) {
     const gearEffects = resolveSkillGearEffects(skill, character)
     for (const effectId of gearEffects) {
       const equipRule = cache.equipmentSkillEffects[skillId]
+      const armourRule = cache.armourSkillEffects?.[skillId]
       let source = `Skill: ${skill.name}`
       if (equipRule && characterWieldsWeaponKind(character, equipRule.weaponKind)) {
         source = `Skill: ${skill.name} (${equipRule.weaponKind} equipped)`
+      } else if (armourRule) {
+        source = `Skill: ${skill.name} (armour)`
       } else if (isToggleSkill(skill) && character.activeToggles?.includes(skillId)) {
         source = `Skill: ${skill.name} (active)`
       }

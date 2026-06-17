@@ -6,15 +6,28 @@
   <title>LumenForge RPG Character Creator</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles/themes.css" />
+  <link rel="stylesheet" href="styles/appearance.css" />
+  <script>
+    (function () {
+      var theme = localStorage.getItem('lumenforge_theme') || 'midnight';
+      if (theme === 'forge') theme = 'midnight';
+      document.documentElement.setAttribute('data-theme', theme);
+      var appearance = localStorage.getItem('lumenforge_appearance') || 'dark';
+      document.documentElement.setAttribute('data-appearance', appearance === 'light' ? 'light' : 'dark');
+    })();
+  </script>
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
       <div class="brand-block">
         <div class="brand-mark">✦</div>
-        <div>
+        <div class="brand-copy">
           <h1>LumenForge</h1>
           <p>RPG character creator & skill tree toolkit</p>
+          <div id="appearance-toggle" class="appearance-toggle" role="group" aria-label="Light or dark mode"></div>
+          <div id="theme-picker" class="theme-picker" role="group" aria-label="Colour theme"></div>
         </div>
       </div>
 

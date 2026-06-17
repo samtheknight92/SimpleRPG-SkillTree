@@ -226,7 +226,8 @@ export const NPC_BUILDS = {
     stats: { hp: 13, stamina: 17, magicPower: 3, accuracy: -2 }
   },
   scout: {
-    skills: ['covering_fire', 'grappling_shot', 'steady_aim', 'human_determination'],
+    name: 'Ranger',
+    skills: ['trail_warden', 'covering_fire', 'steady_aim', 'human_determination'],
     items: [{ itemId: 'health_potion', qty: 2 }, { itemId: 'stamina_potion', qty: 2 }],
     equip: { weapon: 'hunting_bow', armor: 'leather_armor' },
     stats: { hp: 13, stamina: 15, accuracy: 1, speed: 5 }

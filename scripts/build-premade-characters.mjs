@@ -42,6 +42,10 @@ function premadeIdFromFile(file) {
     .replace(/^_|_$/g, '')
 }
 
+const NPC_NAME_OVERRIDES = {
+  scout: 'Ranger'
+}
+
 function inferFromFilename(file) {
   const stem = cleanStem(file)
   const premadeId = premadeIdFromFile(file)
@@ -70,7 +74,7 @@ function inferFromFilename(file) {
     }
   }
 
-  const name = titleCase(stem)
+  const name = NPC_NAME_OVERRIDES[premadeId] || titleCase(stem)
   if (NPC_ARCHETYPES.test(stem)) {
     return {
       premadeId,

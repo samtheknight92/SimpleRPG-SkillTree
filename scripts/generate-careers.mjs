@@ -146,17 +146,17 @@ const CAREERS_SKILLS_DATA = {
       { id: 'replicate_relic', name: 'Replicate Relic', icon: '📋', desc: 'Craft: Reproduce a studied artifact\'s mundane copy (not full magic without Enchanter).', prereqT2: 'careful_extraction' }
     ]
   ),
-  scout: careerTree(
-    { id: 'trail_reader', name: 'Trail Reader', icon: '🌲', desc: 'Passive: Follow tracks in wilderness; know number and rough size of group.' },
+  ranger: careerTree(
+    { id: 'trail_warden', name: 'Trail Warden', icon: '🌲', desc: 'Passive: Follow tracks in wilderness; know number and rough size of a group. Passive: Party ignores difficult terrain from undergrowth on overland travel (GM).' },
     [
       { id: 'ambush_spotter', name: 'Ambush Spotter', icon: '🎯', desc: 'Passive: Party gains +1 initiative when you have 1 minute to scout ahead.' },
       { id: 'snare_craft', name: 'Snare Craft', icon: '🪤', desc: 'Craft: Simple traps (snare, alarm) — GM sets DC/effect.' },
-      { id: 'weather_nose', name: 'Weather Nose', icon: '🌤️', desc: 'Passive: Predict weather 12 hours ahead in region you know.' }
+      { id: 'keen_sight', name: 'Keen Sight', icon: '👁️', desc: 'Passive: +1 to notice hidden creatures, ambushes, or traps at range (you or allies on overwatch benefit).' }
     ],
     [
       { id: 'long_watch', name: 'Long Watch', icon: '🔭', desc: 'Action: Track a quarry for a day — learn camp sites and direction.', prereqT2: 'ambush_spotter' },
       { id: 'camouflage_net', name: 'Camouflage Net', icon: '🕸️', desc: 'Craft: Hide camp from casual search (+2 Stealth for camp).', prereqT2: 'snare_craft' },
-      { id: 'eagles_route', name: 'Eagle\'s Route', icon: '🦅', desc: 'Passive: Party ignores difficult terrain from undergrowth on overland travel (GM).', prereqT2: 'weather_nose' }
+      { id: 'volley_call', name: 'Volley Call', icon: '📣', desc: 'Action: Call a target — one ally gains +1 on their next attack against it (any weapon or spell). Once per combat.', prereqT2: 'keen_sight' }
     ]
   ),
   engineer: careerTree(
@@ -222,6 +222,97 @@ const CAREERS_SKILLS_DATA = {
       { id: 'turn_unholy', name: 'Turn Unholy', icon: '☀️', desc: 'Action: Warded area 10ft — undead/demons hesitate to enter (GM save).', prereqT2: 'last_rites' },
       { id: 'sanctuary_camp', name: 'Sanctuary Camp', icon: '⛺', desc: 'Action: Short rest in consecrated camp — remove one fear/charm.', prereqT2: 'comfort_the_dying' },
       { id: 'faiths_reservoir', name: 'Faith\'s Reservoir', icon: '💧', desc: 'Passive: Once per day, double HP restored by a potion you administer.', prereqT2: 'holy_symbol_craft' }
+    ]
+  ),
+  soldier: careerTree(
+    { id: 'soldier_training', name: 'Soldier Training', icon: '🛡️', desc: 'Passive: +1 Strength while wearing medium or heavy armour.' },
+    [
+      { id: 'shield_wall', name: 'Shield Wall', icon: '🛡️', desc: 'Action: Adjacent ally gains +1 Physical Defence until your next turn.' },
+      { id: 'rally_cry', name: 'Rally Cry', icon: '📣', desc: 'Action: One ally within 30ft may reroll a failed save (once per combat).' },
+      { id: 'hold_the_line', name: 'Hold the Line', icon: '⚔️', desc: 'Passive: +1 Physical Defence when an ally is within 10ft.' }
+    ],
+    [
+      { id: 'phalanx', name: 'Phalanx', icon: '🏛️', desc: 'Passive: When you and two or more allies attack the same target, all gain +1 accuracy.', prereqT2: 'shield_wall' },
+      { id: 'second_wind', name: 'Second Wind', icon: '💨', desc: 'Action: Restore 1d6 HP (once per short rest).', prereqT2: 'rally_cry' },
+      { id: 'commanders_presence', name: 'Commander\'s Presence', icon: '👑', desc: 'Passive: Allies within 10ft gain +1 to initiative.', prereqT2: 'hold_the_line' }
+    ]
+  ),
+  mage: careerTree(
+    { id: 'arcane_study', name: 'Arcane Study', icon: '📘', desc: 'Passive: Allies you target with magic gain +1 effective Magic Power for buffs and heals you apply.' },
+    [
+      { id: 'empower_ally', name: 'Empower Ally', icon: '✨', desc: 'Action: Ally\'s next spell or magical attack gains +1d4 damage or +2 HP on heal (once per ally per combat).' },
+      { id: 'mana_font', name: 'Mana Font', icon: '🔮', desc: 'Passive: Allies within 10ft regain +1 Stamina when they cast a tier-1 spell (once per round per ally).' },
+      { id: 'dispel_assist', name: 'Dispel Assist', icon: '🧹', desc: 'Action: Grant an ally +2 on their next dispel or cleanse check (GM).' }
+    ],
+    [
+      { id: 'amplified_healing', name: 'Amplified Healing', icon: '💚', desc: 'Passive: Healing spells you cast on others restore +2 HP.', prereqT2: 'empower_ally' },
+      { id: 'ward_circle', name: 'Ward Circle', icon: '⭕', desc: 'Action: 10ft aura — allies gain +1 Magical Defence for 3 rounds (once per combat).', prereqT2: 'mana_font' },
+      { id: 'shared_focus', name: 'Shared Focus', icon: '🤝', desc: 'Passive: Once per combat, sustain one ally\'s concentration effect without using your action (GM).', prereqT2: 'dispel_assist' }
+    ]
+  ),
+  paladin: careerTree(
+    { id: 'oathbound', name: 'Oathbound', icon: '⚔️', desc: 'Passive: +1 Magical Defence; advantage on saves vs fear (GM).' },
+    [
+      { id: 'lay_on_hands', name: 'Lay on Hands', icon: '🤲', desc: 'Action: Touch ally — restore 1d6+1 HP (once per ally per day).' },
+      { id: 'rebuke', name: 'Rebuke', icon: '✋', desc: 'Action: One enemy hesitates — save or cannot use reactions until your next turn (once per combat).' },
+      { id: 'bulwark', name: 'Bulwark', icon: '🧱', desc: 'Passive: +1 Physical Defence while below half HP.' }
+    ],
+    [
+      { id: 'aura_of_protection', name: 'Aura of Protection', icon: '🌟', desc: 'Passive: Allies within 10ft gain +1 Magical Defence vs fear and charm.', prereqT2: 'lay_on_hands' },
+      { id: 'turn_shadow', name: 'Turn Shadow', icon: '☀️', desc: 'Action: Warded 10ft — hostile undead or demons save to enter (weaker than full Turn; once per combat).', prereqT2: 'rebuke' },
+      { id: 'sacred_stance', name: 'Sacred Stance', icon: '🛐', desc: 'Action: +2 Physical Defence and +2 Magical Defence until end of your next turn; you cannot move.', prereqT2: 'bulwark' }
+    ]
+  ),
+  thief: careerTree(
+    { id: 'light_fingers', name: 'Light Fingers', icon: '🤏', desc: 'Passive: +2 on pickpocket and sleight-of-hand checks (GM).' },
+    [
+      { id: 'slip_away', name: 'Slip Away', icon: '💨', desc: 'Action: Disengage — leave melee without provoking opportunity attacks (once per combat).' },
+      { id: 'shadow_blend', name: 'Shadow Blend', icon: '🌑', desc: 'Passive: +1 to Stealth when wearing light armour or no armour.' },
+      { id: 'dirty_trick', name: 'Dirty Trick', icon: '🎭', desc: 'Action: Distract a foe — one ally gains +2 on their next attack against that target.' }
+    ],
+    [
+      { id: 'filch', name: 'Filch', icon: '🎒', desc: 'Action: Attempt to steal one small unequipped item from a target (GM contested roll; once per encounter).', prereqT2: 'slip_away' },
+      { id: 'escape_artist', name: 'Escape Artist', icon: '🔗', desc: 'Passive: +2 vs grapples, restraints, and mundane traps.', prereqT2: 'shadow_blend' },
+      { id: 'hit_and_run', name: 'Hit and Run', icon: '🏃', desc: 'Passive: After you deal damage, move 10ft without provoking opportunity attacks (once per turn).', prereqT2: 'dirty_trick' }
+    ]
+  ),
+  berserker: careerTree(
+    { id: 'battle_fury', name: 'Battle Fury', icon: '😤', desc: 'Passive: +1 damage on melee attacks while below half HP.' },
+    [
+      { id: 'reckless_strike', name: 'Reckless Strike', icon: '💥', desc: 'Action: Your next attack gains +2 damage; you suffer −2 Physical Defence until your next turn.' },
+      { id: 'intimidate', name: 'Intimidate', icon: '😠', desc: 'Action: Foes within 10ft save or suffer −1 accuracy for 1 round.' },
+      { id: 'bloodlust', name: 'Bloodlust', icon: '🩸', desc: 'Passive: On a kill or critical hit, regain 1 Stamina.' }
+    ],
+    [
+      { id: 'rage', name: 'Rage', icon: '🔥', desc: 'Action: +2 Strength, −1 Magical Defence for 3 rounds (once per combat).', prereqT2: 'reckless_strike' },
+      { id: 'unstoppable', name: 'Unstoppable', icon: '🦬', desc: 'Passive: Ignore difficult terrain while moving toward a hostile target.', prereqT2: 'intimidate' },
+      { id: 'executioner', name: 'Executioner', icon: '⚰️', desc: 'Passive: +2 damage vs bloodied targets (GM: below half HP).', prereqT2: 'bloodlust' }
+    ]
+  ),
+  marksman: careerTree(
+    { id: 'steady_hand', name: 'Steady Hand', icon: '🎯', desc: 'Passive: +1 accuracy with ranged weapon attacks.' },
+    [
+      { id: 'overwatch', name: 'Overwatch', icon: '👁️', desc: 'Action: Ready a shot — interrupt one enemy moving in your line of sight (GM).' },
+      { id: 'suppressing_fire', name: 'Suppressing Fire', icon: '🔫', desc: 'Action: Suppress a zone — enemies suffer −1 to attacks or movement for 1 round.' },
+      { id: 'quick_reload', name: 'Quick Reload', icon: '⚡', desc: 'Passive: Ranged attacks cost 1 less Stamina (minimum 0).' }
+    ],
+    [
+      { id: 'called_shot', name: 'Called Shot', icon: '🎯', desc: 'Action: −2 to hit; on hit, +1d6 damage (once per target per combat).', prereqT2: 'overwatch' },
+      { id: 'volley_support', name: 'Volley Support', icon: '📣', desc: 'Passive: Allies gain +1 accuracy vs a target you damaged this round.', prereqT2: 'suppressing_fire' },
+      { id: 'snap_shot', name: 'Snap Shot', icon: '💫', desc: 'Passive: Your first ranged attack each combat ignores half-cover penalties (GM).', prereqT2: 'quick_reload' }
+    ]
+  ),
+  duelist: careerTree(
+    { id: 'precise_footwork', name: 'Precise Footwork', icon: '🩰', desc: 'Passive: +1 Speed while wielding a one-handed weapon.' },
+    [
+      { id: 'parry_riposte', name: 'Parry & Riposte', icon: '🤺', desc: 'Action: When hit by a melee attack, contest to negate damage once per round (GM).' },
+      { id: 'feint', name: 'Feint', icon: '🎪', desc: 'Action: Your next attack vs one target has advantage (once per combat).' },
+      { id: 'disengage_master', name: 'Disengage Master', icon: '👟', desc: 'Passive: Leaving melee does not provoke from one chosen foe per turn.' }
+    ],
+    [
+      { id: 'flourish', name: 'Flourish', icon: '✨', desc: 'Action: Attack and force a save — on fail, target loses reactions until your next turn.', prereqT2: 'parry_riposte' },
+      { id: 'dueling_stance', name: 'Dueling Stance', icon: '⚔️', desc: 'Passive: +1 Physical Defence vs one chosen opponent until you change target.', prereqT2: 'feint' },
+      { id: 'finishing_thrust', name: 'Finishing Thrust', icon: '🗡️', desc: 'Passive: +2 damage vs targets who have not yet acted this round.', prereqT2: 'disengage_master' }
     ]
   )
 }
@@ -295,11 +386,125 @@ const RECIPE_SKILL_MAP = {
   master_archaeologist: 'deduction',
   royal_archaeology: 'deduction',
   shadow_archaeology: 'trap_sense',
-  titan_archaeology: 'lost_technique'
+  titan_archaeology: 'lost_technique',
+  trail_reader: 'trail_warden'
+}
+
+/** Old recipe profession keys → career data keys (Craft tab filter). */
+const PROFESSION_TO_CAREER = {
+  smithing: 'blacksmith',
+  cooking: 'chef',
+  herbalism: 'farmer',
+  alchemy: 'alchemist',
+  enchanting: 'enchanter',
+  archaeology: 'archaeologist'
+}
+
+function fusionSkill(id, name, tier, icon, desc, prerequisites) {
+  return {
+    id,
+    name,
+    tier,
+    cost: tier >= 3 ? 15 : 12,
+    staminaCost: 0,
+    desc,
+    icon,
+    prerequisites,
+    fusionKind: 'career',
+    specialEffects: []
+  }
+}
+
+const CAREER_FUSIONS_DATA = {
+  career_fusion: [
+    fusionSkill(
+      'fusion_ember_hearth',
+      'Ember Hearth',
+      2,
+      '🔥🍳',
+      'Craft: Cook meals without a campfire. Meals you cook gain +1 HP.',
+      { type: 'AND', skills: ['camp_cook', 'fireball'] }
+    ),
+    fusionSkill(
+      'fusion_glacier_pantry',
+      'Glacier Pantry',
+      2,
+      '❄️🫙',
+      'Craft: Preserve food twice as long; chilled rations grant +1 Stamina when eaten.',
+      { type: 'AND', skills: ['ice_armor'], anyOfSkills: ['camp_cook', 'preserve_harvest'] }
+    ),
+    fusionSkill(
+      'fusion_field_spark',
+      'Field Spark',
+      2,
+      '⚡💊',
+      'Action: Stabilise downed ally — restore 1 HP and remove Stunned (once per target per day).',
+      { type: 'AND', skills: ['field_medic', 'lightning_bolt'] }
+    ),
+    fusionSkill(
+      'fusion_shadow_snatch',
+      'Shadow Snatch',
+      2,
+      '🌑👁️',
+      'Action: Attempt to lift one small unequipped item from a target (GM contested roll). Once per long rest.',
+      { type: 'AND', skills: ['keen_eye', 'shadow_step', 'darkness'] }
+    ),
+    fusionSkill(
+      'fusion_mirage_patter',
+      'Mirage Patter',
+      2,
+      '✨💬',
+      'Action: Create a brief believable illusion in conversation (+2 social bluff; no combat decoys).',
+      { type: 'AND', skills: ['blinding_flash'], anyOfSkills: ['haggler', 'interview'] }
+    ),
+    fusionSkill(
+      'fusion_ward_meal',
+      'Ward Meal',
+      2,
+      '✝️🍳',
+      'Craft: Meal removes fear or charm on eat (once per creature per day).',
+      { type: 'AND', skills: ['camp_cook'], anyOfSkills: ['lay_blessing', 'healing_light', 'purify'] }
+    ),
+    fusionSkill(
+      'fusion_living_map',
+      'Living Map',
+      2,
+      '🗺️🌲',
+      'Passive: Once per day, sense safest path through wilderness for 8 hours (GM navigation).',
+      { type: 'AND', skills: ['trail_warden'], anyOfSkills: ['darkvision', 'earth_sense', 'illuminate'] }
+    ),
+    fusionSkill(
+      'fusion_trap_runes',
+      'Trap Runes',
+      2,
+      '🪤✨',
+      'Craft: Snares that trigger a minor rune (alarm + 1d4 magic damage).',
+      { type: 'AND', skills: ['snare_craft', 'rune_apprentice'] }
+    ),
+    fusionSkill(
+      'fusion_alchemical_frost',
+      'Alchemical Frost',
+      2,
+      '❄️⚗️',
+      'Craft: Flash-freeze vials — utility slow, no direct spell damage.',
+      { type: 'AND', skills: ['apothecary', 'ice_armor'] }
+    ),
+    fusionSkill(
+      'fusion_beast_whisper',
+      'Beast Whisper',
+      2,
+      '🐾🌿',
+      'Action: Calm one hostile beast for 1 minute (GM save).',
+      { type: 'AND', skills: ['animal_kin'], anyOfSkills: ['earth_sense', 'gust'] }
+    )
+  ]
 }
 
 const careersOut = `// Auto-generated by scripts/generate-careers.mjs — do not edit by hand\nconst CAREERS_SKILLS_DATA = ${JSON.stringify(CAREERS_SKILLS_DATA, null, 4)}\n\nif (typeof window !== 'undefined') {\n  window.CAREERS_SKILLS_DATA = CAREERS_SKILLS_DATA\n}\n`
 fs.writeFileSync(path.join(dataDir, 'careers-skills-data.js'), careersOut, 'utf8')
+
+const fusionsOut = `// Auto-generated by scripts/generate-careers.mjs — do not edit by hand\nconst CAREER_FUSIONS_DATA = ${JSON.stringify(CAREER_FUSIONS_DATA, null, 4)}\n\nif (typeof window !== 'undefined') {\n  window.CAREER_FUSIONS_DATA = CAREER_FUSIONS_DATA\n}\n`
+fs.writeFileSync(path.join(dataDir, 'career-fusions-skills-data.js'), fusionsOut, 'utf8')
 
 const profPath = path.join(dataDir, 'profession-items-data.js')
 let profCode = fs.readFileSync(profPath, 'utf8')
@@ -310,7 +515,12 @@ profCode = profCode.replace(/"requiredSkills":\s*\[([\s\S]*?)\]/g, (match, inner
   const mapped = [...new Set(ids.map(mapSkill))]
   return `"requiredSkills": [\n                ${mapped.map(id => `"${id}"`).join(',\n                ')}\n            ]`
 })
+profCode = profCode.replace(/"profession":\s*"([^"]+)"/g, (match, key) => {
+  const career = PROFESSION_TO_CAREER[key] || key
+  return `"profession": "${career}"`
+})
 fs.writeFileSync(profPath, profCode, 'utf8')
 
 console.log(`Wrote careers-skills-data.js (${Object.keys(CAREERS_SKILLS_DATA).length} careers)`)
-console.log('Updated profession-items requiredSkills')
+console.log(`Wrote career-fusions-skills-data.js (${CAREER_FUSIONS_DATA.career_fusion.length} fusions)`)
+console.log('Updated profession-items requiredSkills and profession keys')

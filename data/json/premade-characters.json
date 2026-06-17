@@ -7210,7 +7210,7 @@
   },
   {
     "premadeId": "scout",
-    "name": "Scout",
+    "name": "Ranger",
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
@@ -7227,10 +7227,9 @@
       "magicalDefence": 8
     },
     "skills": [
+      "trail_warden",
       "steady_aim",
       "covering_fire",
-      "ranged_basics",
-      "grappling_shot",
       "human_determination"
     ],
     "activeToggles": [],
@@ -7263,7 +7262,7 @@
       "armor": "premade_leather_armor_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Scout."
+    "notes": "Premade NPC archetype: Ranger."
   },
   {
     "premadeId": "sea_serpent",

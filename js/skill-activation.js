@@ -1,6 +1,7 @@
 import { cache } from './cache.js'
 import { getEffect } from './character.js'
 import { getSkill, isToggleSkill } from './skills.js'
+import { resolveCareerActionBuffs } from './career-effects.js'
 
 const DAMAGE_TYPE_EFFECTS = new Set([
   'fire_damage', 'ice_damage', 'lightning_damage', 'earth_damage', 'wind_damage',
@@ -188,6 +189,10 @@ export function isActionBarSkill(skill) {
 
 export function resolveActivationEffects(skill) {
   if (!skill) return []
+
+  const careerBuffs = resolveCareerActionBuffs(skill)
+  if (careerBuffs.length) return careerBuffs
+
   const desc = String(skill.desc || '')
   const payloads = parseApplyPhrases(desc)
   const hasChance = /(?:chance to|may)\s+apply|\d+%\s+chance/i.test(desc)

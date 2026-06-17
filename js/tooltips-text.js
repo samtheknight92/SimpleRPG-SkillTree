@@ -13,6 +13,7 @@ import { effectDetailLines, resolveSkillEffects } from './effects.js'
 import { resolveActivationEffects } from './skill-activation.js'
 import { displayCategory, getSkill, isToggleSkill, prereqLabel } from './skills.js'
 import { cache } from './cache.js'
+import { resolveSkillEffectBreakdown, formatSkillEffectBreakdownPlain, skillHasEffectBreakdown } from './damage-breakdown.js'
 import { itemCompareLines } from './item-compare.js'
 import { craftedByLabel } from './craft-bonuses.js'
 
@@ -82,14 +83,21 @@ export function statRefundTooltip(statKey, rule, character) {
   return lines.join('\n')
 }
 
-export function skillTooltip(skill) {
+export function skillTooltip(skill, character = null) {
   if (!skill) return ''
+  const owned = character?.skills?.includes(skill.id)
   const lines = [
     skill.name,
     `${displayCategory(skill.category)} / ${titleCase(skill.subcategory)} · Tier ${skill.tier || 1}`,
     `Cost: ${skill.cost || 0} Lumens · Stamina: ${Number(skill.staminaCost || 0)}`
   ]
   if (skill.desc) lines.push('', skill.desc)
+
+  if (owned && skillHasEffectBreakdown(skill)) {
+    const breakdown = resolveSkillEffectBreakdown(character, skill)
+    const breakdownLine = formatSkillEffectBreakdownPlain(breakdown)
+    if (breakdownLine) lines.push('', breakdownLine)
+  }
 
   const activations = resolveActivationEffects(skill)
   if (activations.length) {

@@ -10,6 +10,7 @@ import {
   skillsInSubcategory,
   displayCategory,
   canLearnSkill,
+  displaySubcategory,
   incompatibilityReason,
   isToggleSkill,
   prereqLabel,
@@ -389,7 +390,7 @@ function renderCharacterTab(character) {
 
     <section class="card mt-16">
       <h3>Unlocked Skills</h3>
-      ${unlocked.length ? `<div class="wrap">${unlocked.map(skill => `<span class="pill ${isToggleSkill(skill) ? 'warn' : 'good'}" data-tooltip="${esc(skillTooltip(skill))}" tabindex="0">${esc(skill.icon || '✦')} ${esc(skill.name)}</span>`).join('')}</div>` : '<div class="empty">No skills yet. Time to spend shiny brain-money.</div>'}
+      ${unlocked.length ? `<div class="wrap">${unlocked.map(skill => `<span class="pill ${isToggleSkill(skill) ? 'warn' : 'good'}" data-tooltip="${esc(skillTooltip(skill, character))}" tabindex="0">${esc(skill.icon || '✦')} ${esc(skill.name)}</span>`).join('')}</div>` : '<div class="empty">No skills yet. Time to spend shiny brain-money.</div>'}
     </section>
   `
 }
@@ -424,7 +425,7 @@ function renderSkillsTab(character) {
       <span class="pill gold">${isGmMode() ? 'Free (GM)' : `${costRemaining}L remaining`}</span>
     </div>
     <div class="segmented">${categories.map(category => `<button type="button" data-skill-category="${esc(category)}" class="${category === state.skillCategory ? 'active' : ''}">${displayCategory(category)}</button>`).join('')}</div>
-    <div class="segmented">${subs.map(sub => `<button type="button" data-skill-subcategory="${esc(sub)}" class="${sub === state.skillSubcategory ? 'active' : ''}">${titleCase(sub)}</button>`).join('')}</div>
+    <div class="segmented">${subs.map(sub => `<button type="button" data-skill-subcategory="${esc(sub)}" class="${sub === state.skillSubcategory ? 'active' : ''}">${displaySubcategory(sub)}</button>`).join('')}</div>
     <div class="skill-tree">
       ${[...byTier.entries()].sort((a, b) => a[0] - b[0]).map(([tier, skills]) => `
         <section class="tier-lane">
@@ -446,7 +447,7 @@ function renderSkillCard(character, skill) {
     ? `<button type="button" class="ghost-btn tiny" data-refund-skill="${esc(skill.id)}">Refund</button>${isToggleSkill(skill) ? `<button type="button" class="chip-btn tiny" data-toggle-skill="${esc(skill.id)}">${active ? 'Switch Off' : 'Switch On'}</button>` : ''}`
     : `<button type="button" class="primary-btn tiny" data-learn-skill="${esc(skill.id)}" ${check.ok ? '' : 'disabled'}>Learn</button>`
   return `
-    <article class="skill-card ${cls}" data-tooltip="${esc(skillTooltip(skill))}" tabindex="0">
+    <article class="skill-card ${cls}" data-tooltip="${esc(skillTooltip(skill, unlocked ? character : null))}" tabindex="0">
       <div class="skill-top">
         <div class="skill-icon">${esc(skill.icon || '✦')}</div>
         <div>
@@ -463,6 +464,7 @@ function renderSkillCard(character, skill) {
       <div class="wrap detail-pills">
         ${isToggleSkill(skill) ? '<span class="pill warn">Toggle</span>' : ''}
         ${skill.elementalType ? `<span class="pill">${titleCase(skill.elementalType)}</span>` : ''}
+        ${skill.fusionKind === 'career' ? '<span class="pill good">Career Fusion</span>' : ''}
         ${skill.lootType ? `<span class="pill">${titleCase(skill.lootType)}</span>` : ''}
         ${conflict ? '<span class="pill bad">Conflict</span>' : ''}
       </div>
@@ -692,7 +694,7 @@ function renderCraftTab(character) {
       <div class="toolbar item-toolbar">
         <input class="input" id="craft-search" placeholder="Search recipes, materials, careers..." value="${esc(state.craftSearch)}" />
         <select class="input" id="craft-profession">
-          ${professions.map(profession => `<option value="${esc(profession)}" ${state.craftProfession === profession ? 'selected' : ''}>${profession === 'all' ? 'All careers' : titleCase(profession)}</option>`).join('')}
+          ${professions.map(profession => `<option value="${esc(profession)}" ${state.craftProfession === profession ? 'selected' : ''}>${profession === 'all' ? 'All careers' : displaySubcategory(profession)}</option>`).join('')}
         </select>
         <label class="pill ${state.craftLearnedOnly ? 'good' : ''}" style="display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;">
           <input type="checkbox" id="craft-learned-only" ${state.craftLearnedOnly ? 'checked' : ''} ${gmFree ? 'disabled' : ''} />
@@ -717,7 +719,7 @@ function renderCraftRecipeCard(recipe, character) {
         <strong>${fallbackIcon(recipe)} ${esc(recipe.name)}</strong>
         <span class="pill">${esc(recipe.tier || recipe.rarity || 'craft')}</span>
       </div>
-      <div class="item-meta">${esc(titleCase(recipe.profession || 'career'))} · ${esc(recipe.type || 'item')}</div>
+      <div class="item-meta">${esc(displaySubcategory(recipe.profession || 'career'))} · ${esc(recipe.type || 'item')}</div>
       <p class="subtle">${esc(recipe.desc || 'No description provided.')}</p>
       <div class="wrap detail-pills">
         <span class="pill">Requires: ${esc(skillLabels || '—')}</span>

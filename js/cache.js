@@ -17,6 +17,12 @@ export const cache = {
   equipmentSkillEffects: {},
   toggleSkillEffects: {},
   incompatibilities: {},
+  armourSkillEffects: {},
+  conditionalSkillStats: {},
+  careerDamageBonuses: {},
+  careerHealBonuses: {},
+  careerActionBuffs: {},
+  careerStaminaDiscounts: {},
   effectDefinitions: {}
 }
 
@@ -58,6 +64,12 @@ export function initCache() {
   cache.equipmentSkillEffects = data['skill-meta']?.EQUIPMENT_SKILL_EFFECTS || {}
   cache.toggleSkillEffects = data['skill-meta']?.TOGGLE_SKILL_EFFECTS || {}
   cache.incompatibilities = data['skill-meta']?.INCOMPATIBILITIES || {}
+  cache.armourSkillEffects = data['skill-meta']?.ARMOUR_SKILL_EFFECTS || {}
+  cache.conditionalSkillStats = data['skill-meta']?.CONDITIONAL_SKILL_STATS || {}
+  cache.careerDamageBonuses = data['skill-meta']?.CAREER_DAMAGE_BONUSES || {}
+  cache.careerHealBonuses = data['skill-meta']?.CAREER_HEAL_BONUSES || {}
+  cache.careerActionBuffs = data['skill-meta']?.CAREER_ACTION_BUFFS || {}
+  cache.careerStaminaDiscounts = data['skill-meta']?.CAREER_STAMINA_DISCOUNTS || {}
 
   cache.skillsFlat = []
   cache.skillById.clear()

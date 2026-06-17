@@ -54,6 +54,7 @@ import { state, activeCharacter, resetItemFilters } from './state.js'
 import { TAB_IDS } from './constants.js'
 import { DEFAULT_BACKGROUND } from './backgrounds.js'
 import { debounce, toast } from './utils.js'
+import { applyTheme, applyAppearance } from './themes.js'
 import { saveNow } from './storage.js'
 import { subcategoriesFor, visibleSubcategories } from './skills.js'
 import { syncUrlState } from './url-state.js'
@@ -189,6 +190,12 @@ const clickActions = {
   gmPremadeCategory(target) {
     state.gmPremadeCategory = target.dataset.gmPremadeCategory || 'all'
     render({ content: true })
+  },
+  setTheme(target) {
+    applyTheme(target.dataset.setTheme)
+  },
+  setAppearance(target) {
+    applyAppearance(target.dataset.setAppearance)
   }
 }
 

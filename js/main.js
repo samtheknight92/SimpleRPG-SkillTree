@@ -8,8 +8,11 @@ import { setupTooltips } from './tooltips.js'
 import { initUrlState, syncUrlState } from './url-state.js'
 import { computeStats } from './character.js'
 
+import { initTheme, applyTheme } from './themes.js'
+
 async function boot() {
   try {
+    initTheme()
     await loadGameData()
     initCache()
     load()

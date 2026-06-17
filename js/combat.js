@@ -1,13 +1,19 @@
-import { getItem } from './cache.js'
 import { getEquippedWeapon, getEquippedOffhand, getWeaponKind } from './equipment.js'
 import { getSkillWeaponKinds, ANY_WEAPON_KIND } from './action-bar-bonuses.js'
 import { getSkillActivationType } from './skill-activation.js'
+import {
+  BASIC_ATTACK_ID,
+  applyBasicAttackDamage,
+  formatDamageModifierSummary,
+  isBasicAttackSkill,
+  rollWeaponDamage
+} from './damage-breakdown.js'
+import { invalidateCharacterCache } from './character.js'
 
-export const BASIC_ATTACK_ID = '__basic_attack__'
+export { BASIC_ATTACK_ID, isBasicAttackSkill, rollWeaponDamage }
 
 /** Ranged skills that intentionally work after movement. */
 const MOVE_EXEMPT_SKILL_IDS = new Set(['quick_draw'])
-
 export function getBasicAttackSkill(character) {
   const weapon = getEquippedWeapon(character)
   const offhand = getEquippedOffhand(character)
@@ -16,6 +22,7 @@ export function getBasicAttackSkill(character) {
   else if (weapon) parts.push(`${weapon.name} (1 damage)`)
   else parts.push('Unarmed: 1 damage')
   if (offhand?.damage) parts.push(`+ ${offhand.name}: ${offhand.damage}`)
+  const onHit = parts.length ? `${parts.join('; ')} + Strength` : '1 + Strength'
   return {
     id: BASIC_ATTACK_ID,
     name: 'Basic Attack',
@@ -24,13 +31,9 @@ export function getBasicAttackSkill(character) {
     staminaCost: 0,
     category: 'combat',
     subcategory: 'attack',
-    desc: `Action: Strike with your weapon. Roll d20 + accuracy vs target Physical Defence; on hit: ${parts.join('; ')}.`,
+    desc: `Action: Strike with your weapon. Roll d20 + accuracy vs target Physical Defence; on hit: ${onHit}.`,
     isBasicAttack: true
   }
-}
-
-export function isBasicAttackSkill(skill) {
-  return skill?.id === BASIC_ATTACK_ID || skill?.isBasicAttack
 }
 
 export function skillRequiredWeaponKinds(skill) {
@@ -139,43 +142,23 @@ export function canUseSkillFromBar(character, skill) {
   return true
 }
 
-function parseDamageFormula(formula) {
-  const text = String(formula || '').trim()
-  const match = text.match(/^(\d+)d(\d+)(?:\s*\+\s*(\d+))?$/i)
-  if (!match) return null
-  return {
-    count: Number(match[1]),
-    sides: Number(match[2]),
-    modifier: Number(match[3] || 0)
-  }
-}
-
-export function rollWeaponDamage(formula, rollDiceFn) {
-  const parsed = parseDamageFormula(formula)
-  if (!parsed) return { total: 1, detail: '1' }
-  const rolls = rollDiceFn(parsed.count, parsed.sides, parsed.modifier)
-  return {
-    total: rolls.total,
-    detail: rolls.rolls?.length
-      ? `${rolls.rolls.join('+')}${parsed.modifier ? `+${parsed.modifier}` : ''} = ${rolls.total}`
-      : String(rolls.total)
-  }
-}
-
 export function resolveBasicAttackDamage(character, rollDiceFn) {
+  invalidateCharacterCache(character)
+
   const segments = []
-  let total = 0
+  let baseTotal = 0
   const main = getEquippedWeapon(character)
   const off = getEquippedOffhand(character)
+  const skill = getBasicAttackSkill(character)
 
   if (main) {
     const result = main.damage
       ? rollWeaponDamage(main.damage, rollDiceFn)
       : { total: 1, detail: '1' }
-    total += result.total
+    baseTotal += result.total
     segments.push(`${main.name}: ${result.detail}`)
   } else {
-    total += 1
+    baseTotal += 1
     segments.push('Unarmed: 1')
   }
 
@@ -183,9 +166,11 @@ export function resolveBasicAttackDamage(character, rollDiceFn) {
     const result = off.damage
       ? rollWeaponDamage(off.damage, rollDiceFn)
       : { total: 1, detail: '1' }
-    total += result.total
+    baseTotal += result.total
     segments.push(`${off.name}: ${result.detail}`)
   }
 
-  return { total, summary: segments.join('; ') }
+  const finalized = applyBasicAttackDamage(character, skill, baseTotal)
+  const summary = formatDamageModifierSummary(segments.join('; '), finalized)
+  return { total: finalized.total, summary, baseTotal, finalized }
 }

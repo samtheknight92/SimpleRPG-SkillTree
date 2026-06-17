@@ -1,4 +1,4 @@
-import { TAB_IDS } from './constants.js'
+import { TAB_IDS, RETIRED_SKILL_SUBCATEGORIES } from './constants.js'
 import { parseUrlState } from './url-state.js'
 
 export const state = {
@@ -45,7 +45,9 @@ export function applyUrlState() {
   if (fromUrl.skillCategory) {
     state.skillCategory = fromUrl.skillCategory === 'monster' ? 'racial' : fromUrl.skillCategory
   }
-  if (fromUrl.skillSubcategory) state.skillSubcategory = fromUrl.skillSubcategory
+  if (fromUrl.skillSubcategory) {
+    state.skillSubcategory = RETIRED_SKILL_SUBCATEGORIES[fromUrl.skillSubcategory] || fromUrl.skillSubcategory
+  }
   if (fromUrl.itemSource) state.itemSource = fromUrl.itemSource
   if (fromUrl.itemPage != null) state.itemPage = fromUrl.itemPage
 }

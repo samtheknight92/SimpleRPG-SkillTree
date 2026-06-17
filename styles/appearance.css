@@ -1,0 +1,189 @@
+/* Light / dark appearance — works with any colour theme (data-theme) */
+
+:root,
+html[data-appearance="dark"] {
+  color-scheme: dark;
+  --ghost-bg-top: rgba(255, 255, 255, 0.06);
+  --ghost-bg-bottom: rgba(255, 255, 255, 0.035);
+  --meter-label: #eef4ff;
+  --meter-value: #dce6f8;
+  --meter-control-text: #eef4ff;
+  --meter-control-bg: rgba(255, 255, 255, 0.08);
+  --brand-mark-text: #0b1120;
+  --item-title: #fff5d7;
+  --stat-value: #fff4cf;
+  --resource-label: #fff3d3;
+  --effect-title: #fff0cd;
+  --tooltip-bg: rgba(5, 10, 24, 0.98);
+  --tooltip-bg-accent: rgba(73, 139, 255, 0.18);
+  --tooltip-text: #eef4ff;
+  --tooltip-text-muted: rgba(220, 230, 248, 0.72);
+  --tooltip-text-faint: rgba(220, 230, 248, 0.5);
+  --tooltip-title: #ffffff;
+  --tooltip-border: rgba(239, 203, 124, 0.22);
+  --tooltip-divider: rgba(239, 203, 124, 0.14);
+  --tooltip-warn: #ffc98a;
+  --tooltip-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(90, 147, 255, 0.1);
+}
+
+/*
+ * Light mode: white/grey surfaces + boosted theme accents
+ * (--blue-2, --brand-accent, --btn-primary-*, etc. from data-theme)
+ */
+html[data-appearance="light"] {
+  color-scheme: light;
+
+  --text: #0f172a;
+  --muted: #475569;
+  --muted-2: #64748b;
+  --bg: #f8fafc;
+  --bg-deep: #f1f5f9;
+  --bg-panel: rgba(255, 255, 255, 0.94);
+  --bg-panel-strong: #ffffff;
+  --bg-soft: color-mix(in srgb, var(--blue-2) 6%, #f1f5f9);
+  --shadow-lg: 0 28px 90px color-mix(in srgb, var(--blue-2) 12%, rgba(15, 23, 42, 0.14));
+  --shadow-md: 0 16px 42px color-mix(in srgb, var(--blue-2) 10%, rgba(15, 23, 42, 0.1));
+
+  --title: var(--blue-2);
+  --heading: color-mix(in srgb, var(--blue-2) 72%, #0f172a);
+  --strong-text: #0f172a;
+  --blue: var(--blue-2);
+  --gold: var(--gold-2);
+  --item-title: color-mix(in srgb, var(--blue-2) 65%, #0f172a);
+  --stat-value: var(--blue-2);
+  --resource-label: color-mix(in srgb, var(--blue-2) 60%, #0f172a);
+  --effect-title: color-mix(in srgb, var(--gold-2) 55%, #0f172a);
+
+  --body-glow-1: color-mix(in srgb, var(--blue-2) 28%, #ffffff);
+  --body-glow-2: color-mix(in srgb, var(--brand-accent) 18%, #f1f5f9);
+  --body-glow-3: color-mix(in srgb, var(--blue-2) 22%, #ffffff);
+  --body-glow-4: color-mix(in srgb, var(--gold-2) 14%, #e2e8f0);
+  --body-gradient-top: #ffffff;
+  --body-gradient-mid: #f8fafc;
+  --body-gradient-bottom: color-mix(in srgb, var(--blue-2) 6%, #e2e8f0);
+
+  --line: color-mix(in srgb, var(--blue-2) 34%, #e2e8f0);
+  --line-strong: color-mix(in srgb, var(--blue-2) 58%, #94a3b8);
+  --line-glow: color-mix(in srgb, var(--blue-2) 72%, #ffffff);
+  --surface-border: color-mix(in srgb, var(--blue-2) 40%, #e2e8f0);
+  --surface-border-soft: color-mix(in srgb, var(--blue-2) 26%, #f1f5f9);
+  --panel-border: var(--surface-border);
+  --brand-divider: color-mix(in srgb, var(--blue-2) 38%, #e2e8f0);
+
+  --panel-bg-top: #ffffff;
+  --panel-bg-bottom: #f8fafc;
+  --panel-shine-gold: color-mix(in srgb, var(--gold-2) 16%, transparent);
+  --panel-shine-accent: color-mix(in srgb, var(--blue-2) 20%, transparent);
+  --surface-elevated-top: #ffffff;
+  --surface-elevated-bottom: #f8fafc;
+  --surface-card-top: #ffffff;
+  --surface-card-bottom: #f1f5f9;
+  --surface-input-top: #ffffff;
+  --surface-input-bottom: #f8fafc;
+  --surface-row-top: #ffffff;
+  --surface-row-bottom: #f8fafc;
+  --surface-ring-start: color-mix(in srgb, var(--blue-2) 52%, transparent);
+  --surface-ring-end: color-mix(in srgb, var(--blue-2) 14%, transparent);
+  --topbar-top: #ffffff;
+  --topbar-bottom: #f8fafc;
+  --tabbar-bg: color-mix(in srgb, var(--blue-2) 5%, #f1f5f9);
+  --content-glow: color-mix(in srgb, var(--blue-2) 24%, transparent);
+  --notice-glow: color-mix(in srgb, var(--blue-2) 22%, transparent);
+
+  --tab-text: color-mix(in srgb, var(--blue-2) 38%, #475569);
+  --tab-active-text: #ffffff;
+  --btn-primary-text: #ffffff;
+  --btn-hover-border: color-mix(in srgb, var(--blue-2) 55%, #94a3b8);
+  --btn-ghost-chip: color-mix(in srgb, var(--blue-2) 16%, #f1f5f9);
+  --input-focus-border: color-mix(in srgb, var(--blue-2) 65%, #94a3b8);
+  --input-focus-ring: color-mix(in srgb, var(--blue-2) 22%, transparent);
+
+  --card-active-border: color-mix(in srgb, var(--blue-2) 62%, #94a3b8);
+  --card-active-bg-start: color-mix(in srgb, var(--blue-2) 22%, #ffffff);
+  --card-active-bg-end: color-mix(in srgb, var(--blue-2) 10%, #f8fafc);
+  --card-active-inset: color-mix(in srgb, var(--blue-2) 45%, transparent);
+  --avatar-text: var(--blue-2);
+  --avatar-border: color-mix(in srgb, var(--blue-2) 48%, #e2e8f0);
+  --avatar-bg-start: color-mix(in srgb, var(--blue-2) 18%, #ffffff);
+  --avatar-bg-end: color-mix(in srgb, var(--blue-2) 8%, #f8fafc);
+  --avatar-inset: color-mix(in srgb, var(--blue-2) 35%, transparent);
+  --brand-mark-text: #ffffff;
+  --brand-shadow: color-mix(in srgb, var(--blue-2) 35%, rgba(15, 23, 42, 0.12));
+
+  --ghost-bg-top: color-mix(in srgb, var(--blue-2) 7%, #ffffff);
+  --ghost-bg-bottom: color-mix(in srgb, var(--blue-2) 4%, #f8fafc);
+  --meter-label: color-mix(in srgb, var(--blue-2) 55%, #475569);
+  --meter-value: var(--text);
+  --meter-control-text: var(--text);
+  --meter-control-bg: color-mix(in srgb, var(--blue-2) 8%, #f1f5f9);
+  --tooltip-bg: #ffffff;
+  --tooltip-bg-accent: color-mix(in srgb, var(--blue-2) 12%, transparent);
+  --tooltip-text: #0f172a;
+  --tooltip-text-muted: #64748b;
+  --tooltip-text-faint: #94a3b8;
+  --tooltip-title: #0f172a;
+  --tooltip-border: color-mix(in srgb, var(--blue-2) 38%, #e2e8f0);
+  --tooltip-divider: color-mix(in srgb, var(--blue-2) 22%, #e2e8f0);
+  --tooltip-warn: #b45309;
+  --tooltip-shadow: 0 20px 50px color-mix(in srgb, var(--blue-2) 14%, rgba(15, 23, 42, 0.16));
+}
+
+html[data-appearance="light"] body::before {
+  opacity: 0.35;
+  background-image:
+    radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--blue-2) 45%, transparent) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 30% 60%, color-mix(in srgb, var(--brand-accent) 30%, transparent) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 75% 24%, color-mix(in srgb, var(--gold-2) 35%, transparent) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 82% 74%, color-mix(in srgb, var(--blue-2) 25%, transparent) 0 1px, transparent 1.5px);
+}
+
+html[data-appearance="light"] body::after {
+  background:
+    linear-gradient(to top, color-mix(in srgb, var(--blue-2) 8%, transparent), transparent 18rem),
+    linear-gradient(to bottom, color-mix(in srgb, var(--blue-2) 5%, transparent), transparent 10rem calc(100% - 10rem), color-mix(in srgb, var(--blue-2) 8%, transparent));
+}
+
+html[data-appearance="light"] .pill.gold {
+  color: var(--gold-2);
+  border-color: color-mix(in srgb, var(--gold-2) 40%, #e2e8f0);
+  background: color-mix(in srgb, var(--gold-2) 12%, #ffffff);
+}
+
+html[data-appearance="light"] .chip-btn {
+  border-color: color-mix(in srgb, var(--blue-2) 32%, #e2e8f0);
+  color: color-mix(in srgb, var(--blue-2) 70%, #0f172a);
+}
+
+html[data-appearance="light"] .theme-swatch.active {
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--blue-2) 25%, #ffffff),
+    0 6px 16px color-mix(in srgb, var(--blue-2) 28%, rgba(15, 23, 42, 0.18));
+}
+
+html[data-appearance="light"] .kicker,
+html[data-appearance="light"] .effect-mini-title {
+  color: var(--blue-2);
+}
+
+html[data-appearance="light"] .skill-card.unlocked {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--good) 14%, #ffffff), var(--surface-row-bottom));
+}
+
+html[data-appearance="light"] .effect-card {
+  background: linear-gradient(180deg, var(--surface-row-top), var(--surface-row-bottom));
+}
+
+html[data-appearance="light"] .effect-card.good {
+  border-color: color-mix(in srgb, var(--good) 45%, #e2e8f0);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--good) 12%, #ffffff), var(--surface-row-bottom));
+}
+
+html[data-appearance="light"] .effect-card.warn {
+  border-color: color-mix(in srgb, var(--warn) 45%, #e2e8f0);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--warn) 12%, #ffffff), var(--surface-row-bottom));
+}
+
+html[data-appearance="light"] .effect-card.bad {
+  border-color: color-mix(in srgb, var(--bad) 45%, #e2e8f0);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bad) 10%, #ffffff), var(--surface-row-bottom));
+}

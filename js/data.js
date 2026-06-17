@@ -11,17 +11,30 @@ const FILES = [
 ]
 
 let gameData = null
+let dataVersion = ''
+
+async function fetchJson(path) {
+  const query = dataVersion ? `?v=${encodeURIComponent(dataVersion)}` : ''
+  const response = await fetch(`${path}${query}`, { cache: 'no-store' })
+  if (!response.ok) throw new Error(`Failed to load ${path}`)
+  return response.json()
+}
 
 export async function loadGameData() {
+  try {
+    const manifest = await fetchJson('data/json/manifest.json')
+    dataVersion = String(manifest?.version || '')
+  } catch {
+    dataVersion = ''
+  }
+
   const entries = await Promise.all(FILES.map(async file => {
-    const response = await fetch(`data/json/${file}.json`)
-    if (!response.ok) throw new Error(`Failed to load data/json/${file}.json`)
-    return [file, await response.json()]
+    const data = await fetchJson(`data/json/${file}.json`)
+    return [file, data]
   }))
   gameData = Object.fromEntries(entries)
   return gameData
 }
-
 export function getGameData() {
   if (!gameData) throw new Error('Game data not loaded')
   return gameData

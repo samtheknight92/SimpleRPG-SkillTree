@@ -56,3 +56,28 @@ export const DISPLAY_CATEGORIES = {
   ultimate: 'Ultimate',
   racial: 'Race'
 }
+
+/** Friendly labels for skill subcategory keys (careers, fusion trees, etc.). */
+export const SKILL_SUBCATEGORY_LABELS = {
+  ranger: 'Ranger',
+  soldier: 'Soldier',
+  mage: 'Mage',
+  paladin: 'Paladin',
+  thief: 'Thief',
+  berserker: 'Berserker',
+  marksman: 'Marksman',
+  duelist: 'Duelist',
+  beast_handler: 'Beast Handler',
+  cleric_lay: 'Cleric',
+  career_fusion: 'Career Fusion',
+  ranged_magic: 'Ranged + Magic',
+  melee_magic: 'Melee + Magic',
+  utility_combat: 'Utility Combat',
+  monster_fusion: 'Monster Fusion',
+  pure_magic: 'Pure Magic'
+}
+
+/** Retired skill-tree keys mapped to replacements (UI + saves). */
+export const RETIRED_SKILL_SUBCATEGORIES = {
+  scout: 'ranger'
+}

@@ -7,7 +7,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "reinforced_leather_armor",
             "name": "Reinforced Leather Armor",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "basic",
             "statModifiers": {
                 "physicalDefence": 2,
@@ -37,7 +37,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "claw_gauntlets",
             "name": "Claw Gauntlets",
             "type": "craftable_weapon",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "basic",
             "statModifiers": {
                 "strength": 2,
@@ -70,7 +70,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "bone_buckler",
             "name": "Bone Buckler",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "basic",
             "statModifiers": {
                 "physicalDefence": 1,
@@ -103,7 +103,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "beast_hide_boots",
             "name": "Beast Hide Boots",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "basic",
             "statModifiers": {
                 "speed": 2,
@@ -136,7 +136,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "fang_dagger",
             "name": "Fang Dagger",
             "type": "craftable_weapon",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "basic",
             "statModifiers": {
                 "strength": 1,
@@ -169,7 +169,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "bone_club",
             "name": "Bone Club",
             "type": "craftable_weapon",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "basic",
             "statModifiers": {
                 "strength": 3
@@ -201,7 +201,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "living_stone_armor",
             "name": "Living Stone Armor",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "advanced",
             "statModifiers": {
                 "physicalDefence": 4,
@@ -238,7 +238,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "razor_talon_daggers",
             "name": "Razor Talon Daggers",
             "type": "craftable_weapon",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "advanced",
             "statModifiers": {
                 "speed": 3,
@@ -277,7 +277,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "drake_scale_mail",
             "name": "Drake Scale Mail",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "advanced",
             "statModifiers": {
                 "physicalDefence": 4,
@@ -316,7 +316,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "venom_blade",
             "name": "Venom Blade",
             "type": "craftable_weapon",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "advanced",
             "statModifiers": {
                 "strength": 3,
@@ -355,7 +355,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "crystal_hammer",
             "name": "Crystal Hammer",
             "type": "craftable_weapon",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "advanced",
             "statModifiers": {
                 "strength": 4,
@@ -394,7 +394,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "segmented_carapace_armor",
             "name": "Segmented Carapace Armor",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "expert",
             "statModifiers": {
                 "physicalDefence": 6,
@@ -434,7 +434,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "void_steel_blade",
             "name": "Void Steel Blade",
             "type": "craftable_weapon",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "expert",
             "statModifiers": {
                 "strength": 5,
@@ -477,7 +477,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "guardian_shield",
             "name": "Guardian Shield",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "expert",
             "statModifiers": {
                 "physicalDefence": 5,
@@ -518,7 +518,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "phoenix_regeneration_armor",
             "name": "Phoenix Regeneration Armor",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "master",
             "statModifiers": {
                 "physicalDefence": 8,
@@ -562,7 +562,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "dragonheart_sword",
             "name": "Dragonheart Sword",
             "type": "craftable_weapon",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "master",
             "statModifiers": {
                 "strength": 6,
@@ -606,7 +606,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "titan_plate_armor",
             "name": "Titan Plate Armor",
             "type": "craftable_armor",
-            "profession": "smithing",
+            "profession": "blacksmith",
             "tier": "master",
             "statModifiers": {
                 "physicalDefence": 10,
@@ -653,7 +653,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "healing_salve",
             "name": "Healing Salve",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "basic",
             "effect": {
                 "type": "heal",
@@ -683,7 +683,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "antitoxin_draught",
             "name": "Antitoxin Draught",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "basic",
             "effect": {
                 "type": "cure_poison",
@@ -713,7 +713,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "stamina_potion",
             "name": "Stamina Potion",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "basic",
             "effect": {
                 "type": "restore_stamina",
@@ -743,7 +743,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "beast_repellent",
             "name": "Beast Repellent",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "basic",
             "effect": {
                 "type": "stealth_boost",
@@ -773,7 +773,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "minor_magic_elixir",
             "name": "Minor Magic Elixir",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -806,7 +806,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "flame_resistance_potion",
             "name": "Flame Resistance Potion",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "advanced",
             "effect": {
                 "type": "fire_resistance",
@@ -841,7 +841,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "berserker_elixir",
             "name": "Berserker Elixir",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -875,7 +875,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "frost_shield_potion",
             "name": "Frost Shield Potion",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "advanced",
             "effect": {
                 "type": "magical_barrier",
@@ -910,7 +910,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "giant_strength_serum",
             "name": "Giant Strength Serum",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -944,7 +944,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "shadow_step_elixir",
             "name": "Shadow Step Elixir",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -984,7 +984,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "regeneration_elixir",
             "name": "Regeneration Elixir",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "expert",
             "effect": {
                 "type": "regeneration",
@@ -1016,7 +1016,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "void_walker_serum",
             "name": "Void Walker Serum",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -1058,7 +1058,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "dragon_blood_elixir",
             "name": "Dragon Blood Elixir",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -1098,7 +1098,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "phoenix_rebirth_elixir",
             "name": "Phoenix Rebirth Elixir",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "master",
             "effect": {
                 "type": "full_restoration",
@@ -1138,7 +1138,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "immortality_essence",
             "name": "Immortality Essence",
             "type": "consumable",
-            "profession": "alchemy",
+            "profession": "alchemist",
             "tier": "master",
             "effect": {
                 "type": "stat_boost",
@@ -1187,7 +1187,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "weapon_sharpening_stone",
             "name": "Weapon Sharpening Stone",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "basic",
             "effect": {
                 "type": "weapon_enchant",
@@ -1223,7 +1223,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "armor_ward_charm",
             "name": "Armor Ward Charm",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "basic",
             "effect": {
                 "type": "armor_enchant",
@@ -1255,7 +1255,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "speed_enhancement_rune",
             "name": "Speed Enhancement Rune",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -1292,7 +1292,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "strength_blessing_stone",
             "name": "Strength Blessing Stone",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -1329,7 +1329,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "elemental_weapon_crystal",
             "name": "Elemental Weapon Crystal",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "advanced",
             "effect": {
                 "type": "weapon_enchant",
@@ -1368,7 +1368,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "barrier_crystal",
             "name": "Barrier Crystal",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "advanced",
             "effect": {
                 "type": "magical_shield",
@@ -1403,7 +1403,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "soul_enhancement_gem",
             "name": "Soul Enhancement Gem",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -1442,7 +1442,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "phase_walker_amulet",
             "name": "Phase Walker Amulet",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -1482,7 +1482,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "spell_amplifier_orb",
             "name": "Spell Amplifier Orb",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "expert",
             "effect": {
                 "type": "spell_power",
@@ -1522,7 +1522,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "reality_anchor",
             "name": "Reality Anchor",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -1564,7 +1564,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "ascension_sigil",
             "name": "Ascension Sigil",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -1604,7 +1604,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "transcendence_gem",
             "name": "Transcendence Gem",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "master",
             "effect": {
                 "type": "permanent_enchant",
@@ -1644,7 +1644,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "godslayer_rune",
             "name": "Godslayer Rune",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "master",
             "effect": {
                 "type": "permanent_enchant",
@@ -1689,7 +1689,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "infinity_core",
             "name": "Infinity Core",
             "type": "enhancement",
-            "profession": "enchanting",
+            "profession": "enchanter",
             "tier": "master",
             "effect": {
                 "type": "permanent_enchant",
@@ -1735,7 +1735,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "monster_jerky",
             "name": "Monster Jerky",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "basic",
             "effect": {
                 "type": "stat_food",
@@ -1768,7 +1768,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "claw_soup",
             "name": "Claw Soup",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "basic",
             "effect": {
                 "type": "stat_food",
@@ -1802,7 +1802,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "energy_steaks",
             "name": "Energy Steaks",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "basic",
             "effect": {
                 "type": "stat_food",
@@ -1835,7 +1835,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "hunter_bread",
             "name": "Hunter's Bread",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "basic",
             "effect": {
                 "type": "stat_food",
@@ -1869,7 +1869,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "defensive_stew",
             "name": "Defensive Stew",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "basic",
             "effect": {
                 "type": "stat_food",
@@ -1903,7 +1903,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "regenerative_stew",
             "name": "Regenerative Stew",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "advanced",
             "effect": {
                 "type": "health_regen",
@@ -1938,7 +1938,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "spiced_fire_roast",
             "name": "Spiced Fire Roast",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -1976,7 +1976,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "honey_glazed_treats",
             "name": "Honey Glazed Treats",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -2014,7 +2014,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "crystal_meat_pie",
             "name": "Crystal Meat Pie",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -2052,7 +2052,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "warrior_feast",
             "name": "Warrior's Feast",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -2090,7 +2090,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "swift_hunter_meal",
             "name": "Swift Hunter Meal",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -2128,7 +2128,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "elemental_feast",
             "name": "Elemental Feast",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "expert",
             "effect": {
                 "type": "elemental_resistance",
@@ -2168,7 +2168,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "dragon_scale_casserole",
             "name": "Dragon Scale Casserole",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -2208,7 +2208,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "void_essence_broth",
             "name": "Void Essence Broth",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -2250,7 +2250,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "phoenix_banquet",
             "name": "Phoenix Banquet",
             "type": "food",
-            "profession": "cooking",
+            "profession": "chef",
             "tier": "master",
             "effect": {
                 "type": "legendary_food",
@@ -2293,7 +2293,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "ancient_coin",
             "name": "Ancient Coin",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "basic",
             "effect": {
                 "type": "currency_bonus",
@@ -2323,7 +2323,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "bone_relic",
             "name": "Bone Relic",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "basic",
             "effect": {
                 "type": "undead_protection",
@@ -2357,7 +2357,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "forgotten_map",
             "name": "Forgotten Map",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "basic",
             "effect": {
                 "type": "exploration_bonus",
@@ -2387,7 +2387,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "warriors_charm",
             "name": "Warrior's Charm",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -2421,7 +2421,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "mystic_amulet",
             "name": "Mystic Amulet",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -2459,7 +2459,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "elemental_tablet",
             "name": "Elemental Tablet",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "advanced",
             "effect": {
                 "type": "elemental_knowledge",
@@ -2497,7 +2497,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "crystal_resonator",
             "name": "Crystal Resonator",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -2538,7 +2538,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "shadow_walker_mask",
             "name": "Shadow Walker Mask",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -2579,7 +2579,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "titans_legacy",
             "name": "Titan's Legacy",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -2620,7 +2620,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "ancient_compass",
             "name": "Ancient Compass",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "advanced",
             "effect": {
                 "type": "treasure_finding",
@@ -2654,7 +2654,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "scholar_spectacles",
             "name": "Scholar's Spectacles",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "advanced",
             "effect": {
                 "type": "knowledge_boost",
@@ -2689,7 +2689,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "time_worn_artifact",
             "name": "Time-Worn Artifact",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "expert",
             "effect": {
                 "type": "experience_boost",
@@ -2725,7 +2725,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "dimensional_anchor",
             "name": "Dimensional Anchor",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -2767,7 +2767,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "phoenix_crown",
             "name": "Phoenix Crown",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -2810,7 +2810,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "primordial_codex",
             "name": "Primordial Codex",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "master",
             "effect": {
                 "type": "skill_unlock",
@@ -2851,7 +2851,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "genesis_fragment",
             "name": "Genesis Fragment",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "master",
             "effect": {
                 "type": "permanent_enhancement",
@@ -2896,7 +2896,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "omniscience_tablet",
             "name": "Omniscience Tablet",
             "type": "artifact",
-            "profession": "archaeology",
+            "profession": "archaeologist",
             "tier": "master",
             "effect": {
                 "type": "skill_unlock",
@@ -2940,7 +2940,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "healing_herbs",
             "name": "Healing Herbs",
             "type": "consumable",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "basic",
             "effect": {
                 "type": "heal",
@@ -2971,7 +2971,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "mana_moss",
             "name": "Mana Moss",
             "type": "consumable",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "basic",
             "effect": {
                 "type": "mana_restore",
@@ -3002,7 +3002,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "energy_berries",
             "name": "Energy Berries",
             "type": "consumable",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "basic",
             "effect": {
                 "type": "restore_stamina",
@@ -3033,7 +3033,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "swift_leaf_tea",
             "name": "Swift Leaf Tea",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -3066,7 +3066,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "protective_bark",
             "name": "Protective Bark",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -3100,7 +3100,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "vitality_bloom",
             "name": "Vitality Bloom",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3134,7 +3134,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "forest_guardian_tea",
             "name": "Forest Guardian Tea",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "advanced",
             "effect": {
                 "type": "nature_attunement",
@@ -3169,7 +3169,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "herbal_antidote",
             "name": "Herbal Antidote",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "advanced",
             "effect": {
                 "type": "cure_all_poisons",
@@ -3203,7 +3203,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "dragons_breath_flower",
             "name": "Dragon's Breath Flower",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3240,7 +3240,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "moonlight_lotus",
             "name": "Moonlight Lotus",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3281,7 +3281,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "giants_root",
             "name": "Giant's Root",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3315,7 +3315,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "ethereal_mushroom",
             "name": "Ethereal Mushroom",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3356,7 +3356,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "nature_elixir",
             "name": "Nature's Elixir",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "expert",
             "effect": {
                 "type": "full_heal_and_cleanse"
@@ -3390,7 +3390,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "phoenix_bloom",
             "name": "Phoenix Bloom",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -3432,7 +3432,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "void_spore",
             "name": "Void Spore",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -3475,7 +3475,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "world_tree_seed",
             "name": "World Tree Seed",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "master",
             "effect": {
                 "type": "permanent_growth",
@@ -3515,7 +3515,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "cosmic_essence_fruit",
             "name": "Cosmic Essence Fruit",
             "type": "herb",
-            "profession": "herbalism",
+            "profession": "farmer",
             "tier": "master",
             "effect": {
                 "type": "permanent_enhancement",

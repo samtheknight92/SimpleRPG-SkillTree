@@ -61,9 +61,39 @@ export function getWeaponKind(item) {
 
 export function characterWieldsWeaponKind(character, weaponKind) {
   if (!weaponKind) return false
+  if (weaponKind === 'oneHanded') return characterWieldsOneHandedWeapon(character)
   const main = getEquippedWeapon(character)
   const off = getEquippedOffhand(character)
   if (getWeaponKind(main) === weaponKind) return true
   if (weaponKind === 'dagger' && getWeaponKind(off) === 'dagger') return true
   return false
+}
+
+export function characterWieldsOneHandedWeapon(character) {
+  const main = getEquippedWeapon(character)
+  if (!main) return false
+  const text = `${main.id} ${main.name} ${main.desc || ''}`.toLowerCase()
+  if (/\b(great|heavy|two.hand|2.hand|battleaxe|greataxe|halberd|glaive|polearm|spear|longbow|staff|maul)\b/.test(text)) {
+    return false
+  }
+  const kind = getWeaponKind(main)
+  if (kind === 'polearm' || kind === 'staff') return false
+  if (kind === 'ranged' && !/hand crossbow|light crossbow/i.test(text)) return false
+  if (kind === 'hammer' && !/light|hand/i.test(text)) return false
+  return true
+}
+
+export function getEquippedArmour(character) {
+  const entry = inventoryEntry(character, character?.equipped?.armor)
+  return entry ? getItem(entry.itemId) : null
+}
+
+/** light | medium | heavy | none */
+export function getArmourWeightClass(character) {
+  const armour = getEquippedArmour(character)
+  if (!armour) return 'none'
+  const text = `${armour.id} ${armour.name} ${armour.desc || ''}`.toLowerCase()
+  if (/\b(plate|full plate|heavy|adamantine|mithril plate|tower shield)\b/.test(text)) return 'heavy'
+  if (/\b(chain|scale|brigandine|medium|splint|banded)\b/.test(text)) return 'medium'
+  return 'light'
 }

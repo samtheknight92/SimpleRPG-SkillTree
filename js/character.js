@@ -1,6 +1,7 @@
 import { DEFAULT_STATS, STAT_RULES, DEFAULT_STARTING_GIL, DEFAULT_STARTING_LUMENS } from './constants.js'
 import { cache, getRace, getSkill, getItem } from './cache.js'
 import { equipmentSkillStatModifiers } from './skill-effects.js'
+import { armourSkillStatModifiers, conditionalSkillStatModifiers } from './career-effects.js'
 import { raceEquipmentStatModifiers, raceEquipmentStatBreakdown } from './race-passives.js'
 import { characterWieldsWeaponKind } from './equipment.js'
 import { getSkillsData } from './data.js'
@@ -61,7 +62,7 @@ export function normalizeCharacter(character) {
   delete merged.currency
   merged.elementalAffinity = normalizeElementalAffinity(merged.race, merged.elementalAffinity)
   merged.background = character?.background || DEFAULT_BACKGROUND
-  merged.skills = Array.isArray(character?.skills) ? [...new Set(character.skills)] : migrateOldSkills(character?.unlockedSkills)
+  merged.skills = migrateSkillIds(Array.isArray(character?.skills) ? [...new Set(character.skills)] : migrateOldSkills(character?.unlockedSkills))
   merged.activeToggles = Array.isArray(character?.activeToggles) ? character.activeToggles.filter(id => merged.skills.includes(id)) : []
   merged.statusEffects = Array.isArray(character?.statusEffects) ? character.statusEffects.map(normalizeStatusEffect).filter(Boolean) : []
   merged.inventory = Array.isArray(character?.inventory) ? character.inventory.map(normalizeInventoryEntry).filter(Boolean) : []
@@ -92,6 +93,11 @@ function sanitizeEquippedSlots(equipped) {
   return slots
 }
 
+function migrateSkillIds(skills) {
+  const aliases = { trail_reader: 'trail_warden' }
+  return [...new Set(skills.map(id => aliases[id] || id))]
+}
+
 function migrateOldSkills(unlockedSkills) {
   const ids = []
   const walk = value => {
@@ -99,7 +105,7 @@ function migrateOldSkills(unlockedSkills) {
     else if (value && typeof value === 'object') Object.values(value).forEach(walk)
   }
   walk(unlockedSkills)
-  return [...new Set(ids)]
+  return migrateSkillIds([...new Set(ids)])
 }
 
 export function normalizeInventoryEntry(entry) {
@@ -174,6 +180,12 @@ export function computeStats(character) {
   for (const [stat, value] of Object.entries(equipmentSkillStatModifiers(character))) {
     stats[stat] = (stats[stat] || 0) + Number(value || 0)
   }
+  for (const [stat, value] of Object.entries(armourSkillStatModifiers(character))) {
+    stats[stat] = (stats[stat] || 0) + Number(value || 0)
+  }
+  for (const [stat, value] of Object.entries(conditionalSkillStatModifiers(character))) {
+    stats[stat] = (stats[stat] || 0) + Number(value || 0)
+  }
   for (const [stat, value] of Object.entries(raceEquipmentStatModifiers(character))) {
     stats[stat] = (stats[stat] || 0) + Number(value || 0)
   }
@@ -210,9 +222,23 @@ export function statBreakdown(character, stat) {
   for (const skillId of character.skills || []) {
     const rule = cache.equipmentSkillEffects[skillId]
     if (!rule?.statModifiers?.[stat]) continue
-    if (!characterWieldsWeaponKind(character, rule.weaponKind)) continue
+    if (rule.weaponKind === 'oneHanded') {
+      if (!characterWieldsWeaponKind(character, 'oneHanded')) continue
+    } else if (!characterWieldsWeaponKind(character, rule.weaponKind)) continue
     const skill = getSkill(skillId)
     rows.push({ label: `${skill?.name || titleCase(skillId)} (${rule.weaponKind})`, value: rule.statModifiers[stat] })
+  }
+  for (const skillId of character.skills || []) {
+    const rule = cache.armourSkillEffects?.[skillId]
+    if (!rule?.statModifiers?.[stat]) continue
+    const skill = getSkill(skillId)
+    rows.push({ label: `${skill?.name || titleCase(skillId)} (armour)`, value: rule.statModifiers[stat] })
+  }
+  for (const skillId of character.skills || []) {
+    const rule = cache.conditionalSkillStats?.[skillId]
+    if (!rule?.[stat] || rule.condition !== 'selfBelowHalfHp') continue
+    const skill = getSkill(skillId)
+    rows.push({ label: `${skill?.name || titleCase(skillId)} (below half HP)`, value: rule[stat] })
   }
   rows.push(...raceEquipmentStatBreakdown(character, stat))
   for (const skillId of character.activeToggles || []) {

@@ -20,6 +20,11 @@ import {
   skillShowsActionBarBonuses,
   summarizeActionBarBonuses
 } from './action-bar-bonuses.js'
+import {
+  formatSkillEffectBreakdownPlain,
+  resolveSkillEffectBreakdown,
+  skillHasEffectBreakdown
+} from './damage-breakdown.js'
 
 function resourceMeter(resource, label, icon, value, max, tone) {
   const pct = max > 0 ? Math.max(0, Math.min(100, Math.round((value / max) * 100))) : 0
@@ -50,16 +55,20 @@ function skillSlot(skill, character) {
     : ''
   const disabled = Boolean(disableReason) && !(type === 'toggle' && active)
   const allBonuses = getActionBarSkillBonuses(character, skill)
-  const showBonuses = skillShowsActionBarBonuses(skill.desc)
+  const showBonuses = skillShowsActionBarBonuses(skill)
   const bonuses = showBonuses ? allBonuses : []
   const bonusTotals = summarizeActionBarBonuses(bonuses)
   const statKeys = Object.keys(bonusTotals)
   const bonusStatClass = statKeys.length === 1 ? statKeys[0] : 'mixed'
   const bonusChip = bonuses.length ? formatBonusChipText(bonuses) : ''
+  const effectBreakdown = skillHasEffectBreakdown(skill)
+    ? formatSkillEffectBreakdownPlain(resolveSkillEffectBreakdown(character, skill))
+    : ''
   const tooltipLines = [
     skill.name,
     bonuses.length ? formatDescWithBonusTotalsPlain(skill.desc || '', bonusTotals) : (skill.desc || ''),
-    ...bonuses.map(bonus => `${formatBonusStatLabel(bonus.stat, bonus.value)} (${bonus.sourceName})`)
+    ...bonuses.map(bonus => `${formatBonusStatLabel(bonus.stat, bonus.value)} (${bonus.sourceName})`),
+    effectBreakdown
   ].filter(Boolean)
   if (disableReason) tooltipLines.push('', `Why greyed out: ${disableReason}`)
   const classes = [

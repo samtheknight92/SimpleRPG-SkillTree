@@ -5,6 +5,14 @@ import { displayCategory } from './skills.js'
 import { isToggleSkill } from './skills.js'
 import { getSkillActivationType } from './skill-activation.js'
 import { getActionBarBlockReason } from './combat.js'
+import {
+  resolveSkillEffectBreakdown,
+  formatDamageBreakdownHtml,
+  skillHasEffectBreakdown,
+  skillHealsDirectHP,
+  usesMagicPowerForHeal,
+  isBasicAttackSkill
+} from './damage-breakdown.js'
 
 const ATTACK_STATS = new Set(['magicPower', 'accuracy', 'strength', 'speed'])
 
@@ -25,12 +33,17 @@ const STAT_LABEL = {
 function getSkillBenefitStats(skill) {
   const desc = String(skill?.desc || '')
   const stats = new Set()
+  if (isBasicAttackSkill(skill)) stats.add('strength')
   if (/^spell:/i.test(desc) || /magic power|magical attack/i.test(desc)) stats.add('magicPower')
-  if (/^action:/i.test(desc) || /attack|strike|shot|slash|swing|cleave/i.test(desc)) stats.add('accuracy')
+  if (/^action:/i.test(desc) || /attack|strike|shot|slash|swing|cleave/i.test(desc)) {
+    stats.add('accuracy')
+    if (!/magic power/i.test(desc)) stats.add('strength')
+  }
   if (isToggleSkill(skill)) {
     if (/staff|wand|magic|spell/i.test(desc)) stats.add('magicPower')
     if (/attack|weapon|strike/i.test(desc)) stats.add('accuracy')
   }
+  if (skillHealsDirectHP(skill) && usesMagicPowerForHeal(skill)) stats.add('magicPower')
   return stats
 }
 
@@ -227,12 +240,38 @@ function findDamageTextEnd(desc) {
   return findFlatDamageEnd(text)
 }
 
-function skillDealsDirectDamage(desc) {
+function findHealTextEnd(desc) {
+  const text = String(desc || '')
+  const match = text.match(/\d+d\d+(?:\s*\+\s*\d+)?\s*HP/i)
+    || text.match(/(?:restore|heals?(?:\s+\w+){0,5}\s+for)\s+\d+\s*HP/i)
+  return match ? match.index + match[0].length : null
+}
+
+function findStrengthTextEnd(desc) {
+  const text = String(desc || '')
+  const match = text.match(/\+\s*Strength\b/i)
+  return match ? match.index + match[0].length : null
+}
+
+function findBonusInsertEnd(desc) {
+  return findDamageTextEnd(desc) ?? findHealTextEnd(desc) ?? findStrengthTextEnd(desc)
+}
+
+function descHasDirectDamage(desc) {
   return findDamageTextEnd(desc) !== null
 }
 
-export function skillShowsActionBarBonuses(desc) {
-  return skillDealsDirectDamage(desc)
+function descHasDirectHeal(desc) {
+  return findHealTextEnd(desc) !== null
+}
+
+export function skillShowsActionBarBonuses(skillOrDesc) {
+  if (skillOrDesc && typeof skillOrDesc === 'object') {
+    if (isBasicAttackSkill(skillOrDesc)) return true
+    return skillShowsActionBarBonuses(skillOrDesc.desc || '')
+  }
+  const desc = String(skillOrDesc || '')
+  return descHasDirectDamage(desc) || descHasDirectHeal(desc) || findStrengthTextEnd(desc) !== null
 }
 
 export function formatDescWithBonusTotals(desc, totals) {
@@ -240,7 +279,7 @@ export function formatDescWithBonusTotals(desc, totals) {
   const entries = Object.entries(totals || {}).filter(([, value]) => value)
   if (!text || !entries.length) return escapeHtml(text)
 
-  const insertAt = findDamageTextEnd(text)
+  const insertAt = findBonusInsertEnd(text)
   if (insertAt === null) return escapeHtml(text)
   const before = escapeHtml(text.slice(0, insertAt))
   const after = escapeHtml(text.slice(insertAt))
@@ -259,7 +298,7 @@ export function formatDescWithBonusTotalsPlain(desc, totals) {
   const text = String(desc || '')
   const label = formatBonusTotalsLabel(totals)
   if (!text || !label) return text
-  const insertAt = findDamageTextEnd(text)
+  const insertAt = findBonusInsertEnd(text)
   if (insertAt === null) return text
   return `${text.slice(0, insertAt)} ${label}${text.slice(insertAt)}`
 }
@@ -277,7 +316,7 @@ export function formatBonusChipText(bonuses) {
 export function actionBarSkillTooltipHtml(skill, character) {
   if (!skill) return ''
   const allBonuses = getActionBarSkillBonuses(character, skill)
-  const showBonuses = skillShowsActionBarBonuses(skill.desc)
+  const showBonuses = skillShowsActionBarBonuses(skill)
   const bonuses = showBonuses ? allBonuses : []
   const totals = summarizeActionBarBonuses(bonuses)
   const lines = []
@@ -291,6 +330,12 @@ export function actionBarSkillTooltipHtml(skill, character) {
   )
   if (skill.desc) {
     lines.push(`<div class="action-bar-tip-desc">${formatDescWithBonusTotals(skill.desc, totals)}</div>`)
+  }
+
+  if (character && skillHasEffectBreakdown(skill)) {
+    const breakdown = resolveSkillEffectBreakdown(character, skill)
+    const breakdownHtml = formatDamageBreakdownHtml(breakdown)
+    if (breakdownHtml) lines.push(breakdownHtml)
   }
 
   if (bonuses.length) {

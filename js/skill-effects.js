@@ -2,6 +2,7 @@ import { cache } from './cache.js'
 import { characterWieldsWeaponKind } from './equipment.js'
 import { getEffect, normalizeEffectId } from './character.js'
 import { isToggleSkill } from './skills.js'
+import { resolveArmourSkillEffects } from './career-effects.js'
 
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -185,12 +186,19 @@ export function resolveSkillGearEffects(skill, character) {
 
   const equipRule = cache.equipmentSkillEffects[skill.id]
   if (equipRule) {
-    if (character && characterWieldsWeaponKind(character, equipRule.weaponKind)) {
-      const effectId = equipRule.effectId && cache.effectDefinitions[equipRule.effectId] ? equipRule.effectId : null
-      return effectId ? [effectId] : []
+    if (character) {
+      if (equipRule.weaponKind === 'oneHanded') {
+        if (!characterWieldsWeaponKind(character, 'oneHanded')) return []
+      } else if (!characterWieldsWeaponKind(character, equipRule.weaponKind)) {
+        return []
+      }
     }
-    return []
+    const effectId = equipRule.effectId && cache.effectDefinitions[equipRule.effectId] ? equipRule.effectId : null
+    return effectId ? [effectId] : []
   }
+
+  const armourEffects = resolveArmourSkillEffects(skill, character)
+  if (armourEffects.length) return armourEffects
 
   if (isToggleSkill(skill)) {
     if (!character?.activeToggles?.includes(skill.id)) return []
@@ -235,7 +243,8 @@ export function equipmentSkillStatModifiers(character) {
   if (!character?.skills?.length) return totals
   for (const skillId of character.skills) {
     const rule = cache.equipmentSkillEffects[skillId]
-    if (!rule || !characterWieldsWeaponKind(character, rule.weaponKind)) continue
+    if (!rule) continue
+    if (!characterWieldsWeaponKind(character, rule.weaponKind)) continue
     for (const [stat, value] of Object.entries(rule.statModifiers || {})) {
       totals[stat] = (totals[stat] || 0) + Number(value || 0)
     }

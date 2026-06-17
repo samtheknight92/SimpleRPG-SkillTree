@@ -1,4 +1,4 @@
-import { SAVE_VERSION, STORAGE_KEY, LEGACY_STORAGE_KEY, LEGACY_ACTIVE_KEY } from './constants.js'
+import { SAVE_VERSION, STORAGE_KEY, LEGACY_STORAGE_KEY, LEGACY_ACTIVE_KEY, RETIRED_SKILL_SUBCATEGORIES } from './constants.js'
 import { state } from './state.js'
 import { debounce, toast } from './utils.js'
 import { normalizeCharacter, stripCharacterCache } from './character.js'
@@ -45,7 +45,9 @@ export function load() {
         if (parsed.ui) {
           if (parsed.ui.tab) state.tab = parsed.ui.tab
           if (parsed.ui.skillCategory) state.skillCategory = parsed.ui.skillCategory
-          if (parsed.ui.skillSubcategory) state.skillSubcategory = parsed.ui.skillSubcategory
+          if (parsed.ui.skillSubcategory) {
+            state.skillSubcategory = RETIRED_SKILL_SUBCATEGORIES[parsed.ui.skillSubcategory] || parsed.ui.skillSubcategory
+          }
           if (parsed.ui.itemSource) state.itemSource = parsed.ui.itemSource
           if (parsed.ui.itemPage != null) state.itemPage = parsed.ui.itemPage
           if (parsed.ui.gmMode != null) state.gmMode = Boolean(parsed.ui.gmMode)

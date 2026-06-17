@@ -34,6 +34,11 @@ import {
   isBasicAttackSkill,
   resolveBasicAttackDamage
 } from './combat.js'
+import {
+  applySkillHeal,
+  formatHealUseSummary
+} from './damage-breakdown.js'
+import { getCareerStaminaDiscount } from './career-effects.js'
 import { itemPriceGil, normalizeGil } from './format.js'
 import { syncUrlState } from './url-state.js'
 import { isGmMode, toggleGmMode as flipGmMode } from './gm-mode.js'
@@ -138,13 +143,20 @@ export function useSkill(skillId) {
   const blockReason = getSkillUseBlockReason(character, skill)
   if (blockReason) return toast(blockReason)
 
-  const cost = Math.max(0, Number(skill.staminaCost || 0))
+  const cost = Math.max(0, Number(skill.staminaCost || 0) - getCareerStaminaDiscount(character, skill))
   if (character.stamina < cost) {
     return toast(`Not enough Stamina for ${skill.name} (need ${cost}, have ${character.stamina}).`)
   }
 
   character.stamina -= cost
-  const activations = resolveActivationEffects(skill)
+
+  const healResult = applySkillHeal(character, skill, rollDice)
+  const healSummary = healResult ? formatHealUseSummary(healResult.breakdown, healResult.healed) : ''
+  const healOrChoice = /\bOR\s+apply\b/i.test(String(skill.desc || ''))
+
+  let activations = resolveActivationEffects(skill)
+  if (healResult && healOrChoice) activations = []
+
   const applied = []
   const missed = []
 
@@ -168,8 +180,29 @@ export function useSkill(skillId) {
 
   touch(character, { header: true, content: true, actionBar: true })
 
+  const staminaNote = `(−${cost} Stamina)`
+  const healPart = healSummary ? healSummary : ''
+  const effectPart = applied.length ? applied.join(', ') : ''
+
+  if (healPart && !effectPart && !missed.length) {
+    toast(`${skill.name}: ${healPart} ${staminaNote}.`)
+    return
+  }
+  if (healPart && effectPart && !missed.length) {
+    toast(`${skill.name}: ${healPart}; ${effectPart} ${staminaNote}.`)
+    return
+  }
+  if (healPart && effectPart && missed.length) {
+    toast(`${skill.name}: ${healPart}; ${effectPart}; ${missed.join(', ')} ${staminaNote}.`)
+    return
+  }
+  if (healPart && !effectPart && missed.length) {
+    toast(`${skill.name}: ${healPart}; ${missed.join(', ')} ${staminaNote}.`)
+    return
+  }
+
   if (!activations.length) {
-    toast(`${skill.name} used (−${cost} Stamina).`)
+    toast(`${skill.name} used ${staminaNote}.`)
     return
   }
   if (applied.length && !missed.length) {
@@ -346,6 +379,7 @@ export function useBasicAttack() {
   if (!character) return
   const blockReason = getSkillUseBlockReason(character, { id: BASIC_ATTACK_ID, subcategory: 'attack' })
   if (blockReason) return toast(blockReason)
+  invalidateCharacterCache(character)
   const { total, summary } = resolveBasicAttackDamage(character, rollDice)
   touch(character, { header: true, content: true, actionBar: true })
   toast(`Basic Attack: ${summary} (${total} damage).`)

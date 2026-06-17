@@ -9,7 +9,8 @@ import { titleCase } from './utils.js'
 import { toast } from './utils.js'
 
 function equippedItem(character, slot) {
-  const entry = character.inventory.find(inv => inv.uid === character.equipped?.[slot])
+  const inventory = character.inventory || []
+  const entry = inventory.find(inv => inv.uid === character.equipped?.[slot])
   return entry ? getItem(entry.itemId) : null
 }
 
@@ -117,14 +118,33 @@ export function buildPrintableSheetHtml(character) {
 
 export function openPrintableCharacterSheet(character) {
   if (!character) return
-  const html = buildPrintableSheetHtml(character)
-  const win = window.open('', '_blank', 'noopener,noreferrer')
-  if (!win) return toast('Allow pop-ups to open the printable character sheet.')
-  win.document.open()
-  win.document.write(html)
-  win.document.close()
-  win.focus()
-  setTimeout(() => {
-    try { win.print() } catch { /* user may close tab first */ }
-  }, 350)
+
+  let html
+  try {
+    html = buildPrintableSheetHtml(character)
+  } catch (error) {
+    console.error('Character sheet build failed:', error)
+    return toast('Could not build character sheet.')
+  }
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const win = window.open(url, '_blank')
+  if (!win) {
+    URL.revokeObjectURL(url)
+    return toast('Allow pop-ups to open the printable character sheet.')
+  }
+
+  const cleanupAndPrint = (() => {
+    let done = false
+    return () => {
+      if (done) return
+      done = true
+      URL.revokeObjectURL(url)
+      try { win.print() } catch { /* tab closed before print */ }
+    }
+  })()
+
+  win.addEventListener('load', () => setTimeout(cleanupAndPrint, 200))
+  setTimeout(cleanupAndPrint, 1000)
 }

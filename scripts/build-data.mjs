@@ -30,44 +30,27 @@ function deepFix(value) {
   return value
 }
 
-function runLegacy(file) {
-  const code = fs.readFileSync(path.join(dataDir, file), 'utf8')
-  const sandbox = { console, window: {}, globalThis: {} }
-  sandbox.globalThis.window = sandbox.window
-  vm.createContext(sandbox)
-  vm.runInContext(code, sandbox)
-  return sandbox.window
-}
-
 function writeJson(name, data) {
   fs.writeFileSync(path.join(jsonDir, `${name}.json`), JSON.stringify(deepFix(data), null, 2), 'utf8')
 }
 
 function extractEffects() {
-  const legacyApp = path.join(root, 'legacy', 'app.js')
   const effectsJson = path.join(jsonDir, 'effects.json')
-  if (fs.existsSync(effectsJson)) {
-    writeJson('effects', JSON.parse(fs.readFileSync(effectsJson, 'utf8')))
-    return
+  if (!fs.existsSync(effectsJson)) {
+    throw new Error('Missing data/json/effects.json — run scripts/generate-career-effects.mjs or restore effects.json')
   }
-  if (!fs.existsSync(legacyApp)) return
-  const app = fs.readFileSync(legacyApp, 'utf8')
-  const start = app.indexOf('const EFFECT_DEFINITIONS = {')
-  const end = app.indexOf('\n\n\n  const state = {')
-  if (start === -1 || end === -1) throw new Error('Could not locate EFFECT_DEFINITIONS in app.js')
-  const block = app.slice(start + 'const EFFECT_DEFINITIONS = '.length, end).trim()
-  const effects = vm.runInNewContext(`(${block})`)
-  const out = `// Auto-generated from app.js — do not edit by hand; run: node scripts/build-data.mjs\nexport const EFFECT_DEFINITIONS = ${JSON.stringify(deepFix(effects), null, 2)}\n`
-  fs.writeFileSync(path.join(dataDir, 'effects-data.js'), out, 'utf8')
-  writeJson('effects', effects)
+  writeJson('effects', JSON.parse(fs.readFileSync(effectsJson, 'utf8')))
 }
 
 fs.mkdirSync(jsonDir, { recursive: true })
+
+execSync('node scripts/generate-career-effects.mjs', { cwd: root, stdio: 'inherit' })
 
 const loadOrder = [
   'races-data.js',
   'skills-data.js',
   'careers-skills-data.js',
+  'career-fusions-skills-data.js',
   'profession-items-data.js',
   'discoverable-items-data.js',
   'monster-loot-data.js',
@@ -76,7 +59,12 @@ const loadOrder = [
 
 const window = {}
 for (const file of loadOrder) {
-  const code = fs.readFileSync(path.join(dataDir, file), 'utf8')
+  const filePath = path.join(dataDir, file)
+  if (!fs.existsSync(filePath)) {
+    if (file === 'career-fusions-skills-data.js') continue
+    throw new Error(`Missing data file: ${file}`)
+  }
+  const code = fs.readFileSync(filePath, 'utf8')
   const sandbox = { console, window, globalThis: { window } }
   vm.createContext(sandbox)
   vm.runInContext(code, sandbox)
@@ -88,6 +76,9 @@ writeJson('races', window.RACES_DATA || {})
 
 const skills = { ...(window.SKILLS_DATA || {}) }
 if (window.CAREERS_SKILLS_DATA) skills.careers = window.CAREERS_SKILLS_DATA
+if (window.CAREER_FUSIONS_DATA) {
+  skills.fusion = { ...(skills.fusion || {}), ...window.CAREER_FUSIONS_DATA }
+}
 const racial = window.RACE_SKILL_TREES || {}
 skills.racial = { ...racial }
 if (skills.monster) {
@@ -100,19 +91,68 @@ writeJson('profession-items', window.PROFESSION_ITEMS_DATA || {})
 writeJson('discoverable-items', window.DISCOVERABLE_ITEMS_DATA || {})
 writeJson('monster-loot', window.MONSTER_LOOT_DATA || {})
 
-const skillMetaRaw = fs.readFileSync(path.join(dataDir, 'skill-meta.js'), 'utf8').replace(/^\uFEFF/, '')
-const skillMeta = skillMetaRaw.replace(/^export const /gm, 'const ')
-const metaSandbox = { module: { exports: {} } }
-vm.createContext(metaSandbox)
-const metaResult = vm.runInContext(`${skillMeta}; ({ TOGGLE_BONUSES, PASSIVE_SKILL_BONUSES, PASSIVE_SKILL_EFFECTS, EQUIPMENT_SKILL_EFFECTS, TOGGLE_SKILL_EFFECTS, INCOMPATIBILITIES })`, metaSandbox)
+function mergeMetaMaps(...maps) {
+  const out = {}
+  for (const map of maps) {
+    for (const [key, value] of Object.entries(map || {})) {
+      if (value && typeof value === 'object' && !Array.isArray(value) && out[key] && typeof out[key] === 'object' && !Array.isArray(out[key])) {
+        out[key] = { ...out[key], ...value }
+      } else {
+        out[key] = value
+      }
+    }
+  }
+  return out
+}
+
+function loadMetaExports(file, names) {
+  const raw = fs.readFileSync(path.join(dataDir, file), 'utf8').replace(/^\uFEFF/, '')
+  const code = raw.replace(/^export const /gm, 'const ')
+  const sandbox = {}
+  vm.createContext(sandbox)
+  const assigns = names.map(name => `globalThis.__meta_${name} = ${name}`).join('\n')
+  vm.runInContext(`${code}\n${assigns}`, sandbox)
+  return names.reduce((acc, name) => {
+    acc[name] = sandbox[`__meta_${name}`]
+    return acc
+  }, {})
+}
+
+const metaResult = loadMetaExports('skill-meta.js', [
+  'TOGGLE_BONUSES',
+  'PASSIVE_SKILL_BONUSES',
+  'PASSIVE_SKILL_EFFECTS',
+  'EQUIPMENT_SKILL_EFFECTS',
+  'TOGGLE_SKILL_EFFECTS',
+  'INCOMPATIBILITIES'
+])
+const careerMeta = loadMetaExports('career-skill-meta.js', [
+  'CAREER_PASSIVE_BONUSES',
+  'CAREER_EQUIPMENT_EFFECTS',
+  'CAREER_ARMOUR_EFFECTS',
+  'CAREER_PASSIVE_EFFECTS',
+  'CAREER_CONDITIONAL_STATS',
+  'CAREER_DAMAGE_BONUSES',
+  'CAREER_HEAL_BONUSES',
+  'CAREER_ACTION_BUFFS',
+  'CAREER_STAMINA_DISCOUNTS'
+])
+
 writeJson('skill-meta', {
   TOGGLE_BONUSES: metaResult.TOGGLE_BONUSES || {},
-  PASSIVE_SKILL_BONUSES: metaResult.PASSIVE_SKILL_BONUSES || {},
-  PASSIVE_SKILL_EFFECTS: metaResult.PASSIVE_SKILL_EFFECTS || {},
-  EQUIPMENT_SKILL_EFFECTS: metaResult.EQUIPMENT_SKILL_EFFECTS || {},
+  PASSIVE_SKILL_BONUSES: mergeMetaMaps(metaResult.PASSIVE_SKILL_BONUSES, careerMeta.CAREER_PASSIVE_BONUSES),
+  PASSIVE_SKILL_EFFECTS: mergeMetaMaps(metaResult.PASSIVE_SKILL_EFFECTS, careerMeta.CAREER_PASSIVE_EFFECTS),
+  EQUIPMENT_SKILL_EFFECTS: mergeMetaMaps(metaResult.EQUIPMENT_SKILL_EFFECTS, careerMeta.CAREER_EQUIPMENT_EFFECTS),
   TOGGLE_SKILL_EFFECTS: metaResult.TOGGLE_SKILL_EFFECTS || {},
-  INCOMPATIBILITIES: metaResult.INCOMPATIBILITIES || {}
+  INCOMPATIBILITIES: metaResult.INCOMPATIBILITIES || {},
+  ARMOUR_SKILL_EFFECTS: careerMeta.CAREER_ARMOUR_EFFECTS || {},
+  CONDITIONAL_SKILL_STATS: careerMeta.CAREER_CONDITIONAL_STATS || {},
+  CAREER_DAMAGE_BONUSES: careerMeta.CAREER_DAMAGE_BONUSES || {},
+  CAREER_HEAL_BONUSES: careerMeta.CAREER_HEAL_BONUSES || {},
+  CAREER_ACTION_BUFFS: careerMeta.CAREER_ACTION_BUFFS || {},
+  CAREER_STAMINA_DISCOUNTS: careerMeta.CAREER_STAMINA_DISCOUNTS || {}
 })
 
-console.log('Built JSON data and effects-data.js')
+console.log('Built JSON data')
+writeJson('manifest', { version: Date.now() })
 execSync('node scripts/build-premade-characters.mjs', { cwd: root, stdio: 'inherit' })

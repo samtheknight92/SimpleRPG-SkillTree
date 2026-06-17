@@ -1,5 +1,5 @@
 import { getSkillsData } from './data.js'
-import { HIDDEN_SKILL_CATEGORIES } from './constants.js'
+import { HIDDEN_SKILL_CATEGORIES, SKILL_SUBCATEGORY_LABELS } from './constants.js'
 import { cache, flattenSkills, getSkill, displayCategory } from './cache.js'
 import { activeCharacter } from './state.js'
 import { isGmMode } from './gm-mode.js'
@@ -198,6 +198,10 @@ export function visibleSkillCategories(character = activeCharacter()) {
   return Object.keys(getSkillsData()).filter(allowed)
 }
 
+export function displaySubcategory(subcategory) {
+  return SKILL_SUBCATEGORY_LABELS[subcategory] || titleCase(subcategory)
+}
+
 export function isToggleSkill(skill) {
   return skill?.isToggle || Object.prototype.hasOwnProperty.call(cache.toggleBonuses, skill?.id)
 }
@@ -205,9 +209,17 @@ export function isToggleSkill(skill) {
 export function prereqLabel(skill) {
   const req = skill?.prerequisites
   if (req?.type === 'LEVEL') return `Level ${req.level}+`
-  if (!req || req.type === 'NONE' || !req.skills?.length) return 'No prerequisite'
-  const labels = req.skills.map(id => getSkill(id)?.name || titleCase(id))
-  return `${req.type}: ${labels.join(req.type === 'AND' ? ' + ' : ' / ')}`
+  const parts = []
+  if (req?.skills?.length) {
+    const labels = req.skills.map(id => getSkill(id)?.name || titleCase(id))
+    parts.push(`${req.type}: ${labels.join(req.type === 'AND' ? ' + ' : ' / ')}`)
+  }
+  if (req?.anyOfSkills?.length) {
+    const labels = req.anyOfSkills.map(id => getSkill(id)?.name || titleCase(id))
+    parts.push(`One of: ${labels.join(' / ')}`)
+  }
+  if (!parts.length) return 'No prerequisite'
+  return parts.join(' · ')
 }
 
 export function hasPrerequisites(character, skill) {
@@ -215,6 +227,9 @@ export function hasPrerequisites(character, skill) {
   if (!req || req.type === 'NONE') return true
   if (req.type === 'LEVEL') {
     return characterLevelInfo(character).level >= Number(req.level || 0)
+  }
+  if (req.anyOfSkills?.length) {
+    if (!req.anyOfSkills.some(id => character.skills.includes(id))) return false
   }
   if (!req.skills?.length) return true
   if (req.type === 'AND') return req.skills.every(id => character.skills.includes(id))
