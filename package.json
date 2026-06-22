@@ -1,0 +1,13 @@
+{
+  "name": "lumenforge-rpg",
+  "version": "5.0.0",
+  "private": true,
+  "description": "LumenForge RPG v5 — Nearly Complete (browser character sheet & play aid)",
+  "scripts": {
+    "serve": "npx --yes serve -l 8000 .",
+    "build-data": "node scripts/build-data.mjs",
+    "validate": "node scripts/validate-data.mjs",
+    "audit": "node scripts/full-audit.mjs",
+    "test": "node scripts/test-save-roundtrip.mjs && node scripts/check-js-syntax.mjs"
+  }
+}
