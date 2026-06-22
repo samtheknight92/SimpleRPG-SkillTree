@@ -11,11 +11,12 @@
       "specialEffects": [],
       "enchantmentSlots": 0,
       "desc": "A simple bronze sword. +1 Strength when equipped. Damage: 1d4",
-      "icon": "�x\u0014�️",
+      "icon": "",
       "price": {
         "silver": 3
       },
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "iron_sword": {
       "id": "iron_sword",
@@ -28,7 +29,7 @@
       "specialEffects": [],
       "enchantmentSlots": 0,
       "desc": "A basic iron sword. +2 Strength when equipped. Damage: 1d6",
-      "icon": "�x\u0014�️",
+      "icon": "",
       "price": {
         "silver": 8
       },
@@ -46,7 +47,8 @@
         ],
         "quantity": 1,
         "skillRequired": 2
-      }
+      },
+      "shopMinLevel": 1
     },
     "steel_sword": {
       "id": "steel_sword",
@@ -59,11 +61,12 @@
       "specialEffects": [],
       "enchantmentSlots": 0,
       "desc": "A well-forged steel sword. +3 Strength when equipped. Damage: 1d8",
-      "icon": "�a\u001d️",
+      "icon": "",
       "price": {
         "silver": 15
       },
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "silver_sword": {
       "id": "silver_sword",
@@ -79,11 +82,12 @@
       ],
       "enchantmentSlots": 1,
       "desc": "A blessed silver sword. +2 Strength, +1 Magical Defence. Damage: 1d8. Extra damage vs undead. GRANTS: Undead Bane.",
-      "icon": "�x\u0014�️",
+      "icon": "",
       "price": {
         "silver": 25
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "flame_blade": {
       "id": "flame_blade",
@@ -108,12 +112,13 @@
         }
       },
       "desc": "A magical sword wreathed in flames. +3 Strength, +1 Magic Power. Attacks may burn enemies. Damage: 1d12 GRANTS: Burn On Hit.",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 20
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "frost_sword": {
       "id": "frost_sword",
@@ -129,12 +134,13 @@
       ],
       "enchantmentSlots": 2,
       "desc": "An ice-enchanted blade. +3 Strength, +1 Magic Power. Damage: 1d10. Attacks may freeze enemies. GRANTS: Freeze On Hit.",
-      "icon": "�\u001e️",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 20
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "wind_blade": {
       "id": "wind_blade",
@@ -148,14 +154,15 @@
       "specialEffects": [
         "wind_slash"
       ],
-      "desc": "A sword light as air. +2 Strength, +3 Speed. Damage: 1d8. Cuts with wind magic. GRANTS: Wind Slash.",
-      "icon": "�xR�️",
+      "desc": "A sword light as air. +2 Strength, +3 Speed. Damage: 1d8. GRANTS: Wind Slash (20ft wind blade — 1d6 slashing; push target 10ft on hit).",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 18
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "obsidian_blade": {
       "id": "obsidian_blade",
@@ -170,13 +177,14 @@
         "bleeding"
       ],
       "desc": "A razor-sharp obsidian blade. +4 Strength, +1 Speed. Damage: 1d10. Causes bleeding wounds.",
-      "icon": "�x\u0013�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 40
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "dragon_blade": {
       "id": "dragon_blade",
@@ -192,13 +200,14 @@
         "dragon_fire"
       ],
       "enchantmentSlots": 1,
-      "desc": "Forged from dragon scales. +4 Strength, +3 Magic Power, +1 Physical Defence. Breathes fire. Damage: 4d12 GRANTS: Dragon Fire.",
-      "icon": "�x�0",
+      "desc": "Forged from dragon scales. +4 Strength, +3 Magic Power, +1 Physical Defence. Damage: 4d12. GRANTS: Dragon Fire (+1d6 fire; 75% Burn on hit).",
+      "icon": "",
       "price": {
         "gold": 3,
         "silver": 75
       },
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "bronze_dagger": {
       "id": "bronze_dagger",
@@ -211,11 +220,12 @@
       "specialEffects": [],
       "enchantmentSlots": 0,
       "desc": "A basic bronze dagger. +1 Speed when equipped. Damage: 1d4",
-      "icon": "�x\u0014�️",
+      "icon": "",
       "price": {
         "silver": 2
       },
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "iron_dagger": {
       "id": "iron_dagger",
@@ -228,11 +238,34 @@
       "specialEffects": [],
       "enchantmentSlots": 0,
       "desc": "A sturdy iron dagger. +1 Speed when equipped. Damage: 1d6",
-      "icon": "�x\u0014�️",
+      "icon": "",
       "price": {
         "silver": 6
       },
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "main_gauche": {
+      "id": "main_gauche",
+      "name": "Main Gauche",
+      "type": "weapon",
+      "hands": "one",
+      "damage": "1d4",
+      "statModifiers": {
+        "speed": 1,
+        "physicalDefence": 1
+      },
+      "specialEffects": [
+        "parry_bonus"
+      ],
+      "enchantmentSlots": 0,
+      "desc": "A parrying dagger for the off-hand. +1 Speed, +1 Physical Defence. Damage: 1d4. Equip off-hand with Dual Wield and a main-hand dagger. GRANTS: Parry Bonus.",
+      "icon": "🗡️",
+      "price": {
+        "silver": 9
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "silver_dagger": {
       "id": "silver_dagger",
@@ -248,11 +281,12 @@
       ],
       "enchantmentSlots": 1,
       "desc": "A blessed silver dagger. +2 Speed, +1 Magical Defence. Damage: 1d8. Extra damage vs undead. GRANTS: Undead Bane.",
-      "icon": "�x\u0014�️",
+      "icon": "",
       "price": {
         "silver": 15
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "poison_dagger": {
       "id": "poison_dagger",
@@ -267,12 +301,13 @@
         "poison"
       ],
       "desc": "A venomous dagger. +2 Speed. Damage: 1d8. Attacks may poison enemies. GRANTS: Poison On Hit.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 30
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "shadow_dagger": {
       "id": "shadow_dagger",
@@ -288,13 +323,14 @@
         "stealth"
       ],
       "enchantmentSlots": 2,
-      "desc": "A dagger forged from shadow. +2 Speed, +1 Magic Power. Damage: 1d8. Enhanced stealth attacks. GRANTS: Stealth Strike.",
-      "icon": "�x\u0014�️",
+      "desc": "A dagger forged from shadow. +2 Speed, +1 Magic Power. Damage: 1d8. GRANTS: Stealth Strike (first attack from hidden: +2 Accuracy, +1d6 damage).",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 15
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "assassin_blade": {
       "id": "assassin_blade",
@@ -309,13 +345,14 @@
         "critical_strike"
       ],
       "enchantmentSlots": 2,
-      "desc": "A deadly assassin's weapon. +3 Speed, +1 Strength. Increased critical hit chance. Damage: 2d6 GRANTS: Critical Strike.",
-      "icon": "�x\u0014�️",
+      "desc": "A deadly assassin's weapon. +3 Speed, +1 Strength. Damage: 2d6. GRANTS: Critical Strike (crit on 19–20; +1 weapon damage die on crit).",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 0
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "void_dagger": {
       "id": "void_dagger",
@@ -330,13 +367,14 @@
         "phase_strike"
       ],
       "enchantmentSlots": 2,
-      "desc": "A dagger from the void realm. +3 Speed, +2 Magic Power. Damage: 1d10. Ignores armor. GRANTS: Phase Strike.",
-      "icon": "�x\u0013�",
+      "desc": "A dagger from the void realm. +3 Speed, +2 Magic Power. Damage: 1d10. GRANTS: Phase Strike (ignore 3 Physical Defence and 3 Magical Defence on this attack).",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 0
       },
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "shadow_fang": {
       "id": "shadow_fang",
@@ -350,14 +388,15 @@
       "specialEffects": [
         "shadow_step"
       ],
-      "desc": "A dagger forged in shadows. +4 Speed, +2 Magic Power. Damage: 2d6. Teleports behind enemies. GRANTS: Shadow Step.",
-      "icon": "�xR\u0018",
+      "desc": "A dagger forged in shadows. +4 Speed, +2 Magic Power. Damage: 2d6. GRANTS: Shadow Step (Action: teleport up to 30ft in dim light or darkness).",
+      "icon": "",
       "price": {
         "gold": 3,
         "silver": 50
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "temporal_blade": {
       "id": "temporal_blade",
@@ -371,14 +410,15 @@
       "specialEffects": [
         "time_strike"
       ],
-      "desc": "A blade that cuts through time itself. +4 Speed, +2 Magic Power. Damage: 2d10. Can strike twice. GRANTS: Time Strike.",
+      "desc": "A blade that cuts through time. +4 Speed, +2 Magic Power. Damage: 2d10. GRANTS: Time Strike (once per scene: extra weapon attack after this hit lands).",
       "icon": "⏰",
       "price": {
         "gold": 4,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "training_bow": {
       "id": "training_bow",
@@ -390,12 +430,13 @@
       },
       "specialEffects": [],
       "desc": "A simple training bow. +1 Speed when equipped. Damage: 1d4",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 5
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "hunting_bow": {
       "id": "hunting_bow",
@@ -407,12 +448,13 @@
       },
       "specialEffects": [],
       "desc": "A reliable hunting bow. +2 Speed when equipped. Damage: 1d6",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 10
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "crossbow": {
       "id": "crossbow",
@@ -427,12 +469,13 @@
         "piercing"
       ],
       "desc": "A mechanical crossbow. +1 Strength, +1 Speed. Piercing shots.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 16
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "composite_bow": {
       "id": "composite_bow",
@@ -445,12 +488,13 @@
       },
       "specialEffects": [],
       "desc": "A reinforced composite bow. +2 Speed, +1 Strength when equipped. Damage: 1d8. 1 enchantment slot.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 20
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "lightning_bow": {
       "id": "lightning_bow",
@@ -465,13 +509,14 @@
         "shock_on_hit"
       ],
       "desc": "A bow that crackles with electricity. +2 Speed, +2 Magic Power. Damage: 1d10. Attacks may shock enemies. GRANTS: Shock On Hit.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 10
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "elvish_bow": {
       "id": "elvish_bow",
@@ -485,14 +530,15 @@
       "specialEffects": [
         "nature_blessing"
       ],
-      "desc": "An elegant elvish bow. +3 Speed, +1 Magic Power. Damage: 1d10. Blessed by nature spirits. GRANTS: Nature Blessing.",
-      "icon": "�x��",
+      "desc": "An elegant elvish bow. +3 Speed, +1 Magic Power. Damage: 1d10. GRANTS: Nature Blessing (+2 Accuracy, +1 Magic Power outdoors for 8 turns; heal 1 HP at start of outdoor turns).",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 25
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "crystal_bow": {
       "id": "crystal_bow",
@@ -508,13 +554,14 @@
         "piercing"
       ],
       "desc": "A bow carved from pure crystal. +3 Speed, +2 Magic Power. Damage: 1d12. Shoots light arrows. GRANTS: Piercing Light.",
-      "icon": "�x\u0019}",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 30
       },
       "enchantmentSlots": 3,
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "storm_bow": {
       "id": "storm_bow",
@@ -529,13 +576,14 @@
         "lightning_arrows"
       ],
       "desc": "A bow that commands storms. +3 Speed, +2 Magic Power. Damage: 2d6. Arrows become lightning. GRANTS: Lightning Arrows.",
-      "icon": "�a�",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 0
       },
       "enchantmentSlots": 3,
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "celestial_bow": {
       "id": "celestial_bow",
@@ -549,14 +597,15 @@
       "specialEffects": [
         "star_arrows"
       ],
-      "desc": "A bow crafted from starlight. +4 Speed, +3 Magic Power. Damage: 2d8. Shoots celestial energy. GRANTS: Star Arrows.",
-      "icon": "�S�",
+      "desc": "A bow crafted from starlight. +4 Speed, +3 Magic Power. Damage: 2d8. GRANTS: Star Arrows (+1d6 radiant; +2 Accuracy in darkness).",
+      "icon": "",
       "price": {
         "gold": 5,
         "silver": 0
       },
       "enchantmentSlots": 2,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "stone_hammer": {
       "id": "stone_hammer",
@@ -568,12 +617,13 @@
       },
       "specialEffects": [],
       "desc": "A crude stone hammer. +2 Strength when equipped. Damage: 1d4",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "silver": 6
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "iron_mace": {
       "id": "iron_mace",
@@ -586,12 +636,13 @@
       },
       "specialEffects": [],
       "desc": "A solid iron mace. +3 Strength, +1 Physical Defence when equipped. Damage: 1d6",
-      "icon": "�a\u0019️",
+      "icon": "",
       "price": {
         "silver": 12
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "war_hammer": {
       "id": "war_hammer",
@@ -605,13 +656,14 @@
       "specialEffects": [
         "armor_pierce"
       ],
-      "desc": "A heavy war hammer. +4 Strength, -1 Speed. Damage: 1d10. Pierces armor. GRANTS: Armor Pierce.",
-      "icon": "�x\u001d�",
+      "desc": "A heavy war hammer. +4 Strength, -1 Speed. Damage: 1d10. GRANTS: Armor Pierce (−2 target Physical Defence for this attack).",
+      "icon": "",
       "price": {
         "silver": 18
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "blessed_mace": {
       "id": "blessed_mace",
@@ -626,12 +678,13 @@
         "holy_strike"
       ],
       "desc": "A mace blessed by divine power. +3 Strength, +1 Magic Power. Damage: 1d10. Holy damage vs undead. GRANTS: Holy Strike.",
-      "icon": "�S�️",
+      "icon": "",
       "price": {
         "silver": 35
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "frost_hammer": {
       "id": "frost_hammer",
@@ -646,13 +699,14 @@
         "freeze_on_hit"
       ],
       "desc": "A hammer of eternal ice. +4 Strength, +1 Magic Power. Damage: 1d10. Freezes enemies on impact. GRANTS: Freeze On Hit.",
-      "icon": "�\u001e️",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 30
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "earth_hammer": {
       "id": "earth_hammer",
@@ -666,14 +720,15 @@
       "specialEffects": [
         "earthquake"
       ],
-      "desc": "A hammer imbued with earth magic. +4 Strength, +2 Physical Defence. Damage: 1d10. Creates tremors. GRANTS: Earthquake.",
-      "icon": "�xR�",
+      "desc": "A hammer imbued with earth magic. +4 Strength, +2 Physical Defence. Damage: 1d10. GRANTS: Earthquake (10ft burst — 2d6 earth; Knockdown on failed Speed save).",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 25
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "thunder_hammer": {
       "id": "thunder_hammer",
@@ -687,14 +742,15 @@
       "specialEffects": [
         "thunder_strike"
       ],
-      "desc": "A hammer that roars with thunder. +5 Strength, +2 Magic Power. Damage: 1d12. Sonic shockwaves. GRANTS: Thunder Strike.",
-      "icon": "�a�",
+      "desc": "A hammer that roars with thunder. +5 Strength, +2 Magic Power. Damage: 1d12. GRANTS: Thunder Strike (+1d6 thunder; 40% Incapacitated for 1 turn).",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 50
       },
       "enchantmentSlots": 3,
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "titan_hammer": {
       "id": "titan_hammer",
@@ -709,14 +765,15 @@
       "specialEffects": [
         "earth_shatter"
       ],
-      "desc": "The legendary hammer of titans. +6 Strength, +5 HP, -1 Speed. Damage: 2d8. Shatters the earth. GRANTS: Earth Shatter.",
-      "icon": "�x�\u001d️",
+      "desc": "The legendary hammer of titans. +6 Strength, +5 HP, -1 Speed. Damage: 2d8. GRANTS: Earth Shatter (+1d8 earth; −2 target Physical Defence until end of next turn).",
+      "icon": "",
       "price": {
         "gold": 6,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "void_crusher": {
       "id": "void_crusher",
@@ -731,14 +788,15 @@
       "specialEffects": [
         "void_impact"
       ],
-      "desc": "A hammer that crushes reality itself. +7 Strength, +3 Magic Power, -2 HP. Damage: 2d10. Void damage. GRANTS: Void Impact.",
-      "icon": "�x\"�️",
+      "desc": "A void-forged war hammer. +7 Strength, +3 Magic Power, -2 HP. Damage: 2d10. GRANTS: Void Impact (+1d6 void; push target 10ft on hit).",
+      "icon": "",
       "price": {
         "gold": 8,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "bronze_axe": {
       "id": "bronze_axe",
@@ -750,12 +808,13 @@
       },
       "specialEffects": [],
       "desc": "A simple bronze axe. +2 Strength when equipped. Damage: 1d4",
-      "icon": "�x�\u001c",
+      "icon": "",
       "price": {
         "silver": 7
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "iron_axe": {
       "id": "iron_axe",
@@ -767,12 +826,13 @@
       },
       "specialEffects": [],
       "desc": "A sturdy iron axe. +3 Strength when equipped. Damage: 1d6",
-      "icon": "�x�\u001c",
+      "icon": "",
       "price": {
         "silver": 13
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "battle_axe": {
       "id": "battle_axe",
@@ -786,13 +846,14 @@
       "specialEffects": [
         "cleave"
       ],
-      "desc": "A brutal battle axe. +3 Strength, -1 Speed. Damage: 1d8. Cleaves through enemies. GRANTS: Cleave.",
-      "icon": "�x�\u001c",
+      "desc": "A brutal battle axe. +3 Strength, -1 Speed. Damage: 1d8. GRANTS: Cleave (on drop or crit: half rolled damage to one adjacent enemy).",
+      "icon": "",
       "price": {
         "silver": 14
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "double_axe": {
       "id": "double_axe",
@@ -806,13 +867,14 @@
       "specialEffects": [
         "double_strike"
       ],
-      "desc": "A double-headed axe. +4 Strength, -1 Speed. Damage: 1d10. Can strike twice per attack. GRANTS: Double Strike.",
-      "icon": "�x�\u001c",
+      "desc": "A double-headed axe. +4 Strength, -1 Speed. Damage: 1d10. GRANTS: Double Strike (two attack rolls with one action; second hit uses same modifiers).",
+      "icon": "",
       "price": {
         "silver": 40
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "demon_axe": {
       "id": "demon_axe",
@@ -827,14 +889,15 @@
       "specialEffects": [
         "lifesteal"
       ],
-      "desc": "A cursed demonic axe. +5 Strength, -1 Speed, -2 HP. Damage: 1d12. Steals life from enemies. GRANTS: Lifesteal.",
-      "icon": "�x\u0018�",
+      "desc": "A cursed demonic axe. +5 Strength, -1 Speed, -2 HP. Damage: 1d12. GRANTS: Lifesteal (heal half the damage this attack deals).",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 50
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "berserker_axe": {
       "id": "berserker_axe",
@@ -849,14 +912,15 @@
       "specialEffects": [
         "rage_mode"
       ],
-      "desc": "An axe that fuels bloodlust. +5 Strength, +1 Speed, -1 HP. Damage: 1d10. Enters rage when wounded. GRANTS: Rage Mode.",
-      "icon": "�x\u0019�",
+      "desc": "An axe that fuels bloodlust. +5 Strength, +1 Speed, -1 HP. Damage: 1d10. GRANTS: Rage Mode (+2 Strength, +2 Speed, −1 Physical Defence for 8 turns).",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 50
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "executioner_axe": {
       "id": "executioner_axe",
@@ -870,14 +934,15 @@
       "specialEffects": [
         "execution"
       ],
-      "desc": "A massive executioner's axe. +6 Strength, -2 Speed. Damage: 2d6. Instant kill on critical hits. GRANTS: Execution.",
-      "icon": "�a\u001d️",
+      "desc": "A massive executioner's axe. +6 Strength, -2 Speed. Damage: 2d6. GRANTS: Execution (+1d6 damage vs targets below half HP).",
+      "icon": "",
       "price": {
         "gold": 3,
         "silver": 0
       },
       "enchantmentSlots": 3,
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "chaos_axe": {
       "id": "chaos_axe",
@@ -892,14 +957,15 @@
       "specialEffects": [
         "chaos_strike"
       ],
-      "desc": "An axe forged in chaos itself. +7 Strength, +2 Magic Power, -3 HP. Damage: 2d8. Unpredictable effects. GRANTS: Chaos Strike.",
-      "icon": "�xR�",
+      "desc": "An axe of wild magic. +7 Strength, +2 Magic Power, -3 HP. Damage: 2d8. GRANTS: Chaos Strike (+1d6 random element — fire, ice, lightning, or void — each hit).",
+      "icon": "",
       "price": {
         "gold": 5,
         "silver": 50
       },
       "enchantmentSlots": 2,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "world_cleaver": {
       "id": "world_cleaver",
@@ -914,14 +980,15 @@
       "specialEffects": [
         "reality_cut"
       ],
-      "desc": "An axe that can cleave worlds in two. +8 Strength, +2 Physical Defence, -3 Speed. Damage: 3d8. Reality-breaking power. GRANTS: Reality Cut.",
-      "icon": "�xR�",
+      "desc": "A world-shattering greataxe. +8 Strength, +2 Physical Defence, -3 Speed. Damage: 3d8. GRANTS: Reality Cut (once per scene: ignore all defence and cover; +2d6 force).",
+      "icon": "",
       "price": {
         "gold": 10,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "wooden_staff": {
       "id": "wooden_staff",
@@ -933,12 +1000,13 @@
       },
       "specialEffects": [],
       "desc": "A simple wooden staff. +1 Magic Power when equipped. Damage: 1d4",
-      "icon": "�x�\u001e",
+      "icon": "",
       "price": {
         "silver": 4
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "quarterstaff": {
       "id": "quarterstaff",
@@ -952,12 +1020,13 @@
       },
       "specialEffects": [],
       "desc": "A versatile wooden staff. +1 Strength, +1 Magic Power, +1 Physical Defence. Damage: 1d4",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 9
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "mystic_staff": {
       "id": "mystic_staff",
@@ -969,12 +1038,13 @@
       },
       "specialEffects": [],
       "desc": "A wooden staff carved with mystical runes. +2 Magic Power when equipped. Damage: 1d6. Enables staff skill bonuses.",
-      "icon": "�x�\u001e",
+      "icon": "",
       "price": {
         "silver": 12
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "crystal_staff": {
       "id": "crystal_staff",
@@ -987,12 +1057,13 @@
       },
       "specialEffects": [],
       "desc": "A staff topped with pure crystal. +3 Magic Power, +2 Stamina when equipped. Damage: 1d8",
-      "icon": "�x\u0019}",
+      "icon": "",
       "price": {
         "silver": 28
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "arcane_staff": {
       "id": "arcane_staff",
@@ -1007,13 +1078,14 @@
         "mana_efficiency"
       ],
       "desc": "A staff humming with arcane energy. +4 Magic Power, +2 Magical Defence. Damage: 1d10. Reduces mana costs. GRANTS: Mana Efficiency.",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 35
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "void_staff": {
       "id": "void_staff",
@@ -1028,13 +1100,14 @@
         "drain_mana"
       ],
       "desc": "A staff channeling dark energy. +4 Magic Power, +1 Magical Defence. Damage: 1d10. Drains enemy mana. GRANTS: Drain Mana.",
-      "icon": "�x\u0013�",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 10
       },
       "enchantmentSlots": 3,
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "elemental_staff": {
       "id": "elemental_staff",
@@ -1050,13 +1123,14 @@
         "elemental_mastery_passive"
       ],
       "desc": "A staff attuned to all elements. +5 Magic Power, +3 Stamina. Damage: 1d12. Elemental spell mastery. GRANTS: Elemental Mastery.",
-      "icon": "�xRx",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 25
       },
       "enchantmentSlots": 3,
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "cosmic_staff": {
       "id": "cosmic_staff",
@@ -1071,14 +1145,15 @@
       "specialEffects": [
         "cosmic_power"
       ],
-      "desc": "A staff channeling cosmic forces. +6 Magic Power, +5 Stamina, +2 HP. Damage: 2d6. Reality-bending magic. GRANTS: Cosmic Power.",
-      "icon": "�xRR",
+      "desc": "A staff channeling cosmic forces. +6 Magic Power, +5 Stamina, +2 HP. Damage: 2d6. GRANTS: Cosmic Power (+4 Magic Power, +2 Magical Defence for 6 turns).",
+      "icon": "",
       "price": {
         "gold": 7,
         "silver": 0
       },
       "enchantmentSlots": 2,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "genesis_rod": {
       "id": "genesis_rod",
@@ -1094,14 +1169,15 @@
       "specialEffects": [
         "creation_magic"
       ],
-      "desc": "The staff of creation itself. +7 Magic Power, +6 Stamina, +3 HP, +1 Speed. Damage: 2d8. Creates matter from nothing. GRANTS: Creation Magic.",
-      "icon": "�S�",
+      "desc": "Rod of creation. +7 Magic Power, +6 Stamina, +3 HP, +1 Speed. Damage: 2d8. GRANTS: Creation Magic (+3 Magic Power for 8 turns; minor objects or barriers — GM).",
+      "icon": "",
       "price": {
         "gold": 12,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "bronze_spear": {
       "id": "bronze_spear",
@@ -1114,12 +1190,13 @@
       },
       "specialEffects": [],
       "desc": "A basic bronze spear. +1 Strength, +1 Physical Defence when equipped. Damage: 1d4",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "silver": 6
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "iron_spear": {
       "id": "iron_spear",
@@ -1132,12 +1209,13 @@
       },
       "specialEffects": [],
       "desc": "A sturdy iron spear. +2 Strength, +1 Physical Defence when equipped. Damage: 1d6",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "silver": 10
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "spear": {
       "id": "spear",
@@ -1152,12 +1230,13 @@
         "reach"
       ],
       "desc": "A long spear. +2 Strength, +1 Physical Defence. Damage: 1d6. Extended reach.",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "silver": 11
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "halberd": {
       "id": "halberd",
@@ -1173,13 +1252,14 @@
         "reach",
         "cleave"
       ],
-      "desc": "A versatile halberd. +3 Strength, +2 Physical Defence, -1 Speed. Damage: 1d10. Reach and cleave attacks.",
-      "icon": "�a\u001d️",
+      "desc": "A versatile halberd. +3 Strength, +2 Physical Defence, -1 Speed. Damage: 1d10. GRANTS: Reach (+5ft melee for 10 turns), Cleave (on drop/crit: half damage to one adjacent enemy).",
+      "icon": "",
       "price": {
         "silver": 25
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "pike": {
       "id": "pike",
@@ -1195,12 +1275,13 @@
         "anti_cavalry"
       ],
       "desc": "A long pike for formation fighting. +2 Strength, +3 Physical Defence, -1 Speed. Damage: 1d8. Extra damage vs mounted foes. GRANTS: Anti Cavalry.",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "silver": 20
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "glaive": {
       "id": "glaive",
@@ -1216,13 +1297,14 @@
         "sweeping_strikes"
       ],
       "desc": "An elegant glaive. +4 Strength, +1 Speed, +1 Physical Defence. Damage: 1d12. Sweeping attack patterns. GRANTS: Sweeping Strikes.",
-      "icon": "�a\u001d️",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 15
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "dragon_lance": {
       "id": "dragon_lance",
@@ -1237,14 +1319,15 @@
       "specialEffects": [
         "dragon_slayer"
       ],
-      "desc": "A lance forged to slay dragons. +4 Strength, +3 Physical Defence, +2 Magic Power. Damage: 2d6. Dragon slaying power. GRANTS: Dragon Slayer.",
-      "icon": "�x��",
+      "desc": "A lance forged to slay dragons. +4 Strength, +3 Physical Defence, +2 Magic Power. Damage: 2d6. GRANTS: Dragon Slayer (+2 Accuracy and +1d6 vs dragons and draconic foes).",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 75
       },
       "enchantmentSlots": 3,
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "infinity_spear": {
       "id": "infinity_spear",
@@ -1260,14 +1343,15 @@
       "specialEffects": [
         "infinite_reach"
       ],
-      "desc": "A spear that transcends distance. +5 Strength, +4 Physical Defence, +3 Magic Power, +1 Speed. Damage: 2d8. Infinite reach.",
-      "icon": "�\"�️",
+      "desc": "A legendary reach spear. +5 Strength, +4 Physical Defence, +3 Magic Power, +1 Speed. Damage: 2d8. GRANTS: Infinite Reach (melee attacks reach 30ft for 3 turns).",
+      "icon": "",
       "price": {
         "gold": 8,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "reality_piercer": {
       "id": "reality_piercer",
@@ -1283,14 +1367,15 @@
       "specialEffects": [
         "dimension_pierce"
       ],
-      "desc": "A spear that pierces through dimensions. +6 Strength, +5 Physical Defence, +4 Magic Power, +2 Speed. Damage: 2d10. Ignores all defenses. GRANTS: Dimension Pierce.",
-      "icon": "�x\"�️",
+      "desc": "A dimension-piercing spear. +6 Strength, +5 Physical Defence, +4 Magic Power, +2 Speed. Damage: 2d10. GRANTS: Dimension Pierce (once per scene: ignore barriers and 6 total defence).",
+      "icon": "",
       "price": {
         "gold": 15,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     }
   },
   "armor": {
@@ -1303,12 +1388,13 @@
       },
       "specialEffects": [],
       "desc": "Simple cloth robes. +1 Magic Power when equipped.",
-      "icon": "�x\u0018�",
+      "icon": "",
       "price": {
         "silver": 3
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "leather_armor": {
       "id": "leather_armor",
@@ -1319,7 +1405,7 @@
       },
       "specialEffects": [],
       "desc": "Basic leather protection. +2 Physical Defence when equipped.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 5
       },
@@ -1334,7 +1420,8 @@
         ],
         "quantity": 1,
         "skillRequired": 2
-      }
+      },
+      "shopMinLevel": 1
     },
     "studded_leather": {
       "id": "studded_leather",
@@ -1346,12 +1433,13 @@
       },
       "specialEffects": [],
       "desc": "Leather armor with metal studs. +3 Physical Defence, -1 Speed.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 8
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "chain_mail": {
       "id": "chain_mail",
@@ -1363,12 +1451,13 @@
       },
       "specialEffects": [],
       "desc": "Interlocked metal rings. +4 Physical Defence, -1 Speed.",
-      "icon": "�:\u001c️",
+      "icon": "",
       "price": {
         "silver": 15
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "scale_mail": {
       "id": "scale_mail",
@@ -1381,12 +1470,13 @@
       },
       "specialEffects": [],
       "desc": "Overlapping metal scales. +4 Physical Defence, +1 Magical Defence, -1 Speed.",
-      "icon": "�x�x",
+      "icon": "",
       "price": {
         "silver": 18
       },
       "enchantmentSlots": 0,
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "plate_mail": {
       "id": "plate_mail",
@@ -1400,13 +1490,14 @@
         "damage_reduction"
       ],
       "desc": "Heavy steel armor. +5 Physical Defence, -1 Speed. Reduces incoming damage. GRANTS: Damage Reduction.",
-      "icon": "�x:�️",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 50
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "knight_armor": {
       "id": "knight_armor",
@@ -1421,13 +1512,14 @@
         "damage_reduction"
       ],
       "desc": "Full plate armor of a knight. +6 Physical Defence, +1 Magical Defence, -2 Speed. GRANTS: Damage Reduction.",
-      "icon": "�x:�️",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 25
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "mage_robes": {
       "id": "mage_robes",
@@ -1442,13 +1534,14 @@
         "regeneration"
       ],
       "desc": "Enchanted robes. +4 Magical Defence, +2 Magic Power. Restores stamina over time. GRANTS: Mana Regeneration.",
-      "icon": "�x\u0018�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 30
       },
       "enchantmentSlots": 1,
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "fire_robes": {
       "id": "fire_robes",
@@ -1471,13 +1564,14 @@
           "water": 1
         }
       },
-      "desc": "Robes woven with fire magic. +3 Magical Defence, +3 Magic Power. Immune to fire damage. GRANTS: Fire resistance 25% (-2), Ice/Water weakness 200% (+1)",
-      "icon": "�x\u001d�",
+      "desc": "Robes woven with fire magic. +3 Magical Defence, +3 Magic Power. Immune to fire damage. GRANTS: Fire resistance 25% (quarter fire damage); Ice and Water weakness 200% (double damage)",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 40
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "ice_armor": {
       "id": "ice_armor",
@@ -1501,13 +1595,14 @@
           "lightning": 1
         }
       },
-      "desc": "Armor made of magical ice. +3 Physical Defence, +3 Magical Defence, -1 Speed. Freezes attackers. GRANTS: Ice resistance 25% (-2), Fire/Lightning weakness 200% (+1)",
-      "icon": "�\u001e️",
+      "desc": "Armor made of magical ice. +3 Physical Defence, +3 Magical Defence, -1 Speed. Freezes attackers. GRANTS: Ice resistance 25% (quarter ice damage); Fire and Lightning weakness 200% (double damage)",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 45
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "shadow_cloak": {
       "id": "shadow_cloak",
@@ -1521,13 +1616,14 @@
         "stealth"
       ],
       "desc": "A cloak woven from shadows. +2 Speed, +2 Magical Defence. Enhanced stealth.",
-      "icon": "�x�!",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 35
       },
       "enchantmentSlots": 2,
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "dragon_scale_armor": {
       "id": "dragon_scale_armor",
@@ -1543,13 +1639,14 @@
         "fire_immunity"
       ],
       "desc": "Armor crafted from ancient dragon scales. +5 Physical Defence, +4 Magical Defence, +5 HP. GRANTS: Fire Immunity, Damage Reduction.",
-      "icon": "�x�0",
+      "icon": "",
       "price": {
         "gold": 4,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     },
     "void_armor": {
       "id": "void_armor",
@@ -1564,14 +1661,15 @@
       "specialEffects": [
         "spell_absorption"
       ],
-      "desc": "Armor from the void realm. +3 Physical Defence, +6 Magical Defence, +2 Magic Power, -3 HP. GRANTS: Spell Absorption.",
-      "icon": "�x\u0013�",
+      "desc": "Armor from the void realm. +3 Physical Defence, +6 Magical Defence, +2 Magic Power, -3 HP. GRANTS: Spell Absorption (once while active: negate one spell targeting you; regain its Stamina cost).",
+      "icon": "",
       "price": {
         "gold": 3,
         "silver": 50
       },
       "enchantmentSlots": 3,
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "celestial_robes": {
       "id": "celestial_robes",
@@ -1588,14 +1686,15 @@
         "regeneration",
         "light_aura"
       ],
-      "desc": "Robes blessed by celestial beings. +5 Magical Defence, +4 Magic Power, +3 HP, +3 Stamina. GRANTS: Light Aura, Mana Regeneration.",
-      "icon": "�S�",
+      "desc": "Robes blessed by celestial beings. +5 Magical Defence, +4 Magic Power, +3 HP, +3 Stamina. GRANTS: Light Aura, Mana Regeneration, Regeneration.",
+      "icon": "",
       "price": {
         "gold": 5,
         "silver": 0
       },
       "enchantmentSlots": 1,
-      "rarity": "legendary"
+      "rarity": "legendary",
+      "shopMinLevel": 21
     }
   },
   "accessories": {
@@ -1609,11 +1708,12 @@
       },
       "specialEffects": [],
       "desc": "A simple enchanted ring. +1 Strength, +1 Magic Power when worn.",
-      "icon": "�x\u0019�",
+      "icon": "",
       "price": {
         "silver": 25
       },
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "ring_of_speed": {
       "id": "ring_of_speed",
@@ -1626,11 +1726,12 @@
         "haste"
       ],
       "desc": "A ring that quickens movement. +2 Speed. Grants extra actions. GRANTS: Haste.",
-      "icon": "�x\u0019�",
+      "icon": "",
       "price": {
         "silver": 30
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "ring_of_protection": {
       "id": "ring_of_protection",
@@ -1642,11 +1743,12 @@
       },
       "specialEffects": [],
       "desc": "A protective ring. +2 Physical Defence, +2 Magical Defence.",
-      "icon": "�x\u0019�",
+      "icon": "",
       "price": {
         "silver": 40
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "ring_of_fire": {
       "id": "ring_of_fire",
@@ -1669,13 +1771,14 @@
           "ice": 1
         }
       },
-      "desc": "A ring wreathed in flames. +3 Magic Power. Fire immunity and burning aura. GRANTS: Fire resistance 50% (-1), Ice weakness 200% (+1)",
-      "icon": "�x\u001d�",
+      "desc": "A ring wreathed in flames. +3 Magic Power. Fire immunity and burning aura. GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 20
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "ring_of_ice": {
       "id": "ring_of_ice",
@@ -1698,13 +1801,14 @@
           "fire": 1
         }
       },
-      "desc": "A ring of eternal frost. +3 Magic Power, +1 Magical Defence. Frost aura. GRANTS: Ice resistance 50% (-1), Fire weakness 200% (+1)",
-      "icon": "�\u001e️",
+      "desc": "A ring of eternal frost. +3 Magic Power, +1 Magical Defence. Frost aura. GRANTS: Ice resistance 50% (half ice damage); Fire weakness 200% (double fire damage)",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 20
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "ring_of_storms": {
       "id": "ring_of_storms",
@@ -1727,13 +1831,14 @@
           "earth": 1
         }
       },
-      "desc": "A ring crackling with electricity. +2 Magic Power, +2 Speed. Lightning attacks. GRANTS: Lightning resistance 50% (-1), Earth weakness 200% (+1)",
-      "icon": "�a�",
+      "desc": "A ring crackling with electricity. +2 Magic Power, +2 Speed. Lightning attacks. GRANTS: Lightning resistance 50% (half lightning damage); Earth weakness 200% (double earth damage)",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 25
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "ring_of_shadows": {
       "id": "ring_of_shadows",
@@ -1747,12 +1852,13 @@
         "invisibility"
       ],
       "desc": "A ring that bends light. +3 Speed, +1 Magic Power. Can become invisible. GRANTS: Invisibility.",
-      "icon": "�x\u0013�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 35
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "speed_boots": {
       "id": "speed_boots",
@@ -1765,11 +1871,12 @@
         "extra_movement"
       ],
       "desc": "Enchanted boots that enhance mobility. +3 Speed. Grants extra movement in combat.",
-      "icon": "�x\u0018�",
+      "icon": "",
       "price": {
         "silver": 75
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "boots_of_stealth": {
       "id": "boots_of_stealth",
@@ -1782,11 +1889,12 @@
         "silent_movement"
       ],
       "desc": "Soft-soled boots. +2 Speed. Move without making sound. GRANTS: Silent Movement.",
-      "icon": "�x\u0018x",
+      "icon": "",
       "price": {
         "silver": 60
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "iron_boots": {
       "id": "iron_boots",
@@ -1800,11 +1908,12 @@
         "immovable"
       ],
       "desc": "Heavy iron boots. +3 Physical Defence, -1 Speed. Cannot be knocked down. GRANTS: Immovable.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 45
       },
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "winged_boots": {
       "id": "winged_boots",
@@ -1817,12 +1926,13 @@
         "flight"
       ],
       "desc": "Boots with ethereal wings. +4 Speed. Grants limited flight ability.",
-      "icon": "�x\u0018�",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 0
       },
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "health_amulet": {
       "id": "health_amulet",
@@ -1836,12 +1946,13 @@
         "regeneration"
       ],
       "desc": "A life-enhancing amulet. +5 HP, +3 Stamina. Slowly regenerates health. GRANTS: Regeneration.",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 25
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "amulet_of_mana": {
       "id": "amulet_of_mana",
@@ -1856,12 +1967,13 @@
         "regeneration"
       ],
       "desc": "An amulet pulsing with magical energy. +3 Magic Power, +5 Stamina. Restores mana over time. GRANTS: Mana Regeneration.",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 30
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "pendant_of_wisdom": {
       "id": "pendant_of_wisdom",
@@ -1875,12 +1987,13 @@
         "spell_resistance"
       ],
       "desc": "A pendant containing ancient knowledge. +2 Magic Power, +3 Magical Defence. GRANTS: Spell Resistance.",
-      "icon": "�x\u001c�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 15
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "amulet_of_earth": {
       "id": "amulet_of_earth",
@@ -1895,13 +2008,14 @@
         "wind_weakness",
         "stone_skin"
       ],
-      "desc": "An amulet of solid stone. +3 Physical Defence, +3 HP. Stone skin protection. GRANTS: Earth resistance 50% (-1), Wind weakness 200% (+1)",
-      "icon": "�xR�",
+      "desc": "An amulet of solid stone. +3 Physical Defence, +3 HP. Stone skin protection. GRANTS: Earth resistance 50% (half earth damage); Wind weakness 200% (double wind damage)",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 18
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "amulet_of_shadows": {
       "id": "amulet_of_shadows",
@@ -1916,13 +2030,14 @@
         "light_weakness",
         "shadow_stealth"
       ],
-      "desc": "An amulet wreathed in darkness. +3 Speed, +2 Magical Defence. Shadow stealth. GRANTS: Darkness resistance 50% (-1), Light weakness 200% (+1)",
-      "icon": "�xR\u0018",
+      "desc": "An amulet wreathed in darkness. +3 Speed, +2 Magical Defence. Shadow stealth. GRANTS: Darkness resistance 50% (half darkness damage); Light weakness 200% (double light damage)",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 22
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "amulet_of_light": {
       "id": "amulet_of_light",
@@ -1938,13 +2053,14 @@
         "radiant_aura",
         "undead_bane"
       ],
-      "desc": "An amulet glowing with holy light. +2 Magic Power, +3 Magical Defence. Radiant aura, extra damage vs undead. GRANTS: Light resistance 50% (-1), Darkness weakness 200% (+1)",
-      "icon": "�S�",
+      "desc": "An amulet glowing with holy light. +2 Magic Power, +3 Magical Defence. Radiant aura, extra damage vs undead. GRANTS: Light resistance 50% (half light damage); Darkness weakness 200% (double darkness damage)",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 25
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "cloak_of_elvenkind": {
       "id": "cloak_of_elvenkind",
@@ -1959,12 +2075,13 @@
         "nature_resistance"
       ],
       "desc": "An elven cloak. +2 Speed, +2 Magical Defence. Enhanced stealth and nature resistance.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 50
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "cloak_of_displacement": {
       "id": "cloak_of_displacement",
@@ -1979,12 +2096,13 @@
         "mirror_image"
       ],
       "desc": "A shimmering cloak. +1 Speed, +2 Physical Defence, +2 Magical Defence. Creates mirror images. GRANTS: Mirror Image.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "gold": 2,
         "silver": 25
       },
-      "rarity": "epic"
+      "rarity": "epic",
+      "shopMinLevel": 14
     },
     "lucky_coin": {
       "id": "lucky_coin",
@@ -1996,11 +2114,12 @@
         "luck"
       ],
       "desc": "An ancient lucky coin. Increases critical hit chance and general luck. GRANTS: Critical Chance, Luck.",
-      "icon": "�x�\"",
+      "icon": "",
       "price": {
         "silver": 20
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "crystal_monocle": {
       "id": "crystal_monocle",
@@ -2014,12 +2133,13 @@
         "identify"
       ],
       "desc": "A monocle made of pure crystal. +2 Magic Power. See magical auras and identify items. GRANTS: Magic Sight, Identify.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 0
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "gauntlets_of_ogre_power": {
       "id": "gauntlets_of_ogre_power",
@@ -2033,12 +2153,13 @@
         "crush"
       ],
       "desc": "Massive gauntlets. +4 Strength, -1 Speed. Can crush armor and weapons.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 60
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "belt_of_giant_strength": {
       "id": "belt_of_giant_strength",
@@ -2050,12 +2171,13 @@
       },
       "specialEffects": [],
       "desc": "A belt crafted by giants. +3 Strength, +3 HP. Increases carrying capacity.",
-      "icon": "�x\u001d\u0014",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 40
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "headband_of_intellect": {
       "id": "headband_of_intellect",
@@ -2069,12 +2191,13 @@
         "spell_memory"
       ],
       "desc": "A scholarly headband. +3 Magic Power, +2 Stamina. Remember more spells. GRANTS: Spell Memory.",
-      "icon": "�x}�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 35
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "eagle_eye_pendant": {
       "id": "eagle_eye_pendant",
@@ -2091,7 +2214,8 @@
       "price": {
         "silver": 30
       },
-      "rarity": "uncommon"
+      "rarity": "uncommon",
+      "shopMinLevel": 5
     },
     "marksman_gloves": {
       "id": "marksman_gloves",
@@ -2109,7 +2233,8 @@
       "price": {
         "silver": 25
       },
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
     },
     "precision_scope": {
       "id": "precision_scope",
@@ -2128,7 +2253,8 @@
         "gold": 1,
         "silver": 15
       },
-      "rarity": "rare"
+      "rarity": "rare",
+      "shopMinLevel": 9
     },
     "hunter_focus_charm": {
       "id": "hunter_focus_charm",
@@ -2146,7 +2272,672 @@
       "price": {
         "silver": 20
       },
-      "rarity": "common"
+      "rarity": "common",
+      "shopMinLevel": 1
+    }
+  },
+  "offhand": {
+    "wooden_shield": {
+      "id": "wooden_shield",
+      "name": "Wooden Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A simple wooden shield for the off-hand. +1 Physical Defence. Requires a one-handed main weapon.",
+      "icon": "🛡️",
+      "price": {
+        "silver": 6
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "iron_shield": {
+      "id": "iron_shield",
+      "name": "Iron Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 2
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "desc": "A sturdy iron shield. +2 Physical Defence. 1 enchant slot.",
+      "icon": "🛡️",
+      "price": {
+        "silver": 18
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "apprentice_spell_tome": {
+      "id": "apprentice_spell_tome",
+      "name": "Apprentice Spell Tome",
+      "type": "offhand",
+      "offhandType": "tome",
+      "statModifiers": {
+        "magicPower": 1,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A pocket spellbook for the off-hand. +1 Magic Power, +1 Magical Defence.",
+      "icon": "📖",
+      "price": {
+        "silver": 12
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "travel_lute": {
+      "id": "travel_lute",
+      "name": "Travel Lute",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "statModifiers": {
+        "stamina": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A light lute for the off-hand. +1 Stamina. Vocals work without it — hover for Musician song bonuses.",
+      "icon": "🎵",
+      "price": {
+        "silver": 15
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "round_buckler": {
+      "id": "round_buckler",
+      "name": "Round Buckler",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 1,
+        "speed": 1
+      },
+      "specialEffects": [
+        "parry_bonus"
+      ],
+      "enchantmentSlots": 0,
+      "desc": "A small round shield for the off-hand. +1 Physical Defence, +1 Speed. Bonus to parrying. GRANTS: Parry Bonus.",
+      "icon": "🛡️",
+      "price": {
+        "silver": 10
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "steel_kite_shield": {
+      "id": "steel_kite_shield",
+      "name": "Steel Kite Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 3,
+        "speed": -1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "desc": "A broad steel kite shield. +3 Physical Defence, −1 Speed. 1 enchant slot.",
+      "icon": "🛡️",
+      "price": {
+        "silver": 32
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "arcane_focus_orb": {
+      "id": "arcane_focus_orb",
+      "name": "Arcane Focus Orb",
+      "type": "offhand",
+      "offhandType": "tome",
+      "statModifiers": {
+        "magicPower": 1,
+        "accuracy": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A crystal orb for channelling spells in the off-hand. +1 Magic Power, +1 Accuracy.",
+      "icon": "🔮",
+      "price": {
+        "silver": 14
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "scholars_grimoire": {
+      "id": "scholars_grimoire",
+      "name": "Scholar's Grimoire",
+      "type": "offhand",
+      "offhandType": "tome",
+      "statModifiers": {
+        "magicPower": 2,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "desc": "A well-worn spellbook for the off-hand. +2 Magic Power, +1 Magical Defence. 1 enchant slot.",
+      "icon": "📖",
+      "price": {
+        "silver": 28
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "hand_drum": {
+      "id": "hand_drum",
+      "name": "Hand Drum",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "statModifiers": {
+        "stamina": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A compact drum for the off-hand. +1 Stamina. Vocals work without it — hover for Musician song bonuses.",
+      "icon": "🥁",
+      "price": {
+        "silver": 12
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "war_horn": {
+      "id": "war_horn",
+      "name": "War Horn",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "statModifiers": {
+        "stamina": 2
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A brass horn for rallying allies. +2 Stamina. Vocals work without it — hover for Musician song bonuses.",
+      "icon": "📯",
+      "price": {
+        "silver": 22
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "pilgrims_holy_symbol": {
+      "id": "pilgrims_holy_symbol",
+      "name": "Pilgrim's Holy Symbol",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "magicalDefence": 1
+      },
+      "specialEffects": [
+        "holy_symbol_craft"
+      ],
+      "enchantmentSlots": 0,
+      "desc": "A blessed symbol for the off-hand. +1 Magical Defence. GRANTS: +1 vs fear and mind control while worn.",
+      "icon": "✝️",
+      "price": {
+        "silver": 11
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "torch_brace": {
+      "id": "torch_brace",
+      "name": "Torch Brace",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "accuracy": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A hooded torch mount for the off-hand. +1 Accuracy. Lights the way — the GM may waive darkness penalties nearby.",
+      "icon": "🔦",
+      "price": {
+        "copper": 8
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "heater_shield": {
+      "id": "heater_shield",
+      "name": "Heater Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 2,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A tall heater shield for the off-hand. +2 Physical Defence, +1 Magical Defence.",
+      "icon": "🛡️",
+      "price": {
+        "silver": 24
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "warden_targe": {
+      "id": "warden_targe",
+      "name": "Warden's Targe",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 2,
+        "speed": 1
+      },
+      "specialEffects": [
+        "flexible_defense"
+      ],
+      "enchantmentSlots": 0,
+      "desc": "A light strapped shield for skirmishers. +2 Physical Defence, +1 Speed. GRANTS: Flexible Defense.",
+      "icon": "🛡️",
+      "price": {
+        "silver": 26
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "tower_guard_shield": {
+      "id": "tower_guard_shield",
+      "name": "Tower Guard Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 4,
+        "speed": -2
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 2,
+      "desc": "A heavy tower shield. +4 Physical Defence, −2 Speed. 2 enchant slots.",
+      "icon": "🛡️",
+      "price": {
+        "gold": 1,
+        "silver": 8
+      },
+      "rarity": "rare",
+      "shopMinLevel": 9
+    },
+    "mirror_shield": {
+      "id": "mirror_shield",
+      "name": "Mirror Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 2,
+        "magicalDefence": 1
+      },
+      "specialEffects": [
+        "reflect_damage"
+      ],
+      "enchantmentSlots": 1,
+      "desc": "A polished shield that catches and returns blows. +2 Physical Defence, +1 Magical Defence. 1 enchant slot. GRANTS: Reflect Damage.",
+      "icon": "🛡️",
+      "price": {
+        "gold": 1,
+        "silver": 20
+      },
+      "rarity": "rare",
+      "shopMinLevel": 9
+    },
+    "aegis_of_dawn": {
+      "id": "aegis_of_dawn",
+      "name": "Aegis of Dawn",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 4,
+        "magicalDefence": 2
+      },
+      "specialEffects": [
+        "magic_barrier"
+      ],
+      "enchantmentSlots": 2,
+      "desc": "A sun-blessed shield for champions. +4 Physical Defence, +2 Magical Defence. 2 enchant slots. GRANTS: Magic Barrier.",
+      "icon": "🛡️",
+      "price": {
+        "gold": 2,
+        "silver": 40
+      },
+      "rarity": "epic",
+      "shopMinLevel": 14
+    },
+    "novice_wand": {
+      "id": "novice_wand",
+      "name": "Novice Wand",
+      "type": "offhand",
+      "offhandType": "tome",
+      "statModifiers": {
+        "magicPower": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A simple wand for the off-hand. +1 Magic Power.",
+      "icon": "🪄",
+      "price": {
+        "silver": 8
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "star_chart_folio": {
+      "id": "star_chart_folio",
+      "name": "Star Chart Folio",
+      "type": "offhand",
+      "offhandType": "tome",
+      "statModifiers": {
+        "magicPower": 1,
+        "accuracy": 2
+      },
+      "specialEffects": [
+        "keen_sight"
+      ],
+      "enchantmentSlots": 0,
+      "desc": "Astrological charts bound for travel. +1 Magic Power, +2 Accuracy. GRANTS: Keen Sight.",
+      "icon": "📜",
+      "price": {
+        "silver": 22
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "mages_codex": {
+      "id": "mages_codex",
+      "name": "Mage's Codex",
+      "type": "offhand",
+      "offhandType": "tome",
+      "statModifiers": {
+        "magicPower": 3,
+        "magicalDefence": 2
+      },
+      "specialEffects": [
+        "concentration"
+      ],
+      "enchantmentSlots": 1,
+      "desc": "A master reference for battle-casting. +3 Magic Power, +2 Magical Defence. 1 enchant slot. GRANTS: Concentration.",
+      "icon": "📖",
+      "price": {
+        "gold": 1,
+        "silver": 5
+      },
+      "rarity": "rare",
+      "shopMinLevel": 9
+    },
+    "void_scripture": {
+      "id": "void_scripture",
+      "name": "Void Scripture",
+      "type": "offhand",
+      "offhandType": "tome",
+      "statModifiers": {
+        "magicPower": 3,
+        "speed": 2
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 2,
+      "desc": "Forbidden pages that bend time at the edge of vision. +3 Magic Power, +2 Speed. 2 enchant slots.",
+      "icon": "📕",
+      "price": {
+        "gold": 2,
+        "silver": 25
+      },
+      "rarity": "epic",
+      "shopMinLevel": 14
+    },
+    "wooden_flute": {
+      "id": "wooden_flute",
+      "name": "Wooden Flute",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "statModifiers": {
+        "stamina": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A simple flute for the off-hand. +1 Stamina. Vocals work without it — hover for Musician song bonuses.",
+      "icon": "🎶",
+      "price": {
+        "silver": 9
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "silver_bells": {
+      "id": "silver_bells",
+      "name": "Silver Bells",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "statModifiers": {
+        "stamina": 1,
+        "magicPower": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "Tiny bells on a wrist strap. +1 Stamina, +1 Magic Power. Vocals work without them — hover for Musician song bonuses.",
+      "icon": "🔔",
+      "price": {
+        "silver": 18
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "singing_bowl": {
+      "id": "singing_bowl",
+      "name": "Singing Bowl",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "statModifiers": {
+        "stamina": 1,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A handheld bowl that rings clear and long. +1 Stamina, +1 Magical Defence. Vocals work without it — hover for Musician song bonuses.",
+      "icon": "🥣",
+      "price": {
+        "silver": 20
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "battle_lute": {
+      "id": "battle_lute",
+      "name": "Battle Lute",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "statModifiers": {
+        "stamina": 2,
+        "magicPower": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "desc": "A reinforced lute built for the front line. +2 Stamina, +1 Magic Power. 1 enchant slot. Vocals work without it — hover for Musician song bonuses.",
+      "icon": "🎸",
+      "price": {
+        "gold": 1,
+        "silver": 12
+      },
+      "rarity": "rare",
+      "shopMinLevel": 9
+    },
+    "symphony_harp": {
+      "id": "symphony_harp",
+      "name": "Hand Harp",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "statModifiers": {
+        "stamina": 2,
+        "magicPower": 2
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "desc": "A portable harp for the off-hand. +2 Stamina, +2 Magic Power. 1 enchant slot. Vocals work without it — hover for Musician song bonuses.",
+      "icon": "🎻",
+      "price": {
+        "gold": 1,
+        "silver": 35
+      },
+      "rarity": "rare",
+      "shopMinLevel": 9
+    },
+    "trail_compass": {
+      "id": "trail_compass",
+      "name": "Trail Compass",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "speed": 1,
+        "accuracy": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A brass compass for the off-hand. +1 Speed, +1 Accuracy.",
+      "icon": "🧭",
+      "price": {
+        "silver": 7
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "component_pouch": {
+      "id": "component_pouch",
+      "name": "Component Pouch",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "magicPower": 1
+      },
+      "specialEffects": [
+        "concentration"
+      ],
+      "enchantmentSlots": 0,
+      "desc": "A belt pouch of spell reagents for the off-hand. +1 Magic Power. GRANTS: Concentration.",
+      "icon": "👝",
+      "price": {
+        "silver": 10
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
+    },
+    "druidic_totem": {
+      "id": "druidic_totem",
+      "name": "Druidic Totem",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "hp": 1,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A carved spirit totem for the off-hand. +1 HP, +1 Magical Defence.",
+      "icon": "🗿",
+      "price": {
+        "silver": 16
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "iron_censer": {
+      "id": "iron_censer",
+      "name": "Iron Censer",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "magicalDefence": 1
+      },
+      "specialEffects": [
+        "turn_unholy"
+      ],
+      "enchantmentSlots": 0,
+      "desc": "A swinging censer of blessed incense. +1 Magical Defence. GRANTS: Turn Unholy (warded area — undead hesitate to enter).",
+      "icon": "⚱️",
+      "price": {
+        "silver": 19
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "lantern_shield": {
+      "id": "lantern_shield",
+      "name": "Lantern Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "statModifiers": {
+        "physicalDefence": 1,
+        "accuracy": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A buckler with a built-in lantern slot. +1 Physical Defence, +1 Accuracy. Lights the way in the off-hand.",
+      "icon": "🏮",
+      "price": {
+        "silver": 14
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "plague_ward_amulet": {
+      "id": "plague_ward_amulet",
+      "name": "Plague Ward Amulet",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "magicalDefence": 1,
+        "hp": 1
+      },
+      "specialEffects": [
+        "plague_ward"
+      ],
+      "enchantmentSlots": 0,
+      "desc": "A warding amulet on a wrist chain. +1 Magical Defence, +1 HP. GRANTS: Plague Ward.",
+      "icon": "📿",
+      "price": {
+        "silver": 21
+      },
+      "rarity": "uncommon",
+      "shopMinLevel": 5
+    },
+    "spell_scarab": {
+      "id": "spell_scarab",
+      "name": "Spell Scarab",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "magicPower": 2,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "desc": "An enchanted beetle talisman for the off-hand. +2 Magic Power, +1 Magical Defence. 1 enchant slot.",
+      "icon": "🪲",
+      "price": {
+        "gold": 1,
+        "silver": 18
+      },
+      "rarity": "rare",
+      "shopMinLevel": 9
+    },
+    "lucky_charm": {
+      "id": "lucky_charm",
+      "name": "Lucky Charm",
+      "type": "offhand",
+      "offhandType": "focus",
+      "statModifiers": {
+        "speed": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "desc": "A rabbit's foot on a cord — probably lucky. +1 Speed.",
+      "icon": "🍀",
+      "price": {
+        "copper": 5
+      },
+      "rarity": "common",
+      "shopMinLevel": 1
     }
   },
   "consumables": {
@@ -2159,12 +2950,13 @@
         "heal_2"
       ],
       "desc": "A fresh apple. Restores 2 HP when consumed. GRANTS: Heal 2.",
-      "icon": "�x�}",
+      "icon": "",
       "price": {
         "copper": 1
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "bread": {
       "id": "bread",
@@ -2175,12 +2967,13 @@
         "heal_5"
       ],
       "desc": "A simple loaf of bread. Restores 5 HP when consumed. GRANTS: Heal 5.",
-      "icon": "�x�~",
+      "icon": "",
       "price": {
         "copper": 5
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "cheese": {
       "id": "cheese",
@@ -2197,7 +2990,8 @@
         "copper": 8
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "meat_ration": {
       "id": "meat_ration",
@@ -2209,12 +3003,13 @@
         "heal_8"
       ],
       "desc": "Preserved meat. Restores 8 HP and temporarily boosts Strength by 1 for 5 turns. GRANTS: Heal 8, Temp Strength 1.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 1
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "wine": {
       "id": "wine",
@@ -2226,12 +3021,13 @@
         "temp_magic_1"
       ],
       "desc": "Fine wine. Restores 5 Stamina and temporarily boosts Magic Power by 1 for 3 turns. GRANTS: Restore Stamina 5, Temp Magic 1.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 2
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "health_potion": {
       "id": "health_potion",
@@ -2242,7 +3038,7 @@
         "heal_25"
       ],
       "desc": "Restores 25 HP when consumed. GRANTS: Heal 25.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 2
       },
@@ -2257,7 +3053,8 @@
         ],
         "quantity": 2,
         "skillRequired": 1
-      }
+      },
+      "shopMinLevel": 1
     },
     "stamina_potion": {
       "id": "stamina_potion",
@@ -2268,13 +3065,14 @@
         "restore_stamina_15"
       ],
       "desc": "Restores 15 Stamina when consumed. GRANTS: Restore Stamina 15.",
-      "icon": "�a�",
+      "icon": "",
       "price": {
         "silver": 1,
         "copper": 50
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "greater_health_potion": {
       "id": "greater_health_potion",
@@ -2285,12 +3083,13 @@
         "heal_50"
       ],
       "desc": "A more potent healing potion. Restores 50 HP when consumed. GRANTS: Heal 50.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 8
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "superior_stamina_potion": {
       "id": "superior_stamina_potion",
@@ -2301,12 +3100,13 @@
         "restore_stamina_30"
       ],
       "desc": "A potent energy potion. Restores 30 Stamina when consumed. GRANTS: Restore Stamina 30.",
-      "icon": "�a�",
+      "icon": "",
       "price": {
         "silver": 6
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "strength_elixir": {
       "id": "strength_elixir",
@@ -2317,12 +3117,13 @@
         "temp_strength_3"
       ],
       "desc": "Temporarily increases Strength by 3 for 10 turns. GRANTS: Temp Strength 3.",
-      "icon": "�x\u0019�",
+      "icon": "",
       "price": {
         "silver": 15
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "speed_elixir": {
       "id": "speed_elixir",
@@ -2333,12 +3134,13 @@
         "temp_speed_3"
       ],
       "desc": "Temporarily increases Speed by 3 for 8 turns. GRANTS: Temp Speed 3.",
-      "icon": "�x\u0019�",
+      "icon": "",
       "price": {
         "silver": 15
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "magic_elixir": {
       "id": "magic_elixir",
@@ -2349,12 +3151,13 @@
         "temp_magic_3"
       ],
       "desc": "Temporarily increases Magic Power by 3 for 10 turns. GRANTS: Temp Magic 3.",
-      "icon": "�S�",
+      "icon": "",
       "price": {
         "silver": 18
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "defense_elixir": {
       "id": "defense_elixir",
@@ -2365,12 +3168,13 @@
         "temp_defense_4"
       ],
       "desc": "Temporarily increases both defenses by 4 for 12 turns. GRANTS: Temp Defense 4.",
-      "icon": "�x:�️",
+      "icon": "",
       "price": {
         "silver": 20
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "invisibility_potion": {
       "id": "invisibility_potion",
@@ -2382,13 +3186,14 @@
         "invisibility"
       ],
       "desc": "Grants invisibility for 5 turns. Enemies cannot target you. GRANTS: Invisibility 5 Turns.",
-      "icon": "�x\u0018�",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 10
       },
       "rarity": "rare",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 9
     },
     "fire_resistance_potion": {
       "id": "fire_resistance_potion",
@@ -2400,12 +3205,13 @@
         "fire_immunity"
       ],
       "desc": "Grants immunity to fire damage for 10 turns. GRANTS: Fire Immunity 10 Turns.",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "silver": 25
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "ice_resistance_potion": {
       "id": "ice_resistance_potion",
@@ -2416,12 +3222,13 @@
         "cold_immunity_10_turns"
       ],
       "desc": "Grants immunity to cold damage for 10 turns. GRANTS: Cold Immunity 10 Turns.",
-      "icon": "�\u001e️",
+      "icon": "",
       "price": {
         "silver": 25
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "berserker_potion": {
       "id": "berserker_potion",
@@ -2434,13 +3241,14 @@
         "temp_speed_2"
       ],
       "desc": "Enter a berserker rage! +5 Strength, +2 Speed, -2 Defense for 8 turns. GRANTS: Temp Strength 5, Temp Speed 2, Temp Defense Minus 2.",
-      "icon": "�xܤ",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 5
       },
       "rarity": "rare",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 9
     },
     "scroll_of_fireball": {
       "id": "scroll_of_fireball",
@@ -2451,12 +3259,13 @@
         "cast_fireball"
       ],
       "desc": "A magical scroll. Allows casting Fireball spell once, even without magic skills. GRANTS: Cast Fireball.",
-      "icon": "�x\u001cS",
+      "icon": "",
       "price": {
         "silver": 30
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "scroll_of_healing": {
       "id": "scroll_of_healing",
@@ -2468,12 +3277,13 @@
         "heal_40"
       ],
       "desc": "A divine scroll. Restores 40 HP and removes poison effects. GRANTS: Heal 40, Remove Poison.",
-      "icon": "�x\u001cS",
+      "icon": "",
       "price": {
         "silver": 35
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     },
     "scroll_of_teleport": {
       "id": "scroll_of_teleport",
@@ -2484,13 +3294,14 @@
         "teleport"
       ],
       "desc": "A dimensional scroll. Instantly teleport to a safe location, escaping combat.",
-      "icon": "�x\u001cS",
+      "icon": "",
       "price": {
         "gold": 1,
         "silver": 0
       },
       "rarity": "rare",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 9
     },
     "phoenix_feather": {
       "id": "phoenix_feather",
@@ -2502,14 +3313,15 @@
         "full_heal",
         "fire_immunity_permanent"
       ],
-      "desc": "A legendary phoenix feather. Full heal, remove all debuffs, permanent fire immunity. GRANTS: Full Heal, Remove All Debuffs, Fire Immunity Permanent.",
-      "icon": "�x��",
+      "desc": "Legendary feather. Consume: full heal, remove all debuffs, permanent fire immunity.",
+      "icon": "",
       "price": {
         "gold": 5,
         "silver": 0
       },
       "rarity": "legendary",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 21
     },
     "dragon_heart": {
       "id": "dragon_heart",
@@ -2521,14 +3333,15 @@
         "permanent_hp_5",
         "dragon_breath"
       ],
-      "desc": "The heart of an ancient dragon. Permanently increases HP by 5, Strength by 2, grants dragon breath. GRANTS: Permanent HP 5, Permanent Strength 2, Dragon Breath.",
+      "desc": "Consume: permanently +5 max HP, +2 Strength, and Dragon Breath (30ft cone — 3d6 fire; 75% Burn on each target).",
       "icon": "❤️",
       "price": {
         "gold": 10,
         "silver": 0
       },
       "rarity": "legendary",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 21
     },
     "elixir_of_immortality": {
       "id": "elixir_of_immortality",
@@ -2540,14 +3353,15 @@
         "permanent_all_stats_1",
         "regeneration"
       ],
-      "desc": "The ultimate elixir. Permanently increases all stats by 1 and grants eternal regeneration. GRANTS: Permanent All Stats 1, Regeneration Permanent.",
-      "icon": "�a\u0014️",
+      "desc": "Consume: permanently +1 Strength, Magic Power, Accuracy, and Speed; restore 1 HP at the start of each turn.",
+      "icon": "",
       "price": {
         "gold": 25,
         "silver": 0
       },
       "rarity": "legendary",
-      "stackable": false
+      "stackable": false,
+      "shopMinLevel": 21
     },
     "lockpick_set": {
       "id": "lockpick_set",
@@ -2558,12 +3372,13 @@
         "unlock_doors"
       ],
       "desc": "A set of fine lockpicks. Can open locked doors and chests. GRANTS: Unlock Doors.",
-      "icon": "�x\u0014�️",
+      "icon": "",
       "price": {
         "silver": 8
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "rope": {
       "id": "rope",
@@ -2574,12 +3389,13 @@
         "climb_assistance"
       ],
       "desc": "50 feet of sturdy rope. Useful for climbing and exploration. GRANTS: Climb Assistance.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "silver": 3
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "torch": {
       "id": "torch",
@@ -2591,12 +3407,13 @@
         "fire_damage"
       ],
       "desc": "A burning torch. Provides light and can be used as a weapon. GRANTS: Light Source, Fire Damage.",
-      "icon": "�x\u001d�",
+      "icon": "",
       "price": {
         "copper": 50
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "holy_water": {
       "id": "holy_water",
@@ -2608,12 +3425,13 @@
         "undead_damage"
       ],
       "desc": "Blessed water. Deals extra damage to undead and purifies corruption. GRANTS: Undead Damage, Purify.",
-      "icon": "�x\u0019�",
+      "icon": "",
       "price": {
         "silver": 12
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
     }
   },
   "materials": {
@@ -2624,12 +3442,13 @@
       "statModifiers": {},
       "specialEffects": [],
       "desc": "Raw iron ore. Used for crafting iron weapons and armor.",
-      "icon": "�:�️",
+      "icon": "",
       "price": {
         "copper": 20
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "wood": {
       "id": "wood",
@@ -2638,12 +3457,13 @@
       "statModifiers": {},
       "specialEffects": [],
       "desc": "Sturdy wood. Used for crafting wooden weapons and tools.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "copper": 5
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "leather": {
       "id": "leather",
@@ -2652,12 +3472,13 @@
       "statModifiers": {},
       "specialEffects": [],
       "desc": "Tanned leather. Used for crafting light armor and accessories.",
-      "icon": "�x��",
+      "icon": "",
       "price": {
         "copper": 15
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "herbs": {
       "id": "herbs",
@@ -2666,12 +3487,13 @@
       "statModifiers": {},
       "specialEffects": [],
       "desc": "Fresh medicinal herbs. Used for brewing potions.",
-      "icon": "�xR�",
+      "icon": "",
       "price": {
         "copper": 8
       },
       "rarity": "common",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 1
     },
     "crystal": {
       "id": "crystal",
@@ -2680,12 +3502,195 @@
       "statModifiers": {},
       "specialEffects": [],
       "desc": "A crystal charged with magical energy. Used for enchanting.",
-      "icon": "�x\u0019}",
+      "icon": "",
       "price": {
         "silver": 2
       },
       "rarity": "uncommon",
-      "stackable": true
+      "stackable": true,
+      "shopMinLevel": 5
+    },
+    "drake_scales": {
+      "id": "drake_scales",
+      "name": "Drake Scales",
+      "type": "material",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Tough scales shed from a drake. Used for high-grade smithing and cooking recipes.",
+      "icon": "🐉",
+      "price": {
+        "gold": 1
+      },
+      "rarity": "rare",
+      "stackable": true,
+      "shopMinLevel": 9
+    },
+    "reinforcement_studs": {
+      "id": "reinforcement_studs",
+      "name": "Reinforcement Studs",
+      "type": "material",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Heavy metal studs used to reinforce armour and shields.",
+      "icon": "🔩",
+      "price": {
+        "silver": 8
+      },
+      "rarity": "uncommon",
+      "stackable": true,
+      "shopMinLevel": 5
+    },
+    "reflective_scales": {
+      "id": "reflective_scales",
+      "name": "Reflective Scales",
+      "type": "material",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Mirror-bright scales used for defensive gear and warding enchantments.",
+      "icon": "🛡️",
+      "price": {
+        "gold": 1,
+        "silver": 5
+      },
+      "rarity": "rare",
+      "stackable": true,
+      "shopMinLevel": 9
+    },
+    "titan_bones": {
+      "id": "titan_bones",
+      "name": "Titan Bones",
+      "type": "material",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Ancient giant bone fragments used in legendary armour and relic crafting.",
+      "icon": "🦴",
+      "price": {
+        "gold": 3
+      },
+      "rarity": "epic",
+      "stackable": true,
+      "shopMinLevel": 14
+    },
+    "phase_essence": {
+      "id": "phase_essence",
+      "name": "Phase Essence",
+      "type": "essence",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Unstable essence that slips between spaces. Used in stealth, void, and phase recipes.",
+      "icon": "🌫️",
+      "price": {
+        "gold": 2
+      },
+      "rarity": "epic",
+      "stackable": true,
+      "shopMinLevel": 14
+    },
+    "storm_organ": {
+      "id": "storm_organ",
+      "name": "Storm Organ",
+      "type": "organic",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "A volatile organ that crackles with stored storm energy.",
+      "icon": "⛈️",
+      "price": {
+        "gold": 2,
+        "silver": 5
+      },
+      "rarity": "epic",
+      "stackable": true,
+      "shopMinLevel": 14
+    },
+    "elemental_core": {
+      "id": "elemental_core",
+      "name": "Elemental Core",
+      "type": "crystal",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "A condensed core of mixed elemental power. Used in advanced alchemy, cooking, and enchanting.",
+      "icon": "🌈",
+      "price": {
+        "gold": 3
+      },
+      "rarity": "epic",
+      "stackable": true,
+      "shopMinLevel": 14
+    },
+    "soul_essence": {
+      "id": "soul_essence",
+      "name": "Soul Essence",
+      "type": "essence",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "A captured trace of spiritual energy used in high-tier enchantments.",
+      "icon": "✨",
+      "price": {
+        "gold": 4
+      },
+      "rarity": "legendary",
+      "stackable": true,
+      "shopMinLevel": 21
+    },
+    "divine_essence": {
+      "id": "divine_essence",
+      "name": "Divine Essence",
+      "type": "essence",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Sacred essence used in relics, divine runes, and ultimate archaeology recipes.",
+      "icon": "☀️",
+      "price": {
+        "gold": 5
+      },
+      "rarity": "legendary",
+      "stackable": true,
+      "shopMinLevel": 21
+    },
+    "ghost_moss": {
+      "id": "ghost_moss",
+      "name": "Ghost Moss",
+      "type": "herb",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Pale moss that grows where the veil is thin. Used in ethereal herbalism recipes.",
+      "icon": "🍄",
+      "price": {
+        "silver": 8
+      },
+      "rarity": "rare",
+      "stackable": true,
+      "shopMinLevel": 9
+    },
+    "flame_petals": {
+      "id": "flame_petals",
+      "name": "Flame Petals",
+      "type": "herb",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Warm petals from a fire-bloom. Used for phoenix-themed herbalism recipes.",
+      "icon": "🌺",
+      "price": {
+        "gold": 1
+      },
+      "rarity": "rare",
+      "stackable": true,
+      "shopMinLevel": 9
+    },
+    "cosmic_dust": {
+      "id": "cosmic_dust",
+      "name": "Cosmic Dust",
+      "type": "material",
+      "statModifiers": {},
+      "specialEffects": [],
+      "desc": "Glittering stardust used in the rarest cosmic herbalism recipes.",
+      "icon": "🌌",
+      "price": {
+        "gold": 4
+      },
+      "rarity": "legendary",
+      "stackable": true,
+      "shopMinLevel": 21
     }
   }
 }

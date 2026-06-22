@@ -47,7 +47,7 @@ function getSkillBenefitStats(skill) {
   return stats
 }
 
-const WEAPON_SKILL_KINDS = ['sword', 'axe', 'dagger', 'polearm', 'hammer', 'staff', 'ranged']
+const WEAPON_SKILL_KINDS = ['sword', 'axe', 'dagger', 'polearm', 'hammer', 'staff', 'ranged', 'striker', 'unarmed']
 const WEAPON_FUSION_KINDS = ['sword', 'bow', 'dagger', 'polearm', 'hammer', 'axe', 'staff']
 const ELEMENT_FUSION_KINDS = new Set([
   'fire', 'ice', 'lightning', 'thunder', 'earth', 'wind', 'water', 'darkness', 'light'
@@ -96,6 +96,7 @@ export function getSkillWeaponKinds(skill) {
     if (/hammer|mace|maul/.test(desc)) kinds.add('hammer')
     if (/\b(staff|wand|rod)\b/.test(desc)) kinds.add('staff')
     if (/bow|crossbow|arrow|bolt/.test(desc)) kinds.add('ranged')
+    if (/empty.?hand|both hands empty|unarmed|striker/i.test(desc)) kinds.add('striker')
   }
 
   return kinds
@@ -115,6 +116,9 @@ function equipmentRuleApplies(rule, skill, benefitStats) {
   }
   if (rule.weaponKind === 'ranged') {
     return kinds.has('ranged') || skill.subcategory === 'ranged'
+  }
+  if (rule.weaponKind === 'striker' || rule.weaponKind === 'unarmed') {
+    return kinds.has('striker') || kinds.has('unarmed') || skill.subcategory === 'striker' || skill.subcategory === 'unarmed'
   }
   return kinds.has(rule.weaponKind) || skill.subcategory === rule.weaponKind
 }

@@ -2086,6 +2086,93 @@
     },
     "manual": false
   },
+  "empty_hand_training": {
+    "id": "empty_hand_training",
+    "name": "Striker Training",
+    "icon": "🥊",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Accuracy while both hands are empty. Unarmed Basic Attack uses 1d4 + Strength.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "striker_training": {
+    "id": "striker_training",
+    "name": "Striker Training",
+    "icon": "🥊",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Accuracy while both hands are empty. Unarmed Basic Attack uses 1d4 + Strength.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": false
+  },
+  "open_stance_passive": {
+    "id": "open_stance_passive",
+    "name": "Open Stance",
+    "icon": "🧘",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Speed and +1 Magical Defence while both hands are empty.",
+    "stackable": false,
+    "statModifiers": {
+      "speed": 1,
+      "magicalDefence": 1
+    },
+    "manual": false
+  },
+  "iron_palm_passive": {
+    "id": "iron_palm_passive",
+    "name": "Iron Palm",
+    "icon": "✋",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+1 Physical Defence while both hands are empty.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 1
+    },
+    "manual": false
+  },
+  "empty_hand_mastery_passive": {
+    "id": "empty_hand_mastery_passive",
+    "name": "Striker Mastery",
+    "icon": "👑",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+2 Accuracy and +1 Strength while both hands are empty.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 2,
+      "strength": 1
+    },
+    "manual": false
+  },
+  "striker_mastery_passive": {
+    "id": "striker_mastery_passive",
+    "name": "Striker Mastery",
+    "icon": "👑",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "+2 Accuracy and +1 Strength while both hands are empty.",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 2,
+      "strength": 1
+    },
+    "manual": false
+  },
   "combat_stance": {
     "id": "combat_stance",
     "name": "Combat Stance",
@@ -2108,6 +2195,21 @@
     "duration": 0,
     "potency": 0,
     "desc": "Active stance: +2 Physical Defence and +2 Magical Defence, but -1 attack damage.",
+    "stackable": false,
+    "statModifiers": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "manual": false
+  },
+  "iron_body_buff": {
+    "id": "iron_body_buff",
+    "name": "Iron Body",
+    "icon": "🧱",
+    "type": "toggleBuff",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Active form: +2 Physical Defence and +2 Magical Defence while both hands are empty.",
     "stackable": false,
     "statModifiers": {
       "physicalDefence": 2,
@@ -2838,7 +2940,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "Tune an ally's weapon or armour before a fight (10 minutes). They gain +1 on their first attack roll or +1 Physical Defence for the first round (choose one). Once per ally per long rest.",
+    "desc": "Pre-combat: Tune ally gear (10 min); +1 first attack roll or +1 Physical Defence first round (choose one). Once per ally per long rest. + Harmony Reaction: same ally (2 Smiths → both bonuses).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -2929,7 +3031,7 @@
     "type": "buff",
     "duration": 20,
     "potency": 0,
-    "desc": "Feast for the whole party — one shared buff (e.g. +1 Accuracy for 20 rounds).",
+    "desc": "Feast for the party; shared +1 Accuracy for 20 rounds. + Harmony Reaction: same feast (each additional Chef adds +1 Accuracy and +5 feast duration; 9 Chefs → +9 Accuracy for 65 rounds).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -2943,7 +3045,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "Pre-combat meal; eater gains +2 to initiative or +1 Physical Defence for first combat only.",
+    "desc": "Before first combat, one eater gains +2 initiative or +1 Physical Defence (first combat only). + Harmony Reaction: same meal (when 2+ Chefs, each served eater gets both bonuses; each Chef adds +2 initiative, +1 Physical Defence for one combat round, +1 Stamina round 1, and +1d4 temp HP at combat start; one eater per Chef).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -3023,7 +3125,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Recall terrain — advantage on navigation checks in regions you've worked (GM).",
+    "desc": "Recall terrain — +2 on navigation checks in regions you've worked (GM).",
     "stackable": false,
     "manual": true
   },
@@ -3067,7 +3169,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+2 effective MD vs poison/disease effects on yourself; identify poison on sight.",
+    "desc": "+2 effective Magical Defence vs poison/disease effects on yourself; identify poison on sight.",
     "stackable": false,
     "manual": false
   },
@@ -3100,7 +3202,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Allies within 10ft gain +1 Magical Defence vs disease/poison saves (GM).",
+    "desc": "Allies within 10ft +1 Magical Defence vs disease and poison saves. + Harmony: +1 Magical Defence vs disease and poison per Medic with this aura in range (no Reaction).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -3136,7 +3238,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Acid flasks (throw: attack roll d20 + accuracy vs PD; on hit, 1d6 acid; 40% chance to apply Weakened).",
+    "desc": "Craft/throw: On hit 1d6 acid; 40% Weakened. + Harmony Reaction: same target, same round (+1 acid damage per Alchemist).",
     "stackable": false,
     "manual": true
   },
@@ -3169,7 +3271,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Bombs (3d6 in 15ft; separate attack roll per target vs MD).",
+    "desc": "Bombs (3d6 in 15ft; separate attack roll per target vs Magical Defence).",
     "stackable": false,
     "manual": true
   },
@@ -3282,7 +3384,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Examine a scene — GM reveals one clue tier (obvious / hidden / secret).",
+    "desc": "Examine scene; GM reveals one clue tier. + Harmony Reaction: same scene (+1 clue tier per Detective).",
     "stackable": false,
     "manual": true
   },
@@ -3403,7 +3505,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Once per adventure, recognise a weakness in an undead/construct type (+2 damage for party for one fight).",
+    "desc": "Once per adventure, recognise weakness vs undead/construct; party +2 damage for one fight. + Harmony: +1 party damage per additional Archaeologist on same enemy type same fight (no Reaction).",
     "stackable": false,
     "manual": false,
     "flatDamageBonus": 2
@@ -3492,7 +3594,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Call a target — one ally gains +1 on their next attack against it (any weapon or spell). Once per combat.",
+    "desc": "Call a target; one ally +1 on next attack vs it. Once per combat. + Harmony Reaction: same target (each Ranger adds +1 to marked allies' next attack and marks one more ally).",
     "stackable": false,
     "manual": true
   },
@@ -3522,12 +3624,15 @@
     "id": "reinforced_frame",
     "name": "Reinforced Frame",
     "icon": "🧱",
-    "type": "utility",
-    "duration": 0,
+    "type": "buff",
+    "duration": 3,
     "potency": 0,
-    "desc": "Portable cover (+3 PD while behind it).",
+    "desc": "Portable cover; +3 Physical Defence while behind it. + Harmony Reaction: same lane (+1 Physical Defence per additional Engineer).",
     "stackable": false,
-    "manual": true
+    "manual": false,
+    "statModifiers": {
+      "physicalDefence": 3
+    }
   },
   "schematic_mind": {
     "id": "schematic_mind",
@@ -3712,7 +3817,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Ally gains your tier-1 knowledge skill for one task this session.",
+    "desc": "Ally gains your tier-1 knowledge skill for one task this session. + Harmony Reaction: same ally, different topics (ally keeps each granted edge once; no cap on number of topics).",
     "stackable": false,
     "manual": true
   },
@@ -3814,7 +3919,7 @@
     "type": "buff",
     "duration": 999,
     "potency": 0,
-    "desc": "Touch ally — +1 Magical Defence for 8 hours (once per ally per day).",
+    "desc": "Touch ally; +1 Magical Defence for 8 hours (once per ally per day). + Harmony Reaction: same ally, same day (+1 Magical Defence per Cleric blessing that ally).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -3839,7 +3944,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Ally at 0 HP hears you — advantage on death saves (GM).",
+    "desc": "Ally at 0 HP hears you — roll death saves twice, keep the better result (GM).",
     "stackable": false,
     "manual": true
   },
@@ -3872,7 +3977,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Short rest in consecrated camp — remove one fear/charm.",
+    "desc": "Short rest in consecrated camp; each ally removes one fear or charm. + Harmony Reaction: same camp (each ally removes one additional fear or charm per Cleric at that rest).",
     "stackable": false,
     "manual": true
   },
@@ -3908,7 +4013,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "Adjacent ally gains +1 Physical Defence until your next turn.",
+    "desc": "Adjacent ally gains +1 Physical Defence until your next turn. + Harmony Reaction: same ally (each Soldier in the huddle adds +1 Physical Defence per Soldier helping — count heads, add that many once per Soldier; 3 Soldiers → +9 Physical Defence; 5 Soldiers on one ally → +25 Physical Defence).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -3922,7 +4027,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "One ally within 30ft may reroll a failed save (once per combat).",
+    "desc": "One ally within 30ft may reroll a failed save (once per combat). + Harmony Reaction: that reroll (+2 for each participating Soldier; 5 Soldiers → +10 on the reroll).",
     "stackable": false,
     "manual": true
   },
@@ -3947,7 +4052,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "When you and two or more allies attack the same target, all gain +1 accuracy.",
+    "desc": "When you and two or more allies attack the same target, all gain +1 accuracy. + Harmony: +1 accuracy on next hit vs that enemy per Phalanx Soldier in the volley; when 2+ Phalanx Soldiers attack, also +1d4 damage per Phalanx Soldier (all focus-fire attackers benefit; no Reaction).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -3994,7 +4099,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Ally's next spell or magical attack gains +1d4 damage or +2 HP on heal (once per ally per combat).",
+    "desc": "Ally's next spell or magical attack +1d4 damage or heal +2 HP (once per ally per combat). + Harmony Reaction: same ally (when 2+ Mages, +1d6 damage or +3 HP instead).",
     "stackable": false,
     "manual": true
   },
@@ -4038,7 +4143,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "10ft aura — allies gain +1 Magical Defence for 3 rounds (once per combat).",
+    "desc": "10ft aura; allies +1 Magical Defence for 3 rounds (once per combat). + Harmony Reaction: overlapping circles (each Mage in the overlap adds +1 Magical Defence per Mage helping — count Mages, add that many once per Mage; 3 Mages → +9 Magical Defence; 5 Mages → +25 Magical Defence).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4063,7 +4168,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 Magical Defence; advantage on saves vs fear (GM).",
+    "desc": "+1 Magical Defence; +2 on saves vs fear (GM).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4114,7 +4219,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Allies within 10ft gain +1 Magical Defence vs fear and charm.",
+    "desc": "Allies within 10ft +1 Magical Defence vs fear and charm. + Harmony: +1 Magical Defence vs fear and charm per Paladin with this aura in range (no Reaction).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4188,7 +4293,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Distract a foe — one ally gains +2 on their next attack against that target.",
+    "desc": "Distract a foe; one ally +2 on next attack vs that target. + Harmony Reaction: same foe (each additional Thief adds +1 to that attack).",
     "stackable": false,
     "manual": true
   },
@@ -4261,7 +4366,7 @@
     "type": "debuff",
     "duration": 1,
     "potency": 0,
-    "desc": "Foes within 10ft save or suffer −1 accuracy for 1 round.",
+    "desc": "Foes within 10ft save or −1 accuracy for 1 round. + Harmony Reaction: same area (−1 accuracy per Berserker on failed save).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4349,12 +4454,12 @@
     "id": "suppressing_fire",
     "name": "Suppressing Fire",
     "icon": "🔫",
-    "type": "debuff",
+    "type": "utility",
     "duration": 1,
     "potency": 0,
-    "desc": "Suppress a zone — enemies suffer −1 to attacks or movement for 1 round.",
+    "desc": "Suppress a zone; enemies −1 to attacks or movement for 1 round. + Harmony Reaction: same zone (−1 penalty per Marksman).",
     "stackable": false,
-    "manual": false
+    "manual": true
   },
   "quick_reload": {
     "id": "quick_reload",
@@ -4438,7 +4543,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Your next attack vs one target has advantage (once per combat).",
+    "desc": "Your next attack vs one target — roll twice, keep the higher result (once per combat).",
     "stackable": false,
     "manual": true
   },
@@ -4600,5 +4705,213 @@
     "desc": "Calm one hostile beast for 1 minute (GM save).",
     "stackable": false,
     "manual": true
+  },
+  "alchemist_explosive_compounds": {
+    "id": "alchemist_explosive_compounds",
+    "name": "Explosive Compounds",
+    "icon": "💣",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Bombs (3d6 in 15ft; separate attack roll per target vs MD).",
+    "stackable": false,
+    "manual": true
+  },
+  "archaeologist_artifact_study": {
+    "id": "archaeologist_artifact_study",
+    "name": "Artifact Study",
+    "icon": "🏺",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Identify relics — true properties, era, curse flags.",
+    "stackable": false,
+    "manual": true
+  },
+  "engineer_overcharge": {
+    "id": "engineer_overcharge",
+    "name": "Overcharge",
+    "icon": "⚡",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Boost ally's mechanical device — double effect once, then it is spent until rebuilt (GM).",
+    "stackable": false,
+    "manual": true
+  },
+  "minstrels_voice": {
+    "id": "minstrels_voice",
+    "name": "Minstrel's Voice",
+    "icon": "🎤",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Sing any Musician skill without an instrument. With an off-hand instrument equipped: your songs last longer, you count as 2 Musicians for your part (at uncommon+ instruments), and allies get +1 extra from your song (rare+ instruments — see item tooltip).",
+    "stackable": false,
+    "manual": false
+  },
+  "marching_tune": {
+    "id": "marching_tune",
+    "name": "Marching Tune",
+    "icon": "🥁",
+    "type": "buff",
+    "duration": 2,
+    "potency": 0,
+    "desc": "Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Speed per performing Musician. + Harmony Reaction: join the same song (+1 initiative for listeners while sustained).",
+    "stackable": false,
+    "manual": false,
+    "statModifiers": {
+      "speed": 1
+    }
+  },
+  "soothing_hymn": {
+    "id": "soothing_hymn",
+    "name": "Soothing Hymn",
+    "icon": "🕊️",
+    "type": "buff",
+    "duration": 2,
+    "potency": 0,
+    "desc": "Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
+    "stackable": false,
+    "manual": false,
+    "statModifiers": {
+      "magicalDefence": 1
+    }
+  },
+  "battle_anthem": {
+    "id": "battle_anthem",
+    "name": "Battle Anthem",
+    "icon": "🎺",
+    "type": "buff",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Sustain up to 3 turns (6 Stamina once); allies in hearing range +1 accuracy per performing Musician. + Harmony Reaction: join the same song (+1 damage on next hit per Musician while sustained).",
+    "stackable": false,
+    "manual": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "flatDamageBonus": 1
+  },
+  "dissonant_note": {
+    "id": "dissonant_note",
+    "name": "Dissonant Note",
+    "icon": "🎸",
+    "type": "debuff",
+    "duration": 1,
+    "potency": 0,
+    "desc": "Sustain 1 turn (4 Stamina once); enemies in hearing range −1 accuracy per performing Musician. + Harmony Reaction: join the same song (−1 per Musician on enemy saves while sustained).",
+    "stackable": false,
+    "manual": false,
+    "statModifiers": {
+      "accuracy": -1
+    }
+  },
+  "long_set": {
+    "id": "long_set",
+    "name": "Long Set",
+    "icon": "🎭",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Your sustained songs may last 1 extra turn (e.g. Work Song up to 4 turns).",
+    "stackable": false,
+    "manual": false
+  },
+  "marching_tune_buff": {
+    "id": "marching_tune_buff",
+    "name": "Marching Tune",
+    "icon": "🥁",
+    "type": "aura",
+    "duration": 2,
+    "potency": 0,
+    "desc": "Allies in hearing range +1 Speed per performing Musician (+1 initiative per harmony joiner).",
+    "stackable": false,
+    "statModifiers": {
+      "speed": 1
+    },
+    "manual": true
+  },
+  "soothing_hymn_buff": {
+    "id": "soothing_hymn_buff",
+    "name": "Soothing Hymn",
+    "icon": "🕊️",
+    "type": "aura",
+    "duration": 2,
+    "potency": 0,
+    "desc": "Allies in hearing range +1 Magical Defence per performing Musician (+1 Stamina at turn start per harmony joiner).",
+    "stackable": false,
+    "statModifiers": {
+      "magicalDefence": 1
+    },
+    "manual": true
+  },
+  "battle_anthem_buff": {
+    "id": "battle_anthem_buff",
+    "name": "Battle Anthem",
+    "icon": "🎺",
+    "type": "aura",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Allies in hearing range +1 accuracy per performing Musician (+1 damage on next hit per harmony joiner).",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": 1
+    },
+    "manual": true
+  },
+  "dissonant_note_debuff": {
+    "id": "dissonant_note_debuff",
+    "name": "Dissonant Note",
+    "icon": "🎸",
+    "type": "debuff",
+    "duration": 1,
+    "potency": 0,
+    "desc": "Enemies in hearing range −1 accuracy per performing Musician (−1 on saves per harmony joiner).",
+    "stackable": false,
+    "statModifiers": {
+      "accuracy": -1
+    },
+    "manual": true
+  },
+  "work_song": {
+    "id": "work_song",
+    "name": "Work Song",
+    "icon": "⛏️",
+    "type": "buff",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Sustain up to 3 turns (5 Stamina once); allies in hearing range +1 Strength per performing Musician. + Harmony Reaction: join the same song (+1 Physical Defence per Musician while sustained; e.g. 6 Musicians → +6 Strength and +6 Physical Defence). Musician baseline: sing without an instrument; off-hand instruments amplify (see glossary Instrument amplify).",
+    "stackable": false,
+    "manual": false,
+    "statModifiers": {
+      "strength": 1,
+      "physicalDefence": 1
+    }
+  },
+  "work_song_buff": {
+    "id": "work_song_buff",
+    "name": "Work Song",
+    "icon": "⛏️",
+    "type": "aura",
+    "duration": 3,
+    "potency": 0,
+    "desc": "Allies in hearing range +1 Strength per performing Musician (+1 Physical Defence per harmony joiner).",
+    "stackable": false,
+    "statModifiers": {
+      "strength": 1
+    },
+    "manual": true
+  },
+  "encore": {
+    "id": "encore",
+    "name": "Encore",
+    "icon": "🎤",
+    "type": "passive",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Once per combat, play the same song again for free — but it only lasts its original length (no Long Set, instrument, or other bonus turns).",
+    "stackable": false,
+    "manual": false
   }
 }

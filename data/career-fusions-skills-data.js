@@ -5,7 +5,7 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_ember_hearth",
             "name": "Ember Hearth",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Cook meals without a campfire. Meals you cook gain +1 HP.",
             "icon": "🔥🍳",
@@ -23,7 +23,7 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_glacier_pantry",
             "name": "Glacier Pantry",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Preserve food twice as long; chilled rations grant +1 Stamina when eaten.",
             "icon": "❄️🫙",
@@ -44,7 +44,7 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_field_spark",
             "name": "Field Spark",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Stabilise downed ally — restore 1 HP and remove Stunned (once per target per day).",
             "icon": "⚡💊",
@@ -56,13 +56,20 @@ const CAREER_FUSIONS_DATA = {
                 ]
             },
             "fusionKind": "career",
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "fusion_field_spark_heal",
+                    "duration": 0,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "fusion_shadow_snatch",
             "name": "Shadow Snatch",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Attempt to lift one small unequipped item from a target (GM contested roll). Once per long rest.",
             "icon": "🌑👁️",
@@ -81,17 +88,14 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_mirage_patter",
             "name": "Mirage Patter",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Create a brief believable illusion in conversation (+2 social bluff; no combat decoys).",
             "icon": "✨💬",
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "blinding_flash"
-                ],
-                "anyOfSkills": [
-                    "haggler",
+                    "blinding_flash",
                     "interview"
                 ]
             },
@@ -102,7 +106,7 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_ward_meal",
             "name": "Ward Meal",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Meal removes fear or charm on eat (once per creature per day).",
             "icon": "✝️🍳",
@@ -124,7 +128,7 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_living_map",
             "name": "Living Map",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Once per day, sense safest path through wilderness for 8 hours (GM navigation).",
             "icon": "🗺️🌲",
@@ -146,7 +150,7 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_trap_runes",
             "name": "Trap Runes",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Snares that trigger a minor rune (alarm + 1d4 magic damage).",
             "icon": "🪤✨",
@@ -164,7 +168,7 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_alchemical_frost",
             "name": "Alchemical Frost",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Flash-freeze vials — utility slow, no direct spell damage.",
             "icon": "❄️⚗️",
@@ -182,7 +186,7 @@ const CAREER_FUSIONS_DATA = {
             "id": "fusion_beast_whisper",
             "name": "Beast Whisper",
             "tier": 2,
-            "cost": 12,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Calm one hostile beast for 1 minute (GM save).",
             "icon": "🐾🌿",

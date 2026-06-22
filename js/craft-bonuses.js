@@ -25,6 +25,9 @@ export function deriveCraftBonuses(character, recipe) {
   if (skills.has('spice_box') && (profession === 'cooking' || type.includes('food') || type.includes('meal'))) {
     bonuses.mealHealBonus = 1
   }
+  if (skills.has('forge_blessing') && (type.includes('weapon') || type.includes('armor'))) {
+    bonuses.enchantmentSlotBonus = (bonuses.enchantmentSlotBonus || 0) + 1
+  }
   return bonuses
 }
 
@@ -45,6 +48,7 @@ export function formatCraftBonusLabel(bonuses = {}) {
   if (bonuses.physicalDefenceBonus) parts.push(`+${bonuses.physicalDefenceBonus} PD`)
   if (bonuses.magicalDefenceBonus) parts.push(`+${bonuses.magicalDefenceBonus} MD`)
   if (bonuses.mealHealBonus) parts.push(`+${bonuses.mealHealBonus} meal heal`)
+  if (bonuses.enchantmentSlotBonus) parts.push(`+${bonuses.enchantmentSlotBonus} enchant slot`)
   return parts.join(', ')
 }
 

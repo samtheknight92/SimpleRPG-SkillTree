@@ -2,9 +2,14 @@ import { cache, getRace, getSkill, getItem } from './cache.js'
 import { getEffect, normalizeEffectId, normalizeStatusEffect, invalidateCharacterCache, computeStats } from './character.js'
 import { characterWieldsWeaponKind } from './equipment.js'
 import { resolveSkillGearEffects } from './skill-effects.js'
+import {
+  entryEnchantments,
+  enchantmentSpecialEffectsForEntry
+} from './enchantments.js'
 import { isToggleSkill } from './skills.js'
 import { titleCase } from './utils.js'
 import { formatStatModifiers } from './format.js'
+import { formatPerformanceMeta } from './instruments.js'
 
 export function effectList() {
   return Object.values(cache.effectDefinitions).sort((a, b) => a.name.localeCompare(b.name))
@@ -16,12 +21,34 @@ export function manualEffectList() {
   return manual.length ? manual : effectList()
 }
 
+/** Duration stored on applied status while a skill/gear/toggle source is active. */
+export const SOURCE_PASSIVE_DURATION = 999
+
 export function effectDurationLabel(duration) {
   const value = Number(duration)
   if (!Number.isFinite(value)) return 'Default'
-  if (value >= 999) return 'Permanent / aura'
+  if (value >= SOURCE_PASSIVE_DURATION) return '∞'
   if (value === 0) return 'Instant / passive'
   return `${value} turn${value === 1 ? '' : 's'}`
+}
+
+/** Whether potency is meaningful for ticks (DoT/HoT/regen), not resistances or stat auras. */
+export function effectUsesPotency(effect) {
+  if (!effect) return false
+  const type = String(effect.type || '').toLowerCase()
+  if (type.includes('damageovertime') || type.includes('healovertime')) return true
+  if (Number(effect.tickDamage) > 0 || Number(effect.tickHeal) > 0 || Number(effect.tickStamina) > 0) return true
+  const potency = effect.potency
+  if (typeof potency === 'number' && potency !== 0) return true
+  return false
+}
+
+export function effectPotencyLabel(effect, potency) {
+  const value = potency ?? effect?.potency
+  if (value === 'escalating') return 'Escalating'
+  const num = Number(value)
+  if (!Number.isFinite(num) || num === 0) return ''
+  return String(num)
 }
 
 export function effectTypeLabel(type) {
@@ -29,9 +56,9 @@ export function effectTypeLabel(type) {
 }
 
 export function effectTone(effect) {
-  const type = String(effect?.type || '')
-  if (type.includes('Buff') || type.includes('heal') || type.includes('recovery') || type.includes('protection')) return 'good'
-  if (type.includes('damage') || type.includes('control') || type.includes('Debuff')) return 'bad'
+  const type = String(effect?.type || '').toLowerCase()
+  if (type.includes('buff') || type.includes('heal') || type.includes('recovery') || type.includes('protection')) return 'good'
+  if (type.includes('damage') || type.includes('control') || type.includes('debuff')) return 'bad'
   if (type.includes('aura') || type.includes('utility')) return 'warn'
   return ''
 }
@@ -48,12 +75,28 @@ export function effectDetailLines(effectIds) {
 export function effectTooltip(effectId, source = '', status = null) {
   const effect = getEffect(effectId)
   if (!effect) return ''
+  const isSourcePassive = status?.sourcePassive === true
+  const duration = status?.duration ?? (isSourcePassive ? SOURCE_PASSIVE_DURATION : effect.duration)
   const lines = [
     effect.name,
-    `${effectTypeLabel(effect.type)} · ${effectDurationLabel(status?.duration ?? effect.duration)}`
+    `${effectTypeLabel(effect.type)} · ${isSourcePassive ? 'While active: ∞' : effectDurationLabel(duration)}`
   ]
+  const potencyText = effectPotencyLabel(effect, status?.potency)
+  if (potencyText && (isSourcePassive ? effectUsesPotency(effect) : true)) {
+    lines.push(`Potency: ${potencyText}`)
+  }
   if (effect.desc) lines.push('', effect.desc)
   if (effect.statModifiers) lines.push(`Stat modifiers: ${formatStatModifiers(effect.statModifiers)}`)
+  if (status?.performance) {
+    const perfLine = formatPerformanceMeta(status.performance)
+    if (perfLine) lines.push('', `Performance: ${perfLine}`)
+    if (status.performance.performerCount > 1) {
+      lines.push(`Table: you count as ${status.performance.performerCount} Musicians for per-musician song bonuses.`)
+    }
+    if (status.performance.listenerBonus > 0) {
+      lines.push(`Table: allies listening get +${status.performance.listenerBonus} extra from your song.`)
+    }
+  }
   if (source) lines.push('', `Source: ${source}`)
   if (status?.notes) lines.push(`Notes: ${status.notes}`)
   return lines.join('\n')
@@ -85,6 +128,7 @@ const RACE_TRAIT_EFFECT_RULES = [
   [/poison\s+immunity/i, 'poison_immunity'],
   [/immune\s+to\s+(?:all\s+)?poison/i, 'poison_immunity'],
   [/immune\s+to\s+disease/i, 'disease_immunity'],
+  [/immune\s+to\s+aging\s+and\s+disease/i, 'disease_immunity'],
   [/immune\s+to\s+fire(?:\s+damage)?/i, 'fire_immunity'],
   [/immune\s+to\s+charm/i, 'spell_warded'],
   [/immune\s+to\s+fear/i, 'spell_warded'],
@@ -112,7 +156,7 @@ export { resolveSkillEffects, resolveSkillGearEffects } from './skill-effects.js
 function recordEffect(map, effectId, source) {
   const effect = getEffect(effectId)
   if (!effect) return
-  if (!map.has(effect.id)) map.set(effect.id, { effect, sources: [] })
+  if (!map.has(effect.id)) map.set(effect.id, { effect, sources: [], duration: SOURCE_PASSIVE_DURATION, potency: effect.potency })
   const item = map.get(effect.id)
   if (source && !item.sources.includes(source)) item.sources.push(source)
 }
@@ -129,6 +173,9 @@ export function characterEffectSources(character) {
     const entry = character.inventory.find(inv => inv.uid === entryUid)
     const item = entry && getItem(entry.itemId)
     for (const effectId of item?.specialEffects || []) recordEffect(map, effectId, `Equipped: ${item.name}`)
+    for (const effectId of enchantmentSpecialEffectsForEntry(entry)) {
+      recordEffect(map, effectId, `Enchant: ${item.name}`)
+    }
   }
   for (const skillId of character.skills || []) {
     const skill = getSkill(skillId)
@@ -161,12 +208,14 @@ export function characterEffectSources(character) {
               name: skill.name,
               icon: skill.icon || '✦',
               type: 'passive',
-              duration: 0,
+              duration: SOURCE_PASSIVE_DURATION,
               potency: 0,
               desc: `Ongoing passive bonuses from ${skill.name}.`,
               statModifiers: flat
             },
-            sources: [`Skill: ${skill.name}`]
+            sources: [`Skill: ${skill.name}`],
+            duration: SOURCE_PASSIVE_DURATION,
+            potency: 0
           })
         }
       }
@@ -261,20 +310,22 @@ export function tickStatusEffects(character) {
   return { summary: parts.join(', ') }
 }
 
-export function addStatusEffectToCharacter(character, effectId, duration, potency, notes) {
+export function addStatusEffectToCharacter(character, effectId, duration, potency, notes, extras = null) {
   const effect = getEffect(effectId)
   if (!character || !effect) return false
   const cleanDuration = duration === '' || duration === null || duration === undefined ? effect.duration : Number(duration)
   const cleanPotency = potency === '' || potency === null || potency === undefined ? effect.potency : Number(potency)
   if (!effect.stackable && character.statusEffects?.some(status => status.effectId === effect.id)) return false
   character.statusEffects = Array.isArray(character.statusEffects) ? character.statusEffects : []
-  character.statusEffects.push(normalizeStatusEffect({
+  const row = {
     uid: `effect_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`,
     effectId: effect.id,
     duration: Number.isFinite(cleanDuration) ? cleanDuration : effect.duration,
     potency: Number.isFinite(cleanPotency) ? cleanPotency : effect.potency,
     notes
-  }))
+  }
+  if (extras?.performance) row.performance = extras.performance
+  character.statusEffects.push(normalizeStatusEffect(row))
   invalidateCharacterCache(character)
   return true
 }

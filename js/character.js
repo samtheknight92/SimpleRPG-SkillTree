@@ -3,7 +3,11 @@ import { cache, getRace, getSkill, getItem } from './cache.js'
 import { equipmentSkillStatModifiers } from './skill-effects.js'
 import { armourSkillStatModifiers, conditionalSkillStatModifiers } from './career-effects.js'
 import { raceEquipmentStatModifiers, raceEquipmentStatBreakdown } from './race-passives.js'
-import { characterWieldsWeaponKind } from './equipment.js'
+import {
+  equippedEnchantmentStatTotals,
+  enchantmentStatBreakdown
+} from './enchantments.js'
+import { characterWieldsWeaponKind, reconcileOffhandEquip } from './equipment.js'
 import { getSkillsData } from './data.js'
 import { clamp, deepClone, uid, titleCase } from './utils.js'
 import { HUMAN_RACE_SKILL } from './skills.js'
@@ -42,8 +46,10 @@ export function createCharacter(name, raceId, options = {}) {
     inventory: [],
     equipped: { weapon: null, offhand: null, armor: null, accessory: null },
     movedThisTurn: false,
-    notes: ''
+    notes: '',
+    folder: ''
   }
+  if (options.folder) character.folder = String(options.folder).trim().slice(0, 48)
   if (race?.id === 'dragonborn' && options.elementalAffinity) {
     character.elementalAffinity = options.elementalAffinity
   }
@@ -69,8 +75,10 @@ export function normalizeCharacter(character) {
   mergeInventoryStacks(merged)
   merged.equipped = { weapon: null, offhand: null, armor: null, accessory: null, ...(character?.equipped || {}) }
   merged.equipped = sanitizeEquippedSlots(merged.equipped)
+  reconcileOffhandEquip(merged)
   merged.movedThisTurn = Boolean(character?.movedThisTurn)
   merged.premadeId = character?.premadeId || null
+  merged.folder = String(character?.folder || '').trim().slice(0, 48)
   merged.hp = Number.isFinite(Number(merged.hp)) ? Number(merged.hp) : merged.stats.hp
   merged.stamina = Number.isFinite(Number(merged.stamina)) ? Number(merged.stamina) : merged.stats.stamina
   invalidateCharacterCache(merged)
@@ -94,8 +102,20 @@ function sanitizeEquippedSlots(equipped) {
 }
 
 function migrateSkillIds(skills) {
-  const aliases = { trail_reader: 'trail_warden' }
-  return [...new Set(skills.map(id => aliases[id] || id))]
+  const aliases = {
+    trail_reader: 'trail_warden',
+    empty_hand_basics: 'striker_basics',
+    empty_hand_mastery: 'striker_mastery',
+    swift_jab: 'stone_fists',
+    rising_kick: 'crushing_fist',
+    knuckle_lock: 'striker_volley',
+    step_inside: 'feint_strike',
+    minstrels_voice: 'long_set'
+  }
+  const removed = new Set([
+    'haggler', 'appraise', 'ledger', 'find_buyer', 'black_market', 'invest', 'caravan_lead'
+  ])
+  return [...new Set(skills.map(id => aliases[id] || id).filter(id => !removed.has(id)))]
 }
 
 function migrateOldSkills(unlockedSkills) {
@@ -147,7 +167,7 @@ export function normalizeStatusEffect(entry) {
   if (!effect) return null
   const durationValue = entry.duration === '' || entry.duration === undefined || entry.duration === null ? effect.duration : Number(entry.duration)
   const potencyValue = entry.potency === '' || entry.potency === undefined || entry.potency === null ? effect.potency : Number(entry.potency)
-  return {
+  const normalized = {
     uid: entry.uid || uid('effect'),
     effectId,
     duration: Number.isFinite(durationValue) ? durationValue : effect.duration,
@@ -155,6 +175,10 @@ export function normalizeStatusEffect(entry) {
     elapsed: Number.isFinite(Number(entry.elapsed)) ? Number(entry.elapsed) : 0,
     notes: String(entry.notes || '')
   }
+  if (entry.performance && typeof entry.performance === 'object') {
+    normalized.performance = { ...entry.performance }
+  }
+  return normalized
 }
 
 export function computeStats(character) {
@@ -187,6 +211,9 @@ export function computeStats(character) {
     stats[stat] = (stats[stat] || 0) + Number(value || 0)
   }
   for (const [stat, value] of Object.entries(raceEquipmentStatModifiers(character))) {
+    stats[stat] = (stats[stat] || 0) + Number(value || 0)
+  }
+  for (const [stat, value] of Object.entries(equippedEnchantmentStatTotals(character))) {
     stats[stat] = (stats[stat] || 0) + Number(value || 0)
   }
   for (const skillId of character?.activeToggles || []) {
@@ -241,6 +268,7 @@ export function statBreakdown(character, stat) {
     rows.push({ label: `${skill?.name || titleCase(skillId)} (below half HP)`, value: rule[stat] })
   }
   rows.push(...raceEquipmentStatBreakdown(character, stat))
+  rows.push(...enchantmentStatBreakdown(character, stat))
   for (const skillId of character.activeToggles || []) {
     if (cache.toggleBonuses[skillId]?.[stat]) rows.push({ label: `${getSkill(skillId)?.name || titleCase(skillId)} active`, value: cache.toggleBonuses[skillId][stat] })
   }

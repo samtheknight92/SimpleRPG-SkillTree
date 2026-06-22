@@ -33,14 +33,14 @@ function resourceMeter(resource, label, icon, value, max, tone) {
       <div class="action-bar-meter-head">
         <span class="action-bar-meter-icon">${icon}</span>
         <span class="action-bar-meter-label">${esc(label)}</span>
-        <div class="action-bar-meter-controls">
-          <button type="button" class="action-bar-adjust" data-adjust-resource="${esc(resource)}" data-amount="-1" aria-label="${esc(`${label} minus 1`)}">−</button>
-          <span class="action-bar-meter-value">${value}/${max}</span>
-          <button type="button" class="action-bar-adjust" data-adjust-resource="${esc(resource)}" data-amount="1" aria-label="${esc(`${label} plus 1`)}">+</button>
-        </div>
+        <span class="action-bar-meter-value">${value}/${max}</span>
       </div>
-      <div class="action-bar-meter-track" role="progressbar" aria-valuemin="0" aria-valuemax="${max}" aria-valuenow="${value}" aria-label="${esc(label)}">
-        <div class="action-bar-meter-fill" style="width:${pct}%"></div>
+      <div class="action-bar-meter-body">
+        <button type="button" class="action-bar-adjust action-bar-adjust-minus" data-adjust-resource="${esc(resource)}" data-amount="-1" aria-label="${esc(`${label} minus 1`)}">−</button>
+        <div class="action-bar-meter-track" role="progressbar" aria-valuemin="0" aria-valuemax="${max}" aria-valuenow="${value}" aria-label="${esc(label)}">
+          <div class="action-bar-meter-fill" style="width:${pct}%"></div>
+        </div>
+        <button type="button" class="action-bar-adjust action-bar-adjust-plus" data-adjust-resource="${esc(resource)}" data-amount="1" aria-label="${esc(`${label} plus 1`)}">+</button>
       </div>
     </div>
   `
@@ -97,7 +97,7 @@ function skillSlot(skill, character) {
       ${action}="${esc(skill.id)}"
       data-action-bar-skill="${esc(skill.id)}"
       data-tooltip="${esc(tooltipLines.join('\n'))}"
-      ${disabled ? 'disabled' : ''}
+      ${disabled && !window.matchMedia('(max-width: 760px)').matches ? 'disabled' : ''}
       ${disableReason ? `title="${esc(disableReason)}"` : ''}
       aria-pressed="${active ? 'true' : 'false'}"
       aria-label="${esc(`${skill.name}, ${type}, ${cost} stamina${disableReason ? `, unavailable: ${disableReason}` : ''}${bonusChip ? `, ${bonusChip} from passives` : ''}`)}"
@@ -122,6 +122,36 @@ function renderActionBarSkillSlots(skills, character) {
   }).join('')
 }
 
+let actionBarInsetObserver
+
+/** Keep scrollable content clear of the fixed action bar (height varies by viewport). */
+export function syncActionBarInset() {
+  const bar = document.querySelector('#action-bar')
+  const root = document.documentElement
+  if (!bar || bar.hidden) {
+    root.style.removeProperty('--action-bar-offset')
+    return
+  }
+  const height = bar.getBoundingClientRect().height
+  const extra = 24
+  root.style.setProperty('--action-bar-offset', `${Math.ceil(height + extra)}px`)
+}
+
+function ensureActionBarInsetObserver() {
+  const bar = document.querySelector('#action-bar')
+  if (!bar || actionBarInsetObserver) return
+  actionBarInsetObserver = new ResizeObserver(() => syncActionBarInset())
+  actionBarInsetObserver.observe(bar)
+  window.addEventListener('resize', syncActionBarInset, { passive: true })
+}
+
+function scheduleActionBarInsetSync() {
+  requestAnimationFrame(() => {
+    syncActionBarInset()
+    requestAnimationFrame(syncActionBarInset)
+  })
+}
+
 export function renderActionBar(character) {
   const bar = document.querySelector('#action-bar')
   if (!bar) return
@@ -130,6 +160,7 @@ export function renderActionBar(character) {
     bar.hidden = true
     bar.innerHTML = ''
     document.body.classList.remove('has-action-bar')
+    syncActionBarInset()
     return
   }
 
@@ -158,4 +189,6 @@ export function renderActionBar(character) {
       </div>
     </div>
   `
+  ensureActionBarInsetObserver()
+  scheduleActionBarInsetSync()
 }

@@ -20,7 +20,7 @@ const PEDESTRIAN_RACES = {
 
 const NPC_ARCHETYPES = /alchemist|archer|assassin|battle_mage|beast_tamer|berserker|bounty_hunter|con_artist|cultist|duelist|elementalist|enchanter|engineer|gambler|gladiator|inquisitor|medic|mercenary|monk|necromancer|ninja|paladin|poisoner|politician|pyromancer|scout|sergeant|smuggler|spearman|spy|thief|time_mage|vampire_hunter|warlock|zealot|heretic|pirate|politician/i
 
-const MONSTER_PATTERN = /slime|goblin|orc|wyvern|dragon|devil|demon|golem|giant|serpent|sprite|fish|octopus|kraken|lich|angel|banshee|phantom|revenant|rat|flayer|doppelganger|poltergeist|armor|knight|weapon|shield|bow|staff|piranha|eel|haunted|possessed|blessed|cursed|living|crystal|electric|fire_|ice_|water_|earth_|forest_|desert_|arctic_|shadow_|prismatic_|ancient_|greater_|lesser_|hell_|healing_|light_|golden_|green_|blue_|red_|plague_|dire_|feral_|cloud_|hill_|frost_|sea_|mind_|warlord|lieutenant|brute|chief|raider|shaman|warrior|bandit|corrupt|crime|torturer|slave|kraken|chernubim|cherubim/i
+const MONSTER_PATTERN = /slime|goblin|orc|wyvern|dragon|devil|demon|golem|giant|serpent|sprite|fish|octopus|kraken|lich|angel|banshee|phantom|revenant|rat|flayer|doppelganger|poltergeist|armor|knight|weapon|shield|bow|staff|piranha|eel|haunted|possessed|blessed|cursed|living|crystal|electric|fire_|ice_|water_|earth_|forest_|desert_|arctic_|shadow_|prismatic_|ancient_|greater_|lesser_|hell_|healing_|light_|golden_|green_|blue_|red_|plague_|dire_|feral_|cloud_|hill_|frost_|sea_|mind_|warlord|lieutenant|brute|chief|raider|shaman|warrior|bandit|corrupt|crime|torturer|slave|kraken|chernubim|cherubim|wolf|bear|lion|tiger|cougar|panther|boar|bull|deer|horse|goat|sheep|pig|chicken|rooster|hen|duck|rabbit|bat|spider|scorpion|eagle|hawk|vulture|owl|raven|crow|croc|gator|alligator|shark|crab|lobster|bee|wasp|hornet|viper|cobra|moose|elk|lynx|leopard|hyena|dog|cat|farm_/i
 
 function titleCase(value) {
   return String(value || '')
@@ -181,13 +181,14 @@ function buildTemplate(file, generatorData) {
 
 function readManifest() {
   const raw = fs.readFileSync(manifestPath)
-  const text = raw[0] === 0xFF && raw[1] === 0xFE
-    ? raw.toString('utf16le')
-    : raw.toString('utf8')
+  let text
+  if (raw[0] === 0xFF && raw[1] === 0xFE) text = raw.toString('utf16le')
+  else if (raw[1] === 0 && raw[3] === 0) text = raw.toString('utf16le')
+  else text = raw.toString('utf8')
   return [...new Set(
     text
       .split(/\r?\n/)
-      .map(line => line.trim())
+      .map(line => line.trim().replace(/\0/g, ''))
       .filter(Boolean)
   )].sort((a, b) => a.localeCompare(b))
 }

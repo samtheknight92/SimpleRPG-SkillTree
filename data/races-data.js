@@ -52,7 +52,7 @@ try {
             description: "Masters of Luck and Stealth with natural fortune, small size advantages, and brave hearts.",
             passiveTraits: [
                 "Lucky: Can reroll any natural 1 on dice (once per combat/encounter)",
-                "Small & Nimble: Can move through larger creature spaces, +1 Speed",
+                "Small & Nimble: Can move through larger creature spaces, +2 Speed",
                 "Brave Heart: Immune to fear and intimidation status effects"
             ],
             statModifiers: {
@@ -178,9 +178,6 @@ try {
                 "Monster Nature: Access to specialized monster skill categories",
                 "Monster Stupidity: No access to Profession Skills/Crafting",
             ],
-            statModifiers: {
-                none: 0 // Monsters should not get any boosts, as they are NPC Enemies
-            },
             exclusiveSkills: [] // Monster skills are handled differently through the monster system
         }
     }
@@ -260,7 +257,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 12,
-            "desc": "Ultimate: Summon starfall in 30ft radius (4d8 light damage, heals allies 2d6)",
+            "desc": "Ultimate (once per long rest): 30ft burst — each enemy takes 4d8 light damage; each ally in the burst heals 2d6.",
             "icon": "⭐",
             "prerequisites": {
                 "type": "AND",
@@ -327,7 +324,7 @@ try {
             "tier": 4,
             "cost": 20,
             "staminaCost": 8,
-            "desc": "Enhancement: Inscribe runes on weapon (+2d6 damage, bypasses resistances for 10 attacks)",
+            "desc": "Enhancement: Your weapon deals +2d6 on the next 10 hits; those hits ignore elemental resistances.",
             "icon": "🔤",
             "prerequisites": {
                 "type": "AND",
@@ -343,7 +340,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 10,
-            "desc": "Toggle: Channel ancient dwarven spirits (+4 Strength, +3 Physical Defence and +3 Magical Defence, +5 crafting bonus)",
+            "desc": "Toggle: +4 Strength, +3 Physical Defence, +3 Magical Defence while active (5 Stamina per round). +1 on craft checks while active.",
             "icon": "👑",
             "prerequisites": {
                 "type": "AND",
@@ -391,7 +388,7 @@ try {
             "tier": 3,
             "cost": 15,
             "staminaCost": 6,
-            "desc": "Action: Grant luck to ally (next 3 rolls are advantage) or curse enemy (disadvantage)",
+            "desc": "Action: Grant luck to ally (next 3 rolls — roll twice, keep higher) or curse enemy (roll twice, keep lower)",
             "icon": "🎲",
             "prerequisites": {
                 "type": "AND",
@@ -423,7 +420,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 0,
-            "desc": "Passive: Reroll any failed save or critical failure, allies within 10ft gain the same effect",
+            "desc": "Passive: Once per short rest, reroll one failed save. Once per short rest, one ally within 10ft may reroll one failed save (you choose when).",
             "icon": "⭐",
             "prerequisites": {
                 "type": "AND",
@@ -441,7 +438,7 @@ try {
             "tier": 1,
             "cost": 5,
             "staminaCost": 3,
-            "desc": "Action: Next attack deals +1d6 damage and gains advantage",
+            "desc": "Action: Next attack deals +1d6 damage; roll the attack twice and keep the higher result",
             "icon": "😡",
             "prerequisites": {
                 "type": "NONE",
@@ -463,7 +460,14 @@ try {
                     "orcish_fury"
                 ]
             },
-            "race": "orc"
+            "race": "orc",
+            "activationEffects": [
+                {
+                    "effectId": "mind_controlled",
+                    "duration": 2,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "blood_frenzy",
@@ -471,7 +475,7 @@ try {
             "tier": 3,
             "cost": 15,
             "staminaCost": 0,
-            "desc": "Passive: When an enemy dies within 30ft, gain +2 damage for rest of combat (stackable up to +10 damage)",
+            "desc": "Passive: When an enemy dies within 30ft, gain +2 damage for the rest of combat (max +6 from this skill)",
             "icon": "🩸",
             "prerequisites": {
                 "type": "AND",
@@ -487,7 +491,7 @@ try {
             "tier": 4,
             "cost": 20,
             "staminaCost": 8,
-            "desc": "Action: Charge through multiple enemies (each takes 2d6)",
+            "desc": "Action: Move through up to 3 enemies in your path; each takes 2d6 damage.",
             "icon": "🐂",
             "prerequisites": {
                 "type": "AND",
@@ -503,7 +507,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 10,
-            "desc": "Aura: Allies within 20ft gain +2 damage and immunity to fear effects",
+            "desc": "Aura: Allies within 20ft gain +2 damage and cannot be frightened.",
             "icon": "👑",
             "prerequisites": {
                 "type": "AND",
@@ -540,7 +544,7 @@ try {
             "tier": 1,
             "cost": 5,
             "staminaCost": 10,
-            "desc": "Action: 15ft cone of chosen element (2d6 + low chance of status effect based on element)",
+            "desc": "Action: 15ft cone — 2d6 damage of your dragonborn element; 20% chance to apply that element's status.",
             "icon": "🔥",
             "prerequisites": {
                 "type": "NONE",
@@ -605,7 +609,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 15,
-            "desc": "Ultimate: Channel ancient dragon (30ft breath, 4d8 damage, + high chance of status effect based on element)",
+            "desc": "Ultimate (once per long rest): 30ft breath — 4d8 damage of your element; 95% chance to apply that element's status.",
             "icon": "🐲",
             "prerequisites": {
                 "type": "AND",
@@ -637,7 +641,7 @@ try {
             "tier": 2,
             "cost": 10,
             "staminaCost": 0,
-            "desc": "Passive: Immunity to fire, resistance to Dark elemental damage, +2 max stamina",
+            "desc": "Passive: Fire immunity; Darkness resistance 50% (half darkness damage); +2 max Stamina.",
             "icon": "😈",
             "prerequisites": {
                 "type": "AND",
@@ -657,7 +661,7 @@ try {
             "tier": 3,
             "cost": 15,
             "staminaCost": 8,
-            "desc": "Action: Offer deal to enemy (they take -2 to all rolls but you take +1 damage from them)",
+            "desc": "Action: One enemy within 30ft — -2 on their next attack and next save; you take +1 damage from that enemy until your next turn.",
             "icon": "📜",
             "prerequisites": {
                 "type": "AND",
@@ -689,7 +693,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 12,
-            "desc": "Ultimate: Create 30ft radius hellish terrain for 5 turns (enemies take 1d8 fire damage when in terrain, allies gain Enhanced Effect while in terrain)",
+            "desc": "Ultimate (once per long rest): 30ft hellfire for 5 rounds — each enemy inside takes 1d8 fire at the start of their turn; allies inside gain +1 damage on attacks.",
             "icon": "🔥",
             "prerequisites": {
                 "type": "AND",
@@ -724,7 +728,7 @@ try {
             "tier": 2,
             "cost": 10,
             "staminaCost": 3,
-            "desc": "Enhancement: Coat weapons with drow poison for entire combat encounter (medium chance of Daze (Incapacitated) effect + 1d4 poison damage)",
+            "desc": "Enhancement (one combat): Weapon attacks deal +1d4 poison; 20% chance to apply Dazed on hit.",
             "icon": "☠️",
             "prerequisites": {
                 "type": "AND",
@@ -772,7 +776,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 15,
-            "desc": "Ultimate: Summon 3 \"shadows\" to fight for you until the end of combat",
+            "desc": "Ultimate (once per long rest): Three shadow allies fight with you until combat ends (GM — one simple attack each per round).",
             "icon": "👸",
             "prerequisites": {
                 "type": "AND",
@@ -836,7 +840,7 @@ try {
             "tier": 4,
             "cost": 20,
             "staminaCost": 8,
-            "desc": "Trigger: When you kill an enemy, immediately move and attack another",
+            "desc": "Trigger: When you kill an enemy, move up to your Speed and make one bonus attack.",
             "icon": "⚡",
             "prerequisites": {
                 "type": "AND",
@@ -852,7 +856,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 12,
-            "desc": "Ultimate: All allies gain Pack Coordination and Rampage for 10 turns",
+            "desc": "Ultimate (once per long rest): All allies within 30ft for 10 rounds — when an ally hits a foe, their next attack vs that foe gains +2 damage; when an ally drops an enemy, they may move and make one bonus attack.",
             "icon": "👑",
             "prerequisites": {
                 "type": "AND",

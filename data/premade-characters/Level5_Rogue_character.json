@@ -1,0 +1,56 @@
+{
+  "premadeId": "level5_rogue",
+  "name": "Alley Cutpurse",
+  "race": "human",
+  "category": "npc",
+  "elementalAffinity": "",
+  "lumens": 1,
+  "gil": 1350,
+  "stats": {
+    "hp": 24,
+    "stamina": 10,
+    "strength": -2,
+    "magicPower": -3,
+    "accuracy": -1,
+    "speed": 2,
+    "physicalDefence": 8,
+    "magicalDefence": 8
+  },
+  "skills": [
+    "dagger_basics",
+    "light_step",
+    "sneak_attack",
+    "light_fingers"
+  ],
+  "activeToggles": [],
+  "statusEffects": [],
+  "inventory": [
+    {
+      "uid": "level5_rogue_health_potion_0",
+      "itemId": "health_potion",
+      "qty": 1
+    },
+    {
+      "uid": "level5_rogue_stamina_potion_1",
+      "itemId": "stamina_potion",
+      "qty": 1
+    },
+    {
+      "uid": "level5_rogue_bronze_dagger_2",
+      "itemId": "bronze_dagger",
+      "qty": 1
+    },
+    {
+      "uid": "level5_rogue_leather_armor_3",
+      "itemId": "leather_armor",
+      "qty": 1
+    }
+  ],
+  "equipped": {
+    "weapon": "level5_rogue_bronze_dagger_2",
+    "offhand": null,
+    "armor": "level5_rogue_leather_armor_3",
+    "accessory": null
+  },
+  "notes": "Dagger + Thief — Sneak Attack, Light Step, Light Fingers. ACC/STR trained for table combat, not HP padding. Level 5 starter (5) — max learnable tier at Lv5 is 2 (tier 3 opens Lv8). Spent 112 Lumens (44 skills + 68 stats) and 1050 Gil on gear. Banked 1 Lumens after creation."
+}

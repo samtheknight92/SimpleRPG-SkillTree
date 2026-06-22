@@ -36,6 +36,7 @@
       "type": "craftable_weapon",
       "profession": "blacksmith",
       "tier": "basic",
+      "damage": "1d4",
       "statModifiers": {
         "strength": 2,
         "speed": 1
@@ -44,7 +45,7 @@
         "bleeding"
       ],
       "icon": "🥊",
-      "desc": "Gauntlets with embedded claws. +2 Strength, +1 Speed. Causes bleeding.",
+      "desc": "Gauntlets with embedded claws. +2 Strength, +1 Speed. Damage: 1d4. Causes bleeding.",
       "rarity": "common",
       "materials": [
         {
@@ -66,7 +67,8 @@
     "bone_buckler": {
       "id": "bone_buckler",
       "name": "Bone Buckler",
-      "type": "craftable_armor",
+      "type": "offhand",
+      "offhandType": "shield",
       "profession": "blacksmith",
       "tier": "basic",
       "statModifiers": {
@@ -77,7 +79,7 @@
         "parry_bonus"
       ],
       "icon": "🛡️",
-      "desc": "Small shield made from monster bones. +1 Physical Defence, +2 Speed. Bonus to parrying. GRANTS: Parry Bonus.",
+      "desc": "Small off-hand shield from monster bones. +1 Physical Defence, +2 Speed. Bonus to parrying. GRANTS: Parry Bonus.",
       "rarity": "common",
       "materials": [
         {
@@ -135,6 +137,7 @@
       "type": "craftable_weapon",
       "profession": "blacksmith",
       "tier": "basic",
+      "damage": "1d4",
       "statModifiers": {
         "strength": 1,
         "speed": 2
@@ -143,7 +146,42 @@
         "piercing"
       ],
       "icon": "🗡️",
-      "desc": "Sharp dagger made from monster fangs. +1 Strength, +2 Speed. High piercing damage.",
+      "desc": "Sharp dagger made from monster fangs. +1 Strength, +2 Speed. Damage: 1d4. High piercing damage.",
+      "rarity": "common",
+      "materials": [
+        {
+          "id": "sharp_fangs",
+          "quantity": 3
+        },
+        {
+          "id": "thick_hide",
+          "quantity": 1
+        }
+      ],
+      "requiredSkills": [
+        "weaponwright"
+      ],
+      "price": {
+        "silver": 5
+      }
+    },
+    "fang_parry_dagger": {
+      "id": "fang_parry_dagger",
+      "name": "Fang Parry Dagger",
+      "type": "craftable_weapon",
+      "profession": "blacksmith",
+      "tier": "basic",
+      "damage": "1d4",
+      "statModifiers": {
+        "speed": 2,
+        "physicalDefence": 1
+      },
+      "specialEffects": [
+        "parry_bonus",
+        "piercing"
+      ],
+      "icon": "🗡️",
+      "desc": "Light fang dagger built for parrying. +2 Speed, +1 Physical Defence. Damage: 1d4. Equip off-hand with Dual Wield. GRANTS: Parry Bonus, Piercing.",
       "rarity": "common",
       "materials": [
         {
@@ -168,6 +206,7 @@
       "type": "craftable_weapon",
       "profession": "blacksmith",
       "tier": "basic",
+      "damage": "1d6",
       "statModifiers": {
         "strength": 3
       },
@@ -175,7 +214,7 @@
         "crushing"
       ],
       "icon": "🦴",
-      "desc": "Heavy club made from dense monster bones. +3 Strength. Crushing attacks.",
+      "desc": "Heavy club made from dense monster bones. +3 Strength. Damage: 1d6. Crushing attacks.",
       "rarity": "common",
       "materials": [
         {
@@ -231,12 +270,91 @@
         "silver": 112
       }
     },
+    "iron_round_shield": {
+      "id": "iron_round_shield",
+      "name": "Iron Round Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "profession": "blacksmith",
+      "tier": "advanced",
+      "statModifiers": {
+        "physicalDefence": 2,
+        "speed": 1
+      },
+      "specialEffects": [
+        "parry_bonus"
+      ],
+      "enchantmentSlots": 1,
+      "icon": "🛡️",
+      "desc": "Iron buckler with a reinforced rim. +2 Physical Defence, +1 Speed. Bonus to parrying. 1 enchant slot. GRANTS: Parry Bonus.",
+      "rarity": "uncommon",
+      "materials": [
+        {
+          "id": "metallic_fragments",
+          "quantity": 4
+        },
+        {
+          "id": "thick_hide",
+          "quantity": 2
+        },
+        {
+          "id": "sharp_claws",
+          "quantity": 2
+        }
+      ],
+      "requiredSkills": [
+        "master_alloy"
+      ],
+      "price": {
+        "silver": 112
+      }
+    },
+    "spiked_targe": {
+      "id": "spiked_targe",
+      "name": "Spiked Targe",
+      "type": "offhand",
+      "offhandType": "shield",
+      "profession": "blacksmith",
+      "tier": "advanced",
+      "statModifiers": {
+        "physicalDefence": 3,
+        "strength": 1
+      },
+      "specialEffects": [
+        "piercing"
+      ],
+      "enchantmentSlots": 1,
+      "icon": "🛡️",
+      "desc": "A spiked strapped shield for brawlers. +3 Physical Defence, +1 Strength. 1 enchant slot. GRANTS: Piercing.",
+      "rarity": "uncommon",
+      "materials": [
+        {
+          "id": "sharp_claws",
+          "quantity": 4
+        },
+        {
+          "id": "metallic_fragments",
+          "quantity": 3
+        },
+        {
+          "id": "thick_hide",
+          "quantity": 2
+        }
+      ],
+      "requiredSkills": [
+        "master_alloy"
+      ],
+      "price": {
+        "silver": 112
+      }
+    },
     "razor_talon_daggers": {
       "id": "razor_talon_daggers",
       "name": "Razor Talon Daggers",
       "type": "craftable_weapon",
       "profession": "blacksmith",
       "tier": "advanced",
+      "damage": "1d8",
       "statModifiers": {
         "speed": 3,
         "strength": 2
@@ -247,7 +365,7 @@
         "bleeding"
       ],
       "icon": "🗡️",
-      "desc": "Twin daggers that pierce armor. +3 Speed, +2 Strength. Armor piercing with critical bleeding. GRANTS: Critical Bleeding, Armor Pierce.",
+      "desc": "Twin daggers that pierce armor. +3 Speed, +2 Strength. Damage: 1d8. Armor piercing with critical bleeding. GRANTS: Critical Bleeding, Armor Pierce.",
       "rarity": "uncommon",
       "materials": [
         {
@@ -315,6 +433,7 @@
       "type": "craftable_weapon",
       "profession": "blacksmith",
       "tier": "advanced",
+      "damage": "1d8",
       "statModifiers": {
         "strength": 3,
         "speed": 2
@@ -324,7 +443,7 @@
         "armor_piercing"
       ],
       "icon": "⚔️",
-      "desc": "Blade infused with poison sacs. +3 Strength, +2 Speed. Poison and armor piercing.",
+      "desc": "Blade infused with poison sacs. +3 Strength, +2 Speed. Damage: 1d8. Poison and armor piercing.",
       "rarity": "uncommon",
       "materials": [
         {
@@ -354,6 +473,7 @@
       "type": "craftable_weapon",
       "profession": "blacksmith",
       "tier": "advanced",
+      "damage": "1d8",
       "statModifiers": {
         "strength": 4,
         "magicPower": 2
@@ -363,7 +483,7 @@
         "magic_damage"
       ],
       "icon": "🔨",
-      "desc": "Heavy hammer with crystal head. +4 Strength, +2 Magic Power. Stunning blows deal magic damage.",
+      "desc": "Heavy hammer with crystal head. +4 Strength, +2 Magic Power. Damage: 1d8. Stunning blows deal magic damage.",
       "rarity": "uncommon",
       "materials": [
         {
@@ -433,6 +553,7 @@
       "type": "craftable_weapon",
       "profession": "blacksmith",
       "tier": "expert",
+      "damage": "1d10",
       "statModifiers": {
         "strength": 5,
         "speed": 3,
@@ -445,7 +566,7 @@
         "piercing"
       ],
       "icon": "🗡️",
-      "desc": "Blade forged from void essence. +5 Strength, +3 Speed, +2 Magic Power. Void damage with life steal. GRANTS: Void Damage, Life Steal, Armor Piercing.",
+      "desc": "Blade forged from void essence. +5 Strength, +3 Speed, +2 Magic Power. Damage: 1d10. Void damage with life steal. GRANTS: Void Damage, Life Steal, Armor Piercing.",
       "rarity": "rare",
       "materials": [
         {
@@ -511,6 +632,48 @@
         "silver": 150
       }
     },
+    "mirror_scale_buckler": {
+      "id": "mirror_scale_buckler",
+      "name": "Mirror-Scale Buckler",
+      "type": "offhand",
+      "offhandType": "shield",
+      "profession": "blacksmith",
+      "tier": "expert",
+      "statModifiers": {
+        "physicalDefence": 3,
+        "magicalDefence": 2,
+        "speed": 1
+      },
+      "specialEffects": [
+        "reflect_damage"
+      ],
+      "enchantmentSlots": 2,
+      "icon": "🛡️",
+      "desc": "Buckler faced with reflective monster scales. +3 Physical Defence, +2 Magical Defence, +1 Speed. 2 enchant slots. GRANTS: Reflect Damage.",
+      "rarity": "rare",
+      "materials": [
+        {
+          "id": "reflective_scales",
+          "quantity": 4
+        },
+        {
+          "id": "metallic_fragments",
+          "quantity": 4
+        },
+        {
+          "id": "glowing_crystals",
+          "quantity": 2
+        }
+      ],
+      "requiredSkills": [
+        "master_alloy",
+        "tempered_steel"
+      ],
+      "price": {
+        "gold": 3,
+        "silver": 150
+      }
+    },
     "phoenix_regeneration_armor": {
       "id": "phoenix_regeneration_armor",
       "name": "Phoenix Regeneration Armor",
@@ -555,12 +718,58 @@
         "gold": 60
       }
     },
+    "titan_wall_shield": {
+      "id": "titan_wall_shield",
+      "name": "Titan Wall Shield",
+      "type": "offhand",
+      "offhandType": "shield",
+      "profession": "blacksmith",
+      "tier": "master",
+      "statModifiers": {
+        "physicalDefence": 5,
+        "magicalDefence": 2,
+        "hp": 2
+      },
+      "specialEffects": [
+        "damage_reduction",
+        "magic_barrier"
+      ],
+      "enchantmentSlots": 2,
+      "icon": "🛡️",
+      "desc": "A slab shield forged from titan bone and void steel. +5 Physical Defence, +2 Magical Defence, +2 HP. 2 enchant slots. GRANTS: Damage Reduction, Magic Barrier.",
+      "rarity": "legendary",
+      "materials": [
+        {
+          "id": "titan_bones",
+          "quantity": 2
+        },
+        {
+          "id": "void_essence",
+          "quantity": 3
+        },
+        {
+          "id": "segmented_carapace",
+          "quantity": 3
+        },
+        {
+          "id": "metallic_fragments",
+          "quantity": 5
+        }
+      ],
+      "requiredSkills": [
+        "tempered_steel"
+      ],
+      "price": {
+        "gold": 60
+      }
+    },
     "dragonheart_sword": {
       "id": "dragonheart_sword",
       "name": "Dragonheart Sword",
       "type": "craftable_weapon",
       "profession": "blacksmith",
       "tier": "master",
+      "damage": "2d10",
       "statModifiers": {
         "strength": 6,
         "speed": 4,
@@ -572,7 +781,7 @@
         "dragon_fire"
       ],
       "icon": "⚔️",
-      "desc": "Legendary sword containing a dragon's heart. +6 Strength, +4 Speed, +3 Magic Power. Dragon fire attacks. GRANTS: Dragon Fire, Critical Strikes, Energy Waves.",
+      "desc": "Legendary sword containing a dragon's heart. +6 Strength, +4 Speed, +3 Magic Power. Damage: 2d10. Dragon fire attacks. GRANTS: Dragon Fire, Critical Strikes, Energy Waves.",
       "rarity": "legendary",
       "materials": [
         {
@@ -706,8 +915,8 @@
         "silver": 4
       }
     },
-    "stamina_potion": {
-      "id": "stamina_potion",
+    "crafted_stamina_potion": {
+      "id": "crafted_stamina_potion",
       "name": "Stamina Potion",
       "type": "consumable",
       "profession": "alchemist",
@@ -797,6 +1006,45 @@
       ],
       "price": {
         "silver": 4
+      }
+    },
+    "alchemists_censer": {
+      "id": "alchemists_censer",
+      "name": "Alchemist's Censer",
+      "type": "offhand",
+      "offhandType": "focus",
+      "profession": "alchemist",
+      "tier": "advanced",
+      "statModifiers": {
+        "magicPower": 2,
+        "magicalDefence": 1
+      },
+      "specialEffects": [
+        "plague_ward"
+      ],
+      "enchantmentSlots": 1,
+      "icon": "⚱️",
+      "desc": "Incense censer infused with purifying reagents. +2 Magic Power, +1 Magical Defence. 1 enchant slot. GRANTS: Plague Ward.",
+      "rarity": "uncommon",
+      "materials": [
+        {
+          "id": "wild_mint",
+          "quantity": 3
+        },
+        {
+          "id": "anti_magic_essence",
+          "quantity": 2
+        },
+        {
+          "id": "nature_essence",
+          "quantity": 2
+        }
+      ],
+      "requiredSkills": [
+        "explosive_compounds"
+      ],
+      "price": {
+        "silver": 112
       }
     },
     "flame_resistance_potion": {
@@ -1189,11 +1437,10 @@
       "effect": {
         "type": "weapon_enchant",
         "stat": "damage",
-        "amount": 2,
-        "duration": 1800
+        "amount": 2
       },
       "icon": "🪨",
-      "desc": "Temporarily increases weapon damage by 2 for 30 rounds.",
+      "desc": "+2 weapon damage while attached. Remove to regain the item.",
       "rarity": "common",
       "materials": [
         {
@@ -1225,11 +1472,10 @@
       "effect": {
         "type": "armor_enchant",
         "stat": "magical_defence",
-        "amount": 3,
-        "duration": 1800
+        "amount": 3
       },
       "icon": "🔮",
-      "desc": "Temporarily increases magical defence by 3 for 30 rounds.",
+      "desc": "+3 Magical Defence on armour while attached. Remove to regain the item.",
       "rarity": "common",
       "materials": [
         {
@@ -1258,11 +1504,10 @@
         "type": "stat_boost",
         "stats": {
           "speed": 2
-        },
-        "duration": 1800
+        }
       },
       "icon": "⚡",
-      "desc": "Temporarily increases speed by 2 for 30 rounds.",
+      "desc": "+2 Speed while attached. Remove to regain the item.",
       "rarity": "common",
       "materials": [
         {
@@ -1295,11 +1540,10 @@
         "type": "stat_boost",
         "stats": {
           "strength": 3
-        },
-        "duration": 1800
+        }
       },
       "icon": "💪",
-      "desc": "Temporarily increases strength by 3 for 30 rounds.",
+      "desc": "+3 Strength while attached. Remove to regain the item.",
       "rarity": "common",
       "materials": [
         {
@@ -1322,6 +1566,76 @@
         "silver": 5
       }
     },
+    "primer_of_runes": {
+      "id": "primer_of_runes",
+      "name": "Primer of Runes",
+      "type": "offhand",
+      "offhandType": "tome",
+      "profession": "enchanter",
+      "tier": "basic",
+      "statModifiers": {
+        "magicPower": 1,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "icon": "📘",
+      "desc": "Beginner rune primer bound for travel. +1 Magic Power, +1 Magical Defence.",
+      "rarity": "common",
+      "materials": [
+        {
+          "id": "anti_magic_essence",
+          "quantity": 2
+        },
+        {
+          "id": "thick_hide",
+          "quantity": 1
+        }
+      ],
+      "requiredSkills": [
+        "rune_apprentice"
+      ],
+      "price": {
+        "silver": 5
+      }
+    },
+    "spellwoven_grimoire": {
+      "id": "spellwoven_grimoire",
+      "name": "Spellwoven Grimoire",
+      "type": "offhand",
+      "offhandType": "tome",
+      "profession": "enchanter",
+      "tier": "basic",
+      "statModifiers": {
+        "magicPower": 2,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "icon": "📖",
+      "desc": "Spellbook bound with rune-thread. +2 Magic Power, +1 Magical Defence. 1 enchant slot.",
+      "rarity": "common",
+      "materials": [
+        {
+          "id": "anti_magic_essence",
+          "quantity": 3
+        },
+        {
+          "id": "glowing_crystals",
+          "quantity": 2
+        },
+        {
+          "id": "thick_hide",
+          "quantity": 1
+        }
+      ],
+      "requiredSkills": [
+        "rune_apprentice"
+      ],
+      "price": {
+        "silver": 5
+      }
+    },
     "elemental_weapon_crystal": {
       "id": "elemental_weapon_crystal",
       "name": "Elemental Weapon Crystal",
@@ -1330,11 +1644,10 @@
       "tier": "advanced",
       "effect": {
         "type": "weapon_enchant",
-        "element": "random",
-        "duration": 3600
+        "element": "random"
       },
       "icon": "💎",
-      "desc": "Adds random elemental damage to weapons for 10 rounds.",
+      "desc": "Random elemental damage on weapon hits while attached. Remove to regain the item.",
       "rarity": "uncommon",
       "materials": [
         {
@@ -1361,6 +1674,45 @@
         "silver": 112
       }
     },
+    "rune_etched_buckler": {
+      "id": "rune_etched_buckler",
+      "name": "Rune-Etched Buckler",
+      "type": "offhand",
+      "offhandType": "shield",
+      "profession": "enchanter",
+      "tier": "advanced",
+      "statModifiers": {
+        "physicalDefence": 2,
+        "magicalDefence": 1
+      },
+      "specialEffects": [
+        "magic_barrier"
+      ],
+      "enchantmentSlots": 1,
+      "icon": "🛡️",
+      "desc": "Small shield inlaid with warding runes. +2 Physical Defence, +1 Magical Defence. Blocks stray magic. 1 enchant slot. GRANTS: Magic Barrier.",
+      "rarity": "uncommon",
+      "materials": [
+        {
+          "id": "anti_magic_essence",
+          "quantity": 4
+        },
+        {
+          "id": "glowing_crystals",
+          "quantity": 3
+        },
+        {
+          "id": "metallic_fragments",
+          "quantity": 2
+        }
+      ],
+      "requiredSkills": [
+        "elemental_ink"
+      ],
+      "price": {
+        "silver": 112
+      }
+    },
     "barrier_crystal": {
       "id": "barrier_crystal",
       "name": "Barrier Crystal",
@@ -1369,11 +1721,10 @@
       "tier": "advanced",
       "effect": {
         "type": "magical_shield",
-        "amount": 40,
-        "duration": 2400
+        "amount": 40
       },
       "icon": "🔷",
-      "desc": "Creates a magical barrier that absorbs 40 damage for 40 rounds.",
+      "desc": "Advanced ward (Ward Scribe). One 40-point pool soaks magical damage only — not physical, not healing. Track with −1/−5 on the chip; at 0 the crystal is spent. Remove unused to regain the item; if removed after any absorption, the crystal is destroyed.",
       "rarity": "uncommon",
       "materials": [
         {
@@ -1408,11 +1759,10 @@
           "hp": 20,
           "stamina": 20,
           "magicPower": 4
-        },
-        "duration": 2700
+        }
       },
       "icon": "💎",
-      "desc": "Enhances the soul's capacity. +20 HP, +20 Stamina, +4 Magic Power for 45 rounds.",
+      "desc": "+20 HP, +20 Stamina, +4 Magic Power while attached. Remove to regain the item.",
       "rarity": "uncommon",
       "materials": [
         {
@@ -1448,11 +1798,10 @@
         },
         "bonus_effects": [
           "wall_phase"
-        ],
-        "duration": 1800
+        ]
       },
       "icon": "🔮",
-      "desc": "Allows brief phasing through walls. +5 Speed for 30 rounds.",
+      "desc": "+5 Speed while attached. Table: brief phasing through walls. Remove to regain the item.",
       "rarity": "uncommon",
       "materials": [
         {
@@ -1483,11 +1832,10 @@
       "tier": "expert",
       "effect": {
         "type": "spell_power",
-        "amount": 25,
-        "duration": 1200
+        "amount": 25
       },
       "icon": "🔵",
-      "desc": "Increases spell power by 25% for 20 rounds.",
+      "desc": "+25% spell power while attached. Remove to regain the item.",
       "rarity": "rare",
       "materials": [
         {
@@ -1515,6 +1863,46 @@
         "silver": 150
       }
     },
+    "bound_archmage_folio": {
+      "id": "bound_archmage_folio",
+      "name": "Bound Archmage Folio",
+      "type": "offhand",
+      "offhandType": "tome",
+      "profession": "enchanter",
+      "tier": "expert",
+      "statModifiers": {
+        "magicPower": 4,
+        "magicalDefence": 2
+      },
+      "specialEffects": [
+        "concentration"
+      ],
+      "enchantmentSlots": 2,
+      "icon": "📚",
+      "desc": "Soul-bound spell folio for battle mages. +4 Magic Power, +2 Magical Defence. 2 enchant slots. GRANTS: Concentration.",
+      "rarity": "rare",
+      "materials": [
+        {
+          "id": "soul_essence",
+          "quantity": 2
+        },
+        {
+          "id": "void_essence",
+          "quantity": 2
+        },
+        {
+          "id": "glowing_crystals",
+          "quantity": 4
+        }
+      ],
+      "requiredSkills": [
+        "artifact_shaping"
+      ],
+      "price": {
+        "gold": 3,
+        "silver": 150
+      }
+    },
     "reality_anchor": {
       "id": "reality_anchor",
       "name": "Reality Anchor",
@@ -1529,11 +1917,10 @@
         },
         "bonus_effects": [
           "status_immunity"
-        ],
-        "duration": 1800
+        ]
       },
       "icon": "⚓",
-      "desc": "Anchors the user to reality. +8 Physical/Magical Defence, immunity to status effects for 30 rounds.",
+      "desc": "+8 Physical and Magical Defence while attached. Table: status immunity. Remove to regain the item.",
       "rarity": "rare",
       "materials": [
         {
@@ -1569,11 +1956,10 @@
           "strength": 6,
           "speed": 6,
           "magicPower": 6
-        },
-        "duration": 1200
+        }
       },
       "icon": "✨",
-      "desc": "Temporarily ascends mortal limits. +6 to Strength, Speed, and Magic Power for 20 rounds.",
+      "desc": "+6 Strength, Speed, and Magic Power while attached. Remove to regain the item.",
       "rarity": "rare",
       "materials": [
         {
@@ -1610,7 +1996,7 @@
         }
       },
       "icon": "💫",
-      "desc": "Permanently increases all stats by 2. Can only be used once per character.",
+      "desc": "+2 to all stats while attached. Remove to regain the item.",
       "rarity": "legendary",
       "materials": [
         {
@@ -1637,6 +2023,45 @@
         "gold": 60
       }
     },
+    "void_lattice_focus": {
+      "id": "void_lattice_focus",
+      "name": "Void Lattice Focus",
+      "type": "offhand",
+      "offhandType": "tome",
+      "profession": "enchanter",
+      "tier": "master",
+      "statModifiers": {
+        "magicPower": 4,
+        "speed": 3,
+        "magicalDefence": 2
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 2,
+      "icon": "🔮",
+      "desc": "A lattice of void crystals that channels raw spell energy. +4 Magic Power, +3 Speed, +2 Magical Defence. 2 enchant slots.",
+      "rarity": "legendary",
+      "materials": [
+        {
+          "id": "void_essence",
+          "quantity": 4
+        },
+        {
+          "id": "elemental_heart",
+          "quantity": 2
+        },
+        {
+          "id": "glowing_crystals",
+          "quantity": 4
+        }
+      ],
+      "requiredSkills": [
+        "dispel_touch",
+        "artifact_shaping"
+      ],
+      "price": {
+        "gold": 60
+      }
+    },
     "godslayer_rune": {
       "id": "godslayer_rune",
       "name": "Godslayer Rune",
@@ -1654,7 +2079,7 @@
         ]
       },
       "icon": "⚡",
-      "desc": "Permanently increases Strength and Magic Power by 5. Deals divine damage. One use per character.",
+      "desc": "+5 Strength and Magic Power while attached. Table: divine damage on hits. Remove to regain the item.",
       "rarity": "legendary",
       "materials": [
         {
@@ -1698,7 +2123,7 @@
         }
       },
       "icon": "♾️",
-      "desc": "The ultimate enhancement. Permanently increases HP/Stamina by 25, defences by 3. One use per character.",
+      "desc": "+25 HP and Stamina, +3 defences while attached. Remove to regain the item.",
       "rarity": "legendary",
       "materials": [
         {
@@ -1751,6 +2176,71 @@
         },
         {
           "id": "sharp_fangs",
+          "quantity": 1
+        }
+      ],
+      "requiredSkills": [
+        "camp_cook"
+      ],
+      "price": {
+        "silver": 3
+      }
+    },
+    "pot_lid_buckler": {
+      "id": "pot_lid_buckler",
+      "name": "Pot-Lid Buckler",
+      "type": "offhand",
+      "offhandType": "shield",
+      "profession": "chef",
+      "tier": "basic",
+      "statModifiers": {
+        "physicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "icon": "🍳",
+      "desc": "When the camp is attacked, anything is a shield. +1 Physical Defence.",
+      "rarity": "common",
+      "materials": [
+        {
+          "id": "metallic_fragments",
+          "quantity": 1
+        },
+        {
+          "id": "thick_hide",
+          "quantity": 1
+        }
+      ],
+      "requiredSkills": [
+        "camp_cook"
+      ],
+      "price": {
+        "silver": 3
+      }
+    },
+    "kettle_drum": {
+      "id": "kettle_drum",
+      "name": "Kettle Drum",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "profession": "chef",
+      "tier": "basic",
+      "statModifiers": {
+        "stamina": 1,
+        "hp": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "icon": "🥁",
+      "desc": "An upturned kettle that somehow keeps a beat. +1 Stamina, +1 HP. Vocals work without it — hover for Musician song bonuses.",
+      "rarity": "common",
+      "materials": [
+        {
+          "id": "metallic_fragments",
+          "quantity": 2
+        },
+        {
+          "id": "thick_hide",
           "quantity": 1
         }
       ],
@@ -2350,6 +2840,80 @@
         "silver": 5
       }
     },
+    "carved_war_drum": {
+      "id": "carved_war_drum",
+      "name": "Carved War Drum",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "profession": "archaeologist",
+      "tier": "basic",
+      "statModifiers": {
+        "stamina": 1,
+        "magicPower": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "icon": "🥁",
+      "desc": "Ancient drum restored for battle songs. +1 Stamina, +1 Magic Power. Vocals work without it — hover for Musician song bonuses.",
+      "rarity": "common",
+      "materials": [
+        {
+          "id": "crusher_molars",
+          "quantity": 2
+        },
+        {
+          "id": "thick_hide",
+          "quantity": 2
+        },
+        {
+          "id": "anti_magic_essence",
+          "quantity": 1
+        }
+      ],
+      "requiredSkills": [
+        "artifact_study"
+      ],
+      "price": {
+        "silver": 5
+      }
+    },
+    "temple_bell_chimes": {
+      "id": "temple_bell_chimes",
+      "name": "Temple Bell Chimes",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "profession": "archaeologist",
+      "tier": "advanced",
+      "statModifiers": {
+        "stamina": 2,
+        "magicalDefence": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "icon": "🔔",
+      "desc": "Ancient temple bells restrung for the road. +2 Stamina, +1 Magical Defence. 1 enchant slot. Vocals work without them — hover for Musician song bonuses.",
+      "rarity": "uncommon",
+      "materials": [
+        {
+          "id": "metallic_fragments",
+          "quantity": 3
+        },
+        {
+          "id": "glowing_crystals",
+          "quantity": 2
+        },
+        {
+          "id": "crusher_molars",
+          "quantity": 2
+        }
+      ],
+      "requiredSkills": [
+        "trap_sense"
+      ],
+      "price": {
+        "silver": 112
+      }
+    },
     "forgotten_map": {
       "id": "forgotten_map",
       "name": "Forgotten Map",
@@ -2480,6 +3044,43 @@
         },
         {
           "id": "glowing_crystals",
+          "quantity": 2
+        }
+      ],
+      "requiredSkills": [
+        "ancient_tongues"
+      ],
+      "price": {
+        "silver": 112
+      }
+    },
+    "restored_glyph_codex": {
+      "id": "restored_glyph_codex",
+      "name": "Restored Glyph Codex",
+      "type": "offhand",
+      "offhandType": "tome",
+      "profession": "archaeologist",
+      "tier": "advanced",
+      "statModifiers": {
+        "magicPower": 3,
+        "accuracy": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 1,
+      "icon": "📜",
+      "desc": "Recovered glyphs rebound into a travel codex. +3 Magic Power, +1 Accuracy. 1 enchant slot.",
+      "rarity": "uncommon",
+      "materials": [
+        {
+          "id": "runic_stone",
+          "quantity": 3
+        },
+        {
+          "id": "glowing_crystals",
+          "quantity": 2
+        },
+        {
+          "id": "anti_magic_essence",
           "quantity": 2
         }
       ],
@@ -2760,6 +3361,47 @@
         "silver": 150
       }
     },
+    "sanctified_reliquary": {
+      "id": "sanctified_reliquary",
+      "name": "Sanctified Reliquary",
+      "type": "offhand",
+      "offhandType": "focus",
+      "profession": "archaeologist",
+      "tier": "expert",
+      "statModifiers": {
+        "magicalDefence": 2,
+        "hp": 2
+      },
+      "specialEffects": [
+        "holy_symbol_craft",
+        "turn_unholy"
+      ],
+      "enchantmentSlots": 1,
+      "icon": "⛪",
+      "desc": "Recovered reliquary re-consecrated for travel. +2 Magical Defence, +2 HP. 1 enchant slot. GRANTS: Holy Symbol Craft, Turn Unholy.",
+      "rarity": "rare",
+      "materials": [
+        {
+          "id": "ancient_parchment",
+          "quantity": 3
+        },
+        {
+          "id": "glowing_crystals",
+          "quantity": 3
+        },
+        {
+          "id": "soul_essence",
+          "quantity": 1
+        }
+      ],
+      "requiredSkills": [
+        "careful_extraction"
+      ],
+      "price": {
+        "gold": 3,
+        "silver": 150
+      }
+    },
     "phoenix_crown": {
       "id": "phoenix_crown",
       "name": "Phoenix Crown",
@@ -2963,6 +3605,39 @@
       "requiredSkills": [
         "hands_in_soil"
       ]
+    },
+    "spirit_rattle": {
+      "id": "spirit_rattle",
+      "name": "Spirit Rattle",
+      "type": "offhand",
+      "offhandType": "instrument",
+      "profession": "farmer",
+      "tier": "basic",
+      "statModifiers": {
+        "stamina": 1,
+        "hp": 1
+      },
+      "specialEffects": [],
+      "enchantmentSlots": 0,
+      "icon": "🪇",
+      "desc": "Dried gourds and seeds on a stick — surprisingly catchy. +1 Stamina, +1 HP. Vocals work without it — hover for Musician song bonuses.",
+      "rarity": "common",
+      "materials": [
+        {
+          "id": "nature_essence",
+          "quantity": 2
+        },
+        {
+          "id": "wild_mint",
+          "quantity": 1
+        }
+      ],
+      "requiredSkills": [
+        "hands_in_soil"
+      ],
+      "price": {
+        "silver": 4
+      }
     },
     "mana_moss": {
       "id": "mana_moss",

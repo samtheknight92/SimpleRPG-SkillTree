@@ -366,6 +366,88 @@ const BUFF_EFFECTS = {
     stackable: false,
     healFormula: '1',
     manual: false
+  },
+  work_song_buff: {
+    id: 'work_song_buff',
+    name: 'Work Song',
+    icon: '⛏️',
+    type: 'aura',
+    duration: 3,
+    potency: 0,
+    desc: 'Allies in hearing range +1 Strength per performing Musician (+1 Physical Defence per harmony joiner).',
+    stackable: false,
+    statModifiers: { strength: 1 },
+    manual: true
+  },
+  marching_tune_buff: {
+    id: 'marching_tune_buff',
+    name: 'Marching Tune',
+    icon: '🥁',
+    type: 'aura',
+    duration: 2,
+    potency: 0,
+    desc: 'Allies in hearing range +1 Speed per performing Musician (+1 initiative per harmony joiner).',
+    stackable: false,
+    statModifiers: { speed: 1 },
+    manual: true
+  },
+  soothing_hymn_buff: {
+    id: 'soothing_hymn_buff',
+    name: 'Soothing Hymn',
+    icon: '🕊️',
+    type: 'aura',
+    duration: 2,
+    potency: 0,
+    desc: 'Allies in hearing range +1 Magical Defence per performing Musician (+1 Stamina at turn start per harmony joiner).',
+    stackable: false,
+    statModifiers: { magicalDefence: 1 },
+    manual: true
+  },
+  battle_anthem_buff: {
+    id: 'battle_anthem_buff',
+    name: 'Battle Anthem',
+    icon: '🎺',
+    type: 'aura',
+    duration: 3,
+    potency: 0,
+    desc: 'Allies in hearing range +1 accuracy per performing Musician (+1 damage on next hit per harmony joiner).',
+    stackable: false,
+    statModifiers: { accuracy: 1 },
+    manual: true
+  },
+  dissonant_note_debuff: {
+    id: 'dissonant_note_debuff',
+    name: 'Dissonant Note',
+    icon: '🎸',
+    type: 'debuff',
+    duration: 1,
+    potency: 0,
+    desc: 'Enemies in hearing range −1 accuracy per performing Musician (−1 on saves per harmony joiner).',
+    stackable: false,
+    statModifiers: { accuracy: -1 },
+    manual: true
+  },
+  long_set: {
+    id: 'long_set',
+    name: 'Long Set',
+    icon: '🎭',
+    type: 'passive',
+    duration: 0,
+    potency: 0,
+    desc: 'Your sustained songs may last 1 extra turn.',
+    stackable: false,
+    manual: false
+  },
+  encore: {
+    id: 'encore',
+    name: 'Encore',
+    icon: '🎤',
+    type: 'passive',
+    duration: 0,
+    potency: 0,
+    desc: 'Once per combat, replay a song you already used this fight for free — base sustain length only (no Long Set, instrument, or other bonus turns).',
+    stackable: false,
+    manual: false
   }
 }
 

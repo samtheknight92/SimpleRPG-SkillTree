@@ -16,6 +16,16 @@ export const BACKGROUNDS = {
     lumens: DEFAULT_STARTING_LUMENS,
     items: [{ itemId: 'health_potion', qty: 1 }]
   },
+  isekai: {
+    id: 'isekai',
+    name: "Isekai'd",
+    icon: '🌀',
+    desc: 'Summoned from another world with nothing on you. Locals trade Gil and never speak of Lumens — but you see the glow when foes fall, and you level up fast. That is your isekai blessing.',
+    gil: 0,
+    lumens: 0,
+    items: [],
+    tableNote: 'Natives do not see or spend Lumens. Your sheet still tracks them — defeat loot and rests are how you grow. Fast leveling compared to locals is the point; the GM sets the pace.'
+  },
   noble_scion: {
     id: 'noble_scion',
     name: 'Noble Scion',
@@ -117,5 +127,6 @@ export function applyBackgroundToCharacter(character, backgroundId) {
     if (getItem(row.itemId)) addItemToInventory(character, row.itemId, row.qty || 1)
   }
   const noteLine = `Background: ${bg.name} — ${bg.desc}`
-  character.notes = character.notes ? `${character.notes}\n\n${noteLine}` : noteLine
+  const tableLine = bg.tableNote ? `\n\nTable: ${bg.tableNote}` : ''
+  character.notes = character.notes ? `${character.notes}\n\n${noteLine}${tableLine}` : `${noteLine}${tableLine}`
 }

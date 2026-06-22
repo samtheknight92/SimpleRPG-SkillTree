@@ -149,7 +149,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "wind_slash"
             ],
-            "desc": "A sword light as air. +2 Strength, +3 Speed. Damage: 1d8. Cuts with wind magic. GRANTS: Wind Slash.",
+            "desc": "A sword light as air. +2 Strength, +3 Speed. Damage: 1d8. GRANTS: Wind Slash (20ft wind blade — 1d6 slashing; push target 10ft on hit).",
             "icon": "ðŸŒªï¸",
             "price": {
                 "gold": 1,
@@ -193,7 +193,7 @@ const ITEMS_DATA = {
                 "dragon_fire"
             ],
             "enchantmentSlots": 1,
-            "desc": "Forged from dragon scales. +4 Strength, +3 Magic Power, +1 Physical Defence. Breathes fire. Damage: 4d12 GRANTS: Dragon Fire.",
+            "desc": "Forged from dragon scales. +4 Strength, +3 Magic Power, +1 Physical Defence. Damage: 4d12. GRANTS: Dragon Fire (+1d6 fire; 75% Burn on hit).",
             "icon": "ðŸ‰",
             "price": {
                 "gold": 3,
@@ -232,6 +232,27 @@ const ITEMS_DATA = {
             "icon": "ðŸ—¡ï¸",
             "price": {
                 "silver": 6
+            },
+            "rarity": "common"
+        },
+        "main_gauche": {
+            "id": "main_gauche",
+            "name": "Main Gauche",
+            "type": "weapon",
+            "hands": "one",
+            "damage": "1d4",
+            "statModifiers": {
+                "speed": 1,
+                "physicalDefence": 1
+            },
+            "specialEffects": [
+                "parry_bonus"
+            ],
+            "enchantmentSlots": 0,
+            "desc": "A parrying dagger for the off-hand. +1 Speed, +1 Physical Defence. Damage: 1d4. Equip off-hand with Dual Wield and a main-hand dagger. GRANTS: Parry Bonus.",
+            "icon": "🗡️",
+            "price": {
+                "silver": 9
             },
             "rarity": "common"
         },
@@ -289,7 +310,7 @@ const ITEMS_DATA = {
                 "stealth"
             ],
             "enchantmentSlots": 2,
-            "desc": "A dagger forged from shadow. +2 Speed, +1 Magic Power. Damage: 1d8. Enhanced stealth attacks. GRANTS: Stealth Strike.",
+            "desc": "A dagger forged from shadow. +2 Speed, +1 Magic Power. Damage: 1d8. GRANTS: Stealth Strike (first attack from hidden: +2 Accuracy, +1d6 damage).",
             "icon": "ðŸ—¡ï¸",
             "price": {
                 "gold": 1,
@@ -310,7 +331,7 @@ const ITEMS_DATA = {
                 "critical_strike"
             ],
             "enchantmentSlots": 2,
-            "desc": "A deadly assassin's weapon. +3 Speed, +1 Strength. Increased critical hit chance. Damage: 2d6 GRANTS: Critical Strike.",
+            "desc": "A deadly assassin's weapon. +3 Speed, +1 Strength. Damage: 2d6. GRANTS: Critical Strike (crit on 19–20; +1 weapon damage die on crit).",
             "icon": "ðŸ—¡ï¸",
             "price": {
                 "gold": 1,
@@ -331,7 +352,7 @@ const ITEMS_DATA = {
                 "phase_strike"
             ],
             "enchantmentSlots": 2,
-            "desc": "A dagger from the void realm. +3 Speed, +2 Magic Power. Damage: 1d10. Ignores armor. GRANTS: Phase Strike.",
+            "desc": "A dagger from the void realm. +3 Speed, +2 Magic Power. Damage: 1d10. GRANTS: Phase Strike (ignore 3 Physical Defence and 3 Magical Defence on this attack).",
             "icon": "ðŸ–¤",
             "price": {
                 "gold": 2,
@@ -351,7 +372,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "shadow_step"
             ],
-            "desc": "A dagger forged in shadows. +4 Speed, +2 Magic Power. Damage: 2d6. Teleports behind enemies. GRANTS: Shadow Step.",
+            "desc": "A dagger forged in shadows. +4 Speed, +2 Magic Power. Damage: 2d6. GRANTS: Shadow Step (Action: teleport up to 30ft in dim light or darkness).",
             "icon": "ðŸŒ‘",
             "price": {
                 "gold": 3,
@@ -372,7 +393,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "time_strike"
             ],
-            "desc": "A blade that cuts through time itself. +4 Speed, +2 Magic Power. Damage: 2d10. Can strike twice. GRANTS: Time Strike.",
+            "desc": "A blade that cuts through time. +4 Speed, +2 Magic Power. Damage: 2d10. GRANTS: Time Strike (once per scene: extra weapon attack after this hit lands).",
             "icon": "â°",
             "price": {
                 "gold": 4,
@@ -486,7 +507,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "nature_blessing"
             ],
-            "desc": "An elegant elvish bow. +3 Speed, +1 Magic Power. Damage: 1d10. Blessed by nature spirits. GRANTS: Nature Blessing.",
+            "desc": "An elegant elvish bow. +3 Speed, +1 Magic Power. Damage: 1d10. GRANTS: Nature Blessing (+2 Accuracy, +1 Magic Power outdoors for 8 turns; heal 1 HP at start of outdoor turns).",
             "icon": "ðŸ§",
             "price": {
                 "gold": 1,
@@ -550,7 +571,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "star_arrows"
             ],
-            "desc": "A bow crafted from starlight. +4 Speed, +3 Magic Power. Damage: 2d8. Shoots celestial energy. GRANTS: Star Arrows.",
+            "desc": "A bow crafted from starlight. +4 Speed, +3 Magic Power. Damage: 2d8. GRANTS: Star Arrows (+1d6 radiant; +2 Accuracy in darkness).",
             "icon": "âœ¨",
             "price": {
                 "gold": 5,
@@ -606,7 +627,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "armor_pierce"
             ],
-            "desc": "A heavy war hammer. +4 Strength, -1 Speed. Damage: 1d10. Pierces armor. GRANTS: Armor Pierce.",
+            "desc": "A heavy war hammer. +4 Strength, -1 Speed. Damage: 1d10. GRANTS: Armor Pierce (−2 target Physical Defence for this attack).",
             "icon": "ðŸ”¨",
             "price": {
                 "silver": 18
@@ -667,7 +688,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "earthquake"
             ],
-            "desc": "A hammer imbued with earth magic. +4 Strength, +2 Physical Defence. Damage: 1d10. Creates tremors. GRANTS: Earthquake.",
+            "desc": "A hammer imbued with earth magic. +4 Strength, +2 Physical Defence. Damage: 1d10. GRANTS: Earthquake (10ft burst — 2d6 earth; Knockdown on failed Speed save).",
             "icon": "ðŸŒ",
             "price": {
                 "gold": 1,
@@ -688,7 +709,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "thunder_strike"
             ],
-            "desc": "A hammer that roars with thunder. +5 Strength, +2 Magic Power. Damage: 1d12. Sonic shockwaves. GRANTS: Thunder Strike.",
+            "desc": "A hammer that roars with thunder. +5 Strength, +2 Magic Power. Damage: 1d12. GRANTS: Thunder Strike (+1d6 thunder; 40% Incapacitated for 1 turn).",
             "icon": "âš¡",
             "price": {
                 "gold": 2,
@@ -710,7 +731,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "earth_shatter"
             ],
-            "desc": "The legendary hammer of titans. +6 Strength, +5 HP, -1 Speed. Damage: 2d8. Shatters the earth. GRANTS: Earth Shatter.",
+            "desc": "The legendary hammer of titans. +6 Strength, +5 HP, -1 Speed. Damage: 2d8. GRANTS: Earth Shatter (+1d8 earth; −2 target Physical Defence until end of next turn).",
             "icon": "ðŸ”ï¸",
             "price": {
                 "gold": 6,
@@ -732,7 +753,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "void_impact"
             ],
-            "desc": "A hammer that crushes reality itself. +7 Strength, +3 Magic Power, -2 HP. Damage: 2d10. Void damage. GRANTS: Void Impact.",
+            "desc": "A void-forged war hammer. +7 Strength, +3 Magic Power, -2 HP. Damage: 2d10. GRANTS: Void Impact (+1d6 void; push target 10ft on hit).",
             "icon": "ðŸ•³ï¸",
             "price": {
                 "gold": 8,
@@ -787,7 +808,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "cleave"
             ],
-            "desc": "A brutal battle axe. +3 Strength, -1 Speed. Damage: 1d8. Cleaves through enemies. GRANTS: Cleave.",
+            "desc": "A brutal battle axe. +3 Strength, -1 Speed. Damage: 1d8. GRANTS: Cleave (on drop or crit: half rolled damage to one adjacent enemy).",
             "icon": "ðŸª“",
             "price": {
                 "silver": 14
@@ -807,7 +828,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "double_strike"
             ],
-            "desc": "A double-headed axe. +4 Strength, -1 Speed. Damage: 1d10. Can strike twice per attack. GRANTS: Double Strike.",
+            "desc": "A double-headed axe. +4 Strength, -1 Speed. Damage: 1d10. GRANTS: Double Strike (two attack rolls with one action; second hit uses same modifiers).",
             "icon": "ðŸª“",
             "price": {
                 "silver": 40
@@ -828,7 +849,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "lifesteal"
             ],
-            "desc": "A cursed demonic axe. +5 Strength, -1 Speed, -2 HP. Damage: 1d12. Steals life from enemies. GRANTS: Lifesteal.",
+            "desc": "A cursed demonic axe. +5 Strength, -1 Speed, -2 HP. Damage: 1d12. GRANTS: Lifesteal (heal half the damage this attack deals).",
             "icon": "ðŸ‘¹",
             "price": {
                 "gold": 2,
@@ -850,7 +871,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "rage_mode"
             ],
-            "desc": "An axe that fuels bloodlust. +5 Strength, +1 Speed, -1 HP. Damage: 1d10. Enters rage when wounded. GRANTS: Rage Mode.",
+            "desc": "An axe that fuels bloodlust. +5 Strength, +1 Speed, -1 HP. Damage: 1d10. GRANTS: Rage Mode (+2 Strength, +2 Speed, −1 Physical Defence for 8 turns).",
             "icon": "ðŸ’€",
             "price": {
                 "gold": 1,
@@ -871,7 +892,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "execution"
             ],
-            "desc": "A massive executioner's axe. +6 Strength, -2 Speed. Damage: 2d6. Instant kill on critical hits. GRANTS: Execution.",
+            "desc": "A massive executioner's axe. +6 Strength, -2 Speed. Damage: 2d6. GRANTS: Execution (+1d6 damage vs targets below half HP).",
             "icon": "âš”ï¸",
             "price": {
                 "gold": 3,
@@ -893,7 +914,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "chaos_strike"
             ],
-            "desc": "An axe forged in chaos itself. +7 Strength, +2 Magic Power, -3 HP. Damage: 2d8. Unpredictable effects. GRANTS: Chaos Strike.",
+            "desc": "An axe of wild magic. +7 Strength, +2 Magic Power, -3 HP. Damage: 2d8. GRANTS: Chaos Strike (+1d6 random element — fire, ice, lightning, or void — each hit).",
             "icon": "ðŸŒ€",
             "price": {
                 "gold": 5,
@@ -915,7 +936,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "reality_cut"
             ],
-            "desc": "An axe that can cleave worlds in two. +8 Strength, +2 Physical Defence, -3 Speed. Damage: 3d8. Reality-breaking power. GRANTS: Reality Cut.",
+            "desc": "A world-shattering greataxe. +8 Strength, +2 Physical Defence, -3 Speed. Damage: 3d8. GRANTS: Reality Cut (once per scene: ignore all defence and cover; +2d6 force).",
             "icon": "ðŸŒ",
             "price": {
                 "gold": 10,
@@ -1072,7 +1093,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "cosmic_power"
             ],
-            "desc": "A staff channeling cosmic forces. +6 Magic Power, +5 Stamina, +2 HP. Damage: 2d6. Reality-bending magic. GRANTS: Cosmic Power.",
+            "desc": "A staff channeling cosmic forces. +6 Magic Power, +5 Stamina, +2 HP. Damage: 2d6. GRANTS: Cosmic Power (+4 Magic Power, +2 Magical Defence for 6 turns).",
             "icon": "ðŸŒŒ",
             "price": {
                 "gold": 7,
@@ -1095,7 +1116,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "creation_magic"
             ],
-            "desc": "The staff of creation itself. +7 Magic Power, +6 Stamina, +3 HP, +1 Speed. Damage: 2d8. Creates matter from nothing. GRANTS: Creation Magic.",
+            "desc": "Rod of creation. +7 Magic Power, +6 Stamina, +3 HP, +1 Speed. Damage: 2d8. GRANTS: Creation Magic (+3 Magic Power for 8 turns; minor objects or barriers — GM).",
             "icon": "âœ¨",
             "price": {
                 "gold": 12,
@@ -1174,7 +1195,7 @@ const ITEMS_DATA = {
                 "reach",
                 "cleave"
             ],
-            "desc": "A versatile halberd. +3 Strength, +2 Physical Defence, -1 Speed. Damage: 1d10. Reach and cleave attacks.",
+            "desc": "A versatile halberd. +3 Strength, +2 Physical Defence, -1 Speed. Damage: 1d10. GRANTS: Reach (+5ft melee for 10 turns), Cleave (on drop/crit: half damage to one adjacent enemy).",
             "icon": "âš”ï¸",
             "price": {
                 "silver": 25
@@ -1238,7 +1259,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "dragon_slayer"
             ],
-            "desc": "A lance forged to slay dragons. +4 Strength, +3 Physical Defence, +2 Magic Power. Damage: 2d6. Dragon slaying power. GRANTS: Dragon Slayer.",
+            "desc": "A lance forged to slay dragons. +4 Strength, +3 Physical Defence, +2 Magic Power. Damage: 2d6. GRANTS: Dragon Slayer (+2 Accuracy and +1d6 vs dragons and draconic foes).",
             "icon": "ðŸ²",
             "price": {
                 "gold": 2,
@@ -1261,7 +1282,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "infinite_reach"
             ],
-            "desc": "A spear that transcends distance. +5 Strength, +4 Physical Defence, +3 Magic Power, +1 Speed. Damage: 2d8. Infinite reach.",
+            "desc": "A legendary reach spear. +5 Strength, +4 Physical Defence, +3 Magic Power, +1 Speed. Damage: 2d8. GRANTS: Infinite Reach (melee attacks reach 30ft for 3 turns).",
             "icon": "â™¾ï¸",
             "price": {
                 "gold": 8,
@@ -1284,7 +1305,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "dimension_pierce"
             ],
-            "desc": "A spear that pierces through dimensions. +6 Strength, +5 Physical Defence, +4 Magic Power, +2 Speed. Damage: 2d10. Ignores all defenses. GRANTS: Dimension Pierce.",
+            "desc": "A dimension-piercing spear. +6 Strength, +5 Physical Defence, +4 Magic Power, +2 Speed. Damage: 2d10. GRANTS: Dimension Pierce (once per scene: ignore barriers and 6 total defence).",
             "icon": "ðŸ•³ï¸",
             "price": {
                 "gold": 15,
@@ -1472,7 +1493,7 @@ const ITEMS_DATA = {
                     "water": 1
                 }
             },
-            "desc": "Robes woven with fire magic. +3 Magical Defence, +3 Magic Power. Immune to fire damage. GRANTS: Fire resistance 25% (-2), Ice/Water weakness 200% (+1)",
+            "desc": "Robes woven with fire magic. +3 Magical Defence, +3 Magic Power. Immune to fire damage. GRANTS: Fire resistance 25% (quarter fire damage); Ice and Water weakness 200% (double damage)",
             "icon": "ðŸ”¥",
             "price": {
                 "gold": 1,
@@ -1502,7 +1523,7 @@ const ITEMS_DATA = {
                     "lightning": 1
                 }
             },
-            "desc": "Armor made of magical ice. +3 Physical Defence, +3 Magical Defence, -1 Speed. Freezes attackers. GRANTS: Ice resistance 25% (-2), Fire/Lightning weakness 200% (+1)",
+            "desc": "Armor made of magical ice. +3 Physical Defence, +3 Magical Defence, -1 Speed. Freezes attackers. GRANTS: Ice resistance 25% (quarter ice damage); Fire and Lightning weakness 200% (double damage)",
             "icon": "â„ï¸",
             "price": {
                 "gold": 1,
@@ -1565,7 +1586,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "spell_absorption"
             ],
-            "desc": "Armor from the void realm. +3 Physical Defence, +6 Magical Defence, +2 Magic Power, -3 HP. GRANTS: Spell Absorption.",
+            "desc": "Armor from the void realm. +3 Physical Defence, +6 Magical Defence, +2 Magic Power, -3 HP. GRANTS: Spell Absorption (once while active: negate one spell targeting you; regain its Stamina cost).",
             "icon": "ðŸ–¤",
             "price": {
                 "gold": 3,
@@ -1589,7 +1610,7 @@ const ITEMS_DATA = {
                 "regeneration",
                 "light_aura"
             ],
-            "desc": "Robes blessed by celestial beings. +5 Magical Defence, +4 Magic Power, +3 HP, +3 Stamina. GRANTS: Light Aura, Mana Regeneration.",
+            "desc": "Robes blessed by celestial beings. +5 Magical Defence, +4 Magic Power, +3 HP, +3 Stamina. GRANTS: Light Aura, Mana Regeneration, Regeneration.",
             "icon": "âœ¨",
             "price": {
                 "gold": 5,
@@ -1670,7 +1691,7 @@ const ITEMS_DATA = {
                     "ice": 1
                 }
             },
-            "desc": "A ring wreathed in flames. +3 Magic Power. Fire immunity and burning aura. GRANTS: Fire resistance 50% (-1), Ice weakness 200% (+1)",
+            "desc": "A ring wreathed in flames. +3 Magic Power. Fire immunity and burning aura. GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
             "icon": "ðŸ”¥",
             "price": {
                 "gold": 1,
@@ -1699,7 +1720,7 @@ const ITEMS_DATA = {
                     "fire": 1
                 }
             },
-            "desc": "A ring of eternal frost. +3 Magic Power, +1 Magical Defence. Frost aura. GRANTS: Ice resistance 50% (-1), Fire weakness 200% (+1)",
+            "desc": "A ring of eternal frost. +3 Magic Power, +1 Magical Defence. Frost aura. GRANTS: Ice resistance 50% (half ice damage); Fire weakness 200% (double fire damage)",
             "icon": "â„ï¸",
             "price": {
                 "gold": 1,
@@ -1728,7 +1749,7 @@ const ITEMS_DATA = {
                     "earth": 1
                 }
             },
-            "desc": "A ring crackling with electricity. +2 Magic Power, +2 Speed. Lightning attacks. GRANTS: Lightning resistance 50% (-1), Earth weakness 200% (+1)",
+            "desc": "A ring crackling with electricity. +2 Magic Power, +2 Speed. Lightning attacks. GRANTS: Lightning resistance 50% (half lightning damage); Earth weakness 200% (double earth damage)",
             "icon": "âš¡",
             "price": {
                 "gold": 1,
@@ -1896,7 +1917,7 @@ const ITEMS_DATA = {
                 "wind_weakness",
                 "stone_skin"
             ],
-            "desc": "An amulet of solid stone. +3 Physical Defence, +3 HP. Stone skin protection. GRANTS: Earth resistance 50% (-1), Wind weakness 200% (+1)",
+            "desc": "An amulet of solid stone. +3 Physical Defence, +3 HP. Stone skin protection. GRANTS: Earth resistance 50% (half earth damage); Wind weakness 200% (double wind damage)",
             "icon": "ðŸŒ",
             "price": {
                 "gold": 1,
@@ -1917,7 +1938,7 @@ const ITEMS_DATA = {
                 "light_weakness",
                 "shadow_stealth"
             ],
-            "desc": "An amulet wreathed in darkness. +3 Speed, +2 Magical Defence. Shadow stealth. GRANTS: Darkness resistance 50% (-1), Light weakness 200% (+1)",
+            "desc": "An amulet wreathed in darkness. +3 Speed, +2 Magical Defence. Shadow stealth. GRANTS: Darkness resistance 50% (half darkness damage); Light weakness 200% (double light damage)",
             "icon": "ðŸŒ‘",
             "price": {
                 "gold": 1,
@@ -1939,7 +1960,7 @@ const ITEMS_DATA = {
                 "radiant_aura",
                 "undead_bane"
             ],
-            "desc": "An amulet glowing with holy light. +2 Magic Power, +3 Magical Defence. Radiant aura, extra damage vs undead. GRANTS: Light resistance 50% (-1), Darkness weakness 200% (+1)",
+            "desc": "An amulet glowing with holy light. +2 Magic Power, +3 Magical Defence. Radiant aura, extra damage vs undead. GRANTS: Light resistance 50% (half light damage); Darkness weakness 200% (double darkness damage)",
             "icon": "âœ¨",
             "price": {
                 "gold": 1,
@@ -2146,6 +2167,636 @@ const ITEMS_DATA = {
             "icon": "🔮",
             "price": {
                 "silver": 20
+            },
+            "rarity": "common"
+        }
+    },
+    "offhand": {
+        "wooden_shield": {
+            "id": "wooden_shield",
+            "name": "Wooden Shield",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A simple wooden shield for the off-hand. +1 Physical Defence. Requires a one-handed main weapon.",
+            "icon": "🛡️",
+            "price": {
+                "silver": 6
+            },
+            "rarity": "common"
+        },
+        "iron_shield": {
+            "id": "iron_shield",
+            "name": "Iron Shield",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 2
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 1,
+            "desc": "A sturdy iron shield. +2 Physical Defence. 1 enchant slot.",
+            "icon": "🛡️",
+            "price": {
+                "silver": 18
+            },
+            "rarity": "common"
+        },
+        "apprentice_spell_tome": {
+            "id": "apprentice_spell_tome",
+            "name": "Apprentice Spell Tome",
+            "type": "offhand",
+            "offhandType": "tome",
+            "statModifiers": {
+                "magicPower": 1,
+                "magicalDefence": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A pocket spellbook for the off-hand. +1 Magic Power, +1 Magical Defence.",
+            "icon": "📖",
+            "price": {
+                "silver": 12
+            },
+            "rarity": "common"
+        },
+        "travel_lute": {
+            "id": "travel_lute",
+            "name": "Travel Lute",
+            "type": "offhand",
+            "offhandType": "instrument",
+            "statModifiers": {
+                "stamina": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A light lute for the off-hand. +1 Stamina. Vocals work without it — hover for Musician song bonuses.",
+            "icon": "🎵",
+            "price": {
+                "silver": 15
+            },
+            "rarity": "common"
+        },
+        "round_buckler": {
+            "id": "round_buckler",
+            "name": "Round Buckler",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 1,
+                "speed": 1
+            },
+            "specialEffects": [
+                "parry_bonus"
+            ],
+            "enchantmentSlots": 0,
+            "desc": "A small round shield for the off-hand. +1 Physical Defence, +1 Speed. Bonus to parrying. GRANTS: Parry Bonus.",
+            "icon": "🛡️",
+            "price": {
+                "silver": 10
+            },
+            "rarity": "common"
+        },
+        "steel_kite_shield": {
+            "id": "steel_kite_shield",
+            "name": "Steel Kite Shield",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 3,
+                "speed": -1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 1,
+            "desc": "A broad steel kite shield. +3 Physical Defence, −1 Speed. 1 enchant slot.",
+            "icon": "🛡️",
+            "price": {
+                "silver": 32
+            },
+            "rarity": "uncommon"
+        },
+        "arcane_focus_orb": {
+            "id": "arcane_focus_orb",
+            "name": "Arcane Focus Orb",
+            "type": "offhand",
+            "offhandType": "tome",
+            "statModifiers": {
+                "magicPower": 1,
+                "accuracy": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A crystal orb for channelling spells in the off-hand. +1 Magic Power, +1 Accuracy.",
+            "icon": "🔮",
+            "price": {
+                "silver": 14
+            },
+            "rarity": "common"
+        },
+        "scholars_grimoire": {
+            "id": "scholars_grimoire",
+            "name": "Scholar's Grimoire",
+            "type": "offhand",
+            "offhandType": "tome",
+            "statModifiers": {
+                "magicPower": 2,
+                "magicalDefence": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 1,
+            "desc": "A well-worn spellbook for the off-hand. +2 Magic Power, +1 Magical Defence. 1 enchant slot.",
+            "icon": "📖",
+            "price": {
+                "silver": 28
+            },
+            "rarity": "uncommon"
+        },
+        "hand_drum": {
+            "id": "hand_drum",
+            "name": "Hand Drum",
+            "type": "offhand",
+            "offhandType": "instrument",
+            "statModifiers": {
+                "stamina": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A compact drum for the off-hand. +1 Stamina. Vocals work without it — hover for Musician song bonuses.",
+            "icon": "🥁",
+            "price": {
+                "silver": 12
+            },
+            "rarity": "common"
+        },
+        "war_horn": {
+            "id": "war_horn",
+            "name": "War Horn",
+            "type": "offhand",
+            "offhandType": "instrument",
+            "statModifiers": {
+                "stamina": 2
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A brass horn for rallying allies. +2 Stamina. Vocals work without it — hover for Musician song bonuses.",
+            "icon": "📯",
+            "price": {
+                "silver": 22
+            },
+            "rarity": "uncommon"
+        },
+        "pilgrims_holy_symbol": {
+            "id": "pilgrims_holy_symbol",
+            "name": "Pilgrim's Holy Symbol",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "magicalDefence": 1
+            },
+            "specialEffects": [
+                "holy_symbol_craft"
+            ],
+            "enchantmentSlots": 0,
+            "desc": "A blessed symbol for the off-hand. +1 Magical Defence. GRANTS: +1 vs fear and mind control while worn.",
+            "icon": "✝️",
+            "price": {
+                "silver": 11
+            },
+            "rarity": "common"
+        },
+        "torch_brace": {
+            "id": "torch_brace",
+            "name": "Torch Brace",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "accuracy": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A hooded torch mount for the off-hand. +1 Accuracy. Lights the way — the GM may waive darkness penalties nearby.",
+            "icon": "🔦",
+            "price": {
+                "copper": 8
+            },
+            "rarity": "common"
+        },
+        "heater_shield": {
+            "id": "heater_shield",
+            "name": "Heater Shield",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 2,
+                "magicalDefence": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A tall heater shield for the off-hand. +2 Physical Defence, +1 Magical Defence.",
+            "icon": "🛡️",
+            "price": {
+                "silver": 24
+            },
+            "rarity": "uncommon"
+        },
+        "warden_targe": {
+            "id": "warden_targe",
+            "name": "Warden's Targe",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 2,
+                "speed": 1
+            },
+            "specialEffects": [
+                "flexible_defense"
+            ],
+            "enchantmentSlots": 0,
+            "desc": "A light strapped shield for skirmishers. +2 Physical Defence, +1 Speed. GRANTS: Flexible Defense.",
+            "icon": "🛡️",
+            "price": {
+                "silver": 26
+            },
+            "rarity": "uncommon"
+        },
+        "tower_guard_shield": {
+            "id": "tower_guard_shield",
+            "name": "Tower Guard Shield",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 4,
+                "speed": -2
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 2,
+            "desc": "A heavy tower shield. +4 Physical Defence, −2 Speed. 2 enchant slots.",
+            "icon": "🛡️",
+            "price": {
+                "gold": 1,
+                "silver": 8
+            },
+            "rarity": "rare"
+        },
+        "mirror_shield": {
+            "id": "mirror_shield",
+            "name": "Mirror Shield",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 2,
+                "magicalDefence": 1
+            },
+            "specialEffects": [
+                "reflect_damage"
+            ],
+            "enchantmentSlots": 1,
+            "desc": "A polished shield that catches and returns blows. +2 Physical Defence, +1 Magical Defence. 1 enchant slot. GRANTS: Reflect Damage.",
+            "icon": "🛡️",
+            "price": {
+                "gold": 1,
+                "silver": 20
+            },
+            "rarity": "rare"
+        },
+        "aegis_of_dawn": {
+            "id": "aegis_of_dawn",
+            "name": "Aegis of Dawn",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 4,
+                "magicalDefence": 2
+            },
+            "specialEffects": [
+                "magic_barrier"
+            ],
+            "enchantmentSlots": 2,
+            "desc": "A sun-blessed shield for champions. +4 Physical Defence, +2 Magical Defence. 2 enchant slots. GRANTS: Magic Barrier.",
+            "icon": "🛡️",
+            "price": {
+                "gold": 2,
+                "silver": 40
+            },
+            "rarity": "epic"
+        },
+        "novice_wand": {
+            "id": "novice_wand",
+            "name": "Novice Wand",
+            "type": "offhand",
+            "offhandType": "tome",
+            "statModifiers": {
+                "magicPower": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A simple wand for the off-hand. +1 Magic Power.",
+            "icon": "🪄",
+            "price": {
+                "silver": 8
+            },
+            "rarity": "common"
+        },
+        "star_chart_folio": {
+            "id": "star_chart_folio",
+            "name": "Star Chart Folio",
+            "type": "offhand",
+            "offhandType": "tome",
+            "statModifiers": {
+                "magicPower": 1,
+                "accuracy": 2
+            },
+            "specialEffects": [
+                "keen_sight"
+            ],
+            "enchantmentSlots": 0,
+            "desc": "Astrological charts bound for travel. +1 Magic Power, +2 Accuracy. GRANTS: Keen Sight.",
+            "icon": "📜",
+            "price": {
+                "silver": 22
+            },
+            "rarity": "uncommon"
+        },
+        "mages_codex": {
+            "id": "mages_codex",
+            "name": "Mage's Codex",
+            "type": "offhand",
+            "offhandType": "tome",
+            "statModifiers": {
+                "magicPower": 3,
+                "magicalDefence": 2
+            },
+            "specialEffects": [
+                "concentration"
+            ],
+            "enchantmentSlots": 1,
+            "desc": "A master reference for battle-casting. +3 Magic Power, +2 Magical Defence. 1 enchant slot. GRANTS: Concentration.",
+            "icon": "📖",
+            "price": {
+                "gold": 1,
+                "silver": 5
+            },
+            "rarity": "rare"
+        },
+        "void_scripture": {
+            "id": "void_scripture",
+            "name": "Void Scripture",
+            "type": "offhand",
+            "offhandType": "tome",
+            "statModifiers": {
+                "magicPower": 3,
+                "speed": 2
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 2,
+            "desc": "Forbidden pages that bend time at the edge of vision. +3 Magic Power, +2 Speed. 2 enchant slots.",
+            "icon": "📕",
+            "price": {
+                "gold": 2,
+                "silver": 25
+            },
+            "rarity": "epic"
+        },
+        "wooden_flute": {
+            "id": "wooden_flute",
+            "name": "Wooden Flute",
+            "type": "offhand",
+            "offhandType": "instrument",
+            "statModifiers": {
+                "stamina": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A simple flute for the off-hand. +1 Stamina. Vocals work without it — hover for Musician song bonuses.",
+            "icon": "🎶",
+            "price": {
+                "silver": 9
+            },
+            "rarity": "common"
+        },
+        "silver_bells": {
+            "id": "silver_bells",
+            "name": "Silver Bells",
+            "type": "offhand",
+            "offhandType": "instrument",
+            "statModifiers": {
+                "stamina": 1,
+                "magicPower": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "Tiny bells on a wrist strap. +1 Stamina, +1 Magic Power. Vocals work without them — hover for Musician song bonuses.",
+            "icon": "🔔",
+            "price": {
+                "silver": 18
+            },
+            "rarity": "uncommon"
+        },
+        "singing_bowl": {
+            "id": "singing_bowl",
+            "name": "Singing Bowl",
+            "type": "offhand",
+            "offhandType": "instrument",
+            "statModifiers": {
+                "stamina": 1,
+                "magicalDefence": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A handheld bowl that rings clear and long. +1 Stamina, +1 Magical Defence. Vocals work without it — hover for Musician song bonuses.",
+            "icon": "🥣",
+            "price": {
+                "silver": 20
+            },
+            "rarity": "uncommon"
+        },
+        "battle_lute": {
+            "id": "battle_lute",
+            "name": "Battle Lute",
+            "type": "offhand",
+            "offhandType": "instrument",
+            "statModifiers": {
+                "stamina": 2,
+                "magicPower": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 1,
+            "desc": "A reinforced lute built for the front line. +2 Stamina, +1 Magic Power. 1 enchant slot. Vocals work without it — hover for Musician song bonuses.",
+            "icon": "🎸",
+            "price": {
+                "gold": 1,
+                "silver": 12
+            },
+            "rarity": "rare"
+        },
+        "symphony_harp": {
+            "id": "symphony_harp",
+            "name": "Hand Harp",
+            "type": "offhand",
+            "offhandType": "instrument",
+            "statModifiers": {
+                "stamina": 2,
+                "magicPower": 2
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 1,
+            "desc": "A portable harp for the off-hand. +2 Stamina, +2 Magic Power. 1 enchant slot. Vocals work without it — hover for Musician song bonuses.",
+            "icon": "🎻",
+            "price": {
+                "gold": 1,
+                "silver": 35
+            },
+            "rarity": "rare"
+        },
+        "trail_compass": {
+            "id": "trail_compass",
+            "name": "Trail Compass",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "speed": 1,
+                "accuracy": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A brass compass for the off-hand. +1 Speed, +1 Accuracy.",
+            "icon": "🧭",
+            "price": {
+                "silver": 7
+            },
+            "rarity": "common"
+        },
+        "component_pouch": {
+            "id": "component_pouch",
+            "name": "Component Pouch",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "magicPower": 1
+            },
+            "specialEffects": [
+                "concentration"
+            ],
+            "enchantmentSlots": 0,
+            "desc": "A belt pouch of spell reagents for the off-hand. +1 Magic Power. GRANTS: Concentration.",
+            "icon": "👝",
+            "price": {
+                "silver": 10
+            },
+            "rarity": "common"
+        },
+        "druidic_totem": {
+            "id": "druidic_totem",
+            "name": "Druidic Totem",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "hp": 1,
+                "magicalDefence": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A carved spirit totem for the off-hand. +1 HP, +1 Magical Defence.",
+            "icon": "🗿",
+            "price": {
+                "silver": 16
+            },
+            "rarity": "uncommon"
+        },
+        "iron_censer": {
+            "id": "iron_censer",
+            "name": "Iron Censer",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "magicalDefence": 1
+            },
+            "specialEffects": [
+                "turn_unholy"
+            ],
+            "enchantmentSlots": 0,
+            "desc": "A swinging censer of blessed incense. +1 Magical Defence. GRANTS: Turn Unholy (warded area — undead hesitate to enter).",
+            "icon": "⚱️",
+            "price": {
+                "silver": 19
+            },
+            "rarity": "uncommon"
+        },
+        "lantern_shield": {
+            "id": "lantern_shield",
+            "name": "Lantern Shield",
+            "type": "offhand",
+            "offhandType": "shield",
+            "statModifiers": {
+                "physicalDefence": 1,
+                "accuracy": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A buckler with a built-in lantern slot. +1 Physical Defence, +1 Accuracy. Lights the way in the off-hand.",
+            "icon": "🏮",
+            "price": {
+                "silver": 14
+            },
+            "rarity": "uncommon"
+        },
+        "plague_ward_amulet": {
+            "id": "plague_ward_amulet",
+            "name": "Plague Ward Amulet",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "magicalDefence": 1,
+                "hp": 1
+            },
+            "specialEffects": [
+                "plague_ward"
+            ],
+            "enchantmentSlots": 0,
+            "desc": "A warding amulet on a wrist chain. +1 Magical Defence, +1 HP. GRANTS: Plague Ward.",
+            "icon": "📿",
+            "price": {
+                "silver": 21
+            },
+            "rarity": "uncommon"
+        },
+        "spell_scarab": {
+            "id": "spell_scarab",
+            "name": "Spell Scarab",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "magicPower": 2,
+                "magicalDefence": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 1,
+            "desc": "An enchanted beetle talisman for the off-hand. +2 Magic Power, +1 Magical Defence. 1 enchant slot.",
+            "icon": "🪲",
+            "price": {
+                "gold": 1,
+                "silver": 18
+            },
+            "rarity": "rare"
+        },
+        "lucky_charm": {
+            "id": "lucky_charm",
+            "name": "Lucky Charm",
+            "type": "offhand",
+            "offhandType": "focus",
+            "statModifiers": {
+                "speed": 1
+            },
+            "specialEffects": [],
+            "enchantmentSlots": 0,
+            "desc": "A rabbit's foot on a cord — probably lucky. +1 Speed.",
+            "icon": "🍀",
+            "price": {
+                "copper": 5
             },
             "rarity": "common"
         }
@@ -2503,7 +3154,7 @@ const ITEMS_DATA = {
                 "full_heal",
                 "fire_immunity_permanent"
             ],
-            "desc": "A legendary phoenix feather. Full heal, remove all debuffs, permanent fire immunity. GRANTS: Full Heal, Remove All Debuffs, Fire Immunity Permanent.",
+            "desc": "Legendary feather. Consume: full heal, remove all debuffs, permanent fire immunity.",
             "icon": "ðŸª¶",
             "price": {
                 "gold": 5,
@@ -2522,7 +3173,7 @@ const ITEMS_DATA = {
                 "permanent_hp_5",
                 "dragon_breath"
             ],
-            "desc": "The heart of an ancient dragon. Permanently increases HP by 5, Strength by 2, grants dragon breath. GRANTS: Permanent HP 5, Permanent Strength 2, Dragon Breath.",
+            "desc": "Consume: permanently +5 max HP, +2 Strength, and Dragon Breath (30ft cone — 3d6 fire; 75% Burn on each target).",
             "icon": "â¤ï¸",
             "price": {
                 "gold": 10,
@@ -2541,7 +3192,7 @@ const ITEMS_DATA = {
                 "permanent_all_stats_1",
                 "regeneration"
             ],
-            "desc": "The ultimate elixir. Permanently increases all stats by 1 and grants eternal regeneration. GRANTS: Permanent All Stats 1, Regeneration Permanent.",
+            "desc": "Consume: permanently +1 Strength, Magic Power, Accuracy, and Speed; restore 1 HP at the start of each turn.",
             "icon": "âš—ï¸",
             "price": {
                 "gold": 25,
@@ -2686,6 +3337,150 @@ const ITEMS_DATA = {
                 "silver": 2
             },
             "rarity": "uncommon",
+            "stackable": true
+        },
+        "drake_scales": {
+            "id": "drake_scales",
+            "name": "Drake Scales",
+            "type": "material",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Tough scales shed from a drake. Used for high-grade smithing and cooking recipes.",
+            "icon": "🐉",
+            "price": { "gold": 1 },
+            "rarity": "rare",
+            "stackable": true
+        },
+        "reinforcement_studs": {
+            "id": "reinforcement_studs",
+            "name": "Reinforcement Studs",
+            "type": "material",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Heavy metal studs used to reinforce armour and shields.",
+            "icon": "🔩",
+            "price": { "silver": 8 },
+            "rarity": "uncommon",
+            "stackable": true
+        },
+        "reflective_scales": {
+            "id": "reflective_scales",
+            "name": "Reflective Scales",
+            "type": "material",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Mirror-bright scales used for defensive gear and warding enchantments.",
+            "icon": "🛡️",
+            "price": { "gold": 1, "silver": 5 },
+            "rarity": "rare",
+            "stackable": true
+        },
+        "titan_bones": {
+            "id": "titan_bones",
+            "name": "Titan Bones",
+            "type": "material",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Ancient giant bone fragments used in legendary armour and relic crafting.",
+            "icon": "🦴",
+            "price": { "gold": 3 },
+            "rarity": "epic",
+            "stackable": true
+        },
+        "phase_essence": {
+            "id": "phase_essence",
+            "name": "Phase Essence",
+            "type": "essence",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Unstable essence that slips between spaces. Used in stealth, void, and phase recipes.",
+            "icon": "🌫️",
+            "price": { "gold": 2 },
+            "rarity": "epic",
+            "stackable": true
+        },
+        "storm_organ": {
+            "id": "storm_organ",
+            "name": "Storm Organ",
+            "type": "organic",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "A volatile organ that crackles with stored storm energy.",
+            "icon": "⛈️",
+            "price": { "gold": 2, "silver": 5 },
+            "rarity": "epic",
+            "stackable": true
+        },
+        "elemental_core": {
+            "id": "elemental_core",
+            "name": "Elemental Core",
+            "type": "crystal",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "A condensed core of mixed elemental power. Used in advanced alchemy, cooking, and enchanting.",
+            "icon": "🌈",
+            "price": { "gold": 3 },
+            "rarity": "epic",
+            "stackable": true
+        },
+        "soul_essence": {
+            "id": "soul_essence",
+            "name": "Soul Essence",
+            "type": "essence",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "A captured trace of spiritual energy used in high-tier enchantments.",
+            "icon": "✨",
+            "price": { "gold": 4 },
+            "rarity": "legendary",
+            "stackable": true
+        },
+        "divine_essence": {
+            "id": "divine_essence",
+            "name": "Divine Essence",
+            "type": "essence",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Sacred essence used in relics, divine runes, and ultimate archaeology recipes.",
+            "icon": "☀️",
+            "price": { "gold": 5 },
+            "rarity": "legendary",
+            "stackable": true
+        },
+        "ghost_moss": {
+            "id": "ghost_moss",
+            "name": "Ghost Moss",
+            "type": "herb",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Pale moss that grows where the veil is thin. Used in ethereal herbalism recipes.",
+            "icon": "🍄",
+            "price": { "silver": 8 },
+            "rarity": "rare",
+            "stackable": true
+        },
+        "flame_petals": {
+            "id": "flame_petals",
+            "name": "Flame Petals",
+            "type": "herb",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Warm petals from a fire-bloom. Used for phoenix-themed herbalism recipes.",
+            "icon": "🌺",
+            "price": { "gold": 1 },
+            "rarity": "rare",
+            "stackable": true
+        },
+        "cosmic_dust": {
+            "id": "cosmic_dust",
+            "name": "Cosmic Dust",
+            "type": "material",
+            "statModifiers": {},
+            "specialEffects": [],
+            "desc": "Glittering stardust used in the rarest cosmic herbalism recipes.",
+            "icon": "🌌",
+            "price": { "gold": 4 },
+            "rarity": "legendary",
             "stackable": true
         }
     }

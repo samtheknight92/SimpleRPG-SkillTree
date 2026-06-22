@@ -1,6 +1,11 @@
 import { DEFAULT_STATS } from './constants.js'
 import { getSkill } from './cache.js'
 
+/** Display level = floor(progress) + 1 — everyone starts at Level 1, never 0. */
+export function characterLevelFromTotal(total) {
+  return Math.floor(Number(total || 0)) + 1
+}
+
 /** Tier 5 skill = exactly 1 level; tier N contributes N ÷ 5. */
 export function tierLevelValue(tier) {
   return Number(tier || 1) / 5
@@ -25,10 +30,10 @@ export function characterLevelInfo(character) {
       hpStaminaUpgrades: 0,
       otherStatUpgrades: 0,
       total: 0,
-      level: 0,
+      level: 1,
       fraction: 0,
       pct: 0,
-      display: '0'
+      display: '1'
     }
   }
 
@@ -53,8 +58,9 @@ export function characterLevelInfo(character) {
   }
 
   const total = skillLevels + statLevels
-  const level = Math.floor(total)
-  const fraction = total - level
+  const progressFloor = Math.floor(total)
+  const level = progressFloor + 1
+  const fraction = total - progressFloor
 
   return {
     skillCount,

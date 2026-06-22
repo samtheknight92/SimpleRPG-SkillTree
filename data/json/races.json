@@ -59,7 +59,7 @@
     "description": "Masters of Luck and Stealth with natural fortune, small size advantages, and brave hearts.",
     "passiveTraits": [
       "Lucky: Can reroll any natural 1 on dice (once per combat/encounter)",
-      "Small & Nimble: Can move through larger creature spaces, +1 Speed",
+      "Small & Nimble: Can move through larger creature spaces, +2 Speed",
       "Brave Heart: Immune to fear and intimidation status effects"
     ],
     "statModifiers": {
@@ -216,9 +216,6 @@
       "Monster Nature: Access to specialized monster skill categories",
       "Monster Stupidity: No access to Profession Skills/Crafting"
     ],
-    "statModifiers": {
-      "none": 0
-    },
     "exclusiveSkills": []
   }
 }

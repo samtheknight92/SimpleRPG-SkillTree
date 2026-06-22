@@ -1,0 +1,949 @@
+/* Global compact density — same targets as the mobile pass, all viewports */
+
+.app-shell {
+  padding: 10px;
+}
+
+.topbar {
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.resource-strip {
+  width: auto;
+  flex: 0 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+  order: unset;
+}
+
+.card-header {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.skill-grid,
+.item-grid,
+.premade-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
+}
+
+.skill-card > p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.effects-manager-intro {
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+  margin: 0 0 8px;
+  max-width: 52rem;
+}
+
+.main-panel {
+  border-radius: 16px;
+  min-height: calc(100dvh - 12px);
+}
+
+.icon-btn {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.current-hero {
+  min-width: 0;
+  flex: 1;
+  gap: 10px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  flex-basis: 44px;
+  font-size: 22px;
+  border-radius: 14px;
+}
+
+.current-hero h2 {
+  font-size: 1.15rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.current-hero p {
+  font-size: 11px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.resource-strip {
+  width: auto;
+  flex: 0 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+  order: unset;
+}
+
+.resource {
+  min-width: 0;
+  padding: 7px 9px;
+  border-radius: 12px;
+}
+
+.resource span {
+  font-size: 9px;
+  margin-bottom: 2px;
+  letter-spacing: 0.08em;
+}
+
+.resource strong {
+  font-size: 13px;
+}
+
+.tabbar {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  gap: 6px;
+  padding: 8px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabbar::-webkit-scrollbar {
+  display: none;
+}
+
+.tabbar button {
+  flex: 0 0 auto;
+  padding: 8px 11px;
+  font-size: 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.content {
+  padding: 10px 12px;
+}
+
+.card,
+.notice-card,
+.tier-lane {
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.card h3,
+.notice-card h2 {
+  font-size: 1.12rem;
+}
+
+.card h3 {
+  font-size: 1.05rem;
+}
+
+.card-header {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.stat-value {
+  font-size: 1.45rem;
+}
+
+.stat-row-compact .stat-value {
+  font-size: 1.2rem;
+}
+
+.input,
+textarea,
+select,
+.primary-btn,
+.ghost-btn,
+.danger-btn,
+.chip-btn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 12px;
+}
+
+.segmented {
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.segmented button {
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.skill-grid,
+.item-grid,
+.premade-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
+}
+
+.premade-card {
+  padding: 12px;
+}
+
+.toast {
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  max-width: none;
+  padding: 12px 14px;
+  font-size: 14px;
+  border-radius: 14px;
+}
+
+
+.initiative-edit-row {
+  grid-template-columns: 1fr 72px auto;
+  gap: 6px;
+}
+
+#gm-premade-sort {
+  min-width: 0;
+  max-width: none;
+  width: 100%;
+}
+
+/* Core stats â€” dense tile grid, not full-width stacked rows */
+@media (max-width: 1100px) {
+  .core-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+
+.core-stats-grid .stat-row-compact {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  min-height: 0;
+  border-radius: 12px;
+}
+
+.core-stats-grid .stat-row-compact strong {
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.core-stats-grid .stat-row-compact .stat-value {
+  font-size: 1.15rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Stats tab â€” two compact upgrade cards per row */
+.stat-upgrade-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.stat-upgrade-card {
+  padding: 10px;
+  border-radius: 14px;
+}
+
+.stat-upgrade-card .stat-row-upgrade {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0;
+}
+
+.stat-upgrade-card .kicker {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  margin-bottom: 2px;
+}
+
+.stat-upgrade-card h3 {
+  font-size: 0.82rem;
+  line-height: 1.15;
+}
+
+.stat-upgrade-card .stat-value {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.stat-upgrade-card .stat-breakdown-pills {
+  margin-top: 8px;
+  gap: 4px;
+}
+
+.stat-upgrade-card .stat-breakdown-pills .pill {
+  font-size: 10px;
+  min-height: 24px;
+  padding: 3px 7px;
+}
+
+.stat-upgrade-card .stat-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.stat-upgrade-card .stat-actions button {
+  flex: 1;
+  padding: 7px 8px;
+  font-size: 11px;
+}
+
+/* â”€â”€ Skills tab â€” compact cards & filters â”€â”€ */
+.skills-toolbar,
+.toolbar {
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.skills-toolbar > .input:first-child,
+.toolbar > .input:first-child {
+  grid-column: 1 / -1;
+}
+
+.skills-toolbar .pill,
+.toolbar .pill {
+  justify-content: center;
+  min-height: 24px;
+  padding: 3px 7px;
+  font-size: 10px;
+}
+
+.segmented {
+  margin-bottom: 8px;
+  gap: 5px;
+}
+
+.segmented button {
+  padding: 6px 9px;
+  font-size: 11px;
+  border-radius: 10px;
+}
+
+.skill-tree {
+  gap: 10px;
+}
+
+.tier-lane {
+  padding: 10px;
+}
+
+.tier-lane > h3 {
+  font-size: 0.98rem;
+  margin-bottom: 8px;
+}
+
+.skill-grid,
+.item-grid {
+  gap: 8px;
+}
+
+.skill-card,
+.item-card {
+  padding: 10px;
+  gap: 6px;
+  min-height: 0;
+}
+
+.skill-top {
+  gap: 8px;
+  align-items: center;
+}
+
+.skill-icon {
+  width: 38px;
+  height: 38px;
+  flex-basis: 38px;
+  font-size: 18px;
+  border-radius: 11px;
+}
+
+.skill-card h4 {
+  font-size: 0.88rem;
+  line-height: 1.2;
+}
+
+.skill-card .wrap.mt-12 {
+  margin-top: 4px;
+  gap: 4px;
+}
+
+.skill-card .pill,
+.item-card .pill {
+  min-height: 22px;
+  padding: 2px 6px;
+  font-size: 10px;
+  gap: 4px;
+}
+
+.skill-card > p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.skill-card .detail-pills,
+.skill-card .spacer {
+  display: none;
+}
+
+.skill-card .subtle {
+  font-size: 10px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.skill-card .pill.bad {
+  font-size: 9px;
+  min-height: 20px;
+  padding: 2px 5px;
+}
+
+.skill-actions {
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.skill-actions button {
+  padding: 5px 8px;
+  font-size: 11px;
+}
+
+.skill-actions .pill {
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: center;
+}
+
+/* â”€â”€ Stats tab â€” compact live resource editor â”€â”€ */
+.tab-intro {
+  display: none;
+}
+
+.resource-card {
+  padding: 10px;
+}
+
+.resource-card .card-header {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.resource-card .kicker {
+  display: none;
+}
+
+.resource-card h3 {
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.resource-card .stack {
+  gap: 8px;
+}
+
+.resource-editor {
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+.resource-editor strong {
+  font-size: 13px;
+}
+
+.resource-editor .subtle {
+  font-size: 10px;
+  margin-top: 1px;
+}
+
+.resource-control-row {
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.resource-control-row .ghost-btn.tiny,
+.resource-control-row .danger-btn.tiny,
+.resource-control-row .primary-btn.tiny {
+  padding: 5px 7px;
+  font-size: 11px;
+  min-width: 0;
+  border-radius: 10px;
+}
+
+.resource-editor [data-amount="-10"],
+.resource-editor [data-amount="10"],
+.resource-editor [data-amount="-25"],
+.resource-editor [data-amount="25"] {
+  display: none;
+}
+
+.mini-input {
+  width: 52px;
+  min-width: 52px;
+  padding: 5px 4px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+.money-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.money-grid .wrap {
+  grid-column: 1 / -1;
+  gap: 4px;
+}
+
+.money-grid .ghost-btn.tiny,
+.money-grid .danger-btn.tiny {
+  padding: 5px 7px;
+  font-size: 11px;
+}
+
+.stat-upgrade-grid.mt-16 {
+  margin-top: 10px;
+}
+
+.stat-upgrade-card .stat-breakdown-pills {
+  display: none;
+}
+
+/* â”€â”€ Shop & Craft â€” compact catalogue â”€â”€ */
+.catalogue-card {
+  padding: 10px;
+}
+
+.catalogue-card .card-header {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.catalogue-card .kicker {
+  display: none;
+}
+
+.catalogue-card h3 {
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.catalogue-card .item-toolbar {
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.catalogue-card .item-toolbar > .input:first-child,
+.catalogue-card .item-toolbar > label.pill {
+  grid-column: 1 / -1;
+}
+
+.catalogue-card .item-toolbar .input,
+.catalogue-card .item-toolbar select {
+  padding: 8px 9px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+.catalogue-card .item-toolbar label.pill {
+  min-height: 32px;
+  padding: 6px 10px;
+  font-size: 11px;
+  justify-content: center;
+}
+
+.catalogue-summary {
+  gap: 4px;
+  margin: 0 0 8px;
+}
+
+.catalogue-summary .pill {
+  min-height: 24px;
+  padding: 3px 7px;
+  font-size: 10px;
+}
+
+.catalogue-summary .ghost-btn.tiny {
+  padding: 5px 8px;
+  font-size: 10px;
+}
+
+.catalogue-card .item-grid.mt-16 {
+  margin-top: 8px;
+}
+
+.item-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.item-title strong {
+  font-size: 0.88rem;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.item-meta {
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.item-card[data-tooltip] > p.subtle {
+  display: none;
+}
+
+.item-card[data-tooltip] .detail-pills {
+  display: none;
+}
+
+.item-card > p.subtle {
+  font-size: 11px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.item-card .detail-pills {
+  gap: 4px;
+  max-height: 48px;
+  overflow: hidden;
+}
+
+.item-card .detail-pills .pill {
+  font-size: 9px;
+  min-height: 20px;
+  padding: 2px 5px;
+}
+
+.item-card .skill-actions .compact-actions {
+  gap: 4px;
+}
+
+.item-card .skill-actions .compact-actions button {
+  padding: 5px 8px;
+  font-size: 11px;
+}
+
+/* Effects & Status Manager â€” compact mobile layout */
+.effects-manager.card {
+  padding: 12px;
+}
+
+.effects-manager-header {
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.effects-manager-header h3 {
+  font-size: 1.05rem;
+}
+
+.effects-manager-intro {
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+  margin: 0 0 8px;
+  max-width: 52rem;
+}
+
+.effects-sections {
+  gap: 12px;
+}
+
+.effects-section-title {
+  font-size: 0.92rem;
+  margin: 0 0 8px;
+}
+
+.effects-section + .effects-section {
+  margin-top: 4px;
+}
+
+.effect-grid {
+  gap: 8px;
+}
+
+.effect-card {
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+.effect-card-title {
+  margin-bottom: 4px;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.effect-card-title strong {
+  font-size: 0.86rem;
+  line-height: 1.25;
+}
+
+.effect-card-title .pill,
+.effect-card-title .danger-btn {
+  flex-shrink: 0;
+  font-size: 10px;
+  min-height: 24px;
+  padding: 3px 7px;
+}
+
+.effect-card-desc {
+  font-size: 11px;
+  line-height: 1.35;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.effect-card-source .effect-card-desc {
+  -webkit-line-clamp: 1;
+}
+
+.effect-card-meta {
+  font-size: 10px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.effect-card-tags {
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.effect-card-tags .pill {
+  font-size: 9px;
+  min-height: 22px;
+  padding: 2px 6px;
+}
+
+.effects-empty {
+  padding: 10px 12px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+.effect-add-box {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.effect-add-intro {
+  display: none;
+}
+
+.effect-add-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 8px 0 10px;
+}
+
+.effect-add-grid label:first-child {
+  grid-column: 1 / -1;
+}
+
+.effect-add-box .field-label {
+  margin: 4px 0 3px;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.effect-add-box .input {
+  padding: 9px 10px;
+  font-size: 14px;
+}
+
+.effect-add-box .primary-btn.full {
+  margin-top: 0;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.effects-snapshot {
+  margin-top: 12px;
+  padding-top: 10px;
+}
+
+.effects-snapshot .pill {
+  font-size: 10px;
+  min-height: 24px;
+  padding: 3px 7px;
+}
+
+/* Equipment & Inventory â€” compact mobile layout */
+.equipment-card,
+.inventory-card {
+  padding: 12px;
+}
+
+.gear-section-title {
+  font-size: 0.98rem;
+  margin: 0 0 8px;
+}
+
+.gear-stack {
+  gap: 6px;
+}
+
+.equip-slot-row,
+.inventory-item-row {
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 12px;
+  gap: 8px;
+}
+
+.inventory-item-row {
+  align-items: flex-start;
+}
+
+.equip-slot-copy,
+.inventory-item-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.equip-slot-label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.equip-slot-item {
+  font-size: 11px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.equip-slot-row .ghost-btn {
+  flex-shrink: 0;
+  padding: 5px 8px;
+  font-size: 10px;
+}
+
+.inventory-item-name {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+.inventory-item-meta {
+  margin-top: 2px;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.inventory-item-desc {
+  display: none;
+}
+
+.inventory-item-tags {
+  margin-top: 4px;
+  gap: 4px;
+}
+
+.inventory-item-tags .pill {
+  font-size: 9px;
+  min-height: 22px;
+  padding: 2px 6px;
+}
+
+.inventory-item-actions {
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  width: auto;
+}
+
+.inventory-item-actions button {
+  padding: 5px 8px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.gear-empty {
+  padding: 10px 12px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+.action-bar-skill-sheet {
+  padding-bottom: calc(var(--action-bar-offset, 168px) + 8px + env(safe-area-inset-bottom, 0px));
+}
+
+.action-bar-skill-sheet-panel {
+  max-height: min(58vh, 480px);
+}
+
+.action-bar-skill-sheet-actions button {
+  padding: 12px 14px;
+  font-size: 14px;
+}

@@ -1,9 +1,17 @@
-import { computeStats } from './character.js'
-import { getRace, getSkill, cache } from './cache.js'
-import { getEquippedWeapon, getEquippedOffhand, getWeaponKind } from './equipment.js'
+import { computeStats, getEffect } from './character.js'
+import { getRace, getSkill, getItem, cache } from './cache.js'
+import { getEquippedWeapon, getEquippedOffhand, getWeaponKind, characterHandsEmpty } from './equipment.js'
 import { collectCareerFlatDamageBonuses } from './career-effects.js'
+import {
+  characterHasStrikerBasics,
+  strikerBasicDamageFormula,
+  parseMultiBasicAttackCount,
+  isStrikerMultiBasicSkill
+} from './striker-combat.js'
+import { enchantmentDamageBonusForEntry, entryEnchantments } from './enchantments.js'
 
 export const BASIC_ATTACK_ID = '__basic_attack__'
+export { characterHasStrikerBasics } from './striker-combat.js'
 /** Minimum result for any attack or direct heal after stat modifiers. */
 export const MIN_EFFECT_AMOUNT = 1
 export const MIN_ATTACK_DAMAGE = MIN_EFFECT_AMOUNT
@@ -13,6 +21,24 @@ const STAT_LABEL = {
   magicPower: 'Magic Power',
   strength: 'Strength',
   accuracy: 'Accuracy'
+}
+
+/** Unarmed basic-attack dice when Striker passives apply; otherwise null → flat 1. */
+export function strikerUnarmedDamageFormula(character) {
+  return strikerBasicDamageFormula(character)
+}
+
+export function unarmedBasicAttackLabel(character) {
+  return strikerUnarmedDamageFormula(character) ? 'Striker' : 'Unarmed'
+}
+
+export function rollUnarmedBasicSegment(character, rollDiceFn) {
+  const formula = strikerUnarmedDamageFormula(character)
+  if (formula) {
+    const result = rollWeaponDamage(formula, rollDiceFn)
+    return { label: 'Striker', total: result.total, detail: result.detail }
+  }
+  return { label: 'Unarmed', total: 1, detail: '1' }
 }
 
 export function isRangedBasicAttack(character) {
@@ -81,6 +107,125 @@ export function rollWeaponDamage(formula, rollDiceFn) {
       ? `${rolls.rolls.join('+')}${parsed.modifier ? `+${parsed.modifier}` : ''} = ${rolls.total}`
       : String(rolls.total)
   }
+}
+
+function rollOrAverageFormula(formula, rollDiceFn) {
+  if (rollDiceFn) return rollWeaponDamage(formula, rollDiceFn)
+  const parsed = parseDamageFormula(formula)
+  if (!parsed) return { total: 1, detail: formula }
+  const avg = diceAverage(parsed.count, parsed.sides, parsed.modifier)
+  return { total: avg, detail: `${formula} (avg ${avg})` }
+}
+
+/** +1d6 fire on hit — parsed from equipped gear effect desc strings. */
+function parseEffectPrimaryAttackDice(desc) {
+  const text = String(desc || '')
+  const match = text.match(/(?:deals?|add(?:s)?)\s+\+?(\d+d\d+(?:\+\d+)?)\s*(?:\w+\s+)?damage/i)
+    || text.match(/\+\s*(\d+d\d+(?:\+\d+)?)\s*(?:\w+\s+)?damage/i)
+  if (!match) return null
+  const element = text.match(/\+\s*\d+d\d+(?:\+\d+)?\s+(\w+)\s+damage/i)?.[1] || null
+  return { formula: match[1], element }
+}
+
+/** Splash to a secondary target — e.g. Energy Waves 1d4 force. */
+function parseEffectSplashAttackDice(desc) {
+  const text = String(desc || '')
+  const match = text.match(/(?:for|release[^.]{0,48}?for)\s+(\d+d\d+(?:\+\d+)?)\s*(\w+)?\s+damage\s+to\s+(?:one\s+)?secondary/i)
+  if (!match) return null
+  return { formula: match[1], element: match[2] || 'force' }
+}
+
+function effectRequiresMelee(desc) {
+  return /\bmelee\s+attacks?\b/i.test(String(desc || ''))
+}
+
+function collectEquippedAttackEffectSources(character) {
+  const sources = []
+  const seen = new Set()
+  for (const slot of ['weapon', 'offhand', 'armor', 'accessory']) {
+    const entry = inventoryEntry(character, character?.equipped?.[slot])
+    if (!entry) continue
+    const item = getItem(entry.itemId)
+    if (!item) continue
+    for (const effectId of item.specialEffects || []) {
+      const key = `${slot}:${effectId}`
+      if (seen.has(key)) continue
+      seen.add(key)
+      sources.push({ effectId, label: item.name })
+    }
+    for (const ench of entryEnchantments(entry)) {
+      for (const effectId of ench.specialEffects || []) {
+        const key = `${slot}:enchant:${effectId}`
+        if (seen.has(key)) continue
+        seen.add(key)
+        sources.push({ effectId, label: ench.name || 'Enchant' })
+      }
+    }
+  }
+  return sources
+}
+
+/** Roll (or average) bonus dice from equipped gear special effects on weapon attacks. */
+export function rollGearAttackEffectDamage(character, skill, rollDiceFn) {
+  if (!character || !skill) return { primaryTotal: 0, segments: [], splash: [], parts: [] }
+  if (!isBasicAttackSkill(skill) && !skillDealsDirectDamage(skill)) {
+    return { primaryTotal: 0, segments: [], splash: [], parts: [] }
+  }
+
+  const isMelee = attackIsMelee(character, skill)
+  let primaryTotal = 0
+  const segments = []
+  const splash = []
+  const parts = []
+
+  for (const { effectId, label } of collectEquippedAttackEffectSources(character)) {
+    const effect = getEffect(effectId)
+    if (!effect) continue
+    const desc = effect.desc || ''
+    if (effectRequiresMelee(desc) && !isMelee) continue
+
+    const primary = parseEffectPrimaryAttackDice(desc)
+    if (primary) {
+      const rolled = rollOrAverageFormula(primary.formula, rollDiceFn)
+      primaryTotal += rolled.total
+      const tag = primary.element ? ` ${primary.element}` : ''
+      const effectLabel = `${effect.name || label}${tag}`
+      segments.push(`${effectLabel}: ${rolled.detail}`)
+      parts.push({
+        kind: 'gear-effect',
+        label: effectLabel,
+        value: rolled.total,
+        detail: rolled.detail,
+        average: !rollDiceFn
+      })
+    }
+
+    const splashDice = parseEffectSplashAttackDice(desc)
+    if (splashDice && isMelee) {
+      const rolled = rollOrAverageFormula(splashDice.formula, rollDiceFn)
+      splash.push({
+        label: effect.name || label,
+        element: splashDice.element,
+        total: rolled.total,
+        detail: rolled.detail
+      })
+      parts.push({
+        kind: 'gear-splash',
+        label: `${effect.name || label} (secondary)`,
+        value: rolled.total,
+        detail: rolled.detail,
+        average: !rollDiceFn
+      })
+    }
+  }
+
+  return { primaryTotal, segments, splash, parts }
+}
+
+export function appendGearAttackEffectSummary(summary, splash = []) {
+  if (!splash.length) return summary
+  const splashText = splash.map(row => `${row.label} (secondary): ${row.detail}`).join('; ')
+  return `${summary}; ${splashText}`
 }
 
 export function skillDealsDirectDamage(skill) {
@@ -194,6 +339,7 @@ export function healStatKey(skill) {
 }
 
 export function skillHasEffectBreakdown(skill) {
+  if (isStrikerMultiBasicSkill(skill)) return true
   return skillDealsDirectDamage(skill) || skillHealsDirectHP(skill)
 }
 
@@ -442,6 +588,19 @@ export function collectFlatDamageBonuses(character, skill) {
     }
   }
 
+  if (isMelee || isRangedBasic || isBasicAttackSkill(skill)) {
+    const weaponEntry = character.inventory?.find(inv => inv.uid === character.equipped?.weapon)
+    const enchBonus = weaponEntry && enchantmentDamageBonusForEntry(weaponEntry)
+    if (enchBonus) {
+      pushFlatBonus(bonuses, seen, {
+        value: enchBonus,
+        source: 'Weapon enchant',
+        sourceId: 'weapon_enchant',
+        conditional: false
+      })
+    }
+  }
+
   return bonuses
 }
 
@@ -456,7 +615,8 @@ function rollWeaponBaseSegments(character, rollDiceFn) {
       : { total: 1, detail: '1' }
     segments.push({ label: main.name, total: result.total, detail: result.detail })
   } else {
-    segments.push({ label: 'Unarmed', total: 1, detail: '1' })
+    const unarmed = rollUnarmedBasicSegment(character, rollDiceFn)
+    segments.push(unarmed)
   }
 
   if (off) {
@@ -519,6 +679,10 @@ export function resolveDamageBreakdown(character, skill, options = {}) {
       }
     }
   }
+
+  const gearEffects = rollGearAttackEffectDamage(character, skill, rollDiceFn)
+  baseTotal += gearEffects.primaryTotal
+  parts.push(...gearEffects.parts)
 
   const flatBonuses = collectFlatDamageBonuses(character, skill)
   let flatTotal = 0
@@ -693,13 +857,37 @@ export function formatHealBreakdownPlain(breakdown) {
 
 export function resolveSkillEffectBreakdown(character, skill, options = {}) {
   if (skillHealsDirectHP(skill)) return resolveHealBreakdown(character, skill, options)
+  const multi = parseMultiBasicAttackCount(skill, character)
+  if (multi > 0 && strikerBasicDamageFormula(character)) {
+    const perHit = resolveDamageBreakdown(character, getBasicAttackSkillStub(), options)
+    if (perHit) {
+      return {
+        kind: 'multi_damage',
+        count: multi,
+        perHit,
+        parts: perHit.parts,
+        total: perHit.total * multi,
+        rawTotal: perHit.rawTotal * multi,
+        minApplied: perHit.minApplied
+      }
+    }
+  }
   if (skillDealsDirectDamage(skill)) return resolveDamageBreakdown(character, skill, options)
   return null
+}
+
+function getBasicAttackSkillStub() {
+  return { id: BASIC_ATTACK_ID, isBasicAttack: true }
 }
 
 export function formatSkillEffectBreakdownPlain(breakdown) {
   if (!breakdown) return ''
   if (breakdown.kind === 'heal') return formatHealBreakdownPlain(breakdown)
+  if (breakdown.kind === 'multi_damage') {
+    const per = formatDamageBreakdownPlain(breakdown.perHit)
+    const perText = per.replace(/^Damage \(yours\):\s*/, '')
+    return `Damage (yours): ${breakdown.count}× Basic Attack (${perText})`
+  }
   return formatDamageBreakdownPlain(breakdown)
 }
 
@@ -771,4 +959,26 @@ export function formatDamageModifierSummary(baseSummary, finalized) {
     summary += ` = ${finalized.total}`
   }
   return summary
+}
+
+/** Combat toast line — breakdown, then bold final damage. */
+export function formatCombatDamageToastLine(index, summary, total) {
+  const prefix = index != null ? `${index}: ` : ''
+  const n = Number(total)
+  let detail = String(summary || '')
+  if (Number.isFinite(n)) {
+    const trimmed = detail.replace(new RegExp(`\\s*=\\s*${n}\\s*$`), '')
+    if (trimmed !== detail) detail = trimmed
+  }
+  return `${prefix}${detail} → <strong class="toast-damage-total">${n} damage</strong>`
+}
+
+/** Multi-hit combat toast with per-hit lines and optional combined total. */
+export function formatMultiHitCombatToast(skillName, hitLines, totals, cost) {
+  const sum = totals.reduce((acc, value) => acc + Number(value || 0), 0)
+  const body = hitLines.join('; ')
+  const totalNote = hitLines.length > 1
+    ? `; Total: <strong class="toast-damage-total">${sum} damage</strong>`
+    : ''
+  return `${skillName}: ${body}${totalNote} (−${cost} Stamina).`
 }

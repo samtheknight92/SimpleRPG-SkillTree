@@ -27,10 +27,17 @@ export function countInventoryMaterial(character, itemId) {
   return countInventoryItem(character, itemId)
 }
 
+/** Dwarf Master Craftsman: recipes cost 1 fewer material (minimum 1). */
+export function materialQuantityNeeded(character, rawNeed) {
+  const need = Number(rawNeed || 1)
+  if (character?.race === 'dwarf') return Math.max(1, need - 1)
+  return need
+}
+
 export function materialsStatus(character, recipe) {
   return (recipe?.materials || []).map(mat => {
     const id = mat.id || mat.item
-    const need = Number(mat.quantity || mat.qty || 1)
+    const need = materialQuantityNeeded(character, mat.quantity || mat.qty || 1)
     const have = countInventoryMaterial(character, id)
     const item = getItem(id)
     return {
@@ -45,10 +52,10 @@ export function materialsStatus(character, recipe) {
 
 export function canCraftRecipe(character, recipe) {
   if (!character || !recipe) return { ok: false, reason: 'No recipe' }
+  if (isGmMode()) return { ok: true, reason: 'GM Mode — free craft' }
   if (!characterHasRecipeSkills(character, recipe)) {
     return { ok: false, reason: 'Learn the required career skill first' }
   }
-  if (isGmMode()) return { ok: true, reason: 'GM Mode — free craft' }
   const mats = materialsStatus(character, recipe)
   const missing = mats.filter(mat => !mat.ok)
   if (missing.length) {
@@ -64,7 +71,7 @@ export function deductMaterials(character, recipe) {
   if (!character || isGmMode()) return
   for (const mat of recipe.materials || []) {
     const id = mat.id || mat.item
-    const need = Number(mat.quantity || mat.qty || 1)
+    const need = materialQuantityNeeded(character, mat.quantity || mat.qty || 1)
     removeInventoryItems(character, id, need)
   }
 }

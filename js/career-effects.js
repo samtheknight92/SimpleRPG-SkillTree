@@ -141,6 +141,10 @@ export function getCareerStaminaDiscount(character, skill) {
   return discount
 }
 
+export function getEffectiveSkillStaminaCost(character, skill) {
+  return Math.max(0, Number(skill?.staminaCost || 0) - getCareerStaminaDiscount(character, skill))
+}
+
 export function resolveCareerActionBuffs(skill) {
   if (!skill) return []
   const mapped = cache.careerActionBuffs?.[skill.id]
@@ -148,6 +152,7 @@ export function resolveCareerActionBuffs(skill) {
   return [{
     effectId: mapped.effectId,
     duration: mapped.duration,
+    potency: mapped.potency,
     chance: 1,
     source: 'career'
   }]

@@ -1,6 +1,7 @@
-﻿export const TOGGLE_BONUSES = {
+export const TOGGLE_BONUSES = {
   defensive_stance: { physicalDefence: 2, magicalDefence: 2 },
   polearm_defensive_stance: { physicalDefence: 2, magicalDefence: 2 },
+  iron_body: { physicalDefence: 2, magicalDefence: 2 },
   berserker_rage: { strength: 2, speed: 2, physicalDefence: -1 },
   monster_berserker_rage: { strength: 2, speed: 2, physicalDefence: -1 },
   fortress_stance: { physicalDefence: 4, magicalDefence: 4 }
@@ -11,12 +12,8 @@ export const PASSIVE_SKILL_BONUSES = {
   rock_skin: { physicalDefence: 3 },
   metal_skin: { physicalDefence: 4 },
   magical_resistance: { magicalDefence: 3 },
-  spell_immunity: { magicalDefence: 6 },
-  wind_mastery: { speed: 3 },
   dwarven_toughness: { hp: 5 },
   elven_accuracy: { accuracy: 1 },
-  human_determination: { accuracy: 1 },
-  pack_coordination: { accuracy: 1 },
   evasion: { physicalDefence: 2, magicalDefence: 2 },
   infernal_constitution: { stamina: 2 }
 }
@@ -35,7 +32,11 @@ export const EQUIPMENT_SKILL_EFFECTS = {
   spell_power: { weaponKind: 'staff', effectId: null, statModifiers: { magicPower: 2 } },
   staff_mastery: { weaponKind: 'staff', effectId: null, statModifiers: { magicPower: 4 } },
   light_step: { weaponKind: 'dagger', effectId: 'light_step', statModifiers: { speed: 1 } },
-  dagger_mastery: { weaponKind: 'dagger', effectId: 'dagger_mastery_passive', statModifiers: { speed: 2 } }
+  dagger_mastery: { weaponKind: 'dagger', effectId: 'dagger_mastery_passive', statModifiers: { speed: 2 } },
+  striker_basics: { weaponKind: 'striker', effectId: 'striker_training', statModifiers: { accuracy: 1 } },
+  open_stance: { weaponKind: 'striker', effectId: 'open_stance_passive', statModifiers: { speed: 1, magicalDefence: 1 } },
+  iron_palm: { weaponKind: 'striker', effectId: 'iron_palm_passive', statModifiers: { physicalDefence: 1 } },
+  striker_mastery: { weaponKind: 'striker', effectId: 'striker_mastery_passive', statModifiers: { accuracy: 2, strength: 1 } }
 }
 
 /** Ongoing passive effects shown in Skill & Gear Effects (not weapon-conditional). */
@@ -55,31 +56,28 @@ export const PASSIVE_SKILL_EFFECTS = {
   armored_plates: ['critical_immunity'],
   cosmic_awareness: ['magic_sight'],
   multiattack: ['multiattack'],
-  quick_draw: ['quick_draw']
+  quick_draw: ['quick_draw'],
+  striker_mastery: ['striker_mastery_passive']
 }
 
 /** Effect shown in Skill & Gear Effects while a toggle skill is active. */
 export const TOGGLE_SKILL_EFFECTS = {
   defensive_stance: 'defensive_stance_buff',
   polearm_defensive_stance: 'defensive_stance_buff',
+  iron_body: 'iron_body_buff',
   berserker_rage: 'berserker_rage_buff',
   monster_berserker_rage: 'berserker_rage_buff',
   fortress_stance: 'fortress_stance_buff'
 }
 
 export const INCOMPATIBILITIES = {
-  defensive_stance: ['berserker_rage', 'monster_berserker_rage', 'fortress_stance', 'polearm_defensive_stance'],
-  berserker_rage: ['defensive_stance', 'polearm_defensive_stance', 'fortress_stance', 'monster_berserker_rage'],
-  monster_berserker_rage: ['defensive_stance', 'berserker_rage', 'polearm_defensive_stance', 'fortress_stance'],
-  polearm_defensive_stance: ['berserker_rage', 'monster_berserker_rage', 'fortress_stance', 'defensive_stance'],
-  fortress_stance: ['defensive_stance', 'berserker_rage', 'monster_berserker_rage', 'polearm_defensive_stance'],
+  defensive_stance: ['berserker_rage', 'monster_berserker_rage', 'fortress_stance', 'polearm_defensive_stance', 'iron_body'],
+  iron_body: ['berserker_rage', 'monster_berserker_rage', 'fortress_stance', 'defensive_stance', 'polearm_defensive_stance'],
+  berserker_rage: ['defensive_stance', 'polearm_defensive_stance', 'fortress_stance', 'monster_berserker_rage', 'iron_body'],
+  monster_berserker_rage: ['defensive_stance', 'berserker_rage', 'polearm_defensive_stance', 'fortress_stance', 'iron_body'],
+  polearm_defensive_stance: ['berserker_rage', 'monster_berserker_rage', 'fortress_stance', 'defensive_stance', 'iron_body'],
+  fortress_stance: ['defensive_stance', 'berserker_rage', 'monster_berserker_rage', 'polearm_defensive_stance', 'iron_body'],
   regeneration: ['rapid_healing', 'water_mastery'],
   rapid_healing: ['regeneration', 'water_mastery'],
-  water_mastery: ['regeneration', 'rapid_healing', 'fire_mastery', 'lightning_mastery'],
-  sword_fire_fusion: ['ice_mastery', 'water_mastery'],
-  sword_ice_fusion: ['fire_mastery'],
-  bow_lightning_fusion: ['water_mastery'],
-  fire_mastery: ['ice_mastery', 'water_mastery'],
-  ice_mastery: ['fire_mastery'],
-  lightning_mastery: ['water_mastery']
+  water_mastery: ['regeneration', 'rapid_healing']
 }

@@ -1,4 +1,5 @@
-/** Career skill effect wiring — merged into skill-meta.json by build-data.mjs */
+/** Career skill effect wiring — merged into skill-meta.json by build-data.mjs.
+ *  Harmony Reaction / + Harmony lines in skill desc are table rules; joiners are not synced across sheets. */
 
 export const CAREER_PASSIVE_BONUSES = {
   oathbound: { magicalDefence: 1 },
@@ -36,7 +37,6 @@ export const CAREER_PASSIVE_EFFECTS = {
   lost_technique: ['lost_technique'],
   ambush_spotter: ['ambush_spotter'],
   keen_sight: ['keen_sight'],
-  haggler: ['haggler'],
   pack_tactics: ['pack_tactics'],
   last_rites: ['last_rites'],
   holy_symbol_craft: ['holy_symbol_craft'],
@@ -63,7 +63,6 @@ export const CAREER_PASSIVE_EFFECTS = {
   escape_artist: ['escape_artist'],
   hit_and_run: ['hit_and_run'],
   light_fingers: ['light_fingers'],
-  caravan_lead: ['caravan_lead'],
   chefs_instinct: ['chefs_instinct'],
   animal_sense: ['animal_sense'],
   trail_warden: ['trail_warden'],
@@ -74,8 +73,8 @@ export const CAREER_PASSIVE_EFFECTS = {
   ancient_tongues: ['ancient_tongues'],
   label_reader: ['label_reader'],
   schematic_mind: ['schematic_mind'],
-  ledger: ['ledger'],
-  black_market: ['black_market']
+  long_set: ['long_set'],
+  encore: ['encore']
 }
 
 /** Stat modifiers applied only when a condition is met during stat calculation. */
@@ -100,27 +99,31 @@ export const CAREER_HEAL_BONUSES = {
 
 /** Action skills that apply a status effect on use (self unless noted). */
 export const CAREER_ACTION_BUFFS = {
-  rage: { effectId: 'career_rage_buff', duration: 3 },
-  reckless_strike: { effectId: 'reckless_strike_buff', duration: 2 },
-  sacred_stance: { effectId: 'sacred_stance_buff', duration: 2 },
-  lay_blessing: { effectId: 'lay_blessing_buff', duration: 999 },
-  ward_circle: { effectId: 'ward_circle_buff', duration: 3 },
-  hearty_rations: { effectId: 'hearty_rations_buff', duration: 10 },
-  battle_breakfast_pd: { effectId: 'battle_breakfast_pd_buff', duration: 999 },
-  battle_breakfast_init: { effectId: 'battle_breakfast_init_buff', duration: 999 },
-  banquet_planner: { effectId: 'banquet_planner_buff', duration: 20 },
-  empower_ally: { effectId: 'empower_ally_buff', duration: 1 },
-  shield_wall: { effectId: 'shield_wall_buff', duration: 1 },
-  second_wind: { effectId: 'second_wind_heal', duration: 0 },
-  lay_on_hands: { effectId: 'lay_on_hands_heal', duration: 0 },
-  clean_bandage: { effectId: 'clean_bandage_heal', duration: 0 },
-  intimidate: { effectId: 'intimidate_debuff', duration: 1 },
-  suppressing_fire: { effectId: 'suppressing_fire_debuff', duration: 1 },
-  dirty_trick: { effectId: 'dirty_trick_buff', duration: 1 },
-  volley_call: { effectId: 'volley_call_buff', duration: 1 },
-  called_shot: { effectId: 'called_shot_buff', duration: 1 },
-  field_fit: { effectId: 'field_fit_buff', duration: 1 },
-  fusion_field_spark: { effectId: 'fusion_field_spark_heal', duration: 0 }
+  rage: { effectId: 'career_rage_buff', duration: 3, potency: 0 },
+  reckless_strike: { effectId: 'reckless_strike_buff', duration: 2, potency: 0 },
+  sacred_stance: { effectId: 'sacred_stance_buff', duration: 2, potency: 0 },
+  lay_blessing: { effectId: 'lay_blessing_buff', duration: 999, potency: 0 },
+  ward_circle: { effectId: 'ward_circle_buff', duration: 3, potency: 0 },
+  hearty_rations: { effectId: 'hearty_rations_buff', duration: 10, potency: 0 },
+  battle_breakfast: { effectId: 'battle_breakfast', duration: 999, potency: 0 },
+  banquet_planner: { effectId: 'banquet_planner_buff', duration: 20, potency: 0 },
+  empower_ally: { effectId: 'empower_ally_buff', duration: 1, potency: 0 },
+  shield_wall: { effectId: 'shield_wall_buff', duration: 1, potency: 0 },
+  second_wind: { effectId: 'second_wind_heal', duration: 0, potency: 0 },
+  lay_on_hands: { effectId: 'lay_on_hands_heal', duration: 0, potency: 0 },
+  clean_bandage: { effectId: 'clean_bandage_heal', duration: 0, potency: 0 },
+  intimidate: { effectId: 'intimidate_debuff', duration: 1, potency: 0 },
+  suppressing_fire: { effectId: 'suppressing_fire_debuff', duration: 1, potency: 0 },
+  dirty_trick: { effectId: 'dirty_trick_buff', duration: 1, potency: 0 },
+  volley_call: { effectId: 'volley_call_buff', duration: 1, potency: 0 },
+  called_shot: { effectId: 'called_shot_buff', duration: 1, potency: 0 },
+  field_fit: { effectId: 'field_fit_buff', duration: 1, potency: 0 },
+  fusion_field_spark: { effectId: 'fusion_field_spark_heal', duration: 0, potency: 0 },
+  work_song: { effectId: 'work_song_buff', duration: 3, potency: 0 },
+  marching_tune: { effectId: 'marching_tune_buff', duration: 2, potency: 0 },
+  soothing_hymn: { effectId: 'soothing_hymn_buff', duration: 2, potency: 0 },
+  battle_anthem: { effectId: 'battle_anthem_buff', duration: 3, potency: 0 },
+  dissonant_note: { effectId: 'dissonant_note_debuff', duration: 1, potency: 0 },
 }
 
 /** Stamina cost reduction for ranged attacks (minimum 0). */

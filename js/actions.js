@@ -1,8 +1,8 @@
-import { DEFAULT_STATS, STAT_RULES } from './constants.js'
+import { DEFAULT_STATS, STAT_RULES, SAVE_VERSION } from './constants.js'
 import { state, activeCharacter } from './state.js'
-import { save, saveNow } from './storage.js'
+import { save, saveNow, serializeSave, applySavePayload, isFullSaveExport } from './storage.js'
 import { render } from './render.js'
-import { toast, clamp, deepClone, uid, titleCase } from './utils.js'
+import { toast, toastCombat, clamp, deepClone, uid, titleCase } from './utils.js'
 import {
   createCharacter,
   normalizeCharacter,
@@ -21,13 +21,32 @@ import {
   humanCrossCulturalSkillIds,
   humanMonsterSkillIds
 } from './skills.js'
-import { getItem, addItemToInventory, addCraftedItemToInventory } from './items.js'
-import { addStatusEffectToCharacter, tickStatusEffects, tickPassiveEffectSources } from './effects.js'
+import { getItem, addItemToInventory, addCraftedItemToInventory, shopPurchaseCheck } from './items.js'
+import {
+  canEquipToMainHand,
+  canEquipToOffhand,
+  characterHandsEmpty,
+  equippedSlotForEntry,
+  getEquippedOffhand,
+  getEquippedWeapon,
+  getOffhandType,
+  getWeaponKind,
+  isTwoHandedWeapon,
+  reconcileOffhandEquip
+} from './equipment.js'
+import { addStatusEffectToCharacter, tickStatusEffects, tickPassiveEffectSources, effectUsesPotency } from './effects.js'
 import {
   getSkillActivationType,
   resolveActivationEffects,
   rollSkillProc
 } from './skill-activation.js'
+import {
+  applyInstrumentToActivations,
+  formatPerformanceMeta,
+  canEncoreReplay,
+  noteMusicianSongStarted,
+  isMusicianPerformanceSkill
+} from './instruments.js'
 import {
   BASIC_ATTACK_ID,
   getSkillUseBlockReason,
@@ -36,9 +55,16 @@ import {
 } from './combat.js'
 import {
   applySkillHeal,
-  formatHealUseSummary
+  formatHealUseSummary,
+  formatCombatDamageToastLine,
+  formatMultiHitCombatToast
 } from './damage-breakdown.js'
-import { getCareerStaminaDiscount } from './career-effects.js'
+import {
+  characterHasStrikerBasics,
+  isStrikerMultiBasicSkill,
+  parseMultiBasicAttackCount
+} from './striker-combat.js'
+import { getEffectiveSkillStaminaCost } from './career-effects.js'
 import { itemPriceGil, normalizeGil } from './format.js'
 import { syncUrlState } from './url-state.js'
 import { isGmMode, toggleGmMode as flipGmMode } from './gm-mode.js'
@@ -52,9 +78,26 @@ import {
   activeInitiativeEntry,
   sortInitiativeEntries
 } from './gm-initiative.js'
-import { getWeaponKind, getEquippedWeapon, equippedSlotForEntry } from './equipment.js'
 import { canCraftRecipe, deductMaterials, buildCraftMetadata, listCraftRecipes } from './craft.js'
 import { formatCraftBonusLabel } from './craft-bonuses.js'
+import {
+  canApplyEnhancementToGear,
+  createAppliedEnchantment,
+  entryEnchantments,
+  maxEnchantmentSlots,
+  isEnhancementItem,
+  isShieldEnchant,
+  shieldEnchantWasUsed,
+  shieldEnchantRemaining
+} from './enchantments.js'
+import {
+  normalizeFolderName,
+  ensureFolderRegistered,
+  setRosterFolderOpen,
+  syncCharacterFolderOrder,
+  characterFolder,
+  FOLDER_FILTER_UNFILED
+} from './character-folders.js'
 
 function touch(character, partial = { header: true, sidebar: true, content: true, actionBar: true }) {
   if (character) invalidateCharacterCache(character)
@@ -64,12 +107,115 @@ function touch(character, partial = { header: true, sidebar: true, content: true
 }
 
 export function createAndSelectCharacter(name, raceId, options = {}) {
+  const spawnFolder = isGmMode() ? normalizeFolderName(state.gmSpawnFolder) : ''
+  if (spawnFolder && !options.folder) options = { ...options, folder: spawnFolder }
   const character = createCharacter(name, raceId, options)
+  if (character.folder) ensureFolderRegistered(state, character.folder)
   state.characters.push(character)
   state.activeId = character.id
   touch(character)
   toast(`${character.name} created.`)
   return character
+}
+
+export function setCharacterFolder(characterId, folderName) {
+  const character = state.characters.find(c => c.id === characterId)
+  if (!character) return
+  const folder = normalizeFolderName(folderName)
+  character.folder = folder
+  if (folder) ensureFolderRegistered(state, folder)
+  touch(character, { sidebar: true })
+}
+
+export function createCharacterFolder(name) {
+  const folder = ensureFolderRegistered(state, name)
+  if (!folder) return toast('Folder name cannot be empty.')
+  setRosterFolderOpen(state, folder, true)
+  touch(null, { sidebar: true })
+  toast(`Folder “${folder}” created — move characters into it from the Move menu on each card.`)
+}
+
+export function rememberRosterFolderOpen(sectionKey, open) {
+  setRosterFolderOpen(state, sectionKey, open)
+  save()
+}
+
+export function setGmSpawnFolder(folderName) {
+  state.gmSpawnFolder = normalizeFolderName(folderName)
+  if (state.gmSpawnFolder) ensureFolderRegistered(state, state.gmSpawnFolder)
+  save()
+}
+
+export function moveCharacterFolder(folderName, direction) {
+  const folder = normalizeFolderName(folderName)
+  if (!folder) return
+  syncCharacterFolderOrder(state)
+  const order = [...state.characterFolderOrder]
+  const idx = order.indexOf(folder)
+  if (idx < 0) return
+  const target = direction === 'up' ? idx - 1 : idx + 1
+  if (target < 0 || target >= order.length) {
+    return toast(direction === 'up' ? 'Folder is already at the top.' : 'Folder is already at the bottom.')
+  }
+  ;[order[idx], order[target]] = [order[target], order[idx]]
+  state.characterFolderOrder = order
+  state.characterFolderNames = [...order]
+  touch(null, { sidebar: true })
+}
+
+export function copyCharacterFolder(folderName) {
+  const source = normalizeFolderName(folderName)
+  if (!source) return
+  const suggested = `${source} (copy)`
+  const input = prompt(`Copy folder “${source}” as:`, suggested)
+  if (input == null) return
+  const dest = ensureFolderRegistered(state, input)
+  if (!dest) return toast('Folder name cannot be empty.')
+  if (dest === source) return toast('Pick a different name for the copy.')
+
+  const originals = state.characters.filter(c => characterFolder(c) === source)
+  const added = []
+  for (const original of originals) {
+    const copy = normalizeCharacter(deepClone(original))
+    copy.id = uid('char')
+    copy.name = allocateCharacterName(original.name, [
+      ...state.characters.map(c => c.name),
+      ...added
+    ])
+    copy.folder = dest
+    copy.premadeId = null
+    copy.created = new Date().toISOString()
+    copy.updated = copy.created
+    state.characters.push(copy)
+    added.push(copy.name)
+  }
+
+  setRosterFolderOpen(state, dest, true)
+  touch(null, { sidebar: true })
+  toast(originals.length
+    ? `Copied ${originals.length} character${originals.length === 1 ? '' : 's'} to “${dest}”.`
+    : `Empty folder “${dest}” created.`)
+}
+
+export function deleteCharacterFolder(folderName) {
+  const folder = normalizeFolderName(folderName)
+  if (!folder) return
+  const count = state.characters.filter(c => characterFolder(c) === folder).length
+  const note = count
+    ? `${count} character${count === 1 ? '' : 's'} will move to Unfiled.`
+    : 'This empty folder will be removed.'
+  if (!confirm(`Delete folder “${folder}”? ${note}`)) return
+
+  for (const character of state.characters) {
+    if (characterFolder(character) === folder) character.folder = ''
+  }
+  syncCharacterFolderOrder(state)
+  state.characterFolderOrder = state.characterFolderOrder.filter(name => name !== folder)
+  state.characterFolderNames = [...state.characterFolderOrder]
+  if (state.characterFolderOpen) delete state.characterFolderOpen[folder]
+  if (state.gmSpawnFolder === folder) state.gmSpawnFolder = ''
+  touch(null, { sidebar: true })
+  toast(`Folder “${folder}” deleted.`)
 }
 
 export function selectCharacter(id) {
@@ -143,9 +289,31 @@ export function useSkill(skillId) {
   const blockReason = getSkillUseBlockReason(character, skill)
   if (blockReason) return toast(blockReason)
 
-  const cost = Math.max(0, Number(skill.staminaCost || 0) - getCareerStaminaDiscount(character, skill))
+  const cost = getEffectiveSkillStaminaCost(character, skill)
   if (character.stamina < cost) {
     return toast(`Not enough Stamina for ${skill.name} (need ${cost}, have ${character.stamina}).`)
+  }
+
+  if (isStrikerMultiBasicSkill(skill)) {
+    if (!characterHandsEmpty(character)) {
+      return toast(`${skill.name} requires both hands empty.`)
+    }
+    if (!characterHasStrikerBasics(character)) {
+      return toast(`${skill.name} requires Striker Basics.`)
+    }
+    character.stamina -= cost
+    invalidateCharacterCache(character)
+    const count = parseMultiBasicAttackCount(skill, character)
+    const hitLines = []
+    const totals = []
+    for (let i = 0; i < count; i++) {
+      const { total, summary } = resolveBasicAttackDamage(character, rollDice)
+      totals.push(total)
+      hitLines.push(formatCombatDamageToastLine(i + 1, summary, total))
+    }
+    touch(character, { header: true, content: true, actionBar: true })
+    toastCombat(formatMultiHitCombatToast(skill.name, hitLines, totals, cost), { html: true })
+    return
   }
 
   character.stamina -= cost
@@ -156,9 +324,12 @@ export function useSkill(skillId) {
 
   let activations = resolveActivationEffects(skill)
   if (healResult && healOrChoice) activations = []
+  const encoreReplay = isMusicianPerformanceSkill(skill) && canEncoreReplay(character, skill.id)
+  activations = applyInstrumentToActivations(character, skill, activations, { encoreReplay })
 
   const applied = []
   const missed = []
+  let performanceNote = ''
 
   for (const payload of activations) {
     const effect = getEffect(payload.effectId)
@@ -171,11 +342,22 @@ export function useSkill(skillId) {
       character,
       payload.effectId,
       payload.duration,
-      undefined,
-      `Used ${skill.name}`
+      payload.potency,
+      encoreReplay ? `Encore: ${skill.name}` : `Used ${skill.name}`,
+      payload.performance ? { performance: payload.performance } : null
     )
-    if (ok) applied.push(`${effect.name} (${payload.duration} turn${payload.duration === 1 ? '' : 's'})`)
-    else missed.push(`${effect.name} (already active)`)
+    const potencyNote = payload.potency != null && effectUsesPotency(effect)
+      ? `, potency ${payload.potency}`
+      : ''
+    if (ok) {
+      applied.push(`${effect.name} (${payload.duration} turn${payload.duration === 1 ? '' : 's'}${potencyNote})`)
+      if (payload.performance && !performanceNote) {
+        performanceNote = formatPerformanceMeta(payload.performance)
+      }
+      if (isMusicianPerformanceSkill(skill)) {
+        noteMusicianSongStarted(character, skill.id, { encoreReplay })
+      }
+    } else missed.push(`${effect.name} (already active)`)
   }
 
   touch(character, { header: true, content: true, actionBar: true })
@@ -183,37 +365,38 @@ export function useSkill(skillId) {
   const staminaNote = `(−${cost} Stamina)`
   const healPart = healSummary ? healSummary : ''
   const effectPart = applied.length ? applied.join(', ') : ''
+  const ampSuffix = performanceNote ? ` — ${performanceNote}` : ''
 
   if (healPart && !effectPart && !missed.length) {
-    toast(`${skill.name}: ${healPart} ${staminaNote}.`)
+    toastCombat(`${skill.name}: ${healPart} ${staminaNote}.`)
     return
   }
   if (healPart && effectPart && !missed.length) {
-    toast(`${skill.name}: ${healPart}; ${effectPart} ${staminaNote}.`)
+    toastCombat(`${skill.name}: ${healPart}; ${effectPart} ${staminaNote}.`)
     return
   }
   if (healPart && effectPart && missed.length) {
-    toast(`${skill.name}: ${healPart}; ${effectPart}; ${missed.join(', ')} ${staminaNote}.`)
+    toastCombat(`${skill.name}: ${healPart}; ${effectPart}; ${missed.join(', ')} ${staminaNote}.`)
     return
   }
   if (healPart && !effectPart && missed.length) {
-    toast(`${skill.name}: ${healPart}; ${missed.join(', ')} ${staminaNote}.`)
+    toastCombat(`${skill.name}: ${healPart}; ${missed.join(', ')} ${staminaNote}.`)
     return
   }
 
   if (!activations.length) {
-    toast(`${skill.name} used ${staminaNote}.`)
+    toastCombat(`${skill.name} used ${staminaNote}.`)
     return
   }
   if (applied.length && !missed.length) {
-    toast(`${skill.name}: ${applied.join(', ')} (−${cost} Stamina).`)
+    toastCombat(`${skill.name}: ${applied.join(', ')}${ampSuffix} (−${cost} Stamina).`)
     return
   }
   if (applied.length) {
-    toast(`${skill.name}: ${applied.join(', ')}; ${missed.join(', ')} (−${cost} Stamina).`)
+    toastCombat(`${skill.name}: ${applied.join(', ')}${ampSuffix}; ${missed.join(', ')} (−${cost} Stamina).`)
     return
   }
-  toast(`${skill.name} failed to apply effects${missed.length ? `: ${missed.join(', ')}` : ''} (−${cost} Stamina).`)
+  toastCombat(`${skill.name} failed to apply effects${missed.length ? `: ${missed.join(', ')}` : ''} (−${cost} Stamina).`)
 }
 
 export function processTurn() {
@@ -225,7 +408,7 @@ export function processTurn() {
   const messages = []
   for (const skillId of character.activeToggles) {
     const skill = getSkill(skillId)
-    const cost = Math.max(0, Number(skill?.staminaCost || 0))
+    const cost = getEffectiveSkillStaminaCost(character, skill)
     if (character.stamina >= cost) {
       character.stamina -= cost
       spent += cost
@@ -244,7 +427,7 @@ export function processTurn() {
   const effectParts = [effectTick.summary, passiveTick.summary].filter(Boolean)
   const effectText = effectParts.length ? ` ${effectParts.join(', ')}.` : ''
   const toggleText = spent ? `${spent} Stamina spent.` : 'No toggle costs.'
-  toast(`Processed turn. ${toggleText}${effectText}${messages.length ? ` ${messages[0]}` : ''}`)
+  toastCombat(`Processed turn. ${toggleText}${effectText}${messages.length ? ` ${messages[0]}` : ''}`)
 }
 
 export function addStatusEffect(effectId, duration, potency, notes) {
@@ -287,9 +470,10 @@ export function buyItem(itemId, free = false) {
   const item = getItem(itemId)
   if (!character || !item) return
   const isFree = free || isGmMode()
+  const check = shopPurchaseCheck(character, item, { free: isFree })
+  if (!check.ok) return toast(check.reason)
   const price = itemPriceGil(item)
   const current = normalizeGil(character.gil)
-  if (!isFree && price > current) return toast('Not enough Gil. Tragic little wallet noises.')
   if (!isFree) character.gil = current - price
   addItemToInventory(character, itemId, 1)
   touch(character)
@@ -310,6 +494,129 @@ export function craftRecipe(recipeId) {
   toast(bonus ? `${recipe.name} crafted (${bonus}).` : `${recipe.name} crafted.`)
 }
 
+/** GM Mode — add recipe output to inventory (no skills, materials, or craft metadata). */
+export function grantCraftRecipe(recipeId) {
+  const character = activeCharacter()
+  const recipe = listCraftRecipes().find(row => row.id === recipeId)
+  if (!character || !recipe) return toast('Unknown recipe.')
+  if (!isGmMode()) return toast('Grant is GM Mode only.')
+  addItemToInventory(character, recipe.id, 1)
+  touch(character)
+  toast(`${recipe.name} granted.`)
+}
+
+function equippedSlotForGearEntry(character, gearEntryUid) {
+  for (const [slot, uid] of Object.entries(character?.equipped || {})) {
+    if (uid === gearEntryUid) return slot
+  }
+  return null
+}
+
+export function applyEnchantment(gearEntryUid, scrollEntryUid) {
+  const character = activeCharacter()
+  if (!character || !gearEntryUid || !scrollEntryUid) return
+
+  const gearEntry = character.inventory.find(row => row.uid === gearEntryUid)
+  const scrollEntry = character.inventory.find(row => row.uid === scrollEntryUid)
+  const gearItem = gearEntry && getItem(gearEntry.itemId)
+  const scrollItem = scrollEntry && getItem(scrollEntry.itemId)
+  if (!gearEntry || !scrollEntry || !gearItem || !scrollItem) return toast('Item not found.')
+
+  const gearSlot = equippedSlotForGearEntry(character, gearEntryUid)
+  if (!gearSlot) return toast('Equip the target weapon or armour first.')
+
+  if (!isEnhancementItem(scrollItem)) return toast('That is not an enchantment item.')
+
+  const check = canApplyEnhancementToGear(scrollItem, gearItem, gearSlot)
+  if (!check.ok) return toast(check.reason)
+
+  const maxSlots = maxEnchantmentSlots(gearEntry, gearItem)
+  if (maxSlots <= 0) return toast(`${gearItem.name} has no enchantment slots.`)
+
+  if (!Array.isArray(gearEntry.enchantments)) gearEntry.enchantments = []
+  if (gearEntry.enchantments.length >= maxSlots) {
+    return toast(`All ${maxSlots} slot${maxSlots === 1 ? '' : 's'} are full. Remove one first.`)
+  }
+
+  const applied = createAppliedEnchantment(scrollItem)
+  if (!applied) return toast('Could not resolve enchant effect.')
+
+  gearEntry.enchantments.push(applied)
+  const qty = Math.max(1, Number(scrollEntry.qty || 1))
+  if (qty > 1) scrollEntry.qty = qty - 1
+  else character.inventory = character.inventory.filter(row => row.uid !== scrollEntryUid)
+
+  invalidateCharacterCache(character)
+  const computed = computeStats(character)
+  character.hp = clamp(character.hp, 0, computed.hp)
+  character.stamina = clamp(character.stamina, 0, computed.stamina)
+  touch(character)
+  toast(`${applied.name} applied to ${gearItem.name}.`)
+}
+
+export function removeEnchantment(gearEntryUid, enchantId) {
+  const character = activeCharacter()
+  if (!character || !gearEntryUid || !enchantId) return
+
+  const gearEntry = character.inventory.find(row => row.uid === gearEntryUid)
+  const gearItem = gearEntry && getItem(gearEntry.itemId)
+  if (!gearEntry || !gearItem) return toast('Item not found.')
+
+  const removed = entryEnchantments(gearEntry).find(row => row.id === enchantId)
+  if (!removed) return toast('Enchantment not found.')
+
+  gearEntry.enchantments = entryEnchantments(gearEntry).filter(row => row.id !== enchantId)
+
+  const canReturn = removed.sourceItemId && (!isShieldEnchant(removed) || !shieldEnchantWasUsed(removed))
+  if (canReturn) {
+    addItemToInventory(character, removed.sourceItemId, 1)
+  }
+
+  invalidateCharacterCache(character)
+  const computed = computeStats(character)
+  character.hp = clamp(character.hp, 0, computed.hp)
+  character.stamina = clamp(character.stamina, 0, computed.stamina)
+  touch(character)
+  const itemName = removed.sourceItemId && getItem(removed.sourceItemId)?.name
+  if (isShieldEnchant(removed) && shieldEnchantWasUsed(removed)) {
+    toast(`${removed.name || itemName || 'Barrier'} removed — crystal destroyed (not returned).`)
+  } else if (itemName) {
+    toast(`${removed.name || itemName} removed from ${gearItem.name} and returned to inventory.`)
+  } else {
+    toast(`Enchantment removed from ${gearItem.name}.`)
+  }
+}
+
+export function recordEnchantShieldAbsorption(gearEntryUid, enchantId, amount) {
+  const character = activeCharacter()
+  if (!character || !gearEntryUid || !enchantId) return
+
+  const gearEntry = character.inventory.find(row => row.uid === gearEntryUid)
+  const gearItem = gearEntry && getItem(gearEntry.itemId)
+  if (!gearEntry || !gearItem) return toast('Item not found.')
+
+  const ench = entryEnchantments(gearEntry).find(row => row.id === enchantId)
+  if (!ench || !isShieldEnchant(ench)) return toast('Not a barrier enchant.')
+
+  const soak = Math.max(0, Number(amount) || 0)
+  if (!soak) return toast('Enter how much magical damage to soak.')
+
+  const before = shieldEnchantRemaining(ench)
+  ench.shieldRemaining = Math.max(0, before - soak)
+
+  if (ench.shieldRemaining <= 0) {
+    gearEntry.enchantments = entryEnchantments(gearEntry).filter(row => row.id !== enchantId)
+    invalidateCharacterCache(character)
+    touch(character)
+    toast(`${ench.name || 'Barrier Crystal'} spent — ${soak} magical damage soaked (pool empty).`)
+    return
+  }
+
+  invalidateCharacterCache(character)
+  touch(character)
+  toast(`Soaked ${soak} magical damage — ${ench.shieldRemaining}/${ench.shieldMax} left on ${gearItem.name}.`)
+}
+
 export function removeInventoryEntry(entryUid) {
   const character = activeCharacter()
   if (!character) return
@@ -326,15 +633,11 @@ export function equipItem(entryUid, slot = null) {
   const item = entry && getItem(entry.itemId)
   if (!character || !entry || !item) return
 
-  const type = String(item.type || '').toLowerCase()
   const isOffhandEquip = slot === 'offhand'
 
   if (isOffhandEquip) {
-    if (!character.skills.includes('dual_wield')) return toast('Learn Dual Wield to use an off-hand dagger.')
-    if (getWeaponKind(item) !== 'dagger') return toast('Off-hand slot only accepts daggers.')
-    if (getWeaponKind(getEquippedWeapon(character)) !== 'dagger') {
-      return toast('Equip a dagger in your main hand before using the off-hand slot.')
-    }
+    const check = canEquipToOffhand(character, item)
+    if (!check.ok) return toast(check.reason)
     const alreadyIn = equippedSlotForEntry(character, entry.uid)
     if (alreadyIn && alreadyIn !== 'offhand') {
       return toast(`${item.name} is already equipped (${titleCase(alreadyIn === 'offhand' ? 'off-hand' : alreadyIn)}).`)
@@ -345,7 +648,8 @@ export function equipItem(entryUid, slot = null) {
     return toast(`${item.name} equipped (off-hand).`)
   }
 
-  const equipSlot = type.includes('weapon')
+  const type = String(item.type || '').toLowerCase()
+  const equipSlot = canEquipToMainHand(item)
     ? 'weapon'
     : type.includes('armor')
       ? 'armor'
@@ -359,13 +663,21 @@ export function equipItem(entryUid, slot = null) {
     return toast(`${item.name} is already equipped (${titleCase(alreadyIn === 'offhand' ? 'off-hand' : alreadyIn)}).`)
   }
 
-  if (equipSlot === 'weapon' && getWeaponKind(item) !== 'dagger' && character.equipped.offhand) {
-    character.equipped.offhand = null
+  if (equipSlot === 'weapon') {
+    character.equipped.weapon = entry.uid
+    if (isTwoHandedWeapon(item)) {
+      character.equipped.offhand = null
+    } else {
+      const offItem = getEquippedOffhand(character)
+      if (offItem && getOffhandType(offItem) === 'weapon') {
+        character.equipped.offhand = null
+      }
+    }
+    reconcileOffhandEquip(character)
+  } else {
+    character.equipped[equipSlot] = entry.uid
   }
-  character.equipped[equipSlot] = entry.uid
-  if (equipSlot === 'weapon' && getWeaponKind(item) !== 'dagger') {
-    character.equipped.offhand = null
-  }
+
   invalidateCharacterCache(character)
   const computed = computeStats(character)
   character.hp = clamp(character.hp, 0, computed.hp)
@@ -382,7 +694,7 @@ export function useBasicAttack() {
   invalidateCharacterCache(character)
   const { total, summary } = resolveBasicAttackDamage(character, rollDice)
   touch(character, { header: true, content: true, actionBar: true })
-  toast(`Basic Attack: ${summary} (${total} damage).`)
+  toastCombat(`Basic Attack: ${formatCombatDamageToastLine(null, summary, total)}`, { html: true })
 }
 
 export function markMoved() {
@@ -520,8 +832,11 @@ export function deleteCharacter(id) {
 
 export function exportData(all = true) {
   const payload = all
-    ? { version: 2, characters: state.characters.map(c => normalizeCharacter(deepClone(c))) }
-    : { version: 2, characters: [normalizeCharacter(deepClone(activeCharacter()))].filter(Boolean) }
+    ? serializeSave()
+    : {
+      version: SAVE_VERSION,
+      characters: [normalizeCharacter(deepClone(activeCharacter()))].filter(Boolean)
+    }
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
   const a = document.createElement('a')
   a.href = URL.createObjectURL(blob)
@@ -533,19 +848,34 @@ export function exportData(all = true) {
 export async function importData(file) {
   if (!file) return
   try {
-    const raw = await file.text()
-    const parsed = JSON.parse(raw)
+    const parsed = JSON.parse(await file.text())
     const imported = Array.isArray(parsed) ? parsed : parsed.characters
     if (!Array.isArray(imported)) throw new Error('No characters array')
-    const normalized = imported.map(normalizeCharacter)
-    const byId = new Map(state.characters.map(character => [character.id, character]))
-    normalized.forEach(character => byId.set(character.id, character))
-    state.characters = [...byId.values()]
-    state.activeId = normalized[0]?.id || state.activeId
+
+    const fullSave = isFullSaveExport(parsed)
+    const hasExisting = state.characters.length > 0
+    let replace = false
+
+    if (fullSave) {
+      if (!hasExisting) {
+        replace = true
+      } else {
+        replace = confirm(
+          'This is a full save file.\n\nOK = Replace entire save (characters, folders, GM tools, and UI).\nCancel = Merge imported characters by ID (keeps your current folders and GM state).'
+        )
+      }
+    }
+
+    applySavePayload(parsed, { replace })
     saveNow()
     render({ all: true })
     syncUrlState()
-    toast(`Imported ${normalized.length} character${normalized.length === 1 ? '' : 's'}.`)
+    const count = imported.length
+    toast(
+      replace
+        ? `Restored full save (${count} character${count === 1 ? '' : 's'}).`
+        : `Merged ${count} character${count === 1 ? '' : 's'} into your roster.`
+    )
   } catch (error) {
     console.error(error)
     toast('Import failed. That file does not look like a LumenForge save.')
@@ -610,6 +940,11 @@ export function spawnPremadeCharacter(premadeId, count = 1) {
     character.premadeId = null
     character.created = new Date().toISOString()
     character.updated = character.created
+    const spawnFolder = normalizeFolderName(state.gmSpawnFolder)
+    if (spawnFolder) {
+      character.folder = spawnFolder
+      ensureFolderRegistered(state, spawnFolder)
+    }
     state.characters.push(character)
     addedNames.push(character.name)
     state.activeId = character.id

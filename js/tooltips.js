@@ -106,7 +106,8 @@ export function setupTooltips() {
 
   document.addEventListener('click', event => {
     if (!isMobile()) return
-    const target = event.target.closest('[data-tooltip], [data-action-bar-skill]')
+    if (event.target.closest('[data-action-bar-skill]')) return
+    const target = event.target.closest('[data-tooltip]')
     if (!target) {
       clearMobileDetails()
       return

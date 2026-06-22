@@ -7,6 +7,16 @@ export const CURRENCY_RATE = { gold: 2500, silver: 100, copper: 1 }
 export const DEFAULT_STARTING_GIL = 2400
 export const DEFAULT_STARTING_LUMENS = 113
 
+/** Minimum character level to learn a skill of that tier. */
+/** +1 vs raw progress floor so tier gates match the same total skill/stat investment as before Level 1 baseline. */
+export const TIER_MIN_LEVEL = { 1: 1, 2: 5, 3: 9, 4: 14, 5: 21 }
+
+/** Shop stock unlocks by item rarity (display level). */
+export const SHOP_MIN_LEVEL_BY_RARITY = { common: 1, uncommon: 5, rare: 9, epic: 14, legendary: 21 }
+
+/** Default Lumen cost floor by skill tier. */
+export const TIER_LUMEN_COST = { 1: 8, 2: 20, 3: 40, 4: 65, 5: 100 }
+
 export const DRAGONBORN_AFFINITIES = ['fire', 'ice', 'thunder', 'earth', 'wind', 'water', 'darkness', 'light']
 export const ITEMS_PER_PAGE = 48
 
@@ -36,20 +46,18 @@ export const TAB_IDS = ['character', 'skills', 'stats', 'shop', 'craft', 'gm', '
 
 /**
  * Skill tree categories hidden from the Skills tab until ready.
- * TODO: Re-enable professions when crafting / profession items are wired up.
+ * Old `professions` trees were removed — crafting uses `careers` instead.
  */
-export const HIDDEN_SKILL_CATEGORIES = ['professions']
+export const HIDDEN_SKILL_CATEGORIES = []
 
 /**
- * TODO: Item enchantment slots are shown on gear but there is no enchant UI yet —
- * consider re-adding an enchantment workflow (apply scrolls, slot limits, etc.).
+ * Enchantment slots on equipped gear — apply/remove on Character tab.
  */
-export const ENCHANTMENTS_PLANNED = true
+export const ENCHANTMENTS_PLANNED = false
 
 export const DISPLAY_CATEGORIES = {
   weapons: 'Weapons',
   magic: 'Magic',
-  professions: 'Professions',
   careers: 'Careers',
   fusion: 'Fusion',
   ascension: 'Ascension',
@@ -62,11 +70,14 @@ export const SKILL_SUBCATEGORY_LABELS = {
   ranger: 'Ranger',
   soldier: 'Soldier',
   mage: 'Mage',
+  musician: 'Musician',
   paladin: 'Paladin',
   thief: 'Thief',
   berserker: 'Berserker',
   marksman: 'Marksman',
   duelist: 'Duelist',
+  unarmed: 'Striker',
+  striker: 'Striker',
   beast_handler: 'Beast Handler',
   cleric_lay: 'Cleric',
   career_fusion: 'Career Fusion',

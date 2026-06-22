@@ -5,7 +5,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "apprentice_smith",
             "name": "Apprentice Smith",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Craft: Basic weapons and armour.",
             "icon": "🔨",
@@ -19,7 +19,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "weaponwright",
             "name": "Weaponwright",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Martial weapons. Weapons you forge gain +1 damage.",
             "icon": "⚔️",
@@ -35,7 +35,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "armourer",
             "name": "Armourer",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Armour and shields. Armour you forge grants +1 Physical Defence and +1 Magical Defence.",
             "icon": "🛡️",
@@ -51,9 +51,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "field_fit",
             "name": "Field Fit",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Tune an ally's weapon or armour before a fight (10 minutes). They gain +1 on their first attack roll or +1 Physical Defence for the first round (choose one). Once per ally per long rest.",
+            "desc": "Pre-combat: Tune ally gear (10 min); +1 first attack roll or +1 Physical Defence first round (choose one). Once per ally per long rest. + Harmony Reaction: same ally (2 Smiths → both bonuses).",
             "icon": "🔧",
             "prerequisites": {
                 "type": "AND",
@@ -61,13 +61,20 @@ const CAREERS_SKILLS_DATA = {
                     "apprentice_smith"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "field_fit_buff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "master_alloy",
             "name": "Master Alloy",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Advanced metals (mithril, adamantine recipes).",
             "icon": "⚗️",
@@ -84,7 +91,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "tempered_steel",
             "name": "Tempered Steel",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Allies using your forged gear gain +1 to physical attack rolls (weapon damage unchanged).",
             "icon": "🔥",
@@ -101,7 +108,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "siege_breaker",
             "name": "Siege Breaker",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Bypass mundane locks, hinges, or chains with tools (GM: one object per use).",
             "icon": "🪓",
@@ -120,7 +127,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "camp_cook",
             "name": "Camp Cook",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Craft: Simple meals. Meal restores 1d4+1 HP when eaten.",
             "icon": "🍳",
@@ -134,7 +141,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "hearty_rations",
             "name": "Hearty Rations",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Travel food. After eating, +2 Stamina for 10 rounds.",
             "icon": "🥘",
@@ -144,13 +151,20 @@ const CAREERS_SKILLS_DATA = {
                     "camp_cook"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "hearty_rations_buff",
+                    "duration": 10,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "spice_box",
             "name": "Spice Box",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Meals you cook gain +1 HP restored or +1 round of meal buff duration.",
             "icon": "🧂",
@@ -166,7 +180,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "second_serving",
             "name": "Second Serving",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Prepare one extra portion from the same ingredients (once per long rest).",
             "icon": "🍽️",
@@ -182,9 +196,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "banquet_planner",
             "name": "Banquet Planner",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Feast for the whole party — one shared buff (e.g. +1 Accuracy for 20 rounds).",
+            "desc": "Craft: Feast for the party; shared +1 Accuracy for 20 rounds. + Harmony Reaction: same feast (each additional Chef adds +1 Accuracy and +5 feast duration; 9 Chefs → +9 Accuracy for 65 rounds).",
             "icon": "🎉",
             "prerequisites": {
                 "type": "AND",
@@ -193,15 +207,22 @@ const CAREERS_SKILLS_DATA = {
                     "hearty_rations"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "banquet_planner_buff",
+                    "duration": 20,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "battle_breakfast",
             "name": "Battle Breakfast",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Pre-combat meal; eater gains +2 to initiative or +1 Physical Defence for first combat only.",
+            "desc": "Craft: Before first combat, one eater gains +2 initiative or +1 Physical Defence (first combat only). + Harmony Reaction: same meal (when 2+ Chefs, each served eater gets both bonuses; each Chef adds +2 initiative, +1 Physical Defence for one combat round, +1 Stamina round 1, and +1d4 temp HP at combat start; one eater per Chef).",
             "icon": "🥞",
             "prerequisites": {
                 "type": "AND",
@@ -210,13 +231,20 @@ const CAREERS_SKILLS_DATA = {
                     "spice_box"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "battle_breakfast",
+                    "duration": 999,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "chefs_instinct",
             "name": "Chef's Instinct",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Detect spoiled, drugged, or poisonous food by taste/smell (GM may require no roll).",
             "icon": "👃",
@@ -235,7 +263,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "hands_in_soil",
             "name": "Hands in the Soil",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Craft: Common herbs and rations from farm goods. Passive: +1 HP from natural food.",
             "icon": "🌱",
@@ -249,7 +277,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "crop_rotation",
             "name": "Crop Rotation",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Reliable herb yields when resting in wilderness or farmland (GM: extra herb loot).",
             "icon": "🔄",
@@ -265,7 +293,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "animal_sense",
             "name": "Animal Sense",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Notice disturbed earth, tracks, and grazing signs within 30ft.",
             "icon": "🐾",
@@ -281,7 +309,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "preserve_harvest",
             "name": "Preserve Harvest",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Salves and preserved goods that don't spoil for a week.",
             "icon": "🫙",
@@ -297,7 +325,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "green_thumb",
             "name": "Green Thumb",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Magical or rare plants (ties to herbalism recipes).",
             "icon": "🌿",
@@ -314,9 +342,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "landmark_memory",
             "name": "Landmark Memory",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Recall terrain — advantage on navigation checks in regions you've worked (GM).",
+            "desc": "Action: Recall terrain — +2 on navigation checks in regions you've worked (GM).",
             "icon": "🗺️",
             "prerequisites": {
                 "type": "AND",
@@ -331,7 +359,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "bountiful_plot",
             "name": "Bountiful Plot",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Party gains +1 material find when looting plants/organics after a fight.",
             "icon": "🌾",
@@ -350,7 +378,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "field_medic",
             "name": "Field Medic",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Craft: Health potions. Potions you brew restore +2 HP.",
             "icon": "💊",
@@ -364,7 +392,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "triage",
             "name": "Triage",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Assess a creature — learn HP band, bleeding, poison, disease (not exact HP unless GM allows).",
             "icon": "🩺",
@@ -380,9 +408,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "antidote_training",
             "name": "Antidote Training",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: +2 effective MD vs poison/disease effects on yourself; identify poison on sight.",
+            "desc": "Passive: +2 effective Magical Defence vs poison/disease effects on yourself; identify poison on sight.",
             "icon": "🧪",
             "prerequisites": {
                 "type": "AND",
@@ -396,7 +424,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "clean_bandage",
             "name": "Clean Bandage",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Stabilise a downed ally (0 HP) so they don't worsen; restore 1 HP.",
             "icon": "🩹",
@@ -406,13 +434,20 @@ const CAREERS_SKILLS_DATA = {
                     "field_medic"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "clean_bandage_heal",
+                    "duration": 0,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "surgical_touch",
             "name": "Surgical Touch",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Advanced potions and antidotes. Healing items you use on others gain +1d4 HP.",
             "icon": "✂️",
@@ -429,9 +464,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "plague_ward",
             "name": "Plague Ward",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Allies within 10ft gain +1 Magical Defence vs disease/poison saves (GM).",
+            "desc": "Passive: Allies within 10ft +1 Magical Defence vs disease and poison saves. + Harmony: +1 Magical Defence vs disease and poison per Medic with this aura in range (no Reaction).",
             "icon": "🛡️",
             "prerequisites": {
                 "type": "AND",
@@ -446,7 +481,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "revival_draft",
             "name": "Revival Draft",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Rare stimulant — remove Incapacitated or one minor debuff (once per target per day).",
             "icon": "💉",
@@ -465,7 +500,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "apothecary",
             "name": "Apothecary",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Craft: Basic potions and reagents.",
             "icon": "⚗️",
@@ -479,9 +514,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "acid_vials",
             "name": "Acid Vials",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Acid flasks (throw: attack roll d20 + accuracy vs PD; on hit, 1d6 acid; 40% chance to apply Weakened).",
+            "desc": "Craft/throw: On hit 1d6 acid; 40% Weakened. + Harmony Reaction: same target, same round (+1 acid damage per Alchemist).",
             "icon": "🧴",
             "prerequisites": {
                 "type": "AND",
@@ -489,13 +524,21 @@ const CAREERS_SKILLS_DATA = {
                     "apothecary"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "weakened",
+                    "duration": 4,
+                    "potency": 2,
+                    "chance": 0.4
+                }
+            ]
         },
         {
             "id": "smoke_and_flash",
             "name": "Smoke & Flash",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Distraction devices (smoke, blinding powder) — no damage, utility.",
             "icon": "💨",
@@ -511,7 +554,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "label_reader",
             "name": "Label Reader",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Identify unknown liquids/powders safely (poison, potion, inert).",
             "icon": "🏷️",
@@ -527,9 +570,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "explosive_compounds",
             "name": "Explosive Compounds",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Bombs (3d6 in 15ft; separate attack roll per target vs MD).",
+            "desc": "Craft: Bombs (3d6 in 15ft; separate attack roll per target vs Magical Defence).",
             "icon": "💣",
             "prerequisites": {
                 "type": "AND",
@@ -544,7 +587,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "transmute_salts",
             "name": "Transmute Salts",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Convert common materials into alchemical bases (GM: daily quota).",
             "icon": "🧂",
@@ -561,7 +604,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "volatile_expert",
             "name": "Volatile Expert",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: You and allies take −1 damage from your own alchemical friendly fire (min 0).",
             "icon": "☢️",
@@ -580,7 +623,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "rune_apprentice",
             "name": "Rune Apprentice",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Craft: Apply one minor enchant (+1 stat or flavour effect).",
             "icon": "✨",
@@ -594,7 +637,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "elemental_ink",
             "name": "Elemental Ink",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Fire/Ice/Lightning +1d6 on weapon (as fusion-lite, not a toggle).",
             "icon": "🔥",
@@ -610,7 +653,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "ward_scribe",
             "name": "Ward Scribe",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Protective charms (+1 Magical Defence permanent slot enchant on armour).",
             "icon": "📜",
@@ -626,7 +669,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "identify_magic",
             "name": "Identify Magic",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Inspect a magic item — learn properties and curse risk.",
             "icon": "🔍",
@@ -642,7 +685,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "soul_bind",
             "name": "Soul Bind",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Bind item to owner (others suffer −2 using it).",
             "icon": "👻",
@@ -659,7 +702,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "artifact_shaping",
             "name": "Artifact Shaping",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Items with 2 enchantment slots.",
             "icon": "🏆",
@@ -676,7 +719,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "dispel_touch",
             "name": "Dispel Touch",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Suppress one magical effect on an object or creature for 1 hour.",
             "icon": "✋",
@@ -695,9 +738,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "keen_eye",
             "name": "Keen Eye",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
-            "desc": "Action: Examine a scene — GM reveals one clue tier (obvious / hidden / secret).",
+            "desc": "Action: Examine scene; GM reveals one clue tier. + Harmony Reaction: same scene (+1 clue tier per Detective).",
             "icon": "👁️",
             "prerequisites": {
                 "type": "NONE",
@@ -709,7 +752,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "trace_evidence",
             "name": "Trace Evidence",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Spot disturbed objects, footprints, blood, recent magic residue.",
             "icon": "🔎",
@@ -725,7 +768,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "interview",
             "name": "Interview",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Conversation grants +2 to read lies or pressure answers (GM social roll).",
             "icon": "💬",
@@ -741,7 +784,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "case_notes",
             "name": "Case Notes",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Once per scene, reroll a failed investigation check.",
             "icon": "📓",
@@ -757,7 +800,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "reconstruct",
             "name": "Reconstruct",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Visualise past events in a location (last 24 hours, GM narrative).",
             "icon": "🕰️",
@@ -774,7 +817,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "follow_the_trail",
             "name": "Follow the Trail",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Determine direction a specific person/creature went within last 8 hours.",
             "icon": "👣",
@@ -791,7 +834,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "deduction",
             "name": "Deduction",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Connect two prior clues — GM must give a useful inference if both are known.",
             "icon": "🧠",
@@ -810,7 +853,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "artifact_study",
             "name": "Artifact Study",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Action: Identify relics — true properties, era, curse flags.",
             "icon": "🏺",
@@ -824,7 +867,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "ancient_tongues",
             "name": "Ancient Tongues",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Read common dead languages; translate inscriptions slowly.",
             "icon": "📜",
@@ -840,7 +883,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "trap_sense",
             "name": "Trap Sense",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: +2 to notice ancient traps and structural weak points.",
             "icon": "⚠️",
@@ -856,7 +899,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "careful_extraction",
             "name": "Careful Extraction",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Remove relic without triggering trap (GM check).",
             "icon": "🧤",
@@ -872,9 +915,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "lost_technique",
             "name": "Lost Technique",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Once per adventure, recognise a weakness in an undead/construct type (+2 damage for party for one fight).",
+            "desc": "Passive: Once per adventure, recognise weakness vs undead/construct; party +2 damage for one fight. + Harmony: +1 party damage per additional Archaeologist on same enemy type same fight (no Reaction).",
             "icon": "💀",
             "prerequisites": {
                 "type": "AND",
@@ -889,7 +932,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "divine_dig",
             "name": "Divine Dig",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Sense consecrated/desecrated ground and major burials within 60ft.",
             "icon": "⛏️",
@@ -906,7 +949,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "replicate_relic",
             "name": "Replicate Relic",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Reproduce a studied artifact's mundane copy (not full magic without Enchanter).",
             "icon": "📋",
@@ -925,7 +968,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "trail_warden",
             "name": "Trail Warden",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Passive: Follow tracks in wilderness; know number and rough size of a group. Passive: Party ignores difficult terrain from undergrowth on overland travel (GM).",
             "icon": "🌲",
@@ -939,7 +982,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "ambush_spotter",
             "name": "Ambush Spotter",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Party gains +1 initiative when you have 1 minute to scout ahead.",
             "icon": "🎯",
@@ -955,7 +998,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "snare_craft",
             "name": "Snare Craft",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Simple traps (snare, alarm) — GM sets DC/effect.",
             "icon": "🪤",
@@ -971,7 +1014,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "keen_sight",
             "name": "Keen Sight",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: +1 to notice hidden creatures, ambushes, or traps at range (you or allies on overwatch benefit).",
             "icon": "👁️",
@@ -987,7 +1030,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "long_watch",
             "name": "Long Watch",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Track a quarry for a day — learn camp sites and direction.",
             "icon": "🔭",
@@ -1004,7 +1047,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "camouflage_net",
             "name": "Camouflage Net",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Hide camp from casual search (+2 Stealth for camp).",
             "icon": "🕸️",
@@ -1021,9 +1064,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "volley_call",
             "name": "Volley Call",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Call a target — one ally gains +1 on their next attack against it (any weapon or spell). Once per combat.",
+            "desc": "Action: Call a target; one ally +1 on next attack vs it. Once per combat. + Harmony Reaction: same target (each Ranger adds +1 to marked allies' next attack and marks one more ally).",
             "icon": "📣",
             "prerequisites": {
                 "type": "AND",
@@ -1032,7 +1075,14 @@ const CAREERS_SKILLS_DATA = {
                     "keen_sight"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "volley_call_buff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
         }
     ],
     "engineer": [
@@ -1040,7 +1090,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "tinker",
             "name": "Tinker",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Craft: Basic tools, crossbow bolts, simple mechanisms.",
             "icon": "🔩",
@@ -1054,7 +1104,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "clockwork_repair",
             "name": "Clockwork Repair",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Fix a jammed lock or stuck mechanism (GM).",
             "icon": "⚙️",
@@ -1070,9 +1120,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "reinforced_frame",
             "name": "Reinforced Frame",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Portable cover (+3 PD while behind it).",
+            "desc": "Craft: Portable cover; +3 Physical Defence while behind it. + Harmony Reaction: same lane (+1 Physical Defence per additional Engineer).",
             "icon": "🧱",
             "prerequisites": {
                 "type": "AND",
@@ -1086,7 +1136,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "schematic_mind",
             "name": "Schematic Mind",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Understand how unfamiliar machines work after 1 minute study.",
             "icon": "📐",
@@ -1102,7 +1152,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "siege_kit",
             "name": "Siege Kit",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Breaching tools, pulleys, collapsible bridge sections.",
             "icon": "🏗️",
@@ -1116,10 +1166,10 @@ const CAREERS_SKILLS_DATA = {
             "specialEffects": []
         },
         {
-            "id": "overcharge",
+            "id": "engineer_overcharge",
             "name": "Overcharge",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Boost ally's mechanical device — double effect once, then it is spent until rebuilt (GM).",
             "icon": "⚡",
@@ -1136,7 +1186,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "demolition_plan",
             "name": "Demolition Plan",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Craft: Shaped charges — target structure weak point (not creature HP).",
             "icon": "💥",
@@ -1150,127 +1200,12 @@ const CAREERS_SKILLS_DATA = {
             "specialEffects": []
         }
     ],
-    "merchant": [
-        {
-            "id": "haggler",
-            "name": "Haggler",
-            "tier": 1,
-            "cost": 5,
-            "staminaCost": 0,
-            "desc": "Passive: Buy at 10% discount, sell at 10% premium (mundane goods).",
-            "icon": "💰",
-            "prerequisites": {
-                "type": "NONE",
-                "skills": []
-            },
-            "specialEffects": []
-        },
-        {
-            "id": "appraise",
-            "name": "Appraise",
-            "tier": 2,
-            "cost": 10,
-            "staminaCost": 0,
-            "desc": "Action: True market value and obvious fakes on items.",
-            "icon": "💎",
-            "prerequisites": {
-                "type": "AND",
-                "skills": [
-                    "haggler"
-                ]
-            },
-            "specialEffects": []
-        },
-        {
-            "id": "ledger",
-            "name": "Ledger",
-            "tier": 2,
-            "cost": 10,
-            "staminaCost": 0,
-            "desc": "Passive: Track party expenses; never \"lose\" change to bookkeeping errors (flavour + GM trust).",
-            "icon": "📒",
-            "prerequisites": {
-                "type": "AND",
-                "skills": [
-                    "haggler"
-                ]
-            },
-            "specialEffects": []
-        },
-        {
-            "id": "find_buyer",
-            "name": "Find Buyer",
-            "tier": 2,
-            "cost": 10,
-            "staminaCost": 0,
-            "desc": "Action: Locate a purchaser for unusual loot in a settlement (GM).",
-            "icon": "🤝",
-            "prerequisites": {
-                "type": "AND",
-                "skills": [
-                    "haggler"
-                ]
-            },
-            "specialEffects": []
-        },
-        {
-            "id": "black_market",
-            "name": "Black Market",
-            "tier": 3,
-            "cost": 15,
-            "staminaCost": 0,
-            "desc": "Passive: Access illegal or rare goods in cities (GM availability).",
-            "icon": "🕶️",
-            "prerequisites": {
-                "type": "AND",
-                "skills": [
-                    "haggler",
-                    "appraise"
-                ]
-            },
-            "specialEffects": []
-        },
-        {
-            "id": "invest",
-            "name": "Invest",
-            "tier": 3,
-            "cost": 15,
-            "staminaCost": 0,
-            "desc": "Action: Seed capital — chance of return after downtime (GM economy).",
-            "icon": "📈",
-            "prerequisites": {
-                "type": "AND",
-                "skills": [
-                    "haggler",
-                    "ledger"
-                ]
-            },
-            "specialEffects": []
-        },
-        {
-            "id": "caravan_lead",
-            "name": "Caravan Lead",
-            "tier": 3,
-            "cost": 15,
-            "staminaCost": 0,
-            "desc": "Passive: Overland travel: −20% random encounter chance when you plan the route (GM).",
-            "icon": "🐪",
-            "prerequisites": {
-                "type": "AND",
-                "skills": [
-                    "haggler",
-                    "find_buyer"
-                ]
-            },
-            "specialEffects": []
-        }
-    ],
     "scholar": [
         {
             "id": "well_read",
             "name": "Well Read",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Action: Recall lore on a topic — GM gives one true fact.",
             "icon": "📚",
@@ -1284,7 +1219,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "polyglot",
             "name": "Polyglot",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Speak/read two extra common languages.",
             "icon": "🗣️",
@@ -1300,7 +1235,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "bestiary_notes",
             "name": "Bestiary Notes",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Identify creature type — resistances, habits (not exact stat block unless GM).",
             "icon": "📖",
@@ -1316,7 +1251,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "map_archive",
             "name": "Map Archive",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Copy or remember maps; never lost in mapped dungeons without magic.",
             "icon": "🗺️",
@@ -1332,7 +1267,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "forbidden_index",
             "name": "Forbidden Index",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Know danger level of magic/curse on touch (safe study).",
             "icon": "📕",
@@ -1349,9 +1284,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "teach",
             "name": "Teach",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Ally gains your tier-1 knowledge skill for one task this session.",
+            "desc": "Action: Ally gains your tier-1 knowledge skill for one task this session. + Harmony Reaction: same ally, different topics (ally keeps each granted edge once; no cap on number of topics).",
             "icon": "👨‍🏫",
             "prerequisites": {
                 "type": "AND",
@@ -1366,7 +1301,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "sages_conclusion",
             "name": "Sage's Conclusion",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Once per adventure, declare a lore-based solution — GM must make it viable if plausible.",
             "icon": "💡",
@@ -1385,7 +1320,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "animal_kin",
             "name": "Animal Kin",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Passive: Calm non-magical beasts; read mood/intent.",
             "icon": "🐕",
@@ -1399,7 +1334,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "train_mount",
             "name": "Train Mount",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Tack and training — mount obeys commands in combat (GM companion rules).",
             "icon": "🐴",
@@ -1415,7 +1350,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "scent_partner",
             "name": "Scent Partner",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Animal alerts to poison, disease, or hidden creature within 30ft.",
             "icon": "👃",
@@ -1431,7 +1366,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "veterinary",
             "name": "Veterinary",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Stabilise beast; heal 1d6 HP or remove minor condition.",
             "icon": "🩺",
@@ -1441,13 +1376,20 @@ const CAREERS_SKILLS_DATA = {
                     "animal_kin"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "veterinary",
+                    "duration": 0,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "falcons_eye",
             "name": "Falcon's Eye",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Send scout animal — report layout of area ahead (limited range).",
             "icon": "🦅",
@@ -1464,7 +1406,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "pack_tactics",
             "name": "Pack Tactics",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: When you and a beast attack same target, +1 accuracy for both.",
             "icon": "🐺",
@@ -1481,7 +1423,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "call_the_wild",
             "name": "Call the Wild",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Summon mundane animals for distraction or transport (once per day, GM).",
             "icon": "🌲",
@@ -1500,21 +1442,28 @@ const CAREERS_SKILLS_DATA = {
             "id": "lay_blessing",
             "name": "Lay Blessing",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
-            "desc": "Action: Touch ally — +1 Magical Defence for 8 hours (once per ally per day).",
+            "desc": "Action: Touch ally; +1 Magical Defence for 8 hours (once per ally per day). + Harmony Reaction: same ally, same day (+1 Magical Defence per Cleric blessing that ally).",
             "icon": "✝️",
             "prerequisites": {
                 "type": "NONE",
                 "skills": []
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "lay_blessing_buff",
+                    "duration": 999,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "last_rites",
             "name": "Last Rites",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Prevent undead rise from bodies you sanctify.",
             "icon": "⚰️",
@@ -1530,9 +1479,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "comfort_the_dying",
             "name": "Comfort the Dying",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Ally at 0 HP hears you — advantage on death saves (GM).",
+            "desc": "Action: Ally at 0 HP hears you — roll death saves twice, keep the better result (GM).",
             "icon": "🕊️",
             "prerequisites": {
                 "type": "AND",
@@ -1546,7 +1495,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "holy_symbol_craft",
             "name": "Holy Symbol Craft",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Craft: Symbols that grant +1 vs fear/mind control while worn.",
             "icon": "✨",
@@ -1562,7 +1511,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "turn_unholy",
             "name": "Turn Unholy",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Warded area 10ft — undead/demons hesitate to enter (GM save).",
             "icon": "☀️",
@@ -1579,9 +1528,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "sanctuary_camp",
             "name": "Sanctuary Camp",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Short rest in consecrated camp — remove one fear/charm.",
+            "desc": "Action: Short rest in consecrated camp; each ally removes one fear or charm. + Harmony Reaction: same camp (each ally removes one additional fear or charm per Cleric at that rest).",
             "icon": "⛺",
             "prerequisites": {
                 "type": "AND",
@@ -1596,7 +1545,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "faiths_reservoir",
             "name": "Faith's Reservoir",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Once per day, double HP restored by a potion you administer.",
             "icon": "💧",
@@ -1615,7 +1564,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "soldier_training",
             "name": "Soldier Training",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Passive: +1 Strength while wearing medium or heavy armour.",
             "icon": "🛡️",
@@ -1629,9 +1578,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "shield_wall",
             "name": "Shield Wall",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Adjacent ally gains +1 Physical Defence until your next turn.",
+            "desc": "Action: Adjacent ally gains +1 Physical Defence until your next turn. + Harmony Reaction: same ally (each Soldier in the huddle adds +1 Physical Defence per Soldier helping — count heads, add that many once per Soldier; 3 Soldiers → +9 Physical Defence; 5 Soldiers on one ally → +25 Physical Defence).",
             "icon": "🛡️",
             "prerequisites": {
                 "type": "AND",
@@ -1639,15 +1588,22 @@ const CAREERS_SKILLS_DATA = {
                     "soldier_training"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "shield_wall_buff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "rally_cry",
             "name": "Rally Cry",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: One ally within 30ft may reroll a failed save (once per combat).",
+            "desc": "Action: One ally within 30ft may reroll a failed save (once per combat). + Harmony Reaction: that reroll (+2 for each participating Soldier; 5 Soldiers → +10 on the reroll).",
             "icon": "📣",
             "prerequisites": {
                 "type": "AND",
@@ -1661,7 +1617,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "hold_the_line",
             "name": "Hold the Line",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: +1 Physical Defence when an ally is within 10ft.",
             "icon": "⚔️",
@@ -1677,9 +1633,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "phalanx",
             "name": "Phalanx",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: When you and two or more allies attack the same target, all gain +1 accuracy.",
+            "desc": "Passive: When you and two or more allies attack the same target, all gain +1 accuracy. + Harmony: +1 accuracy on next hit vs that enemy per Phalanx Soldier in the volley; when 2+ Phalanx Soldiers attack, also +1d4 damage per Phalanx Soldier (all focus-fire attackers benefit; no Reaction).",
             "icon": "🏛️",
             "prerequisites": {
                 "type": "AND",
@@ -1694,7 +1650,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "second_wind",
             "name": "Second Wind",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Restore 1d6 HP (once per short rest).",
             "icon": "💨",
@@ -1705,13 +1661,20 @@ const CAREERS_SKILLS_DATA = {
                     "rally_cry"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "second_wind_heal",
+                    "duration": 0,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "commanders_presence",
             "name": "Commander's Presence",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Allies within 10ft gain +1 to initiative.",
             "icon": "👑",
@@ -1730,7 +1693,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "arcane_study",
             "name": "Arcane Study",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Passive: Allies you target with magic gain +1 effective Magic Power for buffs and heals you apply.",
             "icon": "📘",
@@ -1744,9 +1707,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "empower_ally",
             "name": "Empower Ally",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Ally's next spell or magical attack gains +1d4 damage or +2 HP on heal (once per ally per combat).",
+            "desc": "Action: Ally's next spell or magical attack +1d4 damage or heal +2 HP (once per ally per combat). + Harmony Reaction: same ally (when 2+ Mages, +1d6 damage or +3 HP instead).",
             "icon": "✨",
             "prerequisites": {
                 "type": "AND",
@@ -1754,13 +1717,20 @@ const CAREERS_SKILLS_DATA = {
                     "arcane_study"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "empower_ally_buff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "mana_font",
             "name": "Mana Font",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Allies within 10ft regain +1 Stamina when they cast a tier-1 spell (once per round per ally).",
             "icon": "🔮",
@@ -1776,7 +1746,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "dispel_assist",
             "name": "Dispel Assist",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Grant an ally +2 on their next dispel or cleanse check (GM).",
             "icon": "🧹",
@@ -1792,7 +1762,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "amplified_healing",
             "name": "Amplified Healing",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Healing spells you cast on others restore +2 HP.",
             "icon": "💚",
@@ -1809,9 +1779,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "ward_circle",
             "name": "Ward Circle",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: 10ft aura — allies gain +1 Magical Defence for 3 rounds (once per combat).",
+            "desc": "Action: 10ft aura; allies +1 Magical Defence for 3 rounds (once per combat). + Harmony Reaction: overlapping circles (each Mage in the overlap adds +1 Magical Defence per Mage helping — count Mages, add that many once per Mage; 3 Mages → +9 Magical Defence; 5 Mages → +25 Magical Defence).",
             "icon": "⭕",
             "prerequisites": {
                 "type": "AND",
@@ -1820,13 +1790,20 @@ const CAREERS_SKILLS_DATA = {
                     "mana_font"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "ward_circle_buff",
+                    "duration": 3,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "shared_focus",
             "name": "Shared Focus",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Once per combat, sustain one ally's concentration effect without using your action (GM).",
             "icon": "🤝",
@@ -1840,14 +1817,164 @@ const CAREERS_SKILLS_DATA = {
             "specialEffects": []
         }
     ],
+    "musician": [
+        {
+            "id": "work_song",
+            "name": "Work Song",
+            "tier": 1,
+            "cost": 8,
+            "staminaCost": 0,
+            "desc": "Action: Sustain up to 3 turns (5 Stamina once); allies in hearing range +1 Strength per performing Musician. + Harmony Reaction: join the same song (+1 Physical Defence per Musician while sustained; e.g. 6 Musicians → +6 Strength and +6 Physical Defence). Musician baseline: sing without an instrument; off-hand instruments amplify (see glossary Instrument amplify).",
+            "icon": "⛏️",
+            "prerequisites": {
+                "type": "NONE",
+                "skills": []
+            },
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "work_song_buff",
+                    "duration": 3,
+                    "potency": 0
+                }
+            ]
+        },
+        {
+            "id": "long_set",
+            "name": "Long Set",
+            "tier": 2,
+            "cost": 20,
+            "staminaCost": 0,
+            "desc": "Passive: Your sustained songs may last 1 extra turn (e.g. Work Song up to 4 turns).",
+            "icon": "🎭",
+            "prerequisites": {
+                "type": "AND",
+                "skills": [
+                    "work_song"
+                ]
+            },
+            "specialEffects": []
+        },
+        {
+            "id": "marching_tune",
+            "name": "Marching Tune",
+            "tier": 2,
+            "cost": 20,
+            "staminaCost": 0,
+            "desc": "Action: Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Speed per performing Musician. + Harmony Reaction: join the same song (+1 initiative for listeners while sustained).",
+            "icon": "🥁",
+            "prerequisites": {
+                "type": "AND",
+                "skills": [
+                    "work_song"
+                ]
+            },
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "marching_tune_buff",
+                    "duration": 2,
+                    "potency": 0
+                }
+            ]
+        },
+        {
+            "id": "soothing_hymn",
+            "name": "Soothing Hymn",
+            "tier": 2,
+            "cost": 20,
+            "staminaCost": 0,
+            "desc": "Action: Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
+            "icon": "🕊️",
+            "prerequisites": {
+                "type": "AND",
+                "skills": [
+                    "work_song"
+                ]
+            },
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "soothing_hymn_buff",
+                    "duration": 2,
+                    "potency": 0
+                }
+            ]
+        },
+        {
+            "id": "battle_anthem",
+            "name": "Battle Anthem",
+            "tier": 3,
+            "cost": 40,
+            "staminaCost": 0,
+            "desc": "Action: Sustain up to 3 turns (6 Stamina once); allies in hearing range +1 accuracy per performing Musician. + Harmony Reaction: join the same song (+1 damage on next hit per Musician while sustained).",
+            "icon": "🎺",
+            "prerequisites": {
+                "type": "AND",
+                "skills": [
+                    "work_song",
+                    "marching_tune"
+                ]
+            },
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "battle_anthem_buff",
+                    "duration": 3,
+                    "potency": 0
+                }
+            ]
+        },
+        {
+            "id": "dissonant_note",
+            "name": "Dissonant Note",
+            "tier": 3,
+            "cost": 40,
+            "staminaCost": 0,
+            "desc": "Action: Sustain 1 turn (4 Stamina once); enemies in hearing range −1 accuracy per performing Musician. + Harmony Reaction: join the same song (−1 per Musician on enemy saves while sustained).",
+            "icon": "🎸",
+            "prerequisites": {
+                "type": "AND",
+                "skills": [
+                    "work_song",
+                    "soothing_hymn"
+                ]
+            },
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "dissonant_note_debuff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
+        },
+        {
+            "id": "encore",
+            "name": "Encore",
+            "tier": 3,
+            "cost": 40,
+            "staminaCost": 0,
+            "desc": "Passive: Once per combat, play the same song again for free — but it only lasts its original length (no Long Set, instrument, or other bonus turns).",
+            "icon": "🎤",
+            "prerequisites": {
+                "type": "AND",
+                "skills": [
+                    "work_song",
+                    "long_set"
+                ]
+            },
+            "specialEffects": []
+        }
+    ],
     "paladin": [
         {
             "id": "oathbound",
             "name": "Oathbound",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: +1 Magical Defence; advantage on saves vs fear (GM).",
+            "desc": "Passive: +1 Magical Defence; +2 on saves vs fear (GM).",
             "icon": "⚔️",
             "prerequisites": {
                 "type": "NONE",
@@ -1859,7 +1986,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "lay_on_hands",
             "name": "Lay on Hands",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Touch ally — restore 1d6+1 HP (once per ally per day).",
             "icon": "🤲",
@@ -1869,13 +1996,20 @@ const CAREERS_SKILLS_DATA = {
                     "oathbound"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "lay_on_hands_heal",
+                    "duration": 0,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "rebuke",
             "name": "Rebuke",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: One enemy hesitates — save or cannot use reactions until your next turn (once per combat).",
             "icon": "✋",
@@ -1891,7 +2025,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "bulwark",
             "name": "Bulwark",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: +1 Physical Defence while below half HP.",
             "icon": "🧱",
@@ -1907,9 +2041,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "aura_of_protection",
             "name": "Aura of Protection",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Allies within 10ft gain +1 Magical Defence vs fear and charm.",
+            "desc": "Passive: Allies within 10ft +1 Magical Defence vs fear and charm. + Harmony: +1 Magical Defence vs fear and charm per Paladin with this aura in range (no Reaction).",
             "icon": "🌟",
             "prerequisites": {
                 "type": "AND",
@@ -1924,7 +2058,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "turn_shadow",
             "name": "Turn Shadow",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Warded 10ft — hostile undead or demons save to enter (weaker than full Turn; once per combat).",
             "icon": "☀️",
@@ -1941,7 +2075,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "sacred_stance",
             "name": "Sacred Stance",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: +2 Physical Defence and +2 Magical Defence until end of your next turn; you cannot move.",
             "icon": "🛐",
@@ -1952,7 +2086,14 @@ const CAREERS_SKILLS_DATA = {
                     "bulwark"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "sacred_stance_buff",
+                    "duration": 2,
+                    "potency": 0
+                }
+            ]
         }
     ],
     "thief": [
@@ -1960,7 +2101,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "light_fingers",
             "name": "Light Fingers",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Passive: +2 on pickpocket and sleight-of-hand checks (GM).",
             "icon": "🤏",
@@ -1974,7 +2115,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "slip_away",
             "name": "Slip Away",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Disengage — leave melee without provoking opportunity attacks (once per combat).",
             "icon": "💨",
@@ -1990,7 +2131,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "shadow_blend",
             "name": "Shadow Blend",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: +1 to Stealth when wearing light armour or no armour.",
             "icon": "🌑",
@@ -2006,9 +2147,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "dirty_trick",
             "name": "Dirty Trick",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Distract a foe — one ally gains +2 on their next attack against that target.",
+            "desc": "Action: Distract a foe; one ally +2 on next attack vs that target. + Harmony Reaction: same foe (each additional Thief adds +1 to that attack).",
             "icon": "🎭",
             "prerequisites": {
                 "type": "AND",
@@ -2016,13 +2157,20 @@ const CAREERS_SKILLS_DATA = {
                     "light_fingers"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "dirty_trick_buff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "filch",
             "name": "Filch",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Attempt to steal one small unequipped item from a target (GM contested roll; once per encounter).",
             "icon": "🎒",
@@ -2039,7 +2187,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "escape_artist",
             "name": "Escape Artist",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: +2 vs grapples, restraints, and mundane traps.",
             "icon": "🔗",
@@ -2056,7 +2204,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "hit_and_run",
             "name": "Hit and Run",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: After you deal damage, move 10ft without provoking opportunity attacks (once per turn).",
             "icon": "🏃",
@@ -2075,7 +2223,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "battle_fury",
             "name": "Battle Fury",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Passive: +1 damage on melee attacks while below half HP.",
             "icon": "😤",
@@ -2089,7 +2237,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "reckless_strike",
             "name": "Reckless Strike",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Your next attack gains +2 damage; you suffer −2 Physical Defence until your next turn.",
             "icon": "💥",
@@ -2099,15 +2247,22 @@ const CAREERS_SKILLS_DATA = {
                     "battle_fury"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "reckless_strike_buff",
+                    "duration": 2,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "intimidate",
             "name": "Intimidate",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Foes within 10ft save or suffer −1 accuracy for 1 round.",
+            "desc": "Action: Foes within 10ft save or −1 accuracy for 1 round. + Harmony Reaction: same area (−1 accuracy per Berserker on failed save).",
             "icon": "😠",
             "prerequisites": {
                 "type": "AND",
@@ -2115,13 +2270,20 @@ const CAREERS_SKILLS_DATA = {
                     "battle_fury"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "intimidate_debuff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "bloodlust",
             "name": "Bloodlust",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: On a kill or critical hit, regain 1 Stamina.",
             "icon": "🩸",
@@ -2137,7 +2299,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "rage",
             "name": "Rage",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: +2 Strength, −1 Magical Defence for 3 rounds (once per combat).",
             "icon": "🔥",
@@ -2148,13 +2310,20 @@ const CAREERS_SKILLS_DATA = {
                     "reckless_strike"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "career_rage_buff",
+                    "duration": 3,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "unstoppable",
             "name": "Unstoppable",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Ignore difficult terrain while moving toward a hostile target.",
             "icon": "🦬",
@@ -2171,7 +2340,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "executioner",
             "name": "Executioner",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: +2 damage vs bloodied targets (GM: below half HP).",
             "icon": "⚰️",
@@ -2190,7 +2359,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "steady_hand",
             "name": "Steady Hand",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Passive: +1 accuracy with ranged weapon attacks.",
             "icon": "🎯",
@@ -2204,7 +2373,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "overwatch",
             "name": "Overwatch",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Ready a shot — interrupt one enemy moving in your line of sight (GM).",
             "icon": "👁️",
@@ -2220,9 +2389,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "suppressing_fire",
             "name": "Suppressing Fire",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Suppress a zone — enemies suffer −1 to attacks or movement for 1 round.",
+            "desc": "Action: Suppress a zone; enemies −1 to attacks or movement for 1 round. + Harmony Reaction: same zone (−1 penalty per Marksman).",
             "icon": "🔫",
             "prerequisites": {
                 "type": "AND",
@@ -2230,13 +2399,20 @@ const CAREERS_SKILLS_DATA = {
                     "steady_hand"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "suppressing_fire_debuff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "quick_reload",
             "name": "Quick Reload",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Ranged attacks cost 1 less Stamina (minimum 0).",
             "icon": "⚡",
@@ -2252,7 +2428,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "called_shot",
             "name": "Called Shot",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: −2 to hit; on hit, +1d6 damage (once per target per combat).",
             "icon": "🎯",
@@ -2263,13 +2439,20 @@ const CAREERS_SKILLS_DATA = {
                     "overwatch"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "called_shot_buff",
+                    "duration": 1,
+                    "potency": 0
+                }
+            ]
         },
         {
             "id": "volley_support",
             "name": "Volley Support",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Allies gain +1 accuracy vs a target you damaged this round.",
             "icon": "📣",
@@ -2286,7 +2469,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "snap_shot",
             "name": "Snap Shot",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: Your first ranged attack each combat ignores half-cover penalties (GM).",
             "icon": "💫",
@@ -2305,7 +2488,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "precise_footwork",
             "name": "Precise Footwork",
             "tier": 1,
-            "cost": 5,
+            "cost": 8,
             "staminaCost": 0,
             "desc": "Passive: +1 Speed while wielding a one-handed weapon.",
             "icon": "🩰",
@@ -2319,7 +2502,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "parry_riposte",
             "name": "Parry & Riposte",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Action: When hit by a melee attack, contest to negate damage once per round (GM).",
             "icon": "🤺",
@@ -2335,9 +2518,9 @@ const CAREERS_SKILLS_DATA = {
             "id": "feint",
             "name": "Feint",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Your next attack vs one target has advantage (once per combat).",
+            "desc": "Action: Your next attack vs one target — roll twice, keep the higher result (once per combat).",
             "icon": "🎪",
             "prerequisites": {
                 "type": "AND",
@@ -2351,7 +2534,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "disengage_master",
             "name": "Disengage Master",
             "tier": 2,
-            "cost": 10,
+            "cost": 20,
             "staminaCost": 0,
             "desc": "Passive: Leaving melee does not provoke from one chosen foe per turn.",
             "icon": "👟",
@@ -2367,7 +2550,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "flourish",
             "name": "Flourish",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Action: Attack and force a save — on fail, target loses reactions until your next turn.",
             "icon": "✨",
@@ -2384,7 +2567,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "dueling_stance",
             "name": "Dueling Stance",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: +1 Physical Defence vs one chosen opponent until you change target.",
             "icon": "⚔️",
@@ -2401,7 +2584,7 @@ const CAREERS_SKILLS_DATA = {
             "id": "finishing_thrust",
             "name": "Finishing Thrust",
             "tier": 3,
-            "cost": 15,
+            "cost": 40,
             "staminaCost": 0,
             "desc": "Passive: +2 damage vs targets who have not yet acted this round.",
             "icon": "🗡️",

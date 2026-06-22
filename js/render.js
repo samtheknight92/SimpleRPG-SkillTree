@@ -3,7 +3,8 @@ import { STAT_RULES, ITEMS_PER_PAGE, DRAGONBORN_AFFINITIES } from './constants.j
 import { state, activeCharacter } from './state.js'
 import { raceOptions, getRace, getSkill, getItem, cache } from './cache.js'
 import { computeStats, statBreakdown, getEffect } from './character.js'
-import { offhandSlotAvailable } from './equipment.js'
+import { offhandSlotLockReason, weaponHandednessLabel, offhandTypeLabel, canEquipToOffhand, isOffhandItem, canEquipToMainHand } from './equipment.js'
+import { activePerformanceStatuses, formatPerformanceMeta } from './instruments.js'
 import {
   visibleSubcategories,
   visibleSkillCategories,
@@ -17,6 +18,7 @@ import {
   humanStarterWeaponOptions
 } from './skills.js'
 import { characterLevelInfo, levelTooltip } from './level.js'
+import { isTableRuleRacePassive, racePassiveTooltip } from './race-passives.js'
 import { isGmMode } from './gm-mode.js'
 import {
   filterPremadeCharacters,
@@ -24,13 +26,15 @@ import {
   countPremadeInRoster,
   PREMADE_SORT_OPTIONS
 } from './premade-characters.js'
-import { filterCatalogItems, paginateItems } from './items.js'
+import { filterCatalogItems, paginateItems, isShopPurchaseItem, shopMinLevelForItem, shopPurchaseCheck, ITEM_CATALOG_CATEGORIES, catalogCategoryCounts, catalogSourceCounts, activeCatalogFilterLabels } from './items.js'
 import {
   manualEffectList,
   effectDurationLabel,
   effectTypeLabel,
   effectTone,
   effectTooltip,
+  effectUsesPotency,
+  effectPotencyLabel,
   characterEffectSources
 } from './effects.js'
 import { formatCurrency, formatStatModifiers, fallbackIcon, itemPriceGil, normalizeGil } from './format.js'
@@ -40,6 +44,31 @@ import { backgroundOptions, getBackground, backgroundRewardSummary, DEFAULT_BACK
 import { sortInitiativeEntries, activeInitiativeEntry } from './gm-initiative.js'
 import { filterCraftRecipes, canCraftRecipe, materialsStatus, craftProfessionOptions } from './craft.js'
 import { craftedByLabel } from './craft-bonuses.js'
+import {
+  maxEnchantmentSlots,
+  entryEnchantments,
+  enchantmentTooltip,
+  isEnhancementItem,
+  compatibleEquippedGearForEnhancement,
+  applyEnchantTargetLabel,
+  enchantDisplayLabel,
+  isShieldEnchant
+} from './enchantments.js'
+import {
+  computeElementalAffinity,
+  elementalAffinityTooltip,
+  elementalAffinityTone,
+  isElementalAffinityRowVisible,
+  ELEMENTS
+} from './elemental-affinity.js'
+import { filterGlossaryEntries, groupGlossaryEntries, GLOSSARY_CATEGORIES, getAllGlossaryEntries } from './glossary.js'
+import {
+  characterFolder,
+  folderAssignOptions,
+  listCharacterFolders,
+  rosterFolderSections,
+  isRosterFolderOpen
+} from './character-folders.js'
 
 export function render(options = { all: true }) {
   const opts = options.all
@@ -53,6 +82,38 @@ export function render(options = { all: true }) {
   if (opts.actionBar !== false) renderActionBar(activeCharacter())
   if (opts.tabs) syncTabBar()
   if (opts.content) renderContent()
+}
+
+function captureContentFocus() {
+  const active = document.activeElement
+  if (!(active instanceof HTMLElement)) return null
+  if (!active.closest('#app-content') || !active.id) return null
+  const capture = { id: active.id }
+  if (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement) {
+    capture.selectionStart = active.selectionStart
+    capture.selectionEnd = active.selectionEnd
+  }
+  return capture
+}
+
+function restoreContentFocus(capture) {
+  if (!capture?.id) return
+  const el = document.getElementById(capture.id)
+  if (!(el instanceof HTMLElement)) return
+  el.focus({ preventScroll: true })
+  if (
+    (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) &&
+    capture.selectionStart != null &&
+    typeof el.setSelectionRange === 'function'
+  ) {
+    const start = capture.selectionStart
+    const end = capture.selectionEnd ?? start
+    try {
+      el.setSelectionRange(start, end)
+    } catch {
+      // Some input types do not support selection ranges.
+    }
+  }
 }
 
 function syncTabBar() {
@@ -82,7 +143,10 @@ function updateBackgroundPreview() {
   const select = $('#new-background')
   if (!preview || !select) return
   const bg = getBackground(select.value)
-  preview.textContent = `${bg.desc} Starting: ${backgroundRewardSummary(bg)}.`
+  preview.innerHTML = [
+    `<span class="create-preview-desc">${esc(bg.desc)}</span>`,
+    `<span class="create-preview-start">Starting: ${esc(backgroundRewardSummary(bg))}.</span>`
+  ].join('')
 }
 
 function renderRaceSelects() {
@@ -125,24 +189,103 @@ function renderCreateExtras(raceId) {
   host.innerHTML = parts.join('')
 }
 
+function renderCharacterCard(character) {
+  const race = getRace(character.race)
+  const level = characterLevelInfo(character)
+  const folder = characterFolder(character)
+  const folderOptions = folderAssignOptions(state, folder)
+  return `
+    <div class="character-card-wrap">
+      <button type="button" class="character-card ${character.id === state.activeId ? 'active' : ''}" data-select-character="${esc(character.id)}">
+        <strong>${esc(race?.icon || '👤')} ${esc(character.name)}</strong>
+        <span>Lv ${level.display} · ${level.skillCount} skills · ${character.lumens}L</span>
+      </button>
+      <div class="character-move-picker">
+        <button
+          type="button"
+          class="ghost-btn tiny character-folder-move"
+          data-toggle-character-move="${esc(character.id)}"
+          data-tooltip="Move folder"
+          title="Move folder"
+          aria-label="Move ${esc(character.name)} to another folder"
+          aria-expanded="false"
+          aria-haspopup="menu"
+        >→</button>
+        <div class="character-move-menu" hidden data-character-move-menu="${esc(character.id)}" role="menu">
+          ${folderOptions.map(opt => `
+            <button
+              type="button"
+              role="menuitem"
+              class="ghost-btn tiny character-move-option${opt.value === folder ? ' is-current' : ''}"
+              data-move-character="${esc(character.id)}"
+              data-move-folder="${esc(opt.value)}"
+            >${esc(opt.label)}</button>
+          `).join('')}
+        </div>
+      </div>
+      <button type="button" class="ghost-btn tiny character-dup" data-duplicate-character="${esc(character.id)}" title="Duplicate character">⧉</button>
+    </div>
+  `
+}
+
+function renderFolderSummary(section, open) {
+  const count = section.characters.length
+  if (!section.canManage) {
+    return `
+      <summary class="character-folder-summary">
+        <span class="character-folder-summary-text">${esc(section.label)} <span class="character-folder-count">(${count})</span></span>
+      </summary>
+    `
+  }
+
+  const atTop = section.folderIndex <= 0
+  const atBottom = section.folderIndex >= section.folderCount - 1
+  return `
+    <summary class="character-folder-summary">
+      <span class="character-folder-summary-text">${esc(section.label)} <span class="character-folder-count">(${count})</span></span>
+      <span class="character-folder-picker">
+        <button
+          type="button"
+          class="ghost-btn tiny character-folder-menu-btn"
+          data-toggle-folder-menu="${esc(section.key)}"
+          data-tooltip="Folder options"
+          title="Folder options"
+          aria-label="Folder options for ${esc(section.label)}"
+          aria-expanded="false"
+          aria-haspopup="menu"
+        >⋯</button>
+        <div class="character-folder-menu" hidden data-folder-menu="${esc(section.key)}" role="menu">
+          <button type="button" role="menuitem" class="ghost-btn tiny character-folder-menu-option" data-folder-move-up="${esc(section.key)}" ${atTop ? 'disabled' : ''}>Move up</button>
+          <button type="button" role="menuitem" class="ghost-btn tiny character-folder-menu-option" data-folder-move-down="${esc(section.key)}" ${atBottom ? 'disabled' : ''}>Move down</button>
+          <button type="button" role="menuitem" class="ghost-btn tiny character-folder-menu-option" data-copy-folder="${esc(section.key)}">Copy folder</button>
+          <button type="button" role="menuitem" class="ghost-btn tiny character-folder-menu-option danger-btn" data-delete-folder="${esc(section.key)}">Delete folder</button>
+        </div>
+      </span>
+    </summary>
+  `
+}
+
 function renderCharacterList() {
   const list = $('#character-list')
   if (!list) return
-  if (!state.characters.length) {
+  if (!state.characters.length && !(state.characterFolderOrder || []).length) {
     list.innerHTML = '<div class="empty">No characters yet. Make a chaos gremlin above.</div>'
     return
   }
-  list.innerHTML = state.characters.map(character => {
-    const race = getRace(character.race)
-    const level = characterLevelInfo(character)
+
+  const sections = rosterFolderSections(state)
+  list.innerHTML = sections.map(section => {
+    const open = isRosterFolderOpen(state, section.key, section.characters)
+    const body = section.characters.length
+      ? section.characters.map(renderCharacterCard).join('')
+      : '<p class="subtle character-folder-empty">No characters here yet.</p>'
     return `
-      <div class="character-card-wrap">
-        <button type="button" class="character-card ${character.id === state.activeId ? 'active' : ''}" data-select-character="${esc(character.id)}">
-          <strong>${esc(race?.icon || '👤')} ${esc(character.name)}</strong>
-          <span>Lv ${level.display} · ${level.skillCount} skills · ${character.lumens}L</span>
-        </button>
-        <button type="button" class="ghost-btn tiny character-dup" data-duplicate-character="${esc(character.id)}" title="Duplicate character">⧉</button>
-      </div>
+      <details class="character-folder-details" data-folder-key="${esc(section.key)}" ${open ? 'open' : ''}>
+        ${renderFolderSummary(section, open)}
+        <div class="character-folder-body">
+          ${body}
+        </div>
+      </details>
     `
   }).join('')
 }
@@ -178,6 +321,7 @@ function renderHeader() {
 }
 
 export function renderContent() {
+  const focusCapture = captureContentFocus()
   const content = $('#app-content')
   const character = activeCharacter()
   if (!character && state.tab !== 'gm') {
@@ -187,6 +331,7 @@ export function renderContent() {
         <p>This rebuild keeps the core idea: characters, races, lumens, skills, equipment and GM-friendly tools - but trims the clutter so it is actually usable at the table.</p>
       </div>
     `
+    restoreContentFocus(focusCapture)
     return
   }
 
@@ -200,17 +345,69 @@ export function renderContent() {
     notes: () => renderNotesTab(character)
   }
   content.innerHTML = tabs[state.tab]?.() || ''
+  restoreContentFocus(focusCapture)
 }
 
 export function renderEquipSlots(character, emptyLabel = 'Empty') {
-  const slots = ['weapon', 'armor', 'accessory']
-  if (offhandSlotAvailable(character)) slots.splice(1, 0, 'offhand')
+  const slots = ['weapon', 'offhand', 'armor', 'accessory']
+  const offhandLocked = offhandSlotLockReason(character)
   return slots.map(slot => {
     const entry = character.inventory.find(inv => inv.uid === character.equipped[slot])
     const item = entry && getItem(entry.itemId)
     const label = slot === 'offhand' ? 'Off-hand' : titleCase(slot)
-    return `<div class="equip-row"${item ? ` data-tooltip="${esc(itemTooltip(item, character))}" tabindex="0"` : ''}><div><strong>${label}</strong><div class="subtle">${item ? `${fallbackIcon(item)} ${esc(item.name)} · ${formatStatModifiers(item.statModifiers)}` : emptyLabel}</div></div>${item ? `<button type="button" class="ghost-btn tiny" data-unequip="${slot}">Unequip</button>` : ''}</div>`
+    const enchantRow = entry && item ? renderEquipEnchantSlots(character, entry, item) : ''
+    const rowTip = item ? itemTooltip(item, character, entry) : ''
+    const lockedHint = slot === 'offhand' && offhandLocked && !item
+      ? offhandLocked
+      : ''
+    const emptyText = lockedHint || emptyLabel
+    const rowClass = lockedHint ? 'equip-row equip-slot-row equip-slot-locked' : 'equip-row equip-slot-row'
+    return `
+      <div class="${rowClass}">
+        <div class="equip-slot-copy"${rowTip ? ` data-tooltip="${esc(rowTip)}" tabindex="0"` : lockedHint ? ` data-tooltip="${esc(lockedHint)}" tabindex="0"` : ''}>
+          <strong class="equip-slot-label">${label}${lockedHint ? ' <span class="subtle">(locked)</span>' : ''}</strong>
+          <div class="subtle equip-slot-item">${item ? `${fallbackIcon(item)} ${esc(item.name)} · ${formatStatModifiers(item.statModifiers)}` : emptyText}</div>
+          ${enchantRow}
+        </div>
+        ${item ? `<button type="button" class="ghost-btn tiny" data-unequip="${slot}">Unequip</button>` : ''}
+      </div>
+    `
   }).join('')
+}
+
+function renderEquipEnchantSlots(character, entry, item) {
+  const max = maxEnchantmentSlots(entry, item)
+  if (max <= 0) return ''
+  const enchants = entryEnchantments(entry)
+  const chips = []
+  for (let i = 0; i < max; i++) {
+    const ench = enchants[i]
+    if (ench) {
+      const tip = enchantmentTooltip(ench, item.name)
+      if (isShieldEnchant(ench)) {
+        chips.push(`
+          <span class="enchant-slot-chip filled enchant-shield-chip" data-tooltip="${esc(tip)}" tabindex="0">
+            ${esc(ench.icon || '✨')} ${esc(enchantDisplayLabel(ench))}
+          </span>
+          <button type="button" class="ghost-btn tiny enchant-shield-soak-btn" data-shield-soak-gear="${esc(entry.uid)}" data-enchant-id="${esc(ench.id)}" data-shield-soak-amount="1" title="Record 1 magical damage soaked">−1</button>
+          <button type="button" class="ghost-btn tiny enchant-shield-soak-btn" data-shield-soak-gear="${esc(entry.uid)}" data-enchant-id="${esc(ench.id)}" data-shield-soak-amount="5" title="Record 5 magical damage soaked">−5</button>
+          <button type="button" class="ghost-btn tiny enchant-remove-btn" data-remove-enchant="${esc(entry.uid)}" data-enchant-id="${esc(ench.id)}" title="Remove barrier">×</button>
+        `)
+      } else {
+        const removeTip = `${tip}\n\nClick to remove and return to inventory.`
+        chips.push(`
+          <button type="button" class="enchant-slot-chip filled" data-remove-enchant="${esc(entry.uid)}" data-enchant-id="${esc(ench.id)}" data-tooltip="${esc(removeTip)}" title="Remove enchant">
+            ${esc(ench.icon || '✨')} ${esc(enchantDisplayLabel(ench))}
+          </button>
+        `)
+      }
+    } else {
+      chips.push(`
+        <span class="enchant-slot-chip empty" data-tooltip="${esc('Empty enchant slot — use Apply on an enhancement in Inventory.')}" tabindex="0">Empty slot</span>
+      `)
+    }
+  }
+  return `<div class="enchant-slot-row">${chips.join('')}</div>`
 }
 
 function effectOptionsMarkup() {
@@ -233,11 +430,19 @@ function renderEffectPill(effectId, source = '', status = null) {
   return `<span class="pill ${effectTone(effect)}" data-tooltip="${esc(effectTooltip(effectId, source, status))}" tabindex="0">${esc(effect.icon || '✦')} ${esc(effect.name)}</span>`
 }
 
+function sourceEffectStatus(entry) {
+  return {
+    duration: entry.duration,
+    potency: entry.potency,
+    sourcePassive: true
+  }
+}
+
 function renderEffectsSnapshot(character) {
   const active = character.statusEffects || []
   const sourced = characterEffectSources(character)
   const activePills = active.slice(0, 8).map(status => renderEffectPill(status.effectId, 'Applied status', status)).join('')
-  const sourcePills = sourced.slice(0, 8).map(entry => renderEffectPill(entry.effect.id, entry.sources.join(', '))).join('')
+  const sourcePills = sourced.slice(0, 8).map(entry => renderEffectPill(entry.effect.id, entry.sources.join(', '), sourceEffectStatus(entry))).join('')
   const extraCount = Math.max(0, active.length + sourced.length - 16)
   return `
     <div class="effects-snapshot">
@@ -255,54 +460,63 @@ function renderEffectsSnapshot(character) {
 function renderEffectsManager(character) {
   const sourced = characterEffectSources(character)
   const active = character.statusEffects || []
-  const sourceCards = sourced.map(entry => `
-    <article class="effect-card ${effectTone(entry.effect)}" data-tooltip="${esc(effectTooltip(entry.effect.id, entry.sources.join(', ')))}" tabindex="0">
+  const sourceCards = sourced.map(entry => {
+    const potencyText = effectPotencyLabel(entry.effect, entry.potency)
+    return `
+    <article class="effect-card effect-card-source ${effectTone(entry.effect)}" data-tooltip="${esc(effectTooltip(entry.effect.id, entry.sources.join(', '), sourceEffectStatus(entry)))}" tabindex="0">
       <div class="effect-card-title"><strong>${esc(entry.effect.icon || '✦')} ${esc(entry.effect.name)}</strong><span class="pill">${esc(effectTypeLabel(entry.effect.type))}</span></div>
-      <p>${esc(entry.effect.desc)}</p>
-      <div class="subtle">From: ${esc(entry.sources.slice(0, 4).join(', '))}${entry.sources.length > 4 ? ` and ${entry.sources.length - 4} more` : ''}</div>
+      <p class="effect-card-desc">${esc(entry.effect.desc)}</p>
+      <div class="wrap effect-card-tags">
+        <span class="pill">Duration: ${esc(effectDurationLabel(entry.duration))}</span>
+        ${potencyText && effectUsesPotency(entry.effect) ? `<span class="pill warn">Potency ${esc(potencyText)}</span>` : ''}
+        ${entry.effect.statModifiers ? `<span class="pill ${effectTone(entry.effect)}">${esc(formatStatModifiers(entry.effect.statModifiers))}</span>` : ''}
+      </div>
+      <div class="subtle effect-card-meta">From: ${esc(entry.sources.slice(0, 4).join(', '))}${entry.sources.length > 4 ? ` and ${entry.sources.length - 4} more` : ''}</div>
     </article>
-  `).join('')
+  `
+  }).join('')
   const activeCards = active.map(status => {
     const effect = getEffect(status.effectId)
     if (!effect) return ''
     return `
-      <article class="effect-card ${effectTone(effect)}" data-tooltip="${esc(effectTooltip(effect.id, 'Applied status', status))}" tabindex="0">
+      <article class="effect-card effect-card-active ${effectTone(effect)}" data-tooltip="${esc(effectTooltip(effect.id, 'Applied status', status))}" tabindex="0">
         <div class="effect-card-title"><strong>${esc(effect.icon || '✦')} ${esc(effect.name)}</strong><button type="button" class="danger-btn tiny" data-remove-effect="${esc(status.uid)}">Remove</button></div>
-        <p>${esc(effect.desc)}</p>
-        <div class="wrap">
+        <p class="effect-card-desc">${esc(effect.desc)}</p>
+        <div class="wrap effect-card-tags">
           <span class="pill">Remaining: ${esc(effectDurationLabel(status.duration))}</span>
           ${status.potency !== undefined && status.potency !== null && status.potency !== 0 ? `<span class="pill warn">Potency ${esc(status.potency)}</span>` : ''}
           ${effect.statModifiers ? `<span class="pill ${effectTone(effect)}">${esc(formatStatModifiers(effect.statModifiers))}</span>` : ''}
         </div>
-        ${status.notes ? `<div class="subtle">${esc(status.notes)}</div>` : ''}
-      </article>
+          ${status.notes ? `<div class="subtle effect-card-meta">${esc(status.notes)}</div>` : ''}
+          ${status.performance ? `<div class="subtle effect-card-meta good">${esc(formatPerformanceMeta(status.performance))}</div>` : ''}
+        </article>
     `
   }).join('')
   return `
     <section class="card effects-manager mt-16">
-      <div class="card-header">
+      <div class="card-header effects-manager-header">
         <div>
           <div class="kicker">Rules Brain</div>
           <h3>Effects & Status Manager</h3>
-          <p>Hover any effect to see what it does. Shows ongoing passives from gear, weapon-matched skills, active toggles, and resistances — not one-shot attack spells.</p>
+          <p class="effects-manager-intro">Hover any effect to see what it does. Shows ongoing passives from gear, weapon-matched skills, active toggles, and resistances — not one-shot attack spells.</p>
         </div>
         <button type="button" class="ghost-btn tiny" data-process-turn>Process Turn</button>
       </div>
 
-      <div class="grid two">
-        <div>
-          <h3>Applied Status Effects</h3>
-          <div class="effect-grid">${activeCards || '<div class="empty">No active status effects. Suspiciously healthy.</div>'}</div>
+      <div class="grid two effects-sections">
+        <div class="effects-section">
+          <h3 class="effects-section-title">Applied Status Effects</h3>
+          <div class="effect-grid">${activeCards || '<div class="empty effects-empty">No active status effects. Suspiciously healthy.</div>'}</div>
         </div>
-        <div>
-          <h3>Skill & Gear Effects</h3>
-          <div class="effect-grid">${sourceCards || '<div class="empty">No skill/gear special effects detected yet.</div>'}</div>
+        <div class="effects-section">
+          <h3 class="effects-section-title">Skill & Gear Effects</h3>
+          <div class="effect-grid">${sourceCards || '<div class="empty effects-empty">No skill/gear special effects detected yet.</div>'}</div>
         </div>
       </div>
 
       <div class="effect-add-box">
-        <h3>Add Effect</h3>
-        <p>Use this for Poison, Burn, HP Regen, buffs, debuffs, auras, or GM-made nonsense. Leave duration/potency blank to use the default. Item-only and on-hit procs are hidden from this list.</p>
+        <h3 class="effects-section-title">Add Effect</h3>
+        <p class="effect-add-intro">Use this for Poison, Burn, HP Regen, buffs, debuffs, auras, or GM-made nonsense. Duration counts down each Process Turn; leave blank to use the effect default. Potency matters for damage/heal per turn — leave blank for the default.</p>
         <div class="effect-add-grid">
           <label><span class="field-label">Effect</span><select class="input" id="effect-select">${effectOptionsMarkup()}</select></label>
           <label><span class="field-label">Duration</span><input class="input" id="effect-duration" type="number" min="0" placeholder="Default" /></label>
@@ -315,13 +529,42 @@ function renderEffectsManager(character) {
   `
 }
 
+function renderElementalAffinitySection(character) {
+  const profile = computeElementalAffinity(character)
+  const affected = ELEMENTS
+    .map(element => profile.elements[element.id])
+    .filter(isElementalAffinityRowVisible)
+  if (!affected.length) return ''
+
+  const rows = affected.map(row => `
+    <div class="elemental-affinity-row ${elementalAffinityTone(row)}" data-tooltip="${esc(elementalAffinityTooltip(row))}" tabindex="0">
+      <span class="elemental-affinity-name">${esc(row.icon)} ${esc(row.name)}</span>
+      <span class="elemental-affinity-status">${esc(row.statusLabel)}</span>
+    </div>
+  `).join('')
+
+  return `
+    <section class="card elemental-affinity-card mt-16">
+      <div class="kicker">Defences</div>
+      <h3>Elemental Affinity</h3>
+      <p class="subtle elemental-affinity-intro">Resist and weakness stack in levels (25% = 2, 50% = 1, 200% weak = 1, 400% = 2). Opposing levels cancel before the final tier is shown.</p>
+      <div class="elemental-affinity-grid">${rows}</div>
+    </section>
+  `
+}
+
 function renderCharacterTab(character) {
   const race = getRace(character.race)
   const background = getBackground(character.background)
   const stats = computeStats(character)
   const level = characterLevelInfo(character)
   const unlocked = character.skills.map(getSkill).filter(Boolean)
-  const passives = (race?.passiveTraits || []).map(trait => `<span class="pill good">${esc(trait)}</span>`).join('') || '<span class="pill">No race passives</span>'
+  const passives = (race?.passiveTraits || []).map(trait => {
+    const tableRule = isTableRuleRacePassive(trait)
+    const pillClass = tableRule ? 'pill warn' : 'pill good'
+    const prefix = tableRule ? 'Table rule · ' : ''
+    return `<span class="${pillClass}" data-tooltip="${esc(racePassiveTooltip(trait))}" tabindex="0">${esc(prefix + trait)}</span>`
+  }).join('') || '<span class="pill">No race passives</span>'
   return `
     <div class="grid two">
       <section class="card">
@@ -368,29 +611,58 @@ function renderCharacterTab(character) {
       </section>
     </div>
 
+    ${renderElementalAffinitySection(character)}
+
     ${renderEffectsManager(character)}
 
-    <div class="grid two mt-16">
+    ${renderPerformanceBanner(character)}
+
+    <div class="grid three char-gear-grid mt-16">
       <section class="card">
         <h3>Core Stats</h3>
-        <div class="grid two">
+        <div class="grid three core-stats-grid">
           ${Object.entries(STAT_RULES).map(([stat, rule]) => `<div class="stat-row stat-row-compact" data-tooltip="${esc(statTooltip(rule))}" tabindex="0"><strong>${esc(rule.label)}</strong><div class="stat-value">${stats[stat]}</div></div>`).join('')}
         </div>
       </section>
-      <section class="card">
-        <h3>Equipment</h3>
-        <div class="stack">${renderEquipSlots(character, 'Nothing equipped')}</div>
+      <section class="card equipment-card">
+        <h3 class="gear-section-title">Equipment</h3>
+        <div class="stack gear-stack">${renderEquipSlots(character, 'Nothing equipped')}</div>
+      </section>
+      <section class="card inventory-card">
+        <h3 class="gear-section-title">Inventory</h3>
+        <div class="stack gear-stack">${renderInventoryRows(character)}</div>
       </section>
     </div>
 
     <section class="card mt-16">
-      <h3>Inventory</h3>
-      <div class="stack">${renderInventoryRows(character)}</div>
-    </section>
-
-    <section class="card mt-16">
       <h3>Unlocked Skills</h3>
       ${unlocked.length ? `<div class="wrap">${unlocked.map(skill => `<span class="pill ${isToggleSkill(skill) ? 'warn' : 'good'}" data-tooltip="${esc(skillTooltip(skill, character))}" tabindex="0">${esc(skill.icon || '✦')} ${esc(skill.name)}</span>`).join('')}</div>` : '<div class="empty">No skills yet. Time to spend shiny brain-money.</div>'}
+    </section>
+  `
+}
+
+function renderPerformanceBanner(character) {
+  const rows = activePerformanceStatuses(character)
+  if (!rows.length) return ''
+  const pills = rows.map(status => {
+    const effect = getEffect(status.effectId)
+    const name = effect?.name || titleCase(String(status.effectId || 'song').replace(/_buff|_debuff/g, ''))
+    const turns = Number.isFinite(Number(status.duration)) ? status.duration : '?'
+    const perf = formatPerformanceMeta(status.performance)
+    const tip = [
+      `Performing: ${name}`,
+      `${turns} turn${turns === 1 ? '' : 's'} remaining on your sheet`,
+      perf ? perf : 'Vocal performance',
+      '',
+      'Keep performing each turn or end the song. Harmony joiners are counted at the table.'
+    ].join('\n')
+    return `<span class="pill warn" data-tooltip="${esc(tip)}" tabindex="0">🎵 ${esc(name)} (${turns}t)${perf ? ` · ${esc(perf)}` : ''}</span>`
+  }).join('')
+  return `
+    <section class="card performance-banner mt-16">
+      <div class="kicker">Musician</div>
+      <h3 class="performance-banner-title">Now performing</h3>
+      <div class="wrap">${pills}</div>
     </section>
   `
 }
@@ -419,7 +691,7 @@ function renderSkillsTab(character) {
     : list.filter(skill => !character.skills.includes(skill.id)).reduce((sum, skill) => sum + skill.cost, 0)
 
   return `
-    <div class="toolbar">
+    <div class="toolbar skills-toolbar">
       <input class="input" id="skill-search" placeholder="Search skills, effects, prerequisites..." value="${esc(state.skillSearch)}" />
       <span class="pill good">${learnedInTree}/${list.length} in tree</span>
       <span class="pill gold">${isGmMode() ? 'Free (GM)' : `${costRemaining}L remaining`}</span>
@@ -499,7 +771,7 @@ Current value can be adjusted directly or with the quick buttons. Maximum: ${max
         <div>
           <div class="kicker">Live Resource Editor</div>
           <h3>HP, Stamina, Lumens & Gil</h3>
-          <p>Use this during play to damage, heal, reward, spend, pay, rob, or otherwise lovingly bully the character.</p>
+          <p class="tab-intro">Use this during play to damage, heal, reward, spend, pay, rob, or otherwise lovingly bully the character.</p>
         </div>
         <span class="pill gold">${formatCurrency(character.gil)}</span>
       </div>
@@ -543,22 +815,22 @@ function renderStatsTab(character) {
   const computed = computeStats(character)
   return `
     ${renderResourceManager(character)}
-    <div class="grid two mt-16">
+    <div class="grid two stat-upgrade-grid mt-16">
       ${Object.entries(STAT_RULES).map(([stat, rule]) => {
         const rows = statBreakdown(character, stat).map(row => `<span class="pill ${row.value >= 0 ? 'good' : 'bad'}">${esc(row.label)} ${row.value >= 0 ? '+' : ''}${row.value}</span>`).join('')
         return `
-          <section class="card">
-            <div class="stat-row" data-tooltip="${esc(statTooltip(rule, { includeCost: true }))}" tabindex="0">
-              <div>
+          <section class="card stat-upgrade-card">
+            <div class="stat-row stat-row-upgrade" data-tooltip="${esc(statTooltip(rule, { includeCost: true }))}" tabindex="0">
+              <div class="stat-upgrade-head">
                 <div class="kicker">${rule.cost} Lumens / point</div>
                 <h3>${esc(rule.label)}</h3>
               </div>
               <div class="stat-value">${computed[stat]}</div>
             </div>
-            <div class="wrap mt-12">${rows}</div>
+            <div class="wrap mt-12 stat-breakdown-pills">${rows}</div>
             <div class="stat-actions">
               <button type="button" class="ghost-btn" data-refund-stat="${esc(stat)}" data-tooltip="${esc(statRefundTooltip(stat, rule, character))}" tabindex="0">- Refund</button>
-              <button type="button" class="primary-btn" data-upgrade-stat="${esc(stat)}" data-tooltip="${esc(statUpgradeTooltip(stat, rule, character))}" tabindex="0">+ Upgrade</button>
+              <button type="button" class="primary-btn" data-upgrade-stat="${esc(stat)}" data-tooltip="${esc(statUpgradeTooltip(stat, rule, character))}" tabindex="0">Upgrade (${isGmMode() ? 'Free' : `${rule.cost}L`})</button>
             </div>
           </section>
         `
@@ -572,103 +844,113 @@ function renderInventoryRows(character) {
     const item = getItem(entry.itemId)
     if (!item) return ''
     const equippedSlot = Object.entries(character.equipped || {}).find(([, uidValue]) => uidValue === entry.uid)?.[0]
-    const canEquipWeapon = String(item.type || '').toLowerCase().includes('weapon')
-    const canEquipArmor = String(item.type || '').toLowerCase().includes('armor')
-    const canEquipAccessory = String(item.type || '').toLowerCase().includes('accessory')
-    const canEquipOffhand = canEquipWeapon && offhandSlotAvailable(character) && /\bdagger\b/i.test(`${item.id} ${item.name}`) && !equippedSlot
+    const type = String(item.type || '').toLowerCase()
+    const canEquipWeapon = canEquipToMainHand(item)
+    const canEquipArmor = type.includes('armor')
+    const canEquipAccessory = type.includes('accessory')
+    const offhandCheck = isOffhandItem(item) ? canEquipToOffhand(character, item) : { ok: false }
+    const canEquipOffhand = offhandCheck.ok && !equippedSlot
     const canEquip = (canEquipWeapon || canEquipArmor || canEquipAccessory) && !equippedSlot
     const crafted = craftedByLabel(entry, character)
+    const enchantTargets = isEnhancementItem(item) && !equippedSlot
+      ? compatibleEquippedGearForEnhancement(character, item)
+      : []
     return `
-      <div class="inventory-row" data-tooltip="${esc(itemTooltip(item, character, entry))}" tabindex="0">
-        <div>
-          <strong>${fallbackIcon(item)} ${esc(item.name)} ${entry.qty > 1 ? `x${entry.qty}` : ''}</strong>
-          <div class="subtle">${esc(item.type || 'item')} · ${esc(item.rarity || 'common')} ${equippedSlot ? `· Equipped as ${titleCase(equippedSlot)}` : ''}</div>
-          ${crafted ? `<div class="wrap detail-pills"><span class="pill good">${esc(crafted)}</span></div>` : ''}
-          <div class="subtle detail-line">${esc(item.desc || 'No description provided.')}</div>
+      <div class="inventory-row inventory-item-row" data-tooltip="${esc(itemTooltip(item, character, entry))}" tabindex="0">
+        <div class="inventory-item-copy">
+          <strong class="inventory-item-name">${fallbackIcon(item)} ${esc(item.name)} ${entry.qty > 1 ? `x${entry.qty}` : ''}</strong>
+          <div class="subtle inventory-item-meta">${esc(item.type || 'item')} · ${esc(item.rarity || 'common')} ${equippedSlot ? `· ${titleCase(equippedSlot)}` : ''}</div>
+          ${crafted ? `<div class="wrap inventory-item-tags"><span class="pill good">${esc(crafted)}</span></div>` : ''}
+          <div class="subtle inventory-item-desc detail-line">${esc(item.desc || 'No description provided.')}</div>
         </div>
-        <div class="wrap">
+        <div class="wrap inventory-item-actions">
+          ${enchantTargets.map(row => `<button type="button" class="primary-btn tiny" data-apply-enchant-gear="${esc(row.entry.uid)}" data-apply-enchant-scroll="${esc(entry.uid)}">${esc(applyEnchantTargetLabel(row.slot))}</button>`).join('')}
           ${canEquip ? `<button type="button" class="primary-btn tiny" data-equip-item="${esc(entry.uid)}">Equip</button>` : ''}
-          ${canEquipOffhand ? `<button type="button" class="ghost-btn tiny" data-equip-offhand="${esc(entry.uid)}">Off-hand</button>` : ''}
+          ${canEquipOffhand ? `<button type="button" class="offhand-btn tiny" data-equip-offhand="${esc(entry.uid)}" title="${esc(offhandCheck.reason)}">Off-hand</button>` : ''}
           <button type="button" class="danger-btn tiny" data-remove-item="${esc(entry.uid)}">Remove</button>
         </div>
       </div>
     `
   }).join('')
-  return rows || '<div class="empty">Inventory empty. Visit the Shop tab to gear up.</div>'
+  return rows || '<div class="empty gear-empty">Inventory empty. Visit the Shop tab to gear up.</div>'
 }
 
 function renderShopTab(character) {
   const items = filterCatalogItems(character)
   const pageData = paginateItems(items)
-  const typeOptions = cache.itemTypeOptions || ['all']
+  const categoryCounts = catalogCategoryCounts(character)
+  const sourceCounts = catalogSourceCounts(character)
   const rarityOptions = cache.itemRarityOptions || ['all']
-  const featureOptions = [
-    ['all', 'Any purpose'],
-    ['equippable', 'Any equipment'],
-    ['weapon', 'Weapons'],
-    ['armor', 'Armour'],
-    ['accessory', 'Accessories'],
-    ['damage', 'Has damage dice'],
-    ['consumable', 'Consumables / food'],
-    ['crafting', 'Crafting materials'],
-    ['quest', 'Quest / key items'],
-    ['strength', 'Boosts Strength'],
-    ['magicPower', 'Boosts Magic Power'],
-    ['accuracy', 'Boosts Accuracy'],
-    ['speed', 'Boosts Speed'],
-    ['defence', 'Boosts Defence'],
-    ['special', 'Has special effect'],
-    ['enchantable', 'Has enchant slots'],
-    ['affordable', 'Affordable now'],
-    ['free', 'Free / loot']
+  const activeFilters = activeCatalogFilterLabels()
+  const sourceOptions = [
+    ['shop', 'Shop'],
+    ['profession', 'Profession'],
+    ['discoverable', 'Discoverable'],
+    ['loot', 'Loot'],
+    ['all', 'All sources']
   ]
+  const categoryOptions = ITEM_CATALOG_CATEGORIES.filter(row =>
+    row.id === 'all' || row.id === state.itemCategory || (categoryCounts[row.id] || 0) > 0
+  )
   const sortOptions = [
-    ['name', 'Name A-Z'],
+    ['name', 'Name A–Z'],
     ['priceAsc', 'Cheapest first'],
     ['priceDesc', 'Most expensive'],
     ['rarityDesc', 'Rarest first'],
     ['damageDesc', 'Highest damage'],
-    ['strengthDesc', 'Best Strength boost'],
-    ['magicDesc', 'Best Magic boost'],
-    ['defenceDesc', 'Best Defence boost'],
-    ['sourceType', 'Source then type']
+    ['strengthDesc', 'Best Strength'],
+    ['magicDesc', 'Best Magic'],
+    ['defenceDesc', 'Best Defence'],
+    ['sourceType', 'Source, then type']
   ]
   return `
-    <section class="card">
+    <section class="card catalogue-card">
       <div class="card-header">
         <div>
           <div class="kicker">Item Catalogue</div>
           <h3>Shop</h3>
-          <p>Browse and buy gear. Search by name, effect, stat, damage dice, rarity, or keywords like "burn", "defence", or "sword". Hover any card for full details. Use Grant for free GM loot.</p>
+          <p class="tab-intro">Browse gear by category — food includes shop snacks like apples and cheese, not just chef recipes. Stock unlocks by rarity at your level. Hover cards for details; Grant is GM-only free loot.</p>
         </div>
         <span class="pill gold">${formatCurrency(character.gil)}</span>
       </div>
-      <div class="toolbar item-toolbar">
-        <input class="input" id="item-search" placeholder="Search effects/stats e.g. burn, +strength, 1d8, dragon, defence..." value="${esc(state.itemSearch)}" />
-        <select class="input" id="item-source">
-          ${['shop', 'profession', 'discoverable', 'loot', 'all'].map(source => `<option value="${source}" ${state.itemSource === source ? 'selected' : ''}>${titleCase(source)}</option>`).join('')}
-        </select>
-        <select class="input" id="item-type">
-          ${typeOptions.map(type => `<option value="${esc(type)}" ${state.itemType === type ? 'selected' : ''}>${titleCase(type)}</option>`).join('')}
-        </select>
-        <select class="input" id="item-rarity">
-          ${rarityOptions.map(rarity => `<option value="${esc(rarity)}" ${state.itemRarity === rarity ? 'selected' : ''}>${titleCase(rarity)}</option>`).join('')}
-        </select>
-        <select class="input" id="item-feature">
-          ${featureOptions.map(([value, label]) => `<option value="${value}" ${state.itemFeature === value ? 'selected' : ''}>${esc(label)}</option>`).join('')}
-        </select>
-        <select class="input" id="item-sort">
-          ${sortOptions.map(([value, label]) => `<option value="${value}" ${state.itemSort === value ? 'selected' : ''}>Sort: ${esc(label)}</option>`).join('')}
-        </select>
+      <div class="shop-filters">
+        <div class="shop-filters-primary">
+          <input class="input shop-search" id="item-search" placeholder="Search name, effect, stat, food, potion, sword…" value="${esc(state.itemSearch)}" />
+          <select class="input" id="item-source" title="Where the item comes from">
+            ${sourceOptions.map(([value, label]) => {
+              const count = value === 'all' ? sourceCounts.all : (sourceCounts[value] || 0)
+              return `<option value="${value}" ${state.itemSource === value ? 'selected' : ''}>${esc(label)} (${count})</option>`
+            }).join('')}
+          </select>
+          <select class="input" id="item-category" title="Friendly item groups — Food & drink includes shop consumables">
+            ${categoryOptions.map(row => {
+              const count = row.id === 'all' ? categoryCounts.all : (categoryCounts[row.id] || 0)
+              return `<option value="${esc(row.id)}" ${state.itemCategory === row.id ? 'selected' : ''}>${esc(row.label)} (${count})</option>`
+            }).join('')}
+          </select>
+          <select class="input" id="item-rarity" title="Item rarity">
+            ${rarityOptions.map(rarity => `<option value="${esc(rarity)}" ${state.itemRarity === rarity ? 'selected' : ''}>${rarity === 'all' ? 'Any rarity' : titleCase(rarity)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="shop-filters-secondary">
+          <select class="input" id="item-sort">
+            ${sortOptions.map(([value, label]) => `<option value="${value}" ${state.itemSort === value ? 'selected' : ''}>${esc(label)}</option>`).join('')}
+          </select>
+          <label class="pill ${state.itemBuyableOnly ? 'good' : ''} shop-filter-toggle" title="Shop stock you can afford at your level — profession/loot items are craft-only or GM grant">
+            <input type="checkbox" id="item-buyable-only" ${state.itemBuyableOnly ? 'checked' : ''} ${isGmMode() ? 'disabled' : ''} />
+            Buyable only
+          </label>
+          ${activeFilters.length ? `<span class="pill warn shop-active-filters">Filters: ${activeFilters.map(label => esc(label)).join(' · ')}</span>` : ''}
+        </div>
       </div>
       <div class="catalogue-summary">
         <span class="pill good">${pageData.total} match${pageData.total === 1 ? '' : 'es'}</span>
         <span class="pill">Page ${pageData.page + 1}/${pageData.totalPages} · ${ITEMS_PER_PAGE} per page</span>
         <button type="button" class="ghost-btn tiny" data-item-page-prev ${pageData.page <= 0 ? 'disabled' : ''}>Prev</button>
         <button type="button" class="ghost-btn tiny" data-item-page-next ${pageData.page >= pageData.totalPages - 1 ? 'disabled' : ''}>Next</button>
-        <button type="button" class="ghost-btn tiny" data-reset-item-filters>Reset Filters</button>
+        <button type="button" class="ghost-btn tiny" data-reset-item-filters>Reset filters</button>
       </div>
-      <div class="item-grid">${pageData.items.map(item => renderItemCard(item, character)).join('') || '<div class="empty">No items matched.</div>'}</div>
+      <div class="item-grid">${pageData.items.map(item => renderItemCard(item, character)).join('') || `<div class="empty">${state.itemBuyableOnly && state.itemSource !== 'shop' ? 'Buyable only applies to Shop stock — switch source to Shop, or turn off the filter to browse profession/loot catalogues.' : 'No items matched. Try Shop source, turn off Buyable only, or pick All categories.'}</div>`}</div>
     </section>
   `
 }
@@ -682,12 +964,12 @@ function renderCraftTab(character) {
   const professions = craftProfessionOptions()
   const gmFree = isGmMode()
   return `
-    <section class="card">
+    <section class="card catalogue-card">
       <div class="card-header">
         <div>
           <div class="kicker">Career Crafting</div>
           <h3>Craft</h3>
-          <p>Craft items from career recipes. Materials are taken from your inventory. ${gmFree ? 'GM Mode: craft without materials.' : 'Learn career skills on the Skills tab to unlock recipes.'}</p>
+          <p class="tab-intro">Craft items from career recipes. Materials are taken from your inventory. ${gmFree ? 'GM Mode: Grant adds items instantly; Craft skips materials and skill gates but keeps craft bonuses on gear.' : 'Learn career skills on the Skills tab to unlock recipes.'}</p>
         </div>
         <span class="pill">${recipes.length} recipe${recipes.length === 1 ? '' : 's'}</span>
       </div>
@@ -727,7 +1009,10 @@ function renderCraftRecipeCard(recipe, character) {
       </div>
       <div class="skill-actions">
         <span class="pill ${check.ok ? 'good' : 'warn'}">${esc(check.reason)}</span>
-        <button type="button" class="primary-btn tiny" data-craft-recipe="${esc(recipe.id)}" ${check.ok ? '' : 'disabled'}>Craft</button>
+        <span class="wrap compact-actions">
+          ${isGmMode() ? `<button type="button" class="ghost-btn tiny" data-grant-craft-recipe="${esc(recipe.id)}">Grant</button>` : ''}
+          <button type="button" class="primary-btn tiny" data-craft-recipe="${esc(recipe.id)}" ${check.ok ? '' : 'disabled'}>Craft</button>
+        </span>
       </div>
     </article>
   `
@@ -736,27 +1021,44 @@ function renderCraftRecipeCard(recipe, character) {
 function renderItemCard(item, character = activeCharacter()) {
   const price = itemPriceGil(item)
   const gmFree = isGmMode()
-  const affordable = gmFree || !character || price <= normalizeGil(character.gil)
+  const purchase = shopPurchaseCheck(character, item, { free: gmFree })
+  const shopLocked = isShopPurchaseItem(item) && !gmFree && character && characterLevelInfo(character).level < shopMinLevelForItem(item)
+  const canBuy = isShopPurchaseItem(item) || gmFree
+  const affordLocked = isShopPurchaseItem(item) && !gmFree && character && itemPriceGil(item) > normalizeGil(character.gil)
   const statPills = Object.entries(item.statModifiers || {}).map(([stat, value]) => `<span class="pill ${value >= 0 ? 'good' : 'bad'}">${titleCase(stat)} ${value >= 0 ? '+' : ''}${value}</span>`).join('')
   const effectPills = (item.specialEffects || []).slice(0, 3).map(effect => `<span class="pill warn">${titleCase(effect)}</span>`).join('')
+  const handsLabel = weaponHandednessLabel(item)
+  const offhandLabel = offhandTypeLabel(item)
+  const levelPill = isShopPurchaseItem(item) && !gmFree
+    ? `<span class="pill ${shopLocked ? 'warn' : 'good'}">${shopLocked ? `Lv ${shopMinLevelForItem(item)}+` : 'Unlocked'}</span>`
+    : ''
+  const craftPill = item.source === 'profession' && !gmFree
+    ? '<span class="pill">Craft only</span>'
+    : ''
+  const affordPill = affordLocked
+    ? '<span class="pill warn">Too expensive</span>'
+    : ''
   return `
     <article class="item-card" data-tooltip="${esc(itemTooltip(item, character))}" tabindex="0">
       <div class="item-title">
         <strong>${fallbackIcon(item)} ${esc(item.name)}</strong>
         <span class="pill">${esc(item.rarity || 'common')}</span>
       </div>
-      <div class="item-meta">${esc(item.type || 'item')} · ${esc(item.source || 'shop')}${item.damage ? ` · ${esc(item.damage)}` : ''}</div>
+      <div class="item-meta">${esc(item.type || 'item')} · ${esc(item.source || 'shop')}${item.damage ? ` · ${esc(item.damage)}` : ''}${handsLabel ? ` · ${esc(handsLabel)}` : ''}${offhandLabel ? ` · ${esc(offhandLabel)}` : ''}</div>
       <p class="subtle">${esc(item.desc || 'No description provided.')}</p>
       <div class="wrap detail-pills">
         ${statPills || '<span class="pill">No stat modifiers</span>'}
         ${effectPills}
-        ${Number(item.enchantmentSlots || 0) ? `<span class="pill good" data-tooltip="${esc('Enchantment slots shown — enchant UI not implemented yet (planned).')}" tabindex="0">${item.enchantmentSlots} enchant slot${Number(item.enchantmentSlots) === 1 ? '' : 's'}</span>` : ''}
+        ${levelPill}
+        ${craftPill}
+        ${affordPill}
+        ${Number(item.enchantmentSlots || 0) ? `<span class="pill good">${item.enchantmentSlots} enchant slot${Number(item.enchantmentSlots) === 1 ? '' : 's'}</span>` : ''}
       </div>
       <div class="skill-actions">
         <span class="pill gold">${gmFree ? 'Free (GM)' : price ? formatCurrency(price) : 'Free/loot'}</span>
         <span class="wrap compact-actions">
           <button type="button" class="ghost-btn tiny" data-grant-item="${esc(item.id)}">Grant</button>
-          <button type="button" class="primary-btn tiny" data-buy-item="${esc(item.id)}" ${affordable ? '' : 'disabled'}>${gmFree ? 'Take' : 'Buy'}</button>
+          ${canBuy ? `<button type="button" class="primary-btn tiny" data-buy-item="${esc(item.id)}" ${purchase.ok ? '' : 'disabled'}>${gmFree ? 'Take' : 'Buy'}</button>` : ''}
         </span>
       </div>
     </article>
@@ -783,6 +1085,12 @@ function renderGmPremadePicker() {
         <select class="input" id="gm-premade-sort" aria-label="Sort premade characters">
           ${sortOptions.map(([value, label]) => `<option value="${esc(value)}" ${state.gmPremadeSort === value ? 'selected' : ''}>${esc(label)}</option>`).join('')}
         </select>
+        <select class="input" id="gm-spawn-folder" aria-label="Folder for spawned characters">
+          <option value="">Spawn to: Unfiled</option>
+          ${listCharacterFolders(state).map(name => `
+            <option value="${esc(name)}" ${state.gmSpawnFolder === name ? 'selected' : ''}>Spawn to: ${esc(name)}</option>
+          `).join('')}
+        </select>
         <span class="pill">${rosterCount} in roster</span>
       </div>
       <div class="segmented mt-12">${categories.map(category => `
@@ -802,6 +1110,8 @@ function renderGmPremadePicker() {
               <div class="wrap">
                 <span class="pill">${esc(entry.category || 'npc')}</span>
                 <span class="pill subtle-pill">${skillCount} skill${skillCount === 1 ? '' : 's'}</span>
+                ${entry.lumens > 0 ? `<span class="pill gold">${entry.lumens}L loot</span>` : ''}
+                ${entry.gil > 0 ? `<span class="pill">${formatCurrency(entry.gil)} loot</span>` : ''}
                 ${inRoster ? `<span class="pill good">${inRoster} in roster</span>` : ''}
               </div>
               <div class="subtle">${esc(race?.name || entry.race || 'Unknown race')}${entry.elementalAffinity ? ` · ${titleCase(entry.elementalAffinity)}` : ''}</div>
@@ -1006,23 +1316,83 @@ function renderGmTab(character) {
   `
 }
 
+function renderGlossaryEntry(entry, openByDefault) {
+  return `
+    <details class="glossary-entry"${openByDefault ? ' open' : ''}>
+      <summary class="glossary-entry-summary">
+        <strong class="glossary-entry-term">${esc(entry.term)}</strong>
+        <span class="subtle glossary-entry-blurb">${esc(entry.summary)}</span>
+      </summary>
+      <p class="glossary-entry-body">${esc(entry.detail)}</p>
+    </details>
+  `
+}
+
+function renderGlossarySection() {
+  const query = state.glossarySearch || ''
+  const entries = filterGlossaryEntries(query, cache.effectDefinitions)
+  const grouped = groupGlossaryEntries(entries)
+  const openByDefault = Boolean(query.trim())
+  const total = getAllGlossaryEntries(cache.effectDefinitions).length
+  const countLabel = query.trim()
+    ? `${entries.length} match${entries.length === 1 ? '' : 'es'}`
+    : `${total} terms`
+
+  if (!entries.length) {
+    return `
+      <div class="glossary-results">
+        <div class="empty glossary-empty">No terms match “${esc(query)}”. Try “burn”, “force”, “freeze”, “mind control”, or “incapacitated”.</div>
+      </div>
+    `
+  }
+
+  const sections = grouped.map(([category, items]) => `
+    <section class="glossary-category">
+      <h4 class="glossary-category-title">${esc(category)}</h4>
+      <div class="glossary-entries">
+        ${items.map(entry => renderGlossaryEntry(entry, openByDefault)).join('')}
+      </div>
+    </section>
+  `).join('')
+
+  return `
+    <div class="glossary-meta subtle">${esc(countLabel)} · ${GLOSSARY_CATEGORIES.length} categories</div>
+    <div class="glossary-results">${sections}</div>
+  `
+}
+
 function renderNotesTab(character) {
   const statusLabel = state.notesDirty ? 'Unsaved changes' : 'Saved'
   const toneClass = state.notesDirty ? 'warn' : 'good'
   return `
-    <section class="card">
-      <div class="card-header">
-        <div>
-          <div class="kicker">Campaign Notes</div>
-          <h3>${esc(character.name)}'s Notes</h3>
-          <p>Use this for build plans, loot promises, session reminders, crimes committed, crimes denied, and suspiciously specific goblin grudges.</p>
+    <div class="grid two notes-grid">
+      <section class="card notes-card">
+        <div class="card-header">
+          <div>
+            <div class="kicker">Campaign Notes</div>
+            <h3>${esc(character.name)}'s Notes</h3>
+            <p>Build plans, session reminders, loot lists, and anything your character should remember.</p>
+          </div>
+          <div class="wrap">
+            <span id="notes-status" class="pill ${toneClass}">${statusLabel}</span>
+            <button type="button" class="primary-btn tiny" data-save-notes-button>Save Notes</button>
+          </div>
         </div>
-        <div class="wrap">
-          <span id="notes-status" class="pill ${toneClass}">${statusLabel}</span>
-          <button type="button" class="primary-btn tiny" data-save-notes-button>Save Notes</button>
+        <textarea id="character-notes" class="notes-textarea">${esc(character.notes || '')}</textarea>
+      </section>
+
+      <section class="card glossary-card">
+        <div class="card-header">
+          <div>
+            <div class="kicker">Rules reference</div>
+            <h3>Term Dictionary</h3>
+            <p>Plain-language rules, status effects, and damage types — written for casual tables and read-aloud play.</p>
+          </div>
         </div>
-      </div>
-      <textarea id="character-notes">${esc(character.notes || '')}</textarea>
-    </section>
+        <label class="field-label" for="glossary-search">Search terms</label>
+        <input class="input glossary-search" id="glossary-search" placeholder="e.g. burn, enchant, barrier, force damage, intimidated…" value="${esc(state.glossarySearch || '')}" />
+        ${renderGlossarySection()}
+      </section>
+    </div>
   `
 }

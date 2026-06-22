@@ -1,5 +1,5 @@
 import { getSkillsData } from './data.js'
-import { HIDDEN_SKILL_CATEGORIES, SKILL_SUBCATEGORY_LABELS } from './constants.js'
+import { HIDDEN_SKILL_CATEGORIES, SKILL_SUBCATEGORY_LABELS, TIER_MIN_LEVEL } from './constants.js'
 import { cache, flattenSkills, getSkill, displayCategory } from './cache.js'
 import { activeCharacter } from './state.js'
 import { isGmMode } from './gm-mode.js'
@@ -206,19 +206,25 @@ export function isToggleSkill(skill) {
   return skill?.isToggle || Object.prototype.hasOwnProperty.call(cache.toggleBonuses, skill?.id)
 }
 
+export function minLevelToLearnSkill(skill) {
+  const tier = Number(skill?.tier || 1)
+  const tierGate = TIER_MIN_LEVEL[tier] ?? 1
+  const explicit = skill?.prerequisites?.type === 'LEVEL' ? Number(skill.prerequisites.level || 0) : 0
+  return Math.max(tierGate, explicit)
+}
+
 export function prereqLabel(skill) {
+  const parts = [`Level ${minLevelToLearnSkill(skill)}+`]
   const req = skill?.prerequisites
-  if (req?.type === 'LEVEL') return `Level ${req.level}+`
-  const parts = []
-  if (req?.skills?.length) {
+  if (!req || req.type === 'NONE' || req.type === 'LEVEL') return parts[0]
+  if (req.skills?.length) {
     const labels = req.skills.map(id => getSkill(id)?.name || titleCase(id))
     parts.push(`${req.type}: ${labels.join(req.type === 'AND' ? ' + ' : ' / ')}`)
   }
-  if (req?.anyOfSkills?.length) {
+  if (req.anyOfSkills?.length) {
     const labels = req.anyOfSkills.map(id => getSkill(id)?.name || titleCase(id))
     parts.push(`One of: ${labels.join(' / ')}`)
   }
-  if (!parts.length) return 'No prerequisite'
   return parts.join(' · ')
 }
 
@@ -265,6 +271,10 @@ export function canLearnSkill(character, skill) {
     }
   }
   if (!raceAllowed(character, skill)) return { ok: false, reason: 'Wrong race' }
+  const needLevel = minLevelToLearnSkill(skill)
+  if (characterLevelInfo(character).level < needLevel) {
+    return { ok: false, reason: `Requires level ${needLevel} (Tier ${skill.tier || 1})` }
+  }
   if (!hasPrerequisites(character, skill)) {
     const req = skill?.prerequisites
     if (req?.type === 'LEVEL') return { ok: false, reason: `Requires level ${req.level}` }

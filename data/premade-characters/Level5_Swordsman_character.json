@@ -1,0 +1,56 @@
+{
+  "premadeId": "level5_swordsman",
+  "name": "Road Knight",
+  "race": "human",
+  "category": "npc",
+  "elementalAffinity": "",
+  "lumens": 1,
+  "gil": 1050,
+  "stats": {
+    "hp": 24,
+    "stamina": 10,
+    "strength": -2,
+    "magicPower": -3,
+    "accuracy": -1,
+    "speed": 2,
+    "physicalDefence": 8,
+    "magicalDefence": 8
+  },
+  "skills": [
+    "sword_basics",
+    "sword_stance",
+    "quick_strike",
+    "soldier_training"
+  ],
+  "activeToggles": [],
+  "statusEffects": [],
+  "inventory": [
+    {
+      "uid": "level5_swordsman_health_potion_0",
+      "itemId": "health_potion",
+      "qty": 2
+    },
+    {
+      "uid": "level5_swordsman_stamina_potion_1",
+      "itemId": "stamina_potion",
+      "qty": 1
+    },
+    {
+      "uid": "level5_swordsman_bronze_sword_2",
+      "itemId": "bronze_sword",
+      "qty": 1
+    },
+    {
+      "uid": "level5_swordsman_leather_armor_3",
+      "itemId": "leather_armor",
+      "qty": 1
+    }
+  ],
+  "equipped": {
+    "weapon": "level5_swordsman_bronze_sword_2",
+    "offhand": null,
+    "armor": "level5_swordsman_leather_armor_3",
+    "accessory": null
+  },
+  "notes": "Sword + Soldier — basics, Quick Strike, and Soldier Training (+1 STR in medium armour). ACC/STR trained; modest HP. Level 5 starter (5) — max learnable tier at Lv5 is 2 (tier 3 opens Lv8). Spent 112 Lumens (44 skills + 68 stats) and 1350 Gil on gear. Banked 1 Lumens after creation."
+}

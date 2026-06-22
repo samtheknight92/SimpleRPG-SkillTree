@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LumenForge RPG Character Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>LumenForge RPG v5 — Nearly Complete</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="styles/themes.css" />
   <link rel="stylesheet" href="styles/appearance.css" />
+  <link rel="stylesheet" href="styles/compact.css" />
+  <link rel="stylesheet" href="styles/mobile.css" />
   <script>
     (function () {
       var theme = localStorage.getItem('lumenforge_theme') || 'midnight';
@@ -19,20 +21,22 @@
   </script>
 </head>
 <body>
+  <button type="button" id="sidebar-backdrop" class="sidebar-backdrop" hidden aria-label="Close menu"></button>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
       <div class="brand-block">
         <div class="brand-mark">✦</div>
         <div class="brand-copy">
-          <h1>LumenForge</h1>
-          <p>RPG character creator & skill tree toolkit</p>
+          <h1>LumenForge RPG</h1>
+          <p>v5 · Nearly Complete — character sheet &amp; play aid</p>
           <div id="appearance-toggle" class="appearance-toggle" role="group" aria-label="Light or dark mode"></div>
           <div id="theme-picker" class="theme-picker" role="group" aria-label="Colour theme"></div>
         </div>
       </div>
 
-      <section class="create-card">
-        <h2>Create Character</h2>
+      <details class="sidebar-create-details create-card" open>
+        <summary class="sidebar-create-summary">Create Character</summary>
+        <div class="sidebar-create-body">
         <label class="field-label" for="new-name">Name</label>
         <input id="new-name" class="input" placeholder="e.g. Nero the Reckless" />
         <label class="field-label" for="new-race">Race</label>
@@ -42,12 +46,16 @@
         <p id="background-preview" class="subtle create-preview"></p>
         <div id="create-extras"></div>
         <button type="button" id="create-character" class="primary-btn full">Create</button>
-      </section>
+        </div>
+      </details>
 
       <section class="side-section">
         <div class="section-title-row">
           <h2>Characters</h2>
-          <button type="button" id="collapse-sidebar" class="ghost-btn tiny" aria-label="Toggle sidebar">☰</button>
+          <div class="section-title-actions">
+            <button type="button" class="ghost-btn tiny" data-create-character-folder title="Create folder">+ Folder</button>
+            <button type="button" id="collapse-sidebar" class="ghost-btn tiny" aria-label="Toggle sidebar">☰</button>
+          </div>
         </div>
         <div id="character-list" class="character-list"></div>
       </section>
@@ -60,7 +68,7 @@
 
     <main class="main-panel">
       <header class="topbar">
-        <button type="button" id="open-sidebar" class="icon-btn mobile-only" aria-label="Open sidebar">☰</button>
+        <button type="button" id="open-sidebar" class="icon-btn sidebar-toggle-btn" aria-label="Toggle sidebar">☰</button>
         <div class="current-hero">
           <div class="avatar" id="current-avatar">?</div>
           <div>
@@ -91,6 +99,17 @@
   </div>
 
   <footer id="action-bar" class="action-bar" hidden aria-label="Action bar"></footer>
+
+  <div id="action-bar-skill-sheet" class="action-bar-skill-sheet" hidden>
+    <button type="button" class="action-bar-skill-sheet-backdrop" data-close-skill-sheet aria-label="Close skill details"></button>
+    <div class="action-bar-skill-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="action-bar-skill-sheet-content">
+      <div id="action-bar-skill-sheet-content" class="action-bar-skill-sheet-content"></div>
+      <div class="action-bar-skill-sheet-actions">
+        <button type="button" class="ghost-btn" data-close-skill-sheet>Cancel</button>
+        <button type="button" class="primary-btn" id="action-bar-skill-sheet-use">Use Skill</button>
+      </div>
+    </div>
+  </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <div id="hover-tooltip" class="floating-tooltip" role="tooltip" aria-hidden="true"></div>

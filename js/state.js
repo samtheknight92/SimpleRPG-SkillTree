@@ -9,10 +9,10 @@ export const state = {
   skillSubcategory: 'sword',
   skillSearch: '',
   itemSearch: '',
-  itemType: 'all',
+  itemCategory: 'all',
   itemSource: 'shop',
   itemRarity: 'all',
-  itemFeature: 'all',
+  itemBuyableOnly: true,
   itemSort: 'name',
   itemPage: 0,
   craftSearch: '',
@@ -25,8 +25,13 @@ export const state = {
   gmPremadeSearch: '',
   gmPremadeCategory: 'all',
   gmPremadeSort: 'level-desc',
+  glossarySearch: '',
   gmNpcTurnCharacterIds: [],
   lastNpcTurns: [],
+  characterFolderNames: [],
+  characterFolderOrder: [],
+  characterFolderOpen: {},
+  gmSpawnFolder: '',
   initiativeTracker: {
     entries: [],
     activeEntryId: null
@@ -54,10 +59,10 @@ export function applyUrlState() {
 
 export function resetItemFilters() {
   state.itemSearch = ''
-  state.itemType = 'all'
+  state.itemCategory = 'all'
   state.itemSource = 'shop'
   state.itemRarity = 'all'
-  state.itemFeature = 'all'
+  state.itemBuyableOnly = true
   state.itemSort = 'name'
   state.itemPage = 0
 }

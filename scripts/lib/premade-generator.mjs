@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { characterLevelFromTotal } from './progression.mjs'
 
 const CURRENCY_RATE = { gold: 2500, silver: 100, copper: 1 }
 
@@ -21,6 +22,93 @@ const DEFAULT_STATS = {
   speed: 2,
   physicalDefence: 8,
   magicalDefence: 8
+}
+
+function tierLevelValue(tier) {
+  return Number(tier || 1) / 5
+}
+
+function statLevelValue(statKey) {
+  return statKey === 'hp' || statKey === 'stamina' ? tierLevelValue(1) : tierLevelValue(2)
+}
+
+/** Defeat loot — wallet on sheet equals what the party loots. */
+export const LUMEN_PER_LEVEL = 3
+export const GIL_PER_LEVEL = 200
+export const HUMANOID_MONSTER_GIL = 20
+
+/** Match js/level.js — threat level for loot (display level on premade card). */
+export function characterLevelFromBuild(build, skillById, { countStatUpgrades = true } = {}) {
+  let skillLevels = 0
+  for (const id of build.skills || []) {
+    const skill = skillById.get(id)
+    if (skill) skillLevels += tierLevelValue(skill.tier)
+  }
+  let statLevels = 0
+  if (countStatUpgrades) {
+    for (const [stat, base] of Object.entries(DEFAULT_STATS)) {
+      const purchases = Math.max(0, Number(build.stats?.[stat] ?? base) - base)
+      statLevels += purchases * statLevelValue(stat)
+    }
+  }
+  const total = skillLevels + statLevels
+  return {
+    total,
+    level: characterLevelFromTotal(total)
+  }
+}
+
+/** Goblins, orcs, bandits, etc. — Lumen like other monsters + flat pocket Gil. */
+export function isHumanoidMonster(stem) {
+  return /goblin|orc|bandit|brute|warrior|raider|chief|lieutenant|warlord|knight|guard|torturer|slave|shaman|hell_knight|corrupt_guard|crime_boss|warlord_lieutenant|berserker/.test(String(stem || '').toLowerCase())
+}
+
+export function lumenDropForLevel(level) {
+  return Math.max(0, Math.floor(Number(level || 0) * LUMEN_PER_LEVEL))
+}
+
+export function gilDropForLevel(level) {
+  return Math.max(0, Math.floor(Number(level || 0) * GIL_PER_LEVEL))
+}
+
+/** @deprecated — use lumenDropForLevel */
+export function gilDropForHumanoid(levelInfo) {
+  return gilDropForLevel(levelInfo?.level ?? levelInfo?.total ?? 0)
+}
+
+/** @deprecated — use lumenDropForLevel */
+export function lumenDropForMonster(_tier, levelInfo) {
+  return lumenDropForLevel(levelInfo?.level ?? 0)
+}
+
+/** @deprecated */
+export function tinyGilForHumanoidMonster(_tier, _levelInfo) {
+  return HUMANOID_MONSTER_GIL
+}
+
+function formatDefeatLootNote(lumens, gil) {
+  const parts = []
+  if (lumens > 0) parts.push(`${lumens} Lumens`)
+  if (gil > 0) parts.push(`${gil} Gil`)
+  return parts.length ? `Defeat loot: ${parts.join(', ')}.` : ''
+}
+
+function applyDefeatRewards(inferred, stem, build, skillById) {
+  const isHumanoid = inferred.category === 'pedestrian' || inferred.category === 'npc'
+  const levelInfo = characterLevelFromBuild(build, skillById, { countStatUpgrades: true })
+  const level = levelInfo.level
+
+  if (isHumanoid) {
+    build.lumens = lumenDropForLevel(level)
+    build.gil = gilDropForLevel(level)
+  } else {
+    build.lumens = lumenDropForLevel(level)
+    build.gil = isHumanoidMonster(stem) ? HUMANOID_MONSTER_GIL : 0
+  }
+
+  const dropLine = formatDefeatLootNote(build.lumens, build.gil)
+  build.notes = [build.notes, dropLine].filter(Boolean).join(' ')
+  return build
 }
 
 const MONSTER_SKILL_CHAINS = {
@@ -66,8 +154,8 @@ const RACE_SKILL_TARGETS = {
 
 /** @type {Record<string, object>} */
 export const NPC_BUILDS = {
-  alchemist: {
-    skills: ['grand_alchemist', 'herbal_remedies', 'human_determination'],
+    alchemist: {
+    skills: ['volatile_expert', 'hands_in_soil', 'human_determination'],
     items: [{ itemId: 'health_potion', qty: 6 }, { itemId: 'stamina_potion', qty: 4 }, { itemId: 'herbs', qty: 8 }],
     equip: { armor: 'cloth_robes' },
     stats: { hp: 14, stamina: 16, magicPower: 0, accuracy: -2 },
@@ -93,7 +181,7 @@ export const NPC_BUILDS = {
     stats: { hp: 14, stamina: 16, magicPower: 1, strength: -1, accuracy: -1 }
   },
   beast_tamer: {
-    skills: ['steady_aim', 'ranged_basics', 'herbal_remedies', 'pounce', 'human_determination'],
+    skills: ['steady_aim', 'ranged_basics', 'hands_in_soil', 'pounce', 'human_determination'],
     items: [{ itemId: 'health_potion', qty: 3 }, { itemId: 'herbs', qty: 5 }],
     equip: { weapon: 'hunting_bow', armor: 'leather_armor' },
     stats: { hp: 14, stamina: 15, accuracy: 0, speed: 3 },
@@ -139,13 +227,13 @@ export const NPC_BUILDS = {
     stats: { hp: 13, stamina: 17, magicPower: 3, accuracy: -2 }
   },
   enchanter: {
-    skills: ['archenchanter', 'human_determination'],
+    skills: ['dispel_touch', 'human_determination'],
     items: [{ itemId: 'health_potion', qty: 2 }, { itemId: 'stamina_potion', qty: 2 }],
     equip: { weapon: 'mystic_staff', armor: 'cloth_robes' },
     stats: { hp: 12, stamina: 14, magicPower: 2, accuracy: -2 }
   },
   engineer: {
-    skills: ['explosive_compounds', 'weapon_smithing', 'human_determination'],
+    skills: ['explosive_compounds', 'weaponwright', 'human_determination'],
     items: [{ itemId: 'health_potion', qty: 2 }, { itemId: 'iron_ore', qty: 4 }],
     equip: { weapon: 'crossbow', armor: 'leather_armor' },
     stats: { hp: 14, stamina: 14, strength: 0, accuracy: 0, physicalDefence: 10 }
@@ -206,7 +294,7 @@ export const NPC_BUILDS = {
     stats: { hp: 18, stamina: 16, strength: 0, magicPower: 1, physicalDefence: 12, magicalDefence: 11 }
   },
   poisoner: {
-    skills: ['poison_brewing', 'explosive_compounds', 'poison_blade', 'human_determination'],
+    skills: ['acid_vials', 'explosive_compounds', 'poison_blade', 'human_determination'],
     items: [{ itemId: 'health_potion', qty: 2 }, { itemId: 'herbs', qty: 3 }],
     equip: { weapon: 'iron_dagger', armor: 'leather_armor' },
     stats: { hp: 12, stamina: 14, magicPower: 0, accuracy: 0, speed: 3 }
@@ -420,8 +508,6 @@ function buildFromSpec(spec, skillById, itemIds, toggleSkills) {
     inventory,
     equipped,
     activeToggles,
-    lumens: spec.lumens ?? 300,
-    gil: legacyCurrencyToGil(spec.gil ?? spec.currency ?? { copper: 100, silver: 30, gold: 5 }),
     notes: spec.note || ''
   }
 }
@@ -429,16 +515,17 @@ function buildFromSpec(spec, skillById, itemIds, toggleSkills) {
 function powerTier(stem) {
   const s = stem.toLowerCase()
   if (/ancient|_lord|_prince|kraken|lich|archangel|demon_weapon|dragon_lord|mind_flayer|rat_king|crime_boss|warlord$|devil_lord|demon_prince/.test(s)) return 5
-  if (/greater|hell_knight|frost_giant|fire_giant|cloud_giant|hill_giant|cherubim|prismatic|shadow_dragon|orc_warlord|goblin_chief|orc_chief|dragon$/.test(s)) return 4
-  if (/wyvern|serpent|golem|phantom|revenant|banshee|shaman|chief|lieutenant|possessed|haunted|cursed_knight|doppelganger|poltergeist/.test(s)) return 3
-  if (/warrior|scout|raider|brute|berserker|bandit|guard|thief|torturer|slave|medic|engineer/.test(s)) return 2
+  if (/greater|hell_knight|frost_giant|fire_giant|cloud_giant|hill_giant|cherubim|prismatic|shadow_dragon|orc_warlord|goblin_chief|orc_chief|dragon$|grizzly|polar_bear|moose/.test(s)) return 4
+  if (/wyvern|serpent|golem|phantom|revenant|banshee|shaman|chief|lieutenant|possessed|haunted|cursed_knight|doppelganger|poltergeist|dire_wolf|brown_bear|lion|cougar|giant_spider|croc|alligator|gator|shark|bull|tiger|panther/.test(s)) return 3
+  if (/warrior|scout|raider|brute|berserker|bandit|guard|thief|torturer|slave|medic|engineer|wolf|black_bear|boar|spider|eagle|hawk|scorpion|horse|vulture|deer|piranha/.test(s)) return 2
+  if (/chicken|rooster|goat|rabbit|bat|garden_snake|farm_|hen|piglet|duck/.test(s)) return 1
   return 1
 }
 
 function monsterStats(tier, stem) {
   const s = stem.toLowerCase()
-  const bulky = /giant|golem|kraken|dragon|turtle|armor|shield/.test(s)
-  const fast = /scout|thief|sprite|rat|eel|ninja|phantom/.test(s)
+  const bulky = /giant|golem|kraken|dragon|turtle|armor|shield|bear|bull|moose|grizzly|boar|croc|alligator|gator|shark/.test(s)
+  const fast = /scout|thief|sprite|rat|eel|ninja|phantom|wolf|deer|horse|cat|lion|cougar|panther|rabbit|bat|piranha|spider|eagle|hawk|snake|serpent/.test(s)
   const magical = /shaman|lich|angel|devil|demon|sprite|flayer|wyvern|dragon|mage/.test(s)
   return mergeStats({
     hp: 10 + tier * (bulky ? 8 : 6),
@@ -455,12 +542,15 @@ function monsterStats(tier, stem) {
 function monsterSkillTargets(stem, tier) {
   const s = stem.toLowerCase()
   const targets = []
+  const isCritter = /chicken|rooster|goat|rabbit|duck|hen|bat|garden_snake|deer/.test(s)
 
-  if (tier >= 5) targets.push('metal_skin', 'damage_reduction', 'rapid_healing', 'multiattack')
-  else if (tier >= 4) targets.push('armored_plates', 'regeneration', 'multiattack')
-  else if (tier >= 3) targets.push('rock_skin', 'magical_resistance')
-  else if (tier >= 2) targets.push('magical_resistance', 'tough_skin')
-  else targets.push('tough_skin')
+  if (!isCritter) {
+    if (tier >= 5) targets.push('metal_skin', 'damage_reduction', 'rapid_healing', 'multiattack')
+    else if (tier >= 4) targets.push('armored_plates', 'regeneration', 'multiattack')
+    else if (tier >= 3) targets.push('rock_skin', 'magical_resistance')
+    else if (tier >= 2) targets.push('magical_resistance', 'tough_skin')
+    else targets.push('tough_skin')
+  }
 
   if (/slime/.test(s)) {
     targets.push('acid_spit')
@@ -532,6 +622,47 @@ function monsterSkillTargets(stem, tier) {
     if (/cursed|haunted/.test(s)) targets.push('energy_drain', 'paralyzing_gaze')
   } else if (/mind_flayer|doppelganger/.test(s)) {
     targets.push('mind_control', 'energy_drain', 'paralyzing_gaze', 'teleport')
+  } else if (/chicken|rooster|goat|rabbit|duck|hen/.test(s)) {
+    targets.push('claws')
+    if (/rooster/.test(s)) targets.push('bite_attack')
+  } else if (/wolf|dog|coyote|hyena/.test(s)) {
+    targets.push('bite_attack', 'pounce')
+    if (/dire/.test(s)) targets.push('razor_claws', 'crushing_bite')
+  } else if (/bear|grizzly|polar/.test(s)) {
+    targets.push('tough_skin', 'claws', 'crushing_bite')
+    if (/grizzly|polar/.test(s)) targets.push('rock_skin')
+  } else if (/lion|tiger|cougar|panther|leopard|lynx/.test(s)) {
+    targets.push('claws', 'pounce', 'bite_attack')
+    if (/lion|tiger/.test(s)) targets.push('razor_claws')
+  } else if (/boar|bull|pig/.test(s)) {
+    targets.push('gore', 'monster_charge_attack', 'tough_skin')
+  } else if (/deer|horse|elk|moose|donkey|mule/.test(s)) {
+    targets.push('monster_charge_attack')
+    if (/moose|elk|horse/.test(s)) targets.push('trample')
+    if (/moose|elk/.test(s)) targets.push('gore')
+  } else if (/eagle|hawk|vulture|owl|raven|crow/.test(s)) {
+    targets.push('claws', 'monster_flight')
+    if (/eagle|hawk/.test(s)) targets.push('razor_claws')
+  } else if (/spider/.test(s)) {
+    targets.push('web_shot', 'venomous_claws', 'bite_attack')
+    if (/giant/.test(s)) targets.push('poison_breath')
+  } else if (/scorpion/.test(s)) {
+    targets.push('venomous_claws', 'tail_swipe')
+  } else if (/croc|gator|alligator/.test(s)) {
+    targets.push('bite_attack', 'crushing_bite', 'tough_skin')
+  } else if (/shark/.test(s)) {
+    targets.push('bite_attack', 'crushing_bite', 'pounce')
+  } else if (/bat/.test(s)) {
+    targets.push('bite_attack', 'monster_flight')
+  } else if (/crab|lobster/.test(s)) {
+    targets.push('claws', 'tough_skin')
+  } else if (/bee|wasp|hornet/.test(s)) {
+    targets.push('venomous_claws', 'bite_attack')
+  } else if (/piranha/.test(s)) {
+    targets.push('bite_attack')
+    if (/giant/.test(s)) targets.push('crushing_bite', 'razor_claws')
+  } else if (/garden_snake|viper|cobra/.test(s)) {
+    targets.push('bite_attack', 'venomous_claws')
   } else {
     targets.push('claws', 'bite_attack')
     if (tier >= 2) targets.push('razor_claws')
@@ -624,8 +755,6 @@ function buildMonster(stem, skillById, itemIds, monsterLoot, toggleSkills) {
     inventory,
     equipped,
     activeToggles: toggles,
-    lumens: 80 + tier * 40,
-    gil: legacyCurrencyToGil({ copper: tier * 40, silver: tier * 8, gold: Math.max(0, tier - 2) }),
     notes: dropNote
   }
 }
@@ -670,8 +799,6 @@ function buildPedestrian(stem, race, skillById, itemIds) {
     inventory,
     equipped,
     activeToggles: [],
-    lumens: 180,
-    gil: 7200,
     elementalAffinity: element,
     notes: element ? `Pedestrian dragonborn with ${element} affinity.` : ''
   }
@@ -679,27 +806,28 @@ function buildPedestrian(stem, race, skillById, itemIds) {
 
 export function generatePremadeBuild(inferred, stem, data) {
   const { skillById, itemIds, monsterLoot, toggleSkills } = data
+  const stemLower = stem.toLowerCase()
+  let build
 
   if (inferred.category === 'pedestrian') {
-    return buildPedestrian(stem.toLowerCase(), inferred.race, skillById, itemIds)
-  }
-
-  if (inferred.category === 'npc') {
-    const build = NPC_BUILDS[inferred.premadeId]
-    if (build) {
-      const built = buildFromSpec(build, skillById, itemIds, toggleSkills)
-      built.notes = [build.note, inferred.notes].filter(Boolean).join(' ')
-      return built
+    build = buildPedestrian(stemLower, inferred.race, skillById, itemIds)
+  } else if (inferred.category === 'npc') {
+    const spec = NPC_BUILDS[inferred.premadeId]
+    if (spec) {
+      build = buildFromSpec(spec, skillById, itemIds, toggleSkills)
+      build.notes = [spec.note, inferred.notes].filter(Boolean).join(' ')
+    } else {
+      build = buildFromSpec({
+        skills: ['human_determination', 'sword_basics', 'quick_strike'],
+        equip: { weapon: 'iron_sword', armor: 'leather_armor' },
+        items: [{ itemId: 'health_potion', qty: 2 }],
+        stats: { hp: 14, stamina: 14, strength: -2, accuracy: -2 }
+      }, skillById, itemIds, toggleSkills)
     }
-    return buildFromSpec({
-      skills: ['human_determination', 'sword_basics', 'quick_strike'],
-      equip: { weapon: 'iron_sword', armor: 'leather_armor' },
-      items: [{ itemId: 'health_potion', qty: 2 }],
-      stats: { hp: 14, stamina: 14, strength: -2, accuracy: -2 }
-    }, skillById, itemIds, toggleSkills)
+  } else {
+    build = buildMonster(stemLower, skillById, itemIds, monsterLoot, toggleSkills)
+    build.notes = [build.notes, inferred.notes].filter(Boolean).join(' ')
   }
 
-  const monster = buildMonster(stem.toLowerCase(), skillById, itemIds, monsterLoot, toggleSkills)
-  monster.notes = [monster.notes, inferred.notes].filter(Boolean).join(' ')
-  return monster
+  return applyDefeatRewards(inferred, stemLower, build, skillById)
 }

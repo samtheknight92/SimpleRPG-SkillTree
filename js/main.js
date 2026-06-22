@@ -9,6 +9,7 @@ import { initUrlState, syncUrlState } from './url-state.js'
 import { computeStats } from './character.js'
 
 import { initTheme, applyTheme } from './themes.js'
+import { setupActionBarSkillSheet } from './action-bar-sheet.js'
 
 async function boot() {
   try {
@@ -19,6 +20,7 @@ async function boot() {
     applyUrlState()
     initEvents()
     setupTooltips()
+    setupActionBarSkillSheet()
     render({ all: true })
     syncUrlState()
     initUrlState(() => render({ content: true, header: true, tabs: true, actionBar: true }))

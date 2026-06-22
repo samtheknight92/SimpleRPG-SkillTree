@@ -3,6 +3,7 @@ import path from 'path'
 import vm from 'vm'
 import { execSync } from 'child_process'
 import { fileURLToPath } from 'url'
+import { shopMinLevelForItem } from './lib/progression.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
@@ -19,12 +20,23 @@ function fixMojibake(text) {
   }
 }
 
-function deepFix(value) {
-  if (typeof value === 'string') return fixMojibake(value)
-  if (Array.isArray(value)) return value.map(deepFix)
+function iconLooksCorrupt(text) {
+  return typeof text === 'string' && /[ÃÂâð��]/.test(text)
+}
+
+function deepFix(value, key = '') {
+  if (typeof value === 'string') {
+    const fixed = fixMojibake(value)
+    // A few source icon strings contain replacement characters, meaning the
+    // original emoji cannot be recovered. Blank them so the app can use its
+    // normal fallback icons instead of showing mojibake.
+    if (key === 'icon' && iconLooksCorrupt(fixed)) return ''
+    return fixed
+  }
+  if (Array.isArray(value)) return value.map(item => deepFix(item, key))
   if (value && typeof value === 'object') {
     const out = {}
-    for (const [k, v] of Object.entries(value)) out[k] = deepFix(v)
+    for (const [k, v] of Object.entries(value)) out[k] = deepFix(v, k)
     return out
   }
   return value
@@ -45,6 +57,9 @@ function extractEffects() {
 fs.mkdirSync(jsonDir, { recursive: true })
 
 execSync('node scripts/generate-career-effects.mjs', { cwd: root, stdio: 'inherit' })
+execSync('node scripts/generate-careers.mjs', { cwd: root, stdio: 'inherit' })
+execSync('node scripts/attach-activation-effects.mjs', { cwd: root, stdio: 'inherit' })
+execSync('node scripts/adjust-skill-costs.mjs', { cwd: root, stdio: 'inherit' })
 
 const loadOrder = [
   'races-data.js',
@@ -86,7 +101,16 @@ if (skills.monster) {
   delete skills.monster
 }
 writeJson('skills', skills)
-writeJson('items', window.ITEMS_DATA || {})
+
+const itemsData = window.ITEMS_DATA || {}
+for (const category of Object.values(itemsData)) {
+  if (!category || typeof category !== 'object') continue
+  for (const item of Object.values(category)) {
+    if (!item?.price) continue
+    item.shopMinLevel = shopMinLevelForItem(item)
+  }
+}
+writeJson('items', itemsData)
 writeJson('profession-items', window.PROFESSION_ITEMS_DATA || {})
 writeJson('discoverable-items', window.DISCOVERABLE_ITEMS_DATA || {})
 writeJson('monster-loot', window.MONSTER_LOOT_DATA || {})

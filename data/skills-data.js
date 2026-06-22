@@ -30,7 +30,14 @@
 // BALANCE NOTES:
 // - Toggle skills have stamina costs and mutual exclusivity
 // - Immunity skills have doubled costs to reflect their power
+// - Tier level gates: T1→Lv1 · T2→Lv5 · T3→Lv9 · T4→Lv14 · T5→Lv21
+// - Tier Lumen floors: 8 / 20 / 40 / 65 / 100 (premiums scale from legacy costs)
 // - Weapon-based skills require appropriate equipment
+//
+// ELEMENTAL DAMAGE SCALE (typed damage only — multiply after other bonuses):
+//   25% resistance = quarter damage (÷4)   |   50% resistance = half damage (÷2)
+//   200% weakness = double damage (×2)     |   400% weakness = quadruple damage (×4)
+// Write both % and plain words in GRANTS lines so tables can multiply without a chart.
 // ===========================================
 
 // Skills Data - 25+ skills per category with proper tier structure
@@ -41,7 +48,7 @@ const SKILLS_DATA = {
                 "id": "sword_basics",
                 "name": "Sword Basics",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Accuracy while wielding a sword.",
                 "icon": "⚔️",
@@ -55,7 +62,7 @@ const SKILLS_DATA = {
                 "id": "sword_stance",
                 "name": "Combat Stance",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Physical Defence while wielding a sword.",
                 "icon": "🛡️",
@@ -69,7 +76,7 @@ const SKILLS_DATA = {
                 "id": "quick_strike",
                 "name": "Quick Strike",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Action: Sword attack. Attack roll d20 + accuracy (+) vs Physical Defence; weapon damage on hit.",
                 "icon": "⚡",
@@ -85,7 +92,7 @@ const SKILLS_DATA = {
                 "id": "parry",
                 "name": "Parry",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 1,
                 "desc": "Reaction: When hit by a melee attack, roll d20 + accuracy vs the attacker's accuracy; on success, block the hit (no damage).",
                 "icon": "🛡️",
@@ -102,7 +109,7 @@ const SKILLS_DATA = {
                 "id": "lunge_attack",
                 "name": "Lunge Attack",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Action: Extended-reach sword attack (+5ft range). Attack roll d20 + accuracy vs Physical Defence; weapon damage +1 on hit.",
                 "icon": "🎯",
@@ -118,7 +125,7 @@ const SKILLS_DATA = {
                 "id": "riposte",
                 "name": "Riposte",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 2,
                 "desc": "Reaction: After a successful Parry, counter with a Basic Attack (+2 damage on hit). Costs 1 stamina.",
                 "icon": "⚔️",
@@ -135,7 +142,7 @@ const SKILLS_DATA = {
                 "id": "sweeping_slash",
                 "name": "Sweeping Slash",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 4,
                 "desc": "Action: Wide sword arc. Up to 3 adjacent enemies; separate attack roll (d20 + accuracy vs Physical Defence) vs each; weapon damage on each hit.",
                 "icon": "🌪️",
@@ -151,7 +158,7 @@ const SKILLS_DATA = {
                 "id": "blade_dance",
                 "name": "Blade Dance",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Sword combo of 3 attacks. Each attack roll is d20 + accuracy vs Physical Defence −1; weapon damage +1 on each hit.",
                 "icon": "💃",
@@ -168,7 +175,7 @@ const SKILLS_DATA = {
                 "id": "defensive_stance",
                 "name": "Defensive Stance",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 1,
                 "desc": "Toggle: +2 Physical Defence and +2 Magical Defence, but −1 damage on your attacks. Costs 1 stamina per turn (max 10 turns).",
                 "icon": "🛡️",
@@ -184,7 +191,7 @@ const SKILLS_DATA = {
                 "id": "master_parry",
                 "name": "Master Parry",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 3,
                 "desc": "Reaction: On a successful Parry, reflect the melee attack back at the attacker for full damage.",
                 "icon": "✨",
@@ -201,7 +208,7 @@ const SKILLS_DATA = {
                 "id": "whirlwind",
                 "name": "Whirlwind Strike",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Spinning sword attack. One attack roll per enemy within 10ft (d20 + accuracy vs Physical Defence −2); weapon damage on each hit. Friendly fire possible.",
                 "icon": "🌪️",
@@ -218,7 +225,7 @@ const SKILLS_DATA = {
                 "id": "piercing_thrust",
                 "name": "Piercing Thrust",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 4,
                 "desc": "Action: Armour-piercing sword thrust. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage. Critical hit on natural 18–20. Target's armour bonuses do not add to Physical Defence against this attack.",
                 "icon": "🎯",
@@ -234,7 +241,7 @@ const SKILLS_DATA = {
                 "id": "sword_mastery",
                 "name": "Sword Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: +3 damage on sword hits; critical hits restore 1 stamina.",
                 "icon": "👑",
@@ -254,7 +261,7 @@ const SKILLS_DATA = {
                 "id": "ranged_basics",
                 "name": "Ranged Basics",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Accuracy while wielding a ranged weapon.",
                 "icon": "🏹",
@@ -268,7 +275,7 @@ const SKILLS_DATA = {
                 "id": "steady_aim",
                 "name": "Steady Aim",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +2 accuracy when you didn't move this turn",
                 "icon": "🎯",
@@ -282,7 +289,7 @@ const SKILLS_DATA = {
                 "id": "grappling_shot",
                 "name": "Grappling Shot",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Fire a grappling arrow at a surface or creature within 30ft. Pull yourself to it, or pull a target toward you (GM may call for a contest). No damage unless your table combines it with a separate attack.",
                 "icon": "🪝",
@@ -298,7 +305,7 @@ const SKILLS_DATA = {
                 "id": "aimed_shot",
                 "name": "Aimed Shot",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Action: Ranged weapon attack with extra aim time. Attack roll d20 + accuracy (+3) vs Physical Defence; on a hit, weapon damage +2.",
                 "icon": "🎯",
@@ -314,7 +321,7 @@ const SKILLS_DATA = {
                 "id": "power_shot",
                 "name": "Power Shot",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Ranged weapon attack at full draw. Attack roll d20 + accuracy (−1) vs Physical Defence; on a hit, weapon damage +4.",
                 "icon": "💪",
@@ -330,7 +337,7 @@ const SKILLS_DATA = {
                 "id": "covering_fire",
                 "name": "Covering Fire",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Action: Ranged weapon attack (bow) to suppress a foe. d20 + accuracy vs Physical Defence; weapon damage on hit; 40% chance to apply Weakened. Until your next turn, one ally you choose gains +2 accuracy against that target.",
                 "icon": "🤝",
@@ -340,13 +347,21 @@ const SKILLS_DATA = {
                         "steady_aim"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "multi_shot",
                 "name": "Multi Shot",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Make 2 ranged weapon attacks as one action. Each attack roll is d20 + accuracy vs that target's Physical Defence; weapon damage on each hit. Target one foe twice or two foes once each.",
                 "icon": "⬇️",
@@ -362,7 +377,7 @@ const SKILLS_DATA = {
                 "id": "piercing_shot",
                 "name": "Piercing Shot",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 4,
                 "desc": "Action: Fire one ranged weapon shot along a straight line. Separate attack roll (d20 + accuracy) vs each enemy in that line; weapon damage on each hit. Does not ignore Physical Defence.",
                 "icon": "➡️",
@@ -379,7 +394,7 @@ const SKILLS_DATA = {
                 "id": "explosive_shot",
                 "name": "Explosive Shot",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Action: Ranged weapon attack that detonates on impact. Attack roll d20 + accuracy vs primary target's Physical Defence (−1 accuracy); weapon damage on hit. Each other creature in 10ft: separate attack roll (d20 + accuracy −1) vs each target's Physical Defence; weapon damage on each hit. Friendly fire possible.",
                 "icon": "💥",
@@ -396,7 +411,7 @@ const SKILLS_DATA = {
                 "id": "parting_shot",
                 "name": "Parting Shot",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 3,
                 "desc": "Action: Ranged weapon attack (d20 + accuracy vs Physical Defence; weapon damage on hit), then move up to 15ft without provoking opportunity attacks.",
                 "icon": "↩️",
@@ -412,7 +427,7 @@ const SKILLS_DATA = {
                 "id": "quick_draw",
                 "name": "Quick Draw",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
                 "desc": "Passive: You may attack with ranged weapons the same turn you move (others cannot).",
                 "icon": "⚡",
@@ -428,7 +443,7 @@ const SKILLS_DATA = {
                 "id": "barrage",
                 "name": "Projectile Barrage",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Action: Saturate a 20ft-radius area. One attack roll per enemy inside (d20 + accuracy −3) vs each target's Physical Defence; weapon damage on each hit. Friendly fire possible.",
                 "icon": "🌧️",
@@ -445,7 +460,7 @@ const SKILLS_DATA = {
                 "id": "homing_shot",
                 "name": "Homing Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 6,
                 "desc": "Action: Ranged weapon attack that automatically hits one chosen target (once per combat) — no attack roll. Weapon damage on hit.",
                 "icon": "🧭",
@@ -461,7 +476,7 @@ const SKILLS_DATA = {
                 "id": "rapid_fire",
                 "name": "Rapid Fire",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 5,
                 "desc": "Action: Make 4 ranged weapon attacks. Each attack roll is d20 + accuracy −1 vs Physical Defence; weapon damage on each hit.",
                 "icon": "🔥",
@@ -478,7 +493,7 @@ const SKILLS_DATA = {
                 "id": "siege_shot",
                 "name": "Siege Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 6,
                 "desc": "Action: One heavy ranged weapon shot along a 120ft line. Separate attack roll (d20 + accuracy) vs each enemy in the line; weapon damage on each hit.",
                 "icon": "🏹",
@@ -495,7 +510,7 @@ const SKILLS_DATA = {
                 "id": "ranged_mastery",
                 "name": "Ranged Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: +50% weapon range, +3 damage on ranged weapon hits, and critical hits do not consume ammunition.",
                 "icon": "👑",
@@ -516,7 +531,7 @@ const SKILLS_DATA = {
                 "id": "axe_basics",
                 "name": "Axe Basics",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Accuracy while wielding an axe.",
                 "icon": "🪓",
@@ -530,7 +545,7 @@ const SKILLS_DATA = {
                 "id": "heavy_swing",
                 "name": "Heavy Swing",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 3,
                 "desc": "Action: Overhead axe chop. Attack roll d20 + accuracy () vs Physical Defence; weapon damage +3 on hit.",
                 "icon": "⬇️",
@@ -544,7 +559,7 @@ const SKILLS_DATA = {
                 "id": "cleave",
                 "name": "Cleave",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Passive: When you kill an enemy, make a Basic Attack against an adjacent foe (costs 1 stamina).",
                 "icon": "〰️",
@@ -556,13 +571,20 @@ const SKILLS_DATA = {
                 },
                 "specialEffects": [
                     "cleave"
+                ],
+                "activationEffects": [
+                    {
+                        "effectId": "cleave",
+                        "duration": 0,
+                        "potency": 0
+                    }
                 ]
             },
             {
                 "id": "armor_break",
                 "name": "Armor Break",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Action: Sunder armour. On a successful melee attack roll (d20 + accuracy vs Physical Defence), reduce the target's Physical Defence by 2 for 1 day (once per enemy).",
                 "icon": "🔨",
@@ -578,7 +600,7 @@ const SKILLS_DATA = {
                 "id": "throwing_axe",
                 "name": "Throwing Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Action: Throw axe (30ft). Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. Axe returns to your hand.",
                 "icon": "🎯",
@@ -594,7 +616,7 @@ const SKILLS_DATA = {
                 "id": "berserker_rage",
                 "name": "Berserker Rage",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 2,
                 "desc": "Toggle: +2 Strength and +2 Physical Defence. Costs 2 stamina per turn (max 5 turns).",
                 "icon": "😤",
@@ -610,7 +632,7 @@ const SKILLS_DATA = {
                 "id": "crushing_blow",
                 "name": "Crushing Blow",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Axe smash. Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. 50% chance to apply Incapacitated (1 turn) and knock prone.",
                 "icon": "💥",
@@ -621,13 +643,21 @@ const SKILLS_DATA = {
                         "heavy_swing"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 1,
+                        "potency": 0,
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "ricochet_axe",
                 "name": "Ricochet Axe",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Enhancement: Thrown axe attacks may bounce to one additional target (separate attack roll per target; weapon damage on each hit).",
                 "icon": "🔄",
@@ -643,7 +673,7 @@ const SKILLS_DATA = {
                 "id": "wide_cleave",
                 "name": "Wide Cleave",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 7,
                 "desc": "Action: Cleave arc (15ft). One attack roll (d20 + accuracy vs Physical Defence) per enemy in the arc; weapon damage on each hit.",
                 "icon": "〰️",
@@ -659,7 +689,7 @@ const SKILLS_DATA = {
                 "id": "earthquake_slam",
                 "name": "Earthquake Slam",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Action: Ground slam (20ft radius). One attack roll per creature (d20 + accuracy vs Physical Defence −2); weapon damage on each hit; knockdown on hit. Friendly fire possible.",
                 "icon": "🌍",
@@ -675,7 +705,7 @@ const SKILLS_DATA = {
                 "id": "whirling_axes",
                 "name": "Whirling Axes",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 11,
                 "desc": "Action: Spin with axes (10ft radius). One attack roll per enemy (d20 + accuracy vs Physical Defence −2); weapon damage on each hit. You may move while spinning. Friendly fire possible.",
                 "icon": "🌪️",
@@ -692,7 +722,7 @@ const SKILLS_DATA = {
                 "id": "axe_storm",
                 "name": "Axe Storm",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Action: Throw 6 axes (360°). Six attack rolls (d20 + accuracy vs Physical Defence); weapon damage on each hit.",
                 "icon": "🌩️",
@@ -708,7 +738,7 @@ const SKILLS_DATA = {
                 "id": "axe_mastery",
                 "name": "Axe Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: +3 damage on axe hits; axe attacks have a 25% chance to Cleave.",
                 "icon": "👑",
@@ -720,7 +750,15 @@ const SKILLS_DATA = {
                         "axe_storm"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "cleave",
+                        "duration": 0,
+                        "potency": 0,
+                        "chance": 0.95
+                    }
+                ]
             }
         ],
         "staff": [
@@ -728,7 +766,7 @@ const SKILLS_DATA = {
                 "id": "staff_basics",
                 "name": "Staff Basics",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Magic Power while wielding a staff.",
                 "icon": "🪄",
@@ -742,7 +780,7 @@ const SKILLS_DATA = {
                 "id": "mana_focus",
                 "name": "Mana Focus",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: Restore +1 stamina per turn while a staff is equipped.",
                 "icon": "💙",
@@ -756,7 +794,7 @@ const SKILLS_DATA = {
                 "id": "spell_power",
                 "name": "Spell Power",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 0,
                 "desc": "Passive: +2 Magic Power on magical attacks while using a staff.",
                 "icon": "✨",
@@ -772,7 +810,7 @@ const SKILLS_DATA = {
                 "id": "arcane_shield",
                 "name": "Arcane Shield",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Apply Spell Warded to yourself (magical immunity + magical damage halved, 8 turns).",
                 "icon": "🛡️",
@@ -782,13 +820,20 @@ const SKILLS_DATA = {
                         "mana_focus"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "spell_warded",
+                        "duration": 8,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "staff_strike",
                 "name": "Staff Strike",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Action: Melee staff strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d6 + Magic Power damage.",
                 "icon": "⚡",
@@ -804,7 +849,7 @@ const SKILLS_DATA = {
                 "id": "spell_penetration",
                 "name": "Spell Penetration",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
                 "desc": "Passive: Your spell attack rolls treat the target's Magical Defence as 2 lower.",
                 "icon": "🎯",
@@ -822,7 +867,7 @@ const SKILLS_DATA = {
                 "id": "mana_burn",
                 "name": "Mana Burn",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Drain mana. Attack roll d20 + accuracy vs Magical Defence; on a hit, apply Weakened (all stats −2) and drain 1d4+2 stamina from the target.",
                 "icon": "💔",
@@ -833,13 +878,20 @@ const SKILLS_DATA = {
                         "arcane_shield"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2
+                    }
+                ]
             },
             {
                 "id": "elemental_staff",
                 "name": "Elemental Staff",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Imbue staff with Fire, Ice, or Lightning for 10 turns (GM: adds elemental flavour to staff strikes/spells).",
                 "icon": "🔥",
@@ -855,7 +907,7 @@ const SKILLS_DATA = {
                 "id": "dispel_ward",
                 "name": "Dispel Ward",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 4,
                 "desc": "Action: Remove all magical effects from one target (ally or enemy).",
                 "icon": "🚫",
@@ -871,7 +923,7 @@ const SKILLS_DATA = {
                 "id": "arcane_mastery",
                 "name": "Arcane Mastery",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
                 "desc": "Passive: All spells cost −1 stamina (minimum 1).",
                 "icon": "🧙",
@@ -890,7 +942,7 @@ const SKILLS_DATA = {
                 "id": "staff_of_power",
                 "name": "Staff of Power",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Release stored energy (60ft). Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d8 force damage + Magic Power.",
                 "icon": "💥",
@@ -906,7 +958,7 @@ const SKILLS_DATA = {
                 "id": "reality_tear",
                 "name": "Reality Tear",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Action: Open a dimensional rift — teleport anywhere within 100ft.",
                 "icon": "🌀",
@@ -922,7 +974,7 @@ const SKILLS_DATA = {
                 "id": "staff_mastery",
                 "name": "Staff Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: +4 Magic Power; once per day, cast two spells in one turn.",
                 "icon": "👑",
@@ -942,7 +994,7 @@ const SKILLS_DATA = {
                 "id": "dagger_basics",
                 "name": "Dagger Basics",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Accuracy while wielding a dagger.",
                 "icon": "🗡️",
@@ -956,7 +1008,7 @@ const SKILLS_DATA = {
                 "id": "light_step",
                 "name": "Light Step",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Speed and silent movement while a dagger is equipped.",
                 "icon": "👣",
@@ -970,7 +1022,7 @@ const SKILLS_DATA = {
                 "id": "dual_wield",
                 "name": "Dual Wield",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 0,
                 "desc": "Passive: With a dagger in your main hand, unlock an off-hand dagger slot. Basic Attack rolls damage for both daggers.",
                 "icon": "⚔️",
@@ -986,7 +1038,7 @@ const SKILLS_DATA = {
                 "id": "sneak_attack",
                 "name": "Sneak Attack",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Dagger attack from behind or while hidden. Attack roll d20 + accuracy vs Physical Defence; weapon damage +3 on hit.",
                 "icon": "👤",
@@ -1002,7 +1054,7 @@ const SKILLS_DATA = {
                 "id": "poison_blade",
                 "name": "Poison Blade",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Enhancement: Coat daggers with poison — escalating 1→2→3 damage over 3 turns on hit (GM).",
                 "icon": "☠️",
@@ -1018,7 +1070,7 @@ const SKILLS_DATA = {
                 "id": "flurry",
                 "name": "Flurry",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Make 4 dagger attacks. Each attack roll is d20 + accuracy vs Physical Defence −1; weapon damage on each hit.",
                 "icon": "🌪️",
@@ -1034,7 +1086,7 @@ const SKILLS_DATA = {
                 "id": "shadowstep",
                 "name": "Shadowstep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Teleport behind a target within 30ft. Your next attack qualifies as Sneak Attack.",
                 "icon": "🌑",
@@ -1050,7 +1102,7 @@ const SKILLS_DATA = {
                 "id": "vital_strike",
                 "name": "Vital Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 4,
                 "desc": "Action: Dagger vital strike. Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. Critical hit on natural 15–20.",
                 "icon": "💔",
@@ -1067,7 +1119,7 @@ const SKILLS_DATA = {
                 "id": "evasion",
                 "name": "Evasion",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
                 "desc": "Passive: +2 Physical Defence and +2 Magical Defence; GM may allow a dodge roll to avoid area attacks.",
                 "icon": "💨",
@@ -1083,7 +1135,7 @@ const SKILLS_DATA = {
                 "id": "thousand_cuts",
                 "name": "Thousand Cuts",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Eight dagger strikes — automatically hit (no attack roll). Weapon damage on each hit.",
                 "icon": "⚡",
@@ -1100,7 +1152,7 @@ const SKILLS_DATA = {
                 "id": "shadow_clone",
                 "name": "Shadow Clone",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 7,
                 "desc": "Action: Create a mirror image that fights alongside you for 5 turns (50% your stats, GM).",
                 "icon": "👥",
@@ -1117,7 +1169,7 @@ const SKILLS_DATA = {
                 "id": "assassinate",
                 "name": "Assassinate",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 6,
                 "desc": "Action: Lethal strike. Attack roll d20 + accuracy vs Physical Defence; on a critical hit, instant kill on most enemies (GM discretion).",
                 "icon": "💀",
@@ -1133,7 +1185,7 @@ const SKILLS_DATA = {
                 "id": "dagger_mastery",
                 "name": "Dagger Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: +2 Speed, +3 damage on dagger hits; attacks have 25% critical chance.",
                 "icon": "👑",
@@ -1145,7 +1197,15 @@ const SKILLS_DATA = {
                         "assassinate"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "critical_chance",
+                        "duration": 10,
+                        "potency": 0,
+                        "chance": 0.25
+                    }
+                ]
             }
         ],
         "polearm": [
@@ -1153,7 +1213,7 @@ const SKILLS_DATA = {
                 "id": "polearm_basics",
                 "name": "Polearm Basics",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Accuracy while wielding a polearm.",
                 "icon": "🔱",
@@ -1167,7 +1227,7 @@ const SKILLS_DATA = {
                 "id": "reach_advantage",
                 "name": "Reach Advantage",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: You may attack enemies 10ft away; they cannot reach you with melee unless they close distance.",
                 "icon": "📏",
@@ -1181,7 +1241,7 @@ const SKILLS_DATA = {
                 "id": "thrust_attack",
                 "name": "Thrust Attack",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Action: Piercing polearm thrust. Attack roll d20 + accuracy vs Physical Defence (treat target Physical Defence as 1 lower); weapon damage +2 on hit.",
                 "icon": "➡️",
@@ -1197,7 +1257,7 @@ const SKILLS_DATA = {
                 "id": "polearm_defensive_stance",
                 "name": "Defensive Stance",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 1,
                 "desc": "Toggle: +2 Physical Defence and +2 Magical Defence, but you cannot move. Costs 1 stamina per turn (max 10 turns).",
                 "icon": "🛡️",
@@ -1213,7 +1273,7 @@ const SKILLS_DATA = {
                 "id": "sweep_attack",
                 "name": "Sweep Attack",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Wide sweep. Up to 3 enemies in front; separate attack roll (d20 + accuracy vs Physical Defence) vs each; weapon damage on each hit.",
                 "icon": "〰️",
@@ -1229,7 +1289,7 @@ const SKILLS_DATA = {
                 "id": "spear_wall",
                 "name": "Spear Wall",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Set a 10ft-wide block. Enemies entering the zone are attacked (d20 + accuracy vs Physical Defence); weapon damage on hit.",
                 "icon": "🏗️",
@@ -1246,7 +1306,7 @@ const SKILLS_DATA = {
                 "id": "polearm_charge_attack",
                 "name": "Charge Attack",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Charge then strike. Attack roll d20 + accuracy vs Physical Defence; weapon damage +1 per 5ft moved (max +6) on hit.",
                 "icon": "🏃",
@@ -1262,7 +1322,7 @@ const SKILLS_DATA = {
                 "id": "trip_attack",
                 "name": "Trip Attack",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 4,
                 "desc": "Action: Trip with polearm. Attack roll d20 + accuracy vs Physical Defence; on a hit, knock target prone (they lose next turn, GM).",
                 "icon": "🦵",
@@ -1278,9 +1338,9 @@ const SKILLS_DATA = {
                 "id": "phalanx_formation",
                 "name": "Phalanx Formation",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: +1 Physical Defence and +1 Magical Defence for each polearm ally within 10ft.",
+                "desc": "Passive: +1 Physical Defence and +1 Magical Defence per polearm ally within 10ft. + Harmony: No Reaction — when polearm allies within 10ft all attack the same target that round, +1 accuracy per polearm in that volley on that attack.",
                 "icon": "👥",
                 "prerequisites": {
                     "type": "AND",
@@ -1294,7 +1354,7 @@ const SKILLS_DATA = {
                 "id": "impale",
                 "name": "Impale",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Impaling thrust. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 damage and target cannot move for 3 turns.",
                 "icon": "📌",
@@ -1311,7 +1371,7 @@ const SKILLS_DATA = {
                 "id": "whirlwind_sweep",
                 "name": "Whirlwind Sweep",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 9,
                 "desc": "Action: 360° sweep (15ft). One attack roll per enemy (d20 + accuracy vs Physical Defence −2); weapon damage on each hit. Friendly fire possible.",
                 "icon": "🌪️",
@@ -1328,7 +1388,7 @@ const SKILLS_DATA = {
                 "id": "fortress_stance",
                 "name": "Fortress Stance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 3,
                 "desc": "Toggle: +4 Physical Defence and +4 Magical Defence; reflect 50% damage to attackers. Costs 3 stamina per turn (max 5 turns).",
                 "icon": "🏰",
@@ -1344,7 +1404,7 @@ const SKILLS_DATA = {
                 "id": "polearm_mastery",
                 "name": "Polearm Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: +20ft reach, +3 damage on polearm hits; opportunity attacks when enemies move (GM).",
                 "icon": "👑",
@@ -1364,7 +1424,7 @@ const SKILLS_DATA = {
                 "id": "hammer_basics",
                 "name": "Hammer Basics",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +1 Accuracy while wielding a hammer.",
                 "icon": "🔨",
@@ -1378,7 +1438,7 @@ const SKILLS_DATA = {
                 "id": "heavy_impact",
                 "name": "Heavy Impact",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 3,
                 "desc": "Action: Hammer blow. Attack roll d20 + accuracy () vs Physical Defence; weapon damage +4 on hit.",
                 "icon": "💥",
@@ -1392,7 +1452,7 @@ const SKILLS_DATA = {
                 "id": "armor_crusher",
                 "name": "Armor Crusher",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Passive: Hammer attack rolls treat the target's Physical Defence as 2 lower.",
                 "icon": "💔",
@@ -1408,7 +1468,7 @@ const SKILLS_DATA = {
                 "id": "stunning_blow",
                 "name": "Stunning Blow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Action: Stunning hammer blow. Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. 50% chance to apply Incapacitated (1 turn).",
                 "icon": "⭐",
@@ -1418,13 +1478,21 @@ const SKILLS_DATA = {
                         "heavy_impact"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 1,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "ground_slam",
                 "name": "Ground Slam",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 8,
                 "desc": "Action: Ground slam (10ft). One attack roll per enemy (d20 + accuracy vs Physical Defence −1); weapon damage on each hit; knockdown on hit. Friendly fire possible.",
                 "icon": "🌍",
@@ -1440,7 +1508,7 @@ const SKILLS_DATA = {
                 "id": "thunderstrike",
                 "name": "Thunderstrike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 7,
                 "desc": "Action: Lightning-infused hammer strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 lightning damage.",
                 "icon": "⚡",
@@ -1457,7 +1525,7 @@ const SKILLS_DATA = {
                 "id": "earth_shaker",
                 "name": "Earth Shaker",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 10,
                 "desc": "Action: Earthquake hammer slam (20ft). One attack roll per creature (d20 + accuracy vs Physical Defence −2); weapon damage on each hit; difficult terrain. Friendly fire possible.",
                 "icon": "🌍",
@@ -1473,7 +1541,7 @@ const SKILLS_DATA = {
                 "id": "berserker_swing",
                 "name": "Berserker Swing",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Wild hammer swing. Attack roll d20 + accuracy vs Physical Defence; weapon damage +6 on hit. Until your next turn, −3 Physical Defence and −3 Magical Defence.",
                 "icon": "😤",
@@ -1489,7 +1557,7 @@ const SKILLS_DATA = {
                 "id": "shield_breaker",
                 "name": "Shield Breaker",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Destroy a target's shield and remove Protected status (attack roll vs shield/holder, GM).",
                 "icon": "🛡️",
@@ -1505,7 +1573,7 @@ const SKILLS_DATA = {
                 "id": "mjolnir_strike",
                 "name": "Mjolnir Strike",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Action: Throw hammer (60ft line). Attack roll (d20 + accuracy vs Physical Defence) per enemy in the line; weapon damage on each hit. Hammer returns.",
                 "icon": "⚡",
@@ -1522,7 +1590,7 @@ const SKILLS_DATA = {
                 "id": "apocalypse_slam",
                 "name": "Apocalypse Slam",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
                 "desc": "Action: Devastating slam (40ft radius). One attack roll per creature (d20 + accuracy vs Physical Defence −4); on each hit, 4d6 damage. Friendly fire possible.",
                 "icon": "☄️",
@@ -1539,7 +1607,7 @@ const SKILLS_DATA = {
                 "id": "fortress_buster",
                 "name": "Fortress Buster",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 9,
                 "desc": "Action: Destroy structures or barriers (walls, doors) — no attack roll vs creatures.",
                 "icon": "🏗️",
@@ -1555,7 +1623,7 @@ const SKILLS_DATA = {
                 "id": "hammer_mastery",
                 "name": "Hammer Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: +4 damage on hammer hits; attacks cause knockdown; immune to Incapacitated.",
                 "icon": "👑",
@@ -1571,6 +1639,220 @@ const SKILLS_DATA = {
                     "hammer_mastery_passive"
                 ]
             }
+        ],
+        "striker": [
+            {
+                "id": "striker_basics",
+                "name": "Striker Basics",
+                "tier": 1,
+                "cost": 8,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Accuracy while both hands are empty. Unarmed Basic Attack uses 1d4 + Strength instead of 1 + Strength.",
+                "icon": "🥊",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "open_stance",
+                "name": "Open Stance",
+                "tier": 1,
+                "cost": 8,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Speed and +1 Magical Defence while both hands are empty.",
+                "icon": "🧘",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "stone_fists",
+                "name": "Stone Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Passive: Unarmed Basic Attack uses 1d6 + Strength while both hands are empty.",
+                "icon": "🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "slip_parry",
+                "name": "Slip Parry",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 1,
+                "desc": "Reaction: When hit by a melee attack, roll d20 + accuracy vs the attacker's accuracy; on success, block the hit (no damage). Requires both hands empty.",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "open_stance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "feint_strike",
+                "name": "Feint Strike",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Action: Make 1 Basic Attack with +2 accuracy on the attack roll. Requires both hands empty.",
+                "icon": "🎭",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "open_stance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "iron_palm",
+                "name": "Iron Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 0,
+                "desc": "Passive: +1 Physical Defence while both hands are empty. Unarmed Basic Attack uses 1d10 + Strength.",
+                "icon": "✋",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_fists"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "flurry_of_blows",
+                "name": "Flurry of Blows",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 4,
+                "desc": "Action: Make 2 Basic Attacks while both hands are empty (each uses your striker basic dice + Strength).",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_fists"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "joint_lock",
+                "name": "Joint Lock",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 3,
+                "desc": "Action: One Basic Attack; on hit, target's next attack is at −2 accuracy (1 round, GM). Requires both hands empty.",
+                "icon": "🔒",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "slip_parry",
+                        "stone_fists"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "iron_body",
+                "name": "Iron Body",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 1,
+                "desc": "Toggle: +2 Physical Defence and +2 Magical Defence while both hands empty. Costs 1 stamina per turn (max 10 turns).",
+                "icon": "🧱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "iron_palm"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "crushing_fist",
+                "name": "Crushing Fist",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 0,
+                "desc": "Passive: Unarmed Basic Attack uses 1d12 + Strength while both hands are empty.",
+                "icon": "💥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "iron_palm"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "striker_volley",
+                "name": "Striker Volley",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 5,
+                "desc": "Action: Make 3 Basic Attacks while both hands are empty (each uses your striker basic dice + Strength).",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "iron_reversal",
+                "name": "Iron Reversal",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 2,
+                "desc": "Reaction: After a successful Slip Parry, counter with as many Basic Attacks as your striker combo allows — 1 by default, 2 if you know Flurry of Blows, or 3 if you know Striker Volley (each uses your striker dice + Strength). Costs 2 stamina. Requires both hands empty.",
+                "icon": "↩️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "joint_lock",
+                        "slip_parry"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "striker_mastery",
+                "name": "Striker Mastery",
+                "tier": 5,
+                "cost": 100,
+                "staminaCost": 0,
+                "desc": "Passive: +2 Accuracy and +1 Strength while both hands are empty. Unarmed Basic Attack uses 2d10 + Strength.",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "OR",
+                    "skills": [
+                        "crushing_fist",
+                        "striker_volley",
+                        "iron_reversal"
+                    ]
+                },
+                "specialEffects": [
+                    "striker_mastery_passive"
+                ]
+            }
         ]
     },
     "magic": {
@@ -1579,7 +1861,7 @@ const SKILLS_DATA = {
                 "id": "fire_spark",
                 "name": "Fire Spark",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 fire damage + Magic Power. 30ft range.",
                 "icon": "🔥",
@@ -1593,7 +1875,7 @@ const SKILLS_DATA = {
                 "id": "warm_hands",
                 "name": "Warm Hands",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 1,
                 "desc": "Spell: Create light (30ft radius) and restore 1 HP",
                 "icon": "🤲",
@@ -1607,7 +1889,7 @@ const SKILLS_DATA = {
                 "id": "fireball",
                 "name": "Fireball",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 Fire damage + Magic Power. 60ft range.",
                 "icon": "🔥",
@@ -1623,7 +1905,7 @@ const SKILLS_DATA = {
                 "id": "fire_shield",
                 "name": "Fire Shield",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Spell: Apply Protected (absorb 3 attacks + attackers take 1d4 fire damage)",
                 "icon": "🛡️",
@@ -1633,13 +1915,20 @@ const SKILLS_DATA = {
                         "warm_hands"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "protected",
+                        "duration": 6,
+                        "potency": 3
+                    }
+                ]
             },
             {
                 "id": "ignite",
                 "name": "Ignite",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Spell: Apply Burn (1 fire damage/turn + Strength -2 for 4 turns)",
                 "icon": "🔥",
@@ -1649,13 +1938,20 @@ const SKILLS_DATA = {
                         "fire_spark"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1
+                    }
+                ]
             },
             {
                 "id": "fire_wall",
                 "name": "Fire Wall",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: Create 30ft wall of flames, blocks passage and damages (2d4/turn)",
                 "icon": "🧱",
@@ -1671,7 +1967,7 @@ const SKILLS_DATA = {
                 "id": "explosion",
                 "name": "Explosion",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 9,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage + Magic Power. 15ft.",
                 "icon": "💥",
@@ -1688,9 +1984,9 @@ const SKILLS_DATA = {
                 "id": "phoenix_form",
                 "name": "Phoenix Form",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
-                "desc": "Spell: Apply Enhanced Mobility (flight + immunity to immobilization). GRANTS: Fire resistance (50%), Ice weakness (200%)",
+                "desc": "Spell: Apply Enhanced Mobility (flight + immunity to immobilization). GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
                 "icon": "🦅",
                 "prerequisites": {
                     "type": "AND",
@@ -1699,15 +1995,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "elementalType": "fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "enhanced_mobility",
+                        "duration": 10,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "fire_attunement",
                 "name": "Fire Attunement",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: Become attuned to fire magic. GRANTS: Fire resistance 50% (-1), Ice weakness 200% (+1)",
+                "desc": "Passive: Become attuned to fire magic. GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
                 "icon": "🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -1726,7 +2029,7 @@ const SKILLS_DATA = {
                 "id": "fire_whip",
                 "name": "Fire Whip",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Spell: 15ft reach fire lash. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire damage + Magic Power. May grapple (GM).",
                 "icon": "🔥",
@@ -1742,7 +2045,7 @@ const SKILLS_DATA = {
                 "id": "meteor",
                 "name": "Meteor",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 6d6 fire damage + Magic Power. 20ft radius, -2 accuracy, friendly fire possible.",
                 "icon": "☄️",
@@ -1759,9 +2062,9 @@ const SKILLS_DATA = {
                 "id": "inferno",
                 "name": "Inferno",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
-                "desc": "Spell: Area effect. One attack roll per creature (d20 + accuracy vs Magical Defence -4); on each hit, 2d6 damage + Magic Power. GRANTS: Fire resistance (50%), Ice weakness (200%)",
+                "desc": "Spell: Area effect. One attack roll per creature (d20 + accuracy vs Magical Defence -4); on each hit, 2d6 damage + Magic Power. GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
                 "icon": "🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -1777,7 +2080,7 @@ const SKILLS_DATA = {
                 "id": "fire_tornado",
                 "name": "Fire Tornado",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 11,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 4d6 fire damage + Magic Power. 30ft/turn.",
                 "icon": "🌪️",
@@ -1795,7 +2098,7 @@ const SKILLS_DATA = {
                 "id": "fire_supremacy",
                 "name": "Fire Supremacy",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Action (3 uses per day): Become one with fire for 3 rounds. Gain immunity to fire damage, +50% fire spell damage, all attacks apply Burn, and regenerate 3 HP/turn. Can ignite objects by touch.",
                 "icon": "�",
@@ -1807,7 +2110,15 @@ const SKILLS_DATA = {
                         "fire_tornado"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 3,
+                        "potency": 3,
+                        "chance": 0.5
+                    }
+                ]
             }
         ],
         "ice": [
@@ -1815,7 +2126,7 @@ const SKILLS_DATA = {
                 "id": "ice_shard",
                 "name": "Ice Shard",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 ice damage + Magic Power. 30ft range.",
                 "icon": "🧊",
@@ -1829,7 +2140,7 @@ const SKILLS_DATA = {
                 "id": "frost_touch",
                 "name": "Frost Touch",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 1,
                 "desc": "Spell: Touch attack. Attack roll d20 + accuracy vs Magical Defence; on a hit, applies Weakened (all stats -2 for 4 turns)",
                 "icon": "❄️",
@@ -1843,7 +2154,7 @@ const SKILLS_DATA = {
                 "id": "ice_armor",
                 "name": "Ice Armor",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Gain +3 Physical Defence and +3 Magical Defence (raises your AC), immunity to fire damage (10 rounds)",
                 "icon": "🛡️",
@@ -1859,7 +2170,7 @@ const SKILLS_DATA = {
                 "id": "ice_spear",
                 "name": "Ice Spear",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice damage + Magic Power. 60ft.",
                 "icon": "🏹",
@@ -1875,7 +2186,7 @@ const SKILLS_DATA = {
                 "id": "freeze",
                 "name": "Freeze",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Spell: Apply Immobilized (cannot move but can attack for 3 turns)",
                 "icon": "🧊",
@@ -1885,13 +2196,20 @@ const SKILLS_DATA = {
                         "frost_touch"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "ice_wall",
                 "name": "Ice Wall",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: Create 30ft wall of ice (blocks passage, 20 HP)",
                 "icon": "🧱",
@@ -1907,7 +2225,7 @@ const SKILLS_DATA = {
                 "id": "blizzard",
                 "name": "Blizzard",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Spell: 20ft radius cold storm. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d4 damage + Magic Power. apply Weakened to all inside Friendly fire possible.",
                 "icon": "🌨️",
@@ -1919,15 +2237,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "elementalType": "ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2
+                    }
+                ]
             },
             {
                 "id": "ice_attunement",
                 "name": "Ice Attunement",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: Become attuned to ice magic. GRANTS: Ice resistance 50% (-1), Fire weakness 200% (+1)",
+                "desc": "Passive: Become attuned to ice magic. GRANTS: Ice resistance 50% (half ice damage); Fire weakness 200% (double fire damage)",
                 "icon": "❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -1946,7 +2271,7 @@ const SKILLS_DATA = {
                 "id": "ice_prison",
                 "name": "Ice Prison",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 7,
                 "desc": "Spell: Trap one target in ice. Attack roll d20 + accuracy vs Magical Defence; on a hit, target is immobile in ice until the cage takes 15 damage.",
                 "icon": "🔒",
@@ -1962,7 +2287,7 @@ const SKILLS_DATA = {
                 "id": "frost_nova",
                 "name": "Frost Nova",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: Freeze all enemies within 15ft (1 turn + slow)",
                 "icon": "💫",
@@ -1978,9 +2303,9 @@ const SKILLS_DATA = {
                 "id": "absolute_zero",
                 "name": "Absolute Zero",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
-                "desc": "Spell: Instantly freeze any target (no save, 3 turns). GRANTS: Ice resistance (50%), Water resistance (25%), Fire weakness (200%), Lightning weakness (400%)",
+                "desc": "Spell: Instantly freeze any target (no save, 3 turns). GRANTS: Ice resistance 50% (half ice damage); Water resistance 25% (quarter water damage); Fire weakness 200% (double fire damage); Lightning weakness 400% (quadruple lightning damage)",
                 "icon": "❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -1995,7 +2320,7 @@ const SKILLS_DATA = {
                 "id": "ice_age",
                 "name": "Ice Age",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 cold damage + Magic Power. 200ft.",
                 "icon": "🧊",
@@ -2013,9 +2338,9 @@ const SKILLS_DATA = {
                 "id": "glacier",
                 "name": "Glacier",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
-                "desc": "Spell: Massive 50ft ice wall that moves 20ft/turn. GRANTS: Ice resistance (50%), Water resistance (25%), Fire weakness (200%), Lightning weakness (400%)",
+                "desc": "Spell: Massive 50ft ice wall that moves 20ft/turn. GRANTS: Ice resistance 50% (half ice damage); Water resistance 25% (quarter water damage); Fire weakness 200% (double fire damage); Lightning weakness 400% (quadruple lightning damage)",
                 "icon": "🏔️",
                 "prerequisites": {
                     "type": "AND",
@@ -2030,9 +2355,9 @@ const SKILLS_DATA = {
                 "id": "ice_dominion",
                 "name": "Ice Dominion",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
-                "desc": "Passive: Master ice magic, enhanced ice spell effects. GRANTS: Ice resistance 50% (-1), Fire weakness 200% (+1)",
+                "desc": "Passive: Master ice magic, enhanced ice spell effects. GRANTS: Ice resistance 50% (half ice damage); Fire weakness 200% (double fire damage)",
                 "icon": "❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -2050,7 +2375,7 @@ const SKILLS_DATA = {
                 "id": "ice_supremacy",
                 "name": "Ice Supremacy",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Action (3 uses per day): Become one with ice for 3 rounds. Gain immunity to ice/cold damage, +50% ice spell damage, all attacks apply Weakened, and create frozen terrain (difficult terrain) in 10ft radius. Temperature drops 50°F around you.",
                 "icon": "❄️",
@@ -2062,7 +2387,15 @@ const SKILLS_DATA = {
                         "glacier"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 3,
+                        "potency": 2,
+                        "chance": 0.5
+                    }
+                ]
             }
         ],
         "lightning": [
@@ -2070,7 +2403,7 @@ const SKILLS_DATA = {
                 "id": "spark",
                 "name": "Spark",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 lightning damage + Magic Power. 20ft.",
                 "icon": "⚡",
@@ -2084,7 +2417,7 @@ const SKILLS_DATA = {
                 "id": "static_charge",
                 "name": "Static Charge",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 1,
                 "desc": "Spell: Build electrical energy (+1 damage to next lightning spell)",
                 "icon": "🔋",
@@ -2098,7 +2431,7 @@ const SKILLS_DATA = {
                 "id": "lightning_bolt",
                 "name": "Lightning Bolt",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 Lightning damage + Magic Power. 100ft range.",
                 "icon": "⚡",
@@ -2108,13 +2441,20 @@ const SKILLS_DATA = {
                         "spark"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "lightning_bolt",
+                        "duration": 0,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "shock",
                 "name": "Shock",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Spell: Stun target for 1 turn (save negates)",
                 "icon": "😵",
@@ -2130,7 +2470,7 @@ const SKILLS_DATA = {
                 "id": "chain_lightning",
                 "name": "Chain Lightning",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence per target; on each hit, 2d6 damage + Magic Power.",
                 "icon": "🔗",
@@ -2146,7 +2486,7 @@ const SKILLS_DATA = {
                 "id": "thunder_clap",
                 "name": "Thunder Clap",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: 20ft radius sound blast. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d4 damage + Magic Power. Friendly fire possible.",
                 "icon": "🔊",
@@ -2162,7 +2502,7 @@ const SKILLS_DATA = {
                 "id": "electric_field",
                 "name": "Electric Field",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Spell: 30ft zone deals 1d6 lightning to anyone entering (1 min)",
                 "icon": "⚡",
@@ -2179,9 +2519,9 @@ const SKILLS_DATA = {
                 "id": "lightning_attunement",
                 "name": "Lightning Attunement",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: Become attuned to lightning magic. GRANTS: Lightning resistance 50% (-1), Water weakness 200% (+1)",
+                "desc": "Passive: Become attuned to lightning magic. GRANTS: Lightning resistance 50% (half lightning damage); Water weakness 200% (double water damage)",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -2200,7 +2540,7 @@ const SKILLS_DATA = {
                 "id": "lightning_speed",
                 "name": "Lightning Speed",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Spell: +3 Speed, extra move action (3 turns)",
                 "icon": "💨",
@@ -2216,7 +2556,7 @@ const SKILLS_DATA = {
                 "id": "overcharge",
                 "name": "Overcharge",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 7,
                 "desc": "Spell: Next spell deals maximum damage (no rolling)",
                 "icon": "🔋",
@@ -2232,7 +2572,7 @@ const SKILLS_DATA = {
                 "id": "lightning_storm",
                 "name": "Lightning Storm",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
                 "desc": "Fire an arrow that chains lightning between targets, dealing 3d6 lightning damage. Has a 75% chance to apply Incapacitated",
                 "icon": "⛈️",
@@ -2243,13 +2583,21 @@ const SKILLS_DATA = {
                         "electric_field"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "ball_lightning",
                 "name": "Ball Lightning",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Spell: Slow orb (20ft/turn) explodes for 4d6 in 15ft radius",
                 "icon": "⚡",
@@ -2265,7 +2613,7 @@ const SKILLS_DATA = {
                 "id": "emp",
                 "name": "EMP",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Spell: 40ft radius disables all magic for 1 round",
                 "icon": "📵",
@@ -2281,9 +2629,9 @@ const SKILLS_DATA = {
                 "id": "storm_mastery",
                 "name": "Storm Mastery",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
-                "desc": "Passive: Master lightning magic, enhanced electrical control. GRANTS: Lightning resistance 50% (-1), Water weakness 200% (+1)",
+                "desc": "Passive: Master lightning magic, enhanced electrical control. GRANTS: Lightning resistance 50% (half lightning damage); Water weakness 200% (double water damage)",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -2301,7 +2649,7 @@ const SKILLS_DATA = {
                 "id": "lightning_supremacy",
                 "name": "Lightning Supremacy",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Action (3 uses per day): Become one with lightning for 3 rounds. Gain immunity to lightning damage, +50% movement speed, +50% lightning spell damage, all attacks apply Incapacitated, and can teleport 30ft as bonus action each turn.",
                 "icon": "⚡",
@@ -2313,7 +2661,15 @@ const SKILLS_DATA = {
                         "emp"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.5
+                    }
+                ]
             }
         ],
         "earth": [
@@ -2321,7 +2677,7 @@ const SKILLS_DATA = {
                 "id": "stone_throw",
                 "name": "Stone Throw",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 damage + Magic Power. 40ft range.",
                 "icon": "🪨",
@@ -2335,7 +2691,7 @@ const SKILLS_DATA = {
                 "id": "earth_sense",
                 "name": "Earth Sense",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 1,
                 "desc": "Spell: Detect movement through ground (100ft radius)",
                 "icon": "🌍",
@@ -2349,7 +2705,7 @@ const SKILLS_DATA = {
                 "id": "stone_armor",
                 "name": "Stone Armor",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Rock shell (+3 Physical Defence and +3 Magical Defence (AC bonus), -1 Speed for 10 rounds)",
                 "icon": "🛡️",
@@ -2365,7 +2721,7 @@ const SKILLS_DATA = {
                 "id": "earth_spike",
                 "name": "Earth Spike",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Spell: Ground spike under one target. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth damage + Magic Power and knockdown.",
                 "icon": "⬆️",
@@ -2381,7 +2737,7 @@ const SKILLS_DATA = {
                 "id": "mud_trap",
                 "name": "Mud Trap",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Spell: Create 15ft difficult terrain, slows enemies 50%",
                 "icon": "🟫",
@@ -2397,7 +2753,7 @@ const SKILLS_DATA = {
                 "id": "stone_wall",
                 "name": "Stone Wall",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: Create 40ft stone barrier (blocks movement, provides cover)",
                 "icon": "🧱",
@@ -2413,7 +2769,7 @@ const SKILLS_DATA = {
                 "id": "earthquake",
                 "name": "Earthquake",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Spell: 25ft tremor. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d6 earth damage + Magic Power and knockdown.",
                 "icon": "🌍",
@@ -2424,15 +2780,22 @@ const SKILLS_DATA = {
                         "mud_trap"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "earthquake",
+                        "duration": 0,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "earth_attunement",
                 "name": "Earth Attunement",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: Become attuned to earth magic. GRANTS: Earth resistance 50% (-1), Wind weakness 200% (+1)",
+                "desc": "Passive: Become attuned to earth magic. GRANTS: Earth resistance 50% (half earth damage); Wind weakness 200% (double wind damage)",
                 "icon": "🌍",
                 "prerequisites": {
                     "type": "AND",
@@ -2451,7 +2814,7 @@ const SKILLS_DATA = {
                 "id": "stone_spear",
                 "name": "Stone Spear",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 7,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d4 damage + Magic Power. 60ft range.",
                 "icon": "🗡️",
@@ -2467,7 +2830,7 @@ const SKILLS_DATA = {
                 "id": "earth_shield",
                 "name": "Earth Shield",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Spell: Apply Protected (floating stones absorb next 3 attacks completely)",
                 "icon": "🪨",
@@ -2477,13 +2840,20 @@ const SKILLS_DATA = {
                         "stone_armor"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "protected",
+                        "duration": 6,
+                        "potency": 3
+                    }
+                ]
             },
             {
                 "id": "mountain_crush",
                 "name": "Mountain Crush",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 5d6 damage + Magic Power. 20ft radius.",
                 "icon": "🏔️",
@@ -2500,7 +2870,7 @@ const SKILLS_DATA = {
                 "id": "petrify",
                 "name": "Petrify",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Spell: Apply Immobilized (cannot move but can attack + +5 Physical Defence and +5 Magical Defence for 3 turns)",
                 "icon": "🗿",
@@ -2511,13 +2881,20 @@ const SKILLS_DATA = {
                         "earth_shield"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "tectonic_shift",
                 "name": "Tectonic Shift",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
                 "desc": "Spell: Reshape 100ft area terrain for 1 day",
                 "icon": "🌋",
@@ -2533,9 +2910,9 @@ const SKILLS_DATA = {
                 "id": "stone_mastery",
                 "name": "Stone Mastery",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
-                "desc": "Passive: Master earth magic, enhanced stone manipulation. GRANTS: Earth resistance 50% (-1), Wind weakness 200% (+1)",
+                "desc": "Passive: Master earth magic, enhanced stone manipulation. GRANTS: Earth resistance 50% (half earth damage); Wind weakness 200% (double wind damage)",
                 "icon": "🌍",
                 "prerequisites": {
                     "type": "AND",
@@ -2553,7 +2930,7 @@ const SKILLS_DATA = {
                 "id": "earth_supremacy",
                 "name": "Earth Supremacy",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Action (3 uses per day): Become one with earth for 3 rounds. Gain immunity to earth damage, +5 Physical Defence and +5 Magical Defence from stone skin, +50% earth spell damage, all attacks apply Immobilized, and can burrow through ground at half speed.",
                 "icon": "🌍",
@@ -2565,7 +2942,15 @@ const SKILLS_DATA = {
                         "tectonic_shift"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.5
+                    }
+                ]
             }
         ],
         "wind": [
@@ -2573,7 +2958,7 @@ const SKILLS_DATA = {
                 "id": "gust",
                 "name": "Gust",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Spell: Wind push (knockback 10ft, extinguish flames)",
                 "icon": "💨",
@@ -2587,7 +2972,7 @@ const SKILLS_DATA = {
                 "id": "feather_fall",
                 "name": "Feather Fall",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 1,
                 "desc": "Spell: Slow falling (no fall damage for 1 round)",
                 "icon": "🪶",
@@ -2601,7 +2986,7 @@ const SKILLS_DATA = {
                 "id": "wind_blade",
                 "name": "Wind Blade",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 damage + Magic Power. 50ft range.",
                 "icon": "🌪️",
@@ -2617,7 +3002,7 @@ const SKILLS_DATA = {
                 "id": "levitate",
                 "name": "Levitate",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Spell: Float in air (20ft height, 5 rounds)",
                 "icon": "🎈",
@@ -2633,7 +3018,7 @@ const SKILLS_DATA = {
                 "id": "wind_barrier",
                 "name": "Wind Barrier",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Spell: Deflect projectiles (+4 Physical Defence and +4 Magical Defence (AC bonus) vs ranged for 5 turns)",
                 "icon": "🌀",
@@ -2649,7 +3034,7 @@ const SKILLS_DATA = {
                 "id": "flight",
                 "name": "Flight",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Spell: True flight (60ft speed, 10 rounds)",
                 "icon": "🕊️",
@@ -2666,7 +3051,7 @@ const SKILLS_DATA = {
                 "id": "tornado",
                 "name": "Tornado",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 10,
                 "desc": "Spell: 15ft radius whirlwind. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d4 damage + Magic Power. Friendly fire possible.",
                 "icon": "🌪️",
@@ -2682,9 +3067,9 @@ const SKILLS_DATA = {
                 "id": "wind_attunement",
                 "name": "Wind Attunement",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: Become attuned to wind magic. GRANTS: Wind resistance 50% (-1), Lightning weakness 200% (+1)",
+                "desc": "Passive: Become attuned to wind magic. GRANTS: Wind resistance 50% (half wind damage); Lightning weakness 200% (double lightning damage)",
                 "icon": "💨",
                 "prerequisites": {
                     "type": "AND",
@@ -2703,7 +3088,7 @@ const SKILLS_DATA = {
                 "id": "suffocate",
                 "name": "Suffocate",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: Remove air around target (2d4/turn for 3 turns)",
                 "icon": "😵",
@@ -2719,7 +3104,7 @@ const SKILLS_DATA = {
                 "id": "wind_walk",
                 "name": "Wind Walk",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Spell: Become incorporeal mist (immune to physical damage)",
                 "icon": "☁️",
@@ -2735,7 +3120,7 @@ const SKILLS_DATA = {
                 "id": "hurricane",
                 "name": "Hurricane",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
                 "desc": "Summon a devastating storm dealing 3d6 wind or water damage (whichever each target is weak to) to all enemies. Pushes enemies to storm's center",
                 "icon": "🌀",
@@ -2752,7 +3137,7 @@ const SKILLS_DATA = {
                 "id": "wind_prison",
                 "name": "Wind Prison",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Spell: Trap target in air pocket (cannot move or act)",
                 "icon": "🟦",
@@ -2769,7 +3154,7 @@ const SKILLS_DATA = {
                 "id": "atmospheric_control",
                 "name": "Atmospheric Control",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
                 "desc": "Spell: Control weather in 1 mile radius for 10 rounds",
                 "icon": "⛅",
@@ -2785,9 +3170,9 @@ const SKILLS_DATA = {
                 "id": "gale_mastery",
                 "name": "Gale Mastery",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
-                "desc": "Passive: Master wind magic, enhanced atmospheric control. GRANTS: Wind resistance 50% (-1), Lightning weakness 200% (+1)",
+                "desc": "Passive: Master wind magic, enhanced atmospheric control. GRANTS: Wind resistance 50% (half wind damage); Lightning weakness 200% (double lightning damage)",
                 "icon": "💨",
                 "prerequisites": {
                     "type": "AND",
@@ -2805,7 +3190,7 @@ const SKILLS_DATA = {
                 "id": "wind_mastery",
                 "name": "Wind Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Craft: Action (3 uses per day): Become one with the wind for 3 rounds. Gain flight, immunity to ground effects, +50% movement speed, and all attacks push enemies back 10ft. Can pass through enemy spaces without provoking attacks.",
                 "icon": "🌪️",
@@ -2825,7 +3210,7 @@ const SKILLS_DATA = {
                 "id": "water_splash",
                 "name": "Water Splash",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 Water damage + Magic Power.",
                 "icon": "💧",
@@ -2839,7 +3224,7 @@ const SKILLS_DATA = {
                 "id": "purify_water",
                 "name": "Purify Water",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 1,
                 "desc": "Utility: Clean any liquid, remove poison from drinks",
                 "icon": "🚰",
@@ -2853,7 +3238,7 @@ const SKILLS_DATA = {
                 "id": "water_whip",
                 "name": "Water Whip",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water damage + Magic Power. 20ft reach.",
                 "icon": "🌊",
@@ -2869,7 +3254,7 @@ const SKILLS_DATA = {
                 "id": "heal_wounds",
                 "name": "Heal Wounds",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Spell: Restore 2d4+2 HP instantly OR apply Regeneration status",
                 "icon": "💚",
@@ -2879,13 +3264,20 @@ const SKILLS_DATA = {
                         "purify_water"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "regeneration",
+                        "duration": 5,
+                        "potency": 2
+                    }
+                ]
             },
             {
                 "id": "create_water",
                 "name": "Create Water",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Utility: Summon fresh water (10 gallons), put out fires",
                 "icon": "🫗",
@@ -2901,7 +3293,7 @@ const SKILLS_DATA = {
                 "id": "tidal_wave",
                 "name": "Tidal Wave",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Summon a wave of water and debris dealing 3d6 water or earth damage (whichever each target is weak to). Has a 75% chance to apply both Immobilized and Weakened",
                 "icon": "🌊",
@@ -2912,13 +3304,27 @@ const SKILLS_DATA = {
                         "create_water"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.4
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "water_breathing",
                 "name": "Water Breathing",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: Apply Enhanced Mobility (water breathing + swim speed)",
                 "icon": "🫧",
@@ -2928,13 +3334,20 @@ const SKILLS_DATA = {
                         "heal_wounds"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "enhanced_mobility",
+                        "duration": 10,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "blood_control",
                 "name": "Blood Control",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 7,
                 "desc": "Spell: Apply Mind Controlled (target moves as you direct for 3 turns)",
                 "icon": "🩸",
@@ -2944,15 +3357,22 @@ const SKILLS_DATA = {
                         "heal_wounds"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "water_attunement",
                 "name": "Water Attunement",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: Become attuned to water magic. GRANTS: Water resistance 50% (-1), Lightning weakness 200% (+1)",
+                "desc": "Passive: Become attuned to water magic. GRANTS: Water resistance 50% (half water damage); Lightning weakness 200% (double lightning damage)",
                 "icon": "💧",
                 "prerequisites": {
                     "type": "AND",
@@ -2971,7 +3391,7 @@ const SKILLS_DATA = {
                 "id": "water_shield",
                 "name": "Water Shield",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Spell: Apply Protected (flowing barrier absorbs 3 attacks + fire immunity)",
                 "icon": "🛡️",
@@ -2981,13 +3401,20 @@ const SKILLS_DATA = {
                         "create_water"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "protected",
+                        "duration": 6,
+                        "potency": 3
+                    }
+                ]
             },
             {
                 "id": "maelstrom",
                 "name": "Maelstrom",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
                 "desc": "Spell: 40ft whirlpool (ongoing zone). Attack roll d20 + accuracy vs Magical Defence each turn per creature inside; on a hit, 4d4 water damage + Magic Power.",
                 "icon": "🌀",
@@ -3004,7 +3431,7 @@ const SKILLS_DATA = {
                 "id": "blood_boil",
                 "name": "Blood Boil",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Spell: Superheat blood. Attack roll d20 + accuracy vs Magical Defence; on a hit, 5d4 fire damage + Magic Power (no save).",
                 "icon": "🩸",
@@ -3021,7 +3448,7 @@ const SKILLS_DATA = {
                 "id": "tsunami",
                 "name": "Tsunami",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 6d4 damage + Magic Power.",
                 "icon": "🌊",
@@ -3037,9 +3464,9 @@ const SKILLS_DATA = {
                 "id": "hydro_mastery",
                 "name": "Hydro Mastery",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
-                "desc": "Passive: Master water magic, enhanced fluid manipulation. GRANTS: Water resistance 50% (-1), Lightning weakness 200% (+1)",
+                "desc": "Passive: Master water magic, enhanced fluid manipulation. GRANTS: Water resistance 50% (half water damage); Lightning weakness 200% (double lightning damage)",
                 "icon": "💧",
                 "prerequisites": {
                     "type": "AND",
@@ -3057,7 +3484,7 @@ const SKILLS_DATA = {
                 "id": "water_mastery",
                 "name": "Water Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Craft: Action (3 uses per day): Become one with water for 3 rounds. Gain immunity to water damage, can move through any liquid at normal speed, +50% water spell damage, all attacks heal you for 25% of damage dealt, and can breathe underwater indefinitely.",
                 "icon": "🌊",
@@ -3077,7 +3504,7 @@ const SKILLS_DATA = {
                 "id": "shadow_bolt",
                 "name": "Shadow Bolt",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 damage + Magic Power. 40ft range.",
                 "icon": "🌑",
@@ -3091,7 +3518,7 @@ const SKILLS_DATA = {
                 "id": "darkvision",
                 "name": "Darkvision",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 1,
                 "desc": "Spell: See in complete darkness (10 rounds)",
                 "icon": "👁️",
@@ -3105,7 +3532,7 @@ const SKILLS_DATA = {
                 "id": "shadow_step",
                 "name": "Shadow Step",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Applies Shadow Step. Teleport between shadows (60ft range)",
                 "icon": "👤",
@@ -3121,7 +3548,7 @@ const SKILLS_DATA = {
                 "id": "fear",
                 "name": "Fear",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Spell: Apply Mind Controlled (target flees in terror for 3 turns)",
                 "icon": "😱",
@@ -3131,13 +3558,20 @@ const SKILLS_DATA = {
                         "darkvision"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "darkness",
                 "name": "Darkness",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Spell: Create 20ft radius of magical darkness",
                 "icon": "⚫",
@@ -3153,7 +3587,7 @@ const SKILLS_DATA = {
                 "id": "shadow_duplicate",
                 "name": "Shadow Clone",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Spell: Create dark duplicate (50% your stats, 5 turns)",
                 "icon": "👥",
@@ -3170,7 +3604,7 @@ const SKILLS_DATA = {
                 "id": "nightmare",
                 "name": "Nightmare",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: Assault a sleeping target's mind — automatically hits (no attack roll). 2d6 psychic damage.",
                 "icon": "💭",
@@ -3186,7 +3620,7 @@ const SKILLS_DATA = {
                 "id": "life_drain",
                 "name": "Life Drain",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 7,
                 "desc": "Spell: Steal 2d4 HP from target, heal yourself same amount",
                 "icon": "🖤",
@@ -3202,9 +3636,9 @@ const SKILLS_DATA = {
                 "id": "darkness_attunement",
                 "name": "Darkness Attunement",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: Become attuned to darkness magic. GRANTS: Darkness resistance 50% (-1), Light weakness 200% (+1)",
+                "desc": "Passive: Become attuned to darkness magic. GRANTS: Darkness resistance 50% (half darkness damage); Light weakness 200% (double light damage)",
                 "icon": "🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -3223,7 +3657,7 @@ const SKILLS_DATA = {
                 "id": "shadow_armor",
                 "name": "Shadow Armor",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Spell: Darkness cloaks you (+3 Physical Defence and +3 Magical Defence (AC bonus), +2 Stealth)",
                 "icon": "🥷",
@@ -3239,7 +3673,7 @@ const SKILLS_DATA = {
                 "id": "void_prison",
                 "name": "Void Prison",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
                 "desc": "Spell: Banish target to shadow realm (removed for 3 turns)",
                 "icon": "🕳️",
@@ -3256,7 +3690,7 @@ const SKILLS_DATA = {
                 "id": "soul_steal",
                 "name": "Soul Steal",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Spell: Drain 1 point from all target stats for 1 day",
                 "icon": "👻",
@@ -3273,7 +3707,7 @@ const SKILLS_DATA = {
                 "id": "eclipse",
                 "name": "Eclipse",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
                 "desc": "Perfect balance of light and dark dealing 3d6 darkness or light damage (whichever each target is weak to) to all enemies. Applies Enhanced to allies and has a 75% chance to apply Mind Controlled to enemies",
                 "icon": "🌚",
@@ -3283,15 +3717,23 @@ const SKILLS_DATA = {
                         "shadow_armor"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "void_mastery",
                 "name": "Void Mastery",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
-                "desc": "Passive: Master darkness magic, enhanced shadow manipulation. GRANTS: Darkness resistance 50% (-1), Light weakness 200% (+1)",
+                "desc": "Passive: Master darkness magic, enhanced shadow manipulation. GRANTS: Darkness resistance 50% (half darkness damage); Light weakness 200% (double light damage)",
                 "icon": "🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -3309,7 +3751,7 @@ const SKILLS_DATA = {
                 "id": "darkness_mastery",
                 "name": "Darkness Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Craft: Action (3 uses per day): Become one with darkness for 3 rounds. Gain immunity to darkness damage, permanent invisibility while in shadows, +50% darkness spell damage, all attacks apply Mind Controlled (fear), and can phase through walls for 1 turn per use.",
                 "icon": "🌑",
@@ -3321,7 +3763,15 @@ const SKILLS_DATA = {
                         "eclipse"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 1,
+                        "potency": 0,
+                        "chance": 0.5
+                    }
+                ]
             }
         ],
         "light": [
@@ -3329,7 +3779,7 @@ const SKILLS_DATA = {
                 "id": "light_ray",
                 "name": "Light Ray",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Spell: Radiant beam. Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 light damage + Magic Power and blind for 1 turn.",
                 "icon": "☀️",
@@ -3343,7 +3793,7 @@ const SKILLS_DATA = {
                 "id": "illuminate",
                 "name": "Illuminate",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 1,
                 "desc": "Spell: Bright light (60ft radius, reveals invisible)",
                 "icon": "💡",
@@ -3357,7 +3807,7 @@ const SKILLS_DATA = {
                 "id": "healing_light",
                 "name": "Healing Light",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Spell: Restore 2d4+3 HP instantly + apply Regeneration (immunity to poison)",
                 "icon": "✨",
@@ -3367,13 +3817,20 @@ const SKILLS_DATA = {
                         "light_ray"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "regeneration",
+                        "duration": 5,
+                        "potency": 2
+                    }
+                ]
             },
             {
                 "id": "purify",
                 "name": "Purify",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Spell: Applies Purify. Remove poison, disease, and curses",
                 "icon": "🧽",
@@ -3383,13 +3840,20 @@ const SKILLS_DATA = {
                         "illuminate"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "purify",
+                        "duration": 0,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "blinding_flash",
                 "name": "Blinding Flash",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Spell: 15ft radius flash blinds all enemies for 1 turn",
                 "icon": "⚡",
@@ -3405,7 +3869,7 @@ const SKILLS_DATA = {
                 "id": "holy_weapon",
                 "name": "Holy Weapon",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Spell: Apply Weapon Enchanted (+1d6 radiant damage, extra vs undead)",
                 "icon": "⚔️",
@@ -3416,13 +3880,20 @@ const SKILLS_DATA = {
                         "purify"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weapon_enchanted",
+                        "duration": 10,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "sanctuary",
                 "name": "Sanctuary",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Spell: Protected area (enemies cannot enter 20ft radius)",
                 "icon": "🛡️",
@@ -3438,9 +3909,9 @@ const SKILLS_DATA = {
                 "id": "light_attunement",
                 "name": "Light Attunement",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: Become attuned to light magic. GRANTS: Light resistance 50% (-1), Darkness weakness 200% (+1)",
+                "desc": "Passive: Become attuned to light magic. GRANTS: Light resistance 50% (half light damage); Darkness weakness 200% (double darkness damage)",
                 "icon": "☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -3459,7 +3930,7 @@ const SKILLS_DATA = {
                 "id": "laser_beam",
                 "name": "Laser Beam",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 7,
                 "desc": "Spell: Concentrated light beam. Attack roll d20 + accuracy vs Magical Defence (treat target Magical Defence as 3 lower); on a hit, 3d6 light damage + Magic Power.",
                 "icon": "🔆",
@@ -3475,7 +3946,7 @@ const SKILLS_DATA = {
                 "id": "light_shield",
                 "name": "Light Shield",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Spell: Radiant barrier (+3 Physical Defence and +3 Magical Defence (AC bonus), reflects dark magic)",
                 "icon": "🌟",
@@ -3491,7 +3962,7 @@ const SKILLS_DATA = {
                 "id": "resurrection",
                 "name": "Resurrection",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
                 "desc": "Spell: Bring ally back to life (once per day)",
                 "icon": "🕊️",
@@ -3508,7 +3979,7 @@ const SKILLS_DATA = {
                 "id": "solar_flare",
                 "name": "Solar Flare",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
                 "desc": "Spell: 40ft radius explosion. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 5d6 damage + Magic Power. Friendly fire possible.",
                 "icon": "🌟",
@@ -3525,7 +3996,7 @@ const SKILLS_DATA = {
                 "id": "divine_judgment",
                 "name": "Divine Judgment",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, damage equal to half the target's max HP.",
                 "icon": "⚖️",
@@ -3541,9 +4012,9 @@ const SKILLS_DATA = {
                 "id": "radiant_mastery",
                 "name": "Radiant Mastery",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
-                "desc": "Passive: Master light magic, enhanced radiant energy. GRANTS: Light resistance 50% (-1), Darkness weakness 200% (+1)",
+                "desc": "Passive: Master light magic, enhanced radiant energy. GRANTS: Light resistance 50% (half light damage); Darkness weakness 200% (double darkness damage)",
                 "icon": "☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -3561,7 +4032,7 @@ const SKILLS_DATA = {
                 "id": "light_mastery",
                 "name": "Light Mastery",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Craft: Action (3 uses per day): Become one with light for 3 rounds. Gain immunity to light/radiant damage, emit bright light (30ft radius blinds enemies), +50% light spell damage, all attacks apply Mind Controlled (charm), and can teleport to any bright light source within 100ft.",
                 "icon": "☀️",
@@ -3573,525 +4044,15 @@ const SKILLS_DATA = {
                         "divine_judgment"
                     ]
                 },
-                "specialEffects": []
-            }
-        ]
-    },
-    "professions": {
-        "smithing": [
-            {
-                "id": "basic_smithing",
-                "name": "Basic Smithing",
-                "tier": 1,
-                "cost": 5,
-                "staminaCost": 0,
-                "desc": "Craft basic tools and weapons (+1 quality to crafted items)",
-                "icon": "🔨",
-                "prerequisites": {
-                    "type": "NONE",
-                    "skills": []
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "weapon_smithing",
-                "name": "Weapon Smithing",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Craft and repair weapons (+1 damage to crafted weapons)",
-                "icon": "⚔️",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "basic_smithing"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "armor_smithing",
-                "name": "Armor Smithing",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Craft and repair armor (+1 Physical Defence and +1 Magical Defence to crafted armor)",
-                "icon": "🛡️",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "basic_smithing"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "enchanted_smithing",
-                "name": "Enchanted Smithing",
-                "tier": 3,
-                "cost": 15,
-                "staminaCost": 0,
-                "desc": "Craft: Add minor magical properties (+1 enchantment slot)",
-                "icon": "✨",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "weapon_smithing",
-                        "armor_smithing"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "alloy_crafting",
-                "name": "Alloy Crafting",
-                "tier": 3,
-                "cost": 15,
-                "staminaCost": 0,
-                "desc": "Craft: Create custom alloys (access to mithril and adamantine)",
-                "icon": "⚗️",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "armor_smithing"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "legendary_smithing",
-                "name": "Legendary Smithing",
-                "tier": 4,
-                "cost": 20,
-                "staminaCost": 0,
-                "desc": "Craft legendary equipment (+3 to all bonuses, 2 enchantment slots)",
-                "icon": "🏆",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "enchanted_smithing",
-                        "alloy_crafting"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "divine_smithing",
-                "name": "Divine Smithing",
-                "tier": 5,
-                "cost": 25,
-                "staminaCost": 0,
-                "desc": "Craft artifacts of divine power (unlimited enchantments)",
-                "icon": "☀️",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "legendary_smithing"
-                    ]
-                },
-                "specialEffects": []
-            }
-        ],
-        "alchemy": [
-            {
-                "id": "basic_alchemy",
-                "name": "Basic Alchemy",
-                "tier": 1,
-                "cost": 5,
-                "staminaCost": 0,
-                "desc": "Craft: Mix simple potions (Health potions restore +2 extra HP)",
-                "icon": "🧪",
-                "prerequisites": {
-                    "type": "NONE",
-                    "skills": []
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "poison_brewing",
-                "name": "Poison Brewing",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Craft: Create toxins (Poison deals 1d6 damage/turn for 3 turns)",
-                "icon": "☠️",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "basic_alchemy"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "explosive_compounds",
-                "name": "Explosive Compounds",
-                "tier": 3,
-                "cost": 15,
-                "staminaCost": 0,
-                "desc": "Create alchemical bombs (3d6 damage, 15ft radius)",
-                "icon": "💥",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "poison_brewing"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "transmutation",
-                "name": "Transmutation",
-                "tier": 3,
-                "cost": 15,
-                "staminaCost": 0,
-                "desc": "Convert materials (Lead to gold, generate 100L per day)",
-                "icon": "🏅",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "basic_alchemy"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "elixir_of_life",
-                "name": "Elixir of Life",
-                "tier": 4,
-                "cost": 20,
-                "staminaCost": 0,
-                "desc": "Grant temporary immortality (Cannot die for 1 day)",
-                "icon": "⚱️",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "transmutation"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "grand_alchemist",
-                "name": "Grand Alchemist",
-                "tier": 4,
-                "cost": 20,
-                "staminaCost": 0,
-                "desc": "Passive: Master of all arts (Potions last 1 day instead of permanent)",
-                "icon": "🧙",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "explosive_compounds"
-                    ]
-                },
-                "specialEffects": []
-            }
-        ],
-        "enchanting": [
-            {
-                "id": "basic_enchanting",
-                "name": "Basic Enchanting",
-                "tier": 1,
-                "cost": 5,
-                "staminaCost": 0,
-                "desc": "Craft: Add simple magical effects (+1 to item properties)",
-                "icon": "✨",
-                "prerequisites": {
-                    "type": "NONE",
-                    "skills": []
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "elemental_infusion",
-                "name": "Elemental Infusion",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Add elemental damage (Fire/Ice/Lightning +1d6 damage)",
-                "icon": "🔥",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "basic_enchanting"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "soul_binding",
-                "name": "Soul Binding",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Bind items to owner (Only you can use enchanted items)",
-                "icon": "👻",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "basic_enchanting"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "artifact_creation",
-                "name": "Artifact Creation",
-                "tier": 3,
-                "cost": 15,
-                "staminaCost": 0,
-                "desc": "Create powerful artifacts (3 enchantments per item)",
-                "icon": "🏆",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "elemental_infusion",
-                        "soul_binding"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "archenchanter",
-                "name": "Archenchanter",
-                "tier": 4,
-                "cost": 20,
-                "staminaCost": 0,
-                "desc": "Transcendent mastery (Unlimited enchantments per item)",
-                "icon": "🌟",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "artifact_creation"
-                    ]
-                },
-                "specialEffects": []
-            }
-        ],
-        "cooking": [
-            {
-                "id": "basic_cooking",
-                "name": "Basic Cooking",
-                "tier": 1,
-                "cost": 5,
-                "staminaCost": 0,
-                "desc": "Craft: Prepare simple meals (restore 1d4+1 HP when consumed)",
-                "icon": "🍳",
-                "prerequisites": {
-                    "type": "NONE",
-                    "skills": []
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "hearty_meals",
-                "name": "Hearty Meals",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Cook filling food (+2 Stamina for 10 rounds after eating)",
-                "icon": "🍖",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "basic_cooking"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "stat_boosting_food",
-                "name": "Stat Boosting Food",
-                "tier": 3,
-                "cost": 15,
-                "staminaCost": 0,
-                "desc": "Specialty dishes (+2 to chosen stat for 20 rounds)",
-                "icon": "💪",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "hearty_meals"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "master_chef",
-                "name": "Master Chef",
-                "tier": 4,
-                "cost": 20,
-                "staminaCost": 0,
-                "desc": "Craft: Perfect cuisine (+3 to all stats for 40 rounds)",
-                "icon": "👨‍🍳",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "stat_boosting_food"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "culinary_mastery",
-                "name": "Culinary Mastery",
-                "tier": 4,
-                "cost": 20,
-                "staminaCost": 0,
-                "desc": "Craft: Legendary cooking (all food effects last 1 day)",
-                "icon": "👑",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "stat_boosting_food"
-                    ]
-                },
-                "specialEffects": []
-            }
-        ],
-        "archaeology": [
-            {
-                "id": "artifact_study",
-                "name": "Artifact Study",
-                "tier": 1,
-                "cost": 5,
-                "staminaCost": 0,
-                "desc": "Craft: Identify ancient items (learn item properties and history)",
-                "icon": "🔍",
-                "prerequisites": {
-                    "type": "NONE",
-                    "skills": []
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "ancient_knowledge",
-                "name": "Ancient Knowledge",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Learn forgotten skills (gain 1 skill point in any tree)",
-                "icon": "📚",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "artifact_study"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "divine_archaeology",
-                "name": "Divine Archaeology",
-                "tier": 3,
-                "cost": 15,
-                "staminaCost": 0,
-                "desc": "Craft: Discover godly relics (communicate with ancient deities)",
-                "icon": "✨",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "ancient_knowledge"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "master_archaeologist",
-                "name": "Master Archaeologist",
-                "tier": 4,
-                "cost": 20,
-                "staminaCost": 0,
-                "desc": "Craft: Ultimate discovery (can recreate any lost knowledge or artifact)",
-                "icon": "👑",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "divine_archaeology"
-                    ]
-                },
-                "specialEffects": []
-            }
-        ],
-        "herbalism": [
-            {
-                "id": "plant_identification",
-                "name": "Plant Identification",
-                "tier": 1,
-                "cost": 5,
-                "staminaCost": 0,
-                "desc": "Recognize useful plants (identify herbs and their properties)",
-                "icon": "🌱",
-                "prerequisites": {
-                    "type": "NONE",
-                    "skills": []
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "herbal_remedies",
-                "name": "Herbal Remedies",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Craft: Create natural medicines (heal 1d6+2 HP with herbs)",
-                "icon": "💚",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "plant_identification"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "healing_salves",
-                "name": "Healing Salves",
-                "tier": 2,
-                "cost": 10,
-                "staminaCost": 0,
-                "desc": "Craft: Advanced medicine (create healing items that restore over time)",
-                "icon": "🩹",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "plant_identification"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "magical_herbs",
-                "name": "Magical Herbs",
-                "tier": 3,
-                "cost": 15,
-                "staminaCost": 0,
-                "desc": "Craft: Cultivate enchanted plants (herbs provide magical effects)",
-                "icon": "✨",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "herbal_remedies",
-                        "healing_salves"
-                    ]
-                },
-                "specialEffects": []
-            },
-            {
-                "id": "herbalism_mastery",
-                "name": "Herbalism Mastery",
-                "tier": 4,
-                "cost": 20,
-                "staminaCost": 0,
-                "desc": "Craft: Nature's chosen (immunity to all poisons, plants obey you)",
-                "icon": "👑",
-                "prerequisites": {
-                    "type": "AND",
-                    "skills": [
-                        "magical_herbs"
-                    ]
-                },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.5
+                    }
+                ]
             }
         ]
     },
@@ -4101,7 +4062,7 @@ const SKILLS_DATA = {
                 "id": "tough_skin",
                 "name": "Tough Skin",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Passive: +2 Physical Defence.",
                 "icon": "🛡️",
@@ -4116,7 +4077,7 @@ const SKILLS_DATA = {
                 "id": "rock_skin",
                 "name": "Rock Skin",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 0,
                 "desc": "Passive: +3 Physical Defence; resist piercing (GM).",
                 "icon": "🗿",
@@ -4133,7 +4094,7 @@ const SKILLS_DATA = {
                 "id": "metal_skin",
                 "name": "Metal Skin",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
                 "desc": "Passive: +4 Physical Defence; resist slashing (GM).",
                 "icon": "⚙️",
@@ -4150,7 +4111,7 @@ const SKILLS_DATA = {
                 "id": "magical_resistance",
                 "name": "Magical Resistance",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 0,
                 "desc": "Passive: +3 Magical Defence.",
                 "icon": "🔮",
@@ -4165,7 +4126,7 @@ const SKILLS_DATA = {
                 "id": "damage_reduction",
                 "name": "Damage Reduction",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
                 "desc": "Passive: Reduce all incoming damage by 2 (applied after a hit).",
                 "icon": "🛡️",
@@ -4184,7 +4145,7 @@ const SKILLS_DATA = {
                 "id": "regeneration",
                 "name": "Regeneration",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
                 "desc": "Passive: Apply Regeneration status (2 HP/turn + poison resistance) - does not stack with other regeneration",
                 "icon": "💚",
@@ -4202,7 +4163,7 @@ const SKILLS_DATA = {
                 "id": "rapid_healing",
                 "name": "Rapid Healing",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: Enhanced Regeneration (3 HP/turn + strong DoT resistance) - replaces basic regeneration",
                 "icon": "✨",
@@ -4220,7 +4181,7 @@ const SKILLS_DATA = {
                 "id": "armored_plates",
                 "name": "Armored Plates",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
                 "desc": "Passive: +2 Physical Defence and +2 Magical Defence; immune to critical hits.",
                 "icon": "🦀",
@@ -4239,7 +4200,7 @@ const SKILLS_DATA = {
                 "id": "spell_turning",
                 "name": "Spell Turning",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
                 "desc": "25% chance to reflect spells back at caster",
                 "icon": "🔄",
@@ -4255,7 +4216,7 @@ const SKILLS_DATA = {
                 "id": "immunity_poison",
                 "name": "Poison Resistance",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
                 "desc": "Passive: Strong resistance to all poisons and diseases (25% damage from poison effects)",
                 "icon": "☠️",
@@ -4274,7 +4235,7 @@ const SKILLS_DATA = {
                 "id": "claws",
                 "name": "Natural Claws",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 2,
                 "desc": "Action: Claw attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d6+2 slashing damage.",
                 "icon": "🦅",
@@ -4289,7 +4250,7 @@ const SKILLS_DATA = {
                 "id": "razor_claws",
                 "name": "Razor Claws",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Action: Claw attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d8+3 slashing damage; causes bleeding (GM).",
                 "icon": "🩸",
@@ -4306,7 +4267,7 @@ const SKILLS_DATA = {
                 "id": "venomous_claws",
                 "name": "Venomous Claws",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 4,
                 "desc": "Action: Claw attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + poison 1d4/turn (GM).",
                 "icon": "🟢",
@@ -4323,7 +4284,7 @@ const SKILLS_DATA = {
                 "id": "bite_attack",
                 "name": "Powerful Bite",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 3,
                 "desc": "Action: Bite. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d8+1 piercing damage.",
                 "icon": "🦷",
@@ -4338,7 +4299,7 @@ const SKILLS_DATA = {
                 "id": "crushing_bite",
                 "name": "Crushing Bite",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Bite. Attack roll d20 + accuracy vs Physical Defence (treat Physical Defence as 2 lower); on a hit, 2d6+2 damage.",
                 "icon": "💀",
@@ -4355,7 +4316,7 @@ const SKILLS_DATA = {
                 "id": "tail_swipe",
                 "name": "Tail Swipe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Action: Tail sweep — adjacent enemies. Separate attack roll (d20 + accuracy vs Physical Defence) vs each; 1d6 damage on each hit.",
                 "icon": "🦎",
@@ -4370,7 +4331,7 @@ const SKILLS_DATA = {
                 "id": "spiked_tail",
                 "name": "Spiked Tail",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 4,
                 "desc": "Action: Tail strike (10ft reach). Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d10+3 piercing damage.",
                 "icon": "🦂",
@@ -4387,7 +4348,7 @@ const SKILLS_DATA = {
                 "id": "monster_charge_attack",
                 "name": "Charge Attack",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Action: Charge 20ft and attack. Attack roll d20 + accuracy vs Physical Defence; double weapon/natural damage on hit.",
                 "icon": "🐂",
@@ -4401,7 +4362,7 @@ const SKILLS_DATA = {
                 "id": "monster_berserker_rage",
                 "name": "Berserker Rage",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Toggle: +4 damage, +2 attacks per turn, −2 Physical Defence and −2 Magical Defence for 3 turns.",
                 "icon": "😡",
@@ -4417,7 +4378,7 @@ const SKILLS_DATA = {
                 "id": "multiattack",
                 "name": "Multiattack",
                 "tier": 4,
-                "cost": 30,
+                "cost": 163,
                 "staminaCost": 0,
                 "desc": "Passive: Each turn, make 2 different attacks (each pays its own stamina cost).",
                 "icon": "⚔️",
@@ -4434,7 +4395,7 @@ const SKILLS_DATA = {
                 "id": "rend",
                 "name": "Rend",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Passive: If both claw attacks hit the same target in one turn, deal bonus 1d6 damage.",
                 "icon": "🩸",
@@ -4450,7 +4411,7 @@ const SKILLS_DATA = {
                 "id": "pounce",
                 "name": "Pounce",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Leap 15ft and attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, knock prone.",
                 "icon": "🦘",
@@ -4466,7 +4427,7 @@ const SKILLS_DATA = {
                 "id": "gore",
                 "name": "Gore Attack",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Horn attack. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d8+2 piercing and push 5ft.",
                 "icon": "🐗",
@@ -4480,7 +4441,7 @@ const SKILLS_DATA = {
                 "id": "trample",
                 "name": "Trample",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Move through enemies; each takes 1d6 damage (GM: attack roll or save as appropriate).",
                 "icon": "🦏",
@@ -4493,10 +4454,10 @@ const SKILLS_DATA = {
                 "specialEffects": []
             },
             {
-                "id": "blood_frenzy",
+                "id": "monster_blood_frenzy",
                 "name": "Blood Frenzy",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 0,
                 "desc": "Passive: When an enemy drops below 25% HP, gain +3 damage until end of combat.",
                 "icon": "🩸",
@@ -4514,7 +4475,7 @@ const SKILLS_DATA = {
                 "id": "fire_breath",
                 "name": "Fire Breath",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Action: 30ft cone. Attack roll d20 + accuracy vs Magical Defence vs each target; on a hit, 2d8 fire + apply Burn. Grants fire resistance; ice/water weakness.",
                 "icon": "🔥",
@@ -4524,13 +4485,20 @@ const SKILLS_DATA = {
                 },
                 "lootType": "magic",
                 "elementalType": "fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1
+                    }
+                ]
             },
             {
                 "id": "ice_breath",
                 "name": "Ice Breath",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Action: 30ft cone. Attack roll d20 + accuracy vs Magical Defence vs each target; on a hit, 2d6 cold + apply Weakened. Grants ice/water resistance; fire/lightning weakness.",
                 "icon": "❄️",
@@ -4540,13 +4508,20 @@ const SKILLS_DATA = {
                 },
                 "lootType": "magic",
                 "elementalType": "ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2
+                    }
+                ]
             },
             {
                 "id": "poison_breath",
                 "name": "Poison Breath",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Action: 25ft cone. Attack roll d20 + accuracy vs Magical Defence vs each target; on a hit, 1d8 poison + apply Poison. Grants poison resistance; light/fire weakness.",
                 "icon": "☠️",
@@ -4556,13 +4531,20 @@ const SKILLS_DATA = {
                 },
                 "lootType": "magic",
                 "elementalType": "poison",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "poison",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "lightning_breath",
                 "name": "Lightning Breath",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Action: 60ft line. Attack roll d20 + accuracy vs Magical Defence vs each target; on a hit, 2d10 lightning + apply Immobilized. Grants lightning resistance; earth/water weakness.",
                 "icon": "⚡",
@@ -4572,13 +4554,20 @@ const SKILLS_DATA = {
                 },
                 "lootType": "magic",
                 "elementalType": "lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "acid_spit",
                 "name": "Acid Spit",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "Action: Spit acid (ranged). Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d8 acid + apply Acid Corrosion. Grants poison resistance; ice/water weakness.",
                 "icon": "🟢",
@@ -4588,13 +4577,20 @@ const SKILLS_DATA = {
                 },
                 "lootType": "magic",
                 "elementalType": "acid",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "acid_corrosion",
+                        "duration": 5,
+                        "potency": 1
+                    }
+                ]
             },
             {
                 "id": "fear_aura",
                 "name": "Fear Aura",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Passive: Apply Intimidating Aura (enemies must save vs Mind Control)",
                 "icon": "😨",
@@ -4611,7 +4607,7 @@ const SKILLS_DATA = {
                 "id": "paralyzing_gaze",
                 "name": "Paralyzing Gaze",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Target within 60ft: Apply Immobilized (cannot move but can attack)",
                 "icon": "👁️",
@@ -4620,13 +4616,20 @@ const SKILLS_DATA = {
                     "skills": []
                 },
                 "lootType": "magic",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "invisibility",
                 "name": "Invisibility",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 12,
                 "desc": "Apply Stealth Mastery (invisible + strong mind control resistance)",
                 "icon": "👻",
@@ -4635,13 +4638,20 @@ const SKILLS_DATA = {
                     "skills": []
                 },
                 "lootType": "magic",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stealth_mastery",
+                        "duration": 5,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "teleport",
                 "name": "Teleport",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 8,
                 "desc": "Instantly move up to 60ft to visible location",
                 "icon": "✨",
@@ -4656,7 +4666,7 @@ const SKILLS_DATA = {
                 "id": "web_shot",
                 "name": "Web Shot",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Ranged: Apply Immobilized (cannot move for 3 turns)",
                 "icon": "🕸️",
@@ -4665,13 +4675,20 @@ const SKILLS_DATA = {
                     "skills": []
                 },
                 "lootType": "magic",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "monster_earthquake",
                 "name": "Earthquake",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 15,
                 "desc": "30ft radius: 3d6 damage, knock prone, difficult terrain. Grants earth resistance, wind/lightning weakness",
                 "icon": "🌍",
@@ -4687,7 +4704,7 @@ const SKILLS_DATA = {
                 "id": "mind_control",
                 "name": "Mind Control",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 15,
                 "desc": "Apply Mind Controlled (control enemy actions for 3 turns)",
                 "icon": "🧠",
@@ -4698,13 +4715,20 @@ const SKILLS_DATA = {
                     ]
                 },
                 "lootType": "magic",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "energy_drain",
                 "name": "Energy Drain",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Touch: Apply Weakened (all stats -2) and drain 1d4 stamina",
                 "icon": "🖤",
@@ -4713,13 +4737,20 @@ const SKILLS_DATA = {
                     "skills": []
                 },
                 "lootType": "magic",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2
+                    }
+                ]
             },
             {
                 "id": "monster_shadow_step",
                 "name": "Shadow Step",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Move from shadow to shadow within 40ft. Grants darkness resistance, light weakness",
                 "icon": "🌑",
@@ -4735,7 +4766,7 @@ const SKILLS_DATA = {
                 "id": "roar",
                 "name": "Terrifying Roar",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 5,
                 "desc": "20ft radius: Apply Mind Controlled (fear variant - enemies flee)",
                 "icon": "🦁",
@@ -4744,7 +4775,14 @@ const SKILLS_DATA = {
                     "skills": []
                 },
                 "lootType": "magic",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             }
         ],
         "utility": [
@@ -4752,7 +4790,7 @@ const SKILLS_DATA = {
                 "id": "monster_flight",
                 "name": "Flight",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: Apply Enhanced Mobility (flight + strong immobilization resistance)",
                 "icon": "🦅",
@@ -4769,7 +4807,7 @@ const SKILLS_DATA = {
                 "id": "burrow",
                 "name": "Burrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 0,
                 "desc": "Dig through earth at half speed, surprise attacks",
                 "icon": "🕳️",
@@ -4784,7 +4822,7 @@ const SKILLS_DATA = {
                 "id": "climb",
                 "name": "Natural Climber",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Climb speed equal to land speed, no checks needed",
                 "icon": "🧗",
@@ -4799,7 +4837,7 @@ const SKILLS_DATA = {
                 "id": "swim",
                 "name": "Aquatic",
                 "tier": 1,
-                "cost": 5,
+                "cost": 8,
                 "staminaCost": 0,
                 "desc": "Swim speed, hold breath for 30 rounds",
                 "icon": "🏊",
@@ -4814,7 +4852,7 @@ const SKILLS_DATA = {
                 "id": "echolocation",
                 "name": "Echolocation",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 0,
                 "desc": "See in complete darkness within 60ft",
                 "icon": "🦇",
@@ -4829,7 +4867,7 @@ const SKILLS_DATA = {
                 "id": "camouflage",
                 "name": "Camouflage",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Blend with surroundings: +8 to stealth checks",
                 "icon": "🦎",
@@ -4844,7 +4882,7 @@ const SKILLS_DATA = {
                 "id": "pack_leader",
                 "name": "Pack Leader",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 0,
                 "desc": "Summon 1d4 lesser creatures to fight for 5 turns",
                 "icon": "🐺",
@@ -4859,7 +4897,7 @@ const SKILLS_DATA = {
                 "id": "size_change",
                 "name": "Size Change",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 10,
                 "desc": "Double size for 5 turns: +4 Str, +2 reach, -2 Physical Defence and -2 Magical Defence",
                 "icon": "📏",
@@ -4874,7 +4912,7 @@ const SKILLS_DATA = {
                 "id": "phase_shift",
                 "name": "Phase Shift",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 12,
                 "desc": "Become incorporeal for 3 turns, strong resistance to physical damage (25%)",
                 "icon": "👻",
@@ -4891,7 +4929,7 @@ const SKILLS_DATA = {
                 "id": "monster_ancient_knowledge",
                 "name": "Ancient Knowledge",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Passive: Know weakness of any creature (+4 damage vs that type)",
                 "icon": "📚",
@@ -4910,7 +4948,7 @@ const SKILLS_DATA = {
                 "id": "flame_arrow",
                 "name": "Flame Arrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, ranged attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🏹🔥",
@@ -4922,13 +4960,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "inferno_volley",
                 "name": "Inferno Volley",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "🔥🏹",
@@ -4946,7 +4992,7 @@ const SKILLS_DATA = {
                 "id": "phoenix_shot",
                 "name": "Phoenix Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "🦅🔥",
@@ -4964,7 +5010,7 @@ const SKILLS_DATA = {
                 "id": "frost_arrow",
                 "name": "Frost Arrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, ranged attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🏹❄️",
@@ -4976,13 +5022,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "glacier_volley",
                 "name": "Glacier Volley",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "❄️🏹",
@@ -5000,7 +5054,7 @@ const SKILLS_DATA = {
                 "id": "blizzard_shot",
                 "name": "Blizzard Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌨️❄️",
@@ -5018,7 +5072,7 @@ const SKILLS_DATA = {
                 "id": "storm_arrow",
                 "name": "Storm Arrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, ranged attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🏹⚡",
@@ -5030,13 +5084,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "thunder_volley",
                 "name": "Thunder Volley",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "⚡🏹",
@@ -5051,10 +5113,10 @@ const SKILLS_DATA = {
                 "specialEffects": []
             },
             {
-                "id": "lightning_storm",
+                "id": "bow_lightning_storm",
                 "name": "Lightning Storm",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Fire an arrow that chains lightning between targets, dealing 3d6 lightning damage. Has a 75% chance to apply Incapacitated",
                 "icon": "⛈️⚡",
@@ -5066,13 +5128,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "stone_arrow",
                 "name": "Stone Arrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🏹🪨",
@@ -5090,7 +5160,7 @@ const SKILLS_DATA = {
                 "id": "crystal_volley",
                 "name": "Crystal Volley",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "🪨🏹",
@@ -5108,7 +5178,7 @@ const SKILLS_DATA = {
                 "id": "mountain_shot",
                 "name": "Mountain Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "🏔️🪨",
@@ -5126,7 +5196,7 @@ const SKILLS_DATA = {
                 "id": "wind_arrow",
                 "name": "Wind Arrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, ranged attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🏹💨",
@@ -5144,7 +5214,7 @@ const SKILLS_DATA = {
                 "id": "gale_volley",
                 "name": "Gale Volley",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Fire multiple wind-empowered arrows that curve around obstacles, dealing 2d6 wind damage.",
                 "icon": "💨🏹",
@@ -5162,7 +5232,7 @@ const SKILLS_DATA = {
                 "id": "hurricane_shot",
                 "name": "Hurricane Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌪️💨",
@@ -5180,7 +5250,7 @@ const SKILLS_DATA = {
                 "id": "water_arrow",
                 "name": "Water Arrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Attack roll d20 + accuracy vs Physical Defence; weapon damage ++1d6 water damage and target's Physical Defence is 1 lower for 2 turns on hit",
                 "icon": "🏹�",
@@ -5198,7 +5268,7 @@ const SKILLS_DATA = {
                 "id": "tide_volley",
                 "name": "Tide Volley",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Fire multiple water arrows, each dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
                 "icon": "💧🏹",
@@ -5216,7 +5286,7 @@ const SKILLS_DATA = {
                 "id": "tsunami_shot",
                 "name": "Tsunami Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Fire an arrow that creates a wave of water on impact, dealing 3d6 water damage (no status effect)",
                 "icon": "🌊💧",
@@ -5234,7 +5304,7 @@ const SKILLS_DATA = {
                 "id": "shadow_arrow",
                 "name": "Shadow Arrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, ranged attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🏹🌑",
@@ -5246,13 +5316,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "void_volley",
                 "name": "Void Volley",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "🌑🏹",
@@ -5270,7 +5348,7 @@ const SKILLS_DATA = {
                 "id": "eclipse_shot",
                 "name": "Eclipse Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌑✨",
@@ -5288,7 +5366,7 @@ const SKILLS_DATA = {
                 "id": "light_arrow",
                 "name": "Light Arrow",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, ranged attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🏹☀️",
@@ -5300,13 +5378,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "radiant_volley",
                 "name": "Radiant Volley",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "☀️🏹",
@@ -5324,7 +5410,7 @@ const SKILLS_DATA = {
                 "id": "solar_shot",
                 "name": "Solar Shot",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "☀️✨",
@@ -5344,7 +5430,7 @@ const SKILLS_DATA = {
                 "id": "flame_edge",
                 "name": "Flame Edge",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, sword attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "⚔️🔥",
@@ -5356,13 +5442,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "inferno_parry",
                 "name": "Inferno Parry",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Reaction: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "🛡️🔥",
@@ -5380,7 +5474,7 @@ const SKILLS_DATA = {
                 "id": "blazing_tempest",
                 "name": "Blazing Tempest",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌪️🔥",
@@ -5398,7 +5492,7 @@ const SKILLS_DATA = {
                 "id": "frostbrand",
                 "name": "Frostbrand",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, sword attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "⚔️❄️",
@@ -5410,13 +5504,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "glacial_riposte",
                 "name": "Glacial Riposte",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Parry and counter with a freezing slash, has a 40% chance to apply Immobilized",
                 "icon": "🛡️❄️",
@@ -5428,13 +5530,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "winters_fury",
                 "name": "Winter's Fury",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌨️❄️",
@@ -5452,7 +5562,7 @@ const SKILLS_DATA = {
                 "id": "storm_blade",
                 "name": "Storm Blade",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, sword attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "⚔️⚡",
@@ -5464,13 +5574,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "thunder_parry",
                 "name": "Thunder Parry",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Reaction: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
                 "icon": "🛡️⚡",
@@ -5488,7 +5606,7 @@ const SKILLS_DATA = {
                 "id": "lightning_surge",
                 "name": "Lightning Surge",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌩️⚡",
@@ -5506,7 +5624,7 @@ const SKILLS_DATA = {
                 "id": "stonecutter",
                 "name": "Stonecutter",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, sword attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "⚔️🪨",
@@ -5524,7 +5642,7 @@ const SKILLS_DATA = {
                 "id": "earthen_guard",
                 "name": "Earthen Guard",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Parry and create a stone barrier, gaining Enhanced for 2 turns",
                 "icon": "🛡️🪨",
@@ -5542,7 +5660,7 @@ const SKILLS_DATA = {
                 "id": "quake_slash",
                 "name": "Quake Slash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌋🪨",
@@ -5560,7 +5678,7 @@ const SKILLS_DATA = {
                 "id": "gale_blade",
                 "name": "Gale Blade",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, sword attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "⚔️💨",
@@ -5578,7 +5696,7 @@ const SKILLS_DATA = {
                 "id": "cyclone_parry",
                 "name": "Cyclone Parry",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Parry and create a swirling wind barrier, gaining Enhanced Mobility for 1 turn",
                 "icon": "🛡️💨",
@@ -5596,7 +5714,7 @@ const SKILLS_DATA = {
                 "id": "tempest_dance",
                 "name": "Tempest Dance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌪️💨",
@@ -5614,7 +5732,7 @@ const SKILLS_DATA = {
                 "id": "tidecutter",
                 "name": "Tidecutter",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, sword attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "⚔️💧",
@@ -5632,7 +5750,7 @@ const SKILLS_DATA = {
                 "id": "aqua_parry",
                 "name": "Aqua Parry",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Parry and create a wave, healing self for 1d6 HP and pushing attacker back (no status effect)",
                 "icon": "🛡️💧",
@@ -5650,7 +5768,7 @@ const SKILLS_DATA = {
                 "id": "maelstrom_slash",
                 "name": "Maelstrom Slash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Unleash a spinning slash that deals 3d6 water damage (no status effect)",
                 "icon": "🌊💧",
@@ -5668,7 +5786,7 @@ const SKILLS_DATA = {
                 "id": "shadow_edge",
                 "name": "Shadow Edge",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, sword attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "⚔️🌑",
@@ -5680,13 +5798,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "night_parry",
                 "name": "Night Parry",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Parry and become Stealth Mastery until your next turn",
                 "icon": "🛡️🌑",
@@ -5704,7 +5830,7 @@ const SKILLS_DATA = {
                 "id": "umbral_onslaught",
                 "name": "Umbral Onslaught",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 darkness damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌑🗡️",
@@ -5722,7 +5848,7 @@ const SKILLS_DATA = {
                 "id": "radiant_blade",
                 "name": "Radiant Blade",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, sword attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "⚔️☀️",
@@ -5734,13 +5860,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "solar_parry",
                 "name": "Solar Parry",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Parry and unleash a flash of light, healing allies for 1d6 HP (no status effect)",
                 "icon": "🛡️☀️",
@@ -5758,7 +5892,7 @@ const SKILLS_DATA = {
                 "id": "judgment_slash",
                 "name": "Judgment Slash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Deliver a powerful slash that deals 3d6 light damage and removes all debuffs from allies (no status effect)",
                 "icon": "⚖️☀️",
@@ -5776,7 +5910,7 @@ const SKILLS_DATA = {
                 "id": "flame_dagger",
                 "name": "Flame Dagger",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, dagger attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🗡️🔥",
@@ -5788,13 +5922,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "inferno_strike",
                 "name": "Inferno Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "🔥🗡️",
@@ -5812,7 +5954,7 @@ const SKILLS_DATA = {
                 "id": "phoenix_dance",
                 "name": "Phoenix Dance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🦅🔥",
@@ -5830,7 +5972,7 @@ const SKILLS_DATA = {
                 "id": "frost_dagger",
                 "name": "Frost Dagger",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, dagger attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🗡️❄️",
@@ -5842,13 +5984,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "freezing_strike",
                 "name": "Freezing Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
                 "icon": "❄️🗡️",
@@ -5866,7 +6016,7 @@ const SKILLS_DATA = {
                 "id": "arctic_barrage",
                 "name": "Arctic Barrage",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌨️❄️",
@@ -5884,7 +6034,7 @@ const SKILLS_DATA = {
                 "id": "storm_dagger",
                 "name": "Storm Dagger",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, dagger attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🗡️⚡",
@@ -5896,13 +6046,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "thunder_strike",
                 "name": "Thunder Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
                 "icon": "⚡🗡️",
@@ -5914,13 +6072,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "thunder_strike",
+                        "duration": 0,
+                        "potency": 0,
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "storm_flurry",
                 "name": "Storm Flurry",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
                 "icon": "⛈️⚡",
@@ -5938,7 +6104,7 @@ const SKILLS_DATA = {
                 "id": "stone_dagger",
                 "name": "Stone Dagger",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, dagger attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🗡️🪨",
@@ -5956,7 +6122,7 @@ const SKILLS_DATA = {
                 "id": "crystal_strike",
                 "name": "Crystal Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
                 "icon": "💎🗡️",
@@ -5974,7 +6140,7 @@ const SKILLS_DATA = {
                 "id": "earthen_assault",
                 "name": "Earthen Assault",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌋🪨",
@@ -5992,7 +6158,7 @@ const SKILLS_DATA = {
                 "id": "wind_dagger",
                 "name": "Wind Dagger",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, dagger attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🗡️💨",
@@ -6010,7 +6176,7 @@ const SKILLS_DATA = {
                 "id": "zephyr_strike",
                 "name": "Zephyr Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "A wind-enhanced strike dealing 2d6 wind damage and increases your movement speed.",
                 "icon": "💨🗡️",
@@ -6028,7 +6194,7 @@ const SKILLS_DATA = {
                 "id": "hurricane_dance",
                 "name": "Hurricane Dance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌪️💨",
@@ -6046,7 +6212,7 @@ const SKILLS_DATA = {
                 "id": "water_dagger",
                 "name": "Water Dagger",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, dagger attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🗡️💧",
@@ -6064,7 +6230,7 @@ const SKILLS_DATA = {
                 "id": "tide_strike",
                 "name": "Tide Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "A flowing strike dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
                 "icon": "🌊🗡️",
@@ -6082,7 +6248,7 @@ const SKILLS_DATA = {
                 "id": "tsunami_dance",
                 "name": "Tsunami Dance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Your daggers flow like water, dealing 3d6 water damage to multiple targets (no status effect)",
                 "icon": "🌊💧",
@@ -6100,7 +6266,7 @@ const SKILLS_DATA = {
                 "id": "shadow_dagger",
                 "name": "Shadow Dagger",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, dagger attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🗡️🌑",
@@ -6112,13 +6278,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "void_strike",
                 "name": "Void Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
                 "icon": "🌑🗡️",
@@ -6136,7 +6310,7 @@ const SKILLS_DATA = {
                 "id": "night_dance",
                 "name": "Night Dance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌑✨",
@@ -6154,7 +6328,7 @@ const SKILLS_DATA = {
                 "id": "light_dagger",
                 "name": "Light Dagger",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, dagger attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🗡️☀️",
@@ -6166,13 +6340,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "radiant_strike",
                 "name": "Radiant Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
                 "icon": "✨🗡️",
@@ -6190,7 +6372,7 @@ const SKILLS_DATA = {
                 "id": "dawn_dance",
                 "name": "Dawn Dance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
                 "icon": "☀️✨",
@@ -6208,7 +6390,7 @@ const SKILLS_DATA = {
                 "id": "flame_glaive",
                 "name": "Flame Glaive",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, polearm attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🔱🔥",
@@ -6220,13 +6402,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "blazing_sweep",
                 "name": "Blazing Sweep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage each. Has a 40% chance to apply the listed status.",
                 "icon": "🔥🔱",
@@ -6244,7 +6434,7 @@ const SKILLS_DATA = {
                 "id": "solar_lance",
                 "name": "Solar Lance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "☀️🔥",
@@ -6262,7 +6452,7 @@ const SKILLS_DATA = {
                 "id": "frost_halberd",
                 "name": "Frost Halberd",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, polearm attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🔱❄️",
@@ -6274,13 +6464,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "glacier_sweep",
                 "name": "Glacier Sweep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
                 "icon": "❄️🔱",
@@ -6298,7 +6496,7 @@ const SKILLS_DATA = {
                 "id": "winter_vortex",
                 "name": "Winter Vortex",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌨️❄️",
@@ -6316,7 +6514,7 @@ const SKILLS_DATA = {
                 "id": "storm_glaive",
                 "name": "Storm Glaive",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, polearm attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🔱⚡",
@@ -6328,13 +6526,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "thunder_sweep",
                 "name": "Thunder Sweep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
                 "icon": "⚡🔱",
@@ -6352,7 +6558,7 @@ const SKILLS_DATA = {
                 "id": "lightning_spiral",
                 "name": "Lightning Spiral",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage. Has a 75% chance to apply the listed status.",
                 "icon": "⛈️⚡",
@@ -6370,7 +6576,7 @@ const SKILLS_DATA = {
                 "id": "stone_halberd",
                 "name": "Stone Halberd",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, polearm attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🔱🪨",
@@ -6388,7 +6594,7 @@ const SKILLS_DATA = {
                 "id": "earthen_sweep",
                 "name": "Earthen Sweep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
                 "icon": "🪨🔱",
@@ -6406,7 +6612,7 @@ const SKILLS_DATA = {
                 "id": "tectonic_spiral",
                 "name": "Tectonic Spiral",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌋🪨",
@@ -6424,7 +6630,7 @@ const SKILLS_DATA = {
                 "id": "wind_glaive",
                 "name": "Wind Glaive",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, polearm attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🔱💨",
@@ -6442,7 +6648,7 @@ const SKILLS_DATA = {
                 "id": "cyclone_sweep",
                 "name": "Cyclone Sweep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "A wind-empowered sweep dealing 2d6 wind damage and increasing your movement speed.",
                 "icon": "💨🔱",
@@ -6460,7 +6666,7 @@ const SKILLS_DATA = {
                 "id": "tempest_spiral",
                 "name": "Tempest Spiral",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌪️💨",
@@ -6478,7 +6684,7 @@ const SKILLS_DATA = {
                 "id": "water_glaive",
                 "name": "Water Glaive",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, polearm attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🔱💧",
@@ -6496,7 +6702,7 @@ const SKILLS_DATA = {
                 "id": "wave_sweep",
                 "name": "Wave Sweep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "A flowing sweep dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
                 "icon": "🌊🔱",
@@ -6514,7 +6720,7 @@ const SKILLS_DATA = {
                 "id": "maelstrom_spiral",
                 "name": "Maelstrom Spiral",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Create a spiral of water, dealing 3d6 water damage to all nearby enemies (no status effect)",
                 "icon": "🌊💧",
@@ -6532,7 +6738,7 @@ const SKILLS_DATA = {
                 "id": "shadow_glaive",
                 "name": "Shadow Glaive",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, polearm attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🔱🌑",
@@ -6544,13 +6750,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "void_sweep",
                 "name": "Void Sweep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
                 "icon": "🌑🔱",
@@ -6568,7 +6782,7 @@ const SKILLS_DATA = {
                 "id": "eclipse_spiral",
                 "name": "Eclipse Spiral",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌑✨",
@@ -6586,7 +6800,7 @@ const SKILLS_DATA = {
                 "id": "light_glaive",
                 "name": "Light Glaive",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, polearm attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🔱☀️",
@@ -6598,13 +6812,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "radiant_sweep",
                 "name": "Radiant Sweep",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
                 "icon": "✨🔱",
@@ -6622,7 +6844,7 @@ const SKILLS_DATA = {
                 "id": "solar_spiral",
                 "name": "Solar Spiral",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
                 "icon": "☀️✨",
@@ -6640,7 +6862,7 @@ const SKILLS_DATA = {
                 "id": "flame_hammer",
                 "name": "Flame Hammer",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, hammer attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🔨🔥",
@@ -6652,13 +6874,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "magma_smash",
                 "name": "Magma Smash",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "🌋🔨",
@@ -6676,7 +6906,7 @@ const SKILLS_DATA = {
                 "id": "volcanic_eruption",
                 "name": "Volcanic Eruption",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌋💥",
@@ -6694,7 +6924,7 @@ const SKILLS_DATA = {
                 "id": "frost_hammer",
                 "name": "Frost Hammer",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, hammer attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🔨❄️",
@@ -6706,13 +6936,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "glacial_pound",
                 "name": "Glacial Pound",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "A freezing hammer strike that deals 2d6 ice damage and creates a field of ice. Enemies in the area become Slowed and have a 40% chance to be Immobilized",
                 "icon": "❄️🔨",
@@ -6724,13 +6962,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "permafrost_crash",
                 "name": "Permafrost Crash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
                 "icon": "❄️💥",
@@ -6748,7 +6994,7 @@ const SKILLS_DATA = {
                 "id": "storm_hammer",
                 "name": "Storm Hammer",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, hammer attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🔨⚡",
@@ -6760,13 +7006,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "thunder_slam",
                 "name": "Thunder Slam",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
                 "icon": "⚡🔨",
@@ -6784,7 +7038,7 @@ const SKILLS_DATA = {
                 "id": "storm_surge",
                 "name": "Storm Surge",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Create a wave of electrified water dealing 2d6 lightning or water damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened",
                 "icon": "⛈️⚡",
@@ -6796,13 +7050,27 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.75
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "earthshaker_hammer",
                 "name": "Earthshaker Hammer",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, hammer attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🔨🪨",
@@ -6820,7 +7088,7 @@ const SKILLS_DATA = {
                 "id": "tectonic_slam",
                 "name": "Tectonic Slam",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
                 "icon": "🪨🔨",
@@ -6838,7 +7106,7 @@ const SKILLS_DATA = {
                 "id": "mountain_crash",
                 "name": "Mountain Crash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
                 "icon": "🏔️🪨",
@@ -6856,7 +7124,7 @@ const SKILLS_DATA = {
                 "id": "gale_hammer",
                 "name": "Gale Hammer",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, hammer attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🔨💨",
@@ -6874,7 +7142,7 @@ const SKILLS_DATA = {
                 "id": "cyclone_slam",
                 "name": "Cyclone Slam",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply the listed status.",
                 "icon": "💨🔨",
@@ -6892,7 +7160,7 @@ const SKILLS_DATA = {
                 "id": "tempest_crash",
                 "name": "Tempest Crash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌪️💨",
@@ -6910,7 +7178,7 @@ const SKILLS_DATA = {
                 "id": "tide_hammer",
                 "name": "Tide Hammer",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, hammer attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🔨💧",
@@ -6928,7 +7196,7 @@ const SKILLS_DATA = {
                 "id": "wave_slam",
                 "name": "Wave Slam",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "A water-empowered strike dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
                 "icon": "🌊🔨",
@@ -6946,7 +7214,7 @@ const SKILLS_DATA = {
                 "id": "tsunami_crash",
                 "name": "Tsunami Crash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Create a massive wave with your hammer, dealing 3d6 water damage to all nearby enemies (no status effect)",
                 "icon": "🌊💧",
@@ -6964,7 +7232,7 @@ const SKILLS_DATA = {
                 "id": "shadow_hammer",
                 "name": "Shadow Hammer",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, hammer attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🔨🌑",
@@ -6976,13 +7244,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "void_slam",
                 "name": "Void Slam",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
                 "icon": "🌑🔨",
@@ -7000,7 +7276,7 @@ const SKILLS_DATA = {
                 "id": "eclipse_crash",
                 "name": "Eclipse Crash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌑✨",
@@ -7018,7 +7294,7 @@ const SKILLS_DATA = {
                 "id": "radiant_hammer",
                 "name": "Radiant Hammer",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, hammer attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🔨☀️",
@@ -7030,13 +7306,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "solar_slam",
                 "name": "Solar Slam",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
                 "icon": "☀️🔨",
@@ -7054,7 +7338,7 @@ const SKILLS_DATA = {
                 "id": "divine_crash",
                 "name": "Divine Crash",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
                 "icon": "☀️✨",
@@ -7072,7 +7356,7 @@ const SKILLS_DATA = {
                 "id": "flame_axe",
                 "name": "Flame Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, axe attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🪓🔥",
@@ -7084,13 +7368,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "inferno_cleave",
                 "name": "Inferno Cleave",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage each. Has a 40% chance to apply the listed status.",
                 "icon": "🔥🪓",
@@ -7108,7 +7400,7 @@ const SKILLS_DATA = {
                 "id": "meteor_strike",
                 "name": "Meteor Strike",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "☄️🔥",
@@ -7126,7 +7418,7 @@ const SKILLS_DATA = {
                 "id": "frost_axe",
                 "name": "Frost Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, axe attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🪓❄️",
@@ -7138,13 +7430,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "frozen_cleave",
                 "name": "Frozen Cleave",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage each. Has a 40% chance to apply the listed status.",
                 "icon": "❄️🪓",
@@ -7162,7 +7462,7 @@ const SKILLS_DATA = {
                 "id": "avalanche_strike",
                 "name": "Avalanche Strike",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌨️❄️",
@@ -7180,7 +7480,7 @@ const SKILLS_DATA = {
                 "id": "storm_axe",
                 "name": "Storm Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, axe attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🪓⚡",
@@ -7192,13 +7492,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "stone_axe",
                 "name": "Stone Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, axe attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🪓🪨",
@@ -7216,7 +7524,7 @@ const SKILLS_DATA = {
                 "id": "wind_axe",
                 "name": "Wind Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, axe attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🪓💨",
@@ -7234,7 +7542,7 @@ const SKILLS_DATA = {
                 "id": "water_axe",
                 "name": "Water Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, axe attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🪓💧",
@@ -7252,7 +7560,7 @@ const SKILLS_DATA = {
                 "id": "shadow_axe",
                 "name": "Shadow Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, axe attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🪓🌑",
@@ -7264,13 +7572,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "light_axe",
                 "name": "Light Axe",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, axe attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🪓☀️",
@@ -7282,13 +7598,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "flame_staff",
                 "name": "Flame Staff",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, staff attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🪄🔥",
@@ -7300,13 +7624,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "inferno_channel",
                 "name": "Inferno Channel",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "🔥🪄",
@@ -7324,7 +7656,7 @@ const SKILLS_DATA = {
                 "id": "phoenix_staff",
                 "name": "Phoenix Staff",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "🦅🔥",
@@ -7342,7 +7674,7 @@ const SKILLS_DATA = {
                 "id": "frost_staff",
                 "name": "Frost Staff",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, staff attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🪄❄️",
@@ -7354,13 +7686,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "glacial_focus",
                 "name": "Glacial Focus",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
                 "icon": "❄️🪄",
@@ -7378,7 +7718,7 @@ const SKILLS_DATA = {
                 "id": "winter_staff",
                 "name": "Winter Staff",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌨️❄️",
@@ -7396,7 +7736,7 @@ const SKILLS_DATA = {
                 "id": "storm_staff",
                 "name": "Storm Staff",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, staff attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🪄⚡",
@@ -7408,13 +7748,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "thunder_focus",
                 "name": "Thunder Focus",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
                 "icon": "⚡🪄",
@@ -7432,7 +7780,7 @@ const SKILLS_DATA = {
                 "id": "tempest_staff",
                 "name": "Tempest Staff",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage. Has a 75% chance to apply the listed status.",
                 "icon": "⛈️⚡",
@@ -7450,7 +7798,7 @@ const SKILLS_DATA = {
                 "id": "stone_staff",
                 "name": "Stone Staff",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, staff attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🪄🪨",
@@ -7468,7 +7816,7 @@ const SKILLS_DATA = {
                 "id": "crystal_focus",
                 "name": "Crystal Focus",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
                 "icon": "🪨🪄",
@@ -7486,7 +7834,7 @@ const SKILLS_DATA = {
                 "id": "mountain_staff",
                 "name": "Mountain Staff",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
                 "icon": "🏔️🪨",
@@ -7504,7 +7852,7 @@ const SKILLS_DATA = {
                 "id": "wind_staff",
                 "name": "Wind Staff",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, staff attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🪄💨",
@@ -7522,7 +7870,7 @@ const SKILLS_DATA = {
                 "id": "gale_focus",
                 "name": "Gale Focus",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply the listed status.",
                 "icon": "💨🪄",
@@ -7540,7 +7888,7 @@ const SKILLS_DATA = {
                 "id": "hurricane_staff",
                 "name": "Hurricane Staff",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌪️💨",
@@ -7558,7 +7906,7 @@ const SKILLS_DATA = {
                 "id": "water_staff",
                 "name": "Water Staff",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 3,
                 "desc": "Toggle: While active, staff attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🪄💧",
@@ -7576,7 +7924,7 @@ const SKILLS_DATA = {
                 "id": "tide_focus",
                 "name": "Tide Focus",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Channel water magic through your staff, dealing 2d6 water damage in a cone and healing you for half the damage dealt (no status effect)",
                 "icon": "💧🪄",
@@ -7594,7 +7942,7 @@ const SKILLS_DATA = {
                 "id": "tsunami_staff",
                 "name": "Tsunami Staff",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Your staff becomes pure water, dealing 3d6 water damage in an area (no status effect)",
                 "icon": "🌊💧",
@@ -7612,7 +7960,7 @@ const SKILLS_DATA = {
                 "id": "shadow_staff",
                 "name": "Shadow Staff",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, staff attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🪄🌑",
@@ -7624,13 +7972,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "void_focus",
                 "name": "Void Focus",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
                 "icon": "🌑🪄",
@@ -7648,7 +8004,7 @@ const SKILLS_DATA = {
                 "id": "eclipse_staff",
                 "name": "Eclipse Staff",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
                 "icon": "🌑✨",
@@ -7666,7 +8022,7 @@ const SKILLS_DATA = {
                 "id": "light_staff",
                 "name": "Light Staff",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 2,
                 "desc": "Toggle: While active, staff attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🪄☀️",
@@ -7678,13 +8034,21 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "radiant_focus",
                 "name": "Radiant Focus",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 5,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
                 "icon": "☀️🪄",
@@ -7702,7 +8066,7 @@ const SKILLS_DATA = {
                 "id": "solar_staff",
                 "name": "Solar Staff",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
                 "icon": "☀️✨",
@@ -7722,51 +8086,65 @@ const SKILLS_DATA = {
                 "id": "alchemical_blade",
                 "name": "Alchemical Blade",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 5,
                 "desc": "Weapon coated with deadly poison: Apply Poison (escalating damage)",
                 "icon": "⚔️⚗️",
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "blade_mastery",
-                        "poison_crafting"
+                        "sword_mastery",
+                        "acid_vials"
                     ]
                 },
                 "fusionType": "sword_alchemy",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "poison",
+                        "duration": 3,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "enchanted_arrows",
                 "name": "Enchanted Arrows",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 5,
                 "desc": "Arrows with magical effects: Apply Weapon Enchanted status",
                 "icon": "🏹✨",
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "multishot",
-                        "weapon_enchanting"
+                        "multi_shot",
+                        "rune_apprentice"
                     ]
                 },
                 "fusionType": "bow_enchanting",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weapon_enchanted",
+                        "duration": 10,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "blessed_weapon",
                 "name": "Blessed Weapon",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 0,
                 "desc": "Weapon deals radiant damage: Apply Weapon Enchanted vs undead/evil",
                 "icon": "⚔️☀️",
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "weapon_mastery",
-                        "divine_light"
+                        "sword_mastery",
+                        "holy_weapon"
                     ]
                 },
                 "fusionType": "weapon_light",
@@ -7778,7 +8156,7 @@ const SKILLS_DATA = {
                 "id": "draconic_breath",
                 "name": "Draconic Breath",
                 "tier": 5,
-                "cost": 25,
+                "cost": 100,
                 "staminaCost": 8,
                 "desc": "Fire breath + fire mastery: Apply Burn + Enhanced status",
                 "icon": "🐉🔥",
@@ -7786,7 +8164,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "fire_breath",
-                        "fire_mastery"
+                        "fire_supremacy"
                     ]
                 },
                 "fusionType": "monster_fire",
@@ -7796,7 +8174,7 @@ const SKILLS_DATA = {
                 "id": "shadow_strike",
                 "name": "Shadow Strike",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 6,
                 "desc": "Teleport + claws: Apply Stealth Mastery then strike",
                 "icon": "👥🗡️",
@@ -7808,13 +8186,20 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "monster_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stealth_mastery",
+                        "duration": 5,
+                        "potency": 0
+                    }
+                ]
             },
             {
                 "id": "arcane_roar",
                 "name": "Arcane Roar",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 7,
                 "desc": "Roar + magic: Apply Intimidating Aura + magical damage",
                 "icon": "🦁✨",
@@ -7822,7 +8207,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "roar",
-                        "magic_missile"
+                        "spell_power"
                     ]
                 },
                 "fusionType": "monster_arcane",
@@ -7834,7 +8219,7 @@ const SKILLS_DATA = {
                 "id": "steam_burst",
                 "name": "Steam Burst",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or ice damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🔥❄️",
@@ -7852,7 +8237,7 @@ const SKILLS_DATA = {
                 "id": "thermal_shock",
                 "name": "Thermal Shock",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
                 "icon": "🌡️💥",
@@ -7870,7 +8255,7 @@ const SKILLS_DATA = {
                 "id": "conflicting_elements",
                 "name": "Conflicting Elements",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
                 "icon": "☯️❄️",
@@ -7888,7 +8273,7 @@ const SKILLS_DATA = {
                 "id": "plasma_bolt",
                 "name": "Plasma Bolt",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or lightning damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "⚡🔥",
@@ -7906,7 +8291,7 @@ const SKILLS_DATA = {
                 "id": "storm_of_cinders",
                 "name": "Storm of Cinders",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or lightning damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌩️✨",
@@ -7924,7 +8309,7 @@ const SKILLS_DATA = {
                 "id": "fusion_strike",
                 "name": "Fusion Strike",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
                 "icon": "⚡💥",
@@ -7942,7 +8327,7 @@ const SKILLS_DATA = {
                 "id": "magma_surge",
                 "name": "Magma Surge",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🌋🔥",
@@ -7960,7 +8345,7 @@ const SKILLS_DATA = {
                 "id": "volcanic_rupture",
                 "name": "Volcanic Rupture",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌋💥",
@@ -7978,7 +8363,7 @@ const SKILLS_DATA = {
                 "id": "tectonic_fury",
                 "name": "Tectonic Fury",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire or earth damage (use whichever element the target is weakest to). Has a 75% chance to apply the listed status.",
                 "icon": "🌋⚔️",
@@ -7996,7 +8381,7 @@ const SKILLS_DATA = {
                 "id": "static_freeze",
                 "name": "Static Freeze",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or lightning damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "❄️⚡",
@@ -8014,7 +8399,7 @@ const SKILLS_DATA = {
                 "id": "crystalline_surge",
                 "name": "Crystalline Surge",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or lightning damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "💎⚡",
@@ -8032,7 +8417,7 @@ const SKILLS_DATA = {
                 "id": "arctic_storm",
                 "name": "Arctic Storm",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
                 "icon": "❄️🌩️",
@@ -8050,7 +8435,7 @@ const SKILLS_DATA = {
                 "id": "twilight_balance",
                 "name": "Twilight Balance",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 darkness damage. Has a 20% chance to apply the listed status.",
                 "icon": "🌓✨",
@@ -8068,7 +8453,7 @@ const SKILLS_DATA = {
                 "id": "duality_surge",
                 "name": "Duality Surge",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 darkness or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "☯️✨",
@@ -8083,10 +8468,10 @@ const SKILLS_DATA = {
                 "specialEffects": []
             },
             {
-                "id": "eclipse",
+                "id": "darkness_light_eclipse",
                 "name": "Eclipse",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Perfect balance of light and dark dealing 3d6 darkness or light damage (whichever each target is weak to) to all enemies. Applies Enhanced to allies and has a 75% chance to apply Mind Controlled to enemies",
                 "icon": "🌑☀️",
@@ -8094,17 +8479,25 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "duality_surge",
-                        "dawn_strike"
+                        "dawn_dance"
                     ]
                 },
                 "fusionType": "darkness_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "sandstorm",
                 "name": "Sandstorm",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🌪️🪨",
@@ -8122,7 +8515,7 @@ const SKILLS_DATA = {
                 "id": "desert_winds",
                 "name": "Desert Winds",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🏜️💨",
@@ -8140,7 +8533,7 @@ const SKILLS_DATA = {
                 "id": "terra_tempest",
                 "name": "Terra Tempest",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌪️🗿",
@@ -8158,7 +8551,7 @@ const SKILLS_DATA = {
                 "id": "typhoon_strike",
                 "name": "Typhoon Strike",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or water damage (use whichever element the target is weakest to).",
                 "icon": "🌊💨",
@@ -8176,7 +8569,7 @@ const SKILLS_DATA = {
                 "id": "monsoon",
                 "name": "Monsoon",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or water damage (use whichever element the target is weakest to). in an area; separate attack roll per target.",
                 "icon": "🌧️🌪️",
@@ -8191,10 +8584,10 @@ const SKILLS_DATA = {
                 "specialEffects": []
             },
             {
-                "id": "hurricane",
+                "id": "wind_water_hurricane",
                 "name": "Hurricane",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Summon a devastating storm dealing 3d6 wind or water damage (whichever each target is weak to) to all enemies. Pushes enemies to storm's center",
                 "icon": "🌀💫",
@@ -8212,7 +8605,7 @@ const SKILLS_DATA = {
                 "id": "mud_slash",
                 "name": "Mud Slash",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "💧🪨",
@@ -8230,7 +8623,7 @@ const SKILLS_DATA = {
                 "id": "quicksand",
                 "name": "Quicksand",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🏖️💫",
@@ -8245,10 +8638,10 @@ const SKILLS_DATA = {
                 "specialEffects": []
             },
             {
-                "id": "tidal_wave",
+                "id": "water_earth_tidal_wave",
                 "name": "Tidal Wave",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Summon a wave of water and debris dealing 3d6 water or earth damage (whichever each target is weak to). Has a 75% chance to apply both Immobilized and Weakened",
                 "icon": "🌊🪨",
@@ -8260,13 +8653,27 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "chance": 0.75
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "scalding_jet",
                 "name": "Scalding Jet",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "💧🔥",
@@ -8284,7 +8691,7 @@ const SKILLS_DATA = {
                 "id": "steam_cloud",
                 "name": "Steam Cloud",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or water damage (use whichever element the target is weakest to). in an area; separate attack roll per target. Has a 40% chance to apply the listed status.",
                 "icon": "💨🔥",
@@ -8302,7 +8709,7 @@ const SKILLS_DATA = {
                 "id": "geyser_burst",
                 "name": "Geyser Burst",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
                 "icon": "⛲🔥",
@@ -8320,7 +8727,7 @@ const SKILLS_DATA = {
                 "id": "shadow_wind",
                 "name": "Shadow Wind",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🌫️🌑",
@@ -8338,7 +8745,7 @@ const SKILLS_DATA = {
                 "id": "void_tempest",
                 "name": "Void Tempest",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌪️🌑",
@@ -8356,7 +8763,7 @@ const SKILLS_DATA = {
                 "id": "dark_cyclone",
                 "name": "Dark Cyclone",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌀🌑",
@@ -8374,7 +8781,7 @@ const SKILLS_DATA = {
                 "id": "prismatic_breeze",
                 "name": "Prismatic Breeze",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🌈💨",
@@ -8392,7 +8799,7 @@ const SKILLS_DATA = {
                 "id": "rainbow_gale",
                 "name": "Rainbow Gale",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌈🌪️",
@@ -8410,7 +8817,7 @@ const SKILLS_DATA = {
                 "id": "aurora_storm",
                 "name": "Aurora Storm",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🎆💨",
@@ -8418,7 +8825,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "rainbow_gale",
-                        "dawn_strike"
+                        "dawn_dance"
                     ]
                 },
                 "fusionType": "wind_light",
@@ -8428,7 +8835,7 @@ const SKILLS_DATA = {
                 "id": "inferno_cyclone",
                 "name": "Inferno Cyclone",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🔥💨",
@@ -8446,7 +8853,7 @@ const SKILLS_DATA = {
                 "id": "heat_vacuum",
                 "name": "Heat Vacuum",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌪️🔥",
@@ -8464,7 +8871,7 @@ const SKILLS_DATA = {
                 "id": "phoenix_storm",
                 "name": "Phoenix Storm",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🦅🔥",
@@ -8482,7 +8889,7 @@ const SKILLS_DATA = {
                 "id": "shadowflame",
                 "name": "Shadowflame",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🔥🌑",
@@ -8500,7 +8907,7 @@ const SKILLS_DATA = {
                 "id": "dark_pyre",
                 "name": "Dark Pyre",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🏮🌑",
@@ -8518,7 +8925,7 @@ const SKILLS_DATA = {
                 "id": "hellfire",
                 "name": "Hellfire",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
                 "icon": "👿🔥",
@@ -8536,7 +8943,7 @@ const SKILLS_DATA = {
                 "id": "glacial_spike",
                 "name": "Glacial Spike",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "❄️🪨",
@@ -8554,7 +8961,7 @@ const SKILLS_DATA = {
                 "id": "permafrost",
                 "name": "Permafrost",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "❄️🌍",
@@ -8572,7 +8979,7 @@ const SKILLS_DATA = {
                 "id": "avalanche",
                 "name": "Avalanche",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🏔️❄️",
@@ -8590,7 +8997,7 @@ const SKILLS_DATA = {
                 "id": "frost_current",
                 "name": "Frost Current",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "❄️💧",
@@ -8608,7 +9015,7 @@ const SKILLS_DATA = {
                 "id": "ice_flow",
                 "name": "Ice Flow",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or water damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌊❄️",
@@ -8626,7 +9033,7 @@ const SKILLS_DATA = {
                 "id": "glacier_tsunami",
                 "name": "Glacier Tsunami",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌊❄️",
@@ -8644,7 +9051,7 @@ const SKILLS_DATA = {
                 "id": "dark_frost",
                 "name": "Dark Frost",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "❄️🌑",
@@ -8662,7 +9069,7 @@ const SKILLS_DATA = {
                 "id": "void_freeze",
                 "name": "Void Freeze",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌌❄️",
@@ -8680,7 +9087,7 @@ const SKILLS_DATA = {
                 "id": "eternal_winter",
                 "name": "Eternal Winter",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
                 "icon": "❄️🌑",
@@ -8698,7 +9105,7 @@ const SKILLS_DATA = {
                 "id": "crystal_ray",
                 "name": "Crystal Ray",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "💎☀️",
@@ -8716,7 +9123,7 @@ const SKILLS_DATA = {
                 "id": "aurora_flash",
                 "name": "Aurora Flash",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🎆❄️",
@@ -8734,7 +9141,7 @@ const SKILLS_DATA = {
                 "id": "diamond_radiance",
                 "name": "Diamond Radiance",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
                 "icon": "💎✨",
@@ -8752,7 +9159,7 @@ const SKILLS_DATA = {
                 "id": "storm_front",
                 "name": "Storm Front",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "⚡💨",
@@ -8770,7 +9177,7 @@ const SKILLS_DATA = {
                 "id": "charged_cyclone",
                 "name": "Charged Cyclone",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌪️⚡",
@@ -8788,7 +9195,7 @@ const SKILLS_DATA = {
                 "id": "thunderstorm",
                 "name": "Thunderstorm",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
                 "icon": "⛈️💨",
@@ -8806,7 +9213,7 @@ const SKILLS_DATA = {
                 "id": "conductivity",
                 "name": "Conductivity",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "⚡💧",
@@ -8821,10 +9228,10 @@ const SKILLS_DATA = {
                 "specialEffects": []
             },
             {
-                "id": "storm_surge",
+                "id": "lightning_water_storm_surge",
                 "name": "Storm Surge",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Create a wave of electrified water dealing 2d6 lightning or water damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened",
                 "icon": "🌊⚡",
@@ -8836,20 +9243,34 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "chance": 0.4
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "maelstrom_strike",
                 "name": "Maelstrom Strike",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌊⚡",
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_surge",
+                        "lightning_water_storm_surge",
                         "chain_lightning"
                     ]
                 },
@@ -8860,7 +9281,7 @@ const SKILLS_DATA = {
                 "id": "dark_lightning",
                 "name": "Dark Lightning",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d4 lightning or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "⚡🌑",
@@ -8878,7 +9299,7 @@ const SKILLS_DATA = {
                 "id": "void_thunder",
                 "name": "Void Thunder",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌩️🌑",
@@ -8896,7 +9317,7 @@ const SKILLS_DATA = {
                 "id": "eclipse_storm",
                 "name": "Eclipse Storm",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
                 "icon": "⚡🌑",
@@ -8914,7 +9335,7 @@ const SKILLS_DATA = {
                 "id": "radiant_bolt",
                 "name": "Radiant Bolt",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "⚡☀️",
@@ -8932,7 +9353,7 @@ const SKILLS_DATA = {
                 "id": "divine_thunder",
                 "name": "Divine Thunder",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "⚡✨",
@@ -8950,7 +9371,7 @@ const SKILLS_DATA = {
                 "id": "heavens_wrath",
                 "name": "Heaven's Wrath",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
                 "icon": "⚡☀️",
@@ -8968,7 +9389,7 @@ const SKILLS_DATA = {
                 "id": "shadow_stone",
                 "name": "Shadow Stone",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🪨🌑",
@@ -8986,7 +9407,7 @@ const SKILLS_DATA = {
                 "id": "obsidian_strike",
                 "name": "Obsidian Strike",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌑🪨",
@@ -9004,7 +9425,7 @@ const SKILLS_DATA = {
                 "id": "void_eruption",
                 "name": "Void Eruption",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌋🌑",
@@ -9022,7 +9443,7 @@ const SKILLS_DATA = {
                 "id": "crystal_light",
                 "name": "Crystal Light",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "💎☀️",
@@ -9040,7 +9461,7 @@ const SKILLS_DATA = {
                 "id": "prismatic_earth",
                 "name": "Prismatic Earth",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌈🪨",
@@ -9058,7 +9479,7 @@ const SKILLS_DATA = {
                 "id": "sacred_ground",
                 "name": "Sacred Ground",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
                 "icon": "⚖️🪨",
@@ -9076,7 +9497,7 @@ const SKILLS_DATA = {
                 "id": "abyssal_current",
                 "name": "Abyssal Current",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "🌊🌑",
@@ -9094,7 +9515,7 @@ const SKILLS_DATA = {
                 "id": "deep_surge",
                 "name": "Deep Surge",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌊🌑",
@@ -9112,7 +9533,7 @@ const SKILLS_DATA = {
                 "id": "drowning_darkness",
                 "name": "Drowning Darkness",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌊🖤",
@@ -9130,7 +9551,7 @@ const SKILLS_DATA = {
                 "id": "holy_spring",
                 "name": "Holy Spring",
                 "tier": 2,
-                "cost": 10,
+                "cost": 20,
                 "staminaCost": 4,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
                 "icon": "💧✨",
@@ -9148,7 +9569,7 @@ const SKILLS_DATA = {
                 "id": "purifying_wave",
                 "name": "Purifying Wave",
                 "tier": 3,
-                "cost": 15,
+                "cost": 40,
                 "staminaCost": 6,
                 "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
                 "icon": "🌊✨",
@@ -9166,7 +9587,7 @@ const SKILLS_DATA = {
                 "id": "blessed_tsunami",
                 "name": "Blessed Tsunami",
                 "tier": 4,
-                "cost": 20,
+                "cost": 65,
                 "staminaCost": 8,
                 "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
                 "icon": "🌊☀️",
@@ -9188,9 +9609,9 @@ const SKILLS_DATA = {
                 "id": "familiar_summon",
                 "name": "Familiar Summon",
                 "tier": 3,
-                "cost": 50,
+                "cost": 133,
                 "staminaCost": 20,
-                "desc": "Action (Once per day): Summon a loyal monster companion (player creates monster character with 50 Lumens to spend). Lasts until dismissed or slain. Can transfer your Lumens to improve companion.",
+                "desc": "Action (once per day): Summon a loyal monster companion (build with 50 Lumens — GM). Lasts until dismissed or slain.",
                 "icon": "👹",
                 "prerequisites": {
                     "type": "LEVEL",
@@ -9202,9 +9623,9 @@ const SKILLS_DATA = {
                 "id": "aetherial_reflex",
                 "name": "Aetherial Shift",
                 "tier": 4,
-                "cost": 35,
+                "cost": 163,
                 "staminaCost": 30,
-                "desc": "Reaction (Once per combat): When you would take damage, phase out of reality to ignore all damage from that attack. After phasing, you cannot use other Active/Reaction skills until the end of your next turn due to dimensional instability.",
+                "desc": "Reaction (once per combat): Ignore all damage from one attack. You cannot use Actions or Reactions until the end of your next turn.",
                 "icon": "👻",
                 "prerequisites": {
                     "type": "LEVEL",
@@ -9216,9 +9637,9 @@ const SKILLS_DATA = {
                 "id": "nova_unleashed",
                 "name": "Ultimate Nova",
                 "tier": 4,
-                "cost": 50,
+                "cost": 163,
                 "staminaCost": 30,
-                "desc": "Action: Unleash energy in all directions — automatically hits every creature in 30ft (no attack roll). Each takes 3d20 physical damage. Friendly fire possible. Become Incapacitated afterwards.",
+                "desc": "Action: 30ft burst — hits every creature automatically (no attack roll). Each takes 3d20 physical damage (allies too). You are Incapacitated until your next turn.",
                 "icon": "⭐",
                 "prerequisites": {
                     "type": "LEVEL",
@@ -9230,7 +9651,7 @@ const SKILLS_DATA = {
                 "id": "mind_shield",
                 "name": "Mind Shield",
                 "tier": 4,
-                "cost": 45,
+                "cost": 163,
                 "staminaCost": 0,
                 "desc": "Passive: Immune to mind control, illusions, and psychic damage. Cannot be charmed, frightened, or possessed.",
                 "icon": "🛡️",
@@ -9246,7 +9667,7 @@ const SKILLS_DATA = {
                 "id": "cosmic_awareness",
                 "name": "Cosmic Awareness",
                 "tier": 5,
-                "cost": 65,
+                "cost": 320,
                 "staminaCost": 0,
                 "desc": "Passive: Sense all magical effects, hidden creatures, and dimensional rifts within 100ft. Can see through illusions and invisibility.",
                 "icon": "👁️",
@@ -9262,9 +9683,9 @@ const SKILLS_DATA = {
                 "id": "probability_shift",
                 "name": "Probability Shift",
                 "tier": 4,
-                "cost": 50,
+                "cost": 163,
                 "staminaCost": 10,
-                "desc": "Reaction (Once per combat): When you fail a roll, reroll with advantage. Can also force an enemy to reroll a successful attack with disadvantage.",
+                "desc": "Reaction (once per combat): When you fail a roll, reroll and keep the better result. Once per combat you may also force one enemy to reroll a successful attack and keep the worse result.",
                 "icon": "🎲",
                 "prerequisites": {
                     "type": "LEVEL",
@@ -9276,9 +9697,9 @@ const SKILLS_DATA = {
                 "id": "instinctive_dodge",
                 "name": "Instinctive Dodge",
                 "tier": 3,
-                "cost": 30,
+                "cost": 133,
                 "staminaCost": 1,
-                "desc": "Reaction: Automatically attempt to dodge any attacks that would hit you each round (roll higher than enemy Accuracy). Cannot dodge area attacks.",
+                "desc": "Reaction (once per round): When a single-target attack would hit you, roll d20 + Speed; if you beat the attacker's accuracy, negate the hit. Not vs area effects.",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "LEVEL",
@@ -9290,7 +9711,7 @@ const SKILLS_DATA = {
                 "id": "burst_of_speed",
                 "name": "Burst of Speed",
                 "tier": 3,
-                "cost": 40,
+                "cost": 133,
                 "staminaCost": 5,
                 "desc": "Action: Move up to 2× your normal movement distance for 1 round. Cannot be used again on your next turn.",
                 "icon": "💨",
@@ -9304,9 +9725,9 @@ const SKILLS_DATA = {
                 "id": "analyze",
                 "name": "Analyze",
                 "tier": 4,
-                "cost": 35,
+                "cost": 163,
                 "staminaCost": 5,
-                "desc": "Action: Analyze a target within 30ft to reveal HP, elemental weaknesses, resistances, and special abilities. Also reveals hidden traps and hazards nearby.",
+                "desc": "Action: Study one creature within 30ft — learn HP band, elemental resistances and weaknesses (25%/50%/200%/400% tiers), and one special trait (GM). Nearby traps/hazards revealed.",
                 "icon": "🔍",
                 "prerequisites": {
                     "type": "LEVEL",
@@ -9318,7 +9739,7 @@ const SKILLS_DATA = {
                 "id": "echo_location",
                 "name": "Echo Location",
                 "tier": 3,
-                "cost": 35,
+                "cost": 133,
                 "staminaCost": 10,
                 "desc": "Action: Emit a pulse revealing all creatures and objects within 50ft. Works through darkness; does not pass solid walls.",
                 "icon": "🔊",
@@ -9332,7 +9753,7 @@ const SKILLS_DATA = {
                 "id": "phase_step",
                 "name": "Phase Step",
                 "tier": 4,
-                "cost": 40,
+                "cost": 163,
                 "staminaCost": 15,
                 "desc": "Action: Instantly teleport up to 30ft in any direction, passing through solid objects. Cannot teleport into occupied spaces.",
                 "icon": "👣",
@@ -9346,7 +9767,7 @@ const SKILLS_DATA = {
                 "id": "mind_read",
                 "name": "Mind Read",
                 "tier": 4,
-                "cost": 45,
+                "cost": 163,
                 "staminaCost": 20,
                 "desc": "Action: Read recent memories of a creature within 30ft. Understand desires and intentions; comprehend creatures without a shared language.",
                 "icon": "🧠",
@@ -9360,9 +9781,9 @@ const SKILLS_DATA = {
                 "id": "eternal_moment",
                 "name": "Eternal Moment",
                 "tier": 5,
-                "cost": 70,
+                "cost": 320,
                 "staminaCost": 40,
-                "desc": "Action (Once per day): Stop time and gain 3 additional turns. Enemies cannot use reaction skills during these turns. Skip your next turn afterwards due to temporal exhaustion.",
+                "desc": "Action (once per day): Stop time — take 3 extra turns in a row; enemies cannot react. Skip your next turn afterward.",
                 "icon": "⌛",
                 "prerequisites": {
                     "type": "LEVEL",
@@ -9374,9 +9795,9 @@ const SKILLS_DATA = {
                 "id": "soul_transference",
                 "name": "Soul Transference",
                 "tier": 5,
-                "cost": 80,
+                "cost": 320,
                 "staminaCost": 50,
-                "desc": "Action (Once per lifetime): Transfer consciousness to another body, taking over their form and abilities. Original body becomes comatose.",
+                "desc": "Action (once per lifetime): Transfer your mind into another body — take their form and abilities. Your original body falls into a coma.",
                 "icon": "💫",
                 "prerequisites": {
                     "type": "LEVEL",
@@ -9388,7 +9809,7 @@ const SKILLS_DATA = {
                 "id": "gravity_manipulation",
                 "name": "Gravity Manipulation",
                 "tier": 3,
-                "cost": 30,
+                "cost": 133,
                 "staminaCost": 12,
                 "desc": "Action: Alter gravity in a 10ft radius for 2 rounds. Enemies halve movement speed; allies double movement speed.",
                 "icon": "🌍",
@@ -9406,9 +9827,9 @@ const SKILLS_DATA = {
                 "id": "monster_summoning",
                 "name": "Monster Summoning",
                 "tier": 5,
-                "cost": 50,
+                "cost": 320,
                 "staminaCost": 20,
-                "desc": "Action (Once per day): Summon a loyal monster companion (Player creates monster character with 50 Lumen to spend). Lasts until dismissed or slain. Can transfer your Lumen to improve companion.",
+                "desc": "Action (once per day): Summon a loyal monster companion (build with 50 Lumens — GM). Lasts until dismissed or slain.",
                 "icon": "👹",
                 "prerequisites": {
                     "type": "OR_WEAPON_MASTERY_AND_DARKNESS",
@@ -9428,9 +9849,9 @@ const SKILLS_DATA = {
                 "id": "aetherial_shift",
                 "name": "Aetherial Shift",
                 "tier": 4,
-                "cost": 35,
+                "cost": 163,
                 "staminaCost": 15,
-                "desc": "Action (3 uses per day): Phase out of reality for 1 round. Immune to all damage, can pass through walls/obstacles. Cannot attack or interact while phased. -2 stamina per extra round maintained.",
+                "desc": "Action (3 uses per day): Phase out for 1 round — immune to damage, pass through walls; you cannot attack or interact. Extra rounds cost 2 Stamina each.",
                 "icon": "👻",
                 "prerequisites": {
                     "type": "AND",
@@ -9446,9 +9867,9 @@ const SKILLS_DATA = {
                 "id": "chronos_rewind",
                 "name": "Chronos Rewind",
                 "tier": 5,
-                "cost": 40,
+                "cost": 320,
                 "staminaCost": 12,
-                "desc": "Reaction (Once per encounter): Rewind 1 action/attack. Reroll any dice or make different choice for last action taken (yours or ally). Cannot rewind death or critical story moments.",
+                "desc": "Reaction (once per encounter): Undo the last action you or an ally took — reroll its dice or choose a different target (GM). Cannot undo death or major story beats.",
                 "icon": "⏪",
                 "prerequisites": {
                     "type": "ALL_LIGHT_MAGIC",
@@ -9466,9 +9887,9 @@ const SKILLS_DATA = {
                 "id": "ultimate_nova",
                 "name": "Ultimate Nova",
                 "tier": 5,
-                "cost": 60,
+                "cost": 320,
                 "staminaCost": 25,
-                "desc": "Action (Once per day): Devastating 100ft radius explosion dealing 8d6 damage (DEX save halves). All creatures in area affected. User gains Exhausted (3 rounds) and cannot use magic for 1 round.",
+                "desc": "Action (once per day): 100ft explosion — 8d6 damage to all creatures (each may save for half). You are Exhausted for 3 rounds and cannot cast spells for 1 round.",
                 "icon": "💥",
                 "prerequisites": {
                     "type": "THREE_TIER5_MAGIC",
@@ -9480,23 +9901,23 @@ const SKILLS_DATA = {
                 "id": "soul_link",
                 "name": "Soul Link",
                 "tier": 4,
-                "cost": 30,
+                "cost": 163,
                 "staminaCost": 10,
-                "desc": "Action (10 rounds duration): Link HP pools with willing ally within 30ft. Combine max HP, share all damage/healing equally. If either reaches 0 HP, both fall unconscious. Can be ended early by either participant.",
+                "desc": "Action (10 rounds): Link HP with one willing ally within 30ft — add both max HP into one pool; damage and healing split evenly. If the pool hits 0, both fall unconscious. Either may end early.",
                 "icon": "💕",
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
                         "soul_steal",
                         "divine_judgment",
-                        "elixir_of_life"
+                        "revival_draft"
                     ]
                 },
                 "alternativePrerequisite": {
                     "type": "OR",
                     "skills": [
-                        "elixir_of_life",
-                        "grand_alchemist"
+                        "revival_draft",
+                        "volatile_expert"
                     ]
                 },
                 "specialEffects": []

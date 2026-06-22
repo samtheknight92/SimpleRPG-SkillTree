@@ -1,15 +1,17 @@
-import { uid } from './utils.js'
-import { ITEMS_PER_PAGE } from './constants.js'
+import { uid, titleCase } from './utils.js'
+import { ITEMS_PER_PAGE, SHOP_MIN_LEVEL_BY_RARITY } from './constants.js'
 import { cache, getItem, itemSources, getItemSearchText, rarityRank } from './cache.js'
 import { activeCharacter, state } from './state.js'
 import { normalizeGil, itemPriceGil, damageAverage } from './format.js'
+import { characterLevelInfo } from './level.js'
+import { isGmMode } from './gm-mode.js'
 
 const STACKABLE_TYPES = new Set([
   'material', 'ingredient', 'consumable', 'organic', 'essence', 'crystal', 'food', 'herb', 'reagent', 'potion'
 ])
 
 const NON_STACKABLE_TYPES = new Set([
-  'weapon', 'armor', 'accessory', 'craftable_weapon', 'craftable_armor', 'enhancement'
+  'weapon', 'armor', 'accessory', 'offhand', 'craftable_weapon', 'craftable_armor', 'enhancement'
 ])
 
 export function isStackableItem(item) {
@@ -100,30 +102,142 @@ export function removeInventoryItems(character, itemId, amount, { includeEquippe
   return amount - remaining
 }
 
-export function itemMatchesFeature(item, feature, character = activeCharacter()) {
-  const type = String(item.type || '').toLowerCase()
-  const stats = item.statModifiers || {}
-  const effects = item.specialEffects || []
-  const price = itemPriceGil(item)
-  if (feature === 'all') return true
-  if (feature === 'equippable') return ['weapon', 'armor', 'accessory'].some(value => type.includes(value))
-  if (feature === 'weapon') return type.includes('weapon')
-  if (feature === 'armor') return type.includes('armor')
-  if (feature === 'accessory') return type.includes('accessory')
-  if (feature === 'damage') return Boolean(item.damage)
-  if (feature === 'consumable') return ['consumable', 'food', 'potion', 'herb'].some(value => type.includes(value))
-  if (feature === 'crafting') return ['material', 'ingredient', 'essence', 'organ', 'organic', 'crystal'].some(value => type.includes(value)) || Boolean(item.craftingRecipe)
-  if (feature === 'quest') return ['quest', 'key', 'artifact', 'relic'].some(value => type.includes(value))
-  if (feature === 'strength') return Number(stats.strength || 0) > 0
-  if (feature === 'magicPower') return Number(stats.magicPower || 0) > 0
-  if (feature === 'accuracy') return Number(stats.accuracy || 0) > 0
-  if (feature === 'speed') return Number(stats.speed || 0) > 0
-  if (feature === 'defence') return Number(stats.physicalDefence || 0) > 0 || Number(stats.magicalDefence || 0) > 0
-  if (feature === 'special') return effects.length > 0
-  if (feature === 'enchantable') return Number(item.enchantmentSlots || 0) > 0
-  if (feature === 'free') return price === 0
-  if (feature === 'affordable') return character ? price <= normalizeGil(character.gil) : true
+export const ITEM_CATALOG_CATEGORIES = [
+  { id: 'all', label: 'All categories', searchTerms: [] },
+  { id: 'weapon', label: 'Weapons', searchTerms: ['weapon', 'sword', 'bow', 'staff'] },
+  { id: 'armor', label: 'Armour', searchTerms: ['armor', 'armour', 'robe', 'mail'] },
+  { id: 'accessory', label: 'Accessories', searchTerms: ['accessory', 'ring', 'amulet', 'cloak'] },
+  { id: 'offhand', label: 'Off-hand', searchTerms: ['offhand', 'off-hand', 'shield', 'tome', 'instrument'] },
+  { id: 'food', label: 'Food & drink', searchTerms: ['food', 'drink', 'snack', 'meal', 'bread', 'apple', 'cheese', 'wine'] },
+  { id: 'potion', label: 'Potions & scrolls', searchTerms: ['potion', 'elixir', 'scroll', 'tonic', 'draught'] },
+  { id: 'supply', label: 'Adventuring supplies', searchTerms: ['rope', 'torch', 'lockpick', 'tool'] },
+  { id: 'material', label: 'Materials', searchTerms: ['material', 'ore', 'herb', 'ingredient', 'essence'] },
+  { id: 'enhancement', label: 'Enhancements', searchTerms: ['enhancement', 'enchant'] },
+  { id: 'other', label: 'Other', searchTerms: [] }
+]
+
+const ITEM_CATALOG_CATEGORY_BY_ID = Object.fromEntries(ITEM_CATALOG_CATEGORIES.map(row => [row.id, row]))
+
+const POTION_ITEM_RE = /potion|elixir|scroll|phoenix_feather|dragon_heart|immortality|holy_water|berserker|resistance|feather/i
+const SUPPLY_ITEM_RE = /lockpick|rope|torch/i
+
+export function resolveItemCatalogCategory(item) {
+  const type = String(item?.type || '').toLowerCase()
+  const hay = `${item?.id || ''} ${item?.name || ''}`.toLowerCase()
+  if (type.includes('weapon') || type === 'craftable_weapon') return 'weapon'
+  if (type.includes('armor') || type === 'craftable_armor') return 'armor'
+  if (type.includes('accessory')) return 'accessory'
+  if (type.includes('offhand')) return 'offhand'
+  if (type === 'food') return 'food'
+  if (type.includes('enhancement')) return 'enhancement'
+  if (type === 'consumable') {
+    if (POTION_ITEM_RE.test(hay)) return 'potion'
+    if (SUPPLY_ITEM_RE.test(hay)) return 'supply'
+    return 'food'
+  }
+  if (['material', 'ingredient', 'essence', 'organic', 'crystal', 'herb', 'reagent'].some(part => type.includes(part))) {
+    return 'material'
+  }
+  return 'other'
+}
+
+function itemCatalogSearchText(item) {
+  const category = resolveItemCatalogCategory(item)
+  const meta = ITEM_CATALOG_CATEGORY_BY_ID[category]
+  return [
+    getItemSearchText(item),
+    category,
+    meta?.label || '',
+    ...(meta?.searchTerms || [])
+  ].join(' ').toLowerCase()
+}
+
+function matchesCatalogFilters(item, character, skip = {}) {
+  if (!skip.search) {
+    const terms = String(state.itemSearch || '').toLowerCase().split(/\s+/).map(term => term.trim()).filter(Boolean)
+    const search = itemCatalogSearchText(item)
+    if (terms.length && !terms.every(term => search.includes(term))) return false
+  }
+  if (!skip.source && state.itemSource !== 'all' && item.source !== state.itemSource) return false
+  if (!skip.rarity && state.itemRarity !== 'all' && String(item.rarity || 'common').toLowerCase() !== state.itemRarity) {
+    return false
+  }
+  if (!skip.category && state.itemCategory !== 'all' && resolveItemCatalogCategory(item) !== state.itemCategory) {
+    return false
+  }
+  if (!skip.buyable && state.itemBuyableOnly && !isCatalogItemBuyable(character, item)) return false
   return true
+}
+
+export function catalogCategoryCounts(character = activeCharacter()) {
+  const counts = { all: 0 }
+  for (const item of itemSources()) {
+    if (!matchesCatalogFilters(item, character, { category: true })) continue
+    counts.all += 1
+    const category = resolveItemCatalogCategory(item)
+    counts[category] = (counts[category] || 0) + 1
+  }
+  return counts
+}
+
+export function catalogSourceCounts(character = activeCharacter()) {
+  const counts = { all: 0 }
+  for (const item of itemSources()) {
+    if (!matchesCatalogFilters(item, character, { source: true })) continue
+    counts.all += 1
+    const source = item.source || 'shop'
+    counts[source] = (counts[source] || 0) + 1
+  }
+  return counts
+}
+
+export function activeCatalogFilterLabels() {
+  const labels = []
+  if (state.itemSearch) labels.push(`“${state.itemSearch}”`)
+  if (state.itemSource !== 'shop') labels.push(titleCase(state.itemSource))
+  if (state.itemCategory !== 'all') labels.push(ITEM_CATALOG_CATEGORY_BY_ID[state.itemCategory]?.label || state.itemCategory)
+  if (state.itemRarity !== 'all') labels.push(titleCase(state.itemRarity))
+  if (state.itemBuyableOnly && !isGmMode()) labels.push('Buyable only')
+  return labels
+}
+
+export function shopMinLevelForItem(item) {
+  if (!item) return 1
+  if (Number.isFinite(Number(item.shopMinLevel))) return Number(item.shopMinLevel)
+  return SHOP_MIN_LEVEL_BY_RARITY[String(item.rarity || 'common').toLowerCase()] ?? 1
+}
+
+export function isShopPurchaseItem(item) {
+  return item?.source === 'shop' && itemPriceGil(item) > 0
+}
+
+export function isShopItemLevelUnlocked(character, item) {
+  if (!isShopPurchaseItem(item)) return true
+  if (isGmMode()) return true
+  if (!character) return false
+  return characterLevelInfo(character).level >= shopMinLevelForItem(item)
+}
+
+/** Shop tab filter — item can be purchased from the shop right now (level + Gil). */
+export function isCatalogItemBuyable(character, item) {
+  if (isGmMode()) return true
+  if (!isShopPurchaseItem(item)) return false
+  return shopPurchaseCheck(character, item).ok
+}
+
+export function shopPurchaseCheck(character, item, { free = false } = {}) {
+  if (!item) return { ok: false, reason: 'Unknown item.' }
+  if (free || isGmMode()) return { ok: true }
+  if (!isShopPurchaseItem(item)) {
+    return { ok: false, reason: item?.source === 'profession' ? 'Craft on the Craft tab.' : 'Not sold in the shop.' }
+  }
+  if (!character) return { ok: false, reason: 'No character loaded.' }
+  const need = shopMinLevelForItem(item)
+  const level = characterLevelInfo(character).level
+  if (level < need) return { ok: false, reason: `Requires Level ${need}` }
+  const price = itemPriceGil(item)
+  if (price > normalizeGil(character.gil)) return { ok: false, reason: 'Not enough Gil.' }
+  return { ok: true }
 }
 
 export function sortItems(items, sortKey) {
@@ -144,17 +258,10 @@ export function sortItems(items, sortKey) {
 }
 
 export function filterCatalogItems(character = activeCharacter()) {
-  const allItems = itemSources()
-  return sortItems(allItems.filter(item => {
-    const search = getItemSearchText(item)
-    const typeOk = state.itemType === 'all' || String(item.type || '').toLowerCase() === state.itemType || String(item.type || '').toLowerCase().includes(state.itemType)
-    const sourceOk = state.itemSource === 'all' || item.source === state.itemSource
-    const rarityOk = state.itemRarity === 'all' || String(item.rarity || 'common').toLowerCase() === state.itemRarity
-    const featureOk = itemMatchesFeature(item, state.itemFeature, character)
-    const terms = String(state.itemSearch || '').toLowerCase().split(/\s+/).map(term => term.trim()).filter(Boolean)
-    const searchOk = !terms.length || terms.every(term => search.includes(term))
-    return typeOk && sourceOk && rarityOk && featureOk && searchOk
-  }), state.itemSort)
+  return sortItems(
+    itemSources().filter(item => matchesCatalogFilters(item, character)),
+    state.itemSort
+  )
 }
 
 export function paginateItems(items) {

@@ -25,13 +25,26 @@ function findEffectByPhrase(phrase) {
 
 function parseDurationFromText(text, fallbackEffect) {
   const source = String(text || '')
-  const turnMatch = source.match(/(\d+)\s*turns?/i)
+  const turnMatch = source.match(/(?:for\s+)?(\d+)\s*turns?/i)
   if (turnMatch) return Number(turnMatch[1])
   const actMatch = source.match(/cannot act(?:\s+for)?\s+(\d+)\s*turn/i)
   if (actMatch) return Number(actMatch[1])
+  const roundMatch = source.match(/(?:for\s+)?(\d+)\s*rounds?/i)
+  if (roundMatch) return Number(roundMatch[1])
   const effectDuration = Number(fallbackEffect?.duration)
   if (Number.isFinite(effectDuration) && effectDuration > 0 && effectDuration < 999) return effectDuration
   return 3
+}
+
+function parsePotencyFromText(text, fallbackEffect) {
+  const source = String(text || '')
+  const perTurn = source.match(/(\d+)\s*(?:HP|hp|fire|ice|lightning|damage)?\s*(?:\/|per)\s*turn/i)
+  if (perTurn) return Number(perTurn[1])
+  const potencyMatch = source.match(/potency\s*(\d+)/i)
+  if (potencyMatch) return Number(potencyMatch[1])
+  const fallback = fallbackEffect?.potency
+  if (typeof fallback === 'number' && Number.isFinite(fallback)) return fallback
+  return undefined
 }
 
 function parseApplyPhrases(desc) {
@@ -45,7 +58,8 @@ function parseApplyPhrases(desc) {
     seen.add(effect.id)
     payloads.push({
       effectId: effect.id,
-      duration: parseDurationFromText(parenText || text, effect)
+      duration: parseDurationFromText(parenText || text, effect),
+      potency: parsePotencyFromText(parenText || text, effect)
     })
   }
 
@@ -193,6 +207,20 @@ export function resolveActivationEffects(skill) {
   const careerBuffs = resolveCareerActionBuffs(skill)
   if (careerBuffs.length) return careerBuffs
 
+  if (Array.isArray(skill.activationEffects) && skill.activationEffects.length) {
+    const hasChance = /(?:chance to|may)\s+apply|\d+%\s+chance/i.test(String(skill.desc || ''))
+    const chance = hasChance ? (TIER_APPLY_CHANCE[Number(skill.tier)] ?? 1) : 1
+    return skill.activationEffects
+      .filter(item => item?.effectId && cache.effectDefinitions[item.effectId])
+      .map(item => ({
+        effectId: item.effectId,
+        duration: Number.isFinite(Number(item.duration)) ? Number(item.duration) : parseDurationFromText(skill.desc, getEffect(item.effectId)),
+        potency: Number.isFinite(Number(item.potency)) ? Number(item.potency) : parsePotencyFromText(skill.desc, getEffect(item.effectId)),
+        chance: Number.isFinite(Number(item.chance)) ? Number(item.chance) : chance,
+        source: 'data'
+      }))
+  }
+
   const desc = String(skill.desc || '')
   const payloads = parseApplyPhrases(desc)
   const hasChance = /(?:chance to|may)\s+apply|\d+%\s+chance/i.test(desc)
@@ -209,6 +237,7 @@ export function resolveActivationEffects(skill) {
     return [{
       effectId: skill.id,
       duration,
+      potency: parsePotencyFromText(desc, ownEffect),
       chance: ownHasChance ? (TIER_APPLY_CHANCE[Number(skill.tier)] ?? 0.4) : 1,
       source: 'skill'
     }]

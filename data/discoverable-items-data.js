@@ -448,8 +448,8 @@ const DISCOVERABLE_ITEMS_DATA = {
             sellable: false
         },
 
-        phoenix_feather: {
-            id: "phoenix_feather",
+        quest_phoenix_feather: {
+            id: "quest_phoenix_feather",
             name: "Phoenix Feather",
             type: "quest_item",
             category: "legendary",

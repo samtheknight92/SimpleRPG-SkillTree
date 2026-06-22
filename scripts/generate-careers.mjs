@@ -7,24 +7,40 @@ import fs from 'fs'
 import path from 'path'
 import vm from 'vm'
 import { fileURLToPath } from 'url'
+import { resolveActivationEffectsForSkill } from './lib/resolve-activation-effects.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
 const dataDir = path.join(root, 'data')
+const jsonDir = path.join(dataDir, 'json')
+
+const EFFECTS = JSON.parse(fs.readFileSync(path.join(jsonDir, 'effects.json'), 'utf8'))
+const careerMetaRaw = fs.readFileSync(path.join(dataDir, 'career-skill-meta.js'), 'utf8').replace(/^\uFEFF/, '').replace(/^export const /gm, 'const ')
+const careerMetaSandbox = {}
+vm.createContext(careerMetaSandbox)
+vm.runInContext(`${careerMetaRaw}\n;globalThis.__careerActionBuffs = CAREER_ACTION_BUFFS`, careerMetaSandbox)
+const CAREER_ACTION_BUFFS = careerMetaSandbox.__careerActionBuffs || {}
+
+function withActivationEffects(row) {
+  const activationEffects = resolveActivationEffectsForSkill(row, EFFECTS, { careerActionBuffs: CAREER_ACTION_BUFFS })
+  if (activationEffects.length) row.activationEffects = activationEffects
+  return row
+}
+
+import { TIER_LUMEN_COST } from './lib/progression.mjs'
 
 function skill(id, name, tier, icon, desc, prerequisites) {
-  const costs = { 1: 5, 2: 10, 3: 15, 4: 20 }
-  return {
+  return withActivationEffects({
     id,
     name,
     tier,
-    cost: costs[tier] || 15,
+    cost: TIER_LUMEN_COST[tier] || 40,
     staminaCost: 0,
     desc,
     icon,
     prerequisites,
     specialEffects: []
-  }
+  })
 }
 
 function careerTree(entry, tier2, tier3) {
@@ -47,7 +63,7 @@ const CAREERS_SKILLS_DATA = {
     [
       { id: 'weaponwright', name: 'Weaponwright', icon: '⚔️', desc: 'Craft: Martial weapons. Weapons you forge gain +1 damage.' },
       { id: 'armourer', name: 'Armourer', icon: '🛡️', desc: 'Craft: Armour and shields. Armour you forge grants +1 Physical Defence and +1 Magical Defence.' },
-      { id: 'field_fit', name: 'Field Fit', icon: '🔧', desc: 'Action: Tune an ally\'s weapon or armour before a fight (10 minutes). They gain +1 on their first attack roll or +1 Physical Defence for the first round (choose one). Once per ally per long rest.' }
+      { id: 'field_fit', name: 'Field Fit', icon: '🔧', desc: 'Pre-combat: Tune ally gear (10 min); +1 first attack roll or +1 Physical Defence first round (choose one). Once per ally per long rest. + Harmony Reaction: same ally (2 Smiths → both bonuses).' }
     ],
     [
       { id: 'master_alloy', name: 'Master Alloy', icon: '⚗️', desc: 'Craft: Advanced metals (mithril, adamantine recipes).', prereqT2: 'weaponwright' },
@@ -63,8 +79,8 @@ const CAREERS_SKILLS_DATA = {
       { id: 'second_serving', name: 'Second Serving', icon: '🍽️', desc: 'Action: Prepare one extra portion from the same ingredients (once per long rest).' }
     ],
     [
-      { id: 'banquet_planner', name: 'Banquet Planner', icon: '🎉', desc: 'Craft: Feast for the whole party — one shared buff (e.g. +1 Accuracy for 20 rounds).', prereqT2: 'hearty_rations' },
-      { id: 'battle_breakfast', name: 'Battle Breakfast', icon: '🥞', desc: 'Craft: Pre-combat meal; eater gains +2 to initiative or +1 Physical Defence for first combat only.', prereqT2: 'spice_box' },
+      { id: 'banquet_planner', name: 'Banquet Planner', icon: '🎉', desc: 'Craft: Feast for the party; shared +1 Accuracy for 20 rounds. + Harmony Reaction: same feast (each additional Chef adds +1 Accuracy and +5 feast duration; 9 Chefs → +9 Accuracy for 65 rounds).', prereqT2: 'hearty_rations' },
+      { id: 'battle_breakfast', name: 'Battle Breakfast', icon: '🥞', desc: 'Craft: Before first combat, one eater gains +2 initiative or +1 Physical Defence (first combat only). + Harmony Reaction: same meal (when 2+ Chefs, each served eater gets both bonuses; each Chef adds +2 initiative, +1 Physical Defence for one combat round, +1 Stamina round 1, and +1d4 temp HP at combat start; one eater per Chef).', prereqT2: 'spice_box' },
       { id: 'chefs_instinct', name: 'Chef\'s Instinct', icon: '👃', desc: 'Passive: Detect spoiled, drugged, or poisonous food by taste/smell (GM may require no roll).', prereqT2: 'second_serving' }
     ]
   ),
@@ -77,7 +93,7 @@ const CAREERS_SKILLS_DATA = {
     ],
     [
       { id: 'green_thumb', name: 'Green Thumb', icon: '🌿', desc: 'Craft: Magical or rare plants (ties to herbalism recipes).', prereqT2: 'crop_rotation' },
-      { id: 'landmark_memory', name: 'Landmark Memory', icon: '🗺️', desc: 'Action: Recall terrain — advantage on navigation checks in regions you\'ve worked (GM).', prereqT2: 'animal_sense' },
+      { id: 'landmark_memory', name: 'Landmark Memory', icon: '🗺️', desc: 'Action: Recall terrain — +2 on navigation checks in regions you\'ve worked (GM).', prereqT2: 'animal_sense' },
       { id: 'bountiful_plot', name: 'Bountiful Plot', icon: '🌾', desc: 'Passive: Party gains +1 material find when looting plants/organics after a fight.', prereqT2: 'preserve_harvest' }
     ]
   ),
@@ -85,24 +101,24 @@ const CAREERS_SKILLS_DATA = {
     { id: 'field_medic', name: 'Field Medic', icon: '💊', desc: 'Craft: Health potions. Potions you brew restore +2 HP.' },
     [
       { id: 'triage', name: 'Triage', icon: '🩺', desc: 'Action: Assess a creature — learn HP band, bleeding, poison, disease (not exact HP unless GM allows).' },
-      { id: 'antidote_training', name: 'Antidote Training', icon: '🧪', desc: 'Passive: +2 effective MD vs poison/disease effects on yourself; identify poison on sight.' },
+      { id: 'antidote_training', name: 'Antidote Training', icon: '🧪', desc: 'Passive: +2 effective Magical Defence vs poison/disease effects on yourself; identify poison on sight.' },
       { id: 'clean_bandage', name: 'Clean Bandage', icon: '🩹', desc: 'Action: Stabilise a downed ally (0 HP) so they don\'t worsen; restore 1 HP.' }
     ],
     [
       { id: 'surgical_touch', name: 'Surgical Touch', icon: '✂️', desc: 'Craft: Advanced potions and antidotes. Healing items you use on others gain +1d4 HP.', prereqT2: 'triage' },
-      { id: 'plague_ward', name: 'Plague Ward', icon: '🛡️', desc: 'Passive: Allies within 10ft gain +1 Magical Defence vs disease/poison saves (GM).', prereqT2: 'antidote_training' },
+      { id: 'plague_ward', name: 'Plague Ward', icon: '🛡️', desc: 'Passive: Allies within 10ft +1 Magical Defence vs disease and poison saves. + Harmony: +1 Magical Defence vs disease and poison per Medic with this aura in range (no Reaction).', prereqT2: 'antidote_training' },
       { id: 'revival_draft', name: 'Revival Draft', icon: '💉', desc: 'Craft: Rare stimulant — remove Incapacitated or one minor debuff (once per target per day).', prereqT2: 'clean_bandage' }
     ]
   ),
   alchemist: careerTree(
     { id: 'apothecary', name: 'Apothecary', icon: '⚗️', desc: 'Craft: Basic potions and reagents.' },
     [
-      { id: 'acid_vials', name: 'Acid Vials', icon: '🧴', desc: 'Craft: Acid flasks (throw: attack roll d20 + accuracy vs PD; on hit, 1d6 acid; 40% chance to apply Weakened).' },
+      { id: 'acid_vials', name: 'Acid Vials', icon: '🧴', desc: 'Craft/throw: On hit 1d6 acid; 40% Weakened. + Harmony Reaction: same target, same round (+1 acid damage per Alchemist).' },
       { id: 'smoke_and_flash', name: 'Smoke & Flash', icon: '💨', desc: 'Craft: Distraction devices (smoke, blinding powder) — no damage, utility.' },
       { id: 'label_reader', name: 'Label Reader', icon: '🏷️', desc: 'Passive: Identify unknown liquids/powders safely (poison, potion, inert).' }
     ],
     [
-      { id: 'explosive_compounds', name: 'Explosive Compounds', icon: '💣', desc: 'Craft: Bombs (3d6 in 15ft; separate attack roll per target vs MD).', prereqT2: 'acid_vials' },
+      { id: 'explosive_compounds', name: 'Explosive Compounds', icon: '💣', desc: 'Craft: Bombs (3d6 in 15ft; separate attack roll per target vs Magical Defence).', prereqT2: 'acid_vials' },
       { id: 'transmute_salts', name: 'Transmute Salts', icon: '🧂', desc: 'Craft: Convert common materials into alchemical bases (GM: daily quota).', prereqT2: 'smoke_and_flash' },
       { id: 'volatile_expert', name: 'Volatile Expert', icon: '☢️', desc: 'Passive: You and allies take −1 damage from your own alchemical friendly fire (min 0).', prereqT2: 'label_reader' }
     ]
@@ -121,7 +137,7 @@ const CAREERS_SKILLS_DATA = {
     ]
   ),
   detective: careerTree(
-    { id: 'keen_eye', name: 'Keen Eye', icon: '👁️', desc: 'Action: Examine a scene — GM reveals one clue tier (obvious / hidden / secret).' },
+      { id: 'keen_eye', name: 'Keen Eye', icon: '👁️', desc: 'Action: Examine scene; GM reveals one clue tier. + Harmony Reaction: same scene (+1 clue tier per Detective).' },
     [
       { id: 'trace_evidence', name: 'Trace Evidence', icon: '🔎', desc: 'Passive: Spot disturbed objects, footprints, blood, recent magic residue.' },
       { id: 'interview', name: 'Interview', icon: '💬', desc: 'Action: Conversation grants +2 to read lies or pressure answers (GM social roll).' },
@@ -141,7 +157,7 @@ const CAREERS_SKILLS_DATA = {
       { id: 'careful_extraction', name: 'Careful Extraction', icon: '🧤', desc: 'Action: Remove relic without triggering trap (GM check).' }
     ],
     [
-      { id: 'lost_technique', name: 'Lost Technique', icon: '💀', desc: 'Passive: Once per adventure, recognise a weakness in an undead/construct type (+2 damage for party for one fight).', prereqT2: 'ancient_tongues' },
+      { id: 'lost_technique', name: 'Lost Technique', icon: '💀', desc: 'Passive: Once per adventure, recognise weakness vs undead/construct; party +2 damage for one fight. + Harmony: +1 party damage per additional Archaeologist on same enemy type same fight (no Reaction).', prereqT2: 'ancient_tongues' },
       { id: 'divine_dig', name: 'Divine Dig', icon: '⛏️', desc: 'Action: Sense consecrated/desecrated ground and major burials within 60ft.', prereqT2: 'trap_sense' },
       { id: 'replicate_relic', name: 'Replicate Relic', icon: '📋', desc: 'Craft: Reproduce a studied artifact\'s mundane copy (not full magic without Enchanter).', prereqT2: 'careful_extraction' }
     ]
@@ -156,33 +172,20 @@ const CAREERS_SKILLS_DATA = {
     [
       { id: 'long_watch', name: 'Long Watch', icon: '🔭', desc: 'Action: Track a quarry for a day — learn camp sites and direction.', prereqT2: 'ambush_spotter' },
       { id: 'camouflage_net', name: 'Camouflage Net', icon: '🕸️', desc: 'Craft: Hide camp from casual search (+2 Stealth for camp).', prereqT2: 'snare_craft' },
-      { id: 'volley_call', name: 'Volley Call', icon: '📣', desc: 'Action: Call a target — one ally gains +1 on their next attack against it (any weapon or spell). Once per combat.', prereqT2: 'keen_sight' }
+      { id: 'volley_call', name: 'Volley Call', icon: '📣', desc: 'Action: Call a target; one ally +1 on next attack vs it. Once per combat. + Harmony Reaction: same target (each Ranger adds +1 to marked allies\' next attack and marks one more ally).', prereqT2: 'keen_sight' }
     ]
   ),
   engineer: careerTree(
     { id: 'tinker', name: 'Tinker', icon: '🔩', desc: 'Craft: Basic tools, crossbow bolts, simple mechanisms.' },
     [
       { id: 'clockwork_repair', name: 'Clockwork Repair', icon: '⚙️', desc: 'Action: Fix a jammed lock or stuck mechanism (GM).' },
-      { id: 'reinforced_frame', name: 'Reinforced Frame', icon: '🧱', desc: 'Craft: Portable cover (+3 PD while behind it).' },
+      { id: 'reinforced_frame', name: 'Reinforced Frame', icon: '🧱', desc: 'Craft: Portable cover; +3 Physical Defence while behind it. + Harmony Reaction: same lane (+1 Physical Defence per additional Engineer).' },
       { id: 'schematic_mind', name: 'Schematic Mind', icon: '📐', desc: 'Passive: Understand how unfamiliar machines work after 1 minute study.' }
     ],
     [
       { id: 'siege_kit', name: 'Siege Kit', icon: '🏗️', desc: 'Craft: Breaching tools, pulleys, collapsible bridge sections.', prereqT2: 'clockwork_repair' },
-      { id: 'overcharge', name: 'Overcharge', icon: '⚡', desc: 'Action: Boost ally\'s mechanical device — double effect once, then it is spent until rebuilt (GM).', prereqT2: 'reinforced_frame' },
+      { id: 'engineer_overcharge', name: 'Overcharge', icon: '⚡', desc: 'Action: Boost ally\'s mechanical device — double effect once, then it is spent until rebuilt (GM).', prereqT2: 'reinforced_frame' },
       { id: 'demolition_plan', name: 'Demolition Plan', icon: '💥', desc: 'Craft: Shaped charges — target structure weak point (not creature HP).', prereqT2: 'schematic_mind' }
-    ]
-  ),
-  merchant: careerTree(
-    { id: 'haggler', name: 'Haggler', icon: '💰', desc: 'Passive: Buy at 10% discount, sell at 10% premium (mundane goods).' },
-    [
-      { id: 'appraise', name: 'Appraise', icon: '💎', desc: 'Action: True market value and obvious fakes on items.' },
-      { id: 'ledger', name: 'Ledger', icon: '📒', desc: 'Passive: Track party expenses; never "lose" change to bookkeeping errors (flavour + GM trust).' },
-      { id: 'find_buyer', name: 'Find Buyer', icon: '🤝', desc: 'Action: Locate a purchaser for unusual loot in a settlement (GM).' }
-    ],
-    [
-      { id: 'black_market', name: 'Black Market', icon: '🕶️', desc: 'Passive: Access illegal or rare goods in cities (GM availability).', prereqT2: 'appraise' },
-      { id: 'invest', name: 'Invest', icon: '📈', desc: 'Action: Seed capital — chance of return after downtime (GM economy).', prereqT2: 'ledger' },
-      { id: 'caravan_lead', name: 'Caravan Lead', icon: '🐪', desc: 'Passive: Overland travel: −20% random encounter chance when you plan the route (GM).', prereqT2: 'find_buyer' }
     ]
   ),
   scholar: careerTree(
@@ -194,7 +197,7 @@ const CAREERS_SKILLS_DATA = {
     ],
     [
       { id: 'forbidden_index', name: 'Forbidden Index', icon: '📕', desc: 'Action: Know danger level of magic/curse on touch (safe study).', prereqT2: 'polyglot' },
-      { id: 'teach', name: 'Teach', icon: '👨‍🏫', desc: 'Action: Ally gains your tier-1 knowledge skill for one task this session.', prereqT2: 'bestiary_notes' },
+      { id: 'teach', name: 'Teach', icon: '👨‍🏫', desc: 'Action: Ally gains your tier-1 knowledge skill for one task this session. + Harmony Reaction: same ally, different topics (ally keeps each granted edge once; no cap on number of topics).', prereqT2: 'bestiary_notes' },
       { id: 'sages_conclusion', name: 'Sage\'s Conclusion', icon: '💡', desc: 'Passive: Once per adventure, declare a lore-based solution — GM must make it viable if plausible.', prereqT2: 'map_archive' }
     ]
   ),
@@ -212,27 +215,27 @@ const CAREERS_SKILLS_DATA = {
     ]
   ),
   cleric_lay: careerTree(
-    { id: 'lay_blessing', name: 'Lay Blessing', icon: '✝️', desc: 'Action: Touch ally — +1 Magical Defence for 8 hours (once per ally per day).' },
+    { id: 'lay_blessing', name: 'Lay Blessing', icon: '✝️', desc: 'Action: Touch ally; +1 Magical Defence for 8 hours (once per ally per day). + Harmony Reaction: same ally, same day (+1 Magical Defence per Cleric blessing that ally).' },
     [
       { id: 'last_rites', name: 'Last Rites', icon: '⚰️', desc: 'Passive: Prevent undead rise from bodies you sanctify.' },
-      { id: 'comfort_the_dying', name: 'Comfort the Dying', icon: '🕊️', desc: 'Action: Ally at 0 HP hears you — advantage on death saves (GM).' },
+      { id: 'comfort_the_dying', name: 'Comfort the Dying', icon: '🕊️', desc: 'Action: Ally at 0 HP hears you — roll death saves twice, keep the better result (GM).' },
       { id: 'holy_symbol_craft', name: 'Holy Symbol Craft', icon: '✨', desc: 'Craft: Symbols that grant +1 vs fear/mind control while worn.' }
     ],
     [
       { id: 'turn_unholy', name: 'Turn Unholy', icon: '☀️', desc: 'Action: Warded area 10ft — undead/demons hesitate to enter (GM save).', prereqT2: 'last_rites' },
-      { id: 'sanctuary_camp', name: 'Sanctuary Camp', icon: '⛺', desc: 'Action: Short rest in consecrated camp — remove one fear/charm.', prereqT2: 'comfort_the_dying' },
+      { id: 'sanctuary_camp', name: 'Sanctuary Camp', icon: '⛺', desc: 'Action: Short rest in consecrated camp; each ally removes one fear or charm. + Harmony Reaction: same camp (each ally removes one additional fear or charm per Cleric at that rest).', prereqT2: 'comfort_the_dying' },
       { id: 'faiths_reservoir', name: 'Faith\'s Reservoir', icon: '💧', desc: 'Passive: Once per day, double HP restored by a potion you administer.', prereqT2: 'holy_symbol_craft' }
     ]
   ),
   soldier: careerTree(
     { id: 'soldier_training', name: 'Soldier Training', icon: '🛡️', desc: 'Passive: +1 Strength while wearing medium or heavy armour.' },
     [
-      { id: 'shield_wall', name: 'Shield Wall', icon: '🛡️', desc: 'Action: Adjacent ally gains +1 Physical Defence until your next turn.' },
-      { id: 'rally_cry', name: 'Rally Cry', icon: '📣', desc: 'Action: One ally within 30ft may reroll a failed save (once per combat).' },
+      { id: 'shield_wall', name: 'Shield Wall', icon: '🛡️', desc: 'Action: Adjacent ally gains +1 Physical Defence until your next turn. + Harmony Reaction: same ally (each Soldier in the huddle adds +1 Physical Defence per Soldier helping — count heads, add that many once per Soldier; 3 Soldiers → +9 Physical Defence; 5 Soldiers on one ally → +25 Physical Defence).' },
+      { id: 'rally_cry', name: 'Rally Cry', icon: '📣', desc: 'Action: One ally within 30ft may reroll a failed save (once per combat). + Harmony Reaction: that reroll (+2 for each participating Soldier; 5 Soldiers → +10 on the reroll).' },
       { id: 'hold_the_line', name: 'Hold the Line', icon: '⚔️', desc: 'Passive: +1 Physical Defence when an ally is within 10ft.' }
     ],
     [
-      { id: 'phalanx', name: 'Phalanx', icon: '🏛️', desc: 'Passive: When you and two or more allies attack the same target, all gain +1 accuracy.', prereqT2: 'shield_wall' },
+      { id: 'phalanx', name: 'Phalanx', icon: '🏛️', desc: 'Passive: When you and two or more allies attack the same target, all gain +1 accuracy. + Harmony: +1 accuracy on next hit vs that enemy per Phalanx Soldier in the volley; when 2+ Phalanx Soldiers attack, also +1d4 damage per Phalanx Soldier (all focus-fire attackers benefit; no Reaction).', prereqT2: 'shield_wall' },
       { id: 'second_wind', name: 'Second Wind', icon: '💨', desc: 'Action: Restore 1d6 HP (once per short rest).', prereqT2: 'rally_cry' },
       { id: 'commanders_presence', name: 'Commander\'s Presence', icon: '👑', desc: 'Passive: Allies within 10ft gain +1 to initiative.', prereqT2: 'hold_the_line' }
     ]
@@ -240,25 +243,38 @@ const CAREERS_SKILLS_DATA = {
   mage: careerTree(
     { id: 'arcane_study', name: 'Arcane Study', icon: '📘', desc: 'Passive: Allies you target with magic gain +1 effective Magic Power for buffs and heals you apply.' },
     [
-      { id: 'empower_ally', name: 'Empower Ally', icon: '✨', desc: 'Action: Ally\'s next spell or magical attack gains +1d4 damage or +2 HP on heal (once per ally per combat).' },
+      { id: 'empower_ally', name: 'Empower Ally', icon: '✨', desc: 'Action: Ally\'s next spell or magical attack +1d4 damage or heal +2 HP (once per ally per combat). + Harmony Reaction: same ally (when 2+ Mages, +1d6 damage or +3 HP instead).' },
       { id: 'mana_font', name: 'Mana Font', icon: '🔮', desc: 'Passive: Allies within 10ft regain +1 Stamina when they cast a tier-1 spell (once per round per ally).' },
       { id: 'dispel_assist', name: 'Dispel Assist', icon: '🧹', desc: 'Action: Grant an ally +2 on their next dispel or cleanse check (GM).' }
     ],
     [
       { id: 'amplified_healing', name: 'Amplified Healing', icon: '💚', desc: 'Passive: Healing spells you cast on others restore +2 HP.', prereqT2: 'empower_ally' },
-      { id: 'ward_circle', name: 'Ward Circle', icon: '⭕', desc: 'Action: 10ft aura — allies gain +1 Magical Defence for 3 rounds (once per combat).', prereqT2: 'mana_font' },
+      { id: 'ward_circle', name: 'Ward Circle', icon: '⭕', desc: 'Action: 10ft aura; allies +1 Magical Defence for 3 rounds (once per combat). + Harmony Reaction: overlapping circles (each Mage in the overlap adds +1 Magical Defence per Mage helping — count Mages, add that many once per Mage; 3 Mages → +9 Magical Defence; 5 Mages → +25 Magical Defence).', prereqT2: 'mana_font' },
       { id: 'shared_focus', name: 'Shared Focus', icon: '🤝', desc: 'Passive: Once per combat, sustain one ally\'s concentration effect without using your action (GM).', prereqT2: 'dispel_assist' }
     ]
   ),
+  musician: careerTree(
+    { id: 'work_song', name: 'Work Song', icon: '⛏️', desc: 'Action: Sustain up to 3 turns (5 Stamina once); allies in hearing range +1 Strength per performing Musician. + Harmony Reaction: join the same song (+1 Physical Defence per Musician while sustained; e.g. 6 Musicians → +6 Strength and +6 Physical Defence). Musician baseline: sing without an instrument; off-hand instruments amplify (see glossary Instrument amplify).' },
+    [
+      { id: 'long_set', name: 'Long Set', icon: '🎭', desc: 'Passive: Your sustained songs may last 1 extra turn (e.g. Work Song up to 4 turns).' },
+      { id: 'marching_tune', name: 'Marching Tune', icon: '🥁', desc: 'Action: Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Speed per performing Musician. + Harmony Reaction: join the same song (+1 initiative for listeners while sustained).' },
+      { id: 'soothing_hymn', name: 'Soothing Hymn', icon: '🕊️', desc: 'Action: Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener\'s turn while sustained).' }
+    ],
+    [
+      { id: 'battle_anthem', name: 'Battle Anthem', icon: '🎺', desc: 'Action: Sustain up to 3 turns (6 Stamina once); allies in hearing range +1 accuracy per performing Musician. + Harmony Reaction: join the same song (+1 damage on next hit per Musician while sustained).', prereqT2: 'marching_tune' },
+      { id: 'dissonant_note', name: 'Dissonant Note', icon: '🎸', desc: 'Action: Sustain 1 turn (4 Stamina once); enemies in hearing range −1 accuracy per performing Musician. + Harmony Reaction: join the same song (−1 per Musician on enemy saves while sustained).', prereqT2: 'soothing_hymn' },
+      { id: 'encore', name: 'Encore', icon: '🎤', desc: 'Passive: Once per combat, play the same song again for free — but it only lasts its original length (no Long Set, instrument, or other bonus turns).', prereqT2: 'long_set' }
+    ]
+  ),
   paladin: careerTree(
-    { id: 'oathbound', name: 'Oathbound', icon: '⚔️', desc: 'Passive: +1 Magical Defence; advantage on saves vs fear (GM).' },
+    { id: 'oathbound', name: 'Oathbound', icon: '⚔️', desc: 'Passive: +1 Magical Defence; +2 on saves vs fear (GM).' },
     [
       { id: 'lay_on_hands', name: 'Lay on Hands', icon: '🤲', desc: 'Action: Touch ally — restore 1d6+1 HP (once per ally per day).' },
       { id: 'rebuke', name: 'Rebuke', icon: '✋', desc: 'Action: One enemy hesitates — save or cannot use reactions until your next turn (once per combat).' },
       { id: 'bulwark', name: 'Bulwark', icon: '🧱', desc: 'Passive: +1 Physical Defence while below half HP.' }
     ],
     [
-      { id: 'aura_of_protection', name: 'Aura of Protection', icon: '🌟', desc: 'Passive: Allies within 10ft gain +1 Magical Defence vs fear and charm.', prereqT2: 'lay_on_hands' },
+      { id: 'aura_of_protection', name: 'Aura of Protection', icon: '🌟', desc: 'Passive: Allies within 10ft +1 Magical Defence vs fear and charm. + Harmony: +1 Magical Defence vs fear and charm per Paladin with this aura in range (no Reaction).', prereqT2: 'lay_on_hands' },
       { id: 'turn_shadow', name: 'Turn Shadow', icon: '☀️', desc: 'Action: Warded 10ft — hostile undead or demons save to enter (weaker than full Turn; once per combat).', prereqT2: 'rebuke' },
       { id: 'sacred_stance', name: 'Sacred Stance', icon: '🛐', desc: 'Action: +2 Physical Defence and +2 Magical Defence until end of your next turn; you cannot move.', prereqT2: 'bulwark' }
     ]
@@ -268,7 +284,7 @@ const CAREERS_SKILLS_DATA = {
     [
       { id: 'slip_away', name: 'Slip Away', icon: '💨', desc: 'Action: Disengage — leave melee without provoking opportunity attacks (once per combat).' },
       { id: 'shadow_blend', name: 'Shadow Blend', icon: '🌑', desc: 'Passive: +1 to Stealth when wearing light armour or no armour.' },
-      { id: 'dirty_trick', name: 'Dirty Trick', icon: '🎭', desc: 'Action: Distract a foe — one ally gains +2 on their next attack against that target.' }
+      { id: 'dirty_trick', name: 'Dirty Trick', icon: '🎭', desc: 'Action: Distract a foe; one ally +2 on next attack vs that target. + Harmony Reaction: same foe (each additional Thief adds +1 to that attack).' }
     ],
     [
       { id: 'filch', name: 'Filch', icon: '🎒', desc: 'Action: Attempt to steal one small unequipped item from a target (GM contested roll; once per encounter).', prereqT2: 'slip_away' },
@@ -280,7 +296,7 @@ const CAREERS_SKILLS_DATA = {
     { id: 'battle_fury', name: 'Battle Fury', icon: '😤', desc: 'Passive: +1 damage on melee attacks while below half HP.' },
     [
       { id: 'reckless_strike', name: 'Reckless Strike', icon: '💥', desc: 'Action: Your next attack gains +2 damage; you suffer −2 Physical Defence until your next turn.' },
-      { id: 'intimidate', name: 'Intimidate', icon: '😠', desc: 'Action: Foes within 10ft save or suffer −1 accuracy for 1 round.' },
+      { id: 'intimidate', name: 'Intimidate', icon: '😠', desc: 'Action: Foes within 10ft save or −1 accuracy for 1 round. + Harmony Reaction: same area (−1 accuracy per Berserker on failed save).' },
       { id: 'bloodlust', name: 'Bloodlust', icon: '🩸', desc: 'Passive: On a kill or critical hit, regain 1 Stamina.' }
     ],
     [
@@ -293,7 +309,7 @@ const CAREERS_SKILLS_DATA = {
     { id: 'steady_hand', name: 'Steady Hand', icon: '🎯', desc: 'Passive: +1 accuracy with ranged weapon attacks.' },
     [
       { id: 'overwatch', name: 'Overwatch', icon: '👁️', desc: 'Action: Ready a shot — interrupt one enemy moving in your line of sight (GM).' },
-      { id: 'suppressing_fire', name: 'Suppressing Fire', icon: '🔫', desc: 'Action: Suppress a zone — enemies suffer −1 to attacks or movement for 1 round.' },
+      { id: 'suppressing_fire', name: 'Suppressing Fire', icon: '🔫', desc: 'Action: Suppress a zone; enemies −1 to attacks or movement for 1 round. + Harmony Reaction: same zone (−1 penalty per Marksman).' },
       { id: 'quick_reload', name: 'Quick Reload', icon: '⚡', desc: 'Passive: Ranged attacks cost 1 less Stamina (minimum 0).' }
     ],
     [
@@ -306,7 +322,7 @@ const CAREERS_SKILLS_DATA = {
     { id: 'precise_footwork', name: 'Precise Footwork', icon: '🩰', desc: 'Passive: +1 Speed while wielding a one-handed weapon.' },
     [
       { id: 'parry_riposte', name: 'Parry & Riposte', icon: '🤺', desc: 'Action: When hit by a melee attack, contest to negate damage once per round (GM).' },
-      { id: 'feint', name: 'Feint', icon: '🎪', desc: 'Action: Your next attack vs one target has advantage (once per combat).' },
+      { id: 'feint', name: 'Feint', icon: '🎪', desc: 'Action: Your next attack vs one target — roll twice, keep the higher result (once per combat).' },
       { id: 'disengage_master', name: 'Disengage Master', icon: '👟', desc: 'Passive: Leaving melee does not provoke from one chosen foe per turn.' }
     ],
     [
@@ -401,18 +417,18 @@ const PROFESSION_TO_CAREER = {
 }
 
 function fusionSkill(id, name, tier, icon, desc, prerequisites) {
-  return {
+  return withActivationEffects({
     id,
     name,
     tier,
-    cost: tier >= 3 ? 15 : 12,
+    cost: TIER_LUMEN_COST[tier] || 40,
     staminaCost: 0,
     desc,
     icon,
     prerequisites,
     fusionKind: 'career',
     specialEffects: []
-  }
+  })
 }
 
 const CAREER_FUSIONS_DATA = {
@@ -455,7 +471,7 @@ const CAREER_FUSIONS_DATA = {
       2,
       '✨💬',
       'Action: Create a brief believable illusion in conversation (+2 social bluff; no combat decoys).',
-      { type: 'AND', skills: ['blinding_flash'], anyOfSkills: ['haggler', 'interview'] }
+      { type: 'AND', skills: ['blinding_flash', 'interview'] }
     ),
     fusionSkill(
       'fusion_ward_meal',

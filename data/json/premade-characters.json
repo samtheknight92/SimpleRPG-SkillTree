@@ -5,8 +5,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 380,
-    "gil": 15600,
+    "lumens": 18,
+    "gil": 1200,
     "stats": {
       "hp": 14,
       "stamina": 16,
@@ -18,12 +18,10 @@
       "magicalDefence": 8
     },
     "skills": [
-      "basic_alchemy",
-      "poison_brewing",
-      "explosive_compounds",
-      "grand_alchemist",
-      "plant_identification",
-      "herbal_remedies",
+      "apothecary",
+      "label_reader",
+      "volatile_expert",
+      "hands_in_soil",
       "human_determination"
     ],
     "activeToggles": [],
@@ -56,7 +54,7 @@
       "armor": "premade_cloth_robes_3",
       "accessory": null
     },
-    "notes": "Field kit of reagents, poisons, and polished healing draughts. Premade NPC archetype: Alchemist."
+    "notes": "Field kit of reagents, poisons, and polished healing draughts. Premade NPC archetype: Alchemist. Defeat loot: 18 Lumens, 1200 Gil."
   },
   {
     "premadeId": "ancient_dragon",
@@ -64,8 +62,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 132,
+    "gil": 0,
     "stats": {
       "hp": 50,
       "stamina": 25,
@@ -145,7 +143,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, tail_spikes. Premade monster/NPC: Ancient Dragon."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, tail_spikes. Premade monster/NPC: Ancient Dragon. Defeat loot: 132 Lumens."
   },
   {
     "premadeId": "archangel",
@@ -153,8 +151,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 105,
+    "gil": 0,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -224,7 +222,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, terror_essence. Premade monster/NPC: Archangel."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, terror_essence. Premade monster/NPC: Archangel. Defeat loot: 105 Lumens."
   },
   {
     "premadeId": "archer",
@@ -232,8 +230,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 18,
+    "gil": 1200,
     "stats": {
       "hp": 13,
       "stamina": 14,
@@ -276,7 +274,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Archer."
+    "notes": "Premade NPC archetype: Archer. Defeat loot: 18 Lumens, 1200 Gil."
   },
   {
     "premadeId": "arctic_wyvern",
@@ -284,8 +282,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 60,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -334,7 +332,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, frost_core, flexible_tail_section. Premade monster/NPC: Arctic Wyvern."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, frost_core, flexible_tail_section. Premade monster/NPC: Arctic Wyvern. Defeat loot: 60 Lumens."
   },
   {
     "premadeId": "assassin_rogue",
@@ -342,8 +340,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 12,
       "stamina": 14,
@@ -398,7 +396,7 @@
       "armor": "premade_studded_leather_4",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Assassin Rogue."
+    "notes": "Premade NPC archetype: Assassin Rogue. Defeat loot: 24 Lumens, 1600 Gil."
   },
   {
     "premadeId": "bandit_raider",
@@ -406,8 +404,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 160,
-    "gil": 1680,
+    "lumens": 36,
+    "gil": 20,
     "stats": {
       "hp": 22,
       "stamina": 16,
@@ -475,7 +473,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Bandit Raider."
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Bandit Raider. Defeat loot: 36 Lumens, 20 Gil."
   },
   {
     "premadeId": "banshee",
@@ -483,8 +481,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 57,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -530,7 +528,46 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Banshee."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Banshee. Defeat loot: 57 Lumens."
+  },
+  {
+    "premadeId": "bat",
+    "name": "Bat",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 21,
+    "gil": 0,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "bite_attack",
+      "monster_flight"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_sharp_fangs_0",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: sharp_fangs. Premade monster/NPC: Bat. Defeat loot: 21 Lumens."
   },
   {
     "premadeId": "battle_mage",
@@ -538,8 +575,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 14,
       "stamina": 16,
@@ -587,7 +624,7 @@
       "armor": "premade_cloth_robes_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Battle Mage."
+    "notes": "Premade NPC archetype: Battle Mage. Defeat loot: 21 Lumens, 1400 Gil."
   },
   {
     "premadeId": "beast_tamer",
@@ -595,8 +632,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 15,
+    "gil": 1000,
     "stats": {
       "hp": 14,
       "stamina": 15,
@@ -610,8 +647,7 @@
     "skills": [
       "steady_aim",
       "ranged_basics",
-      "plant_identification",
-      "herbal_remedies",
+      "hands_in_soil",
       "claws",
       "pounce",
       "human_determination"
@@ -646,7 +682,7 @@
       "armor": "premade_leather_armor_3",
       "accessory": null
     },
-    "notes": "Travels with a trained predator; carries treats and tranquilizer herbs. Premade NPC archetype: Beast Tamer."
+    "notes": "Travels with a trained predator; carries treats and tranquilizer herbs. Premade NPC archetype: Beast Tamer. Defeat loot: 15 Lumens, 1000 Gil."
   },
   {
     "premadeId": "berserker",
@@ -654,8 +690,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 18,
       "stamina": 16,
@@ -699,7 +735,64 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Berserker."
+    "notes": "Premade NPC archetype: Berserker. Defeat loot: 21 Lumens, 1400 Gil."
+  },
+  {
+    "premadeId": "black_bear",
+    "name": "Black Bear",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 42,
+    "gil": 0,
+    "stats": {
+      "hp": 26,
+      "stamina": 16,
+      "strength": 1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "bite_attack",
+      "crushing_bite"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_2",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_crusher_molars_3",
+        "itemId": "crusher_molars",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, sharp_claws, crusher_molars. Premade monster/NPC: Black Bear. Defeat loot: 42 Lumens."
   },
   {
     "premadeId": "blessed_armor",
@@ -707,8 +800,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 30,
+    "gil": 0,
     "stats": {
       "hp": 18,
       "stamina": 13,
@@ -758,7 +851,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, energy_gland, anti_magic_essence, regenerative_tissue. Premade monster/NPC: Blessed Armor."
+    "notes": "Potential defeat drops: metallic_fragments, energy_gland, anti_magic_essence, regenerative_tissue. Premade monster/NPC: Blessed Armor. Defeat loot: 30 Lumens."
   },
   {
     "premadeId": "blue_slime",
@@ -766,8 +859,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -802,7 +895,58 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Blue Slime."
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Blue Slime. Defeat loot: 18 Lumens."
+  },
+  {
+    "premadeId": "boar",
+    "name": "Boar",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 42,
+    "gil": 0,
+    "stats": {
+      "hp": 26,
+      "stamina": 16,
+      "strength": 1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 14,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "gore",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_2",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, energy_gland. Premade monster/NPC: Boar. Defeat loot: 42 Lumens."
   },
   {
     "premadeId": "bounty_hunter",
@@ -810,8 +954,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 15,
       "stamina": 14,
@@ -860,7 +1004,117 @@
       "armor": "premade_studded_leather_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Bounty Hunter."
+    "notes": "Premade NPC archetype: Bounty Hunter. Defeat loot: 21 Lumens, 1400 Gil."
+  },
+  {
+    "premadeId": "brown_bear",
+    "name": "Brown Bear",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 60,
+    "gil": 0,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "claws",
+      "bite_attack",
+      "crushing_bite"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_2",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_crusher_molars_3",
+        "itemId": "crusher_molars",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_claws, crusher_molars. Premade monster/NPC: Brown Bear. Defeat loot: 60 Lumens."
+  },
+  {
+    "premadeId": "bull",
+    "name": "Bull",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 60,
+    "gil": 0,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "gore",
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_2",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, energy_gland. Premade monster/NPC: Bull. Defeat loot: 60 Lumens."
   },
   {
     "premadeId": "cherubim",
@@ -868,8 +1122,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 75,
+    "gil": 0,
     "stats": {
       "hp": 34,
       "stamina": 22,
@@ -942,7 +1196,45 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, terror_essence. Premade monster/NPC: Cherubim."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, terror_essence. Premade monster/NPC: Cherubim. Defeat loot: 75 Lumens."
+  },
+  {
+    "premadeId": "chicken",
+    "name": "Chicken",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 15,
+    "gil": 0,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "claws"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_sharp_claws_0",
+        "itemId": "sharp_claws",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: sharp_claws. Premade monster/NPC: Chicken. Defeat loot: 15 Lumens."
   },
   {
     "premadeId": "cloud_giant",
@@ -950,8 +1242,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 93,
+    "gil": 0,
     "stats": {
       "hp": 42,
       "stamina": 22,
@@ -1032,7 +1324,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Cloud Giant."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Cloud Giant. Defeat loot: 93 Lumens."
   },
   {
     "premadeId": "con_artist",
@@ -1040,8 +1332,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 38500,
+    "lumens": 15,
+    "gil": 1000,
     "stats": {
       "hp": 12,
       "stamina": 13,
@@ -1088,7 +1380,7 @@
       "armor": "premade_cloth_robes_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Con Artist."
+    "notes": "Premade NPC archetype: Con Artist. Defeat loot: 15 Lumens, 1000 Gil."
   },
   {
     "premadeId": "corrupt_guard",
@@ -1096,8 +1388,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 160,
-    "gil": 1680,
+    "lumens": 36,
+    "gil": 20,
     "stats": {
       "hp": 22,
       "stamina": 16,
@@ -1155,7 +1447,65 @@
       "armor": "premade_leather_armor_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Corrupt Guard."
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Corrupt Guard. Defeat loot: 36 Lumens, 20 Gil."
+  },
+  {
+    "premadeId": "cougar",
+    "name": "Cougar",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 54,
+    "gil": 0,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 1,
+      "speed": 5,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "claws",
+      "pounce",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_2",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_3",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_claws, sharp_fangs. Premade monster/NPC: Cougar. Defeat loot: 54 Lumens."
   },
   {
     "premadeId": "crime_boss",
@@ -1163,8 +1513,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 90,
+    "gil": 20,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -1228,7 +1578,59 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland. Premade monster/NPC: Crime Boss."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland. Premade monster/NPC: Crime Boss. Defeat loot: 90 Lumens, 20 Gil."
+  },
+  {
+    "premadeId": "crocodile",
+    "name": "Crocodile",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 60,
+    "gil": 0,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "bite_attack",
+      "crushing_bite"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_crusher_molars_2",
+        "itemId": "crusher_molars",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, crusher_molars. Premade monster/NPC: Crocodile. Defeat loot: 60 Lumens."
   },
   {
     "premadeId": "crystal_serpent",
@@ -1236,15 +1638,15 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 57,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
       "strength": 0,
       "magicPower": 0,
-      "accuracy": 0,
-      "speed": 3,
+      "accuracy": 1,
+      "speed": 5,
       "physicalDefence": 14,
       "magicalDefence": 14
     },
@@ -1293,7 +1695,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Crystal Serpent."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Crystal Serpent. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "crystal_slime",
@@ -1301,8 +1703,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -1337,7 +1739,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Crystal Slime."
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Crystal Slime. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "crystal_wyvern",
@@ -1345,8 +1747,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 63,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -1407,7 +1809,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, flame_gland, frost_core, storm_chamber, flexible_tail_section. Premade monster/NPC: Crystal Wyvern."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, flame_gland, frost_core, storm_chamber, flexible_tail_section. Premade monster/NPC: Crystal Wyvern. Defeat loot: 63 Lumens."
   },
   {
     "premadeId": "cultist",
@@ -1415,8 +1817,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 13,
       "stamina": 15,
@@ -1460,7 +1862,7 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Chalice, black candles, and forbidden sigils hidden beneath the robes. Premade NPC archetype: Cultist."
+    "notes": "Chalice, black candles, and forbidden sigils hidden beneath the robes. Premade NPC archetype: Cultist. Defeat loot: 21 Lumens, 1400 Gil."
   },
   {
     "premadeId": "cursed_knight",
@@ -1468,8 +1870,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 54,
+    "gil": 20,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -1532,7 +1934,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, razor_talons, energy_gland. Premade monster/NPC: Cursed Knight."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, razor_talons, energy_gland. Premade monster/NPC: Cursed Knight. Defeat loot: 54 Lumens, 20 Gil."
   },
   {
     "premadeId": "cursed_shield",
@@ -1540,8 +1942,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 30,
+    "gil": 0,
     "stats": {
       "hp": 18,
       "stamina": 13,
@@ -1585,7 +1987,45 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, energy_gland, petrifying_eye. Premade monster/NPC: Cursed Shield."
+    "notes": "Potential defeat drops: metallic_fragments, energy_gland, petrifying_eye. Premade monster/NPC: Cursed Shield. Defeat loot: 30 Lumens."
+  },
+  {
+    "premadeId": "deer",
+    "name": "Deer",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 33,
+    "gil": 0,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "monster_charge_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_energy_gland_0",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: energy_gland. Premade monster/NPC: Deer. Defeat loot: 33 Lumens."
   },
   {
     "premadeId": "demon_prince",
@@ -1593,8 +2033,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 111,
+    "gil": 0,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -1671,7 +2111,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Demon Prince."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Demon Prince. Defeat loot: 111 Lumens."
   },
   {
     "premadeId": "demon_weapon",
@@ -1679,8 +2119,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 111,
+    "gil": 0,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -1757,7 +2197,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Demon Weapon."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Demon Weapon. Defeat loot: 111 Lumens."
   },
   {
     "premadeId": "desert_wyvern",
@@ -1765,8 +2205,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 60,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -1815,7 +2255,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, flame_gland, flexible_tail_section. Premade monster/NPC: Desert Wyvern."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, flame_gland, flexible_tail_section. Premade monster/NPC: Desert Wyvern. Defeat loot: 60 Lumens."
   },
   {
     "premadeId": "devil_lord",
@@ -1823,8 +2263,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 111,
+    "gil": 0,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -1901,7 +2341,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Devil Lord."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Devil Lord. Defeat loot: 111 Lumens."
   },
   {
     "premadeId": "dire_rat",
@@ -1909,8 +2349,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -1945,7 +2385,67 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Dire Rat."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Dire Rat. Defeat loot: 18 Lumens."
+  },
+  {
+    "premadeId": "dire_wolf",
+    "name": "Dire Wolf",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 57,
+    "gil": 0,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 1,
+      "speed": 5,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "bite_attack",
+      "claws",
+      "pounce",
+      "razor_claws",
+      "crushing_bite"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_crusher_molars_2",
+        "itemId": "crusher_molars",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_3",
+        "itemId": "razor_talons",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, crusher_molars, razor_talons. Premade monster/NPC: Dire Wolf. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "doppelganger",
@@ -1953,8 +2453,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 57,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -2004,7 +2504,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, dimensional_node. Premade monster/NPC: Doppelganger."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, dimensional_node. Premade monster/NPC: Doppelganger. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "dragon_lord",
@@ -2012,8 +2512,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 132,
+    "gil": 0,
     "stats": {
       "hp": 50,
       "stamina": 25,
@@ -2093,7 +2593,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, tail_spikes. Premade monster/NPC: Dragon Lord."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, tail_spikes. Premade monster/NPC: Dragon Lord. Defeat loot: 132 Lumens."
   },
   {
     "premadeId": "duelist",
@@ -2101,8 +2601,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 14,
       "stamina": 15,
@@ -2146,7 +2646,59 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Duelist."
+    "notes": "Premade NPC archetype: Duelist. Defeat loot: 24 Lumens, 1600 Gil."
+  },
+  {
+    "premadeId": "eagle",
+    "name": "Eagle",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 39,
+    "gil": 0,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "monster_flight",
+      "razor_claws"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_2",
+        "itemId": "razor_talons",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons. Premade monster/NPC: Eagle. Defeat loot: 39 Lumens."
   },
   {
     "premadeId": "earth_golem",
@@ -2154,8 +2706,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 63,
+    "gil": 0,
     "stats": {
       "hp": 34,
       "stamina": 19,
@@ -2198,7 +2750,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Earth Golem."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Earth Golem. Defeat loot: 63 Lumens."
   },
   {
     "premadeId": "electric_eel",
@@ -2206,8 +2758,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 21,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -2248,7 +2800,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs, storm_chamber. Premade monster/NPC: Electric Eel."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, storm_chamber. Premade monster/NPC: Electric Eel. Defeat loot: 21 Lumens."
   },
   {
     "premadeId": "elementalist",
@@ -2256,8 +2808,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 13,
       "stamina": 17,
@@ -2304,7 +2856,7 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Elementalist."
+    "notes": "Premade NPC archetype: Elementalist. Defeat loot: 24 Lumens, 1600 Gil."
   },
   {
     "premadeId": "enchanter",
@@ -2312,8 +2864,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 18,
+    "gil": 1200,
     "stats": {
       "hp": 12,
       "stamina": 14,
@@ -2325,11 +2877,9 @@
       "magicalDefence": 8
     },
     "skills": [
-      "basic_enchanting",
-      "elemental_infusion",
-      "soul_binding",
-      "artifact_creation",
-      "archenchanter",
+      "rune_apprentice",
+      "identify_magic",
+      "dispel_touch",
       "human_determination"
     ],
     "activeToggles": [],
@@ -2362,7 +2912,7 @@
       "armor": "premade_cloth_robes_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Enchanter."
+    "notes": "Premade NPC archetype: Enchanter. Defeat loot: 18 Lumens, 1200 Gil."
   },
   {
     "premadeId": "engineer",
@@ -2370,8 +2920,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 14,
       "stamina": 14,
@@ -2383,11 +2933,11 @@
       "magicalDefence": 8
     },
     "skills": [
-      "basic_alchemy",
-      "poison_brewing",
+      "apothecary",
+      "acid_vials",
       "explosive_compounds",
-      "basic_smithing",
-      "weapon_smithing",
+      "apprentice_smith",
+      "weaponwright",
       "human_determination"
     ],
     "activeToggles": [],
@@ -2420,7 +2970,7 @@
       "armor": "premade_leather_armor_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Engineer."
+    "notes": "Premade NPC archetype: Engineer. Defeat loot: 21 Lumens, 1400 Gil."
   },
   {
     "premadeId": "feral_rat",
@@ -2428,8 +2978,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -2464,7 +3014,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Feral Rat."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Feral Rat. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "fire_fish",
@@ -2472,8 +3022,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -2514,7 +3064,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flame_gland. Premade monster/NPC: Fire Fish."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flame_gland. Premade monster/NPC: Fire Fish. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "fire_giant",
@@ -2522,8 +3072,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 93,
+    "gil": 0,
     "stats": {
       "hp": 42,
       "stamina": 22,
@@ -2609,7 +3159,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland, flame_gland. Premade monster/NPC: Fire Giant."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland, flame_gland. Premade monster/NPC: Fire Giant. Defeat loot: 93 Lumens."
   },
   {
     "premadeId": "fire_golem",
@@ -2617,8 +3167,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 63,
+    "gil": 0,
     "stats": {
       "hp": 34,
       "stamina": 19,
@@ -2661,7 +3211,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Fire Golem."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Fire Golem. Defeat loot: 63 Lumens."
   },
   {
     "premadeId": "fire_octopus",
@@ -2669,8 +3219,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -2711,7 +3261,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Fire Octopus."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Fire Octopus. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "fire_serpent",
@@ -2719,15 +3269,15 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 57,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
       "strength": 0,
       "magicPower": 0,
-      "accuracy": 0,
-      "speed": 3,
+      "accuracy": 1,
+      "speed": 5,
       "physicalDefence": 14,
       "magicalDefence": 14
     },
@@ -2776,7 +3326,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Fire Serpent."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Fire Serpent. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "fire_sprite",
@@ -2784,8 +3334,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 27,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -2842,7 +3392,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, flame_gland. Premade monster/NPC: Fire Sprite."
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, flame_gland. Premade monster/NPC: Fire Sprite. Defeat loot: 27 Lumens."
   },
   {
     "premadeId": "forest_wyvern",
@@ -2850,8 +3400,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 60,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -2900,7 +3450,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, toxic_lung_tissue, flexible_tail_section. Premade monster/NPC: Forest Wyvern."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, toxic_lung_tissue, flexible_tail_section. Premade monster/NPC: Forest Wyvern. Defeat loot: 60 Lumens."
   },
   {
     "premadeId": "frost_giant",
@@ -2908,8 +3458,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 93,
+    "gil": 0,
     "stats": {
       "hp": 42,
       "stamina": 22,
@@ -2995,7 +3545,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland, frost_core. Premade monster/NPC: Frost Giant."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland, frost_core. Premade monster/NPC: Frost Giant. Defeat loot: 93 Lumens."
   },
   {
     "premadeId": "gambler",
@@ -3003,8 +3553,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 24800,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 12,
       "stamina": 13,
@@ -3045,7 +3595,57 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Gambler."
+    "notes": "Premade NPC archetype: Gambler. Defeat loot: 12 Lumens, 800 Gil."
+  },
+  {
+    "premadeId": "garden_snake",
+    "name": "Garden Snake",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 12,
+    "gil": 800,
+    "stats": {
+      "hp": 14,
+      "stamina": 14,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "human_determination",
+      "sword_basics",
+      "quick_strike"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "premade_iron_sword_1",
+        "itemId": "iron_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_leather_armor_2",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_iron_sword_1",
+      "offhand": null,
+      "armor": "premade_leather_armor_2",
+      "accessory": null
+    },
+    "notes": "Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "giant_octopus",
@@ -3053,8 +3653,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 21,
+    "gil": 0,
     "stats": {
       "hp": 18,
       "stamina": 13,
@@ -3100,7 +3700,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Giant Octopus."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Giant Octopus. Defeat loot: 21 Lumens."
   },
   {
     "premadeId": "giant_piranha",
@@ -3108,19 +3708,20 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 42,
+    "gil": 0,
     "stats": {
-      "hp": 18,
-      "stamina": 13,
-      "strength": -1,
-      "magicPower": -2,
-      "accuracy": -2,
-      "speed": 2,
-      "physicalDefence": 11,
-      "magicalDefence": 10
+      "hp": 26,
+      "stamina": 16,
+      "strength": 1,
+      "magicPower": -1,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 14,
+      "magicalDefence": 12
     },
     "skills": [
+      "magical_resistance",
       "tough_skin",
       "bite_attack"
     ],
@@ -3133,12 +3734,17 @@
         "qty": 1
       },
       {
-        "uid": "premade_thick_hide_1",
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_2",
         "itemId": "thick_hide",
         "qty": 1
       },
       {
-        "uid": "premade_sharp_fangs_2",
+        "uid": "premade_sharp_fangs_3",
         "itemId": "sharp_fangs",
         "qty": 1
       }
@@ -3149,7 +3755,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Giant Piranha."
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, sharp_fangs. Premade monster/NPC: Giant Piranha. Defeat loot: 42 Lumens."
   },
   {
     "premadeId": "giant_rat",
@@ -3157,8 +3763,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 24,
+    "gil": 0,
     "stats": {
       "hp": 18,
       "stamina": 13,
@@ -3198,7 +3804,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Giant Rat."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Giant Rat. Defeat loot: 24 Lumens."
   },
   {
     "premadeId": "giant_slime",
@@ -3206,8 +3812,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 21,
+    "gil": 0,
     "stats": {
       "hp": 18,
       "stamina": 13,
@@ -3247,7 +3853,65 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Giant Slime."
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Giant Slime. Defeat loot: 21 Lumens."
+  },
+  {
+    "premadeId": "giant_spider",
+    "name": "Giant Spider",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 66,
+    "gil": 0,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 1,
+      "speed": 5,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "monster_charge_attack",
+      "trample",
+      "gore"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_steel_sword_0",
+        "itemId": "steel_sword",
+        "qty": 1
+      },
+      {
+        "uid": "premade_living_rock_fragments_1",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_3",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "premade_steel_sword_0",
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, energy_gland. Premade monster/NPC: Giant Spider. Defeat loot: 66 Lumens."
   },
   {
     "premadeId": "gladiator",
@@ -3255,8 +3919,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 30,
+    "gil": 2000,
     "stats": {
       "hp": 18,
       "stamina": 16,
@@ -3307,7 +3971,45 @@
       "armor": "premade_chain_mail_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Gladiator."
+    "notes": "Premade NPC archetype: Gladiator. Defeat loot: 30 Lumens, 2000 Gil."
+  },
+  {
+    "premadeId": "goat",
+    "name": "Goat",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 15,
+    "gil": 0,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "claws"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_sharp_claws_0",
+        "itemId": "sharp_claws",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: sharp_claws. Premade monster/NPC: Goat. Defeat loot: 15 Lumens."
   },
   {
     "premadeId": "goblin_berserker",
@@ -3315,8 +4017,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 14,
       "stamina": 14,
@@ -3357,7 +4059,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Goblin Berserker."
+    "notes": "Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "goblin_chief",
@@ -3365,8 +4067,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 78,
+    "gil": 20,
     "stats": {
       "hp": 34,
       "stamina": 22,
@@ -3454,7 +4156,7 @@
       "armor": "premade_chain_mail_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Goblin Chief."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Goblin Chief. Defeat loot: 78 Lumens, 20 Gil."
   },
   {
     "premadeId": "goblin_scout",
@@ -3462,8 +4164,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 14,
       "stamina": 14,
@@ -3504,7 +4206,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Goblin Scout."
+    "notes": "Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "goblin_shaman",
@@ -3512,8 +4214,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 63,
+    "gil": 20,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -3578,7 +4280,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, sharp_claws. Premade monster/NPC: Goblin Shaman."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, sharp_claws. Premade monster/NPC: Goblin Shaman. Defeat loot: 63 Lumens, 20 Gil."
   },
   {
     "premadeId": "goblin_thief",
@@ -3586,8 +4288,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 14,
       "stamina": 14,
@@ -3628,7 +4330,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Goblin Thief."
+    "notes": "Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "goblin_warrior",
@@ -3636,8 +4338,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 160,
-    "gil": 1680,
+    "lumens": 36,
+    "gil": 20,
     "stats": {
       "hp": 22,
       "stamina": 16,
@@ -3695,7 +4397,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Goblin Warrior."
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Goblin Warrior. Defeat loot: 36 Lumens, 20 Gil."
   },
   {
     "premadeId": "golden_fish",
@@ -3703,8 +4405,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -3739,7 +4441,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Golden Fish."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs. Premade monster/NPC: Golden Fish. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "greater_devil",
@@ -3747,8 +4449,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 90,
+    "gil": 0,
     "stats": {
       "hp": 34,
       "stamina": 22,
@@ -3829,7 +4531,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Greater Devil."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, flame_gland, petrifying_eye. Premade monster/NPC: Greater Devil. Defeat loot: 90 Lumens."
   },
   {
     "premadeId": "green_slime",
@@ -3837,8 +4539,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -3873,7 +4575,84 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Green Slime."
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Green Slime. Defeat loot: 18 Lumens."
+  },
+  {
+    "premadeId": "grizzly_bear",
+    "name": "Grizzly Bear",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 87,
+    "gil": 0,
+    "stats": {
+      "hp": 42,
+      "stamina": 22,
+      "strength": 5,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 20,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "crushing_bite"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_1",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_4",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_crusher_molars_5",
+        "itemId": "crusher_molars",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_6",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, crusher_molars, combat_coordination_gland. Premade monster/NPC: Grizzly Bear. Defeat loot: 87 Lumens."
   },
   {
     "premadeId": "haunted_bow",
@@ -3881,8 +4660,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 57,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -3949,7 +4728,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, energy_gland, razor_talons, petrifying_eye. Premade monster/NPC: Haunted Bow."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, energy_gland, razor_talons, petrifying_eye. Premade monster/NPC: Haunted Bow. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "healing_angel",
@@ -3957,8 +4736,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 27,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -4007,7 +4786,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, terror_essence, regenerative_tissue. Premade monster/NPC: Healing Angel."
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, terror_essence, regenerative_tissue. Premade monster/NPC: Healing Angel. Defeat loot: 27 Lumens."
   },
   {
     "premadeId": "hell_knight",
@@ -4015,8 +4794,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 78,
+    "gil": 20,
     "stats": {
       "hp": 34,
       "stamina": 22,
@@ -4104,7 +4883,7 @@
       "armor": "premade_chain_mail_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Hell Knight."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Hell Knight. Defeat loot: 78 Lumens, 20 Gil."
   },
   {
     "premadeId": "heretic",
@@ -4112,8 +4891,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 13,
       "stamina": 15,
@@ -4157,7 +4936,7 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Heretic."
+    "notes": "Premade NPC archetype: Heretic. Defeat loot: 21 Lumens, 1400 Gil."
   },
   {
     "premadeId": "hill_giant",
@@ -4165,8 +4944,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 93,
+    "gil": 0,
     "stats": {
       "hp": 42,
       "stamina": 22,
@@ -4247,7 +5026,58 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Hill Giant."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Hill Giant. Defeat loot: 93 Lumens."
+  },
+  {
+    "premadeId": "horse",
+    "name": "Horse",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 39,
+    "gil": 0,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "monster_charge_attack",
+      "trample"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_2",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, energy_gland. Premade monster/NPC: Horse. Defeat loot: 39 Lumens."
   },
   {
     "premadeId": "ice_fish",
@@ -4255,8 +5085,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -4297,7 +5127,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs, frost_core. Premade monster/NPC: Ice Fish."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, frost_core. Premade monster/NPC: Ice Fish. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "ice_golem",
@@ -4305,8 +5135,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 63,
+    "gil": 0,
     "stats": {
       "hp": 34,
       "stamina": 19,
@@ -4349,7 +5179,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Ice Golem."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Ice Golem. Defeat loot: 63 Lumens."
   },
   {
     "premadeId": "ice_octopus",
@@ -4357,8 +5187,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -4399,7 +5229,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Ice Octopus."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, flexible_tail_section. Premade monster/NPC: Ice Octopus. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "ice_serpent",
@@ -4407,15 +5237,15 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 57,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
       "strength": 0,
       "magicPower": 0,
-      "accuracy": 0,
-      "speed": 3,
+      "accuracy": 1,
+      "speed": 5,
       "physicalDefence": 14,
       "magicalDefence": 14
     },
@@ -4464,7 +5294,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Ice Serpent."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Ice Serpent. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "ice_sprite",
@@ -4472,8 +5302,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 27,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -4530,7 +5360,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, frost_core. Premade monster/NPC: Ice Sprite."
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, frost_core. Premade monster/NPC: Ice Sprite. Defeat loot: 27 Lumens."
   },
   {
     "premadeId": "inquisitor",
@@ -4538,8 +5368,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 27,
+    "gil": 1800,
     "stats": {
       "hp": 16,
       "stamina": 15,
@@ -4583,7 +5413,7 @@
       "armor": "premade_chain_mail_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Inquisitor."
+    "notes": "Premade NPC archetype: Inquisitor. Defeat loot: 27 Lumens, 1800 Gil."
   },
   {
     "premadeId": "kraken",
@@ -4591,8 +5421,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 120,
+    "gil": 0,
     "stats": {
       "hp": 50,
       "stamina": 25,
@@ -4671,7 +5501,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, tail_spikes, petrifying_eye. Premade monster/NPC: Kraken."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, tail_spikes, petrifying_eye. Premade monster/NPC: Kraken. Defeat loot: 120 Lumens."
   },
   {
     "premadeId": "lesser_devil",
@@ -4679,8 +5509,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 24,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -4722,7 +5552,231 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, flame_gland, petrifying_eye. Premade monster/NPC: Lesser Devil."
+    "notes": "Potential defeat drops: thick_hide, flame_gland, petrifying_eye. Premade monster/NPC: Lesser Devil. Defeat loot: 24 Lumens."
+  },
+  {
+    "premadeId": "level5_archer",
+    "name": "Range Hand",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 1,
+    "gil": 850,
+    "stats": {
+      "hp": 24,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -1,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "ranged_basics",
+      "steady_aim",
+      "aimed_shot",
+      "steady_hand"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "level5_archer_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "level5_archer_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 1
+      },
+      {
+        "uid": "level5_archer_training_bow_2",
+        "itemId": "training_bow",
+        "qty": 1
+      },
+      {
+        "uid": "level5_archer_leather_armor_3",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "level5_archer_training_bow_2",
+      "offhand": null,
+      "armor": "level5_archer_leather_armor_3",
+      "accessory": null
+    },
+    "notes": "Bow + Marksman — Aimed Shot, Steady Aim, Steady Hand (+1 ACC ranged). ACC/STR trained; leather armour. Level 5 starter (5) — max learnable tier at Lv5 is 2 (tier 3 opens Lv8). Spent 112 Lumens (44 skills + 68 stats) and 1550 Gil on gear. Banked 1 Lumens after creation."
+  },
+  {
+    "premadeId": "level5_rogue",
+    "name": "Alley Cutpurse",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 1,
+    "gil": 1350,
+    "stats": {
+      "hp": 24,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -1,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "dagger_basics",
+      "light_step",
+      "sneak_attack",
+      "light_fingers"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "level5_rogue_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 1
+      },
+      {
+        "uid": "level5_rogue_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 1
+      },
+      {
+        "uid": "level5_rogue_bronze_dagger_2",
+        "itemId": "bronze_dagger",
+        "qty": 1
+      },
+      {
+        "uid": "level5_rogue_leather_armor_3",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "level5_rogue_bronze_dagger_2",
+      "offhand": null,
+      "armor": "level5_rogue_leather_armor_3",
+      "accessory": null
+    },
+    "notes": "Dagger + Thief — Sneak Attack, Light Step, Light Fingers. ACC/STR trained for table combat, not HP padding. Level 5 starter (5) — max learnable tier at Lv5 is 2 (tier 3 opens Lv8). Spent 112 Lumens (44 skills + 68 stats) and 1050 Gil on gear. Banked 1 Lumens after creation."
+  },
+  {
+    "premadeId": "level5_staff_mage",
+    "name": "Apprentice Evoker",
+    "race": "human",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 1,
+    "gil": 1000,
+    "stats": {
+      "hp": 24,
+      "stamina": 10,
+      "strength": -3,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "staff_basics",
+      "mana_focus",
+      "staff_strike",
+      "arcane_study"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "level5_staff_mage_stamina_potion_0",
+        "itemId": "stamina_potion",
+        "qty": 2
+      },
+      {
+        "uid": "level5_staff_mage_health_potion_1",
+        "itemId": "health_potion",
+        "qty": 1
+      },
+      {
+        "uid": "level5_staff_mage_wooden_staff_2",
+        "itemId": "wooden_staff",
+        "qty": 1
+      },
+      {
+        "uid": "level5_staff_mage_leather_armor_3",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "level5_staff_mage_wooden_staff_2",
+      "offhand": null,
+      "armor": "level5_staff_mage_leather_armor_3",
+      "accessory": null
+    },
+    "notes": "Staff + Mage — Staff Strike, Mana Focus, Arcane Study support. ACC/MAG trained; leather for survival. Level 5 starter (5) — max learnable tier at Lv5 is 2 (tier 3 opens Lv8). Spent 112 Lumens (44 skills + 68 stats) and 1400 Gil on gear. Banked 1 Lumens after creation."
+  },
+  {
+    "premadeId": "level5_swordsman",
+    "name": "Road Knight",
+    "race": "human",
+    "category": "npc",
+    "elementalAffinity": "",
+    "lumens": 1,
+    "gil": 1050,
+    "stats": {
+      "hp": 24,
+      "stamina": 10,
+      "strength": -2,
+      "magicPower": -3,
+      "accuracy": -1,
+      "speed": 2,
+      "physicalDefence": 8,
+      "magicalDefence": 8
+    },
+    "skills": [
+      "sword_basics",
+      "sword_stance",
+      "quick_strike",
+      "soldier_training"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "level5_swordsman_health_potion_0",
+        "itemId": "health_potion",
+        "qty": 2
+      },
+      {
+        "uid": "level5_swordsman_stamina_potion_1",
+        "itemId": "stamina_potion",
+        "qty": 1
+      },
+      {
+        "uid": "level5_swordsman_bronze_sword_2",
+        "itemId": "bronze_sword",
+        "qty": 1
+      },
+      {
+        "uid": "level5_swordsman_leather_armor_3",
+        "itemId": "leather_armor",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": "level5_swordsman_bronze_sword_2",
+      "offhand": null,
+      "armor": "level5_swordsman_leather_armor_3",
+      "accessory": null
+    },
+    "notes": "Sword + Soldier — basics, Quick Strike, and Soldier Training (+1 STR in medium armour). ACC/STR trained; modest HP. Level 5 starter (5) — max learnable tier at Lv5 is 2 (tier 3 opens Lv8). Spent 112 Lumens (44 skills + 68 stats) and 1350 Gil on gear. Banked 1 Lumens after creation."
   },
   {
     "premadeId": "lich",
@@ -4730,8 +5784,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 111,
+    "gil": 0,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -4818,7 +5872,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, petrifying_eye. Premade monster/NPC: Lich."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, petrifying_eye. Premade monster/NPC: Lich. Defeat loot: 111 Lumens."
   },
   {
     "premadeId": "light_angel",
@@ -4826,8 +5880,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 27,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -4876,7 +5930,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, terror_essence, regenerative_tissue. Premade monster/NPC: Light Angel."
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, terror_essence, regenerative_tissue. Premade monster/NPC: Light Angel. Defeat loot: 27 Lumens."
   },
   {
     "premadeId": "light_sprite",
@@ -4884,8 +5938,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 27,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -4942,7 +5996,66 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, terror_essence. Premade monster/NPC: Light Sprite."
+    "notes": "Potential defeat drops: thick_hide, anti_magic_essence, dimensional_node, terror_essence. Premade monster/NPC: Light Sprite. Defeat loot: 27 Lumens."
+  },
+  {
+    "premadeId": "lion",
+    "name": "Lion",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 54,
+    "gil": 0,
+    "stats": {
+      "hp": 28,
+      "stamina": 19,
+      "strength": 0,
+      "magicPower": 0,
+      "accuracy": 1,
+      "speed": 5,
+      "physicalDefence": 14,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "claws",
+      "pounce",
+      "bite_attack",
+      "razor_claws"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_razor_talons_2",
+        "itemId": "razor_talons",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_3",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, razor_talons, sharp_fangs. Premade monster/NPC: Lion. Defeat loot: 54 Lumens."
   },
   {
     "premadeId": "living_staff",
@@ -4950,8 +6063,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 24,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -4999,7 +6112,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, energy_gland. Premade monster/NPC: Living Staff."
+    "notes": "Potential defeat drops: metallic_fragments, energy_gland. Premade monster/NPC: Living Staff. Defeat loot: 24 Lumens."
   },
   {
     "premadeId": "medic",
@@ -5007,8 +6120,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 15,
+    "gil": 1000,
     "stats": {
       "hp": 14,
       "stamina": 15,
@@ -5049,7 +6162,7 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Medic."
+    "notes": "Premade NPC archetype: Medic. Defeat loot: 15 Lumens, 1000 Gil."
   },
   {
     "premadeId": "mercenary",
@@ -5057,8 +6170,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 17,
       "stamina": 15,
@@ -5106,7 +6219,7 @@
       "armor": "premade_chain_mail_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Mercenary."
+    "notes": "Premade NPC archetype: Mercenary. Defeat loot: 24 Lumens, 1600 Gil."
   },
   {
     "premadeId": "mind_flayer",
@@ -5114,8 +6227,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 111,
+    "gil": 0,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -5202,7 +6315,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, petrifying_eye, dimensional_node. Premade monster/NPC: Mind Flayer."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, sharp_fangs, combat_coordination_gland, petrifying_eye, dimensional_node. Premade monster/NPC: Mind Flayer. Defeat loot: 111 Lumens."
   },
   {
     "premadeId": "monk",
@@ -5210,8 +6323,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 15,
       "stamina": 18,
@@ -5252,7 +6365,91 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Monk."
+    "notes": "Premade NPC archetype: Monk. Defeat loot: 24 Lumens, 1600 Gil."
+  },
+  {
+    "premadeId": "moose",
+    "name": "Moose",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 90,
+    "gil": 0,
+    "stats": {
+      "hp": 42,
+      "stamina": 22,
+      "strength": 5,
+      "magicPower": 1,
+      "accuracy": 1,
+      "speed": 4,
+      "physicalDefence": 20,
+      "magicalDefence": 16
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "armored_plates",
+      "magical_resistance",
+      "damage_reduction",
+      "regeneration",
+      "claws",
+      "bite_attack",
+      "multiattack",
+      "monster_charge_attack",
+      "trample",
+      "gore"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_segmented_carapace_1",
+        "itemId": "segmented_carapace",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_2",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_regenerative_tissue_3",
+        "itemId": "regenerative_tissue",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_4",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_5",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_combat_coordination_gland_6",
+        "itemId": "combat_coordination_gland",
+        "qty": 1
+      },
+      {
+        "uid": "premade_energy_gland_7",
+        "itemId": "energy_gland",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, sharp_claws, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Moose. Defeat loot: 90 Lumens."
   },
   {
     "premadeId": "necromancer",
@@ -5260,8 +6457,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 27,
+    "gil": 1800,
     "stats": {
       "hp": 13,
       "stamina": 16,
@@ -5312,7 +6509,7 @@
       "armor": "premade_cloth_robes_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Necromancer."
+    "notes": "Premade NPC archetype: Necromancer. Defeat loot: 27 Lumens, 1800 Gil."
   },
   {
     "premadeId": "ninja",
@@ -5320,8 +6517,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 27,
+    "gil": 1800,
     "stats": {
       "hp": 13,
       "stamina": 16,
@@ -5371,7 +6568,7 @@
       "armor": "premade_studded_leather_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Ninja."
+    "notes": "Premade NPC archetype: Ninja. Defeat loot: 27 Lumens, 1800 Gil."
   },
   {
     "premadeId": "orc_brute",
@@ -5379,8 +6576,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 160,
-    "gil": 1680,
+    "lumens": 36,
+    "gil": 20,
     "stats": {
       "hp": 22,
       "stamina": 16,
@@ -5438,7 +6635,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Orc Brute."
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Orc Brute. Defeat loot: 36 Lumens, 20 Gil."
   },
   {
     "premadeId": "orc_chief",
@@ -5446,8 +6643,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 78,
+    "gil": 20,
     "stats": {
       "hp": 34,
       "stamina": 22,
@@ -5535,7 +6732,7 @@
       "armor": "premade_chain_mail_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Orc Chief."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Orc Chief. Defeat loot: 78 Lumens, 20 Gil."
   },
   {
     "premadeId": "orc_raider",
@@ -5543,8 +6740,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 160,
-    "gil": 1680,
+    "lumens": 36,
+    "gil": 20,
     "stats": {
       "hp": 22,
       "stamina": 16,
@@ -5612,7 +6809,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Orc Raider."
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Orc Raider. Defeat loot: 36 Lumens, 20 Gil."
   },
   {
     "premadeId": "orc_scout",
@@ -5620,8 +6817,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 14,
       "stamina": 14,
@@ -5662,7 +6859,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Orc Scout."
+    "notes": "Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "orc_shaman",
@@ -5670,8 +6867,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 63,
+    "gil": 20,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -5736,7 +6933,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, sharp_claws. Premade monster/NPC: Orc Shaman."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye, sharp_claws. Premade monster/NPC: Orc Shaman. Defeat loot: 63 Lumens, 20 Gil."
   },
   {
     "premadeId": "orc_warlord",
@@ -5744,8 +6941,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 93,
+    "gil": 20,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -5829,7 +7026,7 @@
       "armor": "premade_chain_mail_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Orc Warlord."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, razor_talons, sharp_fangs, combat_coordination_gland, energy_gland. Premade monster/NPC: Orc Warlord. Defeat loot: 93 Lumens, 20 Gil."
   },
   {
     "premadeId": "paladin",
@@ -5837,8 +7034,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 36,
+    "gil": 2400,
     "stats": {
       "hp": 18,
       "stamina": 16,
@@ -5883,7 +7080,7 @@
       "armor": "premade_chain_mail_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Paladin."
+    "notes": "Premade NPC archetype: Paladin. Defeat loot: 36 Lumens, 2400 Gil."
   },
   {
     "premadeId": "pedestrian_dragonborn_darkness",
@@ -5891,8 +7088,8 @@
     "race": "dragonborn",
     "category": "pedestrian",
     "elementalAffinity": "darkness",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 11,
       "stamina": 10,
@@ -5934,7 +7131,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Pedestrian dragonborn with darkness affinity."
+    "notes": "Pedestrian dragonborn with darkness affinity. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "pedestrian_dragonborn_earth",
@@ -5942,8 +7139,8 @@
     "race": "dragonborn",
     "category": "pedestrian",
     "elementalAffinity": "earth",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 11,
       "stamina": 10,
@@ -5986,7 +7183,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Pedestrian dragonborn with earth affinity."
+    "notes": "Pedestrian dragonborn with earth affinity. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "pedestrian_dragonborn_fire",
@@ -5994,8 +7191,8 @@
     "race": "dragonborn",
     "category": "pedestrian",
     "elementalAffinity": "fire",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 11,
       "stamina": 10,
@@ -6037,7 +7234,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Pedestrian dragonborn with fire affinity."
+    "notes": "Pedestrian dragonborn with fire affinity. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "pedestrian_dragonborn_ice",
@@ -6045,8 +7242,8 @@
     "race": "dragonborn",
     "category": "pedestrian",
     "elementalAffinity": "ice",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 11,
       "stamina": 10,
@@ -6088,7 +7285,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Pedestrian dragonborn with ice affinity."
+    "notes": "Pedestrian dragonborn with ice affinity. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "pedestrian_dragonborn_light",
@@ -6096,8 +7293,8 @@
     "race": "dragonborn",
     "category": "pedestrian",
     "elementalAffinity": "light",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 11,
       "stamina": 10,
@@ -6139,7 +7336,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Pedestrian dragonborn with light affinity."
+    "notes": "Pedestrian dragonborn with light affinity. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "pedestrian_dragonborn_thunder",
@@ -6147,8 +7344,8 @@
     "race": "dragonborn",
     "category": "pedestrian",
     "elementalAffinity": "thunder",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 11,
       "stamina": 10,
@@ -6191,7 +7388,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Pedestrian dragonborn with thunder affinity."
+    "notes": "Pedestrian dragonborn with thunder affinity. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "pedestrian_drow",
@@ -6199,8 +7396,8 @@
     "race": "drow",
     "category": "pedestrian",
     "elementalAffinity": "",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 10,
       "stamina": 10,
@@ -6242,7 +7439,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade pedestrian drow."
+    "notes": "Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "pedestrian_dwarf",
@@ -6250,8 +7447,8 @@
     "race": "dwarf",
     "category": "pedestrian",
     "elementalAffinity": "",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 12,
       "stamina": 10,
@@ -6294,7 +7491,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade pedestrian dwarf."
+    "notes": "Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "pedestrian_elf",
@@ -6302,8 +7499,8 @@
     "race": "elf",
     "category": "pedestrian",
     "elementalAffinity": "",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 10,
       "stamina": 11,
@@ -6346,7 +7543,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade pedestrian elf."
+    "notes": "Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "pedestrian_halfling",
@@ -6354,8 +7551,8 @@
     "race": "halfling",
     "category": "pedestrian",
     "elementalAffinity": "",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 11,
       "stamina": 10,
@@ -6397,7 +7594,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade pedestrian halfling."
+    "notes": "Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "pedestrian_human",
@@ -6405,8 +7602,8 @@
     "race": "human",
     "category": "pedestrian",
     "elementalAffinity": "",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 6,
+    "gil": 400,
     "stats": {
       "hp": 11,
       "stamina": 11,
@@ -6447,7 +7644,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade pedestrian human."
+    "notes": "Defeat loot: 6 Lumens, 400 Gil."
   },
   {
     "premadeId": "pedestrian_tiefling",
@@ -6455,8 +7652,8 @@
     "race": "tiefling",
     "category": "pedestrian",
     "elementalAffinity": "",
-    "lumens": 180,
-    "gil": 7200,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 10,
       "stamina": 10,
@@ -6498,7 +7695,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade pedestrian tiefling."
+    "notes": "Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "phantom",
@@ -6506,8 +7703,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 60,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -6553,7 +7750,57 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Phantom."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Phantom. Defeat loot: 60 Lumens."
+  },
+  {
+    "premadeId": "piranha",
+    "name": "Piranha",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 36,
+    "gil": 0,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, sharp_fangs. Premade monster/NPC: Piranha. Defeat loot: 36 Lumens."
   },
   {
     "premadeId": "pirate",
@@ -6561,8 +7808,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 21300,
+    "lumens": 18,
+    "gil": 1200,
     "stats": {
       "hp": 15,
       "stamina": 14,
@@ -6615,7 +7862,7 @@
       "armor": "premade_leather_armor_4",
       "accessory": null
     },
-    "notes": "Cutlass in inventory — swap weapons for melee vs Power Shot. Premade NPC archetype: Pirate."
+    "notes": "Cutlass in inventory — swap weapons for melee vs Power Shot. Premade NPC archetype: Pirate. Defeat loot: 18 Lumens, 1200 Gil."
   },
   {
     "premadeId": "plague_rat",
@@ -6623,8 +7870,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 24,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -6668,7 +7915,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, sharp_fangs, venom_sacs. Premade monster/NPC: Plague Rat."
+    "notes": "Potential defeat drops: thick_hide, sharp_fangs, venom_sacs. Premade monster/NPC: Plague Rat. Defeat loot: 24 Lumens."
   },
   {
     "premadeId": "poisoner",
@@ -6676,8 +7923,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 12,
       "stamina": 14,
@@ -6689,8 +7936,8 @@
       "magicalDefence": 8
     },
     "skills": [
-      "basic_alchemy",
-      "poison_brewing",
+      "apothecary",
+      "acid_vials",
       "explosive_compounds",
       "dagger_basics",
       "poison_blade",
@@ -6726,7 +7973,7 @@
       "armor": "premade_leather_armor_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Poisoner."
+    "notes": "Premade NPC archetype: Poisoner. Defeat loot: 21 Lumens, 1400 Gil."
   },
   {
     "premadeId": "politician",
@@ -6734,8 +7981,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 74700,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 12,
       "stamina": 12,
@@ -6771,7 +8018,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": null
     },
-    "notes": "Fine clothes, sealed letters, and more gold than combat sense. Premade NPC archetype: Politician."
+    "notes": "Fine clothes, sealed letters, and more gold than combat sense. Premade NPC archetype: Politician. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "poltergeist",
@@ -6779,8 +8026,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 57,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -6826,7 +8073,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Poltergeist."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Poltergeist. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "possessed_armor",
@@ -6834,8 +8081,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 60,
+    "gil": 0,
     "stats": {
       "hp": 34,
       "stamina": 19,
@@ -6878,7 +8125,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, energy_gland. Premade monster/NPC: Possessed Armor."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, energy_gland. Premade monster/NPC: Possessed Armor. Defeat loot: 60 Lumens."
   },
   {
     "premadeId": "prismatic_dragon",
@@ -6886,8 +8133,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 111,
+    "gil": 0,
     "stats": {
       "hp": 42,
       "stamina": 22,
@@ -6982,7 +8229,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, frost_core, storm_chamber, tail_spikes. Premade monster/NPC: Prismatic Dragon."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, flame_gland, frost_core, storm_chamber, tail_spikes. Premade monster/NPC: Prismatic Dragon. Defeat loot: 111 Lumens."
   },
   {
     "premadeId": "pyromancer",
@@ -6990,8 +8237,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 13,
       "stamina": 17,
@@ -7037,7 +8284,45 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Pyromancer."
+    "notes": "Premade NPC archetype: Pyromancer. Defeat loot: 24 Lumens, 1600 Gil."
+  },
+  {
+    "premadeId": "rabbit",
+    "name": "Rabbit",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 18,
+    "gil": 0,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "claws"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_sharp_claws_0",
+        "itemId": "sharp_claws",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: sharp_claws. Premade monster/NPC: Rabbit. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "rat_king",
@@ -7045,8 +8330,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 280,
-    "gil": 11700,
+    "lumens": 96,
+    "gil": 0,
     "stats": {
       "hp": 40,
       "stamina": 25,
@@ -7110,7 +8395,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, crusher_molars, combat_coordination_gland. Premade monster/NPC: Rat King."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence, phoenix_cells, sharp_claws, crusher_molars, combat_coordination_gland. Premade monster/NPC: Rat King. Defeat loot: 96 Lumens."
   },
   {
     "premadeId": "red_slime",
@@ -7118,8 +8403,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
-    "gil": 840,
+    "lumens": 18,
+    "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 13,
@@ -7154,7 +8439,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Red Slime."
+    "notes": "Potential defeat drops: thick_hide, acid_bladder. Premade monster/NPC: Red Slime. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "revenant",
@@ -7162,8 +8447,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 51,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -7206,7 +8491,109 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Revenant."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, petrifying_eye. Premade monster/NPC: Revenant. Defeat loot: 51 Lumens."
+  },
+  {
+    "premadeId": "rooster",
+    "name": "Rooster",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 18,
+    "gil": 0,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "claws",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_sharp_claws_0",
+        "itemId": "sharp_claws",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_1",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: sharp_claws, sharp_fangs. Premade monster/NPC: Rooster. Defeat loot: 18 Lumens."
+  },
+  {
+    "premadeId": "scorpion",
+    "name": "Scorpion",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 36,
+    "gil": 0,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "venomous_claws",
+      "tail_swipe"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_venom_sacs_2",
+        "itemId": "venom_sacs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_flexible_tail_section_3",
+        "itemId": "flexible_tail_section",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, venom_sacs, flexible_tail_section. Premade monster/NPC: Scorpion. Defeat loot: 36 Lumens."
   },
   {
     "premadeId": "scout",
@@ -7214,8 +8601,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 18,
+    "gil": 1200,
     "stats": {
       "hp": 13,
       "stamina": 15,
@@ -7262,7 +8649,7 @@
       "armor": "premade_leather_armor_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Ranger."
+    "notes": "Premade NPC archetype: Ranger. Defeat loot: 18 Lumens, 1200 Gil."
   },
   {
     "premadeId": "sea_serpent",
@@ -7270,15 +8657,15 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 57,
+    "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 19,
       "strength": 0,
       "magicPower": 0,
-      "accuracy": 0,
-      "speed": 3,
+      "accuracy": 1,
+      "speed": 5,
       "physicalDefence": 14,
       "magicalDefence": 14
     },
@@ -7327,7 +8714,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Sea Serpent."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, sharp_fangs, venom_sacs, toxic_lung_tissue. Premade monster/NPC: Sea Serpent. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "sergeant",
@@ -7335,8 +8722,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 17,
       "stamina": 15,
@@ -7379,7 +8766,7 @@
       "armor": "premade_chain_mail_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Sergeant."
+    "notes": "Premade NPC archetype: Sergeant. Defeat loot: 24 Lumens, 1600 Gil."
   },
   {
     "premadeId": "shadow_dragon",
@@ -7387,8 +8774,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 240,
-    "gil": 8360,
+    "lumens": 108,
+    "gil": 0,
     "stats": {
       "hp": 42,
       "stamina": 22,
@@ -7472,7 +8859,66 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, toxic_lung_tissue, tail_spikes. Premade monster/NPC: Shadow Dragon."
+    "notes": "Potential defeat drops: living_rock_fragments, segmented_carapace, anti_magic_essence, regenerative_tissue, razor_talons, sharp_fangs, combat_coordination_gland, toxic_lung_tissue, tail_spikes. Premade monster/NPC: Shadow Dragon. Defeat loot: 108 Lumens."
+  },
+  {
+    "premadeId": "shark",
+    "name": "Shark",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 60,
+    "gil": 0,
+    "stats": {
+      "hp": 34,
+      "stamina": 19,
+      "strength": 3,
+      "magicPower": 0,
+      "accuracy": 0,
+      "speed": 3,
+      "physicalDefence": 17,
+      "magicalDefence": 14
+    },
+    "skills": [
+      "tough_skin",
+      "rock_skin",
+      "magical_resistance",
+      "bite_attack",
+      "crushing_bite",
+      "claws",
+      "pounce"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_living_rock_fragments_0",
+        "itemId": "living_rock_fragments",
+        "qty": 1
+      },
+      {
+        "uid": "premade_anti_magic_essence_1",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_crusher_molars_2",
+        "itemId": "crusher_molars",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_3",
+        "itemId": "sharp_claws",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, crusher_molars, sharp_claws. Premade monster/NPC: Shark. Defeat loot: 60 Lumens."
   },
   {
     "premadeId": "slave_trader",
@@ -7480,8 +8926,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 160,
-    "gil": 1680,
+    "lumens": 36,
+    "gil": 20,
     "stats": {
       "hp": 22,
       "stamina": 16,
@@ -7529,7 +8975,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Slave Trader."
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Slave Trader. Defeat loot: 36 Lumens, 20 Gil."
   },
   {
     "premadeId": "smuggler",
@@ -7537,8 +8983,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 31400,
+    "lumens": 15,
+    "gil": 1000,
     "stats": {
       "hp": 13,
       "stamina": 14,
@@ -7585,7 +9031,7 @@
       "armor": "premade_studded_leather_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Smuggler."
+    "notes": "Premade NPC archetype: Smuggler. Defeat loot: 15 Lumens, 1000 Gil."
   },
   {
     "premadeId": "spearman",
@@ -7593,8 +9039,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 16,
       "stamina": 15,
@@ -7638,7 +9084,66 @@
       "armor": "premade_chain_mail_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Spearman."
+    "notes": "Premade NPC archetype: Spearman. Defeat loot: 24 Lumens, 1600 Gil."
+  },
+  {
+    "premadeId": "spider",
+    "name": "Spider",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 39,
+    "gil": 0,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "web_shot",
+      "claws",
+      "razor_claws",
+      "venomous_claws",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_venom_sacs_2",
+        "itemId": "venom_sacs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_3",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, venom_sacs, sharp_fangs. Premade monster/NPC: Spider. Defeat loot: 39 Lumens."
   },
   {
     "premadeId": "spy",
@@ -7646,8 +9151,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 12,
       "stamina": 15,
@@ -7690,7 +9195,7 @@
       "armor": "premade_leather_armor_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Spy."
+    "notes": "Premade NPC archetype: Spy. Defeat loot: 21 Lumens, 1400 Gil."
   },
   {
     "premadeId": "thief",
@@ -7698,8 +9203,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 19250,
+    "lumens": 15,
+    "gil": 1000,
     "stats": {
       "hp": 12,
       "stamina": 14,
@@ -7751,7 +9256,7 @@
       "armor": "premade_leather_armor_4",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Thief."
+    "notes": "Premade NPC archetype: Thief. Defeat loot: 15 Lumens, 1000 Gil."
   },
   {
     "premadeId": "time_mage",
@@ -7759,8 +9264,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 12,
       "stamina": 18,
@@ -7802,7 +9307,7 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Hourglass focus and chronomancy wards woven into spell threads. Premade NPC archetype: Time Mage."
+    "notes": "Hourglass focus and chronomancy wards woven into spell threads. Premade NPC archetype: Time Mage. Defeat loot: 24 Lumens, 1600 Gil."
   },
   {
     "premadeId": "torturer",
@@ -7810,8 +9315,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 160,
-    "gil": 1680,
+    "lumens": 36,
+    "gil": 20,
     "stats": {
       "hp": 22,
       "stamina": 16,
@@ -7859,7 +9364,7 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Torturer."
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, razor_talons, energy_gland. Premade monster/NPC: Torturer. Defeat loot: 36 Lumens, 20 Gil."
   },
   {
     "premadeId": "vampire_hunter",
@@ -7867,8 +9372,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 27,
+    "gil": 1800,
     "stats": {
       "hp": 15,
       "stamina": 15,
@@ -7919,7 +9424,58 @@
       "armor": "premade_studded_leather_3",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Vampire Hunter."
+    "notes": "Premade NPC archetype: Vampire Hunter. Defeat loot: 27 Lumens, 1800 Gil."
+  },
+  {
+    "premadeId": "vulture",
+    "name": "Vulture",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 36,
+    "gil": 0,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": -1,
+      "speed": 3,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "claws",
+      "monster_flight"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_2",
+        "itemId": "sharp_claws",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, sharp_claws. Premade monster/NPC: Vulture. Defeat loot: 36 Lumens."
   },
   {
     "premadeId": "warlock",
@@ -7927,8 +9483,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 27,
+    "gil": 1800,
     "stats": {
       "hp": 13,
       "stamina": 16,
@@ -7976,7 +9532,7 @@
       "armor": "premade_cloth_robes_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Warlock."
+    "notes": "Premade NPC archetype: Warlock. Defeat loot: 27 Lumens, 1800 Gil."
   },
   {
     "premadeId": "warlord_lieutenant",
@@ -7984,8 +9540,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 54,
+    "gil": 20,
     "stats": {
       "hp": 28,
       "stamina": 19,
@@ -8048,7 +9604,59 @@
       "armor": "premade_leather_armor_1",
       "accessory": null
     },
-    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, razor_talons, energy_gland. Premade monster/NPC: Warlord Lieutenant."
+    "notes": "Potential defeat drops: living_rock_fragments, anti_magic_essence, razor_talons, energy_gland. Premade monster/NPC: Warlord Lieutenant. Defeat loot: 54 Lumens, 20 Gil."
+  },
+  {
+    "premadeId": "wasp",
+    "name": "Wasp",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 21,
+    "gil": 0,
+    "stats": {
+      "hp": 16,
+      "stamina": 13,
+      "strength": -2,
+      "magicPower": -2,
+      "accuracy": -2,
+      "speed": 2,
+      "physicalDefence": 10,
+      "magicalDefence": 10
+    },
+    "skills": [
+      "tough_skin",
+      "claws",
+      "razor_claws",
+      "venomous_claws",
+      "bite_attack"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_thick_hide_0",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_venom_sacs_1",
+        "itemId": "venom_sacs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: thick_hide, venom_sacs, sharp_fangs. Premade monster/NPC: Wasp. Defeat loot: 21 Lumens."
   },
   {
     "premadeId": "water_golem",
@@ -8056,8 +9664,8 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 200,
-    "gil": 5020,
+    "lumens": 63,
+    "gil": 0,
     "stats": {
       "hp": 34,
       "stamina": 19,
@@ -8100,7 +9708,64 @@
       "armor": null,
       "accessory": null
     },
-    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Water Golem."
+    "notes": "Potential defeat drops: metallic_fragments, anti_magic_essence. Premade monster/NPC: Water Golem. Defeat loot: 63 Lumens."
+  },
+  {
+    "premadeId": "wolf",
+    "name": "Wolf",
+    "race": "monster",
+    "category": "monster",
+    "elementalAffinity": "",
+    "lumens": 36,
+    "gil": 0,
+    "stats": {
+      "hp": 22,
+      "stamina": 16,
+      "strength": -1,
+      "magicPower": -1,
+      "accuracy": 0,
+      "speed": 4,
+      "physicalDefence": 12,
+      "magicalDefence": 12
+    },
+    "skills": [
+      "magical_resistance",
+      "tough_skin",
+      "bite_attack",
+      "claws",
+      "pounce"
+    ],
+    "activeToggles": [],
+    "statusEffects": [],
+    "inventory": [
+      {
+        "uid": "premade_anti_magic_essence_0",
+        "itemId": "anti_magic_essence",
+        "qty": 1
+      },
+      {
+        "uid": "premade_thick_hide_1",
+        "itemId": "thick_hide",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_fangs_2",
+        "itemId": "sharp_fangs",
+        "qty": 1
+      },
+      {
+        "uid": "premade_sharp_claws_3",
+        "itemId": "sharp_claws",
+        "qty": 1
+      }
+    ],
+    "equipped": {
+      "weapon": null,
+      "offhand": null,
+      "armor": null,
+      "accessory": null
+    },
+    "notes": "Potential defeat drops: anti_magic_essence, thick_hide, sharp_fangs, sharp_claws. Premade monster/NPC: Wolf. Defeat loot: 36 Lumens."
   },
   {
     "premadeId": "zealot",
@@ -8108,8 +9773,8 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 300,
-    "gil": 15600,
+    "lumens": 33,
+    "gil": 2200,
     "stats": {
       "hp": 17,
       "stamina": 15,
@@ -8158,6 +9823,6 @@
       "armor": "premade_chain_mail_2",
       "accessory": null
     },
-    "notes": "Premade NPC archetype: Zealot."
+    "notes": "Premade NPC archetype: Zealot. Defeat loot: 33 Lumens, 2200 Gil."
   }
 ]

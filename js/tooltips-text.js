@@ -13,9 +13,19 @@ import { effectDetailLines, resolveSkillEffects } from './effects.js'
 import { resolveActivationEffects } from './skill-activation.js'
 import { displayCategory, getSkill, isToggleSkill, prereqLabel } from './skills.js'
 import { cache } from './cache.js'
+import { shopMinLevelForItem, isShopPurchaseItem } from './items.js'
+import { characterLevelInfo } from './level.js'
 import { resolveSkillEffectBreakdown, formatSkillEffectBreakdownPlain, skillHasEffectBreakdown } from './damage-breakdown.js'
 import { itemCompareLines } from './item-compare.js'
 import { craftedByLabel } from './craft-bonuses.js'
+import { weaponHandednessLabel, offhandTypeLabel } from './equipment.js'
+import {
+  applyInstrumentToActivations,
+  getCharacterInstrumentAmplify,
+  instrumentAmplifyTooltipLines,
+  isMusicianPerformanceSkill,
+  canEncoreReplay
+} from './instruments.js'
 
 export function itemTooltip(item, character = null, entry = null) {
   if (!item) return ''
@@ -29,13 +39,23 @@ export function itemTooltip(item, character = null, entry = null) {
   }
   if (item.desc) lines.push('', item.desc)
   if (item.damage) lines.push(`Damage: ${item.damage}`)
+  const hands = weaponHandednessLabel(item)
+  if (hands) lines.push(`Hands: ${hands}`)
+  const offLabel = offhandTypeLabel(item)
+  if (offLabel) lines.push(`Off-hand type: ${offLabel}`)
+  lines.push(...instrumentAmplifyTooltipLines(item))
   lines.push(`Stats: ${formatStatModifiers(item.statModifiers)}`)
   if (item.specialEffects?.length) {
     lines.push('', `Special: ${sentenceList(item.specialEffects)}`)
     lines.push(...effectDetailLines(item.specialEffects))
   }
-  if (Number(item.enchantmentSlots || 0)) lines.push(`Enchantment Slots: ${item.enchantmentSlots} (enchant UI planned)`)
+  if (Number(item.enchantmentSlots || 0)) lines.push(`Enchantment Slots: ${item.enchantmentSlots} (apply from Inventory when gear is equipped)`)
   if (item.price || item.value) lines.push(`Price/Value: ${formatCurrency(itemPriceGil(item))}`)
+  if (isShopPurchaseItem(item) && !isGmMode()) {
+    const need = shopMinLevelForItem(item)
+    const level = character ? characterLevelInfo(character).level : null
+    lines.push(level != null && level >= need ? `Shop: unlocked (Level ${need}+)` : `Shop: requires Level ${need}`)
+  }
   const elements = formatElementalAffinities(item.elementalAffinities)
   if (elements) lines.push(elements)
   const recipe = formatCraftingRecipe(item.craftingRecipe)
@@ -102,12 +122,32 @@ export function skillTooltip(skill, character = null) {
   const activations = resolveActivationEffects(skill)
   if (activations.length) {
     lines.push('', 'On use (tier-based proc chance):')
-    lines.push(...activations.map(entry => {
+    const preview = character && isMusicianPerformanceSkill(skill)
+      ? applyInstrumentToActivations(
+        character,
+        skill,
+        activations,
+        { encoreReplay: canEncoreReplay(character, skill.id) }
+      )
+      : activations
+    lines.push(...preview.map(entry => {
       const effect = cache.effectDefinitions[entry.effectId]
       const label = effect?.name || entry.effectId
       const chance = entry.chance < 1 ? ` · ${Math.round(entry.chance * 100)}% chance` : ''
       return `• ${label} (${entry.duration} turn${entry.duration === 1 ? '' : 's'})${chance}`
     }))
+  }
+
+  if (character && isMusicianPerformanceSkill(skill)) {
+    const amp = getCharacterInstrumentAmplify(character)
+    const encoreReady = canEncoreReplay(character, skill.id)
+    if (encoreReady) {
+      lines.push('', 'Encore ready: replay this song at base length only (free — no instrument or Long Set bonus).')
+    } else if (amp) {
+      lines.push('', `Off-hand instrument: +${amp.extraTurns} sustain turn${amp.extraTurns === 1 ? '' : 's'}${amp.performerCount > 1 ? `; count as ${amp.performerCount} Musicians` : ''}${amp.listenerBonus ? `; listeners +${amp.listenerBonus} from you` : ''}.`)
+    } else {
+      lines.push('', 'No instrument equipped — vocal performance only (equip an off-hand instrument to amplify).')
+    }
   }
 
   const ongoing = resolveSkillEffects(skill)

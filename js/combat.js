@@ -1,4 +1,4 @@
-import { getEquippedWeapon, getEquippedOffhand, getWeaponKind } from './equipment.js'
+import { getEquippedWeapon, getEquippedOffhand, getWeaponKind, characterHandsEmpty } from './equipment.js'
 import { getSkillWeaponKinds, ANY_WEAPON_KIND } from './action-bar-bonuses.js'
 import { getSkillActivationType } from './skill-activation.js'
 import {
@@ -6,9 +6,15 @@ import {
   applyBasicAttackDamage,
   formatDamageModifierSummary,
   isBasicAttackSkill,
-  rollWeaponDamage
+  rollWeaponDamage,
+  rollUnarmedBasicSegment,
+  rollGearAttackEffectDamage,
+  appendGearAttackEffectSummary,
+  strikerUnarmedDamageFormula
 } from './damage-breakdown.js'
+import { strikerBasicDamageFormula } from './striker-combat.js'
 import { invalidateCharacterCache } from './character.js'
+import { getEffectiveSkillStaminaCost } from './career-effects.js'
 
 export { BASIC_ATTACK_ID, isBasicAttackSkill, rollWeaponDamage }
 
@@ -20,6 +26,7 @@ export function getBasicAttackSkill(character) {
   const parts = []
   if (weapon?.damage) parts.push(`${weapon.name}: ${weapon.damage}`)
   else if (weapon) parts.push(`${weapon.name} (1 damage)`)
+  else if (strikerBasicDamageFormula(character)) parts.push(`Striker: ${strikerBasicDamageFormula(character)}`)
   else parts.push('Unarmed: 1 damage')
   if (offhand?.damage) parts.push(`+ ${offhand.name}: ${offhand.damage}`)
   const onHit = parts.length ? `${parts.join('; ')} + Strength` : '1 + Strength'
@@ -47,6 +54,7 @@ export function skillMeetsWeaponRequirement(character, skill) {
   if (!kinds.length) return true
   return kinds.some(kind => {
     if (kind === ANY_WEAPON_KIND) return !!getEquippedWeapon(character)
+    if (kind === 'striker' || kind === 'unarmed') return characterHandsEmpty(character)
     if (kind === 'dagger') {
       return getWeaponKind(getEquippedWeapon(character)) === 'dagger'
         || getWeaponKind(getEquippedOffhand(character)) === 'dagger'
@@ -60,6 +68,7 @@ export function skillWeaponRequirementLabel(skill) {
   if (!kinds.length) return ''
   return kinds.map(k => {
     if (k === ANY_WEAPON_KIND) return 'weapon'
+    if (k === 'striker' || k === 'unarmed') return 'empty hands'
     if (k === 'ranged') return 'ranged weapon'
     return `${k} weapon`
   }).join(' or ')
@@ -124,7 +133,7 @@ export function getActionBarBlockReason(character, skill, activationType = 'acti
   const blockReason = getSkillUseBlockReason(character, skill)
   if (blockReason) return blockReason
   if (!character || !skill || activationType !== 'activatable') return ''
-  const cost = Math.max(0, Number(skill.staminaCost || 0))
+  const cost = getEffectiveSkillStaminaCost(character, skill)
   if (cost > 0 && character.stamina < cost) {
     return `Not enough stamina (${character.stamina}/${cost})`
   }
@@ -158,8 +167,9 @@ export function resolveBasicAttackDamage(character, rollDiceFn) {
     baseTotal += result.total
     segments.push(`${main.name}: ${result.detail}`)
   } else {
-    baseTotal += 1
-    segments.push('Unarmed: 1')
+    const unarmed = rollUnarmedBasicSegment(character, rollDiceFn)
+    baseTotal += unarmed.total
+    segments.push(`${unarmed.label}: ${unarmed.detail}`)
   }
 
   if (off) {
@@ -170,7 +180,14 @@ export function resolveBasicAttackDamage(character, rollDiceFn) {
     segments.push(`${off.name}: ${result.detail}`)
   }
 
+  const gearEffects = rollGearAttackEffectDamage(character, skill, rollDiceFn)
+  baseTotal += gearEffects.primaryTotal
+  segments.push(...gearEffects.segments)
+
   const finalized = applyBasicAttackDamage(character, skill, baseTotal)
-  const summary = formatDamageModifierSummary(segments.join('; '), finalized)
-  return { total: finalized.total, summary, baseTotal, finalized }
+  const summary = appendGearAttackEffectSummary(
+    formatDamageModifierSummary(segments.join('; '), finalized),
+    gearEffects.splash
+  )
+  return { total: finalized.total, summary, baseTotal, finalized, splash: gearEffects.splash }
 }
