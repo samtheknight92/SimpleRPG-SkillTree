@@ -23,6 +23,14 @@ Persistent AI guidance: workspace `.cursor/rules/lumenforge.mdc` + `.cursor/rule
 
 ---
 
+## Homebrew tab (custom items & skills)
+
+**Status:** Spec only — see **`ROADMAP-Homebrew.md`**.
+
+Player/GM-created items (v1) and skills (v2), stored in localStorage, shared via export packs and embedded in character exports. No online sync.
+
+---
+
 ## Priority — planned implementation
 
 ### 1. Roll feedback UX (action bar & combat rolls) — **Completed**
