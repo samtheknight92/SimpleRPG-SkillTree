@@ -993,9 +993,10 @@ export async function importData(file) {
       return
     }
 
-    if (parsed.homebrew?.items?.length || parsed.homebrew?.skills?.length || parsed.homebrew?.races?.length) {
+    const nestedHomebrew = parsed.homebrew
+    if (nestedHomebrew?.items?.length || nestedHomebrew?.skills?.length || nestedHomebrew?.races?.length) {
       if (!isFullSaveExport(parsed)) {
-        mergeHomebrewImport(parsed, { replace: false })
+        mergeHomebrewImport(nestedHomebrew, { replace: false })
       }
     }
 
