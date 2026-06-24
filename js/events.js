@@ -295,43 +295,6 @@ function syncSidebarLayout() {
   sidebarLayoutIsMobile = false
 }
 
-function keepCreateCharacterPanelOpen() {
-  const panel = document.querySelector('.sidebar-create-details')
-  if (!panel || !isSidebarMobile()) return
-  if (!panel.open) panel.setAttribute('open', '')
-}
-
-function initCreateCharacterPanel() {
-  const panel = document.querySelector('.sidebar-create-details')
-  const sidebar = document.querySelector('#sidebar')
-  if (!panel) return
-
-  keepCreateCharacterPanelOpen()
-
-  panel.addEventListener('toggle', () => {
-    if (panel.open) return
-    const focused = document.activeElement
-    if (focused instanceof HTMLElement && panel.contains(focused)) {
-      panel.setAttribute('open', '')
-    }
-  })
-
-  panel.querySelector('.sidebar-create-summary')?.addEventListener('click', event => {
-    if (!isSidebarMobile()) return
-    event.preventDefault()
-    panel.setAttribute('open', '')
-  })
-
-  sidebar?.addEventListener('focusin', event => {
-    if (!isSidebarMobile()) return
-    if (event.target instanceof HTMLElement && panel.contains(event.target)) {
-      keepCreateCharacterPanelOpen()
-    }
-  })
-
-  window.visualViewport?.addEventListener('resize', keepCreateCharacterPanelOpen)
-}
-
 const debouncedSkillSearch = debounce(value => {
   state.skillSearch = value
   render({ content: true })
@@ -632,7 +595,6 @@ function initStaticEvents() {
 
   document.querySelector('#new-name')?.addEventListener('focus', () => {
     if (!isSidebarMobile()) return
-    keepCreateCharacterPanelOpen()
     requestAnimationFrame(() => {
       document.querySelector('#new-name')?.scrollIntoView({ block: 'center', behavior: 'smooth' })
     })
@@ -679,7 +641,6 @@ function initStaticEvents() {
     setSidebarOpen(false)
   })
 
-  initCreateCharacterPanel()
   syncSidebarLayout()
   window.addEventListener('resize', syncSidebarLayout, { passive: true })
 

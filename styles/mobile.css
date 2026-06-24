@@ -102,55 +102,24 @@
     height: 22px;
   }
 
-  .sidebar-create-details {
-    padding: 0;
+  .sidebar-create-panel {
     margin-bottom: 8px;
-    overflow: visible;
   }
 
-  /* Always expanded on mobile — <details> + keyboard is unreliable */
-  .sidebar-create-details > .sidebar-create-body {
-    display: block !important;
-  }
-
-  .sidebar-create-summary {
-    list-style: none;
-    cursor: default;
-    pointer-events: none;
-    padding: 10px 12px;
-    font-family: var(--serif);
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--heading);
-    user-select: none;
-  }
-
-  .sidebar-create-summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .sidebar-create-summary::after {
-    content: none;
-  }
-
-  .sidebar-create-body {
-    padding: 0 12px 12px;
-  }
-
-  .sidebar-create-details .field-label {
+  .sidebar-create-panel .field-label {
     margin: 6px 0 4px;
     font-size: 9px;
     letter-spacing: 0.08em;
   }
 
-  .sidebar-create-details .input,
-  .sidebar-create-details select {
+  .sidebar-create-panel .input,
+  .sidebar-create-panel select {
     padding: 9px 10px;
     font-size: 14px;
     border-radius: 12px;
   }
 
-  .sidebar-create-details .create-preview {
+  .sidebar-create-panel .create-preview {
     margin: 6px 0 8px;
     font-size: 11px;
     line-height: 1.4;
@@ -158,7 +127,7 @@
     white-space: normal;
   }
 
-  .sidebar-create-details .primary-btn.full {
+  .sidebar-create-panel .primary-btn.full {
     margin-top: 8px;
     padding: 10px 12px;
   }
@@ -171,11 +140,6 @@
 
   .side-actions {
     margin-top: 8px;
-  }
-
-  .sidebar-create-details.create-card {
-    padding: 0;
-    border-radius: 14px;
   }
 
   .create-card h2,
