@@ -247,18 +247,14 @@ function setSidebarOpen(open) {
   const mobile = isSidebarMobile()
 
   if (mobile) {
+    const wasOpen = sidebar.classList.contains('open')
     sidebar.classList.toggle('open', open)
     shell?.classList.remove('sidebar-collapsed')
     document.documentElement.classList.toggle('sidebar-open', open)
     document.body.classList.toggle('sidebar-open', open)
 
-    if (open) {
-      sidebarScrollLockY = window.scrollY
-      document.body.style.top = `-${sidebarScrollLockY}px`
-    } else if (document.body.style.top) {
-      document.body.style.top = ''
-      window.scrollTo(0, sidebarScrollLockY)
-    }
+    // Avoid body position:fixed scroll lock on mobile — it fights the virtual keyboard.
+    if (!open && wasOpen) document.body.style.top = ''
 
     if (backdrop) {
       backdrop.hidden = !open
@@ -281,26 +277,59 @@ function setSidebarOpen(open) {
   }
 }
 
+let sidebarLayoutIsMobile = null
+
 function syncSidebarLayout() {
   const sidebar = document.querySelector('#sidebar')
   const shell = document.querySelector('.app-shell')
   if (!sidebar || !shell) return
-  if (isSidebarMobile()) {
+  const mobile = isSidebarMobile()
+  if (mobile) {
     shell.classList.remove('sidebar-collapsed')
-    setSidebarOpen(sidebar.classList.contains('open'))
-  } else {
+    sidebarLayoutIsMobile = true
+    return
+  }
+  if (sidebarLayoutIsMobile !== false) {
     setSidebarOpen(!shell.classList.contains('sidebar-collapsed'))
   }
+  sidebarLayoutIsMobile = false
 }
 
-function syncSidebarCreatePanel() {
+function keepCreateCharacterPanelOpen() {
   const panel = document.querySelector('.sidebar-create-details')
+  if (!panel || !isSidebarMobile()) return
+  if (!panel.open) panel.setAttribute('open', '')
+}
+
+function initCreateCharacterPanel() {
+  const panel = document.querySelector('.sidebar-create-details')
+  const sidebar = document.querySelector('#sidebar')
   if (!panel) return
-  if (window.matchMedia('(max-width: 1100px)').matches) {
-    panel.removeAttribute('open')
-  } else {
+
+  keepCreateCharacterPanelOpen()
+
+  panel.addEventListener('toggle', () => {
+    if (panel.open) return
+    const focused = document.activeElement
+    if (focused instanceof HTMLElement && panel.contains(focused)) {
+      panel.setAttribute('open', '')
+    }
+  })
+
+  panel.querySelector('.sidebar-create-summary')?.addEventListener('click', event => {
+    if (!isSidebarMobile()) return
+    event.preventDefault()
     panel.setAttribute('open', '')
-  }
+  })
+
+  sidebar?.addEventListener('focusin', event => {
+    if (!isSidebarMobile()) return
+    if (event.target instanceof HTMLElement && panel.contains(event.target)) {
+      keepCreateCharacterPanelOpen()
+    }
+  })
+
+  window.visualViewport?.addEventListener('resize', keepCreateCharacterPanelOpen)
 }
 
 const debouncedSkillSearch = debounce(value => {
@@ -601,6 +630,14 @@ function initStaticEvents() {
     if (event.key === 'Enter') handleCreateCharacter()
   })
 
+  document.querySelector('#new-name')?.addEventListener('focus', () => {
+    if (!isSidebarMobile()) return
+    keepCreateCharacterPanelOpen()
+    requestAnimationFrame(() => {
+      document.querySelector('#new-name')?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+    })
+  })
+
   document.querySelector('#tabbar')?.addEventListener('click', event => {
     const button = event.target.closest('button[data-tab]')
     if (!button) return
@@ -642,12 +679,9 @@ function initStaticEvents() {
     setSidebarOpen(false)
   })
 
-  syncSidebarCreatePanel()
+  initCreateCharacterPanel()
   syncSidebarLayout()
-  window.addEventListener('resize', () => {
-    syncSidebarCreatePanel()
-    syncSidebarLayout()
-  }, { passive: true })
+  window.addEventListener('resize', syncSidebarLayout, { passive: true })
 
   document.addEventListener('touchmove', event => {
     if (!document.body.classList.contains('sidebar-open')) return
@@ -659,6 +693,8 @@ function initStaticEvents() {
     if (!isSidebarMobile()) return
     if (!isSidebarOpen()) return
     if (event.target.closest('#sidebar') || event.target.closest('#open-sidebar')) return
+    const focused = document.activeElement
+    if (focused instanceof HTMLElement && focused.closest('#sidebar')) return
     setSidebarOpen(false)
   })
 

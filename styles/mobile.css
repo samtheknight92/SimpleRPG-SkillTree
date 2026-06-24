@@ -47,11 +47,11 @@
     height: 100%;
   }
 
+  /* position:fixed + virtual keyboard collapses inputs and <details> on iOS/Android */
   body.sidebar-open {
-    position: fixed;
+    position: relative;
     width: 100%;
-    left: 0;
-    right: 0;
+    overflow: hidden;
   }
 
   body.sidebar-open .action-bar {
@@ -105,12 +105,18 @@
   .sidebar-create-details {
     padding: 0;
     margin-bottom: 8px;
-    overflow: hidden;
+    overflow: visible;
+  }
+
+  /* Always expanded on mobile — <details> + keyboard is unreliable */
+  .sidebar-create-details > .sidebar-create-body {
+    display: block !important;
   }
 
   .sidebar-create-summary {
     list-style: none;
-    cursor: pointer;
+    cursor: default;
+    pointer-events: none;
     padding: 10px 12px;
     font-family: var(--serif);
     font-size: 0.95rem;
@@ -124,14 +130,7 @@
   }
 
   .sidebar-create-summary::after {
-    content: ' ▾';
-    float: right;
-    color: var(--muted);
-    font-size: 12px;
-  }
-
-  .sidebar-create-details:not([open]) .sidebar-create-summary::after {
-    content: ' ▸';
+    content: none;
   }
 
   .sidebar-create-body {
