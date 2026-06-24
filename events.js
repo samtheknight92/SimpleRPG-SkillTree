@@ -293,21 +293,16 @@ function syncSidebarLayout() {
   }
 }
 
-let sidebarCreatePanelMobile = null
-
-function isSidebarCreateMobile() {
-  return window.matchMedia('(max-width: 1100px)').matches
-}
-
-/** Collapse create panel on mobile by default; expand on desktop. Only runs on breakpoint cross — not on keyboard resize. */
-function syncSidebarCreatePanel() {
+function initCreateCharacterPanel() {
   const panel = document.querySelector('.sidebar-create-details')
   if (!panel) return
-  const mobile = isSidebarCreateMobile()
-  if (sidebarCreatePanelMobile === mobile) return
-  sidebarCreatePanelMobile = mobile
-  if (mobile) panel.removeAttribute('open')
-  else panel.setAttribute('open', '')
+  panel.addEventListener('toggle', () => {
+    if (panel.open) return
+    const focused = document.activeElement
+    if (focused instanceof HTMLElement && panel.contains(focused)) {
+      panel.setAttribute('open', '')
+    }
+  })
 }
 
 const debouncedSkillSearch = debounce(value => {
@@ -649,12 +644,9 @@ function initStaticEvents() {
     setSidebarOpen(false)
   })
 
-  syncSidebarCreatePanel()
+  initCreateCharacterPanel()
   syncSidebarLayout()
-  window.addEventListener('resize', () => {
-    syncSidebarCreatePanel()
-    syncSidebarLayout()
-  }, { passive: true })
+  window.addEventListener('resize', syncSidebarLayout, { passive: true })
 
   document.addEventListener('touchmove', event => {
     if (!document.body.classList.contains('sidebar-open')) return
