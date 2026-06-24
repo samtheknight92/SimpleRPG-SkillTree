@@ -155,7 +155,7 @@ const RACE_SKILL_TARGETS = {
 /** @type {Record<string, object>} */
 export const NPC_BUILDS = {
     alchemist: {
-    skills: ['volatile_expert', 'hands_in_soil', 'human_determination'],
+    skills: ['volatile_expert', 'field_medic', 'human_determination'],
     items: [{ itemId: 'health_potion', qty: 6 }, { itemId: 'stamina_potion', qty: 4 }, { itemId: 'herbs', qty: 8 }],
     equip: { armor: 'cloth_robes' },
     stats: { hp: 14, stamina: 16, magicPower: 0, accuracy: -2 },
@@ -181,7 +181,7 @@ export const NPC_BUILDS = {
     stats: { hp: 14, stamina: 16, magicPower: 1, strength: -1, accuracy: -1 }
   },
   beast_tamer: {
-    skills: ['steady_aim', 'ranged_basics', 'hands_in_soil', 'pounce', 'human_determination'],
+    skills: ['steady_aim', 'ranged_basics', 'field_medic', 'pounce', 'human_determination'],
     items: [{ itemId: 'health_potion', qty: 3 }, { itemId: 'herbs', qty: 5 }],
     equip: { weapon: 'hunting_bow', armor: 'leather_armor' },
     stats: { hp: 14, stamina: 15, accuracy: 0, speed: 3 },

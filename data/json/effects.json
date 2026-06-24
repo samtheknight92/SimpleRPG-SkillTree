@@ -4913,5 +4913,16 @@
     "desc": "Once per combat, play the same song again for free — but it only lasts its original length (no Long Set, instrument, or other bonus turns).",
     "stackable": false,
     "manual": false
+  },
+  "fusion_wild_calm": {
+    "id": "fusion_wild_calm",
+    "name": "Wild Calm",
+    "icon": "🐾🌲",
+    "type": "utility",
+    "duration": 0,
+    "potency": 0,
+    "desc": "Calm one hostile beast for 1 minute (GM save).",
+    "stackable": false,
+    "manual": true
   }
 }

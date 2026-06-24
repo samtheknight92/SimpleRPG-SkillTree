@@ -101,8 +101,12 @@ export const SKILL_SUBCATEGORY_LABELS = {
   duelist: 'Duelist',
   unarmed: 'Striker',
   striker: 'Striker',
-  beast_handler: 'Beast Handler',
-  cleric_lay: 'Cleric',
+  blacksmith: 'Blacksmith',
+  chef: 'Chef',
+  medic: 'Medic',
+  alchemist: 'Alchemist',
+  enchanter: 'Enchanter',
+  detective: 'Detective',
   career_fusion: 'Career Fusion',
   ranged_magic: 'Ranged + Magic',
   melee_magic: 'Melee + Magic',
@@ -113,5 +117,11 @@ export const SKILL_SUBCATEGORY_LABELS = {
 
 /** Retired skill-tree keys mapped to replacements (UI + saves). */
 export const RETIRED_SKILL_SUBCATEGORIES = {
-  scout: 'ranger'
+  scout: 'ranger',
+  beast_handler: 'ranger',
+  cleric_lay: 'paladin',
+  farmer: 'medic',
+  scholar: 'detective',
+  archaeologist: 'detective',
+  engineer: 'blacksmith'
 }

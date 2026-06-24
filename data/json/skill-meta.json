@@ -55,9 +55,6 @@
     },
     "oathbound": {
       "magicalDefence": 1
-    },
-    "hands_in_soil": {
-      "hp": 1
     }
   },
   "PASSIVE_SKILL_EFFECTS": {
@@ -127,12 +124,6 @@
     "spice_box": [
       "spice_box"
     ],
-    "hands_in_soil": [
-      "hands_in_soil"
-    ],
-    "bountiful_plot": [
-      "bountiful_plot"
-    ],
     "field_medic": [
       "field_medic"
     ],
@@ -154,29 +145,11 @@
     "case_notes": [
       "case_notes"
     ],
-    "trap_sense": [
-      "trap_sense"
-    ],
-    "lost_technique": [
-      "lost_technique"
-    ],
     "ambush_spotter": [
       "ambush_spotter"
     ],
     "keen_sight": [
       "keen_sight"
-    ],
-    "pack_tactics": [
-      "pack_tactics"
-    ],
-    "last_rites": [
-      "last_rites"
-    ],
-    "holy_symbol_craft": [
-      "holy_symbol_craft"
-    ],
-    "faiths_reservoir": [
-      "faiths_reservoir"
     ],
     "hold_the_line": [
       "hold_the_line"
@@ -247,32 +220,11 @@
     "chefs_instinct": [
       "chefs_instinct"
     ],
-    "animal_sense": [
-      "animal_sense"
-    ],
     "trail_warden": [
       "trail_warden"
     ],
-    "reinforced_frame": [
-      "reinforced_frame"
-    ],
-    "polyglot": [
-      "polyglot"
-    ],
-    "map_archive": [
-      "map_archive"
-    ],
-    "sages_conclusion": [
-      "sages_conclusion"
-    ],
-    "ancient_tongues": [
-      "ancient_tongues"
-    ],
     "label_reader": [
       "label_reader"
-    ],
-    "schematic_mind": [
-      "schematic_mind"
     ],
     "long_set": [
       "long_set"
@@ -519,10 +471,6 @@
     "finishing_thrust": {
       "flat": 2,
       "condition": "targetNotActed"
-    },
-    "lost_technique": {
-      "flat": 2,
-      "condition": "partyWeakness"
     }
   },
   "CAREER_HEAL_BONUSES": {
@@ -534,10 +482,6 @@
     "field_medic": {
       "flat": 2,
       "craftedPotion": true
-    },
-    "faiths_reservoir": {
-      "multiplier": 2,
-      "oncePerDay": true
     }
   },
   "CAREER_ACTION_BUFFS": {
@@ -554,11 +498,6 @@
     "sacred_stance": {
       "effectId": "sacred_stance_buff",
       "duration": 2,
-      "potency": 0
-    },
-    "lay_blessing": {
-      "effectId": "lay_blessing_buff",
-      "duration": 999,
       "potency": 0
     },
     "ward_circle": {

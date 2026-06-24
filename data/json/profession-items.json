@@ -2800,7 +2800,7 @@
         }
       ],
       "requiredSkills": [
-        "artifact_study"
+        "keen_eye"
       ],
       "price": {
         "silver": 5
@@ -2834,7 +2834,7 @@
         }
       ],
       "requiredSkills": [
-        "artifact_study"
+        "keen_eye"
       ],
       "price": {
         "silver": 5
@@ -2871,7 +2871,7 @@
         }
       ],
       "requiredSkills": [
-        "artifact_study"
+        "keen_eye"
       ],
       "price": {
         "silver": 5
@@ -2908,7 +2908,7 @@
         }
       ],
       "requiredSkills": [
-        "trap_sense"
+        "trace_evidence"
       ],
       "price": {
         "silver": 112
@@ -2938,7 +2938,7 @@
         }
       ],
       "requiredSkills": [
-        "artifact_study"
+        "keen_eye"
       ],
       "price": {
         "silver": 5
@@ -2972,7 +2972,7 @@
         }
       ],
       "requiredSkills": [
-        "artifact_study"
+        "keen_eye"
       ],
       "price": {
         "silver": 5
@@ -3010,7 +3010,7 @@
         }
       ],
       "requiredSkills": [
-        "artifact_study"
+        "keen_eye"
       ],
       "price": {
         "silver": 5
@@ -3048,7 +3048,7 @@
         }
       ],
       "requiredSkills": [
-        "ancient_tongues"
+        "trace_evidence"
       ],
       "price": {
         "silver": 112
@@ -3085,7 +3085,7 @@
         }
       ],
       "requiredSkills": [
-        "ancient_tongues"
+        "trace_evidence"
       ],
       "price": {
         "silver": 112
@@ -3126,7 +3126,7 @@
         }
       ],
       "requiredSkills": [
-        "trap_sense"
+        "trace_evidence"
       ],
       "price": {
         "silver": 112
@@ -3167,7 +3167,7 @@
         }
       ],
       "requiredSkills": [
-        "trap_sense"
+        "trace_evidence"
       ],
       "price": {
         "silver": 112
@@ -3208,7 +3208,7 @@
         }
       ],
       "requiredSkills": [
-        "lost_technique"
+        "deduction"
       ],
       "price": {
         "silver": 112
@@ -3277,7 +3277,7 @@
         }
       ],
       "requiredSkills": [
-        "ancient_tongues"
+        "trace_evidence"
       ],
       "price": {
         "silver": 112
@@ -3312,7 +3312,7 @@
         }
       ],
       "requiredSkills": [
-        "replicate_relic"
+        "deduction"
       ],
       "price": {
         "gold": 3,
@@ -3354,7 +3354,7 @@
         }
       ],
       "requiredSkills": [
-        "careful_extraction"
+        "reconstruct"
       ],
       "price": {
         "gold": 3,
@@ -3395,7 +3395,7 @@
         }
       ],
       "requiredSkills": [
-        "careful_extraction"
+        "reconstruct"
       ],
       "price": {
         "gold": 3,
@@ -3524,8 +3524,7 @@
         }
       ],
       "requiredSkills": [
-        "deduction",
-        "lost_technique"
+        "deduction"
       ],
       "price": {
         "gold": 60
@@ -3567,7 +3566,7 @@
       ],
       "requiredSkills": [
         "deduction",
-        "divine_dig"
+        "follow_the_trail"
       ],
       "price": {
         "gold": 60
@@ -3603,7 +3602,7 @@
         }
       ],
       "requiredSkills": [
-        "hands_in_soil"
+        "field_medic"
       ]
     },
     "spirit_rattle": {
@@ -3633,7 +3632,7 @@
         }
       ],
       "requiredSkills": [
-        "hands_in_soil"
+        "field_medic"
       ],
       "price": {
         "silver": 4
@@ -3664,7 +3663,7 @@
         }
       ],
       "requiredSkills": [
-        "hands_in_soil"
+        "field_medic"
       ],
       "price": {
         "silver": 4
@@ -3695,7 +3694,7 @@
         }
       ],
       "requiredSkills": [
-        "hands_in_soil"
+        "field_medic"
       ],
       "price": {
         "silver": 4
@@ -3728,7 +3727,7 @@
         }
       ],
       "requiredSkills": [
-        "hands_in_soil"
+        "field_medic"
       ],
       "price": {
         "silver": 3
@@ -3762,7 +3761,7 @@
         }
       ],
       "requiredSkills": [
-        "hands_in_soil"
+        "field_medic"
       ],
       "price": {
         "silver": 3
@@ -3796,7 +3795,7 @@
         }
       ],
       "requiredSkills": [
-        "preserve_harvest"
+        "triage"
       ],
       "price": {
         "silver": 67
@@ -3831,7 +3830,7 @@
         }
       ],
       "requiredSkills": [
-        "green_thumb"
+        "surgical_touch"
       ],
       "price": {
         "silver": 67
@@ -3865,7 +3864,7 @@
         }
       ],
       "requiredSkills": [
-        "preserve_harvest"
+        "triage"
       ],
       "price": {
         "silver": 67
@@ -3902,7 +3901,7 @@
         }
       ],
       "requiredSkills": [
-        "crop_rotation"
+        "antidote_training"
       ],
       "price": {
         "silver": 67
@@ -3943,7 +3942,7 @@
         }
       ],
       "requiredSkills": [
-        "green_thumb"
+        "surgical_touch"
       ],
       "price": {
         "silver": 67
@@ -3977,7 +3976,7 @@
         }
       ],
       "requiredSkills": [
-        "green_thumb"
+        "surgical_touch"
       ],
       "price": {
         "silver": 67
@@ -4018,7 +4017,7 @@
         }
       ],
       "requiredSkills": [
-        "green_thumb"
+        "surgical_touch"
       ],
       "price": {
         "silver": 67
@@ -4093,7 +4092,7 @@
         }
       ],
       "requiredSkills": [
-        "green_thumb"
+        "surgical_touch"
       ],
       "price": {
         "gold": 1,
@@ -4136,7 +4135,7 @@
         }
       ],
       "requiredSkills": [
-        "green_thumb"
+        "surgical_touch"
       ],
       "price": {
         "gold": 1,
@@ -4177,7 +4176,7 @@
         }
       ],
       "requiredSkills": [
-        "bountiful_plot"
+        "revival_draft"
       ],
       "price": {
         "gold": 36
@@ -4221,7 +4220,7 @@
         }
       ],
       "requiredSkills": [
-        "bountiful_plot"
+        "revival_draft"
       ],
       "price": {
         "gold": 36

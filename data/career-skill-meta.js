@@ -2,8 +2,7 @@
  *  Harmony Reaction / + Harmony lines in skill desc are table rules; joiners are not synced across sheets. */
 
 export const CAREER_PASSIVE_BONUSES = {
-  oathbound: { magicalDefence: 1 },
-  hands_in_soil: { hp: 1 }
+  oathbound: { magicalDefence: 1 }
 }
 
 /** Stat bonuses that require equipped weapon type (extends EQUIPMENT_SKILL_EFFECTS). */
@@ -24,8 +23,6 @@ export const CAREER_PASSIVE_EFFECTS = {
   armourer: ['armourer'],
   tempered_steel: ['tempered_steel'],
   spice_box: ['spice_box'],
-  hands_in_soil: ['hands_in_soil'],
-  bountiful_plot: ['bountiful_plot'],
   field_medic: ['field_medic'],
   antidote_training: ['antidote_training'],
   surgical_touch: ['surgical_touch'],
@@ -33,14 +30,8 @@ export const CAREER_PASSIVE_EFFECTS = {
   volatile_expert: ['volatile_expert'],
   trace_evidence: ['trace_evidence'],
   case_notes: ['case_notes'],
-  trap_sense: ['trap_sense'],
-  lost_technique: ['lost_technique'],
   ambush_spotter: ['ambush_spotter'],
   keen_sight: ['keen_sight'],
-  pack_tactics: ['pack_tactics'],
-  last_rites: ['last_rites'],
-  holy_symbol_craft: ['holy_symbol_craft'],
-  faiths_reservoir: ['faiths_reservoir'],
   hold_the_line: ['hold_the_line'],
   phalanx: ['phalanx'],
   commanders_presence: ['commanders_presence'],
@@ -64,15 +55,8 @@ export const CAREER_PASSIVE_EFFECTS = {
   hit_and_run: ['hit_and_run'],
   light_fingers: ['light_fingers'],
   chefs_instinct: ['chefs_instinct'],
-  animal_sense: ['animal_sense'],
   trail_warden: ['trail_warden'],
-  reinforced_frame: ['reinforced_frame'],
-  polyglot: ['polyglot'],
-  map_archive: ['map_archive'],
-  sages_conclusion: ['sages_conclusion'],
-  ancient_tongues: ['ancient_tongues'],
   label_reader: ['label_reader'],
-  schematic_mind: ['schematic_mind'],
   long_set: ['long_set'],
   encore: ['encore']
 }
@@ -86,15 +70,13 @@ export const CAREER_CONDITIONAL_STATS = {
 export const CAREER_DAMAGE_BONUSES = {
   battle_fury: { flat: 1, melee: true, condition: 'selfBelowHalfHp' },
   executioner: { flat: 2, condition: 'targetBelowHalfHp' },
-  finishing_thrust: { flat: 2, condition: 'targetNotActed' },
-  lost_technique: { flat: 2, condition: 'partyWeakness' }
+  finishing_thrust: { flat: 2, condition: 'targetNotActed' }
 }
 
 /** Heal bonuses from career passives (see damage-breakdown collectFlatHealBonuses). */
 export const CAREER_HEAL_BONUSES = {
   amplified_healing: { flat: 2, onOthers: true, spellOnly: true },
-  field_medic: { flat: 2, craftedPotion: true },
-  faiths_reservoir: { multiplier: 2, oncePerDay: true }
+  field_medic: { flat: 2, craftedPotion: true }
 }
 
 /** Action skills that apply a status effect on use (self unless noted). */
@@ -102,7 +84,6 @@ export const CAREER_ACTION_BUFFS = {
   rage: { effectId: 'career_rage_buff', duration: 3, potency: 0 },
   reckless_strike: { effectId: 'reckless_strike_buff', duration: 2, potency: 0 },
   sacred_stance: { effectId: 'sacred_stance_buff', duration: 2, potency: 0 },
-  lay_blessing: { effectId: 'lay_blessing_buff', duration: 999, potency: 0 },
   ward_circle: { effectId: 'ward_circle_buff', duration: 3, potency: 0 },
   hearty_rations: { effectId: 'hearty_rations_buff', duration: 10, potency: 0 },
   battle_breakfast: { effectId: 'battle_breakfast', duration: 999, potency: 0 },
@@ -123,7 +104,7 @@ export const CAREER_ACTION_BUFFS = {
   marching_tune: { effectId: 'marching_tune_buff', duration: 2, potency: 0 },
   soothing_hymn: { effectId: 'soothing_hymn_buff', duration: 2, potency: 0 },
   battle_anthem: { effectId: 'battle_anthem_buff', duration: 3, potency: 0 },
-  dissonant_note: { effectId: 'dissonant_note_debuff', duration: 1, potency: 0 },
+  dissonant_note: { effectId: 'dissonant_note_debuff', duration: 1, potency: 0 }
 }
 
 /** Stamina cost reduction for ranged attacks (minimum 0). */

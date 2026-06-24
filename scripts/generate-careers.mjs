@@ -84,19 +84,6 @@ const CAREERS_SKILLS_DATA = {
       { id: 'chefs_instinct', name: 'Chef\'s Instinct', icon: '👃', desc: 'Passive: Detect spoiled, drugged, or poisonous food by taste/smell (GM may require no roll).', prereqT2: 'second_serving' }
     ]
   ),
-  farmer: careerTree(
-    { id: 'hands_in_soil', name: 'Hands in the Soil', icon: '🌱', desc: 'Craft: Common herbs and rations from farm goods. Passive: +1 HP from natural food.' },
-    [
-      { id: 'crop_rotation', name: 'Crop Rotation', icon: '🔄', desc: 'Craft: Reliable herb yields when resting in wilderness or farmland (GM: extra herb loot).' },
-      { id: 'animal_sense', name: 'Animal Sense', icon: '🐾', desc: 'Passive: Notice disturbed earth, tracks, and grazing signs within 30ft.' },
-      { id: 'preserve_harvest', name: 'Preserve Harvest', icon: '🫙', desc: 'Craft: Salves and preserved goods that don\'t spoil for a week.' }
-    ],
-    [
-      { id: 'green_thumb', name: 'Green Thumb', icon: '🌿', desc: 'Craft: Magical or rare plants (ties to herbalism recipes).', prereqT2: 'crop_rotation' },
-      { id: 'landmark_memory', name: 'Landmark Memory', icon: '🗺️', desc: 'Action: Recall terrain — +2 on navigation checks in regions you\'ve worked (GM).', prereqT2: 'animal_sense' },
-      { id: 'bountiful_plot', name: 'Bountiful Plot', icon: '🌾', desc: 'Passive: Party gains +1 material find when looting plants/organics after a fight.', prereqT2: 'preserve_harvest' }
-    ]
-  ),
   medic: careerTree(
     { id: 'field_medic', name: 'Field Medic', icon: '💊', desc: 'Craft: Health potions. Potions you brew restore +2 HP.' },
     [
@@ -149,19 +136,6 @@ const CAREERS_SKILLS_DATA = {
       { id: 'deduction', name: 'Deduction', icon: '🧠', desc: 'Passive: Connect two prior clues — GM must give a useful inference if both are known.', prereqT2: 'case_notes' }
     ]
   ),
-  archaeologist: careerTree(
-    { id: 'artifact_study', name: 'Artifact Study', icon: '🏺', desc: 'Action: Identify relics — true properties, era, curse flags.' },
-    [
-      { id: 'ancient_tongues', name: 'Ancient Tongues', icon: '📜', desc: 'Passive: Read common dead languages; translate inscriptions slowly.' },
-      { id: 'trap_sense', name: 'Trap Sense', icon: '⚠️', desc: 'Passive: +2 to notice ancient traps and structural weak points.' },
-      { id: 'careful_extraction', name: 'Careful Extraction', icon: '🧤', desc: 'Action: Remove relic without triggering trap (GM check).' }
-    ],
-    [
-      { id: 'lost_technique', name: 'Lost Technique', icon: '💀', desc: 'Passive: Once per adventure, recognise weakness vs undead/construct; party +2 damage for one fight. + Harmony: +1 party damage per additional Archaeologist on same enemy type same fight (no Reaction).', prereqT2: 'ancient_tongues' },
-      { id: 'divine_dig', name: 'Divine Dig', icon: '⛏️', desc: 'Action: Sense consecrated/desecrated ground and major burials within 60ft.', prereqT2: 'trap_sense' },
-      { id: 'replicate_relic', name: 'Replicate Relic', icon: '📋', desc: 'Craft: Reproduce a studied artifact\'s mundane copy (not full magic without Enchanter).', prereqT2: 'careful_extraction' }
-    ]
-  ),
   ranger: careerTree(
     { id: 'trail_warden', name: 'Trail Warden', icon: '🌲', desc: 'Passive: Follow tracks in wilderness; know number and rough size of a group. Passive: Party ignores difficult terrain from undergrowth on overland travel (GM).' },
     [
@@ -173,58 +147,6 @@ const CAREERS_SKILLS_DATA = {
       { id: 'long_watch', name: 'Long Watch', icon: '🔭', desc: 'Action: Track a quarry for a day — learn camp sites and direction.', prereqT2: 'ambush_spotter' },
       { id: 'camouflage_net', name: 'Camouflage Net', icon: '🕸️', desc: 'Craft: Hide camp from casual search (+2 Stealth for camp).', prereqT2: 'snare_craft' },
       { id: 'volley_call', name: 'Volley Call', icon: '📣', desc: 'Action: Call a target; one ally +1 on next attack vs it. Once per combat. + Harmony Reaction: same target (each Ranger adds +1 to marked allies\' next attack and marks one more ally).', prereqT2: 'keen_sight' }
-    ]
-  ),
-  engineer: careerTree(
-    { id: 'tinker', name: 'Tinker', icon: '🔩', desc: 'Craft: Basic tools, crossbow bolts, simple mechanisms.' },
-    [
-      { id: 'clockwork_repair', name: 'Clockwork Repair', icon: '⚙️', desc: 'Action: Fix a jammed lock or stuck mechanism (GM).' },
-      { id: 'reinforced_frame', name: 'Reinforced Frame', icon: '🧱', desc: 'Craft: Portable cover; +3 Physical Defence while behind it. + Harmony Reaction: same lane (+1 Physical Defence per additional Engineer).' },
-      { id: 'schematic_mind', name: 'Schematic Mind', icon: '📐', desc: 'Passive: Understand how unfamiliar machines work after 1 minute study.' }
-    ],
-    [
-      { id: 'siege_kit', name: 'Siege Kit', icon: '🏗️', desc: 'Craft: Breaching tools, pulleys, collapsible bridge sections.', prereqT2: 'clockwork_repair' },
-      { id: 'engineer_overcharge', name: 'Overcharge', icon: '⚡', desc: 'Action: Boost ally\'s mechanical device — double effect once, then it is spent until rebuilt (GM).', prereqT2: 'reinforced_frame' },
-      { id: 'demolition_plan', name: 'Demolition Plan', icon: '💥', desc: 'Craft: Shaped charges — target structure weak point (not creature HP).', prereqT2: 'schematic_mind' }
-    ]
-  ),
-  scholar: careerTree(
-    { id: 'well_read', name: 'Well Read', icon: '📚', desc: 'Action: Recall lore on a topic — GM gives one true fact.' },
-    [
-      { id: 'polyglot', name: 'Polyglot', icon: '🗣️', desc: 'Passive: Speak/read two extra common languages.' },
-      { id: 'bestiary_notes', name: 'Bestiary Notes', icon: '📖', desc: 'Action: Identify creature type — resistances, habits (not exact stat block unless GM).' },
-      { id: 'map_archive', name: 'Map Archive', icon: '🗺️', desc: 'Passive: Copy or remember maps; never lost in mapped dungeons without magic.' }
-    ],
-    [
-      { id: 'forbidden_index', name: 'Forbidden Index', icon: '📕', desc: 'Action: Know danger level of magic/curse on touch (safe study).', prereqT2: 'polyglot' },
-      { id: 'teach', name: 'Teach', icon: '👨‍🏫', desc: 'Action: Ally gains your tier-1 knowledge skill for one task this session. + Harmony Reaction: same ally, different topics (ally keeps each granted edge once; no cap on number of topics).', prereqT2: 'bestiary_notes' },
-      { id: 'sages_conclusion', name: 'Sage\'s Conclusion', icon: '💡', desc: 'Passive: Once per adventure, declare a lore-based solution — GM must make it viable if plausible.', prereqT2: 'map_archive' }
-    ]
-  ),
-  beast_handler: careerTree(
-    { id: 'animal_kin', name: 'Animal Kin', icon: '🐕', desc: 'Passive: Calm non-magical beasts; read mood/intent.' },
-    [
-      { id: 'train_mount', name: 'Train Mount', icon: '🐴', desc: 'Craft: Tack and training — mount obeys commands in combat (GM companion rules).' },
-      { id: 'scent_partner', name: 'Scent Partner', icon: '👃', desc: 'Action: Animal alerts to poison, disease, or hidden creature within 30ft.' },
-      { id: 'veterinary', name: 'Veterinary', icon: '🩺', desc: 'Action: Stabilise beast; heal 1d6 HP or remove minor condition.' }
-    ],
-    [
-      { id: 'falcons_eye', name: 'Falcon\'s Eye', icon: '🦅', desc: 'Action: Send scout animal — report layout of area ahead (limited range).', prereqT2: 'train_mount' },
-      { id: 'pack_tactics', name: 'Pack Tactics', icon: '🐺', desc: 'Passive: When you and a beast attack same target, +1 accuracy for both.', prereqT2: 'scent_partner' },
-      { id: 'call_the_wild', name: 'Call the Wild', icon: '🌲', desc: 'Action: Summon mundane animals for distraction or transport (once per day, GM).', prereqT2: 'veterinary' }
-    ]
-  ),
-  cleric_lay: careerTree(
-    { id: 'lay_blessing', name: 'Lay Blessing', icon: '✝️', desc: 'Action: Touch ally; +1 Magical Defence for 8 hours (once per ally per day). + Harmony Reaction: same ally, same day (+1 Magical Defence per Cleric blessing that ally).' },
-    [
-      { id: 'last_rites', name: 'Last Rites', icon: '⚰️', desc: 'Passive: Prevent undead rise from bodies you sanctify.' },
-      { id: 'comfort_the_dying', name: 'Comfort the Dying', icon: '🕊️', desc: 'Action: Ally at 0 HP hears you — roll death saves twice, keep the better result (GM).' },
-      { id: 'holy_symbol_craft', name: 'Holy Symbol Craft', icon: '✨', desc: 'Craft: Symbols that grant +1 vs fear/mind control while worn.' }
-    ],
-    [
-      { id: 'turn_unholy', name: 'Turn Unholy', icon: '☀️', desc: 'Action: Warded area 10ft — undead/demons hesitate to enter (GM save).', prereqT2: 'last_rites' },
-      { id: 'sanctuary_camp', name: 'Sanctuary Camp', icon: '⛺', desc: 'Action: Short rest in consecrated camp; each ally removes one fear or charm. + Harmony Reaction: same camp (each ally removes one additional fear or charm per Cleric at that rest).', prereqT2: 'comfort_the_dying' },
-      { id: 'faiths_reservoir', name: 'Faith\'s Reservoir', icon: '💧', desc: 'Passive: Once per day, double HP restored by a potion you administer.', prereqT2: 'holy_symbol_craft' }
     ]
   ),
   soldier: careerTree(
@@ -356,18 +278,23 @@ const RECIPE_SKILL_MAP = {
   master_chef: 'chefs_instinct',
   void_cooking: 'chefs_instinct',
   scent_masking: 'chefs_instinct',
-  plant_identification: 'hands_in_soil',
-  herbal_remedies: 'hands_in_soil',
-  healing_salves: 'preserve_harvest',
-  elemental_herbalism: 'crop_rotation',
-  magical_herbs: 'green_thumb',
-  strength_herbalism: 'green_thumb',
-  moon_herbalism: 'green_thumb',
-  phoenix_herbalism: 'green_thumb',
-  spirit_herbalism: 'green_thumb',
-  void_herbalism: 'green_thumb',
-  cosmic_herbalism: 'bountiful_plot',
-  herbalism_mastery: 'bountiful_plot',
+  plant_identification: 'field_medic',
+  herbal_remedies: 'field_medic',
+  healing_salves: 'triage',
+  elemental_herbalism: 'antidote_training',
+  magical_herbs: 'surgical_touch',
+  strength_herbalism: 'surgical_touch',
+  moon_herbalism: 'surgical_touch',
+  phoenix_herbalism: 'revival_draft',
+  spirit_herbalism: 'plague_ward',
+  void_herbalism: 'plague_ward',
+  cosmic_herbalism: 'revival_draft',
+  herbalism_mastery: 'revival_draft',
+  hands_in_soil: 'field_medic',
+  preserve_harvest: 'triage',
+  crop_rotation: 'antidote_training',
+  green_thumb: 'surgical_touch',
+  bountiful_plot: 'revival_draft',
   basic_alchemy: 'field_medic',
   poison_brewing: 'acid_vials',
   elixir_brewing: 'surgical_touch',
@@ -392,17 +319,23 @@ const RECIPE_SKILL_MAP = {
   weapon_enchanting: 'elemental_ink',
   infinity_binding: 'artifact_shaping',
   reality_binding: 'dispel_touch',
-  artifact_study: 'artifact_study',
-  ancient_knowledge: 'ancient_tongues',
-  crystal_archaeology: 'trap_sense',
-  dimensional_archaeology: 'careful_extraction',
-  divine_archaeology: 'divine_dig',
-  genesis_archaeology: 'lost_technique',
-  legendary_discovery: 'replicate_relic',
+  artifact_study: 'keen_eye',
+  ancient_knowledge: 'trace_evidence',
+  crystal_archaeology: 'trace_evidence',
+  dimensional_archaeology: 'reconstruct',
+  divine_archaeology: 'follow_the_trail',
+  genesis_archaeology: 'deduction',
+  legendary_discovery: 'deduction',
   master_archaeologist: 'deduction',
   royal_archaeology: 'deduction',
-  shadow_archaeology: 'trap_sense',
-  titan_archaeology: 'lost_technique',
+  shadow_archaeology: 'trace_evidence',
+  titan_archaeology: 'deduction',
+  ancient_tongues: 'trace_evidence',
+  trap_sense: 'trace_evidence',
+  careful_extraction: 'reconstruct',
+  lost_technique: 'deduction',
+  divine_dig: 'follow_the_trail',
+  replicate_relic: 'deduction',
   trail_reader: 'trail_warden'
 }
 
@@ -410,10 +343,10 @@ const RECIPE_SKILL_MAP = {
 const PROFESSION_TO_CAREER = {
   smithing: 'blacksmith',
   cooking: 'chef',
-  herbalism: 'farmer',
+  herbalism: 'medic',
   alchemy: 'alchemist',
   enchanting: 'enchanter',
-  archaeology: 'archaeologist'
+  archaeology: 'detective'
 }
 
 function fusionSkill(id, name, tier, icon, desc, prerequisites) {
@@ -447,7 +380,7 @@ const CAREER_FUSIONS_DATA = {
       2,
       '❄️🫙',
       'Craft: Preserve food twice as long; chilled rations grant +1 Stamina when eaten.',
-      { type: 'AND', skills: ['ice_armor'], anyOfSkills: ['camp_cook', 'preserve_harvest'] }
+      { type: 'AND', skills: ['ice_armor'], anyOfSkills: ['camp_cook', 'hearty_rations'] }
     ),
     fusionSkill(
       'fusion_field_spark',
@@ -479,7 +412,7 @@ const CAREER_FUSIONS_DATA = {
       2,
       '✝️🍳',
       'Craft: Meal removes fear or charm on eat (once per creature per day).',
-      { type: 'AND', skills: ['camp_cook'], anyOfSkills: ['lay_blessing', 'healing_light', 'purify'] }
+      { type: 'AND', skills: ['camp_cook'], anyOfSkills: ['oathbound', 'lay_on_hands', 'healing_light', 'purify'] }
     ),
     fusionSkill(
       'fusion_living_map',
@@ -506,12 +439,12 @@ const CAREER_FUSIONS_DATA = {
       { type: 'AND', skills: ['apothecary', 'ice_armor'] }
     ),
     fusionSkill(
-      'fusion_beast_whisper',
-      'Beast Whisper',
+      'fusion_wild_calm',
+      'Wild Calm',
       2,
-      '🐾🌿',
+      '🐾🌲',
       'Action: Calm one hostile beast for 1 minute (GM save).',
-      { type: 'AND', skills: ['animal_kin'], anyOfSkills: ['earth_sense', 'gust'] }
+      { type: 'AND', skills: ['trail_warden'], anyOfSkills: ['earth_sense', 'gust'] }
     )
   ]
 }

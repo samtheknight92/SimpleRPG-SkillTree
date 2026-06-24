@@ -21,7 +21,7 @@
       "apothecary",
       "label_reader",
       "volatile_expert",
-      "hands_in_soil",
+      "field_medic",
       "human_determination"
     ],
     "activeToggles": [],
@@ -647,7 +647,7 @@
     "skills": [
       "steady_aim",
       "ranged_basics",
-      "hands_in_soil",
+      "field_medic",
       "claws",
       "pounce",
       "human_determination"

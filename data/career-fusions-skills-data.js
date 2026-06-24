@@ -34,7 +34,7 @@ const CAREER_FUSIONS_DATA = {
                 ],
                 "anyOfSkills": [
                     "camp_cook",
-                    "preserve_harvest"
+                    "hearty_rations"
                 ]
             },
             "fusionKind": "career",
@@ -116,7 +116,8 @@ const CAREER_FUSIONS_DATA = {
                     "camp_cook"
                 ],
                 "anyOfSkills": [
-                    "lay_blessing",
+                    "oathbound",
+                    "lay_on_hands",
                     "healing_light",
                     "purify"
                 ]
@@ -183,17 +184,17 @@ const CAREER_FUSIONS_DATA = {
             "specialEffects": []
         },
         {
-            "id": "fusion_beast_whisper",
-            "name": "Beast Whisper",
+            "id": "fusion_wild_calm",
+            "name": "Wild Calm",
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
             "desc": "Action: Calm one hostile beast for 1 minute (GM save).",
-            "icon": "🐾🌿",
+            "icon": "🐾🌲",
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "animal_kin"
+                    "trail_warden"
                 ],
                 "anyOfSkills": [
                     "earth_sense",

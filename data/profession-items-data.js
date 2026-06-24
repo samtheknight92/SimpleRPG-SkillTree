@@ -2803,7 +2803,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "artifact_study"
+                "keen_eye"
             ],
             "price": {
                 "silver": 5
@@ -2837,7 +2837,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "artifact_study"
+                "keen_eye"
             ],
             "price": {
                 "silver": 5
@@ -2874,7 +2874,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "artifact_study"
+                "keen_eye"
             ],
             "price": {
                 "silver": 5
@@ -2911,7 +2911,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "trap_sense"
+                "trace_evidence"
             ],
             "price": {
                 "silver": 112
@@ -2941,7 +2941,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "artifact_study"
+                "keen_eye"
             ],
             "price": {
                 "silver": 5
@@ -2975,7 +2975,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "artifact_study"
+                "keen_eye"
             ],
             "price": {
                 "silver": 5
@@ -3013,7 +3013,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "artifact_study"
+                "keen_eye"
             ],
             "price": {
                 "silver": 5
@@ -3051,7 +3051,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "ancient_tongues"
+                "trace_evidence"
             ],
             "price": {
                 "silver": 112
@@ -3088,7 +3088,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "ancient_tongues"
+                "trace_evidence"
             ],
             "price": {
                 "silver": 112
@@ -3129,7 +3129,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "trap_sense"
+                "trace_evidence"
             ],
             "price": {
                 "silver": 112
@@ -3170,7 +3170,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "trap_sense"
+                "trace_evidence"
             ],
             "price": {
                 "silver": 112
@@ -3211,7 +3211,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "lost_technique"
+                "deduction"
             ],
             "price": {
                 "silver": 112
@@ -3280,7 +3280,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "ancient_tongues"
+                "trace_evidence"
             ],
             "price": {
                 "silver": 112
@@ -3315,7 +3315,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "replicate_relic"
+                "deduction"
             ],
             "price": {
                 "gold": 3,
@@ -3357,7 +3357,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "careful_extraction"
+                "reconstruct"
             ],
             "price": {
                 "gold": 3,
@@ -3398,7 +3398,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "careful_extraction"
+                "reconstruct"
             ],
             "price": {
                 "gold": 3,
@@ -3527,8 +3527,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "deduction",
-                "lost_technique"
+                "deduction"
             ],
             "price": {
                 "gold": 60
@@ -3570,7 +3569,7 @@ const PROFESSION_ITEMS_DATA = {
             ],
             "requiredSkills": [
                 "deduction",
-                "divine_dig"
+                "follow_the_trail"
             ],
             "price": {
                 "gold": 60
@@ -3606,7 +3605,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "hands_in_soil"
+                "field_medic"
             ]
         },
         "spirit_rattle": {
@@ -3636,7 +3635,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "hands_in_soil"
+                "field_medic"
             ],
             "price": {
                 "silver": 4
@@ -3667,7 +3666,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "hands_in_soil"
+                "field_medic"
             ],
             "price": {
                 "silver": 4
@@ -3698,7 +3697,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "hands_in_soil"
+                "field_medic"
             ],
             "price": {
                 "silver": 4
@@ -3731,7 +3730,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "hands_in_soil"
+                "field_medic"
             ],
             "price": {
                 "silver": 3
@@ -3765,7 +3764,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "hands_in_soil"
+                "field_medic"
             ],
             "price": {
                 "silver": 3
@@ -3799,7 +3798,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "preserve_harvest"
+                "triage"
             ],
             "price": {
                 "silver": 67
@@ -3834,7 +3833,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "green_thumb"
+                "surgical_touch"
             ],
             "price": {
                 "silver": 67
@@ -3868,7 +3867,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "preserve_harvest"
+                "triage"
             ],
             "price": {
                 "silver": 67
@@ -3905,7 +3904,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "crop_rotation"
+                "antidote_training"
             ],
             "price": {
                 "silver": 67
@@ -3946,7 +3945,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "green_thumb"
+                "surgical_touch"
             ],
             "price": {
                 "silver": 67
@@ -3980,7 +3979,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "green_thumb"
+                "surgical_touch"
             ],
             "price": {
                 "silver": 67
@@ -4021,7 +4020,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "green_thumb"
+                "surgical_touch"
             ],
             "price": {
                 "silver": 67
@@ -4096,7 +4095,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "green_thumb"
+                "surgical_touch"
             ],
             "price": {
                 "gold": 1,
@@ -4139,7 +4138,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "green_thumb"
+                "surgical_touch"
             ],
             "price": {
                 "gold": 1,
@@ -4180,7 +4179,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "bountiful_plot"
+                "revival_draft"
             ],
             "price": {
                 "gold": 36
@@ -4224,7 +4223,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "bountiful_plot"
+                "revival_draft"
             ],
             "price": {
                 "gold": 36
