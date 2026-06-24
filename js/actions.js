@@ -1,4 +1,6 @@
-import { DEFAULT_STATS, STAT_RULES, SAVE_VERSION } from './constants.js'
+import { DEFAULT_STATS, STAT_RULES, SAVE_VERSION, HOMEBREW_ID_PREFIX, TIER_LUMEN_COST } from './constants.js'
+import { resolveSkillUseDamage } from './homebrew-combat.js'
+import { getMaxStatReward } from './max-stat-rewards.js'
 import { state, activeCharacter } from './state.js'
 import { save, saveNow, serializeSave, applySavePayload, isFullSaveExport } from './storage.js'
 import { render } from './render.js'
@@ -21,7 +23,20 @@ import {
   humanCrossCulturalSkillIds,
   humanMonsterSkillIds
 } from './skills.js'
-import { getItem, addItemToInventory, addCraftedItemToInventory, shopPurchaseCheck } from './items.js'
+import { getRace } from './cache.js'
+import {
+  getItem,
+  addItemToInventory,
+  addCraftedItemToInventory,
+  shopPurchaseCheck,
+  itemHasCounter,
+  itemCounterLabel,
+  inventoryCounterValue,
+  itemBlocksUnequipWithCounter,
+  itemBlocksRemoveWithCounter,
+  counterMaxValue,
+  counterRulePhrase
+} from './items.js'
 import {
   canEquipToMainHand,
   canEquipToOffhand,
@@ -98,6 +113,50 @@ import {
   characterFolder,
   FOLDER_FILTER_UNFILED
 } from './character-folders.js'
+import {
+  upsertHomebrewItem,
+  deleteHomebrewItem,
+  duplicateHomebrewItem,
+  buildHomebrewPack,
+  mergeHomebrewImport,
+  isHomebrewPackFile,
+  listHomebrewItems,
+  getHomebrewItem,
+  listHomebrewSkills,
+  getHomebrewSkill,
+  draftFromHomebrewItem,
+  draftFromHomebrewSkill,
+  emptyHomebrewDraft,
+  emptyHomebrewSkillDraft,
+  collectHomebrewIdsFromCharacter,
+  homebrewItemsForExport,
+  homebrewSkillsForExport,
+  charactersUsingHomebrewItem,
+  charactersUsingHomebrewSkill,
+  parseHomebrewDraftForm,
+  parseHomebrewSkillDraftForm,
+  syncHomebrewDraftFromForm,
+  syncHomebrewSkillDraftFromForm,
+  upsertHomebrewSkill,
+  deleteHomebrewSkill,
+  duplicateHomebrewSkill,
+  listHomebrewRaces,
+  getHomebrewRace,
+  draftFromHomebrewRace,
+  emptyHomebrewRaceDraft,
+  upsertHomebrewRace,
+  deleteHomebrewRace,
+  duplicateHomebrewRace,
+  charactersUsingHomebrewRace,
+  homebrewSkillsForRace,
+  homebrewRacesForExport,
+  parseHomebrewRaceDraftForm,
+  syncHomebrewRaceDraftFromForm
+} from './homebrew.js'
+
+function syncHomebrewEditorFromDom() {
+  syncHomebrewDraftFromForm()
+}
 
 function touch(character, partial = { header: true, sidebar: true, content: true, actionBar: true }) {
   if (character) invalidateCharacterCache(character)
@@ -321,6 +380,10 @@ export function useSkill(skillId) {
   const healResult = applySkillHeal(character, skill, rollDice)
   const healSummary = healResult ? formatHealUseSummary(healResult.breakdown, healResult.healed) : ''
   const healOrChoice = /\bOR\s+apply\b/i.test(String(skill.desc || ''))
+  const damageResult = resolveSkillUseDamage(character, skill, rollDice)
+  const damageLine = damageResult
+    ? formatCombatDamageToastLine(null, damageResult.summary, damageResult.total)
+    : ''
 
   let activations = resolveActivationEffects(skill)
   if (healResult && healOrChoice) activations = []
@@ -366,34 +429,46 @@ export function useSkill(skillId) {
   const healPart = healSummary ? healSummary : ''
   const effectPart = applied.length ? applied.join(', ') : ''
   const ampSuffix = performanceNote ? ` — ${performanceNote}` : ''
+  const withDamage = (body) => {
+    const lead = [damageLine, body].filter(Boolean).join('; ')
+    return lead || damageLine
+  }
 
   if (healPart && !effectPart && !missed.length) {
-    toastCombat(`${skill.name}: ${healPart} ${staminaNote}.`)
+    toastCombat(`${skill.name}: ${withDamage(healPart)} ${staminaNote}.`, { html: Boolean(damageLine) })
     return
   }
   if (healPart && effectPart && !missed.length) {
-    toastCombat(`${skill.name}: ${healPart}; ${effectPart} ${staminaNote}.`)
+    toastCombat(`${skill.name}: ${withDamage(`${healPart}; ${effectPart}`)} ${staminaNote}.`, { html: Boolean(damageLine) })
     return
   }
   if (healPart && effectPart && missed.length) {
-    toastCombat(`${skill.name}: ${healPart}; ${effectPart}; ${missed.join(', ')} ${staminaNote}.`)
+    toastCombat(`${skill.name}: ${withDamage(`${healPart}; ${effectPart}; ${missed.join(', ')}`)} ${staminaNote}.`, { html: Boolean(damageLine) })
     return
   }
   if (healPart && !effectPart && missed.length) {
-    toastCombat(`${skill.name}: ${healPart}; ${missed.join(', ')} ${staminaNote}.`)
+    toastCombat(`${skill.name}: ${withDamage(`${healPart}; ${missed.join(', ')}`)} ${staminaNote}.`, { html: Boolean(damageLine) })
     return
   }
 
-  if (!activations.length) {
+  if (!activations.length && !healResult) {
+    if (damageLine) {
+      toastCombat(`${skill.name}: ${damageLine} ${staminaNote}.`, { html: true })
+      return
+    }
     toastCombat(`${skill.name} used ${staminaNote}.`)
     return
   }
   if (applied.length && !missed.length) {
-    toastCombat(`${skill.name}: ${applied.join(', ')}${ampSuffix} (−${cost} Stamina).`)
+    toastCombat(`${skill.name}: ${withDamage(effectPart)}${ampSuffix} (−${cost} Stamina).`, { html: Boolean(damageLine) })
     return
   }
   if (applied.length) {
-    toastCombat(`${skill.name}: ${applied.join(', ')}${ampSuffix}; ${missed.join(', ')} (−${cost} Stamina).`)
+    toastCombat(`${skill.name}: ${withDamage(`${effectPart}${ampSuffix}; ${missed.join(', ')}`)} (−${cost} Stamina).`, { html: Boolean(damageLine) })
+    return
+  }
+  if (damageLine) {
+    toastCombat(`${skill.name}: ${damageLine}; ${missed.length ? missed.join(', ') : 'no effects applied'} (−${cost} Stamina).`, { html: true })
     return
   }
   toastCombat(`${skill.name} failed to apply effects${missed.length ? `: ${missed.join(', ')}` : ''} (−${cost} Stamina).`)
@@ -620,6 +695,12 @@ export function recordEnchantShieldAbsorption(gearEntryUid, enchantId, amount) {
 export function removeInventoryEntry(entryUid) {
   const character = activeCharacter()
   if (!character) return
+  const entry = character.inventory.find(row => row.uid === entryUid)
+  const item = entry && getItem(entry.itemId)
+  if (entry && item && itemBlocksRemoveWithCounter(entry, item)) {
+    const label = itemCounterLabel(item)
+    return toast(`${item.name} cannot be removed while ${label} ${counterRulePhrase(item)} (now ${inventoryCounterValue(entry, item)}).`)
+  }
   for (const slot of Object.keys(character.equipped)) {
     if (character.equipped[slot] === entryUid) character.equipped[slot] = null
   }
@@ -708,8 +789,27 @@ export function markMoved() {
 export function unequip(slot) {
   const character = activeCharacter()
   if (!character) return
+  const entryUid = character.equipped[slot]
+  const entry = entryUid ? character.inventory.find(row => row.uid === entryUid) : null
+  const item = entry && getItem(entry.itemId)
+  if (entry && item && itemBlocksUnequipWithCounter(entry, item)) {
+    const label = itemCounterLabel(item)
+    return toast(`${item.name} cannot be unequipped while ${label} ${counterRulePhrase(item)} (now ${inventoryCounterValue(entry, item)}).`)
+  }
   character.equipped[slot] = null
   if (slot === 'weapon') character.equipped.offhand = null
+  touch(character)
+}
+
+export function adjustInventoryCounter(entryUid, delta) {
+  const character = activeCharacter()
+  const entry = character?.inventory.find(row => row.uid === entryUid)
+  const item = entry && getItem(entry.itemId)
+  if (!character || !entry || !itemHasCounter(item)) return
+  let next = Math.max(0, inventoryCounterValue(entry, item) + Number(delta || 0))
+  const max = counterMaxValue(item)
+  if (max != null) next = Math.min(next, max)
+  entry.counter = next
   touch(character)
 }
 
@@ -719,11 +819,16 @@ export function upgradeStat(stat) {
   if (!character || !rule) return
   if (character.stats[stat] >= rule.max) return toast(`${rule.label} is already at its cap.`)
   if (!isGmMode() && character.lumens < rule.cost) return toast('Not enough lumens for that upgrade.')
+  const wasBelowCap = character.stats[stat] < rule.max
   character.stats[stat] += 1
   if (!isGmMode()) character.lumens -= rule.cost
   if (stat === 'hp') character.hp += 1
   if (stat === 'stamina') character.stamina += 1
   touch(character)
+  const reward = getMaxStatReward(stat)
+  if (wasBelowCap && character.stats[stat] >= rule.max && reward) {
+    toast(`Hidden reward unlocked: ${reward.icon} ${reward.name}. See Skill & Gear Effects on the Character tab.`)
+  }
 }
 
 export function refundStat(stat) {
@@ -831,16 +936,39 @@ export function deleteCharacter(id) {
 }
 
 export function exportData(all = true) {
-  const payload = all
-    ? serializeSave()
-    : {
-      version: SAVE_VERSION,
-      characters: [normalizeCharacter(deepClone(activeCharacter()))].filter(Boolean)
+  if (all) {
+    const payload = serializeSave()
+    downloadJson(payload, 'lumenforge-save.json')
+    return
+  }
+  const character = activeCharacter()
+  if (!character) return toast('No character to export.')
+  const homebrewIds = [...collectHomebrewIdsFromCharacter(character)]
+  const exportRaceIds = []
+  const exportItemIds = []
+  const exportSkillIds = []
+  for (const id of homebrewIds) {
+    if (getHomebrewRace(id)) exportRaceIds.push(id)
+    else if (getHomebrewSkill(id)) exportSkillIds.push(id)
+    else if (getHomebrewItem(id)) exportItemIds.push(id)
+  }
+  const payload = {
+    version: SAVE_VERSION,
+    characters: [normalizeCharacter(deepClone(character))],
+    homebrew: {
+      items: homebrewItemsForExport(exportItemIds),
+      skills: homebrewSkillsForExport(exportSkillIds),
+      races: homebrewRacesForExport(exportRaceIds)
     }
+  }
+  downloadJson(payload, `${character.name || 'character'}-lumenforge.json`.replace(/[^a-z0-9_.-]+/gi, '_'))
+}
+
+function downloadJson(payload, filename) {
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
   const a = document.createElement('a')
   a.href = URL.createObjectURL(blob)
-  a.download = all ? 'lumenforge-save.json' : `${activeCharacter()?.name || 'character'}-lumenforge.json`.replace(/[^a-z0-9_.-]+/gi, '_')
+  a.download = filename
   a.click()
   URL.revokeObjectURL(a.href)
 }
@@ -849,19 +977,54 @@ export async function importData(file) {
   if (!file) return
   try {
     const parsed = JSON.parse(await file.text())
+
+    if (isHomebrewPackFile(parsed) && !Array.isArray(parsed.characters)) {
+      const hasExisting = listHomebrewItems().length > 0 || listHomebrewSkills().length > 0 || listHomebrewRaces().length > 0
+      const replace = hasExisting && confirm(
+        'Homebrew pack detected.\n\nOK = Replace all local homebrew.\nCancel = Merge by ID (incoming wins conflicts).'
+      )
+      const result = mergeHomebrewImport(parsed, { replace })
+      render({ all: true })
+      const parts = []
+      if (result.items) parts.push(`${result.items} item${result.items === 1 ? '' : 's'}`)
+      if (result.skills) parts.push(`${result.skills} skill${result.skills === 1 ? '' : 's'}`)
+      if (result.races) parts.push(`${result.races} race${result.races === 1 ? '' : 's'}`)
+      toast(`Imported ${parts.join(' and ') || '0 entries'}.`)
+      return
+    }
+
+    if (parsed.homebrew?.items?.length || parsed.homebrew?.skills?.length || parsed.homebrew?.races?.length) {
+      if (!isFullSaveExport(parsed)) {
+        mergeHomebrewImport(parsed, { replace: false })
+      }
+    }
+
     const imported = Array.isArray(parsed) ? parsed : parsed.characters
     if (!Array.isArray(imported)) throw new Error('No characters array')
+
+    const missing = []
+    for (const character of imported.map(normalizeCharacter)) {
+      for (const itemId of collectHomebrewIdsFromCharacter(character)) {
+        if (String(itemId).startsWith(HOMEBREW_ID_PREFIX) && !getItem(itemId) && !getHomebrewRace(itemId)) missing.push(itemId)
+      }
+      for (const skillId of character.skills || []) {
+        if (String(skillId).startsWith(HOMEBREW_ID_PREFIX) && !getSkill(skillId)) missing.push(skillId)
+      }
+      if (String(character.race || '').startsWith(HOMEBREW_ID_PREFIX) && !getRace(character.race)) missing.push(character.race)
+    }
+    if (missing.length) {
+      throw new Error(`Missing homebrew content: ${[...new Set(missing)].join(', ')}`)
+    }
 
     const fullSave = isFullSaveExport(parsed)
     const hasExisting = state.characters.length > 0
     let replace = false
 
     if (fullSave) {
-      if (!hasExisting) {
-        replace = true
-      } else {
+      if (!hasExisting) replace = true
+      else {
         replace = confirm(
-          'This is a full save file.\n\nOK = Replace entire save (characters, folders, GM tools, and UI).\nCancel = Merge imported characters by ID (keeps your current folders and GM state).'
+          'This is a full save file.\n\nOK = Replace entire save (characters, folders, GM tools, UI, homebrew).\nCancel = Merge imported characters by ID (keeps your current folders and GM state).'
         )
       }
     }
@@ -878,8 +1041,405 @@ export async function importData(file) {
     )
   } catch (error) {
     console.error(error)
-    toast('Import failed. That file does not look like a LumenForge save.')
+    toast(error.message?.includes('Missing homebrew')
+      ? error.message
+      : 'Import failed. That file does not look like a LumenForge save.')
   }
+}
+
+export function startHomebrewEditor(itemId = null) {
+  state.homebrewEditorKind = 'item'
+  state.homebrewSkillEditingId = null
+  state.homebrewSkillDraft = null
+  state.homebrewRaceEditingId = null
+  state.homebrewRaceDraft = null
+  state.homebrewRaceShowEffectPicker = false
+  state.homebrewRaceEffectSearch = ''
+  state.homebrewSkillShowEffectPicker = false
+  state.homebrewSkillEffectSearch = ''
+  state.homebrewSkillShowUseEffectPicker = false
+  state.homebrewSkillUseEffectSearch = ''
+  state.homebrewEditingId = itemId
+  state.homebrewDraft = itemId ? draftFromHomebrewItem(getHomebrewItem(itemId)) : emptyHomebrewDraft()
+  state.homebrewShowEffectPicker = false
+  state.homebrewEffectSearch = ''
+  state.homebrewShowCounterOptions = Boolean(state.homebrewDraft?.counterLabel)
+  render({ content: true })
+}
+
+export function startHomebrewSkillEditor(skillId = null) {
+  state.homebrewEditorKind = 'skill'
+  state.homebrewEditingId = null
+  state.homebrewDraft = null
+  state.homebrewRaceEditingId = null
+  state.homebrewRaceDraft = null
+  state.homebrewRaceShowEffectPicker = false
+  state.homebrewRaceEffectSearch = ''
+  state.homebrewShowEffectPicker = false
+  state.homebrewEffectSearch = ''
+  state.homebrewShowCounterOptions = false
+  state.homebrewSkillEditingId = skillId
+  state.homebrewSkillDraft = skillId ? draftFromHomebrewSkill(getHomebrewSkill(skillId)) : emptyHomebrewSkillDraft()
+  state.homebrewSkillShowEffectPicker = false
+  state.homebrewSkillEffectSearch = ''
+  state.homebrewSkillShowUseEffectPicker = false
+  state.homebrewSkillUseEffectSearch = ''
+  render({ content: true })
+}
+
+export function startHomebrewRaceEditor(raceId = null) {
+  state.homebrewEditorKind = 'race'
+  state.homebrewEditingId = null
+  state.homebrewDraft = null
+  state.homebrewSkillEditingId = null
+  state.homebrewSkillDraft = null
+  state.homebrewShowEffectPicker = false
+  state.homebrewEffectSearch = ''
+  state.homebrewShowCounterOptions = false
+  state.homebrewSkillShowEffectPicker = false
+  state.homebrewSkillEffectSearch = ''
+  state.homebrewSkillShowUseEffectPicker = false
+  state.homebrewSkillUseEffectSearch = ''
+  state.homebrewRaceEditingId = raceId
+  state.homebrewRaceDraft = raceId ? draftFromHomebrewRace(getHomebrewRace(raceId)) : emptyHomebrewRaceDraft()
+  state.homebrewRaceShowEffectPicker = false
+  state.homebrewRaceEffectSearch = ''
+  render({ content: true })
+}
+
+export function cancelHomebrewEditor() {
+  state.homebrewEditorKind = null
+  state.homebrewEditingId = null
+  state.homebrewDraft = null
+  state.homebrewShowEffectPicker = false
+  state.homebrewEffectSearch = ''
+  state.homebrewShowCounterOptions = false
+  state.homebrewSkillEditingId = null
+  state.homebrewSkillDraft = null
+  state.homebrewSkillShowEffectPicker = false
+  state.homebrewSkillEffectSearch = ''
+  state.homebrewSkillShowUseEffectPicker = false
+  state.homebrewSkillUseEffectSearch = ''
+  state.homebrewRaceEditingId = null
+  state.homebrewRaceDraft = null
+  state.homebrewRaceShowEffectPicker = false
+  state.homebrewRaceEffectSearch = ''
+  render({ content: true })
+}
+
+export function toggleHomebrewEffectPicker() {
+  syncHomebrewEditorFromDom()
+  state.homebrewShowEffectPicker = !state.homebrewShowEffectPicker
+  render({ content: true })
+}
+
+export function toggleHomebrewCounterOptions() {
+  syncHomebrewEditorFromDom()
+  state.homebrewShowCounterOptions = !state.homebrewShowCounterOptions
+  render({ content: true })
+}
+
+export function clearHomebrewDraftCounter() {
+  syncHomebrewEditorFromDom()
+  if (!state.homebrewDraft) return
+  state.homebrewDraft = {
+    ...state.homebrewDraft,
+    counterLabel: '',
+    counterDefault: 0,
+    counterMax: null,
+    blockUnequipWithCounter: false,
+    blockRemoveWithCounter: false,
+    counterEquippedOnly: false,
+    counterRuleOperator: 'above',
+    counterRuleValue: 0
+  }
+  state.homebrewShowCounterOptions = false
+  render({ content: true })
+}
+
+export function toggleHomebrewDraftEffect(effectId) {
+  syncHomebrewEditorFromDom()
+  if (!state.homebrewDraft || !effectId) return
+  const selected = new Set(state.homebrewDraft.specialEffects || [])
+  if (selected.has(effectId)) selected.delete(effectId)
+  else selected.add(effectId)
+  state.homebrewDraft.specialEffects = [...selected]
+  render({ content: true })
+}
+
+export function removeHomebrewDraftEffect(effectId) {
+  syncHomebrewEditorFromDom()
+  if (!state.homebrewDraft) return
+  state.homebrewDraft.specialEffects = (state.homebrewDraft.specialEffects || []).filter(id => id !== effectId)
+  render({ content: true })
+}
+
+export function saveHomebrewDraftFromForm(form) {
+  try {
+    const draft = parseHomebrewDraftForm(form)
+    if (state.homebrewEditingId) draft.id = state.homebrewEditingId
+    draft.specialEffects = [...(state.homebrewDraft?.specialEffects || [])]
+    const item = upsertHomebrewItem(draft)
+    state.homebrewEditorKind = null
+    state.homebrewEditingId = null
+    state.homebrewDraft = null
+    state.homebrewShowEffectPicker = false
+    state.homebrewEffectSearch = ''
+    state.homebrewShowCounterOptions = false
+    render({ content: true })
+    toast(`Saved ${item.name}.`)
+  } catch (error) {
+    toast(error.message || 'Could not save homebrew item.')
+  }
+}
+
+export function removeHomebrewItem(itemId) {
+  const item = getHomebrewItem(itemId)
+  if (!item) return
+  const users = charactersUsingHomebrewItem(itemId)
+  if (users.length) {
+    if (!confirm(`${item.name} is on ${users.length} character sheet(s). Delete anyway? (Inventory entries will break until removed.)`)) return
+  } else if (!confirm(`Delete homebrew item "${item.name}"?`)) return
+  deleteHomebrewItem(itemId)
+  delete state.homebrewSelected[itemId]
+  render({ content: true })
+  toast('Homebrew item deleted.')
+}
+
+export function copyHomebrewItem(itemId) {
+  const copy = duplicateHomebrewItem(itemId)
+  if (!copy) return toast('Could not duplicate item.')
+  render({ content: true })
+  toast(`Duplicated as ${copy.name}.`)
+}
+
+export function toggleHomebrewSelect(itemId, checked) {
+  if (checked) state.homebrewSelected[itemId] = true
+  else delete state.homebrewSelected[itemId]
+  render({ content: true })
+}
+
+export function grantHomebrewItem(itemId, characterId) {
+  const item = getHomebrewItem(itemId)
+  const targetId = characterId || state.activeId
+  const character = state.characters.find(row => row.id === targetId)
+  if (!item || !character) return toast('Pick a character first.')
+  if (!isGmMode() && targetId !== state.activeId) return toast('You can only grant to your active character.')
+  addItemToInventory(character, itemId, 1)
+  touch(character)
+  toast(`${item.name} added to ${character.name}.`)
+}
+
+export function grantHomebrewSkill(skillId, characterId) {
+  const skill = getHomebrewSkill(skillId)
+  const targetId = characterId || state.activeId
+  const character = state.characters.find(row => row.id === targetId)
+  if (!skill || !character) return toast('Pick a character first.')
+  if (!isGmMode() && targetId !== state.activeId) return toast('You can only grant to your active character.')
+  if (character.skills.includes(skillId)) return toast(`${character.name} already knows ${skill.name}.`)
+  character.skills.push(skillId)
+  touch(character)
+  toast(`${skill.name} granted to ${character.name}.`)
+}
+
+export function syncHomebrewSkillEditorFromDom() {
+  syncHomebrewSkillDraftFromForm()
+}
+
+export function toggleHomebrewSkillEffectPicker() {
+  syncHomebrewSkillEditorFromDom()
+  state.homebrewSkillShowEffectPicker = !state.homebrewSkillShowEffectPicker
+  render({ content: true })
+}
+
+export function toggleHomebrewSkillDraftEffect(effectId) {
+  syncHomebrewSkillEditorFromDom()
+  if (!state.homebrewSkillDraft || !effectId) return
+  const selected = new Set(state.homebrewSkillDraft.specialEffects || [])
+  if (selected.has(effectId)) selected.delete(effectId)
+  else selected.add(effectId)
+  state.homebrewSkillDraft.specialEffects = [...selected]
+  render({ content: true })
+}
+
+export function removeHomebrewSkillDraftEffect(effectId) {
+  syncHomebrewSkillEditorFromDom()
+  if (!state.homebrewSkillDraft) return
+  state.homebrewSkillDraft.specialEffects = (state.homebrewSkillDraft.specialEffects || []).filter(id => id !== effectId)
+  render({ content: true })
+}
+
+export function toggleHomebrewSkillUseEffectPicker() {
+  syncHomebrewSkillEditorFromDom()
+  state.homebrewSkillShowUseEffectPicker = !state.homebrewSkillShowUseEffectPicker
+  render({ content: true })
+}
+
+export function toggleHomebrewSkillUseDraftEffect(effectId) {
+  syncHomebrewSkillEditorFromDom()
+  if (!state.homebrewSkillDraft || !effectId) return
+  const list = [...(state.homebrewSkillDraft.activationEffects || [])]
+  const idx = list.findIndex(row => row.effectId === effectId)
+  if (idx >= 0) list.splice(idx, 1)
+  else list.push({ effectId, duration: 3, potency: undefined })
+  state.homebrewSkillDraft.activationEffects = list
+  render({ content: true })
+}
+
+export function removeHomebrewSkillUseDraftEffect(effectId) {
+  syncHomebrewSkillEditorFromDom()
+  if (!state.homebrewSkillDraft) return
+  state.homebrewSkillDraft.activationEffects = (state.homebrewSkillDraft.activationEffects || [])
+    .filter(row => row.effectId !== effectId)
+  render({ content: true })
+}
+
+export function saveHomebrewSkillDraftFromForm(form) {
+  try {
+    const draft = parseHomebrewSkillDraftForm(form, state.homebrewSkillDraft)
+    if (state.homebrewSkillEditingId) draft.id = state.homebrewSkillEditingId
+    draft.specialEffects = [...(state.homebrewSkillDraft?.specialEffects || [])]
+    const skill = upsertHomebrewSkill(draft)
+    state.homebrewEditorKind = null
+    state.homebrewSkillEditingId = null
+    state.homebrewSkillDraft = null
+    state.homebrewSkillShowEffectPicker = false
+    state.homebrewSkillEffectSearch = ''
+    state.homebrewSkillShowUseEffectPicker = false
+    state.homebrewSkillUseEffectSearch = ''
+    render({ content: true })
+    toast(`Saved ${skill.name}.`)
+  } catch (error) {
+    toast(error.message || 'Could not save homebrew skill.')
+  }
+}
+
+export function removeHomebrewSkill(skillId) {
+  const skill = getHomebrewSkill(skillId)
+  if (!skill) return
+  const users = charactersUsingHomebrewSkill(skillId)
+  if (users.length) {
+    if (!confirm(`${skill.name} is on ${users.length} character sheet(s). Delete anyway?`)) return
+  } else if (!confirm(`Delete homebrew skill "${skill.name}"?`)) return
+  deleteHomebrewSkill(skillId)
+  delete state.homebrewSkillSelected[skillId]
+  render({ content: true })
+  toast('Homebrew skill deleted.')
+}
+
+export function copyHomebrewSkill(skillId) {
+  const copy = duplicateHomebrewSkill(skillId)
+  if (!copy) return toast('Could not duplicate skill.')
+  render({ content: true })
+  toast(`Duplicated as ${copy.name}.`)
+}
+
+export function toggleHomebrewSkillSelect(skillId, checked) {
+  if (checked) state.homebrewSkillSelected[skillId] = true
+  else delete state.homebrewSkillSelected[skillId]
+  render({ content: true })
+}
+
+export function setHomebrewListFilter(filter) {
+  state.homebrewListFilter = filter
+  render({ content: true })
+}
+
+export function exportHomebrewSelection(all = false) {
+  const itemIds = all ? listHomebrewItems().map(item => item.id) : Object.keys(state.homebrewSelected)
+  const skillIds = all ? listHomebrewSkills().map(skill => skill.id) : Object.keys(state.homebrewSkillSelected)
+  const raceIds = all ? listHomebrewRaces().map(race => race.id) : Object.keys(state.homebrewRaceSelected)
+  if (!itemIds.length && !skillIds.length && !raceIds.length) return toast('Select at least one homebrew entry to export.')
+  const name = prompt('Pack name (optional):', 'Homebrew pack') || 'Homebrew pack'
+  const author = prompt('Author name (optional):', '') || ''
+  const pack = buildHomebrewPack({
+    name,
+    author,
+    itemIds: itemIds.length ? itemIds : null,
+    skillIds: skillIds.length ? skillIds : null,
+    raceIds: raceIds.length ? raceIds : null
+  })
+  const total = itemIds.length + skillIds.length + raceIds.length
+  downloadJson(pack, `${name.replace(/[^a-z0-9_.-]+/gi, '_') || 'homebrew'}.json`)
+  toast(`Exported ${total} entr${total === 1 ? 'y' : 'ies'}.`)
+}
+
+export function saveHomebrewRaceDraftFromForm(form) {
+  try {
+    syncHomebrewRaceDraftFromForm(form)
+    const draft = { ...state.homebrewRaceDraft }
+    if (state.homebrewRaceEditingId) draft.id = state.homebrewRaceEditingId
+    const race = upsertHomebrewRace({
+      ...draft,
+      passiveTraits: String(draft.passiveTraitsText || '').split(/\r?\n/).map(row => row.trim()).filter(Boolean),
+      specialEffects: [...(draft.specialEffects || [])]
+    })
+    state.homebrewEditorKind = null
+    state.homebrewRaceEditingId = null
+    state.homebrewRaceDraft = null
+    state.homebrewRaceShowEffectPicker = false
+    state.homebrewRaceEffectSearch = ''
+    render({ content: true })
+    toast(`Saved race "${race.name}".`)
+  } catch (error) {
+    toast(error.message || 'Could not save homebrew race.')
+  }
+}
+
+export function removeHomebrewRace(raceId) {
+  const race = getHomebrewRace(raceId)
+  if (!race) return
+  const users = charactersUsingHomebrewRace(raceId)
+  const linkedSkills = homebrewSkillsForRace(raceId)
+  if (users.length) {
+    if (!confirm(`Delete "${race.name}"? ${users.length} character${users.length === 1 ? '' : 's'} use this race.`)) return
+  } else if (linkedSkills.length) {
+    if (!confirm(`Delete "${race.name}"? ${linkedSkills.length} racial skill${linkedSkills.length === 1 ? '' : 's'} are tied to it.`)) return
+  } else if (!confirm(`Delete homebrew race "${race.name}"?`)) return
+  deleteHomebrewRace(raceId)
+  delete state.homebrewRaceSelected[raceId]
+  render({ content: true })
+  toast('Homebrew race deleted.')
+}
+
+export function copyHomebrewRace(raceId) {
+  const copy = duplicateHomebrewRace(raceId)
+  if (!copy) return toast('Could not duplicate race.')
+  render({ content: true })
+  toast(`Duplicated as ${copy.name}.`)
+}
+
+export function toggleHomebrewRaceSelect(raceId, checked) {
+  if (checked) state.homebrewRaceSelected[raceId] = true
+  else delete state.homebrewRaceSelected[raceId]
+  render({ content: true })
+}
+
+export function syncHomebrewRaceEditorFromDom() {
+  syncHomebrewRaceDraftFromForm()
+}
+
+export function toggleHomebrewRaceEffectPicker() {
+  syncHomebrewRaceEditorFromDom()
+  state.homebrewRaceShowEffectPicker = !state.homebrewRaceShowEffectPicker
+  render({ content: true })
+}
+
+export function toggleHomebrewRaceDraftEffect(effectId) {
+  syncHomebrewRaceEditorFromDom()
+  if (!state.homebrewRaceDraft || !effectId) return
+  const selected = new Set(state.homebrewRaceDraft.specialEffects || [])
+  if (selected.has(effectId)) selected.delete(effectId)
+  else selected.add(effectId)
+  state.homebrewRaceDraft.specialEffects = [...selected]
+  render({ content: true })
+}
+
+export function removeHomebrewRaceDraftEffect(effectId) {
+  syncHomebrewRaceEditorFromDom()
+  if (!state.homebrewRaceDraft) return
+  state.homebrewRaceDraft.specialEffects = (state.homebrewRaceDraft.specialEffects || []).filter(id => id !== effectId)
+  render({ content: true })
 }
 
 export function saveNotes(value, silent = false) {

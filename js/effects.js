@@ -10,6 +10,7 @@ import { isToggleSkill } from './skills.js'
 import { titleCase } from './utils.js'
 import { formatStatModifiers } from './format.js'
 import { formatPerformanceMeta } from './instruments.js'
+import { activeMaxStatRewards, maxStatRewardSourceLabel } from './max-stat-rewards.js'
 
 export function effectList() {
   return Object.values(cache.effectDefinitions).sort((a, b) => a.name.localeCompare(b.name))
@@ -169,6 +170,9 @@ export function characterEffectSources(character) {
   for (const trait of race?.passiveTraits || []) {
     for (const id of extractRaceEffectIdsFromTrait(trait)) recordEffect(map, id, `Race: ${race.name}`)
   }
+  for (const effectId of race?.specialEffects || []) {
+    recordEffect(map, effectId, `Race: ${race.name}`)
+  }
   for (const entryUid of Object.values(character.equipped || {})) {
     const entry = character.inventory.find(inv => inv.uid === entryUid)
     const item = entry && getItem(entry.itemId)
@@ -180,6 +184,11 @@ export function characterEffectSources(character) {
   for (const skillId of character.skills || []) {
     const skill = getSkill(skillId)
     if (!skill) continue
+    if (skill.source === 'homebrew' && skill.specialEffects?.length) {
+      for (const effectId of skill.specialEffects) {
+        recordEffect(map, effectId, `Skill: ${skill.name}`)
+      }
+    }
     const gearEffects = resolveSkillGearEffects(skill, character)
     for (const effectId of gearEffects) {
       const equipRule = cache.equipmentSkillEffects[skillId]
@@ -220,6 +229,9 @@ export function characterEffectSources(character) {
         }
       }
     }
+  }
+  for (const reward of activeMaxStatRewards(character)) {
+    recordEffect(map, reward.id, maxStatRewardSourceLabel(reward.statKey))
   }
   const result = [...map.values()].sort((a, b) => effectTone(a.effect).localeCompare(effectTone(b.effect)) || a.effect.name.localeCompare(b.effect.name))
   if (character) {

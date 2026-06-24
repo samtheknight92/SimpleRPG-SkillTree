@@ -161,6 +161,10 @@ export function collectElementalAffinitySources(character) {
       seenFromText.add(`${entry.element}:${entry.kind}:${entry.tier}:${entry.source}`)
     }
   }
+  for (const effectId of race?.specialEffects || []) {
+    const mapped = tierFromEffectId(effectId)
+    if (mapped) entries.push({ ...mapped, source: `Race: ${race.name}` })
+  }
 
   for (const entry of collectDragonbornEntries(character)) entries.push(entry)
 

@@ -188,6 +188,12 @@ function compareActionBarSkills(a, b) {
 
 export function getSkillActivationType(skill) {
   if (!skill) return 'passive'
+  if (skill.source === 'homebrew') {
+    const type = String(skill.skillType || 'passive').toLowerCase()
+    if (type === 'toggle') return 'toggle'
+    if (type === 'activatable') return 'activatable'
+    return 'passive'
+  }
   if (cache.equipmentSkillEffects?.[skill.id]) return 'passive'
   if (isToggleSkill(skill)) return 'toggle'
   if (/^passive:/i.test(skill.desc || '')) return 'passive'
@@ -208,7 +214,7 @@ export function resolveActivationEffects(skill) {
   if (careerBuffs.length) return careerBuffs
 
   if (Array.isArray(skill.activationEffects) && skill.activationEffects.length) {
-    const hasChance = /(?:chance to|may)\s+apply|\d+%\s+chance/i.test(String(skill.desc || ''))
+    const hasChance = skill.source !== 'homebrew' && /(?:chance to|may)\s+apply|\d+%\s+chance/i.test(String(skill.desc || ''))
     const chance = hasChance ? (TIER_APPLY_CHANCE[Number(skill.tier)] ?? 1) : 1
     return skill.activationEffects
       .filter(item => item?.effectId && cache.effectDefinitions[item.effectId])
@@ -216,7 +222,7 @@ export function resolveActivationEffects(skill) {
         effectId: item.effectId,
         duration: Number.isFinite(Number(item.duration)) ? Number(item.duration) : parseDurationFromText(skill.desc, getEffect(item.effectId)),
         potency: Number.isFinite(Number(item.potency)) ? Number(item.potency) : parsePotencyFromText(skill.desc, getEffect(item.effectId)),
-        chance: Number.isFinite(Number(item.chance)) ? Number(item.chance) : chance,
+        chance: skill.source === 'homebrew' ? 1 : (Number.isFinite(Number(item.chance)) ? Number(item.chance) : chance),
         source: 'data'
       }))
   }

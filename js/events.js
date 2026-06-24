@@ -58,7 +58,42 @@ import {
   setInitiativeActiveEntry as doSetInitiativeActiveEntry,
   nextInitiativeTurn as doNextInitiativeTurn,
   resetInitiativeRound as doResetInitiativeRound,
-  clearInitiativeTracker as doClearInitiativeTracker
+  clearInitiativeTracker as doClearInitiativeTracker,
+  startHomebrewEditor as doStartHomebrewEditor,
+  startHomebrewSkillEditor as doStartHomebrewSkillEditor,
+  cancelHomebrewEditor as doCancelHomebrewEditor,
+  saveHomebrewDraftFromForm as doSaveHomebrewDraftFromForm,
+  saveHomebrewSkillDraftFromForm as doSaveHomebrewSkillDraftFromForm,
+  toggleHomebrewEffectPicker as doToggleHomebrewEffectPicker,
+  toggleHomebrewSkillEffectPicker as doToggleHomebrewSkillEffectPicker,
+  toggleHomebrewSkillUseEffectPicker as doToggleHomebrewSkillUseEffectPicker,
+  toggleHomebrewCounterOptions as doToggleHomebrewCounterOptions,
+  clearHomebrewDraftCounter as doClearHomebrewDraftCounter,
+  toggleHomebrewDraftEffect as doToggleHomebrewDraftEffect,
+  toggleHomebrewSkillDraftEffect as doToggleHomebrewSkillDraftEffect,
+  removeHomebrewDraftEffect as doRemoveHomebrewDraftEffect,
+  removeHomebrewSkillDraftEffect as doRemoveHomebrewSkillDraftEffect,
+  toggleHomebrewSkillUseDraftEffect as doToggleHomebrewSkillUseDraftEffect,
+  removeHomebrewSkillUseDraftEffect as doRemoveHomebrewSkillUseDraftEffect,
+  removeHomebrewItem as doRemoveHomebrewItem,
+  removeHomebrewSkill as doRemoveHomebrewSkill,
+  copyHomebrewItem as doCopyHomebrewItem,
+  copyHomebrewSkill as doCopyHomebrewSkill,
+  toggleHomebrewSelect as doToggleHomebrewSelect,
+  toggleHomebrewSkillSelect as doToggleHomebrewSkillSelect,
+  grantHomebrewItem as doGrantHomebrewItem,
+  grantHomebrewSkill as doGrantHomebrewSkill,
+  setHomebrewListFilter as doSetHomebrewListFilter,
+  exportHomebrewSelection as doExportHomebrewSelection,
+  adjustInventoryCounter as doAdjustInventoryCounter,
+  startHomebrewRaceEditor as doStartHomebrewRaceEditor,
+  saveHomebrewRaceDraftFromForm as doSaveHomebrewRaceDraftFromForm,
+  removeHomebrewRace as doRemoveHomebrewRace,
+  copyHomebrewRace as doCopyHomebrewRace,
+  toggleHomebrewRaceSelect as doToggleHomebrewRaceSelect,
+  toggleHomebrewRaceEffectPicker as doToggleHomebrewRaceEffectPicker,
+  toggleHomebrewRaceDraftEffect as doToggleHomebrewRaceDraftEffect,
+  removeHomebrewRaceDraftEffect as doRemoveHomebrewRaceDraftEffect
 } from './actions.js'
 import { render } from './render.js'
 import { state, activeCharacter, resetItemFilters } from './state.js'
@@ -66,6 +101,7 @@ import { TAB_IDS } from './constants.js'
 import { DEFAULT_BACKGROUND } from './backgrounds.js'
 import { closeActionBarSkillSheet, tryOpenActionBarSkillSheet } from './action-bar-sheet.js'
 import { debounce, toast, toastCombat } from './utils.js'
+import { syncHomebrewDraftFromForm, syncHomebrewSkillDraftFromForm, syncHomebrewRaceDraftFromForm, alignHomebrewSkillSubcategory } from './homebrew.js'
 import { applyTheme, applyAppearance } from './themes.js'
 import { saveNow } from './storage.js'
 import { subcategoriesFor, visibleSubcategories } from './skills.js'
@@ -297,6 +333,35 @@ const debouncedGlossarySearch = debounce(value => {
   render({ content: true })
 }, 200)
 
+const debouncedHomebrewSearch = debounce(value => {
+  state.homebrewSearch = value
+  render({ content: true })
+}, 200)
+
+const debouncedHomebrewEffectSearch = debounce(value => {
+  syncHomebrewDraftFromForm()
+  state.homebrewEffectSearch = value
+  render({ content: true })
+}, 200)
+
+const debouncedHomebrewSkillEffectSearch = debounce(value => {
+  syncHomebrewSkillDraftFromForm()
+  state.homebrewSkillEffectSearch = value
+  render({ content: true })
+}, 200)
+
+const debouncedHomebrewSkillUseEffectSearch = debounce(value => {
+  syncHomebrewSkillDraftFromForm()
+  state.homebrewSkillUseEffectSearch = value
+  render({ content: true })
+}, 200)
+
+const debouncedHomebrewRaceEffectSearch = debounce(value => {
+  syncHomebrewRaceDraftFromForm()
+  state.homebrewRaceEffectSearch = value
+  render({ content: true })
+}, 200)
+
 const clickActions = {
   selectCharacter(target) {
     selectCharacterById(target.dataset.selectCharacter)
@@ -428,6 +493,54 @@ const clickActions = {
   createCharacterFolder() {
     const name = prompt('Folder name (e.g. Forest Ambush, Boss Room):', '')
     if (name != null) doCreateCharacterFolder(name)
+  },
+  homebrewNew() { doStartHomebrewEditor() },
+  homebrewSkillNew() { doStartHomebrewSkillEditor() },
+  homebrewRaceNew() { doStartHomebrewRaceEditor() },
+  homebrewEdit(target) { doStartHomebrewEditor(target.dataset.homebrewEdit) },
+  homebrewSkillEdit(target) { doStartHomebrewSkillEditor(target.dataset.homebrewSkillEdit) },
+  homebrewRaceEdit(target) { doStartHomebrewRaceEditor(target.dataset.homebrewRaceEdit) },
+  homebrewDelete(target) { doRemoveHomebrewItem(target.dataset.homebrewDelete) },
+  homebrewSkillDelete(target) { doRemoveHomebrewSkill(target.dataset.homebrewSkillDelete) },
+  homebrewRaceDelete(target) { doRemoveHomebrewRace(target.dataset.homebrewRaceDelete) },
+  homebrewDuplicate(target) { doCopyHomebrewItem(target.dataset.homebrewDuplicate) },
+  homebrewSkillDuplicate(target) { doCopyHomebrewSkill(target.dataset.homebrewSkillDuplicate) },
+  homebrewRaceDuplicate(target) { doCopyHomebrewRace(target.dataset.homebrewRaceDuplicate) },
+  homebrewExportSelected() { doExportHomebrewSelection(false) },
+  homebrewExportAll() { doExportHomebrewSelection(true) },
+  homebrewCancel() { doCancelHomebrewEditor() },
+  homebrewToggleEffects() { doToggleHomebrewEffectPicker() },
+  homebrewToggleSkillEffects() { doToggleHomebrewSkillEffectPicker() },
+  homebrewToggleSkillUseEffects() { doToggleHomebrewSkillUseEffectPicker() },
+  homebrewEffectRemove(target) { doRemoveHomebrewDraftEffect(target.dataset.homebrewEffectRemove) },
+  homebrewSkillEffectRemove(target) { doRemoveHomebrewSkillDraftEffect(target.dataset.homebrewSkillEffectRemove) },
+  homebrewSkillUseEffectRemove(target) { doRemoveHomebrewSkillUseDraftEffect(target.dataset.homebrewSkillUseEffectRemove) },
+  homebrewToggleCounter() { doToggleHomebrewCounterOptions() },
+  homebrewClearCounter() { doClearHomebrewDraftCounter() },
+  homebrewToggleRaceEffects() { doToggleHomebrewRaceEffectPicker() },
+  homebrewRaceEffectRemove(target) { doRemoveHomebrewRaceDraftEffect(target.dataset.homebrewRaceEffectRemove) },
+  homebrewFilter(target) { doSetHomebrewListFilter(target.dataset.homebrewFilter) },
+  grantHomebrew(target) {
+    const itemId = target.dataset.grantHomebrew
+    const select = document.querySelector(`#homebrew-grant-${CSS.escape(itemId)}`)
+    doGrantHomebrewItem(itemId, select?.value)
+  },
+  grantHomebrewSkill(target) {
+    const skillId = target.dataset.grantHomebrewSkill
+    const select = document.querySelector(`#homebrew-skill-grant-${CSS.escape(skillId)}`)
+    doGrantHomebrewSkill(skillId, select?.value)
+  },
+  homebrewSelect(target) {
+    doToggleHomebrewSelect(target.dataset.homebrewSelect, target.checked)
+  },
+  homebrewSkillSelect(target) {
+    doToggleHomebrewSkillSelect(target.dataset.homebrewSkillSelect, target.checked)
+  },
+  homebrewRaceSelect(target) {
+    doToggleHomebrewRaceSelect(target.dataset.homebrewRaceSelect, target.checked)
+  },
+  inventoryCounter(target) {
+    doAdjustInventoryCounter(target.dataset.inventoryCounter, Number(target.dataset.counterDelta || 0))
   }
 }
 
@@ -473,7 +586,7 @@ function handleTabShortcut(event) {
   if (event.ctrlKey || event.metaKey || event.altKey) return false
   if (/^(INPUT|TEXTAREA|SELECT)$/i.test(event.target?.tagName || '')) return false
   if (event.target?.isContentEditable) return false
-  if (!/^[1-7]$/.test(event.key)) return false
+  if (!/^[1-8]$/.test(event.key)) return false
   const nextTab = TAB_IDS[Number(event.key) - 1]
   if (!nextTab) return false
   event.preventDefault()
@@ -498,6 +611,23 @@ function initStaticEvents() {
   document.querySelector('#import-save')?.addEventListener('change', async event => {
     await importData(event.target.files?.[0])
     event.target.value = ''
+  })
+
+  document.addEventListener('submit', event => {
+    if (event.target?.id === 'homebrew-form') {
+      event.preventDefault()
+      doSaveHomebrewDraftFromForm(event.target)
+      return
+    }
+    if (event.target?.id === 'homebrew-skill-form') {
+      event.preventDefault()
+      doSaveHomebrewSkillDraftFromForm(event.target)
+      return
+    }
+    if (event.target?.id === 'homebrew-race-form') {
+      event.preventDefault()
+      doSaveHomebrewRaceDraftFromForm(event.target)
+    }
   })
 
   document.querySelector('#open-sidebar')?.addEventListener('click', event => {
@@ -590,6 +720,26 @@ function initDelegatedEvents() {
       debouncedCraftSearch(target.value || '')
       return
     }
+    if (target.id === 'homebrew-search') {
+      debouncedHomebrewSearch(target.value || '')
+      return
+    }
+    if (target.id === 'homebrew-effect-search') {
+      debouncedHomebrewEffectSearch(target.value || '')
+      return
+    }
+    if (target.id === 'homebrew-skill-effect-search') {
+      debouncedHomebrewSkillEffectSearch(target.value || '')
+      return
+    }
+    if (target.id === 'homebrew-skill-use-effect-search') {
+      debouncedHomebrewSkillUseEffectSearch(target.value || '')
+      return
+    }
+    if (target.id === 'homebrew-race-effect-search') {
+      debouncedHomebrewRaceEffectSearch(target.value || '')
+      return
+    }
     if (target.id === 'glossary-search') {
       debouncedGlossarySearch(target.value || '')
       return
@@ -656,6 +806,10 @@ function initDelegatedEvents() {
       render({ content: true })
       return
     }
+    if (target.id === 'import-homebrew-pack') {
+      importData(target.files?.[0]).then(() => { target.value = '' })
+      return
+    }
     if (target.id === 'change-race') {
       doSetRace(target.value)
       return
@@ -693,6 +847,29 @@ function initDelegatedEvents() {
     }
     if (target.dataset.initiativeValue) {
       doUpdateInitiativeEntry(target.dataset.initiativeValue, { initiative: target.value })
+      return
+    }
+    if (target.dataset.homebrewEffectToggle) {
+      doToggleHomebrewDraftEffect(target.dataset.homebrewEffectToggle)
+      return
+    }
+    if (target.dataset.homebrewSkillEffectToggle) {
+      doToggleHomebrewSkillDraftEffect(target.dataset.homebrewSkillEffectToggle)
+      return
+    }
+    if (target.dataset.homebrewSkillUseEffectToggle) {
+      doToggleHomebrewSkillUseDraftEffect(target.dataset.homebrewSkillUseEffectToggle)
+      return
+    }
+    if (target.dataset.homebrewRaceEffectToggle) {
+      doToggleHomebrewRaceDraftEffect(target.dataset.homebrewRaceEffectToggle)
+      return
+    }
+    if (target.matches('#homebrew-skill-form [name="hbs-category"], #homebrew-skill-form [name="hbs-skill-type"], #homebrew-skill-form [name="hbs-damage-mode"]')) {
+      syncHomebrewSkillDraftFromForm(target.closest('#homebrew-skill-form'))
+      if (target.name === 'hbs-category') alignHomebrewSkillSubcategory(state.homebrewSkillDraft)
+      render({ content: true })
+      return
     }
   })
 }

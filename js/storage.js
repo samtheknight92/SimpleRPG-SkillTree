@@ -2,6 +2,7 @@ import { SAVE_VERSION, STORAGE_KEY, LEGACY_STORAGE_KEY, LEGACY_ACTIVE_KEY, RETIR
 import { state } from './state.js'
 import { debounce, toast } from './utils.js'
 import { normalizeCharacter, stripCharacterCache } from './character.js'
+import { serializeHomebrewForSave, applyHomebrewFromSave } from './homebrew.js'
 
 /** Full app save — characters plus UI, folders, GM tools, and filters. */
 export function serializeSave() {
@@ -31,7 +32,8 @@ export function serializeSave() {
     characters: state.characters.map(character => {
       const clean = stripCharacterCache(character)
       return { ...clean, updated: new Date().toISOString() }
-    })
+    }),
+    homebrew: serializeHomebrewForSave()
   }
 }
 
@@ -116,6 +118,7 @@ export function applySavePayload(parsed, { replace = false } = {}) {
     state.characters = normalized
     state.activeId = parsed.activeId || normalized[0]?.id || null
     if (parsed.ui) applyUiFromSave(parsed.ui)
+    if (parsed.homebrew) applyHomebrewFromSave(parsed.homebrew)
   } else {
     state.characters = mergeCharactersById(normalized)
     if (parsed.activeId && state.characters.some(character => character.id === parsed.activeId)) {

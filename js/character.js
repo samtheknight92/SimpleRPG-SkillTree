@@ -1,5 +1,6 @@
 import { DEFAULT_STATS, STAT_RULES, DEFAULT_STARTING_GIL, DEFAULT_STARTING_LUMENS } from './constants.js'
 import { cache, getRace, getSkill, getItem } from './cache.js'
+import { listHomebrewSkills } from './homebrew.js'
 import { equipmentSkillStatModifiers } from './skill-effects.js'
 import { armourSkillStatModifiers, conditionalSkillStatModifiers } from './career-effects.js'
 import { raceEquipmentStatModifiers, raceEquipmentStatBreakdown } from './race-passives.js'
@@ -142,7 +143,8 @@ export function normalizeInventoryEntry(entry) {
     craftedWithSkills: Array.isArray(entry.craftedWithSkills) ? [...entry.craftedWithSkills] : [],
     craftBonuses: entry.craftBonuses && typeof entry.craftBonuses === 'object' ? { ...entry.craftBonuses } : undefined,
     enchantments: Array.isArray(entry.enchantments) ? [...entry.enchantments] : [],
-    boundTo: entry.boundTo || null
+    boundTo: entry.boundTo || null,
+    counter: Number.isFinite(Number(entry.counter)) ? Math.max(0, Math.floor(Number(entry.counter))) : undefined
   }
 }
 
@@ -200,6 +202,13 @@ export function computeStats(character) {
     const bonus = cache.passiveBonuses[skillId]
     if (!bonus) continue
     for (const [stat, value] of Object.entries(bonus)) stats[stat] = (stats[stat] || 0) + Number(value || 0)
+  }
+  for (const skillId of character?.skills || []) {
+    const skill = getSkill(skillId)
+    if (skill?.source !== 'homebrew' || !skill.statModifiers) continue
+    for (const [stat, value] of Object.entries(skill.statModifiers)) {
+      stats[stat] = (stats[stat] || 0) + Number(value || 0)
+    }
   }
   for (const [stat, value] of Object.entries(equipmentSkillStatModifiers(character))) {
     stats[stat] = (stats[stat] || 0) + Number(value || 0)
@@ -325,6 +334,12 @@ export function setRace(character, raceId) {
     }
   } else if (Array.isArray(racial[race.id])) {
     racial[race.id].forEach(skill => allowedRacial.add(skill.id))
+  }
+
+  for (const skill of listHomebrewSkills()) {
+    if (skill.category !== 'racial') continue
+    racialSkillIds.add(skill.id)
+    if (skill.subcategory === race.id) allowedRacial.add(skill.id)
   }
 
   character.skills = character.skills.filter(id => !racialSkillIds.has(id) || allowedRacial.has(id))

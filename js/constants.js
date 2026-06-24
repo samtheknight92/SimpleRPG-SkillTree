@@ -32,17 +32,39 @@ export const DEFAULT_STATS = {
 }
 
 export const STAT_RULES = {
-  hp: { label: 'HP', cost: 3, min: 1, max: 500, desc: 'Maximum health. Simple, boring, important. Like vegetables, but with less betrayal.' },
-  stamina: { label: 'Stamina', cost: 4, min: 1, max: 200, desc: 'Fuel for active skills, stances, spells and heroic nonsense.' },
-  strength: { label: 'Strength', cost: 10, min: -5, max: 15, desc: 'Physical damage, grappling and hitting problems until they become smaller problems.' },
-  magicPower: { label: 'Magic Power', cost: 10, min: -5, max: 15, desc: 'Spell power and magical effectiveness.' },
-  accuracy: { label: 'Accuracy', cost: 8, min: -5, max: 12, desc: 'Added to d20 attack rolls. Meet or beat the target\'s Physical Defence (physical attacks) or Magical Defence (magical attacks) to hit.' },
-  speed: { label: 'Speed', cost: 12, min: 1, max: 20, desc: 'Turn order, movement feel and evasion-style checks.' },
+  hp: { label: 'HP', cost: 3, min: 1, max: 1000, desc: 'Maximum health. Simple, boring, important. Like vegetables, but with less betrayal.' },
+  stamina: { label: 'Stamina', cost: 4, min: 1, max: 1000, desc: 'Fuel for active skills, stances, spells and heroic nonsense.' },
+  strength: { label: 'Strength', cost: 10, min: -5, max: 30, desc: 'Physical damage, grappling and hitting problems until they become smaller problems.' },
+  magicPower: { label: 'Magic Power', cost: 10, min: -5, max: 30, desc: 'Spell power and magical effectiveness.' },
+  accuracy: { label: 'Accuracy', cost: 8, min: -5, max: 15, desc: 'Added to d20 attack rolls. Meet or beat the target\'s Physical Defence (physical attacks) or Magical Defence (magical attacks) to hit.' },
+  speed: { label: 'Speed', cost: 12, min: 1, max: 12, desc: 'Turn order and combat movement — 1 Speed = 5ft per turn (max 60ft at cap 12). Also used for evasion-style checks.' },
   physicalDefence: { label: 'Physical Defence', cost: 10, min: 1, max: 30, desc: 'Physical AC — melee, ranged and other physical attacks must roll d20 + accuracy at or above this to hit (otherwise miss/block).' },
   magicalDefence: { label: 'Magical Defence', cost: 10, min: 1, max: 30, desc: 'Magical AC — spells and magical attacks must roll d20 + accuracy at or above this to hit (otherwise miss/block).' }
 }
 
-export const TAB_IDS = ['character', 'skills', 'stats', 'shop', 'craft', 'gm', 'notes']
+export const TAB_IDS = ['character', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes']
+
+export const HOMEBREW_STORAGE_KEY = 'lumenforge_homebrew_v1'
+export const HOMEBREW_STORE_VERSION = 1
+export const HOMEBREW_ID_PREFIX = 'custom_'
+export const HOMEBREW_ITEM_TYPES = ['weapon', 'armor', 'accessory', 'consumable', 'material']
+export const HOMEBREW_RARITIES = ['common', 'uncommon', 'rare', 'epic', 'legendary']
+export const HOMEBREW_SKILL_CATEGORIES = ['weapons', 'magic', 'careers', 'fusion', 'ascension', 'ultimate', 'racial']
+export const HOMEBREW_SKILL_DAMAGE_MODES = [
+  { id: 'none', label: 'No damage roll' },
+  { id: 'dice', label: 'Custom damage dice' },
+  { id: 'basic_plus_dice', label: 'Basic attack + custom dice' },
+  { id: 'elemental_dice', label: 'Custom elemental dice' },
+  { id: 'basic_plus_elemental_dice', label: 'Basic attack + elemental dice' }
+]
+export const HOMEBREW_ELEMENT_TYPES = ['fire', 'ice', 'thunder', 'earth', 'wind', 'water', 'darkness', 'light', 'holy', 'poison']
+/** Stat added to custom dice damage on homebrew action use (dice total + stat value). */
+export const HOMEBREW_DAMAGE_STAT_KEYS = ['strength', 'magicPower', 'physicalDefence', 'magicalDefence', 'speed']
+export const HOMEBREW_SKILL_TYPES = [
+  { id: 'passive', label: 'Passive' },
+  { id: 'toggle', label: 'Toggle (stance)' },
+  { id: 'activatable', label: 'Action (uses stamina)' }
+]
 
 /**
  * Skill tree categories hidden from the Skills tab until ready.
@@ -62,7 +84,8 @@ export const DISPLAY_CATEGORIES = {
   fusion: 'Fusion',
   ascension: 'Ascension',
   ultimate: 'Ultimate',
-  racial: 'Race'
+  racial: 'Race',
+  homebrew: 'Homebrew'
 }
 
 /** Friendly labels for skill subcategory keys (careers, fusion trees, etc.). */

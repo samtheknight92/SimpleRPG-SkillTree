@@ -109,6 +109,58 @@ export function rollWeaponDamage(formula, rollDiceFn) {
   }
 }
 
+/** Flat bonus + dice chains — e.g. `100 + 10d20`, `2d6+1d8`, `1d8+2`. */
+export function parseDamageExpression(expr) {
+  const text = String(expr || '').trim().replace(/\s+/g, ' ')
+  if (!text) return null
+  if (parseDamageFormula(text)) return [{ sign: 1, raw: text }]
+  const terms = []
+  let rest = text
+  while (rest.length) {
+    const match = rest.match(/^\s*(?:([+-])\s*)?(\d+d\d+(?:\+\d+)?|\d+)/i)
+    if (!match) return null
+    terms.push({
+      sign: match[1] === '-' ? -1 : 1,
+      raw: match[2]
+    })
+    rest = rest.slice(match[0].length)
+  }
+  return terms.length ? terms : null
+}
+
+export function isValidDamageExpression(expr) {
+  return parseDamageExpression(expr) != null
+}
+
+export function rollDamageExpression(expr, rollDiceFn) {
+  const terms = parseDamageExpression(expr)
+  if (!terms?.length || !rollDiceFn) return null
+  let total = 0
+  const parts = []
+  for (const { sign, raw } of terms) {
+    const dice = parseDamageFormula(raw)
+    if (dice) {
+      const rolled = rollWeaponDamage(raw, rollDiceFn)
+      total += sign * rolled.total
+      const prefix = sign < 0 ? '−' : parts.length ? '+' : ''
+      parts.push(`${prefix}${raw}: ${rolled.detail}`.replace(/^\+/, ''))
+      continue
+    }
+    if (/^\d+$/.test(raw)) {
+      total += sign * Number(raw)
+      const prefix = sign < 0 ? '−' : parts.length ? '+' : ''
+      parts.push(`${prefix}${raw}`.replace(/^\+/, ''))
+      continue
+    }
+    return null
+  }
+  return {
+    total,
+    detail: parts.join(' '),
+    summary: `${expr} → ${parts.join(' ')} = ${total}`
+  }
+}
+
 function rollOrAverageFormula(formula, rollDiceFn) {
   if (rollDiceFn) return rollWeaponDamage(formula, rollDiceFn)
   const parsed = parseDamageFormula(formula)
@@ -727,6 +779,25 @@ export function resolveDamageBreakdown(character, skill, options = {}) {
     total,
     minApplied: rawTotal < MIN_ATTACK_DAMAGE,
     conditionalBonuses: flatBonuses.filter(b => b.conditional)
+  }
+}
+
+/** Roll direct damage for an official (non-homebrew) skill use toast. Returns null when no damage dice in desc. */
+export function resolveOfficialSkillUseDamage(character, skill, rollDiceFn) {
+  if (!character || !skill || !rollDiceFn) return null
+  if (skill.source === 'homebrew') return null
+  if (isBasicAttackSkill(skill) || isStrikerMultiBasicSkill(skill)) return null
+  if (!skillDealsDirectDamage(skill)) return null
+  if (!parsePrimaryDice(skill.desc)) return null
+
+  const breakdown = resolveDamageBreakdown(character, skill, { rollDiceFn })
+  if (!breakdown?.parts?.length) return null
+
+  const plain = formatDamageBreakdownPlain(breakdown)
+  if (!plain) return null
+  return {
+    total: breakdown.total,
+    summary: plain.replace(/^Damage \(yours\):\s*/, '')
   }
 }
 

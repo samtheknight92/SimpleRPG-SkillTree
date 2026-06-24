@@ -13,7 +13,7 @@ import { effectDetailLines, resolveSkillEffects } from './effects.js'
 import { resolveActivationEffects } from './skill-activation.js'
 import { displayCategory, getSkill, isToggleSkill, prereqLabel } from './skills.js'
 import { cache } from './cache.js'
-import { shopMinLevelForItem, isShopPurchaseItem } from './items.js'
+import { shopMinLevelForItem, isShopPurchaseItem, itemHasCounter, itemCounterLabel, inventoryCounterValue } from './items.js'
 import { characterLevelInfo } from './level.js'
 import { resolveSkillEffectBreakdown, formatSkillEffectBreakdownPlain, skillHasEffectBreakdown } from './damage-breakdown.js'
 import { itemCompareLines } from './item-compare.js'
@@ -36,6 +36,9 @@ export function itemTooltip(item, character = null, entry = null) {
   if (entry) {
     const crafted = craftedByLabel(entry, character)
     if (crafted) lines.push(crafted)
+    if (itemHasCounter(item)) {
+      lines.push(`${itemCounterLabel(item)}: ${inventoryCounterValue(entry, item)}`)
+    }
   }
   if (item.desc) lines.push('', item.desc)
   if (item.damage) lines.push(`Damage: ${item.damage}`)

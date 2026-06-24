@@ -2,6 +2,7 @@
 
 import { COMBAT_GLOSSARY_ENTRIES } from './glossary-combat.js'
 import { buildEffectGlossaryEntries } from './glossary-effects.js'
+import { buildMaxStatGlossaryEntries } from './max-stat-rewards.js'
 
 export const GLOSSARY_CATEGORIES = [
   'Resources & money',
@@ -42,7 +43,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['hit points', 'health'],
     category: 'Resources & money',
     summary: 'How much harm you can take before you are out of the fight.',
-    detail: 'HP is your health pool. When you take damage, subtract it from current HP. At 0 HP your character is down — the GM decides if that means unconscious, captured, or needing rescue. Raise max HP with stat upgrades, gear, and helpful effects. The action bar has quick +/− buttons during fights.\n\nAt the table: “Subtract damage from HP; at zero, you’re out until someone helps.”'
+    detail: 'HP is your health pool. When you take damage, subtract it from current HP. At 0 HP your character is down — the GM decides if that means unconscious, captured, or needing rescue. Raise max HP with stat upgrades (Lumens cap: 1000), gear, and helpful effects. The action bar has quick +/− buttons during fights.\n\nAt the table: “Subtract damage from HP; at zero, you’re out until someone helps.”'
   },
   {
     id: 'stamina',
@@ -50,7 +51,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['STA', 'fuel'],
     category: 'Resources & money',
     summary: 'Fuel for actions — skills, spells, stances, and sustained songs.',
-    detail: 'Many active skills list a Stamina cost. Pay it when you use the skill (or once when you start a sustained performance). If you run out, you cannot pay for costly actions until you recover — rest, items, or GM ruling. Toggle skills may cost Stamina to turn on. Max Stamina can rise from stats, race, gear, and effects.'
+    detail: 'Many active skills list a Stamina cost. Pay it when you use the skill (or once when you start a sustained performance). If you run out, you cannot pay for costly actions until you recover — rest, items, or GM ruling. Toggle skills may cost Stamina to turn on. Max Stamina from Lumens upgrades caps at 1000; race, gear, and effects can add more.'
   },
   {
     id: 'strength',
@@ -58,7 +59,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['STR', 'str'],
     category: 'Core stats',
     summary: 'Physical power — melee damage, grappling, and brute-force checks.',
-    detail: 'Strength adds to physical attacks and strength-based skill effects. Negative Strength is allowed at low levels — you are weak until you invest Lumens on the Stats tab. Some songs and buffs temporarily raise Strength for allies in range.'
+    detail: 'Strength adds to physical attacks and strength-based skill effects. Negative Strength is allowed at low levels — you are weak until you invest Lumens on the Stats tab. Lumens upgrade cap: 30. At cap you unlock the hidden reward Super Strength (see dictionary). Some songs and buffs temporarily raise Strength for allies in range.'
   },
   {
     id: 'magic-power',
@@ -66,7 +67,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['magic power', 'magical power', 'MAG'],
     category: 'Core stats',
     summary: 'Spell strength — how hard your magic hits or heals.',
-    detail: 'Magic Power adds to spell damage, healing, and magical skill effects. Magical attacks use your Accuracy against the target\'s Magical Defence to see if they hit. Invest on the Stats tab like other core stats.'
+    detail: 'Magic Power adds to spell damage, healing, and magical skill effects. Magical attacks use your Accuracy against the target\'s Magical Defence to see if they hit. Lumens upgrade cap: 30. At cap you unlock Arcane Surge. Invest on the Stats tab like other core stats.'
   },
   {
     id: 'accuracy',
@@ -74,15 +75,15 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['ACC', 'to hit', 'attack roll'],
     category: 'Core stats',
     summary: 'Added to d20 attack rolls — meet or beat the target\'s defence to hit.',
-    detail: 'When you attack, roll d20 + Accuracy. Physical attacks compare to Physical Defence. Magical attacks compare to Magical Defence. Meet or beat the number to hit; otherwise you miss or they block. Songs and teamwork can raise or lower Accuracy for a round.\n\nAt the table: “Roll d20 plus Accuracy — did you beat their defence?”'
+    detail: 'When you attack, roll d20 + Accuracy. Physical attacks compare to Physical Defence. Magical attacks compare to Magical Defence. Meet or beat the number to hit; otherwise you miss. Lumens upgrade cap: 15. At cap you unlock Unerring Aim (misses still deal half damage; natural 1 is basic attack only). Songs and teamwork can raise or lower Accuracy for a round.\n\nAt the table: “Roll d20 plus Accuracy — did you beat their defence?”'
   },
   {
     id: 'speed',
     term: 'Speed',
     aliases: ['SPD', 'initiative'],
     category: 'Core stats',
-    summary: 'Turn order, movement feel, and dodge-style checks.',
-    detail: 'Speed helps decide who acts first in combat. Some skills and racial traits reference Speed for evasion or special saves. The GM Tools tab has an initiative tracker for the table — Speed is a guide, not auto-sorted by the app.'
+    summary: 'Turn order, movement (1 Speed = 5ft per turn), and dodge-style checks.',
+    detail: 'Speed helps decide who acts first in combat. At the table, treat 1 Speed as 5ft of movement per turn (cap 12 = 60ft). Lumens upgrade cap: 12. At cap you unlock Afterimage (movement never provokes; win initiative ties vs equal or lower Speed). Some skills and racial traits reference Speed for evasion or special saves. The GM Tools tab has an initiative tracker — Speed is a guide, not auto-sorted by the app.'
   },
   {
     id: 'physical-defence',
@@ -90,7 +91,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['physical defense', 'physical AC', 'armour against hits'],
     category: 'Core stats',
     summary: 'Armour against physical hits — melee, arrows, claws.',
-    detail: 'Physical Defence is the target number enemies must meet with d20 + Accuracy to hit you with physical attacks. Gear, shields, stances, and buffs raise it. Some items say they ignore part of an enemy\'s Physical Defence — that means their attack roll needs less to connect.'
+    detail: 'Physical Defence is the target number enemies must meet with d20 + Accuracy to hit you with physical attacks. Lumens upgrade cap: 30. At cap you unlock Iron Skin (physical crits against you count as normal hits). Gear, shields, stances, and buffs raise it further. Some items say they ignore part of an enemy\'s Physical Defence — that means their attack roll needs less to connect.'
   },
   {
     id: 'magical-defence',
@@ -98,7 +99,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['magical defense', 'magical AC', 'spell defence'],
     category: 'Core stats',
     summary: 'Armour against spells and magical attacks.',
-    detail: 'Magical Defence works like Physical Defence but for spells, curses, and magical skills. Ward effects, auras, and harmony bonuses often stack Magical Defence for the party. Fear and charm saves sometimes reference this stat in skill text.'
+    detail: 'Magical Defence works like Physical Defence but for spells, curses, and magical skills. Lumens upgrade cap: 30. At cap you unlock Spell Turn (failed saves vs spells count as successes). Ward effects, auras, and harmony bonuses often stack Magical Defence for the party. Fear and charm saves sometimes reference this stat in skill text.'
   },
   {
     id: 'tier',
@@ -397,6 +398,14 @@ export const GLOSSARY_ENTRIES = [
     detail: 'Shop and inventory labels show One-handed or Two-handed on weapons. Bows, crossbows, staves, spears, halberds, and great weapons are usually two-handed. Swords, daggers, and light axes are usually one-handed. Equipping a two-handed weapon clears the off-hand slot automatically.'
   },
   {
+    id: 'homebrew',
+    term: 'Homebrew (custom content)',
+    aliases: ['custom items', 'custom skills', 'homebrew tab', 'custom content'],
+    category: 'Character & app',
+    summary: 'Create custom items and skills in this browser — Homebrew tab.',
+    detail: 'The Homebrew tab lets your table add custom items and skills without editing game files. Content saves locally; export packs to share. Homebrew skills pick a normal category (Weapons, Magic, Careers, Fusion, etc.) and appear on the Skills tab with a Homebrew pill. Custom attack skills can set damage dice, scaling stat, and on-use self-buffs. See ROADMAP-Homebrew.md in the project for full scope.'
+  },
+  {
     id: 'save-export',
     term: 'Save & export',
     aliases: ['import', 'export save', 'backup'],
@@ -410,8 +419,10 @@ export function getAllGlossaryEntries(effectDefinitions = {}) {
   const staticIds = new Set(GLOSSARY_ENTRIES.map(entry => entry.id))
   const combat = COMBAT_GLOSSARY_ENTRIES.filter(entry => !staticIds.has(entry.id))
   combat.forEach(entry => staticIds.add(entry.id))
+  const maxStat = buildMaxStatGlossaryEntries().filter(entry => !staticIds.has(entry.id))
+  maxStat.forEach(entry => staticIds.add(entry.id))
   const effects = buildEffectGlossaryEntries(effectDefinitions).filter(entry => !staticIds.has(entry.id))
-  return [...GLOSSARY_ENTRIES, ...combat, ...effects]
+  return [...GLOSSARY_ENTRIES, ...combat, ...maxStat, ...effects]
 }
 
 export function filterGlossaryEntries(query = '', effectDefinitions = {}) {

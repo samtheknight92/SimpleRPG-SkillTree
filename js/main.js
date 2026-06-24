@@ -1,5 +1,6 @@
 import { loadGameData } from './data.js'
 import { initCache, flattenSkills, itemSources } from './cache.js'
+import { loadHomebrewStore, registerHomebrewInCache } from './homebrew.js'
 import { load, saveNow } from './storage.js'
 import { state, activeCharacter, applyUrlState } from './state.js'
 import { render } from './render.js'
@@ -15,7 +16,9 @@ async function boot() {
   try {
     initTheme()
     await loadGameData()
+    loadHomebrewStore()
     initCache()
+    registerHomebrewInCache()
     load()
     applyUrlState()
     initEvents()

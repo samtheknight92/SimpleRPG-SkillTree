@@ -1,6 +1,7 @@
 import { getSkillsData } from './data.js'
 import { HIDDEN_SKILL_CATEGORIES, SKILL_SUBCATEGORY_LABELS, TIER_MIN_LEVEL } from './constants.js'
-import { cache, flattenSkills, getSkill, displayCategory } from './cache.js'
+import { cache, flattenSkills, getSkill, displayCategory, getRace } from './cache.js'
+import { listHomebrewSkills, listHomebrewRaces, homebrewSubcategoriesForCategory } from './homebrew.js'
 import { activeCharacter } from './state.js'
 import { isGmMode } from './gm-mode.js'
 import { titleCase } from './utils.js'
@@ -73,6 +74,9 @@ function racialTreeData(character) {
   if (character?.race && Array.isArray(racial[character.race])) {
     return { [character.race]: racial[character.race] }
   }
+  if (character?.race && getRace(character.race)?.source === 'homebrew') {
+    return { [character.race]: [] }
+  }
   return {}
 }
 
@@ -99,6 +103,7 @@ export function subcategoriesFor(category, character = activeCharacter()) {
       return subs
     }
     if (racial[character.race]) return [character.race]
+    if (getRace(character.race)?.source === 'homebrew') return [character.race]
     return []
   }
   return Object.keys(getSkillsData()[category] || {})
@@ -138,6 +143,12 @@ export function isMonsterRacialSkill(skill) {
 
 export function raceAllowed(character, skill) {
   if (!skill) return false
+  if (skill.source === 'homebrew') {
+    if (skill.category !== 'racial') return true
+    if (isGmMode()) return true
+    if (!character?.race) return false
+    return skill.subcategory === character.race
+  }
   if (isGmMode()) return true
   if (skill.category !== 'racial') return true
   if (!character?.race) return false
@@ -154,6 +165,11 @@ export function raceAllowed(character, skill) {
 
 export function isSkillVisible(character, skill) {
   if (!skill || !character) return false
+  if (skill.source === 'homebrew') {
+    if (!categoryAllowed(character, skill.category)) return false
+    if (skill.category === 'racial' && !raceAllowed(character, skill)) return false
+    return true
+  }
   if (isGmMode()) return true
   if (!raceAllowed(character, skill)) return false
   if (!categoryAllowed(character, skill.category)) return false
@@ -172,25 +188,54 @@ export function isSkillVisible(character, skill) {
 export function skillsInSubcategory(category, subcategory, character = activeCharacter()) {
   const tree = categoryTreeData(category, character)
   const list = listForSubcategory(tree, subcategory)
-  if (!Array.isArray(list)) return []
-  return list
-    .map(skill => getSkill(skill.id) || { ...skill, category, subcategory })
-    .filter(skill => isGmMode() || isSkillVisible(character, skill))
+  const official = Array.isArray(list)
+    ? list.map(skill => getSkill(skill.id) || { ...skill, category, subcategory })
+    : []
+  const homebrew = listHomebrewSkills()
+    .filter(skill => skill.category === category && (skill.subcategory || 'custom') === subcategory)
+    .map(skill => getSkill(skill.id))
+    .filter(Boolean)
+  const merged = [...official, ...homebrew]
+  return merged.filter(skill => isGmMode() || isSkillVisible(character, skill))
 }
 
 export function visibleSubcategories(category, character = activeCharacter()) {
   if (!categoryAllowed(character, category)) return []
-  if (isGmMode()) return subcategoriesFor(category, character)
-  return subcategoriesFor(category, character).filter(sub =>
-    skillsInSubcategory(category, sub, character).length > 0
-  )
+  const official = isGmMode()
+    ? subcategoriesFor(category, character)
+    : subcategoriesFor(category, character).filter(sub =>
+      skillsInSubcategory(category, sub, character).length > 0
+    )
+  const extra = homebrewSubcategoriesForCategory(category).filter(sub => !official.includes(sub))
+  let merged = [...official, ...extra]
+  if (category === 'racial') {
+    const homebrewRaceIds = listHomebrewRaces().map(race => race.id)
+    if (isGmMode()) merged = [...new Set([...merged, ...homebrewRaceIds])]
+    else if (character?.race && getRace(character.race)?.source === 'homebrew') {
+      merged = [...new Set([...merged, character.race])]
+    }
+  }
+  if (isGmMode()) {
+    if (merged.length) return merged
+    if (category === 'racial') {
+      return [...new Set([...homebrewSubcategoriesForCategory(category), ...listHomebrewRaces().map(race => race.id)])]
+    }
+    return homebrewSubcategoriesForCategory(category)
+  }
+  return merged.filter(sub => {
+    if (category === 'racial' && character?.race === sub && getRace(sub)?.source === 'homebrew') return true
+    return skillsInSubcategory(category, sub, character).length > 0
+  })
 }
 
 export function visibleSkillCategories(character = activeCharacter()) {
+  const hasHomebrewInCategory = category =>
+    listHomebrewSkills().some(skill => skill.category === category)
+
   const allowed = category =>
     !isSkillCategoryHidden(category) &&
     categoryAllowed(character, category) &&
-    (isGmMode() || visibleSubcategories(category, character).length > 0)
+    (isGmMode() || visibleSubcategories(category, character).length > 0 || hasHomebrewInCategory(category))
 
   if (isGmMode()) {
     return Object.keys(getSkillsData()).filter(category => !isSkillCategoryHidden(category))
@@ -199,7 +244,7 @@ export function visibleSkillCategories(character = activeCharacter()) {
 }
 
 export function displaySubcategory(subcategory) {
-  return SKILL_SUBCATEGORY_LABELS[subcategory] || titleCase(subcategory)
+  return SKILL_SUBCATEGORY_LABELS[subcategory] || getRace(subcategory)?.name || titleCase(subcategory)
 }
 
 export function isToggleSkill(skill) {

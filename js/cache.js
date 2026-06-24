@@ -1,5 +1,6 @@
 import { DISPLAY_CATEGORIES } from './constants.js'
 import { getGameData, getRacesData, getSkillsData } from './data.js'
+import { registerMaxStatRewardEffects } from './max-stat-rewards.js'
 import { titleCase } from './utils.js'
 import { formatStatModifiers } from './format.js'
 
@@ -23,7 +24,8 @@ export const cache = {
   careerHealBonuses: {},
   careerActionBuffs: {},
   careerStaminaDiscounts: {},
-  effectDefinitions: {}
+  effectDefinitions: {},
+  homebrewRaceById: new Map()
 }
 
 function sanitizeItem(item) {
@@ -58,6 +60,7 @@ function registerSkillTree(category, categoryData, parentSubcategory = null) {
 export function initCache() {
   const data = getGameData()
   cache.effectDefinitions = data.effects || {}
+  registerMaxStatRewardEffects(cache.effectDefinitions)
   cache.toggleBonuses = data['skill-meta']?.TOGGLE_BONUSES || {}
   cache.passiveBonuses = data['skill-meta']?.PASSIVE_SKILL_BONUSES || {}
   cache.passiveSkillEffects = data['skill-meta']?.PASSIVE_SKILL_EFFECTS || {}
@@ -90,6 +93,28 @@ export function initCache() {
   for (const item of cache.itemsFlat) {
     if (item.type) types.add(String(item.type).toLowerCase())
     if (item.rarity) rarities.add(String(item.rarity).toLowerCase())
+  }
+  cache.itemTypeOptions = [...types].sort()
+  cache.itemRarityOptions = [...rarities].sort((a, b) => {
+    if (a === 'all') return -1
+    if (b === 'all') return 1
+    return rarityRank(a) - rarityRank(b)
+  })
+}
+
+export function appendHomebrewToCache(items) {
+  for (const item of items || []) {
+    if (!item?.id) continue
+    cache.itemById.set(item.id, item)
+    cache.itemsFlat.push(item)
+    cache.itemSearchText.set(item.id, buildItemSearchText(item))
+  }
+  cache.itemsFlat.sort((a, b) => String(a.name).localeCompare(String(b.name)))
+  const types = new Set(['all'])
+  const rarities = new Set(['all'])
+  for (const row of cache.itemsFlat) {
+    if (row.type) types.add(String(row.type).toLowerCase())
+    if (row.rarity) rarities.add(String(row.rarity).toLowerCase())
   }
   cache.itemTypeOptions = [...types].sort()
   cache.itemRarityOptions = [...rarities].sort((a, b) => {
@@ -148,11 +173,20 @@ export function rarityRank(rarity) {
 }
 
 export function getRace(raceId) {
-  return getRacesData()[raceId] || null
+  return cache.homebrewRaceById.get(raceId) || getRacesData()[raceId] || null
+}
+
+export function registerHomebrewRacesInCache(races = []) {
+  cache.homebrewRaceById.clear()
+  for (const race of races) {
+    if (race?.id) cache.homebrewRaceById.set(race.id, race)
+  }
 }
 
 export function raceOptions() {
-  return Object.values(getRacesData()).sort((a, b) => a.name.localeCompare(b.name))
+  const official = Object.values(getRacesData())
+  const homebrew = [...cache.homebrewRaceById.values()]
+  return [...official, ...homebrew].sort((a, b) => a.name.localeCompare(b.name))
 }
 
 export function getSkill(skillId) {

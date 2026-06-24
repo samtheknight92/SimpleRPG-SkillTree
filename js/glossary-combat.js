@@ -7,7 +7,15 @@ export const COMBAT_GLOSSARY_ENTRIES = [
     aliases: ['to hit', 'hit roll', 'd20 attack'],
     category: 'Combat & rolls',
     summary: 'Roll d20 + Accuracy — meet or beat the target\'s defence to hit.',
-    detail: 'Physical attacks use Physical Defence as the target number. Magical attacks use Magical Defence. Rolling a 20 on the die usually always hits; rolling a 1 usually always misses (unless your table says otherwise). Some skills treat 18–20 as extra-good hits. Add bonus damage only after you know the attack landed.\n\nAt the table: “Roll the d20, add Accuracy, and compare to their defence number.”'
+    detail: 'Physical attacks use Physical Defence as the target number. Magical attacks use Magical Defence. Rolling a 20 on the die usually always hits; rolling a 1 usually misses (see Natural 1 and Unerring Aim if you maxed Accuracy). Some skills treat 18–20 as extra-good hits. Add bonus damage only after you know the attack landed.\n\nAt the table: “Roll the d20, add Accuracy, and compare to their defence number.”'
+  },
+  {
+    id: 'natural-1',
+    term: 'Natural 1 (attack roll)',
+    aliases: ['nat 1', 'critical failure', 'auto miss', 'rolled a one'],
+    category: 'Combat & rolls',
+    summary: 'Rolling a 1 on the d20 before bonuses — usually an automatic miss.',
+    detail: 'By default, a natural 1 on an attack roll misses even if your Accuracy would have beaten the target\'s defence. Some tables also treat it as a critical failure (fumble) — follow your GM. Halfling Lucky may let you reroll natural 1s.\n\nIf you maxed Accuracy and have Unerring Aim: a miss still deals half total damage (round down), but a natural 1 only deals basic attack damage — weapon die and similar, no Accuracy or other bonuses.\n\nAt the table: “Snake eyes on the d20 — that’s a miss unless a rule says otherwise.”'
   },
   {
     id: 'saving-throw',

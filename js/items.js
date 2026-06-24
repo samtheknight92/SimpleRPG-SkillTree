@@ -16,12 +16,80 @@ const NON_STACKABLE_TYPES = new Set([
 
 export function isStackableItem(item) {
   if (!item) return false
+  if (itemHasCounter(item)) return false
   if (item.stackable === true) return true
   if (item.stackable === false) return false
   const type = String(item.type || '').toLowerCase()
   if ([...NON_STACKABLE_TYPES].some(part => type.includes(part))) return false
   if ([...STACKABLE_TYPES].some(part => type.includes(part))) return true
   return false
+}
+
+export function itemCounterLabel(item) {
+  const label = String(item?.counterLabel || '').trim()
+  return label || null
+}
+
+export function itemHasCounter(item) {
+  return Boolean(itemCounterLabel(item))
+}
+
+export function defaultInventoryCounter(item) {
+  if (!itemHasCounter(item)) return 0
+  const value = Number(item.counterDefault)
+  return Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0
+}
+
+export function inventoryCounterValue(entry, item) {
+  if (!itemHasCounter(item)) return 0
+  const value = Number(entry?.counter)
+  return Number.isFinite(value) ? Math.max(0, Math.floor(value)) : defaultInventoryCounter(item)
+}
+
+const COUNTER_RULE_OPS = new Set(['above', 'below', 'eq'])
+
+export function normalizeCounterRuleOperator(raw) {
+  const op = String(raw || 'above').toLowerCase()
+  return COUNTER_RULE_OPS.has(op) ? op : 'above'
+}
+
+export function counterRuleThreshold(item) {
+  const value = Number(item?.counterRuleValue)
+  return Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0
+}
+
+export function counterRuleMatches(entry, item) {
+  if (!itemHasCounter(item)) return false
+  const value = inventoryCounterValue(entry, item)
+  const threshold = counterRuleThreshold(item)
+  const op = normalizeCounterRuleOperator(item?.counterRuleOperator)
+  if (op === 'below') return value < threshold
+  if (op === 'eq') return value === threshold
+  return value > threshold
+}
+
+export function counterRulePhrase(item) {
+  const threshold = counterRuleThreshold(item)
+  const op = normalizeCounterRuleOperator(item?.counterRuleOperator)
+  if (op === 'below') return `is below ${threshold}`
+  if (op === 'eq') return `is ${threshold}`
+  return `is above ${threshold}`
+}
+
+export function itemBlocksUnequipWithCounter(entry, item) {
+  if (!item?.blockUnequipWithCounter || !itemHasCounter(item)) return false
+  return counterRuleMatches(entry, item)
+}
+
+export function itemBlocksRemoveWithCounter(entry, item) {
+  if (!item?.blockRemoveWithCounter || !itemHasCounter(item)) return false
+  return counterRuleMatches(entry, item)
+}
+
+export function counterMaxValue(item) {
+  if (!itemHasCounter(item)) return null
+  const max = Number(item.counterMax)
+  return Number.isFinite(max) && max > 0 ? Math.floor(max) : null
 }
 
 export function inventoryEntryStackKey(entry) {
@@ -158,7 +226,15 @@ function matchesCatalogFilters(item, character, skip = {}) {
     const search = itemCatalogSearchText(item)
     if (terms.length && !terms.every(term => search.includes(term))) return false
   }
-  if (!skip.source && state.itemSource !== 'all' && item.source !== state.itemSource) return false
+  if (!skip.source && state.itemSource !== 'all') {
+    if (state.itemSource === 'shop') {
+      const inShop = item.source === 'shop'
+        || (item.source === 'homebrew' && item.listInShop && itemPriceGil(item) > 0)
+      if (!inShop) return false
+    } else if (state.itemSource === 'homebrew') {
+      if (item.source !== 'homebrew') return false
+    } else if (item.source !== state.itemSource) return false
+  }
   if (!skip.rarity && state.itemRarity !== 'all' && String(item.rarity || 'common').toLowerCase() !== state.itemRarity) {
     return false
   }
@@ -186,7 +262,14 @@ export function catalogSourceCounts(character = activeCharacter()) {
     if (!matchesCatalogFilters(item, character, { source: true })) continue
     counts.all += 1
     const source = item.source || 'shop'
-    counts[source] = (counts[source] || 0) + 1
+    if (source === 'homebrew') {
+      counts.homebrew = (counts.homebrew || 0) + 1
+      if (item.listInShop && itemPriceGil(item) > 0) counts.shop = (counts.shop || 0) + 1
+    } else if (source === 'shop') {
+      counts.shop = (counts.shop || 0) + 1
+    } else {
+      counts[source] = (counts[source] || 0) + 1
+    }
   }
   return counts
 }
@@ -208,7 +291,8 @@ export function shopMinLevelForItem(item) {
 }
 
 export function isShopPurchaseItem(item) {
-  return item?.source === 'shop' && itemPriceGil(item) > 0
+  if (item?.source === 'shop' && itemPriceGil(item) > 0) return true
+  return item?.source === 'homebrew' && item.listInShop && itemPriceGil(item) > 0
 }
 
 export function isShopItemLevelUnlocked(character, item) {
@@ -229,7 +313,12 @@ export function shopPurchaseCheck(character, item, { free = false } = {}) {
   if (!item) return { ok: false, reason: 'Unknown item.' }
   if (free || isGmMode()) return { ok: true }
   if (!isShopPurchaseItem(item)) {
-    return { ok: false, reason: item?.source === 'profession' ? 'Craft on the Craft tab.' : 'Not sold in the shop.' }
+    const reason = item?.source === 'profession'
+      ? 'Craft on the Craft tab.'
+      : item?.source === 'homebrew'
+        ? 'Grant from the Homebrew tab.'
+        : 'Not sold in the shop.'
+    return { ok: false, reason }
   }
   if (!character) return { ok: false, reason: 'No character loaded.' }
   const need = shopMinLevelForItem(item)
@@ -286,6 +375,7 @@ export function addItemToInventory(character, itemId, qty = 1) {
     return existing
   }
   const entry = { uid: uid('item'), itemId, qty }
+  if (itemHasCounter(item)) entry.counter = defaultInventoryCounter(item)
   character.inventory.push(entry)
   return entry
 }
