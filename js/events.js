@@ -435,6 +435,14 @@ const clickActions = {
   },
   fullResource(target) { doFillResource(target.dataset.fullResource) },
   coin(target) { doAdjustCurrency(Number(target.dataset.coin || 0)) },
+  diceModStep(target) {
+    const delta = Number(target.dataset.diceModStep || 0)
+    const input = document.querySelector('#dice-mod')
+    if (!input || !delta) return
+    const next = Math.max(-100, Math.min(100, Number(input.value || 0) + delta))
+    input.value = String(next)
+    state.dice.modifier = next
+  },
   rollDice() {
     state.dice.count = Math.max(1, Math.min(40, Number(document.querySelector('#dice-count')?.value || 1)))
     state.dice.sides = Math.max(2, Math.min(100, Number(document.querySelector('#dice-sides')?.value || 20)))
@@ -741,6 +749,10 @@ function initDelegatedEvents() {
       debouncedGlossarySearch(target.value || '')
       return
     }
+    if (target.id === 'dice-mod') {
+      state.dice.modifier = Math.max(-100, Math.min(100, Number(target.value || 0)))
+      return
+    }
     if (target.id === 'character-notes') {
       state.notesDirty = true
       debouncedNotesSave(target.value || '')
@@ -761,6 +773,10 @@ function initDelegatedEvents() {
     }
     if (target.matches('[data-money-input]')) {
       doSetGil(Number(target.value || 0))
+      return
+    }
+    if (target.id === 'dice-mod') {
+      state.dice.modifier = Math.max(-100, Math.min(100, Number(target.value || 0)))
       return
     }
 
@@ -865,6 +881,11 @@ function initDelegatedEvents() {
     if (target.matches('#homebrew-skill-form [name="hbs-category"], #homebrew-skill-form [name="hbs-skill-type"], #homebrew-skill-form [name="hbs-damage-mode"]')) {
       syncHomebrewSkillDraftFromForm(target.closest('#homebrew-skill-form'))
       if (target.name === 'hbs-category') alignHomebrewSkillSubcategory(state.homebrewSkillDraft)
+      render({ content: true })
+      return
+    }
+    if (target.matches('#homebrew-form [name="hb-type"]')) {
+      syncHomebrewDraftFromForm(target.closest('#homebrew-form'))
       render({ content: true })
       return
     }

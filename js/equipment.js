@@ -37,6 +37,8 @@ export function getWeaponKind(item) {
   if (!item) return null
   const type = String(item.type || '').toLowerCase()
   if (!type.includes('weapon')) return null
+  const explicit = String(item.weaponKind || '').trim().toLowerCase()
+  if (explicit) return explicit
   const text = `${item.id} ${item.name} ${item.desc || ''}`
   for (const [kind, pattern] of WEAPON_KIND_PATTERNS) {
     if (pattern.test(text)) return kind

@@ -220,7 +220,7 @@
         "tier": 1,
         "cost": 8,
         "staminaCost": 0,
-        "desc": "Passive: +1 Accuracy while wielding a ranged weapon.",
+        "desc": "Passive: +1 Accuracy and +1 Strength while wielding a ranged weapon.",
         "icon": "🏹",
         "prerequisites": {
           "type": "NONE",
@@ -234,7 +234,7 @@
         "tier": 1,
         "cost": 8,
         "staminaCost": 0,
-        "desc": "Passive: +2 accuracy when you didn't move this turn",
+        "desc": "Passive: +2 Accuracy while wielding a ranged weapon and you did not move this turn.",
         "icon": "🎯",
         "prerequisites": {
           "type": "NONE",
@@ -370,7 +370,7 @@
         "tier": 3,
         "cost": 40,
         "staminaCost": 3,
-        "desc": "Action: Ranged weapon attack (d20 + accuracy vs Physical Defence; weapon damage on hit), then move up to 15ft without provoking opportunity attacks.",
+        "desc": "Action: Ranged weapon attack (d20 + accuracy vs Physical Defence; weapon damage on hit), then move up to 15ft without provoking opportunity attacks. If you know Quick Draw, that 15ft is in addition to your normal movement this turn.",
         "icon": "↩️",
         "prerequisites": {
           "type": "AND",

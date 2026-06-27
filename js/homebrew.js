@@ -7,10 +7,12 @@ import {
   HOMEBREW_SKILL_DAMAGE_MODES,
   HOMEBREW_ELEMENT_TYPES,
   HOMEBREW_SKILL_CATEGORIES,
-  HOMEBREW_DAMAGE_STAT_KEYS
+  HOMEBREW_DAMAGE_STAT_KEYS,
+  OFFICIAL_WEAPON_KINDS,
+  ANY_WEAPON_KIND
 } from './constants.js'
 import { isValidDamageDice } from './homebrew-combat.js'
-import { debounce } from './utils.js'
+import { debounce, titleCase } from './utils.js'
 import { cache, getItem, getItemSearchText, getSkill, rarityRank, registerHomebrewRacesInCache } from './cache.js'
 import { normalizeCounterRuleOperator } from './items.js'
 import { getRacesData, getSkillsData } from './data.js'
@@ -136,6 +138,7 @@ export function emptyHomebrewDraft(overrides = {}) {
     icon: '✦',
     rarity: 'common',
     damage: '',
+    weaponKind: '',
     listInShop: false,
     shopPriceGil: 0,
     statModifiers: {},
@@ -172,6 +175,9 @@ export function normalizeHomebrewItem(raw) {
     if (Number.isFinite(value) && value !== 0) statModifiers[key] = value
   }
   const damage = type.includes('weapon') ? String(raw.damage || '').trim().slice(0, 24) : ''
+  const weaponKind = type.includes('weapon')
+    ? normalizeHomebrewWeaponKind(raw.weaponKind)
+    : undefined
   const priceGil = listInShop ? shopPriceGil : 0
   const specialEffects = normalizeSpecialEffectIds(raw.specialEffects)
   const counterLabel = String(raw.counterLabel || '').trim().slice(0, 24)
@@ -197,6 +203,7 @@ export function normalizeHomebrewItem(raw) {
     icon: String(raw.icon || '✦').trim().slice(0, 8) || '✦',
     rarity,
     damage: damage || undefined,
+    weaponKind,
     statModifiers: Object.keys(statModifiers).length ? statModifiers : undefined,
     specialEffects: specialEffects.length ? specialEffects : undefined,
     counterLabel: counterLabel || undefined,
@@ -325,6 +332,10 @@ export function emptyHomebrewSkillDraft(overrides = {}) {
     damageDice: '',
     damageStat: '',
     elementalType: '',
+    lockWeaponKinds: [],
+    lockRaces: [],
+    lockMinLevel: '',
+    lockSkills: [],
     statModifiers: {},
     specialEffects: [],
     activationEffects: [],
@@ -369,6 +380,13 @@ export function normalizeHomebrewSkill(raw) {
   const staminaCost = skillType === 'passive'
     ? undefined
     : Math.max(0, Math.floor(Number(raw.staminaCost ?? 0)))
+  const lockWeaponKinds = normalizeHomebrewLockWeaponKinds(raw.lockWeaponKinds)
+  const lockRaces = normalizeHomebrewLockRaces(raw.lockRaces)
+  const lockMinLevelRaw = Number(raw.lockMinLevel)
+  const lockMinLevel = Number.isFinite(lockMinLevelRaw) && lockMinLevelRaw > 0
+    ? Math.floor(lockMinLevelRaw)
+    : undefined
+  const lockSkills = normalizeHomebrewLockSkills(raw.lockSkills)
   return {
     id,
     name,
@@ -386,6 +404,10 @@ export function normalizeHomebrewSkill(raw) {
     damageStat,
     elementalType,
     activationEffects: activationEffects.length ? activationEffects : undefined,
+    lockWeaponKinds: lockWeaponKinds.length ? lockWeaponKinds : undefined,
+    lockRaces: lockRaces.length ? lockRaces : undefined,
+    lockMinLevel,
+    lockSkills: lockSkills.length ? lockSkills : undefined,
     statModifiers: Object.keys(statModifiers).length ? statModifiers : undefined,
     specialEffects: specialEffects.length ? specialEffects : undefined,
     source: 'homebrew',
@@ -561,6 +583,84 @@ export function homebrewRaceOptionsForSkills() {
     const label = id => getHomebrewRace(id)?.name || getRacesData()[id]?.name || id
     return label(a).localeCompare(label(b))
   })
+}
+
+export function normalizeHomebrewWeaponKind(raw) {
+  const value = String(raw || '').trim().toLowerCase().replace(/[^a-z0-9_]+/g, '_').slice(0, 32)
+  return value || undefined
+}
+
+function normalizeHomebrewLockWeaponKinds(raw) {
+  if (!Array.isArray(raw)) return []
+  return [...new Set(raw.map(normalizeHomebrewWeaponKind).filter(Boolean))]
+}
+
+function normalizeHomebrewLockRaces(raw) {
+  if (!Array.isArray(raw)) return []
+  const allowed = new Set(homebrewRaceOptionsForSkills())
+  return [...new Set(raw.map(id => String(id || '').trim().toLowerCase()).filter(id => allowed.has(id)))]
+}
+
+function normalizeHomebrewLockSkills(raw) {
+  if (!Array.isArray(raw)) return []
+  return [...new Set(raw.map(id => String(id || '').trim()).filter(id => getSkill(id)))]
+}
+
+export function weaponKindDisplayLabel(kind) {
+  if (!kind) return ''
+  if (kind === ANY_WEAPON_KIND) return 'Any weapon'
+  if (kind === 'striker' || kind === 'unarmed') return 'Empty hands'
+  if (kind === 'ranged') return 'Ranged'
+  if (OFFICIAL_WEAPON_KINDS.includes(kind)) return titleCase(kind)
+  const named = listHomebrewItems().find(item => item.weaponKind === kind)
+  if (named) return `${named.name} (${kind})`
+  return kind.replace(/_/g, ' ')
+}
+
+export function homebrewWeaponKindOptions() {
+  const kinds = new Set(OFFICIAL_WEAPON_KINDS)
+  kinds.add(ANY_WEAPON_KIND)
+  for (const item of listHomebrewItems()) {
+    if (item.weaponKind) kinds.add(item.weaponKind)
+  }
+  for (const skill of listHomebrewSkills()) {
+    for (const kind of skill.lockWeaponKinds || []) kinds.add(kind)
+  }
+  return [...kinds].sort((a, b) => weaponKindDisplayLabel(a).localeCompare(weaponKindDisplayLabel(b)))
+}
+
+export function homebrewSkillLockOptions() {
+  const seen = new Set()
+  const rows = []
+  for (const skill of cache.skillsFlat || []) {
+    if (!skill?.id || seen.has(skill.id)) continue
+    seen.add(skill.id)
+    rows.push({ id: skill.id, name: skill.name, source: skill.source || 'official' })
+  }
+  for (const skill of listHomebrewSkills()) {
+    if (seen.has(skill.id)) continue
+    seen.add(skill.id)
+    rows.push({ id: skill.id, name: skill.name, source: 'homebrew' })
+  }
+  return rows.sort((a, b) => a.name.localeCompare(b.name))
+}
+
+export function homebrewSkillLockSummary(skill) {
+  if (!skill || skill.source !== 'homebrew') return ''
+  const parts = []
+  if (skill.lockMinLevel) parts.push(`Level ${skill.lockMinLevel}+`)
+  if (skill.lockRaces?.length) {
+    const labels = skill.lockRaces.map(id => getHomebrewRace(id)?.name || getRacesData()[id]?.name || id)
+    parts.push(`Race: ${labels.join(' / ')}`)
+  }
+  if (skill.lockWeaponKinds?.length) {
+    parts.push(`Equip: ${skill.lockWeaponKinds.map(weaponKindDisplayLabel).join(' / ')}`)
+  }
+  if (skill.lockSkills?.length) {
+    const labels = skill.lockSkills.map(id => getSkill(id)?.name || id)
+    parts.push(`Needs: ${labels.join(' + ')}`)
+  }
+  return parts.join(' · ')
 }
 
 export function officialSubcategoriesForCategory(category) {
@@ -767,6 +867,7 @@ export function draftFromHomebrewItem(item) {
     icon: item.icon,
     rarity: item.rarity,
     damage: item.damage || '',
+    weaponKind: item.weaponKind || '',
     listInShop: Boolean(item.listInShop),
     shopPriceGil: item.shopPriceGil || 0,
     statModifiers: { ...(item.statModifiers || {}) },
@@ -811,6 +912,8 @@ export function parseHomebrewDraftForm(form) {
     icon: form.querySelector('[name="hb-icon"]')?.value,
     rarity: form.querySelector('[name="hb-rarity"]')?.value,
     damage: form.querySelector('[name="hb-damage"]')?.value,
+    weaponKind: form.querySelector('[name="hb-weapon-kind-custom"]')?.value
+      || form.querySelector('[name="hb-weapon-kind"]')?.value,
     listInShop: form.querySelector('[name="hb-list-in-shop"]')?.checked,
     shopPriceGil: form.querySelector('[name="hb-price"]')?.value,
     statModifiers,
@@ -857,7 +960,11 @@ export function draftFromHomebrewSkill(skill) {
     elementalType: skill.elementalType || '',
     statModifiers: { ...(skill.statModifiers || {}) },
     specialEffects: [...(skill.specialEffects || [])],
-    activationEffects: [...(skill.activationEffects || [])]
+    activationEffects: [...(skill.activationEffects || [])],
+    lockWeaponKinds: [...(skill.lockWeaponKinds || [])],
+    lockRaces: [...(skill.lockRaces || [])],
+    lockMinLevel: skill.lockMinLevel ?? '',
+    lockSkills: [...(skill.lockSkills || [])]
   })
 }
 
@@ -875,6 +982,10 @@ function parseUseEffectsFromForm(form, draft) {
   }).filter(row => row.effectId)
 }
 
+function parseLockListFromForm(form, prefix) {
+  return [...form.querySelectorAll(`[name="${prefix}"]:checked`)].map(el => el.value).filter(Boolean)
+}
+
 export function parseHomebrewSkillDraftForm(form, draft = null) {
   const statModifiers = {}
   for (const key of STAT_KEYS) {
@@ -887,6 +998,10 @@ export function parseHomebrewSkillDraftForm(form, draft = null) {
   const damageDice = String(form.querySelector('[name="hbs-damage-dice"]')?.value || '').trim()
   const damageStat = form.querySelector('[name="hbs-damage-stat"]')?.value || ''
   const elementalType = normalizeElementType(form.querySelector('[name="hbs-elemental-type"]')?.value) || ''
+  const lockMinLevelRaw = form.querySelector('[name="hbs-lock-min-level"]')?.value
+  const lockMinLevel = lockMinLevelRaw === '' || lockMinLevelRaw == null
+    ? ''
+    : Math.max(1, Math.floor(Number(lockMinLevelRaw)))
   const baseDraft = draft || state.homebrewSkillDraft
   return emptyHomebrewSkillDraft({
     id: form.querySelector('[name="hbs-id"]')?.value,
@@ -904,6 +1019,10 @@ export function parseHomebrewSkillDraftForm(form, draft = null) {
     damageStat,
     elementalType,
     statModifiers,
+    lockWeaponKinds: parseLockListFromForm(form, 'hbs-lock-weapon'),
+    lockRaces: parseLockListFromForm(form, 'hbs-lock-race'),
+    lockMinLevel,
+    lockSkills: parseLockListFromForm(form, 'hbs-lock-skill'),
     activationEffects: parseUseEffectsFromForm(form, baseDraft)
   })
 }
@@ -915,6 +1034,9 @@ export function syncHomebrewSkillDraftFromForm(form = null) {
   state.homebrewSkillDraft = {
     ...parsed,
     specialEffects: [...(state.homebrewSkillDraft.specialEffects || [])],
+    lockWeaponKinds: [...(parsed.lockWeaponKinds || [])],
+    lockRaces: [...(parsed.lockRaces || [])],
+    lockSkills: [...(parsed.lockSkills || [])],
     activationEffects: parsed.activationEffects?.length
       ? parsed.activationEffects
       : [...(state.homebrewSkillDraft.activationEffects || [])],

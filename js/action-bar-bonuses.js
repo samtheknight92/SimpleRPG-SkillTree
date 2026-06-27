@@ -5,6 +5,7 @@ import { displayCategory } from './skills.js'
 import { isToggleSkill } from './skills.js'
 import { getSkillActivationType } from './skill-activation.js'
 import { getActionBarBlockReason } from './combat.js'
+import { ANY_WEAPON_KIND } from './constants.js'
 import {
   resolveSkillEffectBreakdown,
   formatDamageBreakdownHtml,
@@ -54,7 +55,12 @@ const ELEMENT_FUSION_KINDS = new Set([
 ])
 
 /** Any equipped main-hand weapon (for generic weapon + magic fusions). */
-export const ANY_WEAPON_KIND = '__any_weapon__'
+export { ANY_WEAPON_KIND } from './constants.js'
+
+function homebrewSkillWeaponLocks(skill) {
+  if (skill?.source !== 'homebrew' || !Array.isArray(skill.lockWeaponKinds)) return []
+  return skill.lockWeaponKinds.map(k => String(k || '').trim().toLowerCase()).filter(Boolean)
+}
 
 function weaponKindsFromFusion(fusionType) {
   const fusion = String(fusionType || '').toLowerCase()
@@ -83,6 +89,8 @@ export function getSkillWeaponKinds(skill) {
 
   if (WEAPON_SKILL_KINDS.includes(sub)) kinds.add(sub)
   if (sub === 'ranged_magic') kinds.add('ranged')
+
+  for (const kind of homebrewSkillWeaponLocks(skill)) kinds.add(kind)
 
   for (const kind of weaponKindsFromFusion(fusion)) kinds.add(kind)
   if (String(fusion).toLowerCase().startsWith('bow_')) kinds.add('ranged')

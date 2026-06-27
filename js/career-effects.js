@@ -1,4 +1,5 @@
 import { cache, getSkill, getItem } from './cache.js'
+import { characterWieldsWeaponKind } from './equipment.js'
 
 function getEffectDefinition(effectId) {
   return cache.effectDefinitions?.[effectId] || null
@@ -35,6 +36,8 @@ function evaluateDamageCondition(character, condition, options = {}) {
   switch (condition) {
     case 'selfBelowHalfHp':
       return isBelowHalfHp(character)
+    case 'notMovedThisTurn':
+      return !character?.movedThisTurn
     case 'targetBelowHalfHp':
       return options.targetBelowHalfHp === true
     case 'targetNotActed':
@@ -46,6 +49,23 @@ function evaluateDamageCondition(character, condition, options = {}) {
     default:
       return true
   }
+}
+
+export function conditionalSkillStatLabel(condition) {
+  switch (condition) {
+    case 'selfBelowHalfHp':
+      return 'below half HP'
+    case 'notMovedThisTurn':
+      return "didn't move this turn"
+    default:
+      return condition || 'conditional'
+  }
+}
+
+export function evaluateSkillStatCondition(character, rule) {
+  if (!character || !rule) return false
+  if (rule.weaponKind && !characterWieldsWeaponKind(character, rule.weaponKind)) return false
+  return evaluateDamageCondition(character, rule.condition)
 }
 
 export function armourSkillStatModifiers(character) {
@@ -70,9 +90,9 @@ export function conditionalSkillStatModifiers(character) {
   for (const skillId of character.skills) {
     const rule = cache.conditionalSkillStats?.[skillId]
     if (!rule) continue
-    if (!evaluateDamageCondition(character, rule.condition)) continue
+    if (!evaluateSkillStatCondition(character, rule)) continue
     for (const [stat, value] of Object.entries(rule)) {
-      if (stat === 'condition') continue
+      if (stat === 'condition' || stat === 'weaponKind') continue
       totals[stat] = (totals[stat] || 0) + Number(value || 0)
     }
   }

@@ -1,5 +1,5 @@
 import { $, $$, esc, titleCase } from './utils.js'
-import { STAT_RULES, ITEMS_PER_PAGE, DRAGONBORN_AFFINITIES, HOMEBREW_ITEM_TYPES, HOMEBREW_RARITIES, HOMEBREW_SKILL_CATEGORIES, HOMEBREW_SKILL_TYPES, HOMEBREW_SKILL_DAMAGE_MODES, HOMEBREW_ELEMENT_TYPES, HOMEBREW_DAMAGE_STAT_KEYS, TIER_LUMEN_COST } from './constants.js'
+import { STAT_RULES, ITEMS_PER_PAGE, DRAGONBORN_AFFINITIES, HOMEBREW_ITEM_TYPES, HOMEBREW_RARITIES, HOMEBREW_SKILL_CATEGORIES, HOMEBREW_SKILL_TYPES, HOMEBREW_SKILL_DAMAGE_MODES, HOMEBREW_ELEMENT_TYPES, HOMEBREW_DAMAGE_STAT_KEYS, TIER_LUMEN_COST, WEAPON_SKILL_TREE_INTROS } from './constants.js'
 import { state, activeCharacter } from './state.js'
 import { raceOptions, getRace, getSkill, getItem, cache } from './cache.js'
 import { computeStats, statBreakdown, getEffect } from './character.js'
@@ -17,9 +17,10 @@ import {
   prereqLabel,
   humanStarterWeaponOptions
 } from './skills.js'
+import { renderHowToPlayTab } from './how-to-play.js'
 import { characterLevelInfo, levelTooltip } from './level.js'
 import { isTableRuleRacePassive, racePassiveTooltip } from './race-passives.js'
-import { listHomebrewItems, listHomebrewSkills, listHomebrewRaces, homebrewSkillTreeOptions, homebrewRaceOptionsForSkills } from './homebrew.js'
+import { listHomebrewItems, listHomebrewSkills, listHomebrewRaces, homebrewSkillTreeOptions, homebrewRaceOptionsForSkills, homebrewWeaponKindOptions, weaponKindDisplayLabel, homebrewSkillLockOptions, homebrewSkillLockSummary } from './homebrew.js'
 import { homebrewDamageStatLabel } from './homebrew-combat.js'
 import { isGmMode } from './gm-mode.js'
 import {
@@ -327,7 +328,7 @@ export function renderContent() {
   const focusCapture = captureContentFocus()
   const content = $('#app-content')
   const character = activeCharacter()
-  if (!character && state.tab !== 'gm' && state.tab !== 'homebrew') {
+  if (!character && state.tab !== 'gm' && state.tab !== 'homebrew' && state.tab !== 'howtoplay') {
     content.innerHTML = `
       <div class="notice-card">
         <h2>Welcome to LumenForge ✨</h2>
@@ -346,7 +347,8 @@ export function renderContent() {
     craft: () => renderCraftTab(character),
     homebrew: () => renderHomebrewTab(),
     gm: () => renderGmTab(character),
-    notes: () => renderNotesTab(character)
+    notes: () => renderNotesTab(character),
+    howtoplay: () => renderHowToPlayTab()
   }
   content.innerHTML = tabs[state.tab]?.() || ''
   restoreContentFocus(focusCapture)
@@ -494,6 +496,69 @@ function renderHomebrewEffectSection(draft, options = {}) {
         </div>
       ` : ''}
     </div>
+  `
+}
+
+function renderHomebrewSkillLocksSection(draft) {
+  const lockedWeapons = new Set(draft.lockWeaponKinds || [])
+  const lockedRaces = new Set(draft.lockRaces || [])
+  const lockedSkills = new Set(draft.lockSkills || [])
+  const isRacial = draft.category === 'racial'
+  const weaponRows = homebrewWeaponKindOptions().map(kind => `
+    <label class="pill-label homebrew-lock-chip">
+      <input type="checkbox" name="hbs-lock-weapon" value="${esc(kind)}" ${lockedWeapons.has(kind) ? 'checked' : ''} />
+      ${esc(weaponKindDisplayLabel(kind))}
+    </label>
+  `).join('')
+  const raceRows = homebrewRaceOptionsForSkills().map(raceId => {
+    const race = getRace(raceId)
+    return `
+    <label class="pill-label homebrew-lock-chip">
+      <input type="checkbox" name="hbs-lock-race" value="${esc(raceId)}" ${lockedRaces.has(raceId) ? 'checked' : ''} />
+      ${esc(race?.icon || '✦')} ${esc(race?.name || displaySubcategory(raceId))}
+    </label>
+  `
+  }).join('')
+  const skillRows = homebrewSkillLockOptions().map(skill => `
+    <label class="pill-label homebrew-lock-chip">
+      <input type="checkbox" name="hbs-lock-skill" value="${esc(skill.id)}" ${lockedSkills.has(skill.id) ? 'checked' : ''} />
+      ${esc(skill.name)}${skill.source === 'homebrew' ? ' (HB)' : ''}
+    </label>
+  `).join('')
+  return `
+    <div class="homebrew-locks span-2">
+      <div class="kicker">Optional locks</div>
+      <p class="subtle">Pick any combination. Weapon locks grey out the action bar until equipped; race, level, and skill locks apply when learning (GM Mode bypasses).</p>
+      <label class="field-label mt-12">Minimum character level</label>
+      <input class="input" type="number" min="1" name="hbs-lock-min-level" value="${draft.lockMinLevel !== '' && draft.lockMinLevel != null ? esc(String(draft.lockMinLevel)) : ''}" placeholder="Tier default if empty" />
+      <label class="field-label mt-12">Require equipped weapon type (for actions)</label>
+      <div class="homebrew-lock-grid">${weaponRows || '<span class="subtle">Create a weapon with a custom type first, or use the list above.</span>'}</div>
+      ${isRacial ? `<p class="subtle mt-12">Racial skills already lock to the race chosen above — no extra race lock needed.</p>` : `
+        <label class="field-label mt-12">Allowed races (learn)</label>
+        <div class="homebrew-lock-grid">${raceRows}</div>
+      `}
+      <label class="field-label mt-12">Required skills learned first</label>
+      <div class="homebrew-lock-grid homebrew-lock-grid-skills">${skillRows || '<span class="subtle">No skills in catalog yet.</span>'}</div>
+    </div>
+  `
+}
+
+function homebrewItemWeaponKindFields(draft) {
+  const kinds = homebrewWeaponKindOptions().filter(k => k !== '__any_weapon__')
+  const current = draft.weaponKind || ''
+  const inList = kinds.includes(current)
+  return `
+    <label class="field-label mt-12 hb-weapon-field">Weapon type</label>
+    <select class="input hb-weapon-field" name="hb-weapon-kind">
+      <option value="" ${!current || !inList ? 'selected' : ''}>Auto-detect from name/description</option>
+      ${kinds.map(kind => `<option value="${esc(kind)}" ${current === kind ? 'selected' : ''}>${esc(weaponKindDisplayLabel(kind))}</option>`).join('')}
+    </select>
+    <label class="field-label mt-12 hb-weapon-field">Or new custom type</label>
+    <input class="input hb-weapon-field" name="hb-weapon-kind-custom" maxlength="32" list="hb-weapon-kind-list" value="${!inList && current ? esc(current) : ''}" placeholder="e.g. katana, whip, gun" />
+    <datalist id="hb-weapon-kind-list">
+      ${kinds.map(kind => `<option value="${esc(kind)}">${esc(weaponKindDisplayLabel(kind))}</option>`).join('')}
+    </datalist>
+    <p class="subtle mt-12 hb-weapon-field">Custom types appear in skill weapon locks after you save this item.</p>
   `
 }
 
@@ -967,6 +1032,16 @@ function renderSkillsTab(character) {
     ? 0
     : list.filter(skill => !character.skills.includes(skill.id)).reduce((sum, skill) => sum + skill.cost, 0)
 
+  const treeIntro = state.skillCategory === 'weapons' && WEAPON_SKILL_TREE_INTROS[state.skillSubcategory]
+  const introHtml = treeIntro
+    ? `<aside class="card skill-tree-intro" aria-label="${esc(displaySubcategory(state.skillSubcategory))} rules">
+        <div class="kicker">${esc(displaySubcategory(state.skillSubcategory))} at the table</div>
+        <ul class="skill-tree-intro-list">
+          ${treeIntro.map(line => `<li>${line}</li>`).join('')}
+        </ul>
+      </aside>`
+    : ''
+
   return `
     <div class="toolbar skills-toolbar">
       <input class="input" id="skill-search" placeholder="Search skills, effects, prerequisites..." value="${esc(state.skillSearch)}" />
@@ -975,6 +1050,7 @@ function renderSkillsTab(character) {
     </div>
     <div class="segmented">${categories.map(category => `<button type="button" data-skill-category="${esc(category)}" class="${category === state.skillCategory ? 'active' : ''}">${displayCategory(category)}</button>`).join('')}</div>
     <div class="segmented">${subs.map(sub => `<button type="button" data-skill-subcategory="${esc(sub)}" class="${sub === state.skillSubcategory ? 'active' : ''}">${displaySubcategory(sub)}</button>`).join('')}</div>
+    ${introHtml}
     <div class="skill-tree">
       ${[...byTier.entries()].sort((a, b) => a[0] - b[0]).map(([tier, skills]) => `
         <section class="tier-lane">
@@ -1199,7 +1275,7 @@ function renderHomebrewTab() {
           <label class="homebrew-check"><input type="checkbox" data-homebrew-select="${esc(item.id)}" ${checked ? 'checked' : ''} /> ${fallbackIcon(item)} <strong>${esc(item.name)}</strong></label>
           <span class="pill warn">Item</span>
         </div>
-        <div class="item-meta">${esc(item.type)} · ${esc(item.rarity || 'common')} · ${esc(shopLabel)}${item.damage ? ` · ${esc(item.damage)}` : ''}${itemHasCounter(item) ? ` · Counter: ${esc(itemCounterLabel(item))}` : ''}</div>
+        <div class="item-meta">${esc(item.type)} · ${esc(item.rarity || 'common')} · ${esc(shopLabel)}${item.damage ? ` · ${esc(item.damage)}` : ''}${item.weaponKind ? ` · ${esc(weaponKindDisplayLabel(item.weaponKind))}` : ''}${itemHasCounter(item) ? ` · Counter: ${esc(itemCounterLabel(item))}` : ''}</div>
         <p class="subtle">${esc(item.desc || 'No description.')}</p>
         <div class="wrap detail-pills">${Object.entries(item.statModifiers || {}).map(([k, v]) => `<span class="pill good">${titleCase(k)} ${v >= 0 ? '+' : ''}${v}</span>`).join('')}${(item.specialEffects || []).map(id => renderEffectPill(id, item.name)).join('') || (!Object.keys(item.statModifiers || {}).length ? '<span class="pill">No stat modifiers</span>' : '')}</div>
         <div class="skill-actions">
@@ -1226,13 +1302,15 @@ function renderHomebrewTab() {
     const useFx = (skill.activationEffects || []).length
       ? ` · ${skill.activationEffects.length} on-use effect${skill.activationEffects.length === 1 ? '' : 's'}`
       : ''
+    const lockLabel = homebrewSkillLockSummary(skill)
+    const lockMeta = lockLabel ? ` · ${lockLabel}` : ''
     return `
       <article class="item-card homebrew-row">
         <div class="item-title">
           <label class="homebrew-check"><input type="checkbox" data-homebrew-skill-select="${esc(skill.id)}" ${checked ? 'checked' : ''} /> ${esc(skill.icon || '✦')} <strong>${esc(skill.name)}</strong></label>
           <span class="pill good">Skill</span>
         </div>
-        <div class="item-meta">${displayCategory(skill.category)} · ${displaySubcategory(skill.subcategory || 'custom')} · Tier ${skill.tier} · ${skill.cost}L · ${esc(typeLabel)}${esc(damageLabel)}${esc(useFx)}</div>
+        <div class="item-meta">${displayCategory(skill.category)} · ${displaySubcategory(skill.subcategory || 'custom')} · Tier ${skill.tier} · ${skill.cost}L · ${esc(typeLabel)}${esc(damageLabel)}${esc(useFx)}${esc(lockMeta)}</div>
         <p class="subtle">${esc(skill.desc || 'No description.')}</p>
         <div class="wrap detail-pills">${Object.entries(skill.statModifiers || {}).map(([k, v]) => `<span class="pill good">${titleCase(k)} ${v >= 0 ? '+' : ''}${v}</span>`).join('')}${(skill.specialEffects || []).map(id => renderEffectPill(id, skill.name)).join('') || (!Object.keys(skill.statModifiers || {}).length ? '<span class="pill">No stat modifiers</span>' : '')}</div>
         <div class="skill-actions">
@@ -1284,7 +1362,7 @@ function renderHomebrewTab() {
         </div>
         <button type="button" class="ghost-btn tiny" data-homebrew-cancel>Cancel</button>
       </div>
-      <form id="homebrew-form" class="homebrew-form grid two">
+      <form id="homebrew-form" class="homebrew-form grid two${String(draft.type || '').includes('weapon') ? '' : ' homebrew-item-not-weapon'}">
         <input type="hidden" name="hb-id" value="${esc(draft.id || '')}" />
         <div>
           <label class="field-label">Name *</label>
@@ -1301,6 +1379,7 @@ function renderHomebrewTab() {
           </select>
           <label class="field-label mt-12">Damage (weapons, e.g. 1d8)</label>
           <input class="input" name="hb-damage" value="${esc(draft.damage || '')}" placeholder="1d8" />
+          ${homebrewItemWeaponKindFields(draft)}
         </div>
         <div>
           <label class="field-label">Description *</label>
@@ -1409,6 +1488,7 @@ function renderHomebrewTab() {
           toggleCheckbox: 'homebrew-skill-effect-toggle',
           removeBtn: 'homebrew-skill-effect-remove'
         })}
+        ${renderHomebrewSkillLocksSection(skillDraft)}
         <div class="span-2">
           <button type="submit" class="primary-btn">Save skill</button>
         </div>
@@ -1932,7 +2012,14 @@ function renderGmTab(character) {
         <div class="grid three">
           <label><span class="field-label">Count</span><input class="input" id="dice-count" type="number" min="1" max="40" value="${state.dice.count}" /></label>
           <label><span class="field-label">Sides</span><input class="input" id="dice-sides" type="number" min="2" max="100" value="${state.dice.sides}" /></label>
-          <label><span class="field-label">Modifier</span><input class="input" id="dice-mod" type="number" min="-100" max="100" value="${state.dice.modifier}" /></label>
+          <label class="dice-mod-field">
+            <span class="field-label">Modifier</span>
+            <div class="dice-mod-control">
+              <button type="button" class="dice-step-btn" data-dice-mod-step="-1" aria-label="Decrease modifier by 1">−</button>
+              <input class="input dice-mod-input" id="dice-mod" type="number" min="-100" max="100" step="1" value="${state.dice.modifier}" aria-label="Roll modifier" />
+              <button type="button" class="dice-step-btn" data-dice-mod-step="1" aria-label="Increase modifier by 1">+</button>
+            </div>
+          </label>
         </div>
         <button type="button" class="primary-btn full" data-roll-dice>Roll</button>
         <div class="mt-14">${diceResult}</div>

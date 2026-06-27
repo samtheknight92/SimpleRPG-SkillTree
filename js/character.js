@@ -2,7 +2,7 @@ import { DEFAULT_STATS, STAT_RULES, DEFAULT_STARTING_GIL, DEFAULT_STARTING_LUMEN
 import { cache, getRace, getSkill, getItem } from './cache.js'
 import { listHomebrewSkills } from './homebrew.js'
 import { equipmentSkillStatModifiers } from './skill-effects.js'
-import { armourSkillStatModifiers, conditionalSkillStatModifiers } from './career-effects.js'
+import { armourSkillStatModifiers, conditionalSkillStatModifiers, conditionalSkillStatLabel, evaluateSkillStatCondition } from './career-effects.js'
 import { raceEquipmentStatModifiers, raceEquipmentStatBreakdown } from './race-passives.js'
 import {
   equippedEnchantmentStatTotals,
@@ -272,9 +272,12 @@ export function statBreakdown(character, stat) {
   }
   for (const skillId of character.skills || []) {
     const rule = cache.conditionalSkillStats?.[skillId]
-    if (!rule?.[stat] || rule.condition !== 'selfBelowHalfHp') continue
+    if (!rule?.[stat]) continue
+    if (!evaluateSkillStatCondition(character, rule)) continue
     const skill = getSkill(skillId)
-    rows.push({ label: `${skill?.name || titleCase(skillId)} (below half HP)`, value: rule[stat] })
+    const suffix = conditionalSkillStatLabel(rule.condition)
+    const weaponNote = rule.weaponKind ? `, ${rule.weaponKind} equipped` : ''
+    rows.push({ label: `${skill?.name || titleCase(skillId)} (${suffix}${weaponNote})`, value: rule[stat] })
   }
   rows.push(...raceEquipmentStatBreakdown(character, stat))
   rows.push(...enchantmentStatBreakdown(character, stat))

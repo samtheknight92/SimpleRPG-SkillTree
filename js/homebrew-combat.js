@@ -52,17 +52,17 @@ export function resolveHomebrewSkillUseDamage(character, skill, rollDiceFn) {
     const statVal = statKey ? Number(stats[statKey] || 0) : 0
     total += rolled.total + statVal
     const usesElement = mode.includes('elemental')
-    const ele = usesElement && skill.elementalType
+    const elePrefix = usesElement && skill.elementalType
       ? `${titleCase(skill.elementalType)} `
       : ''
     const statLabel = statKey && statVal
-      ? ` + ${homebrewDamageStatLabel(statKey)} ${statVal}`
+      ? ` + ${homebrewDamageStatLabel(statKey)} ${statVal < 0 ? `(${statVal})` : statVal}`
       : ''
-    parts.push(`${ele}${dice}: ${rolled.detail}${statLabel}`)
+    parts.push(`${elePrefix}${rolled.detail}${statLabel}`)
   }
 
   if (!parts.length) return null
-  return { total, summary: parts.join('; ') }
+  return { total, summary: parts.join(' · ') }
 }
 
 export function resolveSkillUseDamage(character, skill, rollDiceFn) {

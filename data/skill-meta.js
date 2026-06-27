@@ -22,7 +22,7 @@ export const PASSIVE_SKILL_BONUSES = {
 export const EQUIPMENT_SKILL_EFFECTS = {
   sword_basics: { weaponKind: 'sword', effectId: 'sword_training', statModifiers: { accuracy: 1 } },
   sword_stance: { weaponKind: 'sword', effectId: 'combat_stance', statModifiers: { physicalDefence: 1 } },
-  ranged_basics: { weaponKind: 'ranged', effectId: 'ranged_training', statModifiers: { accuracy: 1 } },
+  ranged_basics: { weaponKind: 'ranged', effectId: 'ranged_training', statModifiers: { accuracy: 1, strength: 1 } },
   axe_basics: { weaponKind: 'axe', effectId: 'axe_training', statModifiers: { accuracy: 1 } },
   dagger_basics: { weaponKind: 'dagger', effectId: 'dagger_training', statModifiers: { accuracy: 1 } },
   polearm_basics: { weaponKind: 'polearm', effectId: 'polearm_training', statModifiers: { accuracy: 1 } },
@@ -80,4 +80,9 @@ export const INCOMPATIBILITIES = {
   regeneration: ['rapid_healing', 'water_mastery'],
   rapid_healing: ['regeneration', 'water_mastery'],
   water_mastery: ['regeneration', 'rapid_healing']
+}
+
+/** Stat bonuses gated on a condition (see career-effects.js evaluateSkillStatCondition). */
+export const CONDITIONAL_SKILL_STATS = {
+  steady_aim: { accuracy: 2, condition: 'notMovedThisTurn', weaponKind: 'ranged' }
 }

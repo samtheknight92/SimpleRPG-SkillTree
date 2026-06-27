@@ -1191,6 +1191,44 @@
     padding: 12px 14px;
     font-size: 14px;
   }
+
+  .dice-step-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    min-height: 48px;
+    padding: 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1;
+    border-radius: 12px;
+    border: 1px solid rgba(129, 161, 216, 0.28);
+    background: rgba(129, 161, 216, 0.12);
+    color: var(--text, #e8eef8);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .dice-step-btn:active {
+    background: rgba(129, 161, 216, 0.22);
+  }
+
+  .dice-mod-control .dice-mod-input {
+    border-radius: 0;
+    min-height: 48px;
+    font-size: 1.05rem;
+  }
+
+  .dice-mod-control .dice-step-btn:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .dice-mod-control .dice-step-btn:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 }
 
 @media (max-width: 420px) {

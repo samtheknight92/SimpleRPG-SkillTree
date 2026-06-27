@@ -1,5 +1,6 @@
 import { getEquippedWeapon, getEquippedOffhand, getWeaponKind, characterHandsEmpty } from './equipment.js'
-import { getSkillWeaponKinds, ANY_WEAPON_KIND } from './action-bar-bonuses.js'
+import { getSkillWeaponKinds } from './action-bar-bonuses.js'
+import { ANY_WEAPON_KIND } from './constants.js'
 import { getSkillActivationType } from './skill-activation.js'
 import {
   BASIC_ATTACK_ID,

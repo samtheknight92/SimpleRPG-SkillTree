@@ -252,7 +252,8 @@
       "weaponKind": "ranged",
       "effectId": "ranged_training",
       "statModifiers": {
-        "accuracy": 1
+        "accuracy": 1,
+        "strength": 1
       }
     },
     "axe_basics": {
@@ -453,6 +454,11 @@
     }
   },
   "CONDITIONAL_SKILL_STATS": {
+    "steady_aim": {
+      "accuracy": 2,
+      "condition": "notMovedThisTurn",
+      "weaponKind": "ranged"
+    },
     "bulwark": {
       "physicalDefence": 1,
       "condition": "selfBelowHalfHp"

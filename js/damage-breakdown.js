@@ -8,6 +8,7 @@ import {
   parseMultiBasicAttackCount,
   isStrikerMultiBasicSkill
 } from './striker-combat.js'
+import { parseMultiWeaponAttackCount } from './weapon-combat.js'
 import { enchantmentDamageBonusForEntry, entryEnchantments } from './enchantments.js'
 
 export const BASIC_ATTACK_ID = '__basic_attack__'
@@ -36,9 +37,9 @@ export function rollUnarmedBasicSegment(character, rollDiceFn) {
   const formula = strikerUnarmedDamageFormula(character)
   if (formula) {
     const result = rollWeaponDamage(formula, rollDiceFn)
-    return { label: 'Striker', total: result.total, detail: result.detail }
+    return { label: 'Striker', formula, total: result.total, detail: result.detail }
   }
-  return { label: 'Unarmed', total: 1, detail: '1' }
+  return { label: 'Unarmed', formula: '1', total: 1, detail: '1' }
 }
 
 export function isRangedBasicAttack(character) {
@@ -97,15 +98,26 @@ function parseDamageFormula(formula) {
   }
 }
 
+function weaponDiceLabel(parsed) {
+  return `${parsed.count}d${parsed.sides}${parsed.modifier ? `+${parsed.modifier}` : ''}`
+}
+
 export function rollWeaponDamage(formula, rollDiceFn) {
+  if (!rollDiceFn) return rollOrAverageFormula(formula, null)
   const parsed = parseDamageFormula(formula)
-  if (!parsed) return { total: 1, detail: '1' }
+  if (!parsed) return { total: 1, detail: '1', formula: String(formula || '1') }
+  const diceLabel = weaponDiceLabel(parsed)
   const rolls = rollDiceFn(parsed.count, parsed.sides, parsed.modifier)
+  const rollText = rolls.rolls?.length
+    ? rolls.rolls.join('+')
+    : String(rolls.total - parsed.modifier)
+  const modifierText = parsed.modifier ? `+${parsed.modifier}` : ''
   return {
     total: rolls.total,
+    formula: diceLabel,
     detail: rolls.rolls?.length
-      ? `${rolls.rolls.join('+')}${parsed.modifier ? `+${parsed.modifier}` : ''} = ${rolls.total}`
-      : String(rolls.total)
+      ? `${diceLabel}: ${rollText}${modifierText} = ${rolls.total}`
+      : `${diceLabel} = ${rolls.total}`
   }
 }
 
@@ -143,7 +155,7 @@ export function rollDamageExpression(expr, rollDiceFn) {
       const rolled = rollWeaponDamage(raw, rollDiceFn)
       total += sign * rolled.total
       const prefix = sign < 0 ? '−' : parts.length ? '+' : ''
-      parts.push(`${prefix}${raw}: ${rolled.detail}`.replace(/^\+/, ''))
+      parts.push(`${prefix}${rolled.detail}`.replace(/^\+/, ''))
       continue
     }
     if (/^\d+$/.test(raw)) {
@@ -164,9 +176,10 @@ export function rollDamageExpression(expr, rollDiceFn) {
 function rollOrAverageFormula(formula, rollDiceFn) {
   if (rollDiceFn) return rollWeaponDamage(formula, rollDiceFn)
   const parsed = parseDamageFormula(formula)
-  if (!parsed) return { total: 1, detail: formula }
+  if (!parsed) return { total: 1, detail: '1', formula: String(formula || '1') }
+  const diceLabel = weaponDiceLabel(parsed)
   const avg = diceAverage(parsed.count, parsed.sides, parsed.modifier)
-  return { total: avg, detail: `${formula} (avg ${avg})` }
+  return { total: avg, formula: diceLabel, detail: `${diceLabel} (avg ${avg})` }
 }
 
 /** +1d6 fire on hit — parsed from equipped gear effect desc strings. */
@@ -280,12 +293,41 @@ export function appendGearAttackEffectSummary(summary, splash = []) {
   return `${summary}; ${splashText}`
 }
 
+function skillUsesWeaponDamage(desc) {
+  return /\bweapon damage\b/i.test(String(desc || ''))
+}
+
+function parseSkillWeaponFlatBonus(desc) {
+  const match = String(desc || '').match(/\bweapon damage\s+\+(\d+)\b/i)
+  return match ? Number(match[1]) : 0
+}
+
+/** Bonus dice on weapon attacks — e.g. weapon damage + 2d6 lightning (not the equipped weapon die). */
+function parseSkillExtraAttackDice(desc) {
+  if (!skillUsesWeaponDamage(desc)) return []
+  const text = String(desc || '')
+  const dicePattern = /(\d+)d(\d+)(?:\s*\+\s*(\d+))?/gi
+  const results = []
+  let match
+  while ((match = dicePattern.exec(text))) {
+    const before = text.slice(Math.max(0, match.index - 40), match.index).toLowerCase()
+    if (/restore|heals?\s|healing\s|stamina\s*\(/.test(before)) continue
+    results.push({
+      count: Number(match[1]),
+      sides: Number(match[2]),
+      modifier: Number(match[3] || 0),
+      formula: match[0].replace(/\s+/g, '')
+    })
+  }
+  return results
+}
+
 export function skillDealsDirectDamage(skill) {
   if (!skill) return false
   if (isBasicAttackSkill(skill)) return true
   if (skillHealsDirectHP(skill)) return false
   const desc = String(skill.desc || '')
-  return /\d+d\d+/i.test(desc) || /\+\d+\s+damage\b/i.test(desc)
+  return /\d+d\d+/i.test(desc) || /\+\d+\s+damage\b/i.test(desc) || skillUsesWeaponDamage(desc)
 }
 
 const HEAL_HALF_DAMAGE_RE = /heal(?:ing)?\s+(?:you|yourself|self|allies)\s+for\s+half/i
@@ -662,23 +704,95 @@ function rollWeaponBaseSegments(character, rollDiceFn) {
   const off = getEquippedOffhand(character)
 
   if (main) {
-    const result = main.damage
-      ? rollWeaponDamage(main.damage, rollDiceFn)
-      : { total: 1, detail: '1' }
-    segments.push({ label: main.name, total: result.total, detail: result.detail })
+    const formula = main.damage || null
+    const result = formula
+      ? rollOrAverageFormula(formula, rollDiceFn)
+      : { total: 1, detail: '1', formula: '1' }
+    segments.push({
+      label: main.name,
+      formula: formula || '1',
+      total: result.total,
+      detail: result.detail
+    })
   } else {
+    const unarmedFormula = strikerUnarmedDamageFormula(character)
     const unarmed = rollUnarmedBasicSegment(character, rollDiceFn)
-    segments.push(unarmed)
+    segments.push({
+      ...unarmed,
+      formula: unarmedFormula || '1'
+    })
   }
 
   if (off) {
-    const result = off.damage
-      ? rollWeaponDamage(off.damage, rollDiceFn)
-      : { total: 1, detail: '1' }
-    segments.push({ label: off.name, total: result.total, detail: result.detail })
+    const formula = off.damage || null
+    const result = formula
+      ? rollOrAverageFormula(formula, rollDiceFn)
+      : { total: 1, detail: '1', formula: '1' }
+    segments.push({
+      label: off.name,
+      formula: formula || '1',
+      total: result.total,
+      detail: result.detail
+    })
   }
 
   return segments
+}
+
+function appendWeaponSkillBaseParts(character, skill, rollDiceFn, parts) {
+  let baseTotal = 0
+  for (const segment of rollWeaponBaseSegments(character, rollDiceFn)) {
+    parts.push({
+      kind: 'base',
+      label: segment.label,
+      formula: segment.formula,
+      value: segment.total,
+      detail: segment.detail,
+      average: !rollDiceFn
+    })
+    baseTotal += segment.total
+  }
+
+  const flatBonus = parseSkillWeaponFlatBonus(skill.desc)
+  if (flatBonus) {
+    parts.push({
+      kind: 'bonus',
+      label: skill.name,
+      value: flatBonus,
+      conditional: false
+    })
+    baseTotal += flatBonus
+  }
+
+  for (const dice of parseSkillExtraAttackDice(skill.desc)) {
+    if (rollDiceFn) {
+      const rolled = rollDiceFn(dice.count, dice.sides, dice.modifier)
+      const rollText = rolled.rolls?.length
+        ? `${dice.formula}: ${rolled.rolls.join('+')}${dice.modifier ? `+${dice.modifier}` : ''} = ${rolled.total}`
+        : `${dice.formula} = ${rolled.total}`
+      parts.push({
+        kind: 'base',
+        label: dice.formula,
+        formula: dice.formula,
+        value: rolled.total,
+        detail: rollText,
+        average: false
+      })
+      baseTotal += rolled.total
+    } else {
+      const avg = diceAverage(dice.count, dice.sides, dice.modifier)
+      parts.push({
+        kind: 'base',
+        label: dice.formula,
+        formula: dice.formula,
+        value: avg,
+        average: true
+      })
+      baseTotal += avg
+    }
+  }
+
+  return baseTotal
 }
 
 export function resolveDamageBreakdown(character, skill, options = {}) {
@@ -689,20 +803,9 @@ export function resolveDamageBreakdown(character, skill, options = {}) {
   const rollDiceFn = options.rollDiceFn
 
   if (isBasicAttackSkill(skill)) {
-    const segments = rollWeaponBaseSegments(character, rollDiceFn || ((count, sides, mod = 0) => ({
-      total: diceAverage(count, sides, mod),
-      rolls: []
-    })))
-    for (const segment of segments) {
-      parts.push({
-        kind: 'base',
-        label: segment.label,
-        value: segment.total,
-        detail: segment.detail,
-        average: !rollDiceFn
-      })
-      baseTotal += segment.total
-    }
+    baseTotal += appendWeaponSkillBaseParts(character, skill, rollDiceFn, parts)
+  } else if (skillUsesWeaponDamage(skill.desc)) {
+    baseTotal += appendWeaponSkillBaseParts(character, skill, rollDiceFn, parts)
   } else {
     const dice = parsePrimaryDice(skill.desc)
     if (dice) {
@@ -787,8 +890,9 @@ export function resolveOfficialSkillUseDamage(character, skill, rollDiceFn) {
   if (!character || !skill || !rollDiceFn) return null
   if (skill.source === 'homebrew') return null
   if (isBasicAttackSkill(skill) || isStrikerMultiBasicSkill(skill)) return null
+  if (parseMultiWeaponAttackCount(skill) > 0) return null
   if (!skillDealsDirectDamage(skill)) return null
-  if (!parsePrimaryDice(skill.desc)) return null
+  if (!parsePrimaryDice(skill.desc) && !skillUsesWeaponDamage(skill.desc)) return null
 
   const breakdown = resolveDamageBreakdown(character, skill, { rollDiceFn })
   if (!breakdown?.parts?.length) return null
@@ -890,9 +994,18 @@ function formatBreakdownTerms(parts) {
   for (const part of parts) {
     if (part.kind === 'base') {
       if (part.detail && !part.average) {
-        terms.push(`${part.detail} (${part.label})`)
+        const suffix = part.label && part.formula && part.label !== part.formula
+          ? ` (${part.label})`
+          : ''
+        terms.push(`${part.detail}${suffix}`)
       } else if (part.average) {
-        terms.push(`${part.label} (avg ${part.value})`)
+        if (part.formula && part.label && part.label !== part.formula) {
+          terms.push(`${part.label} ${part.formula} (avg ${part.value})`)
+        } else if (part.formula) {
+          terms.push(`${part.formula} (avg ${part.value})`)
+        } else {
+          terms.push(`${part.label} (avg ${part.value})`)
+        }
       } else {
         terms.push(String(part.value))
       }
@@ -928,18 +1041,42 @@ export function formatHealBreakdownPlain(breakdown) {
 
 export function resolveSkillEffectBreakdown(character, skill, options = {}) {
   if (skillHealsDirectHP(skill)) return resolveHealBreakdown(character, skill, options)
-  const multi = parseMultiBasicAttackCount(skill, character)
-  if (multi > 0 && strikerBasicDamageFormula(character)) {
-    const perHit = resolveDamageBreakdown(character, getBasicAttackSkillStub(), options)
+  const multiWeapon = parseMultiWeaponAttackCount(skill)
+  if (multiWeapon > 0 && skillUsesWeaponDamage(skill.desc)) {
+    const perHit = resolveDamageBreakdown(character, skill, options)
     if (perHit) {
       return {
         kind: 'multi_damage',
-        count: multi,
+        count: multiWeapon,
         perHit,
+        perHitNote: 'weapon damage per hit',
         parts: perHit.parts,
-        total: perHit.total * multi,
-        rawTotal: perHit.rawTotal * multi,
+        total: perHit.total * multiWeapon,
+        rawTotal: perHit.rawTotal * multiWeapon,
         minApplied: perHit.minApplied
+      }
+    }
+  }
+  if (
+    isStrikerMultiBasicSkill(skill)
+    && characterHandsEmpty(character)
+    && characterHasStrikerBasics(character)
+  ) {
+    const multi = parseMultiBasicAttackCount(skill, character)
+    if (multi > 0) {
+      const perHit = resolveDamageBreakdown(character, getBasicAttackSkillStub(), options)
+      if (perHit) {
+        const formula = strikerBasicDamageFormula(character)
+        return {
+          kind: 'multi_damage',
+          count: multi,
+          perHit,
+          strikerFormula: formula,
+          parts: perHit.parts,
+          total: perHit.total * multi,
+          rawTotal: perHit.rawTotal * multi,
+          minApplied: perHit.minApplied
+        }
       }
     }
   }
@@ -957,7 +1094,10 @@ export function formatSkillEffectBreakdownPlain(breakdown) {
   if (breakdown.kind === 'multi_damage') {
     const per = formatDamageBreakdownPlain(breakdown.perHit)
     const perText = per.replace(/^Damage \(yours\):\s*/, '')
-    return `Damage (yours): ${breakdown.count}× Basic Attack (${perText})`
+    const diceNote = breakdown.strikerFormula
+      ? `${breakdown.strikerFormula} + Strength per hit`
+      : breakdown.perHitNote || 'weapon damage per hit'
+    return `Damage (yours): ${breakdown.count}× ${diceNote} (${perText})`
   }
   return formatDamageBreakdownPlain(breakdown)
 }

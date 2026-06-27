@@ -14,6 +14,7 @@ export const STRIKER_BASIC_DAMAGE_BY_SKILL = [
 /** Action skills that repeat Basic Attack N times (each full roll). */
 export const STRIKER_MULTI_BASIC_SKILLS = {
   feint_strike: 1,
+  joint_lock: 1,
   flurry_of_blows: 2,
   striker_volley: 3
 }
@@ -52,8 +53,11 @@ export function parseMultiBasicAttackCount(skill, character = null) {
   }
   const fixed = strikerMultiBasicAttackCount(skill?.id)
   if (fixed) return fixed
-  const match = String(skill?.desc || '').match(/Make\s+(\d+)\s+Basic\s+Attack/i)
-  return match ? Number(match[1]) : 0
+  const desc = String(skill?.desc || '')
+  const makeMatch = desc.match(/Make\s+(\d+)\s+Basic\s+Attack/i)
+  if (makeMatch) return Number(makeMatch[1])
+  if (/\bOne Basic Attack\b/i.test(desc)) return 1
+  return 0
 }
 
 export function isStrikerMultiBasicSkill(skill) {

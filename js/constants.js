@@ -42,7 +42,16 @@ export const STAT_RULES = {
   magicalDefence: { label: 'Magical Defence', cost: 10, min: 1, max: 30, desc: 'Magical AC — spells and magical attacks must roll d20 + accuracy at or above this to hit (otherwise miss/block).' }
 }
 
-export const TAB_IDS = ['character', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes']
+export const TAB_IDS = ['character', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes', 'howtoplay']
+
+/** Callout shown above a weapon skill subcategory on the Skills tab. */
+export const WEAPON_SKILL_TREE_INTROS = {
+  ranged: [
+    'With bows and crossbows, you normally cannot move and attack in the same turn, in either order — unless you have Quick Draw or a skill says otherwise (e.g. Parting Shot: attack then up to 15ft; with Quick Draw, that 15ft is in addition to normal movement). Mark Moved on the action bar when you reposition.',
+    'There is no fixed range on ranged weapons except what you can see and the GM allows.',
+    'On any ranged attack: if the accuracy roll is a natural 20, roll a second d20. If that is also a natural 20, the target can be instantly defeated (GM decides what is fair).'
+  ]
+}
 
 export const HOMEBREW_STORAGE_KEY = 'lumenforge_homebrew_v1'
 export const HOMEBREW_STORE_VERSION = 1
@@ -65,6 +74,14 @@ export const HOMEBREW_SKILL_TYPES = [
   { id: 'toggle', label: 'Toggle (stance)' },
   { id: 'activatable', label: 'Action (uses stamina)' }
 ]
+
+/** Official weapon-type tags for skills and homebrew gear locks. */
+export const OFFICIAL_WEAPON_KINDS = [
+  'sword', 'axe', 'dagger', 'polearm', 'hammer', 'staff', 'ranged', 'striker', 'unarmed'
+]
+
+/** Generic equipped main-hand weapon (fusion / homebrew locks). */
+export const ANY_WEAPON_KIND = '__any_weapon__'
 
 /**
  * Skill tree categories hidden from the Skills tab until ready.

@@ -72,13 +72,16 @@ import {
   applySkillHeal,
   formatHealUseSummary,
   formatCombatDamageToastLine,
-  formatMultiHitCombatToast
+  formatMultiHitCombatToast,
+  resolveDamageBreakdown,
+  formatDamageBreakdownPlain
 } from './damage-breakdown.js'
 import {
   characterHasStrikerBasics,
   isStrikerMultiBasicSkill,
   parseMultiBasicAttackCount
 } from './striker-combat.js'
+import { isMultiWeaponAttackSkill, parseMultiWeaponAttackCount } from './weapon-combat.js'
 import { getEffectiveSkillStaminaCost } from './career-effects.js'
 import { itemPriceGil, normalizeGil } from './format.js'
 import { syncUrlState } from './url-state.js'
@@ -375,6 +378,29 @@ export function useSkill(skillId) {
     return
   }
 
+  if (isMultiWeaponAttackSkill(skill)) {
+    character.stamina -= cost
+    invalidateCharacterCache(character)
+    const count = parseMultiWeaponAttackCount(skill)
+    const hitLines = []
+    const totals = []
+    for (let i = 0; i < count; i++) {
+      const breakdown = resolveDamageBreakdown(character, skill, { rollDiceFn: rollDice })
+      if (!breakdown?.parts?.length) break
+      const plain = formatDamageBreakdownPlain(breakdown)
+      const summary = plain.replace(/^Damage \(yours\):\s*/, '')
+      totals.push(breakdown.total)
+      hitLines.push(formatCombatDamageToastLine(i + 1, summary, breakdown.total))
+    }
+    touch(character, { header: true, content: true, actionBar: true })
+    if (hitLines.length) {
+      toastCombat(formatMultiHitCombatToast(skill.name, hitLines, totals, cost), { html: true })
+    } else {
+      toast(`${skill.name} used (−${cost} Stamina). Roll each hit at the table.`)
+    }
+    return
+  }
+
   character.stamina -= cost
 
   const healResult = applySkillHeal(character, skill, rollDice)
@@ -478,6 +504,7 @@ export function processTurn() {
   const character = activeCharacter()
   if (!character) return
   character.movedThisTurn = false
+  invalidateCharacterCache(character)
   const stillActive = []
   let spent = 0
   const messages = []
@@ -782,7 +809,8 @@ export function markMoved() {
   const character = activeCharacter()
   if (!character) return
   character.movedThisTurn = true
-  touch(character, { actionBar: true })
+  invalidateCharacterCache(character)
+  touch(character, { header: true, actionBar: true })
   toast('Movement marked — ranged attacks blocked this turn (Quick Draw bypasses this).')
 }
 

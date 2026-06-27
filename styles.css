@@ -219,31 +219,13 @@ h1, h2, h3, h4, p { margin: 0; }
 .create-preview-start { display: block; }
 .create-preview-start { margin-top: 5px; font-size: 0.78rem; opacity: 0.92; }
 .side-actions { margin-top: 12px; }
-.create-card h2, .side-section h2 { font-size: 0.95rem; margin-bottom: 8px; color: var(--heading); }
-
-.sidebar-create-summary {
-  list-style: none;
+.create-card h2, .side-section h2 {
   font-family: var(--serif);
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: -0.03em;
-  font-size: 1.08rem;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: var(--heading);
-  cursor: pointer;
-}
-
-.sidebar-create-details:not([open]) .sidebar-create-summary {
-  margin-bottom: 0;
-}
-
-.sidebar-create-summary::-webkit-details-marker {
-  display: none;
-}
-
-@media (min-width: 1101px) {
-  .sidebar-create-summary::after {
-    display: none;
-  }
 }
 
 .section-title-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -955,6 +937,161 @@ textarea {
   }
 }
 
+/* How to Play tab */
+.how-to-play {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 52rem;
+}
+
+.how-to-hero h2 {
+  margin: 0.25rem 0 0.5rem;
+}
+
+.how-to-lead {
+  margin: 0;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.how-to-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.how-to-section h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.how-to-body {
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.how-to-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.how-to-item {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.how-to-items > .how-to-item:last-child,
+.how-to-items > .how-to-block:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.how-to-item-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent, #8eb4ff);
+  margin-bottom: 0.35rem;
+}
+
+.how-to-item-text {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.how-to-block {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.how-to-block .how-to-item {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.how-to-sublist {
+  margin: 0.55rem 0 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  opacity: 0.92;
+}
+
+.how-to-sublist li {
+  line-height: 1.45;
+}
+
+.how-to-type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.55rem;
+}
+
+.how-to-type-card {
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.how-to-type-card p {
+  margin: 0.55rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.how-to-footnote {
+  margin: 0.65rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.how-to-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.55rem;
+}
+
+.how-to-resource-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.how-to-resource-card strong {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .how-to-type-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.how-to-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.how-to-list li {
+  padding-left: 0.15rem;
+}
+
 /* Notes tab — personal notes + rules dictionary */
 .notes-grid {
   align-items: start;
@@ -1101,6 +1238,24 @@ textarea {
 }
 
 .skill-tree { display: grid; gap: 18px; }
+
+.skill-tree-intro {
+  margin-bottom: 4px;
+}
+
+.skill-tree-intro-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  line-height: 1.5;
+  font-size: 0.92rem;
+}
+
+.skill-tree-intro-list li {
+  padding-left: 0.1rem;
+}
 .tier-lane {
   padding: 16px;
   background:
@@ -1764,6 +1919,21 @@ body.has-action-bar .toast {
 }
 .money-grid .field-label { margin-top: 0; }
 
+/* GM dice roller — modifier steppers shown on mobile (mobile.css) */
+.dice-mod-control {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.dice-mod-field .dice-mod-input {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+.dice-step-btn {
+  display: none;
+}
+
 .effects-snapshot {
   margin-top: 16px;
   padding-top: 14px;
@@ -2371,6 +2541,15 @@ body.skill-sheet-open {
   margin-top: 0.25rem;
   opacity: 0.75;
 }
+.homebrew-item-not-weapon .hb-weapon-field { display: none; }
+.homebrew-lock-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.65rem;
+  margin-top: 0.35rem;
+}
+.homebrew-lock-grid-skills { max-height: 12rem; overflow-y: auto; }
+.homebrew-lock-chip { font-size: 0.82rem; }
 .homebrew-counter-rule {
   display: inline-flex;
   align-items: center;
