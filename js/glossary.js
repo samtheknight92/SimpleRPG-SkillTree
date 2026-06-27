@@ -83,7 +83,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['SPD', 'initiative'],
     category: 'Core stats',
     summary: 'Turn order, movement (1 Speed = 5ft per turn), and dodge-style checks.',
-    detail: 'Speed helps decide who acts first in combat. At the table, treat 1 Speed as 5ft of movement per turn (cap 12 = 60ft). Lumens upgrade cap: 12. At cap you unlock Afterimage (movement never provokes; win initiative ties vs equal or lower Speed). Some skills and racial traits reference Speed for evasion or special saves. The GM Tools tab has an initiative tracker — Speed is a guide, not auto-sorted by the app.'
+    detail: 'Speed helps decide who acts first in combat. At the table, treat 1 Speed as 5ft of movement per turn (cap 12 = 60ft). Press Process Turn at the start of your turn to clear your movement marker (Moved on the action bar). Lumens upgrade cap: 12. At cap you unlock Afterimage (movement never provokes; win initiative ties vs equal or lower Speed). Some skills and racial traits reference Speed for evasion or special saves. The GM Tools tab has an initiative tracker — Speed is a guide, not auto-sorted by the app.'
   },
   {
     id: 'physical-defence',
@@ -267,7 +267,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['status', 'buff', 'debuff', 'condition'],
     category: 'Effects & gear',
     summary: 'Temporary condition — poison, burn, bless, dazed, and similar.',
-    detail: 'Active statuses show on the Character tab under Applied Status Effects. The GM or player can add one from the Effects list (pick effect, how many rounds, optional notes). Process Turn counts rounds down. Each entry in this dictionary explains what a status does in plain language.\n\nAt the table: “Put a token or note on the sheet — tick down each round.”'
+    detail: 'Active statuses show on the Character tab under Applied Status Effects. The GM or player can add one from the Effects list (pick effect, duration, optional note). Press Process Turn at the start of your turn to tick durations down. Each entry in this dictionary explains what a status does in plain language.\n\nAt the table: “Put a token or note on the sheet — tick down each turn at the start of your turn.”'
   },
   {
     id: 'potency',
@@ -282,16 +282,16 @@ export const GLOSSARY_ENTRIES = [
     term: 'Duration (rounds)',
     aliases: ['rounds', 'remaining'],
     category: 'Effects & gear',
-    summary: 'How many turns an effect lasts — Process Turn counts down.',
-    detail: 'Duration is in rounds unless the effect says otherwise. Blank duration often means “until removed.” Process Turn on the Effects panel reduces remaining time on all active statuses. “Sustain” on skills is separate — that is how long you keep performing a song.'
+    summary: 'How many turns an effect lasts — Process Turn counts down at the start of your turn.',
+    detail: 'Duration is in turns unless the effect says otherwise. Blank duration often means “until removed.” Press Process Turn at the start of your turn to reduce remaining time on all active statuses and apply per-turn ticks. “Sustain” on skills is separate — that is how long you keep performing a song.'
   },
   {
     id: 'process-turn',
     term: 'Process Turn',
-    aliases: ['end of turn', 'tick effects'],
+    aliases: ['start of turn', 'tick effects'],
     category: 'Effects & gear',
-    summary: 'Button that ticks down status durations and similar end-of-turn cleanup.',
-    detail: 'Click Process Turn when a round ends to reduce effect durations and apply any per-turn damage or healing from statuses. It does not replace the GM running enemy turns — it is a sheet helper so you remember to tick poison, regen, and buff timers.'
+    summary: 'Press at the start of your turn — pays toggle costs, ticks statuses, clears movement marker.',
+    detail: 'Press Process Turn at the start of your turn, before moving or acting. It pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses; ticks each effect\'s remaining duration down by 1; and clears your previous movement marker. In combat, do this every turn; out of combat, only when the GM says to and you have effects or toggles to process.'
   },
   {
     id: 'background',
@@ -315,7 +315,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['quick skills', 'combat dock'],
     category: 'Character & app',
     summary: 'Bottom dock — quick HP/Stamina and pinned combat skills.',
-    detail: 'When a character is selected, the action bar appears at the bottom. Adjust HP and Stamina with +/−, tap skills to use them (costs Stamina, shows toasts for results). Long-press or use the skill sheet for details before committing. Hides when no character is active.'
+    detail: 'When a character is selected, the action bar appears at the bottom. Adjust HP and Stamina with +/−, tap skills to use them (costs Stamina, shows pop-ups for rolls and results). Offensive debuffs from skills are not auto-added to your sheet — add them to the target manually after the GM confirms a hit. Long-press or use the skill sheet for details before committing. Hides when no character is active.'
   },
   {
     id: 'craft',

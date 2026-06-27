@@ -32,6 +32,7 @@ import {
 import { filterCatalogItems, paginateItems, isShopPurchaseItem, shopMinLevelForItem, shopPurchaseCheck, ITEM_CATALOG_CATEGORIES, catalogCategoryCounts, catalogSourceCounts, activeCatalogFilterLabels, itemHasCounter, itemCounterLabel, inventoryCounterValue } from './items.js'
 import {
   manualEffectList,
+  groupedManualEffects,
   effectList,
   effectDurationLabel,
   effectTypeLabel,
@@ -418,13 +419,7 @@ function renderEquipEnchantSlots(character, entry, item) {
 }
 
 function effectOptionsMarkup() {
-  const groups = new Map()
-  for (const effect of manualEffectList()) {
-    const group = effectTypeLabel(effect.type)
-    if (!groups.has(group)) groups.set(group, [])
-    groups.get(group).push(effect)
-  }
-  return [...groups.entries()].map(([group, effects]) => `
+  return groupedManualEffects().map(([group, effects]) => `
     <optgroup label="${esc(group)}">
       ${effects.map(effect => `<option value="${esc(effect.id)}">${esc(effect.icon || '✦')} ${esc(effect.name)}</option>`).join('')}
     </optgroup>
@@ -856,7 +851,7 @@ function renderEffectsManager(character) {
 
       <div class="effect-add-box">
         <h3 class="effects-section-title">Add Effect</h3>
-        <p class="effect-add-intro">Use this for Poison, Burn, HP Regen, buffs, debuffs, auras, or GM-made nonsense. Duration counts down each Process Turn; leave blank to use the effect default. Potency matters for damage/heal per turn — leave blank for the default.</p>
+        <p class="effect-add-intro">Use this for Poison, Burn, HP Regen, buffs, debuffs, auras, or GM-made nonsense. Common combat statuses are listed first. Duration counts down each Process Turn at the start of your turn; leave blank to use the effect default. Potency matters for damage/heal per turn — leave blank for the default.</p>
         <div class="effect-add-grid">
           <label><span class="field-label">Effect</span><select class="input" id="effect-select">${effectOptionsMarkup()}</select></label>
           <label><span class="field-label">Duration</span><input class="input" id="effect-duration" type="number" min="0" placeholder="Default" /></label>

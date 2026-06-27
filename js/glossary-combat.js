@@ -50,6 +50,14 @@ export const COMBAT_GLOSSARY_ENTRIES = [
     detail: 'Read the weapon or skill. Crits often add extra dice or trigger bonus effects (Burn, Bleeding). There is no shared crit chart — follow the card that gave you the attack.\n\nAt the table: “That was a crit — add the extra dice or effect from the skill.”'
   },
   {
+    id: 'ranged-critical',
+    term: 'Ranged critical (double natural 20)',
+    aliases: ['bow crit', 'crossbow crit', 'double 20', 'vital shot'],
+    category: 'Combat & rolls',
+    summary: 'Bow or crossbow: natural 20 on accuracy, then roll a second d20 — double 20 may drop the target.',
+    detail: 'Ranged criticals: if a bow or crossbow attack rolls a natural 20 on accuracy, roll one extra d20. If that second roll is also a natural 20, the GM may allow an instant takedown or vital-shot effect. Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover.\n\nAt the table: “Nat 20 on the bow — roll again. Another 20? GM calls the shot.”'
+  },
+  {
     id: 'physical-damage',
     term: 'Physical damage',
     aliases: ['weapon damage', 'melee damage', 'ranged damage'],

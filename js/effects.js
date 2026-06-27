@@ -22,6 +22,51 @@ export function manualEffectList() {
   return manual.length ? manual : effectList()
 }
 
+/** Shown first in the Character tab effect picker — common table statuses. */
+export const COMMON_MANUAL_EFFECT_IDS = [
+  'burn', 'poison', 'hp_regen', 'regeneration', 'stamina_regen',
+  'protected', 'enhanced', 'weakened', 'incapacitated', 'immobilized', 'mind_controlled'
+]
+
+function manualEffectPickerGroup(effect) {
+  if (COMMON_MANUAL_EFFECT_IDS.includes(effect.id)) return 'Common combat statuses'
+  const type = String(effect.type || '').toLowerCase()
+  if (type.includes('buff') || type.includes('heal') || type.includes('recovery') || type.includes('protection')) {
+    return 'Buffs & recovery'
+  }
+  if (type.includes('debuff') || type.includes('control') || type.includes('damageovertime')) {
+    return 'Debuffs & control'
+  }
+  return 'Utility & other'
+}
+
+/** Effects that belong on a target's sheet — not auto-applied from the action bar. */
+export function isTargetFacingEffect(effect) {
+  if (!effect) return false
+  const type = String(effect.type || '').toLowerCase()
+  if (type.includes('debuff') || type === 'control' || type.includes('damageovertime')) return true
+  if (effectTone(effect) === 'bad') return true
+  return false
+}
+
+export function groupedManualEffects() {
+  const groups = new Map()
+  for (const effect of manualEffectList()) {
+    const group = manualEffectPickerGroup(effect)
+    if (!groups.has(group)) groups.set(group, [])
+    groups.get(group).push(effect)
+  }
+  const order = [
+    'Common combat statuses',
+    'Buffs & recovery',
+    'Debuffs & control',
+    'Utility & other'
+  ]
+  return order
+    .filter(label => groups.has(label))
+    .map(label => [label, groups.get(label)])
+}
+
 /** Duration stored on applied status while a skill/gear/toggle source is active. */
 export const SOURCE_PASSIVE_DURATION = 999
 

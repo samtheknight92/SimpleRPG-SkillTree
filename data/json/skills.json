@@ -35,7 +35,7 @@
         "tier": 2,
         "cost": 20,
         "staminaCost": 2,
-        "desc": "Action: Sword attack. Attack roll d20 + accuracy (+) vs Physical Defence; weapon damage on hit.",
+        "desc": "Action: Sword attack. Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit.",
         "icon": "⚡",
         "prerequisites": {
           "type": "AND",
@@ -504,7 +504,7 @@
         "tier": 1,
         "cost": 8,
         "staminaCost": 3,
-        "desc": "Action: Overhead axe chop. Attack roll d20 + accuracy () vs Physical Defence; weapon damage +3 on hit.",
+        "desc": "Action: Overhead axe chop. Attack roll d20 + accuracy vs Physical Defence; weapon damage +3 on hit.",
         "icon": "⬇️",
         "prerequisites": {
           "type": "NONE",
@@ -1397,7 +1397,7 @@
         "tier": 1,
         "cost": 8,
         "staminaCost": 3,
-        "desc": "Action: Hammer blow. Attack roll d20 + accuracy () vs Physical Defence; weapon damage +4 on hit.",
+        "desc": "Action: Hammer blow. Attack roll d20 + accuracy vs Physical Defence; weapon damage +4 on hit.",
         "icon": "💥",
         "prerequisites": {
           "type": "NONE",
@@ -2184,7 +2184,7 @@
         "tier": 3,
         "cost": 40,
         "staminaCost": 8,
-        "desc": "Spell: 20ft radius cold storm. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d4 damage + Magic Power. apply Weakened to all inside Friendly fire possible.",
+        "desc": "Spell: 20ft radius cold storm. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d4 damage + Magic Power. Apply Weakened to all inside. Friendly fire possible.",
         "icon": "🌨️",
         "prerequisites": {
           "type": "AND",
@@ -2829,7 +2829,7 @@
         "tier": 4,
         "cost": 65,
         "staminaCost": 10,
-        "desc": "Spell: Apply Immobilized (cannot move but can attack + +5 Physical Defence and +5 Magical Defence for 3 turns)",
+        "desc": "Spell: Apply Immobilized (cannot move but can attack) and +5 Physical Defence and +5 Magical Defence for 3 turns.",
         "icon": "🗿",
         "prerequisites": {
           "type": "AND",
@@ -3149,7 +3149,7 @@
         "tier": 5,
         "cost": 100,
         "staminaCost": 15,
-        "desc": "Craft: Action (3 uses per day): Become one with the wind for 3 rounds. Gain flight, immunity to ground effects, +50% movement speed, and all attacks push enemies back 10ft. Can pass through enemy spaces without provoking attacks.",
+        "desc": "Action (3 uses per day): Become one with the wind for 3 rounds. Gain flight, immunity to ground effects, +50% movement speed, and all attacks push enemies back 10ft. Can pass through enemy spaces without provoking attacks.",
         "icon": "🌪️",
         "prerequisites": {
           "type": "AND",
@@ -3443,7 +3443,7 @@
         "tier": 5,
         "cost": 100,
         "staminaCost": 15,
-        "desc": "Craft: Action (3 uses per day): Become one with water for 3 rounds. Gain immunity to water damage, can move through any liquid at normal speed, +50% water spell damage, all attacks heal you for 25% of damage dealt, and can breathe underwater indefinitely.",
+        "desc": "Action (3 uses per day): Become one with water for 3 rounds. Gain immunity to water damage, can move through any liquid at normal speed, +50% water spell damage, all attacks heal you for 25% of damage dealt, and can breathe underwater indefinitely.",
         "icon": "🌊",
         "prerequisites": {
           "type": "AND",
@@ -3710,7 +3710,7 @@
         "tier": 5,
         "cost": 100,
         "staminaCost": 15,
-        "desc": "Craft: Action (3 uses per day): Become one with darkness for 3 rounds. Gain immunity to darkness damage, permanent invisibility while in shadows, +50% darkness spell damage, all attacks apply Mind Controlled (fear), and can phase through walls for 1 turn per use.",
+        "desc": "Action (3 uses per day): Become one with darkness for 3 rounds. Gain immunity to darkness damage, permanent invisibility while in shadows, +50% darkness spell damage, all attacks apply Mind Controlled (fear), and can phase through walls for 1 turn per use.",
         "icon": "🌑",
         "prerequisites": {
           "type": "AND",
@@ -3991,7 +3991,7 @@
         "tier": 5,
         "cost": 100,
         "staminaCost": 15,
-        "desc": "Craft: Action (3 uses per day): Become one with light for 3 rounds. Gain immunity to light/radiant damage, emit bright light (30ft radius blinds enemies), +50% light spell damage, all attacks apply Mind Controlled (charm), and can teleport to any bright light source within 100ft.",
+        "desc": "Action (3 uses per day): Become one with light for 3 rounds. Gain immunity to light/radiant damage, emit bright light (30ft radius blinds enemies), +50% light spell damage, all attacks apply Mind Controlled (charm), and can teleport to any bright light source within 100ft.",
         "icon": "☀️",
         "prerequisites": {
           "type": "AND",
@@ -4323,8 +4323,8 @@
         "tier": 2,
         "cost": 20,
         "staminaCost": 3,
-        "desc": "Attack roll d20 + accuracy vs Physical Defence; weapon damage ++1d6 water damage and target's Physical Defence is 1 lower for 2 turns on hit",
-        "icon": "",
+        "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; weapon damage + 1d6 water damage and target's Physical Defence is 1 lower for 2 turns on hit.",
+        "icon": "🏹💧",
         "prerequisites": {
           "type": "AND",
           "skills": [

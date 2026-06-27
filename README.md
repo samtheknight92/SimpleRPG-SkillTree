@@ -1,4 +1,4 @@
-# LumenForge RPG v5 — Nearly Complete
+# LumenForge RPG v5 — Table Ready
 
 LumenForge is a browser-based **character sheet and play aid** for a custom tabletop RPG. It helps players create, equip, level, and track characters at the table, with GM tools for initiative, NPC turns, folders, and premade spawns.
 
@@ -71,13 +71,14 @@ styles/             Base, themes, compact, mobile CSS
 
 ## Current status
 
-**v5 · Nearly Complete** — playable at the table for character management, shop/craft, combat rolls, enchants, GM initiative, and folders. See `ROADMAP.md` for planned work (e.g. off-hand slot expansion, instrument items).
+**v5 · Table Ready** — playable at the table for character management, shop/craft, combat rolls, enchants, GM initiative, and folders. See `ROADMAP.md` for planned work (e.g. off-hand slot expansion, instrument items).
 
 ## Known limitations
 
 - **No multiplayer / harmony sync** — harmonies are table rules; each sheet is local.
 - **Table-rule race passives** — Lucky, Relentless Endurance, Ambitious Spirit, Sunlight Sensitivity, and Pack Tactics are labeled in the UI; the app does not roll or track them automatically.
 - **No server** — saves stay on the device unless you export them.
+- **GM judgement required** — hits, targets, and offensive status effects are table calls; the action bar rolls and reminds, but does not replace the GM.
 - **Manual browser testing** — combat toasts, mobile layout, and edge-case UI are not fully automated.
 
 ## Credits

@@ -1,4 +1,5 @@
 import { esc } from './utils.js'
+import { RANGED_CRITICAL_RULE } from './constants.js'
 
 function section(title, bodyHtml) {
   return `
@@ -52,7 +53,7 @@ function skillTypesBlock() {
           </div>
         `).join('')}
       </div>
-      <p class="how-to-footnote subtle">Skill text says the timing — <strong>Action</strong> on your turn, <strong>Reaction</strong> outside your turn when the trigger happens (if the GM agrees), <strong>Spell</strong>, etc. Read that at the table.</p>
+      <p class="how-to-footnote subtle">Most skills start with <strong>Action:</strong>, <strong>Passive:</strong>, <strong>Spell:</strong>, or similar — read the full skill text if timing is unclear.</p>
     </div>
   `
 }
@@ -82,7 +83,7 @@ function resourcesBlock() {
 
 function actionBarBlock() {
   const choices = [
-    'Tap a skill to roll what the app supports and spend Stamina — only apply damage after the GM confirms the attack hit',
+    'Tap a skill to roll what the app supports and spend Stamina — only apply damage or target effects after the GM confirms the attack hit',
     'Roll accuracy and damage on your own dice — tap the skill only to deduct Stamina, or skip the button entirely',
     'Track everything manually with HP/Stamina +/- on the Character or Stats tab'
   ]
@@ -119,7 +120,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Ranged weapons',
-      'With bows and crossbows, you normally <strong>cannot move and attack in the same turn, in either order</strong>, unless <strong>Quick Draw</strong> or a skill says otherwise (e.g. Parting Shot: attack then up to 15ft — plus normal movement if you have Quick Draw). Mark <strong>Moved</strong> on the action bar when you reposition. Range is sight-only — no fixed distance except what you can see and the GM allows. Double natural 20 on accuracy can mean an instant takedown — GM decides. See <strong>Skills → Weapons → Ranged</strong> for the full summary.'
+      'With bows and crossbows, you normally <strong>cannot move and attack in the same turn, in either order</strong>, unless <strong>Quick Draw</strong> or a skill says otherwise (e.g. Parting Shot: attack then up to 15ft — plus normal movement if you have Quick Draw). Mark <strong>Moved</strong> on the action bar when you reposition. Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover. ${RANGED_CRITICAL_RULE} See <strong>Skills → Weapons → Ranged</strong> for the full summary.'
     ),
     tip(
       'Harmonies &amp; careers',
@@ -146,7 +147,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Your turn (combat)',
-      'When initiative reaches you: <strong>1.</strong> <strong>Process Turn</strong> on your sheet. <strong>2.</strong> <strong>Move</strong> <em>or</em> use one skill / Basic Attack (your choice first). <strong>3.</strong> Do the other if you still can — melee can move then strike; bows normally cannot move and shoot the same turn unless Quick Draw or a skill says otherwise. <strong>4.</strong> Say you are done; next player goes. Roll accuracy at the table first; only apply damage after the GM confirms a hit — action bar, physical dice, or manual HP/Stamina all work.'
+      'When initiative reaches you: <strong>1.</strong> <strong>Process Turn</strong> on your sheet. <strong>2.</strong> <strong>Move</strong> <em>or</em> use one skill / Basic Attack (your choice first). <strong>3.</strong> Do the other if you still can — melee can move then strike; bows normally cannot move and shoot the same turn unless Quick Draw or a skill says otherwise. <strong>4.</strong> Say you are done; next player goes. Roll accuracy at the table first; only apply damage or target effects after the GM confirms a hit — action bar, physical dice, or manual HP/Stamina all work.'
     ),
     tip(
       'Outside combat',
@@ -177,7 +178,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Player rolls',
-      'Action bar toasts are convenience, not law — they do not prove a hit landed. A player may roll physical dice and only use the app to track Stamina. Only apply damage after the GM confirms the attack hit; trust what players call out at the table.'
+      'Action bar pop-ups are convenience, not law — they do not prove a hit landed. A player may roll physical dice and only use the app to track Stamina. Only apply damage or target effects after the GM confirms the attack hit; trust what players call out at the table.'
     ),
     tip(
       'GM Tools tab',

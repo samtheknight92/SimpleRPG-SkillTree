@@ -45,11 +45,14 @@ export const STAT_RULES = {
 export const TAB_IDS = ['character', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes', 'howtoplay']
 
 /** Callout shown above a weapon skill subcategory on the Skills tab. */
+export const RANGED_CRITICAL_RULE =
+  'Ranged criticals: if a bow or crossbow attack rolls a natural 20 on accuracy, roll one extra d20. If that second roll is also a natural 20, the GM may allow an instant takedown or vital-shot effect.'
+
 export const WEAPON_SKILL_TREE_INTROS = {
   ranged: [
     'With bows and crossbows, you normally cannot move and attack in the same turn, in either order — unless you have Quick Draw or a skill says otherwise (e.g. Parting Shot: attack then up to 15ft; with Quick Draw, that 15ft is in addition to normal movement). Mark Moved on the action bar when you reposition.',
-    'There is no fixed range on ranged weapons except what you can see and the GM allows.',
-    'On any ranged attack: if the accuracy roll is a natural 20, roll a second d20. If that is also a natural 20, the target can be instantly defeated (GM decides what is fair).'
+    'Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover.',
+    RANGED_CRITICAL_RULE
   ]
 }
 

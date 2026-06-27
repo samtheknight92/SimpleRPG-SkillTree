@@ -49,7 +49,13 @@ import {
   isTwoHandedWeapon,
   reconcileOffhandEquip
 } from './equipment.js'
-import { addStatusEffectToCharacter, tickStatusEffects, tickPassiveEffectSources, effectUsesPotency } from './effects.js'
+import {
+  addStatusEffectToCharacter,
+  tickStatusEffects,
+  tickPassiveEffectSources,
+  effectUsesPotency,
+  isTargetFacingEffect
+} from './effects.js'
 import {
   getSkillActivationType,
   resolveActivationEffects,
@@ -418,12 +424,28 @@ export function useSkill(skillId) {
 
   const applied = []
   const missed = []
+  const targetProcs = []
+  const targetProcMissed = []
   let performanceNote = ''
 
   for (const payload of activations) {
     const effect = getEffect(payload.effectId)
     if (!effect) continue
-    if (!rollSkillProc(payload.chance ?? 1)) {
+    const procRoll = rollSkillProc(payload.chance ?? 1)
+    if (isTargetFacingEffect(effect)) {
+      const pct = payload.chance != null && payload.chance < 1
+        ? `${Math.round(payload.chance * 100)}% `
+        : ''
+      if (procRoll) {
+        targetProcs.push(
+          `${pct}${effect.name} on target — add to their sheet manually if the GM confirms the hit`
+        )
+      } else {
+        targetProcMissed.push(`${effect.name} proc missed`)
+      }
+      continue
+    }
+    if (!procRoll) {
       missed.push(effect.name)
       continue
     }
@@ -449,11 +471,14 @@ export function useSkill(skillId) {
     } else missed.push(`${effect.name} (already active)`)
   }
 
+  const targetEffectPart = [...targetProcs, ...targetProcMissed].join('; ')
+
   touch(character, { header: true, content: true, actionBar: true })
 
   const staminaNote = `(−${cost} Stamina)`
   const healPart = healSummary ? healSummary : ''
-  const effectPart = applied.length ? applied.join(', ') : ''
+  const selfEffectPart = applied.length ? applied.join(', ') : ''
+  const effectPart = [selfEffectPart, targetEffectPart].filter(Boolean).join('; ')
   const ampSuffix = performanceNote ? ` — ${performanceNote}` : ''
   const withDamage = (body) => {
     const lead = [damageLine, body].filter(Boolean).join('; ')
