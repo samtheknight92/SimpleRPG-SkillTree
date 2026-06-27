@@ -2,9 +2,26 @@
 
 Living build spec for **custom skills & items** created in-app, stored locally, and shared via **export files** (no online sync).
 
-**Status:** **v1 items + v2 skills + v3 races** implemented — custom races with Skills tab sub-tabs; racial skills locked to official + homebrew race list.  
+**Status:** **v1 items + v2 skills + v3 races + v4 locks** — custom races; optional skill locks (weapon / race / level / prerequisite skills); weapon **type** on homebrew gear.  
 **Main roadmap:** `ROADMAP.md`  
 **Design rules:** workspace `.cursor/rules/lumenforge.mdc` + `.cursor/rules/simple-game-design.mdc`
+
+---
+
+## v4 — Skill & gear locks (implemented)
+
+Homebrew **skills** optional locks (combine any):
+
+| Lock | When enforced |
+|------|----------------|
+| **Weapon type(s)** | Action bar — same as official sword/axe trees (`Requires sword weapon equipped`) |
+| **Race(s)** | Skills tab visibility + learning (racial category still uses **Race** picker above) |
+| **Minimum level** | Learning — stacks with tier gate (`max(tier, lock)`) |
+| **Required skills** | Learning — all listed skills must be learned first (AND) |
+
+Homebrew **weapons** get an explicit **Weapon type** field (official kinds + custom ids). Custom types from saved items appear in skill weapon-lock checkboxes. **No** Human Determination / cross-race rules for homebrew — keep those official-only.
+
+Skill fields on disk: `lockWeaponKinds`, `lockRaces`, `lockMinLevel`, `lockSkills`. Item field: `weaponKind`.
 
 ---
 
