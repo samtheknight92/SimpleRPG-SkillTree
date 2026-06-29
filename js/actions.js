@@ -1357,6 +1357,9 @@ export function saveHomebrewSkillDraftFromForm(form) {
     const draft = parseHomebrewSkillDraftForm(form, state.homebrewSkillDraft)
     if (state.homebrewSkillEditingId) draft.id = state.homebrewSkillEditingId
     draft.specialEffects = [...(state.homebrewSkillDraft?.specialEffects || [])]
+    draft.lockWeaponKinds = [...(draft.lockWeaponKinds || [])]
+    draft.lockRaces = [...(draft.lockRaces || [])]
+    draft.lockSkills = [...(draft.lockSkills || [])]
     const skill = upsertHomebrewSkill(draft)
     state.homebrewEditorKind = null
     state.homebrewSkillEditingId = null

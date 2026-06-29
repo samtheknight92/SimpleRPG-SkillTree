@@ -48,6 +48,12 @@ export function loadHomebrewStore() {
     console.error('Homebrew load failed', error)
     store = { version: HOMEBREW_STORE_VERSION, items: {}, skills: {}, races: {} }
   }
+  const skills = {}
+  for (const row of Object.values(store.skills || {})) {
+    const normalized = normalizeHomebrewSkill(row)
+    if (normalized) skills[normalized.id] = normalized
+  }
+  store.skills = skills
   return store
 }
 
@@ -279,6 +285,29 @@ export function getHomebrewSkill(skillId) {
   return row ? normalizeHomebrewSkill(row) : null
 }
 
+export function isHomebrewSkill(skill) {
+  if (!skill?.id) return false
+  if (skill.source === 'homebrew') return true
+  if (String(skill.id).startsWith(HOMEBREW_ID_PREFIX)) return true
+  return Boolean(store.skills[skill.id])
+}
+
+/** Merge cached skill data with stored homebrew locks (level, skills, races). */
+export function resolvedHomebrewSkill(skill) {
+  if (!skill?.id || !isHomebrewSkill(skill)) return skill
+  const stored = getHomebrewSkill(skill.id)
+  if (!stored) return { ...skill, source: 'homebrew' }
+  return {
+    ...stored,
+    ...skill,
+    source: 'homebrew',
+    lockMinLevel: stored.lockMinLevel ?? skill.lockMinLevel,
+    lockSkills: stored.lockSkills ?? skill.lockSkills,
+    lockRaces: stored.lockRaces ?? skill.lockRaces,
+    lockWeaponKinds: stored.lockWeaponKinds ?? skill.lockWeaponKinds
+  }
+}
+
 function normalizeDamageMode(raw) {
   const mode = String(raw || 'none').toLowerCase()
   return HOMEBREW_SKILL_DAMAGE_MODES.some(row => row.id === mode) ? mode : 'none'
@@ -382,7 +411,9 @@ export function normalizeHomebrewSkill(raw) {
     : Math.max(0, Math.floor(Number(raw.staminaCost ?? 0)))
   const lockWeaponKinds = normalizeHomebrewLockWeaponKinds(raw.lockWeaponKinds)
   const lockRaces = normalizeHomebrewLockRaces(raw.lockRaces)
-  const lockMinLevelRaw = Number(raw.lockMinLevel)
+  const lockMinLevelRaw = Number(
+    raw.lockMinLevel ?? raw.minLevel ?? (raw.prerequisites?.type === 'LEVEL' ? raw.prerequisites.level : NaN)
+  )
   const lockMinLevel = Number.isFinite(lockMinLevelRaw) && lockMinLevelRaw > 0
     ? Math.floor(lockMinLevelRaw)
     : undefined
@@ -646,7 +677,8 @@ export function homebrewSkillLockOptions() {
 }
 
 export function homebrewSkillLockSummary(skill, { skipLevel = false } = {}) {
-  if (!skill || skill.source !== 'homebrew') return ''
+  skill = resolvedHomebrewSkill(skill)
+  if (!skill || !isHomebrewSkill(skill)) return ''
   const parts = []
   if (!skipLevel && skill.lockMinLevel) parts.push(`Level ${skill.lockMinLevel}+`)
   if (skill.lockRaces?.length) {

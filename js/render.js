@@ -27,7 +27,7 @@ import {
 } from './fusion-nav.js'
 import { characterLevelInfo, levelTooltip } from './level.js'
 import { isTableRuleRacePassive, racePassiveTooltip } from './race-passives.js'
-import { listHomebrewItems, listHomebrewSkills, listHomebrewRaces, homebrewSkillTreeOptions, homebrewRaceOptionsForSkills, homebrewWeaponKindOptions, weaponKindDisplayLabel, homebrewSkillLockOptions, homebrewSkillLockSummary } from './homebrew.js'
+import { listHomebrewItems, listHomebrewSkills, listHomebrewRaces, homebrewSkillTreeOptions, homebrewRaceOptionsForSkills, homebrewWeaponKindOptions, weaponKindDisplayLabel, homebrewSkillLockOptions, homebrewSkillLockSummary, isHomebrewSkill } from './homebrew.js'
 import { homebrewDamageStatLabel } from './homebrew-combat.js'
 import { isGmMode } from './gm-mode.js'
 import {
@@ -1188,7 +1188,7 @@ function renderSkillCard(character, skill) {
         ${isToggleSkill(skill) ? '<span class="pill warn">Toggle</span>' : ''}
         ${skill.elementalType ? `<span class="pill">${titleCase(skill.elementalType)}</span>` : ''}
         ${skill.fusionKind === 'career' ? '<span class="pill good">Career Fusion</span>' : ''}
-        ${skill.source === 'homebrew' ? '<span class="pill warn">Homebrew</span>' : ''}
+        ${isHomebrewSkill(skill) ? '<span class="pill warn">Homebrew</span>' : ''}
         ${skill.lootType ? `<span class="pill">${titleCase(skill.lootType)}</span>` : ''}
         ${conflict ? '<span class="pill bad">Conflict</span>' : ''}
       </div>

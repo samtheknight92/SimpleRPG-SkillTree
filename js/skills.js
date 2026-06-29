@@ -1,7 +1,14 @@
 import { getSkillsData } from './data.js'
 import { HIDDEN_SKILL_CATEGORIES, SKILL_SUBCATEGORY_LABELS, TIER_MIN_LEVEL, CAPSTONE_TIER_MIN_LEVEL } from './constants.js'
 import { cache, flattenSkills, getSkill, displayCategory, getRace } from './cache.js'
-import { listHomebrewSkills, listHomebrewRaces, homebrewSubcategoriesForCategory, homebrewSkillLockSummary } from './homebrew.js'
+import {
+  listHomebrewSkills,
+  listHomebrewRaces,
+  homebrewSubcategoriesForCategory,
+  homebrewSkillLockSummary,
+  isHomebrewSkill,
+  resolvedHomebrewSkill
+} from './homebrew.js'
 import { activeCharacter, state } from './state.js'
 import { isGmMode } from './gm-mode.js'
 import { titleCase } from './utils.js'
@@ -341,11 +348,12 @@ export function isToggleSkill(skill) {
 }
 
 export function minLevelToLearnSkill(skill) {
+  skill = resolvedHomebrewSkill(skill)
   const tier = Number(skill?.tier || 1)
   const capstoneGate = capstoneTierMinLevel(skill)
   const tierGate = capstoneGate ?? TIER_MIN_LEVEL[tier] ?? 1
   const explicit = skill?.prerequisites?.type === 'LEVEL' ? Number(skill.prerequisites.level || 0) : 0
-  if (skill?.source === 'homebrew') {
+  if (isHomebrewSkill(skill)) {
     const homebrewLock = Number(skill.lockMinLevel || 0)
     if (homebrewLock > 0) return Math.max(homebrewLock, explicit)
     return Math.max(tierGate, explicit)
@@ -410,7 +418,8 @@ function evaluatePrerequisiteReq(character, req) {
 }
 
 export function prereqLabel(skill) {
-  if (skill?.source === 'homebrew') {
+  if (isHomebrewSkill(skill)) {
+    skill = resolvedHomebrewSkill(skill)
     const parts = [`Level ${minLevelToLearnSkill(skill)}+`]
     const extras = homebrewSkillLockSummary(skill, { skipLevel: true })
     if (extras) parts.push(extras)
@@ -427,7 +436,8 @@ export function prereqLabel(skill) {
 }
 
 export function hasPrerequisites(character, skill) {
-  if (skill?.source === 'homebrew' && skill.lockSkills?.length) {
+  skill = resolvedHomebrewSkill(skill)
+  if (isHomebrewSkill(skill) && skill.lockSkills?.length) {
     if (!skill.lockSkills.every(id => character.skills.includes(id))) return false
   }
   const req = skill?.prerequisites
@@ -448,6 +458,7 @@ export function incompatibilityReason(character, skill) {
 
 export function canLearnSkill(character, skill) {
   if (!character || !skill) return { ok: false, reason: 'No character selected' }
+  skill = resolvedHomebrewSkill(skill)
   if (character.skills.includes(skill.id)) return { ok: false, reason: 'Already learned' }
   if (isGmMode()) return { ok: true, reason: 'GM Mode — free' }
   if (character.race === 'human' && isHumanCrossCulturalSkill(character, skill)) {
@@ -467,7 +478,7 @@ export function canLearnSkill(character, skill) {
     }
   }
   if (!raceAllowed(character, skill)) {
-    if (skill?.source === 'homebrew' && skill.lockRaces?.length) {
+    if (isHomebrewSkill(skill) && skill.lockRaces?.length) {
       const labels = skill.lockRaces.map(id => getRace(id)?.name || titleCase(id))
       return { ok: false, reason: `Requires race: ${labels.join(' or ')}` }
     }
@@ -477,7 +488,7 @@ export function canLearnSkill(character, skill) {
   if (characterLevelInfo(character).level < needLevel) {
     return {
       ok: false,
-      reason: skill?.source === 'homebrew'
+      reason: isHomebrewSkill(skill)
         ? `Requires level ${needLevel}`
         : `Requires level ${needLevel} (Tier ${skill.tier || 1})`
     }
@@ -485,7 +496,7 @@ export function canLearnSkill(character, skill) {
   if (!hasPrerequisites(character, skill)) {
     const req = skill?.prerequisites
     if (req?.type === 'LEVEL') return { ok: false, reason: `Requires level ${req.level}` }
-    if (skill?.source === 'homebrew' && skill.lockSkills?.length) {
+    if (isHomebrewSkill(skill) && skill.lockSkills?.length) {
       const labels = skill.lockSkills.map(id => getSkill(id)?.name || id)
       return { ok: false, reason: `Requires: ${labels.join(' + ')}` }
     }
