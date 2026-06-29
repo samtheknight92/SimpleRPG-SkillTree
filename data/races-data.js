@@ -1,8 +1,6 @@
 // Races Data - Character races with unique abilities and racial skill trees
 
 try {
-    console.log('Loading races data...')
-
     const RACES_DATA = {
         elf: {
             id: "elf",
@@ -872,8 +870,6 @@ try {
 
     window.RACES_DATA = RACES_DATA;
     window.RACE_SKILL_TREES = RACE_SKILL_TREES;
-    console.log('RACES_DATA loaded successfully:', Object.keys(RACES_DATA));
-    console.log('RACE_SKILL_TREES loaded successfully:', Object.keys(RACE_SKILL_TREES));
 } catch (error) {
     console.error('Error loading races data:', error);
 }

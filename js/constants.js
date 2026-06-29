@@ -98,11 +98,6 @@ export const ANY_WEAPON_KIND = '__any_weapon__'
  */
 export const HIDDEN_SKILL_CATEGORIES = []
 
-/**
- * Enchantment slots on equipped gear — apply/remove on Character tab.
- */
-export const ENCHANTMENTS_PLANNED = false
-
 export const DISPLAY_CATEGORIES = {
   weapons: 'Weapons',
   magic: 'Magic',

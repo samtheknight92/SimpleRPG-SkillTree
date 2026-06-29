@@ -139,6 +139,9 @@ export function canEquipToOffhand(character, item) {
   const lock = offhandSlotLockReason(character)
   if (lock) return { ok: false, reason: lock.replace(' — off-hand unavailable.', '.') }
   const main = getEquippedWeapon(character)
+  if (offType === 'shield') {
+    if (!main) return { ok: false, reason: 'Equip a one-handed weapon first.' }
+  }
   if (offType === 'weapon') {
     if (!character.skills?.includes('dual_wield')) {
       return { ok: false, reason: 'Learn Dual Wield for an off-hand dagger.' }

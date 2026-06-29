@@ -67,7 +67,8 @@ import {
   formatPerformanceMeta,
   canEncoreReplay,
   noteMusicianSongStarted,
-  isMusicianPerformanceSkill
+  isMusicianPerformanceSkill,
+  activePerformanceStatuses
 } from './instruments.js'
 import {
   BASIC_ATTACK_ID,
@@ -578,6 +579,17 @@ export function removeStatusEffect(effectUid) {
   character.statusEffects = (character.statusEffects || []).filter(status => status.uid !== effectUid)
   touch(character)
   toast('Effect removed.')
+}
+
+export function stopPerformance() {
+  const character = activeCharacter()
+  if (!character) return
+  const active = activePerformanceStatuses(character)
+  if (!active.length) return
+  const uids = new Set(active.map(s => s.uid))
+  character.statusEffects = (character.statusEffects || []).filter(s => !uids.has(s.uid))
+  touch(character)
+  toast('Performance ended.')
 }
 
 export function setRace(raceId) {

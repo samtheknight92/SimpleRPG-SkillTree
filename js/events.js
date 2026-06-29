@@ -96,7 +96,8 @@ import {
   toggleHomebrewRaceSelect as doToggleHomebrewRaceSelect,
   toggleHomebrewRaceEffectPicker as doToggleHomebrewRaceEffectPicker,
   toggleHomebrewRaceDraftEffect as doToggleHomebrewRaceDraftEffect,
-  removeHomebrewRaceDraftEffect as doRemoveHomebrewRaceDraftEffect
+  removeHomebrewRaceDraftEffect as doRemoveHomebrewRaceDraftEffect,
+  stopPerformance as doStopPerformance
 } from './actions.js'
 import { stepNumberInput } from './number-stepper.js'
 import { render } from './render.js'
@@ -410,6 +411,7 @@ const clickActions = {
   equipItem(target) { doEquipItem(target.dataset.equipItem) },
   equipOffhand(target) { doEquipItem(target.dataset.equipOffhand, 'offhand') },
   markMoved() { doMarkMoved() },
+  stopPerformance() { doStopPerformance() },
   unequip(target) { doUnequip(target.dataset.unequip) },
   removeEnchant(target) {
     doRemoveEnchantment(target.dataset.removeEnchant, target.dataset.enchantId)

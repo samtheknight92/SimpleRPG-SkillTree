@@ -1,4 +1,5 @@
 import { esc } from './utils.js'
+import { activePerformanceStatuses } from './instruments.js'
 import { computeStats } from './character.js'
 import {
   getActionBarSkills,
@@ -185,6 +186,9 @@ export function renderActionBar(character) {
               : '<div class="action-bar-empty">Learn Action, Spell, or Toggle skills to slot them here.</div>'}
           </div>
           <button type="button" class="ghost-btn tiny action-bar-move-btn" data-mark-moved="">Mark movement</button>
+          ${activePerformanceStatuses(character).length
+            ? `<button type="button" class="ghost-btn tiny action-bar-stop-performance-btn" data-stop-performance="" aria-label="Stop current performance">Stop performance</button>`
+            : ''}
         </div>
       </div>
     </div>
