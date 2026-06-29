@@ -882,7 +882,7 @@
         }
       ],
       "requiredSkills": [
-        "field_medic"
+        "apothecary"
       ]
     },
     "antitoxin_draught": {
@@ -939,7 +939,7 @@
         }
       ],
       "requiredSkills": [
-        "field_medic"
+        "apothecary"
       ],
       "price": {
         "silver": 4
@@ -969,7 +969,7 @@
         }
       ],
       "requiredSkills": [
-        "chefs_instinct"
+        "smoke_and_flash"
       ],
       "price": {
         "silver": 4
@@ -1002,7 +1002,7 @@
         }
       ],
       "requiredSkills": [
-        "field_medic"
+        "apothecary"
       ],
       "price": {
         "silver": 4
@@ -1145,7 +1145,7 @@
         }
       ],
       "requiredSkills": [
-        "plague_ward"
+        "transmute_salts"
       ],
       "price": {
         "silver": 90
@@ -2780,7 +2780,7 @@
       "id": "ancient_coin",
       "name": "Ancient Coin",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "basic",
       "effect": {
         "type": "currency_bonus",
@@ -2810,7 +2810,7 @@
       "id": "bone_relic",
       "name": "Bone Relic",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "basic",
       "effect": {
         "type": "undead_protection",
@@ -2845,7 +2845,7 @@
       "name": "Carved War Drum",
       "type": "offhand",
       "offhandType": "instrument",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "basic",
       "statModifiers": {
         "stamina": 1,
@@ -2882,7 +2882,7 @@
       "name": "Temple Bell Chimes",
       "type": "offhand",
       "offhandType": "instrument",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "advanced",
       "statModifiers": {
         "stamina": 2,
@@ -2918,7 +2918,7 @@
       "id": "forgotten_map",
       "name": "Forgotten Map",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "basic",
       "effect": {
         "type": "exploration_bonus",
@@ -2948,7 +2948,7 @@
       "id": "warriors_charm",
       "name": "Warrior's Charm",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "basic",
       "effect": {
         "type": "stat_boost",
@@ -2982,7 +2982,7 @@
       "id": "mystic_amulet",
       "name": "Mystic Amulet",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "basic",
       "effect": {
         "type": "stat_boost",
@@ -3020,7 +3020,7 @@
       "id": "elemental_tablet",
       "name": "Elemental Tablet",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "advanced",
       "effect": {
         "type": "elemental_knowledge",
@@ -3059,7 +3059,7 @@
       "name": "Restored Glyph Codex",
       "type": "offhand",
       "offhandType": "tome",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "advanced",
       "statModifiers": {
         "magicPower": 3,
@@ -3095,7 +3095,7 @@
       "id": "crystal_resonator",
       "name": "Crystal Resonator",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "advanced",
       "effect": {
         "type": "stat_boost",
@@ -3136,7 +3136,7 @@
       "id": "shadow_walker_mask",
       "name": "Shadow Walker Mask",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "advanced",
       "effect": {
         "type": "stat_boost",
@@ -3177,7 +3177,7 @@
       "id": "titans_legacy",
       "name": "Titan's Legacy",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "advanced",
       "effect": {
         "type": "stat_boost",
@@ -3218,7 +3218,7 @@
       "id": "ancient_compass",
       "name": "Ancient Compass",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "advanced",
       "effect": {
         "type": "treasure_finding",
@@ -3252,7 +3252,7 @@
       "id": "scholar_spectacles",
       "name": "Scholar's Spectacles",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "advanced",
       "effect": {
         "type": "knowledge_boost",
@@ -3287,7 +3287,7 @@
       "id": "time_worn_artifact",
       "name": "Time-Worn Artifact",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "expert",
       "effect": {
         "type": "experience_boost",
@@ -3323,7 +3323,7 @@
       "id": "dimensional_anchor",
       "name": "Dimensional Anchor",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "expert",
       "effect": {
         "type": "stat_boost",
@@ -3366,7 +3366,7 @@
       "name": "Sanctified Reliquary",
       "type": "offhand",
       "offhandType": "focus",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "expert",
       "statModifiers": {
         "magicalDefence": 2,
@@ -3406,7 +3406,7 @@
       "id": "phoenix_crown",
       "name": "Phoenix Crown",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "expert",
       "effect": {
         "type": "stat_boost",
@@ -3449,7 +3449,7 @@
       "id": "primordial_codex",
       "name": "Primordial Codex",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "master",
       "effect": {
         "type": "skill_unlock",
@@ -3490,7 +3490,7 @@
       "id": "genesis_fragment",
       "name": "Genesis Fragment",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "master",
       "effect": {
         "type": "permanent_enhancement",
@@ -3534,7 +3534,7 @@
       "id": "omniscience_tablet",
       "name": "Omniscience Tablet",
       "type": "artifact",
-      "profession": "archaeologist",
+      "profession": "detective",
       "tier": "master",
       "effect": {
         "type": "skill_unlock",
@@ -3578,7 +3578,7 @@
       "id": "healing_herbs",
       "name": "Healing Herbs",
       "type": "consumable",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "basic",
       "effect": {
         "type": "heal",
@@ -3610,7 +3610,7 @@
       "name": "Spirit Rattle",
       "type": "offhand",
       "offhandType": "instrument",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "basic",
       "statModifiers": {
         "stamina": 1,
@@ -3642,7 +3642,7 @@
       "id": "mana_moss",
       "name": "Mana Moss",
       "type": "consumable",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "basic",
       "effect": {
         "type": "mana_restore",
@@ -3673,7 +3673,7 @@
       "id": "energy_berries",
       "name": "Energy Berries",
       "type": "consumable",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "basic",
       "effect": {
         "type": "restore_stamina",
@@ -3704,7 +3704,7 @@
       "id": "swift_leaf_tea",
       "name": "Swift Leaf Tea",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "basic",
       "effect": {
         "type": "stat_boost",
@@ -3737,7 +3737,7 @@
       "id": "protective_bark",
       "name": "Protective Bark",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "basic",
       "effect": {
         "type": "stat_boost",
@@ -3771,7 +3771,7 @@
       "id": "vitality_bloom",
       "name": "Vitality Bloom",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "advanced",
       "effect": {
         "type": "stat_boost",
@@ -3805,7 +3805,7 @@
       "id": "forest_guardian_tea",
       "name": "Forest Guardian Tea",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "advanced",
       "effect": {
         "type": "nature_attunement",
@@ -3840,7 +3840,7 @@
       "id": "herbal_antidote",
       "name": "Herbal Antidote",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "advanced",
       "effect": {
         "type": "cure_all_poisons",
@@ -3874,7 +3874,7 @@
       "id": "dragons_breath_flower",
       "name": "Dragon's Breath Flower",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "advanced",
       "effect": {
         "type": "stat_boost",
@@ -3911,7 +3911,7 @@
       "id": "moonlight_lotus",
       "name": "Moonlight Lotus",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "advanced",
       "effect": {
         "type": "stat_boost",
@@ -3952,7 +3952,7 @@
       "id": "giants_root",
       "name": "Giant's Root",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "advanced",
       "effect": {
         "type": "stat_boost",
@@ -3986,7 +3986,7 @@
       "id": "ethereal_mushroom",
       "name": "Ethereal Mushroom",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "advanced",
       "effect": {
         "type": "stat_boost",
@@ -4027,7 +4027,7 @@
       "id": "nature_elixir",
       "name": "Nature's Elixir",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "expert",
       "effect": {
         "type": "full_heal_and_cleanse"
@@ -4061,7 +4061,7 @@
       "id": "phoenix_bloom",
       "name": "Phoenix Bloom",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "expert",
       "effect": {
         "type": "stat_boost",
@@ -4103,7 +4103,7 @@
       "id": "void_spore",
       "name": "Void Spore",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "expert",
       "effect": {
         "type": "stat_boost",
@@ -4146,7 +4146,7 @@
       "id": "world_tree_seed",
       "name": "World Tree Seed",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "master",
       "effect": {
         "type": "permanent_growth",
@@ -4186,7 +4186,7 @@
       "id": "cosmic_essence_fruit",
       "name": "Cosmic Essence Fruit",
       "type": "herb",
-      "profession": "farmer",
+      "profession": "medic",
       "tier": "master",
       "effect": {
         "type": "permanent_enhancement",

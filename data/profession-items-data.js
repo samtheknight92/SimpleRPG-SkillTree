@@ -885,7 +885,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "field_medic"
+                "apothecary"
             ]
         },
         "antitoxin_draught": {
@@ -942,7 +942,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "field_medic"
+                "apothecary"
             ],
             "price": {
                 "silver": 4
@@ -972,7 +972,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "chefs_instinct"
+                "smoke_and_flash"
             ],
             "price": {
                 "silver": 4
@@ -1005,7 +1005,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "field_medic"
+                "apothecary"
             ],
             "price": {
                 "silver": 4
@@ -1148,7 +1148,7 @@ const PROFESSION_ITEMS_DATA = {
                 }
             ],
             "requiredSkills": [
-                "plague_ward"
+                "transmute_salts"
             ],
             "price": {
                 "silver": 90
@@ -2783,7 +2783,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "ancient_coin",
             "name": "Ancient Coin",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "basic",
             "effect": {
                 "type": "currency_bonus",
@@ -2813,7 +2813,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "bone_relic",
             "name": "Bone Relic",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "basic",
             "effect": {
                 "type": "undead_protection",
@@ -2848,7 +2848,7 @@ const PROFESSION_ITEMS_DATA = {
             "name": "Carved War Drum",
             "type": "offhand",
             "offhandType": "instrument",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "basic",
             "statModifiers": {
                 "stamina": 1,
@@ -2885,7 +2885,7 @@ const PROFESSION_ITEMS_DATA = {
             "name": "Temple Bell Chimes",
             "type": "offhand",
             "offhandType": "instrument",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "advanced",
             "statModifiers": {
                 "stamina": 2,
@@ -2921,7 +2921,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "forgotten_map",
             "name": "Forgotten Map",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "basic",
             "effect": {
                 "type": "exploration_bonus",
@@ -2951,7 +2951,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "warriors_charm",
             "name": "Warrior's Charm",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -2985,7 +2985,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "mystic_amulet",
             "name": "Mystic Amulet",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -3023,7 +3023,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "elemental_tablet",
             "name": "Elemental Tablet",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "advanced",
             "effect": {
                 "type": "elemental_knowledge",
@@ -3062,7 +3062,7 @@ const PROFESSION_ITEMS_DATA = {
             "name": "Restored Glyph Codex",
             "type": "offhand",
             "offhandType": "tome",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "advanced",
             "statModifiers": {
                 "magicPower": 3,
@@ -3098,7 +3098,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "crystal_resonator",
             "name": "Crystal Resonator",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3139,7 +3139,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "shadow_walker_mask",
             "name": "Shadow Walker Mask",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3180,7 +3180,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "titans_legacy",
             "name": "Titan's Legacy",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3221,7 +3221,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "ancient_compass",
             "name": "Ancient Compass",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "advanced",
             "effect": {
                 "type": "treasure_finding",
@@ -3255,7 +3255,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "scholar_spectacles",
             "name": "Scholar's Spectacles",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "advanced",
             "effect": {
                 "type": "knowledge_boost",
@@ -3290,7 +3290,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "time_worn_artifact",
             "name": "Time-Worn Artifact",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "expert",
             "effect": {
                 "type": "experience_boost",
@@ -3326,7 +3326,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "dimensional_anchor",
             "name": "Dimensional Anchor",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -3369,7 +3369,7 @@ const PROFESSION_ITEMS_DATA = {
             "name": "Sanctified Reliquary",
             "type": "offhand",
             "offhandType": "focus",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "expert",
             "statModifiers": {
                 "magicalDefence": 2,
@@ -3409,7 +3409,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "phoenix_crown",
             "name": "Phoenix Crown",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -3452,7 +3452,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "primordial_codex",
             "name": "Primordial Codex",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "master",
             "effect": {
                 "type": "skill_unlock",
@@ -3493,7 +3493,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "genesis_fragment",
             "name": "Genesis Fragment",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "master",
             "effect": {
                 "type": "permanent_enhancement",
@@ -3537,7 +3537,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "omniscience_tablet",
             "name": "Omniscience Tablet",
             "type": "artifact",
-            "profession": "archaeologist",
+            "profession": "detective",
             "tier": "master",
             "effect": {
                 "type": "skill_unlock",
@@ -3581,7 +3581,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "healing_herbs",
             "name": "Healing Herbs",
             "type": "consumable",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "basic",
             "effect": {
                 "type": "heal",
@@ -3613,7 +3613,7 @@ const PROFESSION_ITEMS_DATA = {
             "name": "Spirit Rattle",
             "type": "offhand",
             "offhandType": "instrument",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "basic",
             "statModifiers": {
                 "stamina": 1,
@@ -3645,7 +3645,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "mana_moss",
             "name": "Mana Moss",
             "type": "consumable",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "basic",
             "effect": {
                 "type": "mana_restore",
@@ -3676,7 +3676,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "energy_berries",
             "name": "Energy Berries",
             "type": "consumable",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "basic",
             "effect": {
                 "type": "restore_stamina",
@@ -3707,7 +3707,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "swift_leaf_tea",
             "name": "Swift Leaf Tea",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -3740,7 +3740,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "protective_bark",
             "name": "Protective Bark",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "basic",
             "effect": {
                 "type": "stat_boost",
@@ -3774,7 +3774,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "vitality_bloom",
             "name": "Vitality Bloom",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3808,7 +3808,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "forest_guardian_tea",
             "name": "Forest Guardian Tea",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "advanced",
             "effect": {
                 "type": "nature_attunement",
@@ -3843,7 +3843,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "herbal_antidote",
             "name": "Herbal Antidote",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "advanced",
             "effect": {
                 "type": "cure_all_poisons",
@@ -3877,7 +3877,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "dragons_breath_flower",
             "name": "Dragon's Breath Flower",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3914,7 +3914,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "moonlight_lotus",
             "name": "Moonlight Lotus",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3955,7 +3955,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "giants_root",
             "name": "Giant's Root",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -3989,7 +3989,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "ethereal_mushroom",
             "name": "Ethereal Mushroom",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "advanced",
             "effect": {
                 "type": "stat_boost",
@@ -4030,7 +4030,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "nature_elixir",
             "name": "Nature's Elixir",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "expert",
             "effect": {
                 "type": "full_heal_and_cleanse"
@@ -4064,7 +4064,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "phoenix_bloom",
             "name": "Phoenix Bloom",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -4106,7 +4106,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "void_spore",
             "name": "Void Spore",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "expert",
             "effect": {
                 "type": "stat_boost",
@@ -4149,7 +4149,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "world_tree_seed",
             "name": "World Tree Seed",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "master",
             "effect": {
                 "type": "permanent_growth",
@@ -4189,7 +4189,7 @@ const PROFESSION_ITEMS_DATA = {
             "id": "cosmic_essence_fruit",
             "name": "Cosmic Essence Fruit",
             "type": "herb",
-            "profession": "farmer",
+            "profession": "medic",
             "tier": "master",
             "effect": {
                 "type": "permanent_enhancement",

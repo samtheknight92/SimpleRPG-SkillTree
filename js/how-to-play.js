@@ -155,7 +155,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Skills tab',
-      'Learn skills when you have enough Lumens and meet requirements. Passives apply automatically; toggles get <strong>Switch On/Off</strong>; actions show on the action bar. Tier 1 is cheap; higher tiers need higher level.'
+      'Learn skills when you have enough Lumens and meet requirements. <strong>Ascension</strong> (~20 breakthroughs, hidden until you qualify — T3 Lv10 · T4 Lv15 · T5 Lv22). <strong>Ultimate</strong> splits into Rare Legends, Weapon Mastery (one per weapon path), and Element Mastery (one per magic path) — T5 Lv22 · T6 Lv30.'
     ),
     tip(
       'Notes tab',

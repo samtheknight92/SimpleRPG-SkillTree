@@ -89,6 +89,7 @@ const ACTION_BAR_GROUP_RANK = {
   dagger: 30,
   polearm: 40,
   hammer: 50,
+  striker: 55,
   ranged: 60,
   staff: 70,
   fire: 110,
@@ -223,6 +224,7 @@ export function resolveActivationEffects(skill) {
         duration: Number.isFinite(Number(item.duration)) ? Number(item.duration) : parseDurationFromText(skill.desc, getEffect(item.effectId)),
         potency: Number.isFinite(Number(item.potency)) ? Number(item.potency) : parsePotencyFromText(skill.desc, getEffect(item.effectId)),
         chance: skill.source === 'homebrew' ? 1 : (Number.isFinite(Number(item.chance)) ? Number(item.chance) : chance),
+        applyTo: item.applyTo,
         source: 'data'
       }))
   }
@@ -268,6 +270,7 @@ export function rollSkillProc(chance) {
 
 export function tierBorderClass(tier) {
   const value = Number(tier || 1)
+  if (value >= 6) return 'skill-slot-tier-6'
   if (value >= 5) return 'skill-slot-tier-5'
   if (value >= 4) return 'skill-slot-tier-4'
   if (value >= 3) return 'skill-slot-tier-3'

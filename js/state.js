@@ -1,5 +1,6 @@
 import { TAB_IDS, RETIRED_SKILL_SUBCATEGORIES } from './constants.js'
 import { parseUrlState } from './url-state.js'
+import { applyFusionNavigationState, EMPTY_FUSION_FILTERS, parseFusionFiltersFromUrl, filtersForRetiredFusionSubcategory } from './fusion-nav.js'
 
 export const state = {
   characters: [],
@@ -7,6 +8,7 @@ export const state = {
   tab: 'character',
   skillCategory: 'weapons',
   skillSubcategory: 'sword',
+  skillFusionFilters: EMPTY_FUSION_FILTERS(),
   skillSearch: '',
   itemSearch: '',
   itemCategory: 'all',
@@ -27,6 +29,7 @@ export const state = {
   gmPremadeSort: 'level-desc',
   glossarySearch: '',
   gmNpcTurnCharacterIds: [],
+  gmNpcTurnFolder: '',
   lastNpcTurns: [],
   characterFolderNames: [],
   characterFolderOrder: [],
@@ -74,6 +77,15 @@ export function applyUrlState() {
   if (fromUrl.skillSubcategory) {
     state.skillSubcategory = RETIRED_SKILL_SUBCATEGORIES[fromUrl.skillSubcategory] || fromUrl.skillSubcategory
   }
+  if (fromUrl.skillFusionFilters) {
+    state.skillFusionFilters = fromUrl.skillFusionFilters
+  } else {
+    const filterHint = filtersForRetiredFusionSubcategory(fromUrl.skillSubcategory)
+    if (filterHint) {
+      state.skillFusionFilters = { ...EMPTY_FUSION_FILTERS(), ...filterHint }
+    }
+  }
+  applyFusionNavigationState(state)
   if (fromUrl.itemSource) state.itemSource = fromUrl.itemSource
   if (fromUrl.itemPage != null) state.itemPage = fromUrl.itemPage
 }

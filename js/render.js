@@ -12,12 +12,19 @@ import {
   displayCategory,
   canLearnSkill,
   displaySubcategory,
+  syncFusionFilters,
+  fusionFilterOptions,
   incompatibilityReason,
   isToggleSkill,
   prereqLabel,
   humanStarterWeaponOptions
 } from './skills.js'
-import { renderHowToPlayTab } from './how-to-play.js'
+import {
+  displayFusionCareerKind,
+  displayFusionElement,
+  displayFusionWeapon,
+  hasActiveFusionFilters
+} from './fusion-nav.js'
 import { characterLevelInfo, levelTooltip } from './level.js'
 import { isTableRuleRacePassive, racePassiveTooltip } from './race-passives.js'
 import { listHomebrewItems, listHomebrewSkills, listHomebrewRaces, homebrewSkillTreeOptions, homebrewRaceOptionsForSkills, homebrewWeaponKindOptions, weaponKindDisplayLabel, homebrewSkillLockOptions, homebrewSkillLockSummary } from './homebrew.js'
@@ -30,6 +37,7 @@ import {
   PREMADE_SORT_OPTIONS
 } from './premade-characters.js'
 import { filterCatalogItems, paginateItems, isShopPurchaseItem, shopMinLevelForItem, shopPurchaseCheck, ITEM_CATALOG_CATEGORIES, catalogCategoryCounts, catalogSourceCounts, activeCatalogFilterLabels, itemHasCounter, itemCounterLabel, inventoryCounterValue } from './items.js'
+import { renderHowToPlayTab } from './how-to-play.js'
 import {
   manualEffectList,
   groupedManualEffects,
@@ -40,9 +48,11 @@ import {
   effectTooltip,
   effectUsesPotency,
   effectPotencyLabel,
-  characterEffectSources
+  characterEffectSources,
+  statusStatModifiers
 } from './effects.js'
 import { formatCurrency, formatStatModifiers, fallbackIcon, itemPriceGil, normalizeGil } from './format.js'
+import { renderNumberStepper } from './number-stepper.js'
 import { itemTooltip, skillTooltip, statTooltip, statUpgradeTooltip, statRefundTooltip } from './tooltips-text.js'
 import { renderActionBar } from './action-bar.js'
 import { backgroundOptions, getBackground, backgroundRewardSummary, DEFAULT_BACKGROUND } from './backgrounds.js'
@@ -72,7 +82,10 @@ import {
   folderAssignOptions,
   listCharacterFolders,
   rosterFolderSections,
-  isRosterFolderOpen
+  isRosterFolderOpen,
+  folderFilterOptions,
+  filterCharactersByFolder,
+  FOLDER_FILTER_ALL
 } from './character-folders.js'
 
 export function render(options = { all: true }) {
@@ -616,10 +629,24 @@ function renderHomebrewUseEffectSection(draft) {
       <div class="homebrew-use-effect-row">
         <span class="pill ${effect ? effectTone(effect) : 'warn'}">${effect ? esc(`${effect.icon || '✦'} ${effect.name}`) : esc(row.effectId)}</span>
         <label class="field-label compact">Turns
-          <input class="input tiny" type="number" min="0" name="hbs-use-duration-${esc(row.effectId)}" value="${esc(String(row.duration ?? 3))}" />
+          ${renderNumberStepper({
+            name: `hbs-use-duration-${row.effectId}`,
+            value: String(row.duration ?? 3),
+            min: 0,
+            tiny: true,
+            decreaseLabel: 'Decrease duration',
+            increaseLabel: 'Increase duration'
+          })}
         </label>
         <label class="field-label compact">${esc(potencyLabel)}
-          <input class="input tiny" type="number" name="hbs-use-potency-${esc(row.effectId)}" value="${row.potency == null ? '' : esc(String(row.potency))}" placeholder="auto" />
+          ${renderNumberStepper({
+            name: `hbs-use-potency-${row.effectId}`,
+            value: row.potency == null ? '' : String(row.potency),
+            placeholder: 'auto',
+            tiny: true,
+            decreaseLabel: 'Decrease potency',
+            increaseLabel: 'Increase potency'
+          })}
         </label>
         <button type="button" class="homebrew-effect-remove" data-homebrew-skill-use-effect-remove="${esc(row.effectId)}" aria-label="Remove">×</button>
       </div>
@@ -820,7 +847,7 @@ function renderEffectsManager(character) {
         <div class="wrap effect-card-tags">
           <span class="pill">Remaining: ${esc(effectDurationLabel(status.duration))}</span>
           ${status.potency !== undefined && status.potency !== null && status.potency !== 0 ? `<span class="pill warn">Potency ${esc(status.potency)}</span>` : ''}
-          ${effect.statModifiers ? `<span class="pill ${effectTone(effect)}">${esc(formatStatModifiers(effect.statModifiers))}</span>` : ''}
+          ${Object.keys(statusStatModifiers(status, effect)).length ? `<span class="pill ${effectTone(effect)}">${esc(formatStatModifiers(statusStatModifiers(status, effect)))}</span>` : ''}
         </div>
           ${status.notes ? `<div class="subtle effect-card-meta">${esc(status.notes)}</div>` : ''}
           ${status.performance ? `<div class="subtle effect-card-meta good">${esc(formatPerformanceMeta(status.performance))}</div>` : ''}
@@ -851,11 +878,11 @@ function renderEffectsManager(character) {
 
       <div class="effect-add-box">
         <h3 class="effects-section-title">Add Effect</h3>
-        <p class="effect-add-intro">Use this for Poison, Burn, HP Regen, buffs, debuffs, auras, or GM-made nonsense. Common combat statuses are listed first. Duration counts down each Process Turn at the start of your turn; leave blank to use the effect default. Potency matters for damage/heal per turn — leave blank for the default.</p>
+        <p class="effect-add-intro">Track combat statuses, skill buffs, and potion effects here. For Temp Strength, Temp Magic, and similar, enter the duration and potency from the item or skill text (e.g. potency 3, 8 turns).</p>
         <div class="effect-add-grid">
           <label><span class="field-label">Effect</span><select class="input" id="effect-select">${effectOptionsMarkup()}</select></label>
-          <label><span class="field-label">Duration</span><input class="input" id="effect-duration" type="number" min="0" placeholder="Default" /></label>
-          <label><span class="field-label">Potency</span><input class="input" id="effect-potency" type="number" placeholder="Default" /></label>
+          <label><span class="field-label">Duration</span>${renderNumberStepper({ id: 'effect-duration', min: 0, placeholder: 'Default', decreaseLabel: 'Decrease duration', increaseLabel: 'Increase duration' })}</label>
+          <label><span class="field-label">Potency</span>${renderNumberStepper({ id: 'effect-potency', placeholder: 'Default', decreaseLabel: 'Decrease potency', increaseLabel: 'Increase potency' })}</label>
           <label><span class="field-label">Notes</span><input class="input" id="effect-notes" placeholder="Optional source/variant" /></label>
         </div>
         <button type="button" class="primary-btn full" data-add-effect>Add Effect</button>
@@ -1004,6 +1031,79 @@ function renderPerformanceBanner(character) {
   `
 }
 
+function renderFusionFilterBar(character) {
+  if (state.skillCategory !== 'fusion') return ''
+  syncFusionFilters(character)
+  const options = fusionFilterOptions(state.skillSubcategory, character)
+  const filters = state.skillFusionFilters || { weapons: [], elements: [], kinds: [] }
+  const rows = []
+
+  if (options.weapons.length) {
+    rows.push({
+      label: 'Weapon',
+      dim: 'weapons',
+      items: options.weapons.map(value => ({
+        value,
+        label: displayFusionWeapon(value),
+        active: filters.weapons.includes(value)
+      }))
+    })
+  }
+  if (options.elements.length) {
+    rows.push({
+      label: 'Element',
+      dim: 'elements',
+      items: options.elements.map(value => ({
+        value,
+        label: displayFusionElement(value),
+        active: filters.elements.includes(value)
+      }))
+    })
+  }
+  if (options.kinds.length) {
+    rows.push({
+      label: 'Type',
+      dim: 'kinds',
+      items: options.kinds.map(value => ({
+        value,
+        label: displayFusionCareerKind(value),
+        active: filters.kinds.includes(value)
+      }))
+    })
+  }
+
+  if (!rows.length) return ''
+
+  const hint = hasActiveFusionFilters(filters)
+    ? 'Showing skills that match your selections. Click again to deselect.'
+    : 'Click to filter — leave all off to show every available skill.'
+
+  return `
+    <div class="fusion-filters card" aria-label="Fusion filters">
+      <div class="fusion-filters-head">
+        <span class="kicker">Filter</span>
+        <span class="subtle fusion-filters-hint">${esc(hint)}</span>
+        ${hasActiveFusionFilters(filters) ? '<button type="button" class="ghost-btn tiny" data-clear-fusion-filters="">Clear</button>' : ''}
+      </div>
+      ${rows.map(row => `
+        <div class="fusion-filter-row">
+          <span class="fusion-filter-label">${esc(row.label)}</span>
+          <div class="fusion-filter-chips">
+            ${row.items.map(item => `
+              <button type="button"
+                class="fusion-filter-chip ${item.active ? 'active' : ''}"
+                data-fusion-filter=""
+                data-fusion-filter-dim="${esc(row.dim)}"
+                data-fusion-filter-value="${esc(item.value)}"
+                aria-pressed="${item.active ? 'true' : 'false'}">${esc(item.label)}</button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `
+}
+
 function renderSkillsTab(character) {
   const categories = visibleSkillCategories(character)
   if (!categories.length) {
@@ -1012,6 +1112,8 @@ function renderSkillsTab(character) {
   if (!categories.includes(state.skillCategory)) state.skillCategory = categories[0]
   const subs = visibleSubcategories(state.skillCategory, character)
   if (!subs.includes(state.skillSubcategory)) state.skillSubcategory = subs[0] || ''
+  syncFusionFilters(character)
+  const fusionFiltersHtml = renderFusionFilterBar(character)
 
   const list = skillsInSubcategory(state.skillCategory, state.skillSubcategory, character)
     .filter(skill => !state.skillSearch || `${skill.name} ${skill.desc} ${skill.id}`.toLowerCase().includes(state.skillSearch.toLowerCase()))
@@ -1045,6 +1147,7 @@ function renderSkillsTab(character) {
     </div>
     <div class="segmented">${categories.map(category => `<button type="button" data-skill-category="${esc(category)}" class="${category === state.skillCategory ? 'active' : ''}">${displayCategory(category)}</button>`).join('')}</div>
     <div class="segmented">${subs.map(sub => `<button type="button" data-skill-subcategory="${esc(sub)}" class="${sub === state.skillSubcategory ? 'active' : ''}">${displaySubcategory(sub)}</button>`).join('')}</div>
+    ${fusionFiltersHtml}
     ${introHtml}
     <div class="skill-tree">
       ${[...byTier.entries()].sort((a, b) => a[0] - b[0]).map(([tier, skills]) => `
@@ -1052,7 +1155,7 @@ function renderSkillsTab(character) {
           <h3>Tier ${tier}</h3>
           <div class="skill-grid">${skills.map(skill => renderSkillCard(character, skill)).join('')}</div>
         </section>
-      `).join('') || '<div class="empty">No skills matched your search.</div>'}
+      `).join('') || `<div class="empty">${state.skillCategory === 'fusion' && hasActiveFusionFilters(state.skillFusionFilters) ? 'No skills match these filters — try fewer selections or Clear.' : 'No skills matched your search.'}</div>`}
     </div>
   `
 }
@@ -1252,10 +1355,19 @@ function renderHomebrewTab() {
   const statFields = (draft, prefix = 'hb') => ['strength', 'magicPower', 'accuracy', 'speed', 'hp', 'stamina', 'physicalDefence', 'magicalDefence']
     .map(key => {
       const rule = STAT_RULES[key]
+      const label = rule?.label || titleCase(key)
       const value = draft?.statModifiers?.[key] ?? ''
       return `
-        <label class="field-label">${esc(rule?.label || titleCase(key))}</label>
-        <input class="input" type="number" name="${prefix}-stat-${key}" value="${value === '' ? '' : esc(String(value))}" placeholder="0" />
+        <div class="number-stepper-field">
+          <span class="field-label">${esc(label)}</span>
+          ${renderNumberStepper({
+            name: `${prefix}-stat-${key}`,
+            value: value === '' ? '' : String(value),
+            placeholder: '0',
+            decreaseLabel: `Decrease ${label}`,
+            increaseLabel: `Increase ${label}`
+          })}
+        </div>
       `
     }).join('')
 
@@ -1872,13 +1984,58 @@ function renderNpcTurnSuggestionCard(result) {
   `
 }
 
+function combatFolderOptions() {
+  return folderFilterOptions(state).filter(opt => opt.value !== FOLDER_FILTER_ALL)
+}
+
+function resolveCombatFolderKey(savedKey) {
+  const options = combatFolderOptions()
+  if (savedKey && options.some(opt => opt.value === savedKey)) return savedKey
+  return options[0]?.value || ''
+}
+
+function renderCombatFolderPicker({ selectId, buttonDataKey, buttonLabel, selectedValue }) {
+  if (!state.characters.length) return ''
+
+  const options = combatFolderOptions()
+  const selected = resolveCombatFolderKey(selectedValue)
+  return `
+    <div class="initiative-folder-picker wrap mt-10">
+      <select class="input" id="${selectId}" aria-label="Roster folder">
+        ${options.map(opt => `<option value="${esc(opt.value)}" ${opt.value === selected ? 'selected' : ''}>${esc(opt.label)}</option>`).join('')}
+      </select>
+      <button type="button" class="ghost-btn tiny" data-${buttonDataKey}>${esc(buttonLabel)}</button>
+    </div>
+  `
+}
+
+function renderInitiativeFolderPicker() {
+  return renderCombatFolderPicker({
+    selectId: 'initiative-folder-select',
+    buttonDataKey: 'add-initiative-from-folder',
+    buttonLabel: 'Add from folder',
+    selectedValue: resolveCombatFolderKey(state.gmNpcTurnFolder)
+  })
+}
+
 function renderGmNpcTurnPanel() {
   const roster = state.characters
   const selectedIds = new Set(state.gmNpcTurnCharacterIds)
+  const folderKey = resolveCombatFolderKey(state.gmNpcTurnFolder)
+  const folderCharacters = filterCharactersByFolder(roster, folderKey)
   const results = state.lastNpcTurns || []
   const suggestionHtml = results.length
     ? `<div class="npc-turn-results">${results.map(renderNpcTurnSuggestionCard).join('')}</div>`
     : '<p class="subtle">Select roster characters, then suggest turns. Characters with Multiattack get 2 different attacks.</p>'
+
+  const checkGrid = folderCharacters.length
+    ? folderCharacters.map(character => `
+        <label class="gm-check-row">
+          <input type="checkbox" data-gm-turn-character="${esc(character.id)}" ${selectedIds.has(character.id) ? 'checked' : ''} />
+          <span>${esc(character.name)}</span>
+        </label>
+      `).join('')
+    : '<p class="subtle">No characters in this folder.</p>'
 
   return `
     <section class="card mt-16">
@@ -1889,18 +2046,16 @@ function renderGmNpcTurnPanel() {
         <div class="section-title-row">
           <span class="field-label">Characters</span>
           <div class="wrap compact-actions">
-            <button type="button" class="ghost-btn tiny" data-select-all-gm-turn ${roster.length ? '' : 'disabled'}>Select all</button>
-            <button type="button" class="ghost-btn tiny" data-clear-gm-turn ${roster.length ? '' : 'disabled'}>Clear</button>
+            <button type="button" class="ghost-btn tiny" data-clear-gm-turn ${selectedIds.size ? '' : 'disabled'}>Clear</button>
           </div>
         </div>
-        <div class="gm-check-grid">
-          ${roster.map(character => `
-            <label class="gm-check-row">
-              <input type="checkbox" data-gm-turn-character="${esc(character.id)}" ${selectedIds.has(character.id) ? 'checked' : ''} />
-              <span>${esc(character.name)}</span>
-            </label>
-          `).join('') || '<p class="subtle">No characters in roster yet.</p>'}
-        </div>
+        ${renderCombatFolderPicker({
+          selectId: 'gm-turn-folder-select',
+          buttonDataKey: 'select-gm-turn-from-folder',
+          buttonLabel: 'Select from folder',
+          selectedValue: folderKey
+        })}
+        <div class="gm-check-grid mt-10">${checkGrid}</div>
       </div>
       <div class="wrap mt-12">
         <button type="button" class="primary-btn" data-generate-npc-turn ${roster.length ? '' : 'disabled'}>Suggest Turn${selectedIds.size > 1 ? 's' : ''}</button>
@@ -1934,11 +2089,12 @@ function renderGmInitiativeTracker() {
       </ol>`
     : '<p class="subtle">Add combatants and enter initiative — the list sorts highest to lowest automatically.</p>'
 
-  const editorRows = entries.length
-    ? entries.map(entry => `
+  const editorRows = sorted.length
+    ? sorted.map((entry, index) => `
         <div class="initiative-edit-row">
-          <input class="input" type="text" value="${esc(entry.name)}" data-initiative-name="${esc(entry.id)}" placeholder="Name" aria-label="Initiative name" />
-          <input class="input initiative-value-input" type="number" value="${entry.initiative === '' || entry.initiative == null ? '' : entry.initiative}" data-initiative-value="${esc(entry.id)}" placeholder="Init" aria-label="Initiative value" />
+          <span class="initiative-edit-rank" aria-hidden="true">${index + 1}</span>
+          <input class="input" type="text" value="${esc(entry.name)}" data-initiative-name="${esc(entry.id)}" placeholder="Name" aria-label="Initiative name for ${esc(entry.name || 'entry')}" />
+          <input class="input initiative-value-input" type="number" value="${entry.initiative === '' || entry.initiative == null ? '' : entry.initiative}" data-initiative-value="${esc(entry.id)}" placeholder="Init" aria-label="Initiative value for ${esc(entry.name || 'entry')}" />
           <button type="button" class="ghost-btn tiny" data-remove-initiative="${esc(entry.id)}" aria-label="Remove ${esc(entry.name || 'entry')}">Remove</button>
         </div>
       `).join('')
@@ -1970,10 +2126,11 @@ function renderGmInitiativeTracker() {
             <span class="field-label">Combatants</span>
             <div class="wrap compact-actions">
               <button type="button" class="ghost-btn tiny" data-add-initiative-entry>Add blank</button>
-              <button type="button" class="ghost-btn tiny" data-add-roster-initiative ${state.characters.length ? '' : 'disabled'}>Add roster</button>
+              <button type="button" class="ghost-btn tiny" data-add-roster-initiative ${state.characters.length ? '' : 'disabled'}>Add all</button>
             </div>
           </div>
-          <div class="initiative-edit-rows">${editorRows || '<p class="subtle">No entries yet.</p>'}</div>
+          ${renderInitiativeFolderPicker()}
+          <div class="initiative-edit-rows">${editorRows || '<p class="subtle">No entries yet — use Add from folder, Add all, or Add blank.</p>'}</div>
         </div>
       </div>
 

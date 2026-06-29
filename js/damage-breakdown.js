@@ -322,12 +322,33 @@ function parseSkillExtraAttackDice(desc) {
   return results
 }
 
+function casterDealsDirectDamage(desc) {
+  const text = String(desc || '')
+  if (!/\d+d\d+/i.test(text) && !/\+\d+\s+damage\b/i.test(text) && !skillUsesWeaponDamage(text)) {
+    return false
+  }
+  const stripped = text
+    .replace(/attackers?\s+(?:that|who)\s+hit[^.;]*/gi, '')
+    .replace(/when\s+(?:you are\s+)?hit[^.;]*/gi, '')
+    .replace(/on\s+being\s+hit[^.;]*/gi, '')
+  return /\d+d\d+/i.test(stripped) || /\+\d+\s+damage\b/i.test(stripped) || skillUsesWeaponDamage(stripped)
+}
+
+function isPrimaryApplyCast(desc) {
+  const text = String(desc || '')
+  return /^spell:\s*apply\b/i.test(text) || /^action:\s*(?:touch:\s*)?apply\b/i.test(text)
+}
+
 export function skillDealsDirectDamage(skill) {
   if (!skill) return false
   if (isBasicAttackSkill(skill)) return true
   if (skillHealsDirectHP(skill)) return false
   const desc = String(skill.desc || '')
-  return /\d+d\d+/i.test(desc) || /\+\d+\s+damage\b/i.test(desc) || skillUsesWeaponDamage(desc)
+  if (isPrimaryApplyCast(desc)) return false
+  if (/drain\s+\d+d\d+\s+stamina/i.test(desc)) {
+    return casterDealsDirectDamage(desc.replace(/drain\s+\d+d\d+\s+stamina/gi, ''))
+  }
+  return casterDealsDirectDamage(desc)
 }
 
 const HEAL_HALF_DAMAGE_RE = /heal(?:ing)?\s+(?:you|yourself|self|allies)\s+for\s+half/i

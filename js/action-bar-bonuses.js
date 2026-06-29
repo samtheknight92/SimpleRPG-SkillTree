@@ -49,7 +49,7 @@ function getSkillBenefitStats(skill) {
 }
 
 const WEAPON_SKILL_KINDS = ['sword', 'axe', 'dagger', 'polearm', 'hammer', 'staff', 'ranged', 'striker', 'unarmed']
-const WEAPON_FUSION_KINDS = ['sword', 'bow', 'dagger', 'polearm', 'hammer', 'axe', 'staff']
+const WEAPON_FUSION_KINDS = ['sword', 'bow', 'dagger', 'polearm', 'hammer', 'axe', 'staff', 'striker']
 const ELEMENT_FUSION_KINDS = new Set([
   'fire', 'ice', 'lightning', 'thunder', 'earth', 'wind', 'water', 'darkness', 'light'
 ])
@@ -76,7 +76,11 @@ function weaponKindsFromFusion(fusionType) {
   if (ELEMENT_FUSION_KINDS.has(first) && ELEMENT_FUSION_KINDS.has(second)) return []
 
   // Weapon + magic/profession (e.g. sword_fire, bow_enchanting, staff_ice).
-  if (WEAPON_FUSION_KINDS.includes(first)) return [first === 'bow' ? 'ranged' : first]
+  if (WEAPON_FUSION_KINDS.includes(first)) {
+    if (first === 'bow') return ['ranged']
+    if (first === 'striker') return ['striker', 'unarmed']
+    return [first]
+  }
 
   return []
 }

@@ -930,14 +930,14 @@
     "name": "Fire Immunity",
     "icon": "🔥",
     "type": "special",
-    "duration": 0,
+    "duration": 10,
     "potency": 0,
-    "desc": "Immune to fire damage and Burn while active.",
+    "desc": "Immune to fire damage and Burn while active. Set duration from the item or skill.",
     "stackable": false,
     "immunities": [
       "burn"
     ],
-    "manual": false
+    "manual": true
   },
   "cold_aura": {
     "id": "cold_aura",
@@ -1045,7 +1045,7 @@
     "type": "utility",
     "duration": 5,
     "potency": 0,
-    "desc": "Cannot be seen normally for 5 turns. +4 Accuracy on the first attack; broken after attacking or taking damage.",
+    "desc": "Cannot be seen normally while active. +4 Accuracy on the first attack; ends if you attack or take damage. Set duration from the item or skill.",
     "stackable": false,
     "statModifiers": {
       "accuracy": 4
@@ -1270,7 +1270,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 to notice hidden creatures, ambushes, or traps at range (you or allies on overwatch benefit).",
+    "desc": "Wilderness vigilance — +1 to spot hidden creatures, ambushes, or traps at range (you or allies on overwatch benefit).",
     "stackable": false,
     "manual": false
   },
@@ -1372,20 +1372,6 @@
     "stackable": false,
     "manual": false
   },
-  "temp_strength_1": {
-    "id": "temp_strength_1",
-    "name": "Temp Strength 1",
-    "icon": "💪",
-    "type": "statBuff",
-    "duration": 8,
-    "potency": 0,
-    "desc": "+1 Strength for 8 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "strength": 1
-    },
-    "manual": false
-  },
   "restore_stamina_5": {
     "id": "restore_stamina_5",
     "name": "Restore Stamina 5",
@@ -1395,20 +1381,6 @@
     "potency": 0,
     "desc": "Instantly restore 5 Stamina when consumed or activated.",
     "stackable": false,
-    "manual": false
-  },
-  "temp_magic_1": {
-    "id": "temp_magic_1",
-    "name": "Temp Magic 1",
-    "icon": "✨",
-    "type": "statBuff",
-    "duration": 8,
-    "potency": 0,
-    "desc": "+1 Magic Power for 8 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "magicPower": 1
-    },
     "manual": false
   },
   "heal_25": {
@@ -1453,148 +1425,6 @@
     "potency": 0,
     "desc": "Instantly restore 30 Stamina when consumed or activated.",
     "stackable": false,
-    "manual": false
-  },
-  "temp_strength_3": {
-    "id": "temp_strength_3",
-    "name": "Temp Strength 3",
-    "icon": "💪",
-    "type": "statBuff",
-    "duration": 6,
-    "potency": 0,
-    "desc": "+3 Strength for 6 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "strength": 3
-    },
-    "manual": false
-  },
-  "temp_speed_3": {
-    "id": "temp_speed_3",
-    "name": "Temp Speed 3",
-    "icon": "💨",
-    "type": "statBuff",
-    "duration": 6,
-    "potency": 0,
-    "desc": "+3 Speed for 6 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "speed": 3
-    },
-    "manual": false
-  },
-  "temp_magic_3": {
-    "id": "temp_magic_3",
-    "name": "Temp Magic 3",
-    "icon": "✨",
-    "type": "statBuff",
-    "duration": 6,
-    "potency": 0,
-    "desc": "+3 Magic Power for 6 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "magicPower": 3
-    },
-    "manual": false
-  },
-  "temp_defense_4": {
-    "id": "temp_defense_4",
-    "name": "Temp Defense 4",
-    "icon": "🛡️",
-    "type": "protection",
-    "duration": 6,
-    "potency": 0,
-    "desc": "+2 Physical Defence and +2 Magical Defence for 6 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "physicalDefence": 2,
-      "magicalDefence": 2
-    },
-    "manual": false
-  },
-  "invisibility_5_turns": {
-    "id": "invisibility_5_turns",
-    "name": "Invisibility 5 Turns",
-    "icon": "🌑",
-    "type": "utility",
-    "duration": 5,
-    "potency": 0,
-    "desc": "Invisible for 5 turns: +4 Accuracy on first attack; ends if you attack or take damage.",
-    "stackable": false,
-    "statModifiers": {
-      "accuracy": 4
-    },
-    "manual": false
-  },
-  "fire_immunity_10_turns": {
-    "id": "fire_immunity_10_turns",
-    "name": "Fire Immunity 10 Turns",
-    "icon": "🔥",
-    "type": "special",
-    "duration": 10,
-    "potency": 0,
-    "desc": "Immune to fire damage and Burn for 10 turns.",
-    "stackable": false,
-    "immunities": [
-      "burn"
-    ],
-    "manual": false
-  },
-  "cold_immunity_10_turns": {
-    "id": "cold_immunity_10_turns",
-    "name": "Cold Immunity 10 Turns",
-    "icon": "❄️",
-    "type": "special",
-    "duration": 10,
-    "potency": 0,
-    "desc": "Immune to cold damage and Immobilized from ice for 10 turns.",
-    "stackable": false,
-    "immunities": [
-      "immobilized"
-    ],
-    "manual": false
-  },
-  "temp_strength_5": {
-    "id": "temp_strength_5",
-    "name": "Temp Strength 5",
-    "icon": "💪",
-    "type": "statBuff",
-    "duration": 4,
-    "potency": 0,
-    "desc": "+5 Strength for 4 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "strength": 5
-    },
-    "manual": false
-  },
-  "temp_speed_2": {
-    "id": "temp_speed_2",
-    "name": "Temp Speed 2",
-    "icon": "💨",
-    "type": "statBuff",
-    "duration": 8,
-    "potency": 0,
-    "desc": "+2 Speed for 8 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "speed": 2
-    },
-    "manual": false
-  },
-  "temp_defense_minus_2": {
-    "id": "temp_defense_minus_2",
-    "name": "Temp Defense Minus 2",
-    "icon": "🛡️",
-    "type": "protection",
-    "duration": 4,
-    "potency": 0,
-    "desc": "-2 Physical Defence and -2 Magical Defence for 4 turns.",
-    "stackable": false,
-    "statModifiers": {
-      "physicalDefence": -2,
-      "magicalDefence": -2
-    },
     "manual": false
   },
   "cast_fireball": {
@@ -2351,13 +2181,8 @@
     "type": "protection",
     "duration": 0,
     "potency": 0,
-    "desc": "Immune to mind control, illusions, charm, fear, and possession.",
+    "desc": "Advantage on saves vs mind control, charm, fear, and illusions; halve magical damage from direct mental assaults (GM).",
     "stackable": false,
-    "immunities": [
-      "mind_controlled",
-      "charm",
-      "fear"
-    ],
     "manual": true
   },
   "hammer_mastery_passive": {
@@ -2899,33 +2724,33 @@
     "id": "apprentice_smith",
     "name": "Apprentice Smith",
     "icon": "🔨",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Basic weapons and armour.",
+    "desc": "Forge basic weapons and armour for allies to equip.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "weaponwright": {
     "id": "weaponwright",
     "name": "Weaponwright",
     "icon": "⚔️",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Martial weapons. Weapons you forge gain +1 damage.",
+    "desc": "Forge martial weapons. Weapons you forge gain +1 damage.",
     "stackable": false,
-    "manual": true,
+    "manual": false,
     "flatDamageBonus": 1
   },
   "armourer": {
     "id": "armourer",
     "name": "Armourer",
     "icon": "🛡️",
-    "type": "buff",
-    "duration": 3,
+    "type": "craft",
+    "duration": 0,
     "potency": 0,
-    "desc": "Armour and shields. Armour you forge grants +1 Physical Defence and +1 Magical Defence.",
+    "desc": "Forge armour and shields. Armour you forge grants +1 Physical Defence and +1 Magical Defence.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -2940,7 +2765,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "Pre-combat: Tune ally gear (10 min); +1 first attack roll or +1 Physical Defence first round (choose one). Once per ally per long rest. + Harmony Reaction: same ally (2 Smiths → both bonuses).",
+    "desc": "Pre-combat: Battlefield fitting — tune ally gear (10 min); +1 first attack roll or +1 Physical Defence first round (choose one). Once per ally per long rest. + Harmony Reaction: same ally (2 Smiths → both bonuses).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -2951,12 +2776,12 @@
     "id": "master_alloy",
     "name": "Master Alloy",
     "icon": "⚗️",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Advanced metals (mithril, adamantine recipes).",
+    "desc": "Masterwork alloy recipes (mithril, adamantine). Gear you forge from these counts as masterwork.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "tempered_steel": {
     "id": "tempered_steel",
@@ -2965,7 +2790,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Allies using your forged gear gain +1 to physical attack rolls (weapon damage unchanged).",
+    "desc": "Allies wielding weapons or armour you forged gain +1 to physical attack rolls (weapon damage unchanged).",
     "stackable": false,
     "manual": false
   },
@@ -2976,29 +2801,29 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Bypass mundane locks, hinges, or chains with tools (GM: one object per use).",
+    "desc": "Break mundane locks, hinges, or chains with smith's tools (GM: one object per use).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "camp_cook": {
     "id": "camp_cook",
     "name": "Camp Cook",
     "icon": "🍳",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Simple meals. Meal restores 1d4+1 HP when eaten.",
+    "desc": "Hearty camp meals. Each meal restores 1d4+1 HP when eaten.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "hearty_rations": {
     "id": "hearty_rations",
     "name": "Hearty Rations",
     "icon": "🥘",
-    "type": "buff",
+    "type": "craft",
     "duration": 10,
     "potency": 0,
-    "desc": "Travel food. After eating, +2 Stamina for 10 rounds.",
+    "desc": "Travel rations. After eating, +2 Stamina for 10 rounds.",
     "stackable": false,
     "manual": false
   },
@@ -3009,7 +2834,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Meals you cook gain +1 HP restored or +1 round of meal buff duration.",
+    "desc": "Camp provisioning — meals you cook restore +1 HP or last +1 round of meal buff duration.",
     "stackable": false,
     "manual": false
   },
@@ -3020,15 +2845,15 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Prepare one extra portion from the same ingredients (once per long rest).",
+    "desc": "Camp provisioning — prepare one extra portion from the same ingredients (once per long rest).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "banquet_planner": {
     "id": "banquet_planner",
     "name": "Banquet Planner",
     "icon": "🎉",
-    "type": "buff",
+    "type": "craft",
     "duration": 20,
     "potency": 0,
     "desc": "Feast for the party; shared +1 Accuracy for 20 rounds. + Harmony Reaction: same feast (each additional Chef adds +1 Accuracy and +5 feast duration; 9 Chefs → +9 Accuracy for 65 rounds).",
@@ -3042,8 +2867,8 @@
     "id": "battle_breakfast",
     "name": "Battle Breakfast",
     "icon": "🥞",
-    "type": "buff",
-    "duration": 3,
+    "type": "craft",
+    "duration": 0,
     "potency": 0,
     "desc": "Before first combat, one eater gains +2 initiative or +1 Physical Defence (first combat only). + Harmony Reaction: same meal (when 2+ Chefs, each served eater gets both bonuses; each Chef adds +2 initiative, +1 Physical Defence for one combat round, +1 Stamina round 1, and +1d4 temp HP at combat start; one eater per Chef).",
     "stackable": false,
@@ -3059,7 +2884,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Detect spoiled, drugged, or poisonous food by taste/smell (GM may require no roll).",
+    "desc": "Spoil and poison sense — detect spoiled, drugged, or poisoned food by taste or smell (GM may require no roll).",
     "stackable": false,
     "manual": false
   },
@@ -3144,12 +2969,12 @@
     "id": "field_medic",
     "name": "Field Medic",
     "icon": "💊",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Health potions. Potions you brew restore +2 HP.",
+    "desc": "Brew health potions. Potions you brew restore +2 HP when used.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "triage": {
     "id": "triage",
@@ -3158,9 +2983,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Assess a creature — learn HP band, bleeding, poison, disease (not exact HP unless GM allows).",
+    "desc": "Triage and diagnosis — learn a creature's HP band, bleeding, poison, or disease before you treat (not exact HP unless GM allows).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "antidote_training": {
     "id": "antidote_training",
@@ -3169,7 +2994,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+2 effective Magical Defence vs poison/disease effects on yourself; identify poison on sight.",
+    "desc": "Plague and poison warding on yourself — +2 effective Magical Defence vs poison and disease; identify poison on sight.",
     "stackable": false,
     "manual": false
   },
@@ -3180,7 +3005,7 @@
     "type": "heal",
     "duration": 0,
     "potency": 0,
-    "desc": "Stabilise a downed ally (0 HP) so they don't worsen; restore 1 HP.",
+    "desc": "Stabilise and revive — stabilise a downed ally (0 HP) so they do not worsen; restore 1 HP.",
     "stackable": false,
     "manual": false
   },
@@ -3188,12 +3013,12 @@
     "id": "surgical_touch",
     "name": "Surgical Touch",
     "icon": "✂️",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Advanced potions and antidotes. Healing items you use on others gain +1d4 HP.",
+    "desc": "Advanced potions and antidotes. Wound mending you apply to others restores +1d4 HP.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "plague_ward": {
     "id": "plague_ward",
@@ -3213,23 +3038,23 @@
     "id": "revival_draft",
     "name": "Revival Draft",
     "icon": "💉",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Rare stimulant — remove Incapacitated or one minor debuff (once per target per day).",
+    "desc": "Brew a rare revival draft — remove Incapacitated or one minor debuff (once per target per day).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "apothecary": {
     "id": "apothecary",
     "name": "Apothecary",
     "icon": "⚗️",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Basic potions and reagents.",
+    "desc": "Basic potions and alchemical reagents.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "acid_vials": {
     "id": "acid_vials",
@@ -3238,20 +3063,20 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Craft/throw: On hit 1d6 acid; 40% Weakened. + Harmony Reaction: same target, same round (+1 acid damage per Alchemist).",
+    "desc": "Craft/throw: Volatile brew — on hit 1d6 acid; 40% Weakened. + Harmony Reaction: same target, same round (+1 acid damage per Alchemist).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "smoke_and_flash": {
     "id": "smoke_and_flash",
     "name": "Smoke & Flash",
     "icon": "💨",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Distraction devices (smoke, blinding powder) — no damage, utility.",
+    "desc": "Smoke and flash powder — cover a retreat or confuse foes; no damage.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "label_reader": {
     "id": "label_reader",
@@ -3260,7 +3085,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Identify unknown liquids/powders safely (poison, potion, inert).",
+    "desc": "Reagent identification — safely identify unknown liquids and powders (poison, potion, or inert) before anyone uses them.",
     "stackable": false,
     "manual": false
   },
@@ -3268,23 +3093,23 @@
     "id": "explosive_compounds",
     "name": "Explosive Compounds",
     "icon": "💣",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Bombs (3d6 in 15ft; separate attack roll per target vs Magical Defence).",
+    "desc": "Volatile bombs (3d6 in 15ft; separate attack roll per target vs Magical Defence).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "transmute_salts": {
     "id": "transmute_salts",
     "name": "Transmute Salts",
     "icon": "🧂",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Convert common materials into alchemical bases (GM: daily quota).",
+    "desc": "Material transmutation — convert common materials into alchemical bases (GM: daily quota).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "volatile_expert": {
     "id": "volatile_expert",
@@ -3293,7 +3118,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "You and allies take −1 damage from your own alchemical friendly fire (min 0).",
+    "desc": "You and allies take −1 damage from your own alchemical blasts (minimum 0).",
     "stackable": false,
     "manual": false
   },
@@ -3301,32 +3126,32 @@
     "id": "rune_apprentice",
     "name": "Rune Apprentice",
     "icon": "✨",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Apply one minor enchant (+1 stat or flavour effect).",
+    "desc": "Rune inscription — apply one minor enchant to gear (+1 stat or similar effect).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "elemental_ink": {
     "id": "elemental_ink",
     "name": "Elemental Ink",
     "icon": "🔥",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Fire/Ice/Lightning +1d6 on weapon (as fusion-lite, not a toggle).",
+    "desc": "Inscribe Fire, Ice, or Lightning +1d6 on a weapon (permanent enchant, not a toggle).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "ward_scribe": {
     "id": "ward_scribe",
     "name": "Ward Scribe",
     "icon": "📜",
-    "type": "buff",
-    "duration": 3,
+    "type": "craft",
+    "duration": 0,
     "potency": 0,
-    "desc": "Protective charms (+1 Magical Defence permanent slot enchant on armour).",
+    "desc": "Protective warding — inscribe charms granting +1 Magical Defence (permanent slot enchant on armour).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -3340,18 +3165,18 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Inspect a magic item — learn properties and curse risk.",
+    "desc": "Arcane appraisal — inspect a magic item; learn properties and curse risk before anyone equips it.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "soul_bind": {
     "id": "soul_bind",
     "name": "Soul Bind",
     "icon": "👻",
-    "type": "debuff",
-    "duration": 3,
+    "type": "craft",
+    "duration": 0,
     "potency": 0,
-    "desc": "Bind item to owner (others suffer −2 using it).",
+    "desc": "Master engraving — soul-bind an item to its owner (others suffer −2 using it).",
     "stackable": false,
     "manual": false
   },
@@ -3359,12 +3184,12 @@
     "id": "artifact_shaping",
     "name": "Artifact Shaping",
     "icon": "🏆",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Items with 2 enchantment slots.",
+    "desc": "Master engraving — items you make gain 2 enchantment slots.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "dispel_touch": {
     "id": "dispel_touch",
@@ -3373,9 +3198,9 @@
     "type": "utility",
     "duration": 10,
     "potency": 0,
-    "desc": "Suppress one magical effect on an object or creature for 1 hour.",
+    "desc": "Protective warding — suppress one hostile magical effect on an object or creature for 1 hour.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "keen_eye": {
     "id": "keen_eye",
@@ -3384,9 +3209,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Examine scene; GM reveals one clue tier. + Harmony Reaction: same scene (+1 clue tier per Detective).",
+    "desc": "Scene examination — study a scene or object; GM reveals one clue tier. + Harmony Reaction: same scene (+1 clue tier per Detective).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "trace_evidence": {
     "id": "trace_evidence",
@@ -3395,7 +3220,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Spot disturbed objects, footprints, blood, recent magic residue.",
+    "desc": "Spot disturbed objects, footprints, blood, or recent magic residue at a scene.",
     "stackable": false,
     "manual": false
   },
@@ -3406,9 +3231,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Conversation grants +2 to read lies or pressure answers (GM social roll).",
+    "desc": "Witness interrogation — +2 to read lies or pressure answers (GM social roll).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "case_notes": {
     "id": "case_notes",
@@ -3428,9 +3253,9 @@
     "type": "utility",
     "duration": 999,
     "potency": 0,
-    "desc": "Visualise past events in a location (last 24 hours, GM narrative).",
+    "desc": "Trail and timeline reconstruction — visualise recent events at a location (last 24 hours; wilderness, ruins, or camp — GM narrative).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "follow_the_trail": {
     "id": "follow_the_trail",
@@ -3439,9 +3264,9 @@
     "type": "utility",
     "duration": 999,
     "potency": 0,
-    "desc": "Determine direction a specific person/creature went within last 8 hours.",
+    "desc": "Determine which way a specific person or creature went within the last 8 hours.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "deduction": {
     "id": "deduction",
@@ -3450,7 +3275,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Connect two prior clues — GM must give a useful inference if both are known.",
+    "desc": "Clue synthesis — connect two clues the party already knows; GM must give a useful inference if both are known.",
     "stackable": false,
     "manual": false
   },
@@ -3539,7 +3364,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Follow tracks in wilderness; know number and rough size of a group. Passive: Party ignores difficult terrain from undergrowth on overland travel (GM).",
+    "desc": "Wilderness tracking — follow tracks; know number and rough size of a group. Party ignores difficult undergrowth on overland travel (GM).",
     "stackable": false,
     "manual": false
   },
@@ -3550,7 +3375,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Party gains +1 initiative when you have 1 minute to scout ahead.",
+    "desc": "Snares and ambush — when you scout ahead for 1 minute, the party gains +1 initiative.",
     "stackable": false,
     "manual": false
   },
@@ -3558,12 +3383,12 @@
     "id": "snare_craft",
     "name": "Snare Craft",
     "icon": "🪤",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Simple traps (snare, alarm) — GM sets DC/effect.",
+    "desc": "Set simple snares and alarm traps — GM sets DC and effect.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "long_watch": {
     "id": "long_watch",
@@ -3572,20 +3397,20 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Track a quarry for a day — learn camp sites and direction.",
+    "desc": "Wilderness tracking — follow one quarry for a day; learn camp sites and direction of travel.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "camouflage_net": {
     "id": "camouflage_net",
     "name": "Camouflage Net",
     "icon": "🕸️",
-    "type": "utility",
+    "type": "craft",
     "duration": 0,
     "potency": 0,
-    "desc": "Hide camp from casual search (+2 Stealth for camp).",
+    "desc": "Snares and ambush — camouflage a camp from casual search (+2 Stealth for the camp).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "volley_call": {
     "id": "volley_call",
@@ -3594,9 +3419,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Call a target; one ally +1 on next attack vs it. Once per combat. + Harmony Reaction: same target (each Ranger adds +1 to marked allies' next attack and marks one more ally).",
+    "desc": "Marked quarry — call out one target; one ally gains +1 on next attack vs it. Once per combat. + Harmony Reaction: same target (each Ranger adds +1 to marked allies' next attack and marks one more ally).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "tinker": {
     "id": "tinker",
@@ -3999,7 +3824,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 Strength while wearing medium or heavy armour.",
+    "desc": "Armoured discipline — +1 Strength while wearing medium or heavy armour.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4013,7 +3838,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "Adjacent ally gains +1 Physical Defence until your next turn. + Harmony Reaction: same ally (each Soldier in the huddle adds +1 Physical Defence per Soldier helping — count heads, add that many once per Soldier; 3 Soldiers → +9 Physical Defence; 5 Soldiers on one ally → +25 Physical Defence).",
+    "desc": "Shield formation — adjacent ally gains +1 Physical Defence until your next turn. + Harmony Reaction: same ally (each Soldier in the huddle adds +1 Physical Defence per Soldier helping — count heads, add that many once per Soldier; 3 Soldiers → +9 Physical Defence; 5 Soldiers on one ally → +25 Physical Defence).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4027,9 +3852,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "One ally within 30ft may reroll a failed save (once per combat). + Harmony Reaction: that reroll (+2 for each participating Soldier; 5 Soldiers → +10 on the reroll).",
+    "desc": "Battlefield rally — one ally within 30ft may reroll a failed save (once per combat). + Harmony Reaction: that reroll (+2 for each participating Soldier; 5 Soldiers → +10 on the reroll).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "hold_the_line": {
     "id": "hold_the_line",
@@ -4038,7 +3863,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 Physical Defence when an ally is within 10ft.",
+    "desc": "Shield formation — +1 Physical Defence when an ally is within 10ft.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4052,7 +3877,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "When you and two or more allies attack the same target, all gain +1 accuracy. + Harmony: +1 accuracy on next hit vs that enemy per Phalanx Soldier in the volley; when 2+ Phalanx Soldiers attack, also +1d4 damage per Phalanx Soldier (all focus-fire attackers benefit; no Reaction).",
+    "desc": "Volley focus — when you and two or more allies attack the same target, all gain +1 accuracy. + Harmony: +1 accuracy on next hit vs that enemy per Phalanx Soldier in the volley; when 2+ Phalanx Soldiers attack, also +1d4 damage per Phalanx Soldier (all focus-fire attackers benefit; no Reaction).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4061,12 +3886,12 @@
   },
   "second_wind": {
     "id": "second_wind",
-    "name": "Second Wind",
+    "name": "Soldier's Second Wind",
     "icon": "💨",
     "type": "heal",
     "duration": 0,
     "potency": 0,
-    "desc": "Restore 1d6 HP (once per short rest).",
+    "desc": "Battlefield rally — restore 1d6 HP (once per short rest).",
     "stackable": false,
     "manual": false
   },
@@ -4077,7 +3902,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Allies within 10ft gain +1 to initiative.",
+    "desc": "Battlefield rally — allies within 10ft gain +1 to initiative.",
     "stackable": false,
     "manual": false
   },
@@ -4088,7 +3913,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Allies you target with magic gain +1 effective Magic Power for buffs and heals you apply.",
+    "desc": "Career support — allies you help with magic gain +1 effective Magic Power on buffs and heals you apply to them.",
     "stackable": false,
     "manual": false
   },
@@ -4099,9 +3924,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Ally's next spell or magical attack +1d4 damage or heal +2 HP (once per ally per combat). + Harmony Reaction: same ally (when 2+ Mages, +1d6 damage or +3 HP instead).",
+    "desc": "Spell empowerment — ally's next spell or magical attack gains +1d4 damage or heal +2 HP (once per ally per combat). + Harmony Reaction: same ally (when 2+ Mages, +1d6 damage or +3 HP instead).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "mana_font": {
     "id": "mana_font",
@@ -4110,7 +3935,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Allies within 10ft regain +1 Stamina when they cast a tier-1 spell (once per round per ally).",
+    "desc": "Arcane sustenance — allies within 10ft regain +1 Stamina when they cast a tier-1 spell (once per round per ally).",
     "stackable": false,
     "manual": false
   },
@@ -4121,9 +3946,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Grant an ally +2 on their next dispel or cleanse check (GM).",
+    "desc": "Circle warding assist — grant an ally +2 on their next dispel or cleanse attempt (GM).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "amplified_healing": {
     "id": "amplified_healing",
@@ -4132,7 +3957,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Healing spells you cast on others restore +2 HP.",
+    "desc": "Amplified aid — healing you apply to others restores +2 HP.",
     "stackable": false,
     "manual": false
   },
@@ -4143,7 +3968,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "10ft aura; allies +1 Magical Defence for 3 rounds (once per combat). + Harmony Reaction: overlapping circles (each Mage in the overlap adds +1 Magical Defence per Mage helping — count Mages, add that many once per Mage; 3 Mages → +9 Magical Defence; 5 Mages → +25 Magical Defence).",
+    "desc": "Circle warding — 10ft aura; allies +1 Magical Defence for 3 rounds (once per combat). + Harmony Reaction: overlapping circles (each Mage in the overlap adds +1 Magical Defence per Mage helping — count Mages, add that many once per Mage; 3 Mages → +9 Magical Defence; 5 Mages → +25 Magical Defence).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4157,7 +3982,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Once per combat, sustain one ally's concentration effect without using your action (GM).",
+    "desc": "Arcane sustenance — once per combat, sustain one ally's concentration effect without spending your action (GM).",
     "stackable": false,
     "manual": false
   },
@@ -4168,7 +3993,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 Magical Defence; +2 on saves vs fear (GM).",
+    "desc": "Oathbound resolve — +1 Magical Defence; +2 on saves vs fear (GM).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4182,7 +4007,7 @@
     "type": "heal",
     "duration": 0,
     "potency": 0,
-    "desc": "Touch ally — restore 1d6+1 HP (once per ally per day).",
+    "desc": "Lay on hands — touch an ally and restore 1d6+1 HP (once per ally per day).",
     "stackable": false,
     "manual": false
   },
@@ -4193,9 +4018,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "One enemy hesitates — save or cannot use reactions until your next turn (once per combat).",
+    "desc": "Rebuke a foe — one enemy hesitates; save or cannot use reactions until your next turn (once per combat).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "bulwark": {
     "id": "bulwark",
@@ -4204,7 +4029,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 Physical Defence while below half HP.",
+    "desc": "Holy protection — +1 Physical Defence while below half HP.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4219,7 +4044,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Allies within 10ft +1 Magical Defence vs fear and charm. + Harmony: +1 Magical Defence vs fear and charm per Paladin with this aura in range (no Reaction).",
+    "desc": "Holy protection — allies within 10ft +1 Magical Defence vs fear and charm. + Harmony: +1 Magical Defence vs fear and charm per Paladin with this aura in range (no Reaction).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4233,9 +4058,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Warded 10ft — hostile undead or demons save to enter (weaker than full Turn; once per combat).",
+    "desc": "Rebuke the unholy — ward 10ft; hostile undead or demons must save to enter (weaker than full Turn; once per combat).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "sacred_stance": {
     "id": "sacred_stance",
@@ -4244,7 +4069,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "+2 Physical Defence and +2 Magical Defence until end of your next turn; you cannot move.",
+    "desc": "Holy protection — +2 Physical Defence and +2 Magical Defence until end of your next turn; you cannot move.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4259,7 +4084,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+2 on pickpocket and sleight-of-hand checks (GM).",
+    "desc": "Pickpocket and filch — +2 on pickpocket and sleight-of-hand (GM).",
     "stackable": false,
     "manual": false
   },
@@ -4270,9 +4095,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Disengage — leave melee without provoking opportunity attacks (once per combat).",
+    "desc": "Slip away — disengage from melee without provoking opportunity attacks (once per combat).",
     "stackable": false,
-    "manual": true,
+    "manual": false,
     "attackScope": "melee"
   },
   "shadow_blend": {
@@ -4282,7 +4107,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 to Stealth when wearing light armour or no armour.",
+    "desc": "Shadow stealth — +1 to Stealth in light armour or none.",
     "stackable": false,
     "manual": false
   },
@@ -4293,9 +4118,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Distract a foe; one ally +2 on next attack vs that target. + Harmony Reaction: same foe (each additional Thief adds +1 to that attack).",
+    "desc": "Distraction setup — distract a foe; one ally gains +2 on next attack vs that target. + Harmony Reaction: same foe (each additional Thief adds +1 to that attack).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "filch": {
     "id": "filch",
@@ -4304,9 +4129,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Attempt to steal one small unequipped item from a target (GM contested roll; once per encounter).",
+    "desc": "Pickpocket and filch — steal one small unequipped item from a target (GM contested roll; once per encounter).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "escape_artist": {
     "id": "escape_artist",
@@ -4315,7 +4140,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+2 vs grapples, restraints, and mundane traps.",
+    "desc": "Slip away — +2 vs grapples, restraints, and mundane traps.",
     "stackable": false,
     "manual": false
   },
@@ -4326,7 +4151,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "After you deal damage, move 10ft without provoking opportunity attacks (once per turn).",
+    "desc": "Slip away — after you deal damage, move 10ft without provoking opportunity attacks (once per turn).",
     "stackable": false,
     "manual": false
   },
@@ -4337,7 +4162,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 damage on melee attacks while below half HP.",
+    "desc": "Wounded fury — +1 damage on melee attacks while below half HP.",
     "stackable": false,
     "manual": false,
     "condition": "belowHalfHp",
@@ -4351,7 +4176,7 @@
     "type": "debuff",
     "duration": 3,
     "potency": 0,
-    "desc": "Your next attack gains +2 damage; you suffer −2 Physical Defence until your next turn.",
+    "desc": "Reckless assault — your next attack gains +2 damage; you suffer −2 Physical Defence until your next turn.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4366,7 +4191,7 @@
     "type": "debuff",
     "duration": 1,
     "potency": 0,
-    "desc": "Foes within 10ft save or −1 accuracy for 1 round. + Harmony Reaction: same area (−1 accuracy per Berserker on failed save).",
+    "desc": "Battlefield intimidation — foes within 10ft save or suffer −1 accuracy for 1 round. + Harmony Reaction: same area (−1 accuracy per Berserker on failed save).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4380,7 +4205,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "On a kill or critical hit, regain 1 Stamina.",
+    "desc": "Wounded fury — on a kill or critical hit, regain 1 Stamina.",
     "stackable": false,
     "manual": false,
     "onKillStamina": 1
@@ -4392,7 +4217,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "+2 Strength, −1 Magical Defence for 3 rounds (once per combat).",
+    "desc": "Wounded fury — +2 Strength, −1 Magical Defence for 3 rounds (once per combat).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4407,7 +4232,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Ignore difficult terrain while moving toward a hostile target.",
+    "desc": "Reckless assault — ignore difficult terrain while moving toward a hostile target.",
     "stackable": false,
     "manual": false
   },
@@ -4418,7 +4243,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+2 damage vs bloodied targets (GM: below half HP).",
+    "desc": "Coup de grace — +2 damage vs bloodied targets (GM: below half HP).",
     "stackable": false,
     "manual": false,
     "condition": "belowHalfHp",
@@ -4431,7 +4256,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 accuracy with ranged weapon attacks.",
+    "desc": "Steady aim — +1 accuracy with ranged weapon attacks.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4446,20 +4271,20 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Ready a shot — interrupt one enemy moving in your line of sight (GM).",
+    "desc": "Overwatch shot — ready a shot; interrupt one enemy moving in your line of sight (GM).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "suppressing_fire": {
     "id": "suppressing_fire",
     "name": "Suppressing Fire",
     "icon": "🔫",
-    "type": "utility",
+    "type": "debuff",
     "duration": 1,
     "potency": 0,
-    "desc": "Suppress a zone; enemies −1 to attacks or movement for 1 round. + Harmony Reaction: same zone (−1 penalty per Marksman).",
+    "desc": "Pinning shots into a zone — enemies suffer −1 to attacks or movement for 1 round. + Harmony Reaction: same zone (−1 penalty per Marksman).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "quick_reload": {
     "id": "quick_reload",
@@ -4468,7 +4293,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Ranged attacks cost 1 less Stamina (minimum 0).",
+    "desc": "Steady aim — ranged attacks cost 1 less Stamina (minimum 0).",
     "stackable": false,
     "manual": false,
     "attackScope": "ranged"
@@ -4480,9 +4305,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "−2 to hit; on hit, +1d6 damage (once per target per combat).",
+    "desc": "Steady aim — −2 to hit; on hit, +1d6 damage (once per target per combat).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "volley_support": {
     "id": "volley_support",
@@ -4491,7 +4316,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Allies gain +1 accuracy vs a target you damaged this round.",
+    "desc": "Marked for allies — allies gain +1 accuracy vs a target you damaged this round.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4505,7 +4330,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Your first ranged attack each combat ignores half-cover penalties (GM).",
+    "desc": "Steady aim — your first ranged attack each combat ignores half-cover penalties (GM).",
     "stackable": false,
     "manual": false,
     "attackScope": "ranged"
@@ -4517,7 +4342,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 Speed while wielding a one-handed weapon.",
+    "desc": "Dueling footwork — +1 Speed while wielding a one-handed weapon.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4531,9 +4356,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "When hit by a melee attack, contest to negate damage once per round (GM).",
+    "desc": "Parry and riposte — when hit by a melee attack, contest to negate damage once per round (GM).",
     "stackable": false,
-    "manual": true,
+    "manual": false,
     "attackScope": "melee"
   },
   "feint": {
@@ -4543,9 +4368,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Your next attack vs one target — roll twice, keep the higher result (once per combat).",
+    "desc": "Feint and misdirection — your next attack vs one target: roll twice, keep the higher result (once per combat).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "disengage_master": {
     "id": "disengage_master",
@@ -4554,7 +4379,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Leaving melee does not provoke from one chosen foe per turn.",
+    "desc": "Dueling footwork — leaving melee does not provoke from one chosen foe per turn.",
     "stackable": false,
     "manual": false,
     "attackScope": "melee"
@@ -4566,9 +4391,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Attack and force a save — on fail, target loses reactions until your next turn.",
+    "desc": "Parry and riposte — attack and force a save; on fail, target loses reactions until your next turn.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "dueling_stance": {
     "id": "dueling_stance",
@@ -4577,7 +4402,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+1 Physical Defence vs one chosen opponent until you change target.",
+    "desc": "Single-foe focus — +1 Physical Defence vs one chosen opponent until you change target.",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4591,7 +4416,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "+2 damage vs targets who have not yet acted this round.",
+    "desc": "Single-foe focus — +2 damage vs targets who have not yet acted this round.",
     "stackable": false,
     "manual": false,
     "flatDamageBonus": 2
@@ -4603,9 +4428,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Cook meals without a campfire. Meals you cook gain +1 HP.",
+    "desc": "Craft (Hearty Provisions + Burning): Cook meals without a campfire. Meals you cook restore +1 HP.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "fusion_glacier_pantry": {
     "id": "fusion_glacier_pantry",
@@ -4614,7 +4439,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "Preserve food twice as long; chilled rations grant +1 Stamina when eaten.",
+    "desc": "Craft (Camp Provisioning + Preservation): Preserve food twice as long; chilled rations grant +1 Stamina when eaten.",
     "stackable": false,
     "manual": false
   },
@@ -4625,7 +4450,7 @@
     "type": "heal",
     "duration": 0,
     "potency": 0,
-    "desc": "Stabilise downed ally — restore 1 HP and remove Stunned (once per target per day).",
+    "desc": "Action (Stabilise & Revive + Conductivity): Jump-start a downed ally — restore 1 HP and remove Stunned (once per target per day).",
     "stackable": false,
     "manual": false
   },
@@ -4636,9 +4461,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Attempt to lift one small unequipped item from a target (GM contested roll). Once per long rest.",
+    "desc": "Action (Scene Examination + Concealment): Lift one small unequipped item from a target while they are distracted (GM contested roll). Once per long rest.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "fusion_mirage_patter": {
     "id": "fusion_mirage_patter",
@@ -4647,9 +4472,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Create a brief believable illusion in conversation (+2 social bluff; no combat decoys).",
+    "desc": "Action (Witness Interrogation + Radiance): Weave a brief believable illusion into conversation (+2 social bluff; no combat decoys).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "fusion_ward_meal": {
     "id": "fusion_ward_meal",
@@ -4658,18 +4483,18 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Meal removes fear or charm on eat (once per creature per day).",
+    "desc": "Craft (Hearty Provisions + Protective Warding): Blessed meal removes fear or charm when eaten (once per creature per day).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "fusion_living_map": {
     "id": "fusion_living_map",
     "name": "Living Map",
     "icon": "🗺️🌲",
-    "type": "passive",
-    "duration": 0,
+    "type": "utility",
+    "duration": 999,
     "potency": 0,
-    "desc": "Once per day, sense safest path through wilderness for 8 hours (GM navigation).",
+    "desc": "Passive (Wilderness Tracking + Divination): Once per day, sense the safest path through wilderness for 8 hours (GM navigation).",
     "stackable": false,
     "manual": false
   },
@@ -4680,9 +4505,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Snares that trigger a minor rune (alarm + 1d4 magic damage).",
+    "desc": "Craft (Snares & Ambush + Rune Inscription): Snares that trigger a minor rune (alarm + 1d4 magic damage).",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "fusion_alchemical_frost": {
     "id": "fusion_alchemical_frost",
@@ -4691,9 +4516,9 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Flash-freeze vials — utility slow, no direct spell damage.",
+    "desc": "Craft (Volatile Brews + Preservation): Flash-freeze vials — utility slow, no direct spell damage.",
     "stackable": false,
-    "manual": true
+    "manual": false
   },
   "fusion_beast_whisper": {
     "id": "fusion_beast_whisper",
@@ -4717,28 +4542,6 @@
     "stackable": false,
     "manual": true
   },
-  "archaeologist_artifact_study": {
-    "id": "archaeologist_artifact_study",
-    "name": "Artifact Study",
-    "icon": "🏺",
-    "type": "utility",
-    "duration": 0,
-    "potency": 0,
-    "desc": "Identify relics — true properties, era, curse flags.",
-    "stackable": false,
-    "manual": true
-  },
-  "engineer_overcharge": {
-    "id": "engineer_overcharge",
-    "name": "Overcharge",
-    "icon": "⚡",
-    "type": "utility",
-    "duration": 0,
-    "potency": 0,
-    "desc": "Boost ally's mechanical device — double effect once, then it is spent until rebuilt (GM).",
-    "stackable": false,
-    "manual": true
-  },
   "minstrels_voice": {
     "id": "minstrels_voice",
     "name": "Minstrel's Voice",
@@ -4757,7 +4560,7 @@
     "type": "buff",
     "duration": 2,
     "potency": 0,
-    "desc": "Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Speed per performing Musician. + Harmony Reaction: join the same song (+1 initiative for listeners while sustained).",
+    "desc": "Sustained performance — up to 2 turns (4 Stamina once); allies in hearing range +1 Speed per performing Musician. + Harmony Reaction: join the same song (+1 initiative for listeners while sustained).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4771,7 +4574,7 @@
     "type": "buff",
     "duration": 2,
     "potency": 0,
-    "desc": "Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
+    "desc": "Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4785,7 +4588,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "Sustain up to 3 turns (6 Stamina once); allies in hearing range +1 accuracy per performing Musician. + Harmony Reaction: join the same song (+1 damage on next hit per Musician while sustained).",
+    "desc": "Allied ballad — sustain up to 3 turns (6 Stamina once); allies in hearing range +1 accuracy per performing Musician. + Harmony Reaction: join the same song (+1 damage on next hit per Musician while sustained).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4800,7 +4603,7 @@
     "type": "debuff",
     "duration": 1,
     "potency": 0,
-    "desc": "Sustain 1 turn (4 Stamina once); enemies in hearing range −1 accuracy per performing Musician. + Harmony Reaction: join the same song (−1 per Musician on enemy saves while sustained).",
+    "desc": "Enemy dissonance — sustain 1 turn (4 Stamina once); enemies in hearing range −1 accuracy per performing Musician. + Harmony Reaction: join the same song (−1 per Musician on enemy saves while sustained).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4814,7 +4617,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Your sustained songs may last 1 extra turn (e.g. Work Song up to 4 turns).",
+    "desc": "Sustained performance — your songs may last 1 extra turn (e.g. Work Song up to 4 turns).",
     "stackable": false,
     "manual": false
   },
@@ -4881,7 +4684,7 @@
     "type": "buff",
     "duration": 3,
     "potency": 0,
-    "desc": "Sustain up to 3 turns (5 Stamina once); allies in hearing range +1 Strength per performing Musician. + Harmony Reaction: join the same song (+1 Physical Defence per Musician while sustained; e.g. 6 Musicians → +6 Strength and +6 Physical Defence). Musician baseline: sing without an instrument; off-hand instruments amplify (see glossary Instrument amplify).",
+    "desc": "Sustained performance — up to 3 turns (5 Stamina once); allies in hearing range +1 Strength per performing Musician. + Harmony Reaction: join the same song (+1 Physical Defence per Musician while sustained; e.g. 6 Musicians → +6 Strength and +6 Physical Defence). Sing without an instrument; off-hand instruments amplify (see glossary Instrument amplify).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
@@ -4910,7 +4713,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "Once per combat, play the same song again for free — but it only lasts its original length (no Long Set, instrument, or other bonus turns).",
+    "desc": "Sustained performance — once per combat, play the same song again for free, but only for its original length (no Long Set, instrument, or other bonus turns).",
     "stackable": false,
     "manual": false
   },
@@ -4921,8 +4724,73 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Calm one hostile beast for 1 minute (GM save).",
+    "desc": "Action (Wilderness Tracking + Harmony): Calm one hostile beast for 1 minute (GM save).",
     "stackable": false,
+    "manual": false
+  },
+  "temp_strength": {
+    "id": "temp_strength",
+    "name": "Temp Strength",
+    "icon": "💪",
+    "type": "statBuff",
+    "duration": 3,
+    "potency": 1,
+    "desc": "+Potency Strength while active. Set duration and potency from the item or skill (e.g. potency 3, 8 turns).",
+    "stackable": false,
+    "potencyStat": "strength",
+    "manual": true
+  },
+  "temp_magic": {
+    "id": "temp_magic",
+    "name": "Temp Magic",
+    "icon": "✨",
+    "type": "statBuff",
+    "duration": 3,
+    "potency": 1,
+    "desc": "+Potency Magic Power while active. Set duration and potency from the item or skill.",
+    "stackable": false,
+    "potencyStat": "magicPower",
+    "manual": true
+  },
+  "temp_speed": {
+    "id": "temp_speed",
+    "name": "Temp Speed",
+    "icon": "💨",
+    "type": "statBuff",
+    "duration": 3,
+    "potency": 1,
+    "desc": "+Potency Speed while active. Set duration and potency from the item or skill.",
+    "stackable": false,
+    "potencyStat": "speed",
+    "manual": true
+  },
+  "temp_defense": {
+    "id": "temp_defense",
+    "name": "Temp Defense",
+    "icon": "🛡️",
+    "type": "protection",
+    "duration": 3,
+    "potency": 1,
+    "desc": "+Potency Physical Defence and +Potency Magical Defence while active. Negative potency lowers both (e.g. −2 from a reckless attack).",
+    "stackable": false,
+    "potencyStats": [
+      "physicalDefence",
+      "magicalDefence"
+    ],
+    "manual": true
+  },
+  "cold_immunity": {
+    "id": "cold_immunity",
+    "name": "Cold Immunity",
+    "icon": "❄️",
+    "type": "special",
+    "duration": 10,
+    "potency": 0,
+    "desc": "Immune to cold damage and ice Immobilized while active. Set duration from the item or skill.",
+    "stackable": false,
+    "immunities": [
+      "immobilized"
+    ],
     "manual": true
   }
 }

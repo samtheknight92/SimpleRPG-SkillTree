@@ -2857,10 +2857,10 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "temp_strength_1",
+                "temp_strength",
                 "heal_8"
             ],
-            "desc": "Preserved meat. Restores 8 HP and temporarily boosts Strength by 1 for 5 turns. GRANTS: Heal 8, Temp Strength 1.",
+            "desc": "Preserved meat. Restores 8 HP and temporarily boosts Strength by 1 for 5 turns. GRANTS: Heal 8, Temp Strength (potency 1, 5 turns).",
             "icon": "ðŸ¥©",
             "price": {
                 "silver": 1
@@ -2875,9 +2875,9 @@ const ITEMS_DATA = {
             "statModifiers": {},
             "specialEffects": [
                 "restore_stamina_5",
-                "temp_magic_1"
+                "temp_magic"
             ],
-            "desc": "Fine wine. Restores 5 Stamina and temporarily boosts Magic Power by 1 for 3 turns. GRANTS: Restore Stamina 5, Temp Magic 1.",
+            "desc": "Fine wine. Restores 5 Stamina and temporarily boosts Magic Power by 1 for 3 turns. GRANTS: Restore Stamina 5, Temp Magic (potency 1, 3 turns).",
             "icon": "ðŸ·",
             "price": {
                 "silver": 2
@@ -2966,9 +2966,9 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "temp_strength_3"
+                "temp_strength"
             ],
-            "desc": "Temporarily increases Strength by 3 for 10 turns. GRANTS: Temp Strength 3.",
+            "desc": "Temporarily increases Strength by 3 for 10 turns. GRANTS: Temp Strength (potency 3, 10 turns).",
             "icon": "ðŸ’ª",
             "price": {
                 "silver": 15
@@ -2982,9 +2982,9 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "temp_speed_3"
+                "temp_speed"
             ],
-            "desc": "Temporarily increases Speed by 3 for 8 turns. GRANTS: Temp Speed 3.",
+            "desc": "Temporarily increases Speed by 3 for 8 turns. GRANTS: Temp Speed (potency 3, 8 turns).",
             "icon": "ðŸ’¨",
             "price": {
                 "silver": 15
@@ -2998,9 +2998,9 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "temp_magic_3"
+                "temp_magic"
             ],
-            "desc": "Temporarily increases Magic Power by 3 for 10 turns. GRANTS: Temp Magic 3.",
+            "desc": "Temporarily increases Magic Power by 3 for 10 turns. GRANTS: Temp Magic (potency 3, 10 turns).",
             "icon": "âœ¨",
             "price": {
                 "silver": 18
@@ -3014,9 +3014,9 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "temp_defense_4"
+                "temp_defense"
             ],
-            "desc": "Temporarily increases both defenses by 4 for 12 turns. GRANTS: Temp Defense 4.",
+            "desc": "Temporarily increases both defenses by 4 for 12 turns. GRANTS: Temp Defense (potency 4, 12 turns).",
             "icon": "ðŸ›¡ï¸",
             "price": {
                 "silver": 20
@@ -3030,10 +3030,9 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "invisibility_5_turns",
                 "invisibility"
             ],
-            "desc": "Grants invisibility for 5 turns. Enemies cannot target you. GRANTS: Invisibility 5 Turns.",
+            "desc": "Grants invisibility for 5 turns. Enemies cannot target you. GRANTS: Invisibility (5 turns).",
             "icon": "ðŸ‘»",
             "price": {
                 "gold": 1,
@@ -3048,10 +3047,9 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "fire_immunity_10_turns",
                 "fire_immunity"
             ],
-            "desc": "Grants immunity to fire damage for 10 turns. GRANTS: Fire Immunity 10 Turns.",
+            "desc": "Grants immunity to fire damage for 10 turns. GRANTS: Fire Immunity (10 turns).",
             "icon": "ðŸ”¥",
             "price": {
                 "silver": 25
@@ -3065,9 +3063,9 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "cold_immunity_10_turns"
+                "cold_immunity"
             ],
-            "desc": "Grants immunity to cold damage for 10 turns. GRANTS: Cold Immunity 10 Turns.",
+            "desc": "Grants immunity to cold damage for 10 turns. GRANTS: Cold Immunity (10 turns).",
             "icon": "â„ï¸",
             "price": {
                 "silver": 25
@@ -3081,11 +3079,11 @@ const ITEMS_DATA = {
             "type": "consumable",
             "statModifiers": {},
             "specialEffects": [
-                "temp_defense_minus_2",
-                "temp_strength_5",
-                "temp_speed_2"
+                "temp_defense",
+                "temp_strength",
+                "temp_speed"
             ],
-            "desc": "Enter a berserker rage! +5 Strength, +2 Speed, -2 Defense for 8 turns. GRANTS: Temp Strength 5, Temp Speed 2, Temp Defense Minus 2.",
+            "desc": "Enter a berserker rage! +5 Strength, +2 Speed, -2 Defense for 8 turns. GRANTS: Temp Strength (potency 5, 8 turns), Temp Speed (potency 2, 8 turns), Temp Defense (potency −2, 8 turns).",
             "icon": "ðŸ˜¤",
             "price": {
                 "gold": 1,

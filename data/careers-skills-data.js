@@ -7,7 +7,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Craft: Basic weapons and armour.",
+            "desc": "Craft: Forge basic weapons and armour for allies to equip.",
             "icon": "🔨",
             "prerequisites": {
                 "type": "NONE",
@@ -21,7 +21,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Martial weapons. Weapons you forge gain +1 damage.",
+            "desc": "Craft: Forge martial weapons. Weapons you forge gain +1 damage.",
             "icon": "⚔️",
             "prerequisites": {
                 "type": "AND",
@@ -37,7 +37,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Armour and shields. Armour you forge grants +1 Physical Defence and +1 Magical Defence.",
+            "desc": "Craft: Forge armour and shields. Armour you forge grants +1 Physical Defence and +1 Magical Defence.",
             "icon": "🛡️",
             "prerequisites": {
                 "type": "AND",
@@ -53,7 +53,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Pre-combat: Tune ally gear (10 min); +1 first attack roll or +1 Physical Defence first round (choose one). Once per ally per long rest. + Harmony Reaction: same ally (2 Smiths → both bonuses).",
+            "desc": "Pre-combat: Battlefield fitting — tune ally gear (10 min); +1 first attack roll or +1 Physical Defence first round (choose one). Once per ally per long rest. + Harmony Reaction: same ally (2 Smiths → both bonuses).",
             "icon": "🔧",
             "prerequisites": {
                 "type": "AND",
@@ -76,7 +76,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Advanced metals (mithril, adamantine recipes).",
+            "desc": "Craft: Masterwork alloy recipes (mithril, adamantine). Gear you forge from these counts as masterwork.",
             "icon": "⚗️",
             "prerequisites": {
                 "type": "AND",
@@ -93,7 +93,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Allies using your forged gear gain +1 to physical attack rolls (weapon damage unchanged).",
+            "desc": "Passive: Allies wielding weapons or armour you forged gain +1 to physical attack rolls (weapon damage unchanged).",
             "icon": "🔥",
             "prerequisites": {
                 "type": "AND",
@@ -110,7 +110,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Bypass mundane locks, hinges, or chains with tools (GM: one object per use).",
+            "desc": "Action: Break mundane locks, hinges, or chains with smith's tools (GM: one object per use).",
             "icon": "🪓",
             "prerequisites": {
                 "type": "AND",
@@ -129,7 +129,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Craft: Simple meals. Meal restores 1d4+1 HP when eaten.",
+            "desc": "Craft: Hearty camp meals. Each meal restores 1d4+1 HP when eaten.",
             "icon": "🍳",
             "prerequisites": {
                 "type": "NONE",
@@ -143,7 +143,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Travel food. After eating, +2 Stamina for 10 rounds.",
+            "desc": "Craft: Travel rations. After eating, +2 Stamina for 10 rounds.",
             "icon": "🥘",
             "prerequisites": {
                 "type": "AND",
@@ -166,7 +166,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Meals you cook gain +1 HP restored or +1 round of meal buff duration.",
+            "desc": "Passive: Camp provisioning — meals you cook restore +1 HP or last +1 round of meal buff duration.",
             "icon": "🧂",
             "prerequisites": {
                 "type": "AND",
@@ -182,7 +182,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Prepare one extra portion from the same ingredients (once per long rest).",
+            "desc": "Action: Camp provisioning — prepare one extra portion from the same ingredients (once per long rest).",
             "icon": "🍽️",
             "prerequisites": {
                 "type": "AND",
@@ -246,7 +246,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Detect spoiled, drugged, or poisonous food by taste/smell (GM may require no roll).",
+            "desc": "Passive: Spoil and poison sense — detect spoiled, drugged, or poisoned food by taste or smell (GM may require no roll).",
             "icon": "👃",
             "prerequisites": {
                 "type": "AND",
@@ -255,7 +255,15 @@ const CAREERS_SKILLS_DATA = {
                     "second_serving"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "poison",
+                    "duration": 3,
+                    "potency": 0,
+                    "applyTo": "target"
+                }
+            ]
         }
     ],
     "medic": [
@@ -265,7 +273,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Craft: Health potions. Potions you brew restore +2 HP.",
+            "desc": "Craft: Brew health potions. Potions you brew restore +2 HP when used.",
             "icon": "💊",
             "prerequisites": {
                 "type": "NONE",
@@ -279,7 +287,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Assess a creature — learn HP band, bleeding, poison, disease (not exact HP unless GM allows).",
+            "desc": "Action: Triage and diagnosis — learn a creature's HP band, bleeding, poison, or disease before you treat (not exact HP unless GM allows).",
             "icon": "🩺",
             "prerequisites": {
                 "type": "AND",
@@ -295,7 +303,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: +2 effective Magical Defence vs poison/disease effects on yourself; identify poison on sight.",
+            "desc": "Passive: Plague and poison warding on yourself — +2 effective Magical Defence vs poison and disease; identify poison on sight.",
             "icon": "🧪",
             "prerequisites": {
                 "type": "AND",
@@ -303,7 +311,15 @@ const CAREERS_SKILLS_DATA = {
                     "field_medic"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "poison",
+                    "duration": 3,
+                    "potency": 0,
+                    "applyTo": "target"
+                }
+            ]
         },
         {
             "id": "clean_bandage",
@@ -311,7 +327,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Stabilise a downed ally (0 HP) so they don't worsen; restore 1 HP.",
+            "desc": "Action: Stabilise and revive — stabilise a downed ally (0 HP) so they do not worsen; restore 1 HP.",
             "icon": "🩹",
             "prerequisites": {
                 "type": "AND",
@@ -334,7 +350,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Advanced potions and antidotes. Healing items you use on others gain +1d4 HP.",
+            "desc": "Craft: Advanced potions and antidotes. Wound mending you apply to others restores +1d4 HP.",
             "icon": "✂️",
             "prerequisites": {
                 "type": "AND",
@@ -360,7 +376,15 @@ const CAREERS_SKILLS_DATA = {
                     "antidote_training"
                 ]
             },
-            "specialEffects": []
+            "specialEffects": [],
+            "activationEffects": [
+                {
+                    "effectId": "poison",
+                    "duration": 3,
+                    "potency": 0,
+                    "applyTo": "target"
+                }
+            ]
         },
         {
             "id": "revival_draft",
@@ -368,7 +392,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Rare stimulant — remove Incapacitated or one minor debuff (once per target per day).",
+            "desc": "Craft: Brew a rare revival draft — remove Incapacitated or one minor debuff (once per target per day).",
             "icon": "💉",
             "prerequisites": {
                 "type": "AND",
@@ -387,7 +411,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Craft: Basic potions and reagents.",
+            "desc": "Craft: Basic potions and alchemical reagents.",
             "icon": "⚗️",
             "prerequisites": {
                 "type": "NONE",
@@ -401,7 +425,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft/throw: On hit 1d6 acid; 40% Weakened. + Harmony Reaction: same target, same round (+1 acid damage per Alchemist).",
+            "desc": "Craft/throw: Volatile brew — on hit 1d6 acid; 40% Weakened. + Harmony Reaction: same target, same round (+1 acid damage per Alchemist).",
             "icon": "🧴",
             "prerequisites": {
                 "type": "AND",
@@ -415,6 +439,7 @@ const CAREERS_SKILLS_DATA = {
                     "effectId": "weakened",
                     "duration": 4,
                     "potency": 2,
+                    "applyTo": "target",
                     "chance": 0.4
                 }
             ]
@@ -425,7 +450,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Distraction devices (smoke, blinding powder) — no damage, utility.",
+            "desc": "Craft: Smoke and flash powder — cover a retreat or confuse foes; no damage.",
             "icon": "💨",
             "prerequisites": {
                 "type": "AND",
@@ -441,7 +466,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Identify unknown liquids/powders safely (poison, potion, inert).",
+            "desc": "Passive: Reagent identification — safely identify unknown liquids and powders (poison, potion, or inert) before anyone uses them.",
             "icon": "🏷️",
             "prerequisites": {
                 "type": "AND",
@@ -457,7 +482,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Bombs (3d6 in 15ft; separate attack roll per target vs Magical Defence).",
+            "desc": "Craft: Volatile bombs (3d6 in 15ft; separate attack roll per target vs Magical Defence).",
             "icon": "💣",
             "prerequisites": {
                 "type": "AND",
@@ -474,7 +499,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Convert common materials into alchemical bases (GM: daily quota).",
+            "desc": "Craft: Material transmutation — convert common materials into alchemical bases (GM: daily quota).",
             "icon": "🧂",
             "prerequisites": {
                 "type": "AND",
@@ -491,7 +516,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: You and allies take −1 damage from your own alchemical friendly fire (min 0).",
+            "desc": "Passive: You and allies take −1 damage from your own alchemical blasts (minimum 0).",
             "icon": "☢️",
             "prerequisites": {
                 "type": "AND",
@@ -510,7 +535,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Craft: Apply one minor enchant (+1 stat or flavour effect).",
+            "desc": "Craft: Rune inscription — apply one minor enchant to gear (+1 stat or similar effect).",
             "icon": "✨",
             "prerequisites": {
                 "type": "NONE",
@@ -524,7 +549,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Fire/Ice/Lightning +1d6 on weapon (as fusion-lite, not a toggle).",
+            "desc": "Craft: Inscribe Fire, Ice, or Lightning +1d6 on a weapon (permanent enchant, not a toggle).",
             "icon": "🔥",
             "prerequisites": {
                 "type": "AND",
@@ -540,7 +565,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Protective charms (+1 Magical Defence permanent slot enchant on armour).",
+            "desc": "Craft: Protective warding — inscribe charms granting +1 Magical Defence (permanent slot enchant on armour).",
             "icon": "📜",
             "prerequisites": {
                 "type": "AND",
@@ -556,7 +581,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Inspect a magic item — learn properties and curse risk.",
+            "desc": "Action: Arcane appraisal — inspect a magic item; learn properties and curse risk before anyone equips it.",
             "icon": "🔍",
             "prerequisites": {
                 "type": "AND",
@@ -572,7 +597,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Bind item to owner (others suffer −2 using it).",
+            "desc": "Craft: Master engraving — soul-bind an item to its owner (others suffer −2 using it).",
             "icon": "👻",
             "prerequisites": {
                 "type": "AND",
@@ -589,7 +614,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Items with 2 enchantment slots.",
+            "desc": "Craft: Master engraving — items you make gain 2 enchantment slots.",
             "icon": "🏆",
             "prerequisites": {
                 "type": "AND",
@@ -606,7 +631,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Suppress one magical effect on an object or creature for 1 hour.",
+            "desc": "Action: Protective warding — suppress one hostile magical effect on an object or creature for 1 hour.",
             "icon": "✋",
             "prerequisites": {
                 "type": "AND",
@@ -625,7 +650,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Action: Examine scene; GM reveals one clue tier. + Harmony Reaction: same scene (+1 clue tier per Detective).",
+            "desc": "Action: Scene examination — study a scene or object; GM reveals one clue tier. + Harmony Reaction: same scene (+1 clue tier per Detective).",
             "icon": "👁️",
             "prerequisites": {
                 "type": "NONE",
@@ -639,7 +664,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Spot disturbed objects, footprints, blood, recent magic residue.",
+            "desc": "Passive: Spot disturbed objects, footprints, blood, or recent magic residue at a scene.",
             "icon": "🔎",
             "prerequisites": {
                 "type": "AND",
@@ -655,7 +680,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Conversation grants +2 to read lies or pressure answers (GM social roll).",
+            "desc": "Action: Witness interrogation — +2 to read lies or pressure answers (GM social roll).",
             "icon": "💬",
             "prerequisites": {
                 "type": "AND",
@@ -687,7 +712,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Visualise past events in a location (last 24 hours, GM narrative).",
+            "desc": "Action: Trail and timeline reconstruction — visualise recent events at a location (last 24 hours; wilderness, ruins, or camp — GM narrative).",
             "icon": "🕰️",
             "prerequisites": {
                 "type": "AND",
@@ -704,7 +729,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Determine direction a specific person/creature went within last 8 hours.",
+            "desc": "Action: Determine which way a specific person or creature went within the last 8 hours.",
             "icon": "👣",
             "prerequisites": {
                 "type": "AND",
@@ -721,7 +746,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Connect two prior clues — GM must give a useful inference if both are known.",
+            "desc": "Passive: Clue synthesis — connect two clues the party already knows; GM must give a useful inference if both are known.",
             "icon": "🧠",
             "prerequisites": {
                 "type": "AND",
@@ -740,7 +765,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: Follow tracks in wilderness; know number and rough size of a group. Passive: Party ignores difficult terrain from undergrowth on overland travel (GM).",
+            "desc": "Passive: Wilderness tracking — follow tracks; know number and rough size of a group. Party ignores difficult undergrowth on overland travel (GM).",
             "icon": "🌲",
             "prerequisites": {
                 "type": "NONE",
@@ -754,7 +779,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Party gains +1 initiative when you have 1 minute to scout ahead.",
+            "desc": "Passive: Snares and ambush — when you scout ahead for 1 minute, the party gains +1 initiative.",
             "icon": "🎯",
             "prerequisites": {
                 "type": "AND",
@@ -770,7 +795,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Simple traps (snare, alarm) — GM sets DC/effect.",
+            "desc": "Craft: Set simple snares and alarm traps — GM sets DC and effect.",
             "icon": "🪤",
             "prerequisites": {
                 "type": "AND",
@@ -786,7 +811,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: +1 to notice hidden creatures, ambushes, or traps at range (you or allies on overwatch benefit).",
+            "desc": "Passive: Wilderness vigilance — +1 to spot hidden creatures, ambushes, or traps at range (you or allies on overwatch benefit).",
             "icon": "👁️",
             "prerequisites": {
                 "type": "AND",
@@ -802,7 +827,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Track a quarry for a day — learn camp sites and direction.",
+            "desc": "Action: Wilderness tracking — follow one quarry for a day; learn camp sites and direction of travel.",
             "icon": "🔭",
             "prerequisites": {
                 "type": "AND",
@@ -819,7 +844,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Craft: Hide camp from casual search (+2 Stealth for camp).",
+            "desc": "Craft: Snares and ambush — camouflage a camp from casual search (+2 Stealth for the camp).",
             "icon": "🕸️",
             "prerequisites": {
                 "type": "AND",
@@ -836,7 +861,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Call a target; one ally +1 on next attack vs it. Once per combat. + Harmony Reaction: same target (each Ranger adds +1 to marked allies' next attack and marks one more ally).",
+            "desc": "Action: Marked quarry — call out one target; one ally gains +1 on next attack vs it. Once per combat. + Harmony Reaction: same target (each Ranger adds +1 to marked allies' next attack and marks one more ally).",
             "icon": "📣",
             "prerequisites": {
                 "type": "AND",
@@ -862,7 +887,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: +1 Strength while wearing medium or heavy armour.",
+            "desc": "Passive: Armoured discipline — +1 Strength while wearing medium or heavy armour.",
             "icon": "🛡️",
             "prerequisites": {
                 "type": "NONE",
@@ -876,7 +901,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Adjacent ally gains +1 Physical Defence until your next turn. + Harmony Reaction: same ally (each Soldier in the huddle adds +1 Physical Defence per Soldier helping — count heads, add that many once per Soldier; 3 Soldiers → +9 Physical Defence; 5 Soldiers on one ally → +25 Physical Defence).",
+            "desc": "Action: Shield formation — adjacent ally gains +1 Physical Defence until your next turn. + Harmony Reaction: same ally (each Soldier in the huddle adds +1 Physical Defence per Soldier helping — count heads, add that many once per Soldier; 3 Soldiers → +9 Physical Defence; 5 Soldiers on one ally → +25 Physical Defence).",
             "icon": "🛡️",
             "prerequisites": {
                 "type": "AND",
@@ -899,7 +924,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: One ally within 30ft may reroll a failed save (once per combat). + Harmony Reaction: that reroll (+2 for each participating Soldier; 5 Soldiers → +10 on the reroll).",
+            "desc": "Action: Battlefield rally — one ally within 30ft may reroll a failed save (once per combat). + Harmony Reaction: that reroll (+2 for each participating Soldier; 5 Soldiers → +10 on the reroll).",
             "icon": "📣",
             "prerequisites": {
                 "type": "AND",
@@ -915,7 +940,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: +1 Physical Defence when an ally is within 10ft.",
+            "desc": "Passive: Shield formation — +1 Physical Defence when an ally is within 10ft.",
             "icon": "⚔️",
             "prerequisites": {
                 "type": "AND",
@@ -931,7 +956,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: When you and two or more allies attack the same target, all gain +1 accuracy. + Harmony: +1 accuracy on next hit vs that enemy per Phalanx Soldier in the volley; when 2+ Phalanx Soldiers attack, also +1d4 damage per Phalanx Soldier (all focus-fire attackers benefit; no Reaction).",
+            "desc": "Passive: Volley focus — when you and two or more allies attack the same target, all gain +1 accuracy. + Harmony: +1 accuracy on next hit vs that enemy per Phalanx Soldier in the volley; when 2+ Phalanx Soldiers attack, also +1d4 damage per Phalanx Soldier (all focus-fire attackers benefit; no Reaction).",
             "icon": "🏛️",
             "prerequisites": {
                 "type": "AND",
@@ -944,11 +969,11 @@ const CAREERS_SKILLS_DATA = {
         },
         {
             "id": "second_wind",
-            "name": "Second Wind",
+            "name": "Soldier's Second Wind",
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Restore 1d6 HP (once per short rest).",
+            "desc": "Action: Battlefield rally — restore 1d6 HP (once per short rest).",
             "icon": "💨",
             "prerequisites": {
                 "type": "AND",
@@ -972,7 +997,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Allies within 10ft gain +1 to initiative.",
+            "desc": "Passive: Battlefield rally — allies within 10ft gain +1 to initiative.",
             "icon": "👑",
             "prerequisites": {
                 "type": "AND",
@@ -991,7 +1016,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: Allies you target with magic gain +1 effective Magic Power for buffs and heals you apply.",
+            "desc": "Passive: Career support — allies you help with magic gain +1 effective Magic Power on buffs and heals you apply to them.",
             "icon": "📘",
             "prerequisites": {
                 "type": "NONE",
@@ -1005,7 +1030,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Ally's next spell or magical attack +1d4 damage or heal +2 HP (once per ally per combat). + Harmony Reaction: same ally (when 2+ Mages, +1d6 damage or +3 HP instead).",
+            "desc": "Action: Spell empowerment — ally's next spell or magical attack gains +1d4 damage or heal +2 HP (once per ally per combat). + Harmony Reaction: same ally (when 2+ Mages, +1d6 damage or +3 HP instead).",
             "icon": "✨",
             "prerequisites": {
                 "type": "AND",
@@ -1028,7 +1053,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Allies within 10ft regain +1 Stamina when they cast a tier-1 spell (once per round per ally).",
+            "desc": "Passive: Arcane sustenance — allies within 10ft regain +1 Stamina when they cast a tier-1 spell (once per round per ally).",
             "icon": "🔮",
             "prerequisites": {
                 "type": "AND",
@@ -1044,7 +1069,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Grant an ally +2 on their next dispel or cleanse check (GM).",
+            "desc": "Action: Circle warding assist — grant an ally +2 on their next dispel or cleanse attempt (GM).",
             "icon": "🧹",
             "prerequisites": {
                 "type": "AND",
@@ -1060,7 +1085,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Healing spells you cast on others restore +2 HP.",
+            "desc": "Passive: Amplified aid — healing you apply to others restores +2 HP.",
             "icon": "💚",
             "prerequisites": {
                 "type": "AND",
@@ -1077,7 +1102,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: 10ft aura; allies +1 Magical Defence for 3 rounds (once per combat). + Harmony Reaction: overlapping circles (each Mage in the overlap adds +1 Magical Defence per Mage helping — count Mages, add that many once per Mage; 3 Mages → +9 Magical Defence; 5 Mages → +25 Magical Defence).",
+            "desc": "Action: Circle warding — 10ft aura; allies +1 Magical Defence for 3 rounds (once per combat). + Harmony Reaction: overlapping circles (each Mage in the overlap adds +1 Magical Defence per Mage helping — count Mages, add that many once per Mage; 3 Mages → +9 Magical Defence; 5 Mages → +25 Magical Defence).",
             "icon": "⭕",
             "prerequisites": {
                 "type": "AND",
@@ -1101,7 +1126,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Once per combat, sustain one ally's concentration effect without using your action (GM).",
+            "desc": "Passive: Arcane sustenance — once per combat, sustain one ally's concentration effect without spending your action (GM).",
             "icon": "🤝",
             "prerequisites": {
                 "type": "AND",
@@ -1120,7 +1145,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Action: Sustain up to 3 turns (5 Stamina once); allies in hearing range +1 Strength per performing Musician. + Harmony Reaction: join the same song (+1 Physical Defence per Musician while sustained; e.g. 6 Musicians → +6 Strength and +6 Physical Defence). Musician baseline: sing without an instrument; off-hand instruments amplify (see glossary Instrument amplify).",
+            "desc": "Action: Sustained performance — up to 3 turns (5 Stamina once); allies in hearing range +1 Strength per performing Musician. + Harmony Reaction: join the same song (+1 Physical Defence per Musician while sustained; e.g. 6 Musicians → +6 Strength and +6 Physical Defence). Sing without an instrument; off-hand instruments amplify (see glossary Instrument amplify).",
             "icon": "⛏️",
             "prerequisites": {
                 "type": "NONE",
@@ -1141,7 +1166,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Your sustained songs may last 1 extra turn (e.g. Work Song up to 4 turns).",
+            "desc": "Passive: Sustained performance — your songs may last 1 extra turn (e.g. Work Song up to 4 turns).",
             "icon": "🎭",
             "prerequisites": {
                 "type": "AND",
@@ -1157,7 +1182,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Speed per performing Musician. + Harmony Reaction: join the same song (+1 initiative for listeners while sustained).",
+            "desc": "Action: Sustained performance — up to 2 turns (4 Stamina once); allies in hearing range +1 Speed per performing Musician. + Harmony Reaction: join the same song (+1 initiative for listeners while sustained).",
             "icon": "🥁",
             "prerequisites": {
                 "type": "AND",
@@ -1180,7 +1205,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
+            "desc": "Action: Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
             "icon": "🕊️",
             "prerequisites": {
                 "type": "AND",
@@ -1203,7 +1228,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Sustain up to 3 turns (6 Stamina once); allies in hearing range +1 accuracy per performing Musician. + Harmony Reaction: join the same song (+1 damage on next hit per Musician while sustained).",
+            "desc": "Action: Allied ballad — sustain up to 3 turns (6 Stamina once); allies in hearing range +1 accuracy per performing Musician. + Harmony Reaction: join the same song (+1 damage on next hit per Musician while sustained).",
             "icon": "🎺",
             "prerequisites": {
                 "type": "AND",
@@ -1227,7 +1252,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Sustain 1 turn (4 Stamina once); enemies in hearing range −1 accuracy per performing Musician. + Harmony Reaction: join the same song (−1 per Musician on enemy saves while sustained).",
+            "desc": "Action: Enemy dissonance — sustain 1 turn (4 Stamina once); enemies in hearing range −1 accuracy per performing Musician. + Harmony Reaction: join the same song (−1 per Musician on enemy saves while sustained).",
             "icon": "🎸",
             "prerequisites": {
                 "type": "AND",
@@ -1251,7 +1276,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Once per combat, play the same song again for free — but it only lasts its original length (no Long Set, instrument, or other bonus turns).",
+            "desc": "Passive: Sustained performance — once per combat, play the same song again for free, but only for its original length (no Long Set, instrument, or other bonus turns).",
             "icon": "🎤",
             "prerequisites": {
                 "type": "AND",
@@ -1270,7 +1295,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: +1 Magical Defence; +2 on saves vs fear (GM).",
+            "desc": "Passive: Oathbound resolve — +1 Magical Defence; +2 on saves vs fear (GM).",
             "icon": "⚔️",
             "prerequisites": {
                 "type": "NONE",
@@ -1284,7 +1309,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Touch ally — restore 1d6+1 HP (once per ally per day).",
+            "desc": "Action: Lay on hands — touch an ally and restore 1d6+1 HP (once per ally per day).",
             "icon": "🤲",
             "prerequisites": {
                 "type": "AND",
@@ -1307,7 +1332,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: One enemy hesitates — save or cannot use reactions until your next turn (once per combat).",
+            "desc": "Action: Rebuke a foe — one enemy hesitates; save or cannot use reactions until your next turn (once per combat).",
             "icon": "✋",
             "prerequisites": {
                 "type": "AND",
@@ -1323,7 +1348,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: +1 Physical Defence while below half HP.",
+            "desc": "Passive: Holy protection — +1 Physical Defence while below half HP.",
             "icon": "🧱",
             "prerequisites": {
                 "type": "AND",
@@ -1339,7 +1364,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Allies within 10ft +1 Magical Defence vs fear and charm. + Harmony: +1 Magical Defence vs fear and charm per Paladin with this aura in range (no Reaction).",
+            "desc": "Passive: Holy protection — allies within 10ft +1 Magical Defence vs fear and charm. + Harmony: +1 Magical Defence vs fear and charm per Paladin with this aura in range (no Reaction).",
             "icon": "🌟",
             "prerequisites": {
                 "type": "AND",
@@ -1356,7 +1381,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Warded 10ft — hostile undead or demons save to enter (weaker than full Turn; once per combat).",
+            "desc": "Action: Rebuke the unholy — ward 10ft; hostile undead or demons must save to enter (weaker than full Turn; once per combat).",
             "icon": "☀️",
             "prerequisites": {
                 "type": "AND",
@@ -1373,7 +1398,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: +2 Physical Defence and +2 Magical Defence until end of your next turn; you cannot move.",
+            "desc": "Action: Holy protection — +2 Physical Defence and +2 Magical Defence until end of your next turn; you cannot move.",
             "icon": "🛐",
             "prerequisites": {
                 "type": "AND",
@@ -1399,7 +1424,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: +2 on pickpocket and sleight-of-hand checks (GM).",
+            "desc": "Passive: Pickpocket and filch — +2 on pickpocket and sleight-of-hand (GM).",
             "icon": "🤏",
             "prerequisites": {
                 "type": "NONE",
@@ -1413,7 +1438,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Disengage — leave melee without provoking opportunity attacks (once per combat).",
+            "desc": "Action: Slip away — disengage from melee without provoking opportunity attacks (once per combat).",
             "icon": "💨",
             "prerequisites": {
                 "type": "AND",
@@ -1429,7 +1454,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: +1 to Stealth when wearing light armour or no armour.",
+            "desc": "Passive: Shadow stealth — +1 to Stealth in light armour or none.",
             "icon": "🌑",
             "prerequisites": {
                 "type": "AND",
@@ -1445,7 +1470,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Distract a foe; one ally +2 on next attack vs that target. + Harmony Reaction: same foe (each additional Thief adds +1 to that attack).",
+            "desc": "Action: Distraction setup — distract a foe; one ally gains +2 on next attack vs that target. + Harmony Reaction: same foe (each additional Thief adds +1 to that attack).",
             "icon": "🎭",
             "prerequisites": {
                 "type": "AND",
@@ -1468,7 +1493,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Attempt to steal one small unequipped item from a target (GM contested roll; once per encounter).",
+            "desc": "Action: Pickpocket and filch — steal one small unequipped item from a target (GM contested roll; once per encounter).",
             "icon": "🎒",
             "prerequisites": {
                 "type": "AND",
@@ -1485,7 +1510,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: +2 vs grapples, restraints, and mundane traps.",
+            "desc": "Passive: Slip away — +2 vs grapples, restraints, and mundane traps.",
             "icon": "🔗",
             "prerequisites": {
                 "type": "AND",
@@ -1502,7 +1527,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: After you deal damage, move 10ft without provoking opportunity attacks (once per turn).",
+            "desc": "Passive: Slip away — after you deal damage, move 10ft without provoking opportunity attacks (once per turn).",
             "icon": "🏃",
             "prerequisites": {
                 "type": "AND",
@@ -1521,7 +1546,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: +1 damage on melee attacks while below half HP.",
+            "desc": "Passive: Wounded fury — +1 damage on melee attacks while below half HP.",
             "icon": "😤",
             "prerequisites": {
                 "type": "NONE",
@@ -1535,7 +1560,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Your next attack gains +2 damage; you suffer −2 Physical Defence until your next turn.",
+            "desc": "Action: Reckless assault — your next attack gains +2 damage; you suffer −2 Physical Defence until your next turn.",
             "icon": "💥",
             "prerequisites": {
                 "type": "AND",
@@ -1558,7 +1583,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Foes within 10ft save or −1 accuracy for 1 round. + Harmony Reaction: same area (−1 accuracy per Berserker on failed save).",
+            "desc": "Action: Battlefield intimidation — foes within 10ft save or suffer −1 accuracy for 1 round. + Harmony Reaction: same area (−1 accuracy per Berserker on failed save).",
             "icon": "😠",
             "prerequisites": {
                 "type": "AND",
@@ -1581,7 +1606,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: On a kill or critical hit, regain 1 Stamina.",
+            "desc": "Passive: Wounded fury — on a kill or critical hit, regain 1 Stamina.",
             "icon": "🩸",
             "prerequisites": {
                 "type": "AND",
@@ -1597,7 +1622,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: +2 Strength, −1 Magical Defence for 3 rounds (once per combat).",
+            "desc": "Action: Wounded fury — +2 Strength, −1 Magical Defence for 3 rounds (once per combat).",
             "icon": "🔥",
             "prerequisites": {
                 "type": "AND",
@@ -1621,7 +1646,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Ignore difficult terrain while moving toward a hostile target.",
+            "desc": "Passive: Reckless assault — ignore difficult terrain while moving toward a hostile target.",
             "icon": "🦬",
             "prerequisites": {
                 "type": "AND",
@@ -1638,7 +1663,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: +2 damage vs bloodied targets (GM: below half HP).",
+            "desc": "Passive: Coup de grace — +2 damage vs bloodied targets (GM: below half HP).",
             "icon": "⚰️",
             "prerequisites": {
                 "type": "AND",
@@ -1657,7 +1682,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: +1 accuracy with ranged weapon attacks.",
+            "desc": "Passive: Steady aim — +1 accuracy with ranged weapon attacks.",
             "icon": "🎯",
             "prerequisites": {
                 "type": "NONE",
@@ -1671,7 +1696,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Ready a shot — interrupt one enemy moving in your line of sight (GM).",
+            "desc": "Action: Overwatch shot — ready a shot; interrupt one enemy moving in your line of sight (GM).",
             "icon": "👁️",
             "prerequisites": {
                 "type": "AND",
@@ -1687,7 +1712,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Suppress a zone; enemies −1 to attacks or movement for 1 round. + Harmony Reaction: same zone (−1 penalty per Marksman).",
+            "desc": "Action: Pinning shots into a zone — enemies suffer −1 to attacks or movement for 1 round. + Harmony Reaction: same zone (−1 penalty per Marksman).",
             "icon": "🔫",
             "prerequisites": {
                 "type": "AND",
@@ -1710,7 +1735,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Ranged attacks cost 1 less Stamina (minimum 0).",
+            "desc": "Passive: Steady aim — ranged attacks cost 1 less Stamina (minimum 0).",
             "icon": "⚡",
             "prerequisites": {
                 "type": "AND",
@@ -1726,7 +1751,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: −2 to hit; on hit, +1d6 damage (once per target per combat).",
+            "desc": "Action: Steady aim — −2 to hit; on hit, +1d6 damage (once per target per combat).",
             "icon": "🎯",
             "prerequisites": {
                 "type": "AND",
@@ -1750,7 +1775,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Allies gain +1 accuracy vs a target you damaged this round.",
+            "desc": "Passive: Marked for allies — allies gain +1 accuracy vs a target you damaged this round.",
             "icon": "📣",
             "prerequisites": {
                 "type": "AND",
@@ -1767,7 +1792,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: Your first ranged attack each combat ignores half-cover penalties (GM).",
+            "desc": "Passive: Steady aim — your first ranged attack each combat ignores half-cover penalties (GM).",
             "icon": "💫",
             "prerequisites": {
                 "type": "AND",
@@ -1786,7 +1811,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 1,
             "cost": 8,
             "staminaCost": 0,
-            "desc": "Passive: +1 Speed while wielding a one-handed weapon.",
+            "desc": "Passive: Dueling footwork — +1 Speed while wielding a one-handed weapon.",
             "icon": "🩰",
             "prerequisites": {
                 "type": "NONE",
@@ -1800,7 +1825,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: When hit by a melee attack, contest to negate damage once per round (GM).",
+            "desc": "Action: Parry and riposte — when hit by a melee attack, contest to negate damage once per round (GM).",
             "icon": "🤺",
             "prerequisites": {
                 "type": "AND",
@@ -1816,7 +1841,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Your next attack vs one target — roll twice, keep the higher result (once per combat).",
+            "desc": "Action: Feint and misdirection — your next attack vs one target: roll twice, keep the higher result (once per combat).",
             "icon": "🎪",
             "prerequisites": {
                 "type": "AND",
@@ -1832,7 +1857,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Leaving melee does not provoke from one chosen foe per turn.",
+            "desc": "Passive: Dueling footwork — leaving melee does not provoke from one chosen foe per turn.",
             "icon": "👟",
             "prerequisites": {
                 "type": "AND",
@@ -1848,7 +1873,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Action: Attack and force a save — on fail, target loses reactions until your next turn.",
+            "desc": "Action: Parry and riposte — attack and force a save; on fail, target loses reactions until your next turn.",
             "icon": "✨",
             "prerequisites": {
                 "type": "AND",
@@ -1865,7 +1890,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: +1 Physical Defence vs one chosen opponent until you change target.",
+            "desc": "Passive: Single-foe focus — +1 Physical Defence vs one chosen opponent until you change target.",
             "icon": "⚔️",
             "prerequisites": {
                 "type": "AND",
@@ -1882,7 +1907,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 3,
             "cost": 40,
             "staminaCost": 0,
-            "desc": "Passive: +2 damage vs targets who have not yet acted this round.",
+            "desc": "Passive: Single-foe focus — +2 damage vs targets who have not yet acted this round.",
             "icon": "🗡️",
             "prerequisites": {
                 "type": "AND",

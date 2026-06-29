@@ -84,7 +84,7 @@ export const EFFECT_DESC_OVERRIDES = {
   fire_weakness: 'Fire damage is doubled (200% weak — multiply by 2).',
   ice_weakness: 'Ice damage is doubled unless your sheet says otherwise.',
   spell_warded: 'You are protected from charm and fear effects.',
-  mind_shield: 'Extra protection against mind-affecting magic.',
+  mind_shield: 'Advantage vs mental effects; half magical damage from mind-only assaults (GM).',
   protected: 'You take less damage from the next hits — track how much is left with the GM.',
   damage_reduction: 'Incoming damage is reduced by a flat amount or a step on the table — read the source.',
   burn_on_hit: 'When you hit with this weapon, there is a 40% chance (tier 3+) to apply Burn for 4 turns.',

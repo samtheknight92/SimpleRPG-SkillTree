@@ -7,7 +7,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Cook meals without a campfire. Meals you cook gain +1 HP.",
+            "desc": "Craft (Hearty Provisions + Burning): Cook meals without a campfire. Meals you cook restore +1 HP.",
             "icon": "🔥🍳",
             "prerequisites": {
                 "type": "AND",
@@ -25,7 +25,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Preserve food twice as long; chilled rations grant +1 Stamina when eaten.",
+            "desc": "Craft (Camp Provisioning + Preservation): Preserve food twice as long; chilled rations grant +1 Stamina when eaten.",
             "icon": "❄️🫙",
             "prerequisites": {
                 "type": "AND",
@@ -46,7 +46,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Stabilise downed ally — restore 1 HP and remove Stunned (once per target per day).",
+            "desc": "Action (Stabilise & Revive + Conductivity): Jump-start a downed ally — restore 1 HP and remove Stunned (once per target per day).",
             "icon": "⚡💊",
             "prerequisites": {
                 "type": "AND",
@@ -71,7 +71,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Attempt to lift one small unequipped item from a target (GM contested roll). Once per long rest.",
+            "desc": "Action (Scene Examination + Concealment): Lift one small unequipped item from a target while they are distracted (GM contested roll). Once per long rest.",
             "icon": "🌑👁️",
             "prerequisites": {
                 "type": "AND",
@@ -90,7 +90,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Create a brief believable illusion in conversation (+2 social bluff; no combat decoys).",
+            "desc": "Action (Witness Interrogation + Radiance): Weave a brief believable illusion into conversation (+2 social bluff; no combat decoys).",
             "icon": "✨💬",
             "prerequisites": {
                 "type": "AND",
@@ -108,7 +108,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Meal removes fear or charm on eat (once per creature per day).",
+            "desc": "Craft (Hearty Provisions + Protective Warding): Blessed meal removes fear or charm when eaten (once per creature per day).",
             "icon": "✝️🍳",
             "prerequisites": {
                 "type": "AND",
@@ -131,7 +131,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Passive: Once per day, sense safest path through wilderness for 8 hours (GM navigation).",
+            "desc": "Passive (Wilderness Tracking + Divination): Once per day, sense the safest path through wilderness for 8 hours (GM navigation).",
             "icon": "🗺️🌲",
             "prerequisites": {
                 "type": "AND",
@@ -153,7 +153,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Snares that trigger a minor rune (alarm + 1d4 magic damage).",
+            "desc": "Craft (Snares & Ambush + Rune Inscription): Snares that trigger a minor rune (alarm + 1d4 magic damage).",
             "icon": "🪤✨",
             "prerequisites": {
                 "type": "AND",
@@ -171,7 +171,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft: Flash-freeze vials — utility slow, no direct spell damage.",
+            "desc": "Craft (Volatile Brews + Preservation): Flash-freeze vials — utility slow, no direct spell damage.",
             "icon": "❄️⚗️",
             "prerequisites": {
                 "type": "AND",
@@ -189,7 +189,7 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Calm one hostile beast for 1 minute (GM save).",
+            "desc": "Action (Wilderness Tracking + Harmony): Calm one hostile beast for 1 minute (GM save).",
             "icon": "🐾🌲",
             "prerequisites": {
                 "type": "AND",

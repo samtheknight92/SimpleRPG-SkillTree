@@ -11,6 +11,12 @@ export const DEFAULT_STARTING_LUMENS = 113
 /** +1 vs raw progress floor so tier gates match the same total skill/stat investment as before Level 1 baseline. */
 export const TIER_MIN_LEVEL = { 1: 1, 2: 5, 3: 9, 4: 14, 5: 21 }
 
+/** Ascension & Ultimate — stricter tier level gates (weapons/magic/careers use TIER_MIN_LEVEL). Tier 6 = Ultimate only. */
+export const CAPSTONE_TIER_MIN_LEVEL = { 3: 10, 4: 15, 5: 22, 6: 30 }
+
+/** Default Lumen cost floors for capstone tiers (individual skills may cost more). */
+export const CAPSTONE_TIER_LUMEN_COST = { 3: 133, 4: 163, 5: 320, 6: 450 }
+
 /** Shop stock unlocks by item rarity (display level). */
 export const SHOP_MIN_LEVEL_BY_RARITY = { common: 1, uncommon: 5, rare: 9, epic: 14, legendary: 21 }
 
@@ -127,12 +133,17 @@ export const SKILL_SUBCATEGORY_LABELS = {
   alchemist: 'Alchemist',
   enchanter: 'Enchanter',
   detective: 'Detective',
+  career_fusions: 'Career Fusions',
   career_fusion: 'Career Fusion',
   ranged_magic: 'Ranged + Magic',
   melee_magic: 'Melee + Magic',
   utility_combat: 'Utility Combat',
   monster_fusion: 'Monster Fusion',
-  pure_magic: 'Pure Magic'
+  pure_magic: 'Pure Magic',
+  unique: 'Breakthroughs',
+  legendary: 'Rare Legends',
+  weapon_ultimates: 'Weapon Mastery',
+  magic_ultimates: 'Element Mastery'
 }
 
 /** Retired skill-tree keys mapped to replacements (UI + saves). */
@@ -143,5 +154,8 @@ export const RETIRED_SKILL_SUBCATEGORIES = {
   farmer: 'medic',
   scholar: 'detective',
   archaeologist: 'detective',
-  engineer: 'blacksmith'
+  engineer: 'blacksmith',
+  ranged_magic: 'melee_magic',
+  utility_combat: 'career_fusions',
+  career_fusion: 'career_fusions'
 }

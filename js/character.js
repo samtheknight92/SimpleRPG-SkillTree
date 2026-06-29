@@ -15,6 +15,7 @@ import { HUMAN_RACE_SKILL } from './skills.js'
 import { normalizeGil } from './format.js'
 import { applyBackgroundToCharacter, DEFAULT_BACKGROUND } from './backgrounds.js'
 import { mergeInventoryStacks } from './items.js'
+import { migrateLegacyStatusEffect, statusStatModifiers } from './status-stat-modifiers.js'
 
 export function stripCharacterCache(character) {
   if (!character) return character
@@ -58,6 +59,7 @@ export function createCharacter(name, raceId, options = {}) {
     character.skills.push(options.humanStarterSkill)
   }
   applyBackgroundToCharacter(character, options.background || DEFAULT_BACKGROUND)
+  fillCharacterToFullResources(character)
   return character
 }
 
@@ -164,21 +166,22 @@ export function getEffect(effectId) {
 
 export function normalizeStatusEffect(entry) {
   if (!entry) return null
-  const effectId = normalizeEffectId(entry.effectId || entry.id || entry.name)
+  const migrated = migrateLegacyStatusEffect(entry, normalizeEffectId)
+  const effectId = normalizeEffectId(migrated.effectId || migrated.id || migrated.name)
   const effect = getEffect(effectId)
   if (!effect) return null
-  const durationValue = entry.duration === '' || entry.duration === undefined || entry.duration === null ? effect.duration : Number(entry.duration)
-  const potencyValue = entry.potency === '' || entry.potency === undefined || entry.potency === null ? effect.potency : Number(entry.potency)
+  const durationValue = migrated.duration === '' || migrated.duration === undefined || migrated.duration === null ? effect.duration : Number(migrated.duration)
+  const potencyValue = migrated.potency === '' || migrated.potency === undefined || migrated.potency === null ? effect.potency : Number(migrated.potency)
   const normalized = {
     uid: entry.uid || uid('effect'),
     effectId,
     duration: Number.isFinite(durationValue) ? durationValue : effect.duration,
     potency: Number.isFinite(potencyValue) ? potencyValue : effect.potency,
     elapsed: Number.isFinite(Number(entry.elapsed)) ? Number(entry.elapsed) : 0,
-    notes: String(entry.notes || '')
+    notes: String(migrated.notes || '')
   }
-  if (entry.performance && typeof entry.performance === 'object') {
-    normalized.performance = { ...entry.performance }
+  if (migrated.performance && typeof migrated.performance === 'object') {
+    normalized.performance = { ...migrated.performance }
   }
   return normalized
 }
@@ -232,7 +235,9 @@ export function computeStats(character) {
   }
   for (const status of character?.statusEffects || []) {
     const effect = getEffect(status.effectId)
-    for (const [stat, value] of Object.entries(effect?.statModifiers || {})) stats[stat] = (stats[stat] || 0) + Number(value || 0)
+    for (const [stat, value] of Object.entries(statusStatModifiers(status, effect))) {
+      stats[stat] = (stats[stat] || 0) + Number(value || 0)
+    }
   }
   stats.hp = Math.max(1, Math.floor(stats.hp))
   stats.stamina = Math.max(1, Math.floor(stats.stamina))
@@ -241,6 +246,16 @@ export function computeStats(character) {
     character._cache.stats = stats
   }
   return stats
+}
+
+/** Set current HP and Stamina to computed maximum (creation, premade spawn). */
+export function fillCharacterToFullResources(character) {
+  if (!character) return character
+  invalidateCharacterCache(character)
+  const computed = computeStats(character)
+  character.hp = computed.hp
+  character.stamina = computed.stamina
+  return character
 }
 
 export function statBreakdown(character, stat) {
@@ -286,7 +301,8 @@ export function statBreakdown(character, stat) {
   }
   for (const status of character.statusEffects || []) {
     const effect = getEffect(status.effectId)
-    if (effect?.statModifiers?.[stat]) rows.push({ label: `${effect.name} effect`, value: effect.statModifiers[stat] })
+    const mods = statusStatModifiers(status, effect)
+    if (mods[stat]) rows.push({ label: `${effect.name} effect`, value: mods[stat] })
   }
   return rows
 }

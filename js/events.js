@@ -44,8 +44,11 @@ import {
   toggleGmTurnCharacter as doToggleGmTurnCharacter,
   selectAllGmTurnCharacters as doSelectAllGmTurnCharacters,
   clearGmTurnCharacters as doClearGmTurnCharacters,
+  setGmNpcTurnFolder as doSetGmNpcTurnFolder,
+  selectGmTurnFromFolder as doSelectGmTurnFromFolder,
   addInitiativeEntry as doAddInitiativeEntry,
   addRosterToInitiativeTracker as doAddRosterToInitiativeTracker,
+  addFolderToInitiativeTracker as doAddFolderToInitiativeTracker,
   removeInitiativeEntry as doRemoveInitiativeEntry,
   setCharacterFolder as doSetCharacterFolder,
   createCharacterFolder as doCreateCharacterFolder,
@@ -95,6 +98,7 @@ import {
   toggleHomebrewRaceDraftEffect as doToggleHomebrewRaceDraftEffect,
   removeHomebrewRaceDraftEffect as doRemoveHomebrewRaceDraftEffect
 } from './actions.js'
+import { stepNumberInput } from './number-stepper.js'
 import { render } from './render.js'
 import { state, activeCharacter, resetItemFilters } from './state.js'
 import { TAB_IDS } from './constants.js'
@@ -104,7 +108,8 @@ import { debounce, toast, toastCombat } from './utils.js'
 import { syncHomebrewDraftFromForm, syncHomebrewSkillDraftFromForm, syncHomebrewRaceDraftFromForm, alignHomebrewSkillSubcategory } from './homebrew.js'
 import { applyTheme, applyAppearance } from './themes.js'
 import { saveNow } from './storage.js'
-import { subcategoriesFor, visibleSubcategories } from './skills.js'
+import { subcategoriesFor, visibleSubcategories, syncFusionFilters } from './skills.js'
+import { applyFusionNavigationState, resetFusionFilters, toggleFusionFilterValue } from './fusion-nav.js'
 import { syncUrlState } from './url-state.js'
 
 let initialized = false
@@ -368,11 +373,30 @@ const clickActions = {
     state.skillCategory = target.dataset.skillCategory || state.skillCategory
     const character = activeCharacter()
     state.skillSubcategory = visibleSubcategories(state.skillCategory, character)[0] || subcategoriesFor(state.skillCategory, character)[0] || ''
+    resetFusionFilters(state)
+    applyFusionNavigationState(state)
+    syncFusionFilters(character)
     render({ content: true })
     syncUrlState()
   },
   skillSubcategory(target) {
     state.skillSubcategory = target.dataset.skillSubcategory || state.skillSubcategory
+    resetFusionFilters(state)
+    applyFusionNavigationState(state)
+    syncFusionFilters(activeCharacter())
+    render({ content: true })
+    syncUrlState()
+  },
+  fusionFilter(target) {
+    const dim = target.dataset.fusionFilterDim
+    const value = target.dataset.fusionFilterValue
+    if (!dim || !value) return
+    state.skillFusionFilters = toggleFusionFilterValue(state.skillFusionFilters, dim, value)
+    render({ content: true })
+    syncUrlState()
+  },
+  clearFusionFilters() {
+    resetFusionFilters(state)
     render({ content: true })
     syncUrlState()
   },
@@ -473,9 +497,18 @@ const clickActions = {
   printCharacterSheet() { doPrintCharacterSheet() },
   selectAllGmTurn() { doSelectAllGmTurnCharacters() },
   clearGmTurn() { doClearGmTurnCharacters() },
+  selectGmTurnFromFolder() {
+    const folderKey = document.querySelector('#gm-turn-folder-select')?.value
+    if (!folderKey) return toast('Pick a roster folder first.')
+    doSelectGmTurnFromFolder(folderKey)
+  },
   addInitiativeEntry() { doAddInitiativeEntry() },
   addRosterInitiative() { doAddRosterToInitiativeTracker() },
-  removeInitiative(target) { doRemoveInitiativeEntry(target.dataset.removeInitiative) },
+  addInitiativeFromFolder() {
+    const folderKey = document.querySelector('#initiative-folder-select')?.value
+    if (!folderKey) return toast('Pick a roster folder first.')
+    doAddFolderToInitiativeTracker(folderKey)
+  },
   setInitiativeActive(target) { doSetInitiativeActiveEntry(target.dataset.setInitiativeActive) },
   initiativeNext() { doNextInitiativeTurn() },
   initiativeResetRound() { doResetInitiativeRound() },
@@ -541,6 +574,12 @@ const clickActions = {
   },
   inventoryCounter(target) {
     doAdjustInventoryCounter(target.dataset.inventoryCounter, Number(target.dataset.counterDelta || 0))
+  },
+  numberStepperDelta(target) {
+    const wrap = target.closest('.number-stepper')
+    const input = wrap?.querySelector('input[type="number"]')
+    if (!input) return
+    stepNumberInput(input, Number(target.dataset.numberStepperDelta || 0))
   }
 }
 
@@ -693,6 +732,13 @@ function initStaticEvents() {
 }
 
 function initDelegatedEvents() {
+  document.addEventListener('pointerdown', event => {
+    const removeBtn = event.target.closest('[data-remove-initiative]')
+    if (!removeBtn) return
+    event.preventDefault()
+    doRemoveInitiativeEntry(removeBtn.dataset.removeInitiative)
+  })
+
   document.addEventListener('click', event => {
     if (tryOpenActionBarSkillSheet(event)) return
     if (handleFolderMenuClick(event)) return
@@ -834,6 +880,12 @@ function initDelegatedEvents() {
     if (target.id === 'rename-character') doRenameCharacter(target.value)
     if (target.id === 'gm-spawn-folder') {
       doSetGmSpawnFolder(target.value)
+    }
+    if (target.id === 'gm-turn-folder-select') {
+      doSetGmNpcTurnFolder(target.value)
+    }
+    if (target.id === 'initiative-folder-select') {
+      doSetGmNpcTurnFolder(target.value)
     }
   })
 

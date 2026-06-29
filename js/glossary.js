@@ -139,23 +139,23 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['fusion', 'hybrid'],
     category: 'Skills & trees',
     summary: 'Skills that mix two styles — need skills from both parents.',
-    detail: 'Fusion trees unlock when you have the right skills from two other categories (career + weapon, ranged + magic, etc.). They reward mixed builds without a separate character sheet. Check prerequisites on each fusion skill card.'
+    detail: 'Fusion skills mix two styles — weapon + magic, career + magic, career + weapon, or two elements. On the Skills tab, pick a fusion group (Melee + Magic, Pure Magic, and so on), then use the filter chips to narrow by weapon, element, or career type. Leave all chips off to see everything you can learn. Check prerequisites on each card.'
   },
   {
     id: 'ascension',
     term: 'Ascension',
-    aliases: ['ascension skills', 'racial ascension'],
+    aliases: ['ascension skills', 'breakthrough'],
     category: 'Skills & trees',
-    summary: 'High-tier racial power spikes — usually once-per-rest or once-per-day limits.',
-    detail: 'Ascension skills sit in the Ascension category and represent a big step in your race\'s power fantasy. Read the skill text for limits (once per day, once per combat, etc.). They are meant to feel special, not spammable.'
+    summary: 'Major personal breakthrough powers — strong, limited, not your legendary capstone.',
+    detail: 'Ascension skills are universal breakthrough powers with stricter level gates than normal skills: Tier 3 → Level 10+ · Tier 4 → Level 15+ · Tier 5 → Level 22+. They stay hidden until you qualify. Most are gated by Stamina cost and drawbacks — not once-per-combat limits. Rare exceptions (once per day / lifetime) mark the biggest effects.'
   },
   {
     id: 'ultimate',
     term: 'Ultimate',
-    aliases: ['ultimate skill', 'capstone'],
+    aliases: ['ultimate skill', 'capstone', 'legendary'],
     category: 'Skills & trees',
-    summary: 'Top-tier signature ability — high cost, big moment.',
-    detail: 'Ultimate skills are tier 4–5 capstones, often with clear range, damage, and side effects in one sentence. Many are once per encounter or once per day. Save them for the scene-stealing turn.'
+    summary: 'Legendary endgame powers — build-defining, rare, hard to unlock.',
+    detail: 'Ultimate skills are legendary capstones with strict skill prerequisites. Level gates: Tier 5 → Level 22+ · Tier 6 → Level 30+. Weapon and Element Mastery ultimates are balanced by high Stamina cost and drawbacks — not once-per-combat limits. Rare Legends on the same tab may cost even more Stamina for cross-build effects.'
   },
   {
     id: 'racial',

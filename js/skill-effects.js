@@ -147,6 +147,10 @@ function isPassiveSkill(skill) {
   return /^passive:/i.test(skill?.desc || '')
 }
 
+function isCraftSkill(skill) {
+  return /^craft:/i.test(String(skill?.desc || ''))
+}
+
 function isAttackSkill(skill) {
   const desc = String(skill?.desc || '')
   return /^action:/i.test(desc) || /^spell:/i.test(desc)
@@ -159,6 +163,7 @@ export function recommendSkillEffects(skill) {
 
   if (cache.equipmentSkillEffects[skill.id]) return []
   if (isToggleSkill(skill)) return []
+  if (isCraftSkill(skill)) return []
   if (isAttackSkill(skill) && !isPassiveSkill(skill)) return []
 
   const mapped = cache.passiveSkillEffects[skill.id]

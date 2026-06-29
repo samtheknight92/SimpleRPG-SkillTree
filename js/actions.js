@@ -8,6 +8,7 @@ import { toast, toastCombat, clamp, deepClone, uid, titleCase } from './utils.js
 import {
   createCharacter,
   normalizeCharacter,
+  fillCharacterToFullResources,
   computeStats,
   invalidateCharacterCache,
   setRace as applyRace,
@@ -120,6 +121,7 @@ import {
   setRosterFolderOpen,
   syncCharacterFolderOrder,
   characterFolder,
+  filterCharactersByFolder,
   FOLDER_FILTER_UNFILED
 } from './character-folders.js'
 import {
@@ -432,7 +434,9 @@ export function useSkill(skillId) {
     const effect = getEffect(payload.effectId)
     if (!effect) continue
     const procRoll = rollSkillProc(payload.chance ?? 1)
-    if (isTargetFacingEffect(effect)) {
+    const applyToTarget = payload.applyTo === 'target'
+    const applyToSelf = payload.applyTo === 'self'
+    if (!applyToSelf && (applyToTarget || isTargetFacingEffect(effect))) {
       const pct = payload.chance != null && payload.chance < 1
         ? `${Math.round(payload.chance * 100)}% `
         : ''
@@ -1546,6 +1550,7 @@ export function spawnPremadeCharacter(premadeId, count = 1) {
 
   for (let i = 0; i < amount; i += 1) {
     const character = normalizeCharacter(deepClone(template))
+    fillCharacterToFullResources(character)
     character.id = uid('char')
     character.name = allocateCharacterName(template.name, [
       ...state.characters.map(c => c.name),
@@ -1605,6 +1610,28 @@ export function clearGmTurnCharacters() {
   render({ content: true })
 }
 
+export function setGmNpcTurnFolder(folderKey) {
+  state.gmNpcTurnFolder = folderKey || ''
+  save()
+  render({ content: true })
+}
+
+export function selectGmTurnFromFolder(folderKey) {
+  const key = folderKey || state.gmNpcTurnFolder
+  const characters = filterCharactersByFolder(state.characters, key)
+  if (!characters.length) {
+    return toast(`No characters in “${initiativeFolderLabel(key)}”.`)
+  }
+  state.gmNpcTurnFolder = key
+  state.gmNpcTurnCharacterIds = characters.map(character => character.id)
+  save()
+  render({ content: true })
+}
+
+function initiativeFolderLabel(folderKey) {
+  return folderKey === FOLDER_FILTER_UNFILED ? 'Unfiled' : folderKey
+}
+
 export function addInitiativeEntry(name = '') {
   state.initiativeTracker.entries.push(createInitiativeEntry(name))
   save()
@@ -1612,9 +1639,19 @@ export function addInitiativeEntry(name = '') {
 }
 
 export function addRosterToInitiativeTracker() {
+  addCharactersToInitiativeTracker(state.characters)
+}
+
+export function addFolderToInitiativeTracker(folderKey) {
+  const characters = filterCharactersByFolder(state.characters, folderKey)
+  if (!characters.length) return toast(`No characters in “${initiativeFolderLabel(folderKey)}”.`)
+  addCharactersToInitiativeTracker(characters, initiativeFolderLabel(folderKey))
+}
+
+function addCharactersToInitiativeTracker(characters, folderLabel = '') {
   const existing = new Set(state.initiativeTracker.entries.map(entry => entry.name.toLowerCase()))
   let added = 0
-  for (const character of state.characters) {
+  for (const character of characters) {
     if (existing.has(character.name.toLowerCase())) continue
     state.initiativeTracker.entries.push(createInitiativeEntry(character.name, ''))
     existing.add(character.name.toLowerCase())
@@ -1622,7 +1659,15 @@ export function addRosterToInitiativeTracker() {
   }
   save()
   render({ content: true })
-  toast(added ? `Added ${added} character${added === 1 ? '' : 's'} to initiative.` : 'Everyone on the roster is already listed.')
+  if (added) {
+    toast(folderLabel
+      ? `Added ${added} from “${folderLabel}”.`
+      : `Added ${added} character${added === 1 ? '' : 's'} to initiative.`)
+    return
+  }
+  toast(folderLabel
+    ? `Everyone in “${folderLabel}” is already listed.`
+    : 'Everyone on the roster is already listed.')
 }
 
 export function removeInitiativeEntry(entryId) {

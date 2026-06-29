@@ -11,6 +11,8 @@
 //   "Has a X% chance to apply [Status Effect] ([reference to status-effects.js])"
 // Do not invent new status effects or durations; use standard effect names from the Effects list.
 // This rule applies to ALL skills, not just fusion skills.
+// Weapon & element design pillars: DESIGN-WEAPON-ELEMENT-IDENTITY.md
+// (every skill reinforces ≥1 trait; fusion skills reinforce ≥1 from each parent)
 // -----------------------------------------------------------------------------
 // SKILL SYSTEM DATA
 // ===========================================
@@ -227,7 +229,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 4,
-                "desc": "Action: Armour-piercing sword thrust. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage. Critical hit on natural 18–20. Target's armour bonuses do not add to Physical Defence against this attack.",
+                "desc": "Action: Precise thrust through an opening. Attack roll d20 + accuracy +1 vs Physical Defence; weapon damage +1 on hit. Critical hit on natural 18–20.",
                 "icon": "🎯",
                 "prerequisites": {
                     "type": "AND",
@@ -339,7 +341,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Action: Ranged weapon attack (bow) to suppress a foe. d20 + accuracy vs Physical Defence; weapon damage on hit; 40% chance to apply Weakened. Until your next turn, one ally you choose gains +2 accuracy against that target.",
+                "desc": "Action: Ranged weapon attack to suppress a foe. d20 + accuracy vs Physical Defence; weapon damage on hit; 20% chance to apply Weakened. Until your next turn, one ally you choose gains +2 accuracy against that target.",
                 "icon": "🤝",
                 "prerequisites": {
                     "type": "AND",
@@ -353,6 +355,7 @@ const SKILLS_DATA = {
                         "effectId": "weakened",
                         "duration": 4,
                         "potency": 2,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -396,7 +399,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 8,
-                "desc": "Action: Ranged weapon attack that detonates on impact. Attack roll d20 + accuracy vs primary target's Physical Defence (−1 accuracy); weapon damage on hit. Each other creature in 10ft: separate attack roll (d20 + accuracy −1) vs each target's Physical Defence; weapon damage on each hit. Friendly fire possible.",
+                "desc": "Action: Fire a prepared explosive arrow or bolt (requires Explosive Compounds). Attack roll d20 + accuracy −1 vs primary target's Physical Defence; weapon damage on hit. Each other creature in 10ft: separate attack roll (d20 + accuracy −1) vs each target's Physical Defence; weapon damage on each hit. You must not have moved this turn. Friendly fire possible.",
                 "icon": "💥",
                 "prerequisites": {
                     "type": "AND",
@@ -445,7 +448,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 10,
-                "desc": "Action: Saturate a 20ft-radius area. One attack roll per enemy inside (d20 + accuracy −3) vs each target's Physical Defence; weapon damage on each hit. Friendly fire possible.",
+                "desc": "Action: Rain shots into a 20ft area after aiming (you did not move this turn). One attack roll per enemy inside (d20 + accuracy −2 vs Physical Defence); weapon damage on each hit. Friendly fire possible.",
                 "icon": "🌧️",
                 "prerequisites": {
                     "type": "AND",
@@ -462,7 +465,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 6,
-                "desc": "Action: Ranged weapon attack that automatically hits one chosen target (once per combat) — no attack roll. Weapon damage on hit.",
+                "desc": "Action: One aimed shot at a target you hit last turn. Attack roll d20 + accuracy +5 vs Physical Defence; weapon damage +2 on hit. Once per combat.",
                 "icon": "🧭",
                 "prerequisites": {
                     "type": "AND",
@@ -602,7 +605,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Action: Throw axe (30ft). Attack roll d20 + accuracy vs Physical Defence; weapon damage on hit. Axe returns to your hand.",
+                "desc": "Action: Hurl your axe with brutal force (30ft). Attack roll d20 + accuracy vs Physical Defence; weapon damage +2 on hit. Axe returns to your hand.",
                 "icon": "🎯",
                 "prerequisites": {
                     "type": "AND",
@@ -618,7 +621,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 2,
-                "desc": "Toggle: +2 Strength and +2 Physical Defence. Costs 2 stamina per turn (max 5 turns).",
+                "desc": "Toggle: +2 Strength and +2 Speed, but −1 Physical Defence. Costs 2 stamina per turn (max 5 turns).",
                 "icon": "😤",
                 "prerequisites": {
                     "type": "AND",
@@ -649,6 +652,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 1,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.4
                     }
                 ]
@@ -659,7 +663,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Enhancement: Thrown axe attacks may bounce to one additional target (separate attack roll per target; weapon damage on each hit).",
+                "desc": "Enhancement: When you throw an axe, it may cleave through to one adjacent foe (separate attack roll per target; weapon damage on each hit).",
                 "icon": "🔄",
                 "prerequisites": {
                     "type": "AND",
@@ -756,7 +760,8 @@ const SKILLS_DATA = {
                         "effectId": "cleave",
                         "duration": 0,
                         "potency": 0,
-                        "chance": 0.95
+                        "applyTo": "target",
+                        "chance": 0.25
                     }
                 ]
             }
@@ -782,7 +787,7 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 0,
-                "desc": "Passive: Restore +1 stamina per turn while a staff is equipped.",
+                "desc": "Passive: Sustain long battles — restore +1 stamina per turn while a staff is equipped (feeds your spellcasting).",
                 "icon": "💙",
                 "prerequisites": {
                     "type": "NONE",
@@ -825,7 +830,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "spell_warded",
                         "duration": 8,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -835,7 +841,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Action: Melee staff strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 1d6 + Magic Power damage.",
+                "desc": "Action: Channel a short arc through the staff (10ft). Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 + Magic Power force damage. Weaker than your spells — use when you cannot cast.",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -869,7 +875,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Drain mana. Attack roll d20 + accuracy vs Magical Defence; on a hit, apply Weakened (all stats −2) and drain 1d4+2 stamina from the target.",
+                "desc": "Action: Arcane drain through your staff. Attack roll d20 + accuracy vs Magical Defence; on a hit, apply Weakened (all stats −2 for 4 turns) and you recover 1d4+2 stamina.",
                 "icon": "💔",
                 "prerequisites": {
                     "type": "AND",
@@ -883,7 +889,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "weakened",
                         "duration": 4,
-                        "potency": 2
+                        "potency": 2,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -893,7 +900,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Imbue staff with Fire, Ice, or Lightning for 10 turns (GM: adds elemental flavour to staff strikes/spells).",
+                "desc": "Action: Channel Fire, Ice, or Lightning into your staff for 10 turns. While active, your spells and staff strikes deal +2 typed damage of the chosen element.",
                 "icon": "🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -944,7 +951,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Release stored energy (60ft). Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d8 force damage + Magic Power.",
+                "desc": "Action: Release power you have built up (requires Elemental Staff active, or pay +3 stamina if not). Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d8 force damage + Magic Power at up to 60ft.",
                 "icon": "💥",
                 "prerequisites": {
                     "type": "AND",
@@ -1056,7 +1063,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Enhancement: Coat daggers with poison — escalating 1→2→3 damage over 3 turns on hit (GM).",
+                "desc": "Enhancement: Your cuts leave bleeding wounds — escalating 1→2→3 damage over 3 turns on hit (stack refreshes). Has a 20% chance to apply Bleeding.",
                 "icon": "☠️",
                 "prerequisites": {
                     "type": "AND",
@@ -1064,7 +1071,16 @@ const SKILLS_DATA = {
                         "dagger_basics"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "bleeding",
+                        "duration": 3,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "flurry",
@@ -1137,7 +1153,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Eight dagger strikes — automatically hit (no attack roll). Weapon damage on each hit.",
+                "desc": "Action: Eight rapid cuts. Each attack roll is d20 + accuracy −2 vs Physical Defence; weapon damage on each hit. Each hit has a 40% chance to apply Bleeding.",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -1146,7 +1162,16 @@ const SKILLS_DATA = {
                         "vital_strike"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "bleeding",
+                        "duration": 3,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "shadow_clone",
@@ -1154,7 +1179,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 7,
-                "desc": "Action: Create a mirror image that fights alongside you for 5 turns (50% your stats, GM).",
+                "desc": "Action: After you hit with a dagger attack, teleport up to 15ft and gain +2 Physical Defence until your next turn. Once per combat, you may immediately make one Basic Attack from your new position.",
                 "icon": "👥",
                 "prerequisites": {
                     "type": "AND",
@@ -1203,6 +1228,7 @@ const SKILLS_DATA = {
                         "effectId": "critical_chance",
                         "duration": 10,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.25
                     }
                 ]
@@ -1255,7 +1281,7 @@ const SKILLS_DATA = {
             },
             {
                 "id": "polearm_defensive_stance",
-                "name": "Defensive Stance",
+                "name": "Reach Guard",
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 1,
@@ -1308,7 +1334,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Charge then strike. Attack roll d20 + accuracy vs Physical Defence; weapon damage +1 per 5ft moved (max +6) on hit.",
+                "desc": "Action: Controlled lunge up to 15ft in a straight line, then thrust. Attack roll d20 + accuracy vs Physical Defence; weapon damage +2 on hit. You may attack enemies 10ft away without closing to melee.",
                 "icon": "🏃",
                 "prerequisites": {
                     "type": "AND",
@@ -1345,7 +1371,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "defensive_stance"
+                        "polearm_defensive_stance"
                     ]
                 },
                 "specialEffects": []
@@ -1373,7 +1399,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 9,
-                "desc": "Action: 360° sweep (15ft). One attack roll per enemy (d20 + accuracy vs Physical Defence −2); weapon damage on each hit. Friendly fire possible.",
+                "desc": "Action: Measured full-circle sweep while holding your ground (you cannot move this turn). One attack roll per enemy within 15ft (d20 + accuracy −1 vs Physical Defence); weapon damage on each hit. Enemies you hit cannot move toward you until your next turn.",
                 "icon": "🌪️",
                 "prerequisites": {
                     "type": "AND",
@@ -1484,6 +1510,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 1,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -1510,7 +1537,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 7,
-                "desc": "Action: Lightning-infused hammer strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 lightning damage.",
+                "desc": "Action: Thunderous hammer blow. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage +2d6 thunder damage. One adjacent foe takes half that thunder damage (no roll).",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -1543,7 +1570,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Wild hammer swing. Attack roll d20 + accuracy vs Physical Defence; weapon damage +6 on hit. Until your next turn, −3 Physical Defence and −3 Magical Defence.",
+                "desc": "Action: Wind up a crushing blow (you cannot move this turn). Attack roll d20 + accuracy vs Physical Defence; weapon damage +6 on hit. You are immune to Incapacitated until your next turn.",
                 "icon": "😤",
                 "prerequisites": {
                     "type": "AND",
@@ -1575,7 +1602,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 10,
-                "desc": "Action: Throw hammer (60ft line). Attack roll (d20 + accuracy vs Physical Defence) per enemy in the line; weapon damage on each hit. Hammer returns.",
+                "desc": "Action: Hurl your hammer in a 60ft line. One attack roll per enemy in the line; weapon damage on each hit. The impact sends a shockwave — each hit foe is knocked prone. Hammer returns.",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -1790,7 +1817,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 0,
-                "desc": "Passive: Unarmed Basic Attack uses 1d12 + Strength while both hands are empty.",
+                "desc": "Passive: Your combo finishers hit hardest — unarmed Basic Attack uses 1d12 + Strength while both hands are empty (pairs with Flurry of Blows and Striker Volley).",
                 "icon": "💥",
                 "prerequisites": {
                     "type": "AND",
@@ -1877,7 +1904,7 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 1,
-                "desc": "Spell: Create light (30ft radius) and restore 1 HP",
+                "desc": "Spell: Ignite a small flame (30ft light). Touch one ally to soothe minor burns — restore 1 HP.",
                 "icon": "🤲",
                 "prerequisites": {
                     "type": "NONE",
@@ -1907,7 +1934,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Spell: Apply Protected (absorb 3 attacks + attackers take 1d4 fire damage)",
+                "desc": "Spell: Apply Protected (absorb 3 attacks). Attackers that hit the shield take 1d4 fire damage and have a 20% chance to apply Burn.",
                 "icon": "🛡️",
                 "prerequisites": {
                     "type": "AND",
@@ -1920,7 +1947,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "protected",
                         "duration": 6,
-                        "potency": 3
+                        "potency": 3,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -1943,7 +1971,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "burn",
                         "duration": 4,
-                        "potency": 1
+                        "potency": 1,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -1986,7 +2015,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 8,
-                "desc": "Spell: Apply Enhanced Mobility (flight + immunity to immobilization). GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
+                "desc": "Spell: Apply Enhanced Mobility (flight + immunity to immobilization). Your flames burn hotter — fire spells deal +1d4 fire damage while active. GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
                 "icon": "🦅",
                 "prerequisites": {
                     "type": "AND",
@@ -2000,7 +2029,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "enhanced_mobility",
                         "duration": 10,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -2064,7 +2094,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 15,
-                "desc": "Spell: Area effect. One attack roll per creature (d20 + accuracy vs Magical Defence -4); on each hit, 2d6 damage + Magic Power. GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
+                "desc": "Spell: 20ft raging flames. One attack roll per creature (d20 + accuracy vs Magical Defence −4); on each hit, 2d6 fire damage + Magic Power. Has a 40% chance to apply Burn. Friendly fire possible.",
                 "icon": "🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -2074,7 +2104,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "elementalType": "fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "fire_tornado",
@@ -2116,7 +2155,7 @@ const SKILLS_DATA = {
                         "effectId": "burn",
                         "duration": 3,
                         "potency": 3,
-                        "chance": 0.5
+                        "applyTo": "target"
                     }
                 ]
             }
@@ -2142,13 +2181,28 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 1,
-                "desc": "Spell: Touch attack. Attack roll d20 + accuracy vs Magical Defence; on a hit, applies Weakened (all stats -2 for 4 turns)",
+                "desc": "Spell: Touch attack. Attack roll d20 + accuracy vs Magical Defence; on a hit, applies Weakened (all stats −2 for 4 turns). Has a 20% chance to apply Immobilized.",
                 "icon": "❄️",
                 "prerequisites": {
                     "type": "NONE",
                     "skills": []
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 4,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "ice_armor",
@@ -2156,7 +2210,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Spell: Gain +3 Physical Defence and +3 Magical Defence (raises your AC), immunity to fire damage (10 rounds)",
+                "desc": "Spell: Gain +3 Physical Defence and +3 Magical Defence (10 rounds). While active, fire damage against you is halved (does not stack with Ice Attunement).",
                 "icon": "🛡️",
                 "prerequisites": {
                     "type": "AND",
@@ -2201,7 +2255,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "immobilized",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -2242,7 +2297,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "weakened",
                         "duration": 4,
-                        "potency": 2
+                        "potency": 2,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -2289,7 +2345,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Spell: Freeze all enemies within 15ft (1 turn + slow)",
+                "desc": "Spell: 15ft burst. All enemies inside: has a 40% chance to apply Immobilized (1 turn) and Weakened (Speed −2 for 4 turns).",
                 "icon": "💫",
                 "prerequisites": {
                     "type": "AND",
@@ -2297,7 +2353,22 @@ const SKILLS_DATA = {
                         "ice_wall"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "absolute_zero",
@@ -2322,7 +2393,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 15,
-                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 cold damage + Magic Power. 200ft.",
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 ice damage + Magic Power. 200ft. On a hit, target is Weakened and has a 40% chance to apply Immobilized — frozen foes are easier for allies to shatter.",
                 "icon": "🧊",
                 "prerequisites": {
                     "type": "AND",
@@ -2393,7 +2464,7 @@ const SKILLS_DATA = {
                         "effectId": "weakened",
                         "duration": 3,
                         "potency": 2,
-                        "chance": 0.5
+                        "applyTo": "target"
                     }
                 ]
             }
@@ -2419,7 +2490,7 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 1,
-                "desc": "Spell: Build electrical energy (+1 damage to next lightning spell)",
+                "desc": "Spell: Charge your next lightning spell (+1d6 lightning damage) and gain +1 Speed until you cast again.",
                 "icon": "🔋",
                 "prerequisites": {
                     "type": "NONE",
@@ -2488,7 +2559,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Spell: 20ft radius sound blast. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d4 damage + Magic Power. Friendly fire possible.",
+                "desc": "Spell: 20ft thunder burst. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d4 lightning damage + Magic Power. Has a 40% chance to apply Incapacitated. Friendly fire possible.",
                 "icon": "🔊",
                 "prerequisites": {
                     "type": "AND",
@@ -2496,7 +2567,16 @@ const SKILLS_DATA = {
                         "lightning_bolt"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "electric_field",
@@ -2574,7 +2654,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 12,
-                "desc": "Fire an arrow that chains lightning between targets, dealing 3d6 lightning damage. Has a 75% chance to apply Incapacitated",
+                "desc": "Spell: 60ft line. Separate attack roll per creature in the line (d20 + accuracy vs Magical Defence); on each hit, 3d6 lightning damage + Magic Power. Lightning jumps — each hit after the first deals +1d6. Has a 75% chance to apply Incapacitated.",
                 "icon": "⛈️",
                 "prerequisites": {
                     "type": "AND",
@@ -2589,6 +2669,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.75
                     }
                 ]
@@ -2599,7 +2680,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 10,
-                "desc": "Spell: Slow orb (20ft/turn) explodes for 4d6 in 15ft radius",
+                "desc": "Spell: Hurl a fast orb to a point within 60ft; it detonates immediately for 4d6 lightning damage in a 15ft radius. Has a 40% chance to apply Incapacitated.",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -2607,7 +2688,16 @@ const SKILLS_DATA = {
                         "lightning_speed"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "emp",
@@ -2667,7 +2757,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 3,
                         "potency": 0,
-                        "chance": 0.5
+                        "applyTo": "target"
                     }
                 ]
             }
@@ -2679,7 +2769,7 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 2,
-                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 damage + Magic Power. 40ft range.",
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 earth damage + Magic Power. 40ft. On a hit, target has a 20% chance to be knocked down.",
                 "icon": "🪨",
                 "prerequisites": {
                     "type": "NONE",
@@ -2693,7 +2783,7 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 1,
-                "desc": "Spell: Detect movement through ground (100ft radius)",
+                "desc": "Spell: Sense vibrations through stone and soil (100ft). You know where creatures are moving and where the ground is unstable — +2 to place earth spikes and walls for 1 round.",
                 "icon": "🌍",
                 "prerequisites": {
                     "type": "NONE",
@@ -2731,7 +2821,15 @@ const SKILLS_DATA = {
                         "earth_sense"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "knockdown",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "mud_trap",
@@ -2783,9 +2881,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "earthquake",
-                        "duration": 0,
-                        "potency": 0
+                        "effectId": "knockdown",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -2816,7 +2915,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 7,
-                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d4 damage + Magic Power. 60ft range.",
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d4 earth damage + Magic Power. 60ft. Ignores 2 Magical Defence (piercing stone).",
                 "icon": "🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -2845,7 +2944,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "protected",
                         "duration": 6,
-                        "potency": 3
+                        "potency": 3,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -2872,7 +2972,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 10,
-                "desc": "Spell: Apply Immobilized (cannot move but can attack) and +5 Physical Defence and +5 Magical Defence for 3 turns.",
+                "desc": "Spell: Apply Immobilized (encased in stone — cannot move but can attack) and +5 Physical Defence and +5 Magical Defence for 3 turns.",
                 "icon": "🗿",
                 "prerequisites": {
                     "type": "AND",
@@ -2886,7 +2986,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "immobilized",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -2948,7 +3049,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
-                        "chance": 0.5
+                        "applyTo": "target"
                     }
                 ]
             }
@@ -2988,7 +3089,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 damage + Magic Power. 50ft range.",
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind damage + Magic Power. 50ft. On a hit, push the target 5ft.",
                 "icon": "🌪️",
                 "prerequisites": {
                     "type": "AND",
@@ -3053,7 +3154,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 10,
-                "desc": "Spell: 15ft radius whirlwind. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d4 damage + Magic Power. Friendly fire possible.",
+                "desc": "Spell: 30ft tornado. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d4 wind damage + Magic Power. You may move up to 10ft before or after casting. Friendly fire possible.",
                 "icon": "🌪️",
                 "prerequisites": {
                     "type": "AND",
@@ -3122,7 +3223,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 15,
-                "desc": "Summon a devastating storm dealing 3d6 wind or water damage (whichever each target is weak to) to all enemies. Pushes enemies to storm's center",
+                "desc": "Spell: 30ft storm. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 wind damage + Magic Power. Pull all enemies 10ft toward the storm's center. Friendly fire possible.",
                 "icon": "🌀",
                 "prerequisites": {
                     "type": "AND",
@@ -3212,7 +3313,7 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 2,
-                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 Water damage + Magic Power.",
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d4 water damage + Magic Power. 30ft. On a hit, target's Speed is −1 until your next turn (slippery splash).",
                 "icon": "💧",
                 "prerequisites": {
                     "type": "NONE",
@@ -3269,7 +3370,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "regeneration",
                         "duration": 5,
-                        "potency": 2
+                        "potency": 2,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -3310,13 +3412,13 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
-                        "chance": 0.4
+                        "applyTo": "target"
                     },
                     {
                         "effectId": "weakened",
                         "duration": 4,
                         "potency": 2,
-                        "chance": 0.4
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -3339,7 +3441,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "enhanced_mobility",
                         "duration": 10,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -3349,7 +3452,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 7,
-                "desc": "Spell: Apply Mind Controlled (target moves as you direct for 3 turns)",
+                "desc": "Spell: Grip a foe with pressurized blood inside their veins. Attack roll d20 + accuracy vs Magical Defence; on a hit, apply Weakened (all stats −2 for 4 turns) and has a 40% chance to apply Immobilized.",
                 "icon": "🩸",
                 "prerequisites": {
                     "type": "AND",
@@ -3360,9 +3463,17 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "mind_controlled",
-                        "duration": 3,
-                        "potency": 0
+                        "effectId": "immobilized",
+                        "duration": 4,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -3406,7 +3517,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "protected",
                         "duration": 6,
-                        "potency": 3
+                        "potency": 3,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -3433,7 +3545,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 10,
-                "desc": "Spell: Superheat blood. Attack roll d20 + accuracy vs Magical Defence; on a hit, 5d4 fire damage + Magic Power (no save).",
+                "desc": "Spell: Superheat fluids in the target's body. Attack roll d20 + accuracy vs Magical Defence; on a hit, 5d4 water damage + Magic Power (scalding steam). Has a 40% chance to apply Burn.",
                 "icon": "🩸",
                 "prerequisites": {
                     "type": "AND",
@@ -3442,7 +3554,16 @@ const SKILLS_DATA = {
                         "water_shield"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tsunami",
@@ -3450,7 +3571,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 15,
-                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 6d4 damage + Magic Power.",
+                "desc": "Spell: 40ft wave. One attack roll per creature (d20 + accuracy vs Magical Defence −2); on each hit, 6d4 water damage + Magic Power and push 15ft. Has a 40% chance to apply Immobilized. Friendly fire possible.",
                 "icon": "🌊",
                 "prerequisites": {
                     "type": "AND",
@@ -3458,7 +3579,16 @@ const SKILLS_DATA = {
                         "water_shield"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "hydro_mastery",
@@ -3506,13 +3636,22 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 2,
-                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 damage + Magic Power. 40ft range.",
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 darkness damage + Magic Power. 40ft. Has a 20% chance to apply Weakened (all stats −2 for 4 turns).",
                 "icon": "🌑",
                 "prerequisites": {
                     "type": "NONE",
                     "skills": []
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 1
+                    }
+                ]
             },
             {
                 "id": "darkvision",
@@ -3542,7 +3681,15 @@ const SKILLS_DATA = {
                         "shadow_bolt"
                     ]
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "shadow_step",
+                        "duration": 0,
+                        "potency": 0,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "fear",
@@ -3550,7 +3697,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 5,
-                "desc": "Spell: Apply Mind Controlled (target flees in terror for 3 turns)",
+                "desc": "Spell: Apply Mind Controlled (target flees in terror — cannot approach you for 3 turns).",
                 "icon": "😱",
                 "prerequisites": {
                     "type": "AND",
@@ -3563,7 +3710,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "mind_controlled",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -3585,7 +3733,7 @@ const SKILLS_DATA = {
             },
             {
                 "id": "shadow_duplicate",
-                "name": "Shadow Clone",
+                "name": "Shadow Duplicate",
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 8,
@@ -3606,7 +3754,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Spell: Assault a sleeping target's mind — automatically hits (no attack roll). 2d6 psychic damage.",
+                "desc": "Spell: Assault a sleeping target's mind — automatically hits (no attack roll). 2d6 darkness damage + Magic Power.",
                 "icon": "💭",
                 "prerequisites": {
                     "type": "AND",
@@ -3692,7 +3840,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 10,
-                "desc": "Spell: Drain 1 point from all target stats for 1 day",
+                "desc": "Spell: Drain 1 point from all target stats for 1 day (curse). You regain 2d4 HP.",
                 "icon": "👻",
                 "prerequisites": {
                     "type": "AND",
@@ -3709,7 +3857,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 15,
-                "desc": "Perfect balance of light and dark dealing 3d6 darkness or light damage (whichever each target is weak to) to all enemies. Applies Enhanced to allies and has a 75% chance to apply Mind Controlled to enemies",
+                "desc": "Spell: 30ft void. One attack roll per enemy (d20 + accuracy vs Magical Defence); on each hit, 3d6 darkness damage + Magic Power. Enemies inside have a 75% chance to apply Mind Controlled (cower in terror). You gain +2 Stealth while the eclipse lasts.",
                 "icon": "🌚",
                 "prerequisites": {
                     "type": "AND",
@@ -3723,6 +3871,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.75
                     }
                 ]
@@ -3769,7 +3918,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 1,
                         "potency": 0,
-                        "chance": 0.5
+                        "applyTo": "target"
                     }
                 ]
             }
@@ -3781,7 +3930,7 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 2,
-                "desc": "Spell: Radiant beam. Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 light damage + Magic Power and blind for 1 turn.",
+                "desc": "Spell: Radiant beam. Attack roll d20 + accuracy vs Magical Defence; on a hit, 1d6 light damage + Magic Power and blind for 1 turn. Deals +1d6 light damage vs undead, demons, and darkness creatures.",
                 "icon": "☀️",
                 "prerequisites": {
                     "type": "NONE",
@@ -3822,7 +3971,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "regeneration",
                         "duration": 5,
-                        "potency": 2
+                        "potency": 2,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -3845,7 +3995,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "purify",
                         "duration": 0,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -3885,7 +4036,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "weapon_enchanted",
                         "duration": 10,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -3981,7 +4133,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 12,
-                "desc": "Spell: 40ft radius explosion. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 5d6 damage + Magic Power. Friendly fire possible.",
+                "desc": "Spell: 40ft radius explosion. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 5d6 light damage + Magic Power. Allies in the radius gain Protected (absorb 1 attack). Friendly fire possible.",
                 "icon": "🌟",
                 "prerequisites": {
                     "type": "AND",
@@ -3998,7 +4150,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 10,
-                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, damage equal to half the target's max HP.",
+                "desc": "Spell: Attack roll d20 + accuracy vs Magical Defence; on a hit, 4d6 light damage + Magic Power vs normal foes, or 6d6 vs undead, demons, and corrupted creatures.",
                 "icon": "⚖️",
                 "prerequisites": {
                     "type": "AND",
@@ -4034,7 +4186,7 @@ const SKILLS_DATA = {
                 "tier": 5,
                 "cost": 100,
                 "staminaCost": 15,
-                "desc": "Action (3 uses per day): Become one with light for 3 rounds. Gain immunity to light/radiant damage, emit bright light (30ft radius blinds enemies), +50% light spell damage, all attacks apply Mind Controlled (charm), and can teleport to any bright light source within 100ft.",
+                "desc": "Action (3 uses per day): Become one with light for 3 rounds. Gain immunity to light damage, emit bright light (30ft — enemies are Blinded), +50% light spell damage, all allies within 10ft gain Enhanced (+2 all stats), and you can teleport to any bright light within 100ft as a bonus action.",
                 "icon": "☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -4044,15 +4196,7 @@ const SKILLS_DATA = {
                         "divine_judgment"
                     ]
                 },
-                "specialEffects": [],
-                "activationEffects": [
-                    {
-                        "effectId": "mind_controlled",
-                        "duration": 3,
-                        "potency": 0,
-                        "chance": 0.5
-                    }
-                ]
+                "specialEffects": []
             }
         ]
     },
@@ -4346,7 +4490,7 @@ const SKILLS_DATA = {
             },
             {
                 "id": "monster_charge_attack",
-                "name": "Charge Attack",
+                "name": "Monster Charge",
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 5,
@@ -4360,7 +4504,7 @@ const SKILLS_DATA = {
             },
             {
                 "id": "monster_berserker_rage",
-                "name": "Berserker Rage",
+                "name": "Monster Rage",
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 8,
@@ -4490,7 +4634,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "burn",
                         "duration": 4,
-                        "potency": 1
+                        "potency": 1,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -4513,7 +4658,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "weakened",
                         "duration": 4,
-                        "potency": 2
+                        "potency": 2,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -4536,7 +4682,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "poison",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -4559,7 +4706,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "immobilized",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -4582,7 +4730,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "acid_corrosion",
                         "duration": 5,
-                        "potency": 1
+                        "potency": 1,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -4621,7 +4770,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "immobilized",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -4643,7 +4793,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "stealth_mastery",
                         "duration": 5,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -4680,13 +4831,14 @@ const SKILLS_DATA = {
                     {
                         "effectId": "immobilized",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
             {
                 "id": "monster_earthquake",
-                "name": "Earthquake",
+                "name": "Monster Earthquake",
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 15,
@@ -4720,7 +4872,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "mind_controlled",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -4742,13 +4895,14 @@ const SKILLS_DATA = {
                     {
                         "effectId": "weakened",
                         "duration": 4,
-                        "potency": 2
+                        "potency": 2,
+                        "applyTo": "target"
                     }
                 ]
             },
             {
                 "id": "monster_shadow_step",
-                "name": "Shadow Step",
+                "name": "Monster Shadow Step",
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
@@ -4780,7 +4934,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "mind_controlled",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             }
@@ -4788,7 +4943,7 @@ const SKILLS_DATA = {
         "utility": [
             {
                 "id": "monster_flight",
-                "name": "Flight",
+                "name": "Monster Flight",
                 "tier": 5,
                 "cost": 100,
                 "staminaCost": 0,
@@ -4950,7 +5105,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, ranged attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "desc": "Toggle (Preparation): While active, ranged attacks gain +1d6 fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🏹🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -4966,6 +5121,7 @@ const SKILLS_DATA = {
                         "effectId": "burn",
                         "duration": 4,
                         "potency": 1,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -4976,7 +5132,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fire 2 ranged attacks from cover (Multi Shot). Each attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 fire damage. Has a 40% chance to apply Burn.",
                 "icon": "🔥🏹",
                 "prerequisites": {
                     "type": "AND",
@@ -4986,7 +5142,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "phoenix_shot",
@@ -4994,7 +5159,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Distance): One devastating aimed shot from safety. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 3d6 fire damage. Has a 75% chance to apply Burn.",
                 "icon": "🦅🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -5004,7 +5169,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "frost_arrow",
@@ -5012,7 +5186,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, ranged attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "desc": "Toggle (Preparation): While active, ranged attacks gain +1d6 ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🏹❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -5028,6 +5202,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5038,7 +5213,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fire 2 ice-empowered shots (Multi Shot). Each attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 ice damage. Has a 40% chance to apply Immobilized.",
                 "icon": "❄️🏹",
                 "prerequisites": {
                     "type": "AND",
@@ -5048,7 +5223,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "blizzard_shot",
@@ -5056,7 +5240,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Distance): One devastating ranged shot from safety. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 3d6 ice damage. Has a 75% chance to apply Immobilized.",
                 "icon": "🌨️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -5066,7 +5250,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "storm_arrow",
@@ -5074,7 +5267,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, ranged attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "desc": "Toggle (Preparation): While active, ranged attacks gain +1d6 lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🏹⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -5090,6 +5283,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5100,7 +5294,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fire 2 lightning-empowered shots (Multi Shot). Each attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 lightning damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "⚡🏹",
                 "prerequisites": {
                     "type": "AND",
@@ -5110,15 +5304,24 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "bow_lightning_storm",
-                "name": "Lightning Storm",
+                "name": "Lightning Volley",
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Fire an arrow that chains lightning between targets, dealing 3d6 lightning damage. Has a 75% chance to apply Incapacitated",
+                "desc": "Action (Distance): Fire an arrow that chains lightning between up to three targets within 30ft. Attack roll d20 + accuracy vs Physical Defence per jump; on each hit, weapon damage + 3d6 lightning damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "⛈️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -5134,6 +5337,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.75
                     }
                 ]
@@ -5144,7 +5348,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "desc": "Toggle (Preparation): While active, ranged attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🏹🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -5162,7 +5366,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fire 2 earth-empowered shots (Multi Shot). Each attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 earth damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "🪨🏹",
                 "prerequisites": {
                     "type": "AND",
@@ -5172,7 +5376,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "mountain_shot",
@@ -5180,7 +5393,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Distance): One devastating ranged shot from safety. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 3d6 earth damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "🏔️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -5190,7 +5403,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "wind_arrow",
@@ -5198,7 +5420,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, ranged attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "desc": "Toggle (Preparation): While active, ranged attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🏹💨",
                 "prerequisites": {
                     "type": "AND",
@@ -5216,7 +5438,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Fire multiple wind-empowered arrows that curve around obstacles, dealing 2d6 wind damage.",
+                "desc": "Action (Precision): Fire 2 wind-curved shots that ignore half cover (Multi Shot). Each attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 wind damage. Has a 40% chance to apply Weakened.",
                 "icon": "💨🏹",
                 "prerequisites": {
                     "type": "AND",
@@ -5226,7 +5448,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "hurricane_shot",
@@ -5234,7 +5465,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Distance): One devastating ranged shot from safety. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 3d6 wind damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌪️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -5244,7 +5475,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "water_arrow",
@@ -5252,7 +5492,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; weapon damage + 1d6 water damage and target's Physical Defence is 1 lower for 2 turns on hit.",
+                "desc": "Toggle (Preparation): While active, ranged attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🏹💧",
                 "prerequisites": {
                     "type": "AND",
@@ -5270,7 +5510,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Fire multiple water arrows, each dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
+                "desc": "Action (Precision): Fire 2 flowing water arrows (Multi Shot). Each attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 water damage and you heal for half the damage dealt. Has a 40% chance to apply Weakened.",
                 "icon": "💧🏹",
                 "prerequisites": {
                     "type": "AND",
@@ -5280,7 +5520,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tsunami_shot",
@@ -5288,7 +5537,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Fire an arrow that creates a wave of water on impact, dealing 3d6 water damage (no status effect)",
+                "desc": "Action (Distance): One arrow that bursts into a wave on impact (30ft). Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 3d6 water damage and push the target 10ft. Has a 75% chance to apply Weakened.",
                 "icon": "🌊💧",
                 "prerequisites": {
                     "type": "AND",
@@ -5298,7 +5547,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadow_arrow",
@@ -5306,7 +5564,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, ranged attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Preparation): While active, ranged attacks gain +1d6 darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🏹🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -5322,6 +5580,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5332,7 +5591,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fire 2 darkness-empowered shots (Multi Shot). Each attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 darkness damage. Has a 40% chance to apply Mind Controlled.",
                 "icon": "🌑🏹",
                 "prerequisites": {
                     "type": "AND",
@@ -5342,7 +5601,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "eclipse_shot",
@@ -5350,7 +5618,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Distance): One devastating ranged shot from safety. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 3d6 darkness damage. Has a 75% chance to apply Mind Controlled.",
                 "icon": "🌑✨",
                 "prerequisites": {
                     "type": "AND",
@@ -5360,7 +5628,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "light_arrow",
@@ -5368,7 +5645,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, ranged attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Preparation): While active, ranged attacks gain +1d6 light damage on hit and have a 20% chance to apply Blinded. Costs stamina per turn while active.",
                 "icon": "🏹☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -5381,9 +5658,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "mind_controlled",
-                        "duration": 3,
+                        "effectId": "blinded",
+                        "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5394,7 +5672,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 Fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fire 2 light-empowered shots (Multi Shot). Each attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 light damage. Has a 40% chance to apply Blinded.",
                 "icon": "☀️🏹",
                 "prerequisites": {
                     "type": "AND",
@@ -5404,7 +5682,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "solar_shot",
@@ -5412,7 +5699,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 Fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Distance): One devastating ranged shot from safety. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 3d6 light damage. Has a 75% chance to apply Blinded.",
                 "icon": "☀️✨",
                 "prerequisites": {
                     "type": "AND",
@@ -5422,7 +5709,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "bow_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             }
         ],
         "melee_magic": [
@@ -5432,7 +5728,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, sword attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "desc": "Toggle (Technique): While active, sword attacks gain +1d6 fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "⚔️🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -5448,6 +5744,7 @@ const SKILLS_DATA = {
                         "effectId": "burn",
                         "duration": 4,
                         "potency": 1,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5458,7 +5755,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Reaction: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Reaction (Counterplay): Parry and riposte with a fire-charged slash. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply Burn.",
                 "icon": "🛡️🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -5468,7 +5765,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "blazing_tempest",
@@ -5476,7 +5782,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Momentum): Spinning flame strike — separate attack roll per enemy within 10ft (d20 + accuracy vs Physical Defence −2); on each hit, weapon damage + 3d6 fire damage. Has a 75% chance to apply Burn.",
                 "icon": "🌪️🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -5486,7 +5792,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "frostbrand",
@@ -5494,7 +5809,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, sword attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "desc": "Toggle (Technique): While active, sword attacks gain +1d6 ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "⚔️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -5510,6 +5825,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5520,7 +5836,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Parry and counter with a freezing slash, has a 40% chance to apply Immobilized",
+                "desc": "Reaction (Counterplay): Parry and riposte with a freezing slash. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply Immobilized.",
                 "icon": "🛡️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -5536,6 +5852,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.4
                     }
                 ]
@@ -5546,7 +5863,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Momentum): Whirling finish — separate attack roll per enemy within 10ft (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice damage. Has a 75% chance to apply Immobilized.",
                 "icon": "🌨️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -5556,7 +5873,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "storm_blade",
@@ -5564,7 +5890,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, sword attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "desc": "Toggle (Technique): While active, sword attacks gain +1d6 lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "⚔️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -5580,6 +5906,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5590,7 +5917,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Reaction: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "desc": "Reaction (Counterplay): Parry and riposte with a lightning-charged slash. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "🛡️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -5600,7 +5927,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "lightning_surge",
@@ -5608,7 +5944,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Momentum): Whirling finish — separate attack roll per enemy within 10ft (d20 + accuracy vs Magical Defence); on each hit, 3d6 lightning damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "🌩️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -5618,7 +5954,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "stonecutter",
@@ -5626,7 +5971,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, sword attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "desc": "Toggle (Technique): While active, sword attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "⚔️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -5644,7 +5989,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Parry and create a stone barrier, gaining Enhanced for 2 turns",
+                "desc": "Reaction (Counterplay): Parry and raise a stone barrier. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. You gain Enhanced (+2 all stats) for 2 turns. Has a 40% chance to apply Incapacitated.",
                 "icon": "🛡️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -5654,7 +5999,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "quake_slash",
@@ -5662,7 +6016,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Momentum): Finishing slash. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "🌋🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -5672,7 +6026,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "gale_blade",
@@ -5680,7 +6043,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, sword attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "desc": "Toggle (Technique): While active, sword attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "⚔️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -5698,7 +6061,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Parry and create a swirling wind barrier, gaining Enhanced Mobility for 1 turn",
+                "desc": "Reaction (Counterplay): Parry inside a swirling wind barrier. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 wind damage. You gain Enhanced Mobility for 1 turn. Has a 40% chance to apply Weakened.",
                 "icon": "🛡️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -5708,7 +6071,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 1,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tempest_dance",
@@ -5716,7 +6088,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Momentum): Finishing slash. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌪️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -5726,7 +6098,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "tidecutter",
@@ -5734,7 +6115,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, sword attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "desc": "Toggle (Technique): While active, sword attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "⚔️💧",
                 "prerequisites": {
                     "type": "AND",
@@ -5752,7 +6133,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Parry and create a wave, healing self for 1d6 HP and pushing attacker back (no status effect)",
+                "desc": "Reaction (Counterplay): Parry into a rebounding wave. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 water damage, heal yourself for 1d6 HP, and push the attacker 5ft. Has a 40% chance to apply Weakened.",
                 "icon": "🛡️💧",
                 "prerequisites": {
                     "type": "AND",
@@ -5762,7 +6143,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "maelstrom_slash",
@@ -5770,7 +6160,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Unleash a spinning slash that deals 3d6 water damage (no status effect)",
+                "desc": "Action (Momentum): Spinning water slash — separate attack roll per enemy within 10ft (d20 + accuracy vs Physical Defence); on each hit, weapon damage + 3d6 water damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌊💧",
                 "prerequisites": {
                     "type": "AND",
@@ -5780,7 +6170,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadow_edge",
@@ -5788,7 +6187,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, sword attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Technique): While active, sword attacks gain +1d6 darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "⚔️🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -5804,6 +6203,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5814,7 +6214,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Parry and become Stealth Mastery until your next turn",
+                "desc": "Reaction (Counterplay): Parry and slip into shadow. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. You gain Stealth Mastery until your next turn. Has a 40% chance to apply Mind Controlled.",
                 "icon": "🛡️🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -5824,7 +6224,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "umbral_onslaught",
@@ -5832,7 +6241,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 darkness damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Momentum): Whirling finish — separate attack roll per enemy within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 darkness damage. Has a 75% chance to apply Mind Controlled.",
                 "icon": "🌑🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -5842,7 +6251,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "radiant_blade",
@@ -5850,7 +6268,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, sword attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Technique): While active, sword attacks gain +1d6 light damage on hit and have a 20% chance to apply Blinded. Costs stamina per turn while active.",
                 "icon": "⚔️☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -5863,9 +6281,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "mind_controlled",
-                        "duration": 3,
+                        "effectId": "blinded",
+                        "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5876,7 +6295,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Parry and unleash a flash of light, healing allies for 1d6 HP (no status effect)",
+                "desc": "Reaction (Counterplay): Parry and flash radiant light. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Allies within 10ft heal 1d6 HP. Has a 40% chance to apply Blinded.",
                 "icon": "🛡️☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -5886,7 +6305,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "judgment_slash",
@@ -5894,7 +6322,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Deliver a powerful slash that deals 3d6 light damage and removes all debuffs from allies (no status effect)",
+                "desc": "Action (Momentum): Radiant finishing slash. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage and remove all debuffs from allies within 10ft. Has a 75% chance to apply Blinded.",
                 "icon": "⚖️☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -5904,7 +6332,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "sword_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "flame_dagger",
@@ -5912,7 +6349,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, dagger attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "desc": "Toggle (Speed): While active, dagger attacks gain +1d6 fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🗡️🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -5928,6 +6365,7 @@ const SKILLS_DATA = {
                         "effectId": "burn",
                         "duration": 4,
                         "potency": 1,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -5938,7 +6376,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fast vital strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply Burn.",
                 "icon": "🔥🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -5948,7 +6386,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "phoenix_dance",
@@ -5956,7 +6403,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Agility): Rapid flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 fire damage. Has a 75% chance to apply Burn.",
                 "icon": "🦅🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -5966,7 +6413,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "frost_dagger",
@@ -5974,7 +6430,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, dagger attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "desc": "Toggle (Speed): While active, dagger attacks gain +1d6 ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🗡️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -5990,6 +6446,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6000,7 +6457,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fast vital strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply Immobilized.",
                 "icon": "❄️🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -6010,7 +6467,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "arctic_barrage",
@@ -6018,7 +6484,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Agility): Rapid flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 ice damage. Has a 75% chance to apply Immobilized.",
                 "icon": "🌨️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -6028,7 +6494,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "storm_dagger",
@@ -6036,7 +6511,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, dagger attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "desc": "Toggle (Speed): While active, dagger attacks gain +1d6 lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🗡️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -6052,6 +6527,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6062,7 +6538,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fast vital strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "⚡🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -6075,9 +6551,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "thunder_strike",
-                        "duration": 0,
+                        "effectId": "incapacitated",
+                        "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.4
                     }
                 ]
@@ -6088,7 +6565,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Agility): Rapid flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 lightning damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "⛈️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -6098,7 +6575,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "stone_dagger",
@@ -6106,7 +6592,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, dagger attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "desc": "Toggle (Speed): While active, dagger attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🗡️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -6124,7 +6610,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fast vital strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "💎🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -6134,7 +6620,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "earthen_assault",
@@ -6142,7 +6637,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Agility): Rapid flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 earth damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "🌋🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -6152,7 +6647,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "wind_dagger",
@@ -6160,7 +6664,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, dagger attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "desc": "Toggle (Speed): While active, dagger attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🗡️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -6178,7 +6682,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "A wind-enhanced strike dealing 2d6 wind damage and increases your movement speed.",
+                "desc": "Action (Precision): Wind-quick vital strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 wind damage. You gain +2 Speed until your next turn. Has a 40% chance to apply Weakened.",
                 "icon": "💨🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -6188,7 +6692,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "hurricane_dance",
@@ -6196,7 +6709,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Agility): Rapid flurry — separate attack roll per target within 10ft (d20 + accuracy vs Magical Defence); on each hit, 3d6 wind damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌪️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -6206,7 +6719,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "water_dagger",
@@ -6214,7 +6736,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, dagger attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "desc": "Toggle (Speed): While active, dagger attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🗡️💧",
                 "prerequisites": {
                     "type": "AND",
@@ -6232,7 +6754,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "A flowing strike dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
+                "desc": "Action (Precision): Flowing vital strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 water damage and heal yourself for half the damage dealt. Has a 40% chance to apply Weakened.",
                 "icon": "🌊🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -6242,7 +6764,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tsunami_dance",
@@ -6250,7 +6781,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Your daggers flow like water, dealing 3d6 water damage to multiple targets (no status effect)",
+                "desc": "Action (Agility): Water-flow flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 water damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌊💧",
                 "prerequisites": {
                     "type": "AND",
@@ -6260,7 +6791,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadow_dagger",
@@ -6268,7 +6808,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, dagger attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Speed): While active, dagger attacks gain +1d6 darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🗡️🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -6284,6 +6824,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6294,7 +6835,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fast vital strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply Mind Controlled.",
                 "icon": "🌑🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -6304,7 +6845,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "night_dance",
@@ -6312,7 +6862,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Agility): Rapid flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 darkness damage. Has a 75% chance to apply Mind Controlled.",
                 "icon": "🌑✨",
                 "prerequisites": {
                     "type": "AND",
@@ -6322,7 +6872,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "light_dagger",
@@ -6330,7 +6889,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, dagger attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Speed): While active, dagger attacks gain +1d6 light damage on hit and have a 20% chance to apply Blinded. Costs stamina per turn while active.",
                 "icon": "🗡️☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -6343,9 +6902,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "mind_controlled",
-                        "duration": 3,
+                        "effectId": "blinded",
+                        "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6356,7 +6916,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Precision): Fast vital strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply Blinded.",
                 "icon": "✨🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -6366,7 +6926,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "dawn_dance",
@@ -6374,7 +6943,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Agility): Rapid flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 light damage. Has a 75% chance to apply Blinded.",
                 "icon": "☀️✨",
                 "prerequisites": {
                     "type": "AND",
@@ -6384,7 +6953,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "dagger_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "flame_glaive",
@@ -6392,7 +6970,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, polearm attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "desc": "Toggle (Reach): While active, polearm attacks gain +1d6 fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🔱🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -6408,6 +6986,7 @@ const SKILLS_DATA = {
                         "effectId": "burn",
                         "duration": 4,
                         "potency": 1,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6418,7 +6997,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage each. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Battlefield Control): Reach sweep — separate attack roll per target within 15ft (d20 + accuracy vs Magical Defence); on each hit, 2d6 fire damage. Has a 40% chance to apply Burn.",
                 "icon": "🔥🔱",
                 "prerequisites": {
                     "type": "AND",
@@ -6428,7 +7007,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "solar_lance",
@@ -6436,7 +7024,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Discipline): Measured finishing thrust at reach. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply Burn.",
                 "icon": "☀️🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -6446,7 +7034,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "frost_halberd",
@@ -6454,7 +7051,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, polearm attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "desc": "Toggle (Reach): While active, polearm attacks gain +1d6 ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🔱❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -6470,6 +7067,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6480,7 +7078,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Battlefield Control): Reach sweep — separate attack roll per target within 15ft (d20 + accuracy vs Magical Defence); on each hit, 2d6 ice damage. Has a 40% chance to apply Immobilized.",
                 "icon": "❄️🔱",
                 "prerequisites": {
                     "type": "AND",
@@ -6490,7 +7088,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "winter_vortex",
@@ -6498,7 +7105,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Discipline): Measured finishing thrust at reach. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply Immobilized.",
                 "icon": "🌨️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -6508,7 +7115,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "storm_glaive",
@@ -6516,7 +7132,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, polearm attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "desc": "Toggle (Reach): While active, polearm attacks gain +1d6 lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🔱⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -6532,6 +7148,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6542,7 +7159,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Battlefield Control): Reach sweep — separate attack roll per target within 15ft (d20 + accuracy vs Magical Defence); on each hit, 2d6 lightning damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "⚡🔱",
                 "prerequisites": {
                     "type": "AND",
@@ -6552,7 +7169,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "lightning_spiral",
@@ -6560,7 +7186,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Discipline): Measured finishing thrust at reach. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "⛈️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -6570,7 +7196,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "stone_halberd",
@@ -6578,7 +7213,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, polearm attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "desc": "Toggle (Reach): While active, polearm attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🔱🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -6596,7 +7231,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Battlefield Control): Reach sweep — separate attack roll per target within 15ft (d20 + accuracy vs Magical Defence); on each hit, 2d6 earth damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "🪨🔱",
                 "prerequisites": {
                     "type": "AND",
@@ -6606,7 +7241,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tectonic_spiral",
@@ -6614,7 +7258,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Discipline): Measured finishing thrust at reach. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "🌋🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -6624,7 +7268,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "wind_glaive",
@@ -6632,7 +7285,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, polearm attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "desc": "Toggle (Reach): While active, polearm attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🔱💨",
                 "prerequisites": {
                     "type": "AND",
@@ -6650,7 +7303,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "A wind-empowered sweep dealing 2d6 wind damage and increasing your movement speed.",
+                "desc": "Action (Battlefield Control): Wind-empowered reach sweep. Separate attack roll per target within 15ft (d20 + accuracy vs Magical Defence); on each hit, 2d6 wind damage. You gain +2 Speed until your next turn. Has a 40% chance to apply Weakened.",
                 "icon": "💨🔱",
                 "prerequisites": {
                     "type": "AND",
@@ -6660,7 +7313,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tempest_spiral",
@@ -6668,7 +7330,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Discipline): Measured finishing thrust at reach. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌪️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -6678,7 +7340,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "water_glaive",
@@ -6686,7 +7357,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, polearm attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "desc": "Toggle (Reach): While active, polearm attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🔱💧",
                 "prerequisites": {
                     "type": "AND",
@@ -6704,7 +7375,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "A flowing sweep dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
+                "desc": "Action (Battlefield Control): Flowing reach sweep. Separate attack roll per target within 15ft (d20 + accuracy vs Magical Defence); on each hit, 2d6 water damage and heal yourself for half the total damage dealt. Has a 40% chance to apply Weakened.",
                 "icon": "🌊🔱",
                 "prerequisites": {
                     "type": "AND",
@@ -6714,7 +7385,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "maelstrom_spiral",
@@ -6722,7 +7402,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Create a spiral of water, dealing 3d6 water damage to all nearby enemies (no status effect)",
+                "desc": "Action (Discipline): Spiral water sweep — separate attack roll per enemy within 15ft (d20 + accuracy vs Magical Defence); on each hit, 3d6 water damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌊💧",
                 "prerequisites": {
                     "type": "AND",
@@ -6732,7 +7412,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadow_glaive",
@@ -6740,7 +7429,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, polearm attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Reach): While active, polearm attacks gain +1d6 darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🔱🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -6756,6 +7445,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6766,7 +7456,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Battlefield Control): Reach sweep — separate attack roll per target within 15ft (d20 + accuracy vs Magical Defence); on each hit, 2d6 darkness damage. Has a 40% chance to apply Mind Controlled.",
                 "icon": "🌑🔱",
                 "prerequisites": {
                     "type": "AND",
@@ -6776,7 +7466,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "eclipse_spiral",
@@ -6784,7 +7483,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Discipline): Measured finishing thrust at reach. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply Mind Controlled.",
                 "icon": "🌑✨",
                 "prerequisites": {
                     "type": "AND",
@@ -6794,7 +7493,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "light_glaive",
@@ -6802,7 +7510,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, polearm attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Reach): While active, polearm attacks gain +1d6 light damage on hit and have a 20% chance to apply Blinded. Costs stamina per turn while active.",
                 "icon": "🔱☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -6815,9 +7523,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "mind_controlled",
-                        "duration": 3,
+                        "effectId": "blinded",
+                        "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6828,7 +7537,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Battlefield Control): Reach sweep — separate attack roll per target within 15ft (d20 + accuracy vs Magical Defence); on each hit, 2d6 light damage. Has a 40% chance to apply Blinded.",
                 "icon": "✨🔱",
                 "prerequisites": {
                     "type": "AND",
@@ -6838,7 +7547,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "solar_spiral",
@@ -6846,7 +7564,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Discipline): Measured finishing thrust at reach. Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply Blinded.",
                 "icon": "☀️✨",
                 "prerequisites": {
                     "type": "AND",
@@ -6856,7 +7574,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "polearm_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "flame_hammer",
@@ -6864,7 +7591,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, hammer attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "desc": "Toggle (Fortitude): While active, hammer attacks gain +1d6 fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🔨🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -6880,6 +7607,7 @@ const SKILLS_DATA = {
                         "effectId": "burn",
                         "duration": 4,
                         "potency": 1,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6890,7 +7618,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Crushing Power): Crushing ground strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply Burn.",
                 "icon": "🌋🔨",
                 "prerequisites": {
                     "type": "AND",
@@ -6900,7 +7628,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "volcanic_eruption",
@@ -6908,7 +7645,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Shockwaves): Thunderous finishing blow. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply Burn.",
                 "icon": "🌋💥",
                 "prerequisites": {
                     "type": "AND",
@@ -6918,7 +7655,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "frost_hammer",
@@ -6926,7 +7672,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, hammer attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "desc": "Toggle (Fortitude): While active, hammer attacks gain +1d6 ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🔨❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -6942,6 +7688,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -6952,7 +7699,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "A freezing hammer strike that deals 2d6 ice damage and creates a field of ice. Enemies in the area become Slowed and have a 40% chance to be Immobilized",
+                "desc": "Action (Crushing Power): Freezing ground slam. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Enemies within 10ft are Slowed and have a 40% chance to apply Immobilized.",
                 "icon": "❄️🔨",
                 "prerequisites": {
                     "type": "AND",
@@ -6968,6 +7715,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.4
                     }
                 ]
@@ -6978,7 +7726,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Shockwaves): Thunderous finishing blow. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply Immobilized.",
                 "icon": "❄️💥",
                 "prerequisites": {
                     "type": "AND",
@@ -6988,7 +7736,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "storm_hammer",
@@ -6996,7 +7753,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, hammer attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "desc": "Toggle (Fortitude): While active, hammer attacks gain +1d6 lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🔨⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -7012,6 +7769,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7022,7 +7780,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Crushing Power): Crushing ground strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "⚡🔨",
                 "prerequisites": {
                     "type": "AND",
@@ -7032,7 +7790,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "storm_surge",
@@ -7040,7 +7807,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Create a wave of electrified water dealing 2d6 lightning or water damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened",
+                "desc": "Action (Shockwaves): Thunderous ground strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 lightning damage. One adjacent foe takes half that lightning damage (no roll). Has a 75% chance to apply Incapacitated.",
                 "icon": "⛈️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -7056,12 +7823,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
-                        "chance": 0.75
-                    },
-                    {
-                        "effectId": "weakened",
-                        "duration": 4,
-                        "potency": 2,
+                        "applyTo": "target",
                         "chance": 0.75
                     }
                 ]
@@ -7072,7 +7834,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, hammer attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "desc": "Toggle (Fortitude): While active, hammer attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🔨🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -7090,7 +7852,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Crushing Power): Crushing ground strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "🪨🔨",
                 "prerequisites": {
                     "type": "AND",
@@ -7100,7 +7862,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "mountain_crash",
@@ -7108,7 +7879,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Shockwaves): Thunderous finishing blow. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "🏔️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -7118,7 +7889,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "gale_hammer",
@@ -7126,7 +7906,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, hammer attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "desc": "Toggle (Fortitude): While active, hammer attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🔨💨",
                 "prerequisites": {
                     "type": "AND",
@@ -7144,7 +7924,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Crushing Power): Crushing ground strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply Weakened.",
                 "icon": "💨🔨",
                 "prerequisites": {
                     "type": "AND",
@@ -7154,7 +7934,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tempest_crash",
@@ -7162,7 +7951,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Shockwaves): Thunderous finishing blow. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌪️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -7172,7 +7961,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "tide_hammer",
@@ -7180,7 +7978,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, hammer attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "desc": "Toggle (Fortitude): While active, hammer attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🔨💧",
                 "prerequisites": {
                     "type": "AND",
@@ -7198,7 +7996,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "A water-empowered strike dealing 2d6 water damage and healing you for half the damage dealt (no status effect)",
+                "desc": "Action (Crushing Power): Tidal hammer blow. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 water damage and heal yourself for half the damage dealt. Has a 40% chance to apply Weakened.",
                 "icon": "🌊🔨",
                 "prerequisites": {
                     "type": "AND",
@@ -7208,7 +8006,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tsunami_crash",
@@ -7216,7 +8023,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Create a massive wave with your hammer, dealing 3d6 water damage to all nearby enemies (no status effect)",
+                "desc": "Action (Shockwaves): Massive water hammer crash — separate attack roll per enemy within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 water damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌊💧",
                 "prerequisites": {
                     "type": "AND",
@@ -7226,7 +8033,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadow_hammer",
@@ -7234,7 +8050,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, hammer attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Fortitude): While active, hammer attacks gain +1d6 darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🔨🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -7250,6 +8066,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7260,7 +8077,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Crushing Power): Crushing ground strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply Mind Controlled.",
                 "icon": "🌑🔨",
                 "prerequisites": {
                     "type": "AND",
@@ -7270,7 +8087,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "eclipse_crash",
@@ -7278,7 +8104,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Shockwaves): Thunderous finishing blow. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply Mind Controlled.",
                 "icon": "🌑✨",
                 "prerequisites": {
                     "type": "AND",
@@ -7288,7 +8114,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "radiant_hammer",
@@ -7296,7 +8131,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, hammer attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Fortitude): While active, hammer attacks gain +1d6 light damage on hit and have a 20% chance to apply Blinded. Costs stamina per turn while active.",
                 "icon": "🔨☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -7309,9 +8144,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "mind_controlled",
-                        "duration": 3,
+                        "effectId": "blinded",
+                        "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7322,7 +8158,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Crushing Power): Crushing ground strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply Blinded.",
                 "icon": "☀️🔨",
                 "prerequisites": {
                     "type": "AND",
@@ -7332,7 +8168,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "divine_crash",
@@ -7340,7 +8185,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Shockwaves): Thunderous finishing blow. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply Blinded.",
                 "icon": "☀️✨",
                 "prerequisites": {
                     "type": "AND",
@@ -7350,7 +8195,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "hammer_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "flame_axe",
@@ -7358,7 +8212,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, axe attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "desc": "Toggle (Relentlessness): While active, axe attacks gain +1d6 fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🪓🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -7374,6 +8228,7 @@ const SKILLS_DATA = {
                         "effectId": "burn",
                         "duration": 4,
                         "potency": 1,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7384,7 +8239,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage each. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Cleaving): Wide cleave — separate attack roll per target (d20 + accuracy vs Physical Defence); on each hit, 2d6 fire damage. Has a 40% chance to apply Burn.",
                 "icon": "🔥🪓",
                 "prerequisites": {
                     "type": "AND",
@@ -7394,7 +8249,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "meteor_strike",
@@ -7402,7 +8266,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Brute Force): Devastating overhead chop. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply Burn.",
                 "icon": "☄️🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -7412,7 +8276,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "frost_axe",
@@ -7420,7 +8293,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, axe attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "desc": "Toggle (Relentlessness): While active, axe attacks gain +1d6 ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🪓❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -7436,6 +8309,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7446,7 +8320,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage each. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Cleaving): Wide cleave — separate attack roll per target (d20 + accuracy vs Physical Defence); on each hit, 2d6 ice damage. Has a 40% chance to apply Immobilized.",
                 "icon": "❄️🪓",
                 "prerequisites": {
                     "type": "AND",
@@ -7456,7 +8330,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "avalanche_strike",
@@ -7464,7 +8347,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Brute Force): Devastating overhead chop. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply Immobilized.",
                 "icon": "🌨️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -7474,7 +8357,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "axe_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "storm_axe",
@@ -7482,7 +8374,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, axe attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "desc": "Toggle (Relentlessness): While active, axe attacks gain +1d6 lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🪓⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -7498,6 +8390,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7508,7 +8401,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, axe attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "desc": "Toggle (Relentlessness): While active, axe attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🪓🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -7526,7 +8419,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, axe attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "desc": "Toggle (Relentlessness): While active, axe attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🪓💨",
                 "prerequisites": {
                     "type": "AND",
@@ -7544,7 +8437,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, axe attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "desc": "Toggle (Relentlessness): While active, axe attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🪓💧",
                 "prerequisites": {
                     "type": "AND",
@@ -7562,7 +8455,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, axe attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Relentlessness): While active, axe attacks gain +1d6 darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🪓🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -7578,6 +8471,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7588,7 +8482,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, axe attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Relentlessness): While active, axe attacks gain +1d6 light damage on hit and have a 20% chance to apply Blinded. Costs stamina per turn while active.",
                 "icon": "🪓☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -7601,10 +8495,335 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "thunder_cleave",
+                "name": "Thunder Cleave",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Cleaving): Wide cleave — separate attack roll per target (d20 + accuracy vs Physical Defence); on each hit, 2d6 lightning damage. Has a 40% chance to apply Incapacitated.",
+                "icon": "⚡🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wide_cleave",
+                        "electric_field"
+                    ]
+                },
+                "fusionType": "axe_lightning",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "storm_strike",
+                "name": "Storm Strike",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Brute Force): Devastating overhead chop. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 lightning damage. Has a 75% chance to apply Incapacitated.",
+                "icon": "⛈️⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_axe",
+                        "thunder_cleave"
+                    ]
+                },
+                "fusionType": "axe_lightning",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "earthen_cleave",
+                "name": "Earthen Cleave",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Cleaving): Wide cleave — separate attack roll per target (d20 + accuracy vs Physical Defence); on each hit, 2d6 earth damage. Has a 40% chance to apply Incapacitated.",
+                "icon": "🪨🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wide_cleave",
+                        "earth_shield"
+                    ]
+                },
+                "fusionType": "axe_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "quake_strike",
+                "name": "Quake Strike",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Brute Force): Devastating overhead chop. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply Incapacitated.",
+                "icon": "🌋🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "stone_axe",
+                        "earthen_cleave"
+                    ]
+                },
+                "fusionType": "axe_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "gale_cleave",
+                "name": "Gale Cleave",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Cleaving): Wide cleave — separate attack roll per target (d20 + accuracy vs Physical Defence); on each hit, 2d6 wind damage. Has a 40% chance to apply Weakened.",
+                "icon": "💨🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wide_cleave",
+                        "tornado"
+                    ]
+                },
+                "fusionType": "axe_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "hurricane_strike",
+                "name": "Hurricane Strike",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Brute Force): Devastating overhead chop. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply Weakened.",
+                "icon": "🌪️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_axe",
+                        "gale_cleave"
+                    ]
+                },
+                "fusionType": "axe_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "tidal_cleave",
+                "name": "Tidal Cleave",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Cleaving): Wide cleave — separate attack roll per target (d20 + accuracy vs Physical Defence); on each hit, 2d6 water damage. Has a 40% chance to apply Weakened.",
+                "icon": "💧🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wide_cleave",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "axe_water",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "deluge_strike",
+                "name": "Deluge Strike",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Brute Force): Devastating overhead chop. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 water damage. Has a 75% chance to apply Weakened.",
+                "icon": "🌊💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_axe",
+                        "tidal_cleave"
+                    ]
+                },
+                "fusionType": "axe_water",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "void_cleave",
+                "name": "Void Cleave",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Cleaving): Wide cleave — separate attack roll per target (d20 + accuracy vs Physical Defence); on each hit, 2d6 darkness damage. Has a 40% chance to apply Mind Controlled.",
+                "icon": "🌑🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wide_cleave",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "axe_darkness",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
-                        "chance": 0.2
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "abyss_strike",
+                "name": "Abyss Strike",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Brute Force): Devastating overhead chop. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply Mind Controlled.",
+                "icon": "🕳️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_axe",
+                        "void_cleave"
+                    ]
+                },
+                "fusionType": "axe_darkness",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "radiant_cleave",
+                "name": "Radiant Cleave",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Cleaving): Wide cleave — separate attack roll per target (d20 + accuracy vs Physical Defence); on each hit, 2d6 light damage. Has a 40% chance to apply Blinded.",
+                "icon": "☀️🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wide_cleave",
+                        "holy_weapon"
+                    ]
+                },
+                "fusionType": "axe_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "dawn_strike",
+                "name": "Dawn Strike",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Brute Force): Devastating overhead chop. Attack roll d20 + accuracy vs Physical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply Blinded.",
+                "icon": "🌅☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_axe",
+                        "radiant_cleave"
+                    ]
+                },
+                "fusionType": "axe_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
                     }
                 ]
             },
@@ -7614,7 +8833,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, staff attacks gain +1d6 Fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "desc": "Toggle (Channeling): While active, staff attacks gain +1d6 fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
                 "icon": "🪄🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -7630,6 +8849,7 @@ const SKILLS_DATA = {
                         "effectId": "burn",
                         "duration": 4,
                         "potency": 1,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7640,7 +8860,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Arcane Focus): Channel fire through your staff. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply Burn.",
                 "icon": "🔥🪄",
                 "prerequisites": {
                     "type": "AND",
@@ -7650,7 +8870,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "phoenix_staff",
@@ -7658,7 +8887,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Mana Mastery): Release stored fire in a 20ft burst. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 fire damage. Has a 75% chance to apply Burn.",
                 "icon": "🦅🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -7668,7 +8897,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "frost_staff",
@@ -7676,7 +8914,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, staff attacks gain +1d6 Ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "desc": "Toggle (Channeling): While active, staff attacks gain +1d6 ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
                 "icon": "🪄❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -7692,6 +8930,7 @@ const SKILLS_DATA = {
                         "effectId": "immobilized",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7702,7 +8941,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Arcane Focus): Channel ice through your staff. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply Immobilized.",
                 "icon": "❄️🪄",
                 "prerequisites": {
                     "type": "AND",
@@ -7712,7 +8951,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "winter_staff",
@@ -7720,7 +8968,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Mana Mastery): Release stored ice in a 20ft burst. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice damage. Has a 75% chance to apply Immobilized.",
                 "icon": "🌨️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -7730,7 +8978,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "storm_staff",
@@ -7738,7 +8995,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, staff attacks gain +1d6 Lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "desc": "Toggle (Channeling): While active, staff attacks gain +1d6 lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
                 "icon": "🪄⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -7754,6 +9011,7 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7764,7 +9022,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Arcane Focus): Channel lightning through your staff. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "⚡🪄",
                 "prerequisites": {
                     "type": "AND",
@@ -7774,7 +9032,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tempest_staff",
@@ -7782,7 +9049,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Mana Mastery): Release stored lightning in a 20ft burst. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 lightning damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "⛈️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -7792,7 +9059,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "stone_staff",
@@ -7800,7 +9076,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, staff attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "desc": "Toggle (Channeling): While active, staff attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
                 "icon": "🪄🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -7818,7 +9094,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Arcane Focus): Channel earth through your staff. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply Incapacitated.",
                 "icon": "🪨🪄",
                 "prerequisites": {
                     "type": "AND",
@@ -7828,7 +9104,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "mountain_staff",
@@ -7836,7 +9121,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Mana Mastery): Release stored earth in a 20ft burst. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 earth damage. Has a 75% chance to apply Incapacitated.",
                 "icon": "🏔️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -7846,7 +9131,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "wind_staff",
@@ -7854,7 +9148,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, staff attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "desc": "Toggle (Channeling): While active, staff attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
                 "icon": "🪄💨",
                 "prerequisites": {
                     "type": "AND",
@@ -7872,7 +9166,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Arcane Focus): Channel wind through your staff. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply Weakened.",
                 "icon": "💨🪄",
                 "prerequisites": {
                     "type": "AND",
@@ -7882,7 +9176,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "hurricane_staff",
@@ -7890,7 +9193,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 wind damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Mana Mastery): Release stored wind in a 20ft burst. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 wind damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌪️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -7900,7 +9203,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "water_staff",
@@ -7908,7 +9220,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 3,
-                "desc": "Toggle: While active, staff attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "desc": "Toggle (Channeling): While active, staff attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
                 "icon": "🪄💧",
                 "prerequisites": {
                     "type": "AND",
@@ -7926,7 +9238,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Channel water magic through your staff, dealing 2d6 water damage in a cone and healing you for half the damage dealt (no status effect)",
+                "desc": "Action (Arcane Focus): Channel water through your staff in a 20ft cone. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d6 water damage and heal yourself for half the total damage dealt. Has a 40% chance to apply Weakened.",
                 "icon": "💧🪄",
                 "prerequisites": {
                     "type": "AND",
@@ -7936,7 +9248,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tsunami_staff",
@@ -7944,7 +9265,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Your staff becomes pure water, dealing 3d6 water damage in an area (no status effect)",
+                "desc": "Action (Mana Mastery): Staff becomes a crashing wave — separate attack roll per enemy in a 20ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 water damage. Has a 75% chance to apply Weakened.",
                 "icon": "🌊💧",
                 "prerequisites": {
                     "type": "AND",
@@ -7954,7 +9275,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadow_staff",
@@ -7962,7 +9292,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, staff attacks gain +1d6 Darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Channeling): While active, staff attacks gain +1d6 darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
                 "icon": "🪄🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -7978,6 +9308,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -7988,7 +9319,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Arcane Focus): Channel darkness through your staff. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply Mind Controlled.",
                 "icon": "🌑🪄",
                 "prerequisites": {
                     "type": "AND",
@@ -7998,7 +9329,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "eclipse_staff",
@@ -8006,7 +9346,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Mana Mastery): Release stored darkness in a 20ft burst. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 darkness damage. Has a 75% chance to apply Mind Controlled.",
                 "icon": "🌑✨",
                 "prerequisites": {
                     "type": "AND",
@@ -8016,7 +9356,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "light_staff",
@@ -8024,7 +9373,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 2,
-                "desc": "Toggle: While active, staff attacks gain +1d6 Light damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "desc": "Toggle (Channeling): While active, staff attacks gain +1d6 light damage on hit and have a 20% chance to apply Blinded. Costs stamina per turn while active.",
                 "icon": "🪄☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -8037,9 +9386,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "mind_controlled",
-                        "duration": 3,
+                        "effectId": "blinded",
+                        "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.2
                     }
                 ]
@@ -8050,7 +9400,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 5,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply the listed status.",
+                "desc": "Action (Arcane Focus): Channel light through your staff. Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply Blinded.",
                 "icon": "☀️🪄",
                 "prerequisites": {
                     "type": "AND",
@@ -8060,7 +9410,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "solar_staff",
@@ -8068,7 +9427,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 light damage. Has a 75% chance to apply the listed status.",
+                "desc": "Action (Mana Mastery): Release stored light in a 20ft burst. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 light damage. Has a 75% chance to apply Blinded.",
                 "icon": "☀️✨",
                 "prerequisites": {
                     "type": "AND",
@@ -8078,7 +9437,637 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "staff_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "ember_fists",
+                "name": "Ember Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Toggle (Empty Hands): While both hands are empty and active, unarmed attacks gain +1d6 fire damage on hit and have a 20% chance to apply Burn. Costs stamina per turn while active.",
+                "icon": "🥊🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "striker_fire",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "inferno_palm",
+                "name": "Inferno Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Feints & Control): Feint into an elemental palm strike (both hands empty). Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply Burn.",
+                "icon": "🔥🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "fire_wall"
+                    ]
+                },
+                "fusionType": "striker_fire",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "phoenix_flurry",
+                "name": "Phoenix Flurry",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Combo Flow): Elemental flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 fire damage. Requires both hands empty. Has a 75% chance to apply Burn.",
+                "icon": "🦅🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ember_fists",
+                        "inferno_palm"
+                    ]
+                },
+                "fusionType": "striker_fire",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "frost_fists",
+                "name": "Frost Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Toggle (Empty Hands): While both hands are empty and active, unarmed attacks gain +1d6 ice damage on hit and have a 20% chance to apply Immobilized. Costs stamina per turn while active.",
+                "icon": "🥊❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "ice_shard"
+                    ]
+                },
+                "fusionType": "striker_ice",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "glacial_palm",
+                "name": "Glacial Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Feints & Control): Feint into an elemental palm strike (both hands empty). Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 ice damage. Has a 40% chance to apply Immobilized.",
+                "icon": "❄️🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "ice_wall"
+                    ]
+                },
+                "fusionType": "striker_ice",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "avalanche_flurry",
+                "name": "Avalanche Flurry",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Combo Flow): Elemental flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 ice damage. Requires both hands empty. Has a 75% chance to apply Immobilized.",
+                "icon": "🌨️🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_fists",
+                        "glacial_palm"
+                    ]
+                },
+                "fusionType": "striker_ice",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "storm_fists",
+                "name": "Storm Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Toggle (Empty Hands): While both hands are empty and active, unarmed attacks gain +1d6 lightning damage on hit and have a 20% chance to apply Incapacitated. Costs stamina per turn while active.",
+                "icon": "🥊⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "spark"
+                    ]
+                },
+                "fusionType": "striker_lightning",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "thunder_palm",
+                "name": "Thunder Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Feints & Control): Feint into an elemental palm strike (both hands empty). Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 lightning damage. Has a 40% chance to apply Incapacitated.",
+                "icon": "⚡🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "electric_field"
+                    ]
+                },
+                "fusionType": "striker_lightning",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "lightning_flurry",
+                "name": "Lightning Flurry",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Combo Flow): Elemental flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 lightning damage. Requires both hands empty. Has a 75% chance to apply Incapacitated.",
+                "icon": "⛈️🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "storm_fists",
+                        "thunder_palm"
+                    ]
+                },
+                "fusionType": "striker_lightning",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "granite_fists",
+                "name": "Granite Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Toggle (Empty Hands): While both hands are empty and active, unarmed attacks gain +1d6 earth damage on hit; attack rolls against targets treat Physical Defence as 2 lower. Costs stamina per turn while active.",
+                "icon": "🥊🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "striker_earth",
                 "specialEffects": []
+            },
+            {
+                "id": "earthen_palm",
+                "name": "Earthen Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Feints & Control): Feint into an elemental palm strike (both hands empty). Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 earth damage. Has a 40% chance to apply Incapacitated.",
+                "icon": "🪨🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "earth_shield"
+                    ]
+                },
+                "fusionType": "striker_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "quake_flurry",
+                "name": "Quake Flurry",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Combo Flow): Elemental flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 earth damage. Requires both hands empty. Has a 75% chance to apply Incapacitated.",
+                "icon": "🌋🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "granite_fists",
+                        "earthen_palm"
+                    ]
+                },
+                "fusionType": "striker_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "gale_fists",
+                "name": "Gale Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Toggle (Empty Hands): While both hands are empty and active, unarmed attacks gain +1d6 wind damage on hit and push the target 5ft on a hit. Costs stamina per turn while active.",
+                "icon": "🥊💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "gust"
+                    ]
+                },
+                "fusionType": "striker_wind",
+                "specialEffects": []
+            },
+            {
+                "id": "cyclone_palm",
+                "name": "Cyclone Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Feints & Control): Feint into an elemental palm strike (both hands empty). Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 wind damage. Has a 40% chance to apply Weakened.",
+                "icon": "💨🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "tornado"
+                    ]
+                },
+                "fusionType": "striker_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "hurricane_flurry",
+                "name": "Hurricane Flurry",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Combo Flow): Elemental flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 wind damage. Requires both hands empty. Has a 75% chance to apply Weakened.",
+                "icon": "🌪️🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gale_fists",
+                        "cyclone_palm"
+                    ]
+                },
+                "fusionType": "striker_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "tide_fists",
+                "name": "Tide Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Toggle (Empty Hands): While both hands are empty and active, unarmed attacks gain +1d6 water damage on hit; on a hit, the target's Physical Defence is 1 lower for 2 turns. Costs stamina per turn while active.",
+                "icon": "🥊💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "water_splash"
+                    ]
+                },
+                "fusionType": "striker_water",
+                "specialEffects": []
+            },
+            {
+                "id": "tidal_palm",
+                "name": "Tidal Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Feints & Control): Feint into an elemental palm strike (both hands empty). Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 water damage. Has a 40% chance to apply Weakened.",
+                "icon": "💧🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "water_shield"
+                    ]
+                },
+                "fusionType": "striker_water",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "tsunami_flurry",
+                "name": "Tsunami Flurry",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Combo Flow): Elemental flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 water damage. Requires both hands empty. Has a 75% chance to apply Weakened.",
+                "icon": "🌊🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "tide_fists",
+                        "tidal_palm"
+                    ]
+                },
+                "fusionType": "striker_water",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "shadow_fists",
+                "name": "Shadow Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Toggle (Empty Hands): While both hands are empty and active, unarmed attacks gain +1d6 darkness damage on hit and have a 20% chance to apply Mind Controlled. Costs stamina per turn while active.",
+                "icon": "🥊🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "shadow_bolt"
+                    ]
+                },
+                "fusionType": "striker_darkness",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "umbral_palm",
+                "name": "Umbral Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Feints & Control): Feint into an elemental palm strike (both hands empty). Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 darkness damage. Has a 40% chance to apply Mind Controlled.",
+                "icon": "🌑🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "shadow_armor"
+                    ]
+                },
+                "fusionType": "striker_darkness",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "void_flurry",
+                "name": "Void Flurry",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Combo Flow): Elemental flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 darkness damage. Requires both hands empty. Has a 75% chance to apply Mind Controlled.",
+                "icon": "🕳️🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_fists",
+                        "umbral_palm"
+                    ]
+                },
+                "fusionType": "striker_darkness",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "radiant_fists",
+                "name": "Radiant Fists",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Toggle (Empty Hands): While both hands are empty and active, unarmed attacks gain +1d6 light damage on hit and have a 20% chance to apply Blinded. Costs stamina per turn while active.",
+                "icon": "🥊☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_basics",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "striker_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "solar_palm",
+                "name": "Solar Palm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Feints & Control): Feint into an elemental palm strike (both hands empty). Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 light damage. Has a 40% chance to apply Blinded.",
+                "icon": "☀️🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "holy_weapon"
+                    ]
+                },
+                "fusionType": "striker_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "dawn_flurry",
+                "name": "Dawn Flurry",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Combo Flow): Elemental flurry — separate attack roll per target within 10ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 light damage. Requires both hands empty. Has a 75% chance to apply Blinded.",
+                "icon": "🌅🥊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "radiant_fists",
+                        "solar_palm"
+                    ]
+                },
+                "fusionType": "striker_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             }
         ],
         "utility_combat": [
@@ -8088,7 +10077,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 5,
-                "desc": "Weapon coated with deadly poison: Apply Poison (escalating damage)",
+                "desc": "Action (Technique): Coat your blade in volatile reagents before striking. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage on hit and apply Poison (escalating 1→2→3 damage over 3 turns).",
                 "icon": "⚔️⚗️",
                 "prerequisites": {
                     "type": "AND",
@@ -8103,7 +10092,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "poison",
                         "duration": 3,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -8113,7 +10103,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 5,
-                "desc": "Arrows with magical effects: Apply Weapon Enchanted status",
+                "desc": "Enhancement (Preparation): Inscribe runes on a quiver of arrows — your ranged attacks apply Weapon Enchanted (+1 damage and typed effect) for 10 turns.",
                 "icon": "🏹✨",
                 "prerequisites": {
                     "type": "AND",
@@ -8128,7 +10118,8 @@ const SKILLS_DATA = {
                     {
                         "effectId": "weapon_enchanted",
                         "duration": 10,
-                        "potency": 0
+                        "potency": 0,
+                        "applyTo": "self"
                     }
                 ]
             },
@@ -8138,7 +10129,7 @@ const SKILLS_DATA = {
                 "tier": 5,
                 "cost": 100,
                 "staminaCost": 0,
-                "desc": "Weapon deals radiant damage: Apply Weapon Enchanted vs undead/evil",
+                "desc": "Passive (Technique): Your weapon radiates holy power — melee attacks deal +1d6 light damage and apply Weapon Enchanted vs undead and corrupted foes.",
                 "icon": "⚔️☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -8148,7 +10139,15 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "weapon_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weapon_enchanted",
+                        "duration": 10,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
             }
         ],
         "monster_fusion": [
@@ -8158,7 +10157,7 @@ const SKILLS_DATA = {
                 "tier": 5,
                 "cost": 100,
                 "staminaCost": 8,
-                "desc": "Fire breath + fire mastery: Apply Burn + Enhanced status",
+                "desc": "Action: Unleash draconic fire breath in a 30ft cone. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 4d6 fire damage + Magic Power. Has a 95% chance to apply Burn. You gain Enhanced (+2 all stats) for 3 turns.",
                 "icon": "🐉🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8168,7 +10167,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "monster_fire",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 3,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.95
+                    }
+                ]
             },
             {
                 "id": "shadow_strike",
@@ -8176,7 +10184,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 6,
-                "desc": "Teleport + claws: Apply Stealth Mastery then strike",
+                "desc": "Action: Teleport up to 20ft, gain Stealth Mastery, then claw strike. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6 darkness damage. Has a 75% chance to apply Mind Controlled.",
                 "icon": "👥🗡️",
                 "prerequisites": {
                     "type": "AND",
@@ -8189,9 +10197,11 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "stealth_mastery",
-                        "duration": 5,
-                        "potency": 0
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
                     }
                 ]
             },
@@ -8201,7 +10211,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 7,
-                "desc": "Roar + magic: Apply Intimidating Aura + magical damage",
+                "desc": "Action: Arcane-enhanced roar in a 20ft cone. Enemies have a 75% chance to apply Intimidating Aura; one attack roll per foe (d20 + accuracy vs Magical Defence) for 2d6 force damage + Magic Power.",
                 "icon": "🦁✨",
                 "prerequisites": {
                     "type": "AND",
@@ -8211,7 +10221,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "monster_arcane",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "intimidating_aura",
+                        "duration": 3,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             }
         ],
         "pure_magic": [
@@ -8221,7 +10240,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or ice damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (fire + ice): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or ice damage (use whichever the target is weak to). Has a 20% chance to apply Burn and Immobilized.",
                 "icon": "🔥❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -8231,7 +10250,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "thermal_shock",
@@ -8239,7 +10267,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire damage. Has a 40% chance to apply the listed status.",
+                "desc": "Spell (fire + ice): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or ice damage (use whichever the target is weak to). Has a 40% chance to apply Burn and Immobilized.",
                 "icon": "🌡️💥",
                 "prerequisites": {
                     "type": "AND",
@@ -8249,7 +10277,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "conflicting_elements",
@@ -8257,7 +10294,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (fire + ice): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 fire or ice damage (use whichever each target is weak to). Has a 75% chance to apply Burn and Immobilized.",
                 "icon": "☯️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -8267,7 +10304,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_ice",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "plasma_bolt",
@@ -8275,7 +10321,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or lightning damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (fire + lightning): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or lightning damage (use whichever the target is weak to). Has a 20% chance to apply Burn and Incapacitated.",
                 "icon": "⚡🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8285,7 +10331,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "storm_of_cinders",
@@ -8293,7 +10348,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or lightning damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (fire + lightning): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or lightning damage (use whichever the target is weak to). Has a 40% chance to apply Burn and Incapacitated.",
                 "icon": "🌩️✨",
                 "prerequisites": {
                     "type": "AND",
@@ -8303,7 +10358,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "fusion_strike",
@@ -8311,7 +10375,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (fire + lightning): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 fire or lightning damage (use whichever each target is weak to). Has a 75% chance to apply Burn and Incapacitated.",
                 "icon": "⚡💥",
                 "prerequisites": {
                     "type": "AND",
@@ -8321,7 +10385,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "magma_surge",
@@ -8329,7 +10402,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (fire + earth): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or earth damage (use whichever the target is weak to). Has a 20% chance to apply Burn and Incapacitated.",
                 "icon": "🌋🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8339,7 +10412,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "volcanic_rupture",
@@ -8347,7 +10429,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (fire + earth): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or earth damage (use whichever the target is weak to). Has a 40% chance to apply Burn and Incapacitated.",
                 "icon": "🌋💥",
                 "prerequisites": {
                     "type": "AND",
@@ -8357,7 +10439,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "tectonic_fury",
@@ -8365,7 +10456,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire or earth damage (use whichever element the target is weakest to). Has a 75% chance to apply the listed status.",
+                "desc": "Spell (fire + earth): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 fire or earth damage (use whichever each target is weak to). Has a 75% chance to apply Burn and Incapacitated.",
                 "icon": "🌋⚔️",
                 "prerequisites": {
                     "type": "AND",
@@ -8375,7 +10466,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "static_freeze",
@@ -8383,7 +10483,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or lightning damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (ice + lightning): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or lightning damage (use whichever the target is weak to). Has a 20% chance to apply Immobilized and Incapacitated.",
                 "icon": "❄️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -8393,7 +10493,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "crystalline_surge",
@@ -8401,7 +10510,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or lightning damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (ice + lightning): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or lightning damage (use whichever the target is weak to). Has a 40% chance to apply Immobilized and Incapacitated.",
                 "icon": "💎⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -8411,7 +10520,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "arctic_storm",
@@ -8419,7 +10537,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (ice + lightning): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice or lightning damage (use whichever each target is weak to). Has a 75% chance to apply Immobilized and Incapacitated.",
                 "icon": "❄️🌩️",
                 "prerequisites": {
                     "type": "AND",
@@ -8429,7 +10547,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_lightning",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "twilight_balance",
@@ -8437,7 +10564,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 darkness damage. Has a 20% chance to apply the listed status.",
+                "desc": "Spell (darkness + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 darkness or light damage (use whichever the target is weak to). Has a 20% chance to apply Mind Controlled and Blinded.",
                 "icon": "🌓✨",
                 "prerequisites": {
                     "type": "AND",
@@ -8447,7 +10574,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "darkness_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "duality_surge",
@@ -8455,7 +10591,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 darkness or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (darkness + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 darkness or light damage (use whichever the target is weak to). Has a 40% chance to apply Mind Controlled and Blinded.",
                 "icon": "☯️✨",
                 "prerequisites": {
                     "type": "AND",
@@ -8465,15 +10601,24 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "darkness_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "darkness_light_eclipse",
-                "name": "Eclipse",
+                "name": "Twilight Eclipse",
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Perfect balance of light and dark dealing 3d6 darkness or light damage (whichever each target is weak to) to all enemies. Applies Enhanced to allies and has a 75% chance to apply Mind Controlled to enemies",
+                "desc": "Spell (Judgment + Concealment): Perfect balance of light and dark in a 30ft burst. One attack roll per enemy (d20 + accuracy vs Magical Defence); on each hit, 3d6 darkness or light damage (use whichever each target is weak to). Has a 75% chance to apply Mind Controlled and Blinded.",
                 "icon": "🌑☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -8489,6 +10634,7 @@ const SKILLS_DATA = {
                         "effectId": "mind_controlled",
                         "duration": 3,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.75
                     }
                 ]
@@ -8499,7 +10645,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (earth + wind): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or wind damage (use whichever the target is weak to). Has a 20% chance to apply Incapacitated and Weakened.",
                 "icon": "🌪️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -8509,7 +10655,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "desert_winds",
@@ -8517,7 +10678,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (earth + wind): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or wind damage (use whichever the target is weak to). Has a 40% chance to apply Incapacitated and Weakened.",
                 "icon": "🏜️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -8527,7 +10688,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "terra_tempest",
@@ -8535,7 +10711,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (earth + wind): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 earth or wind damage (use whichever each target is weak to). Has a 75% chance to apply Incapacitated and Weakened.",
                 "icon": "🌪️🗿",
                 "prerequisites": {
                     "type": "AND",
@@ -8545,7 +10721,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "typhoon_strike",
@@ -8553,7 +10744,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or water damage (use whichever element the target is weakest to).",
+                "desc": "Spell (wind + water): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or water damage (use whichever the target is weak to). Has a 20% chance to apply Weakened and Weakened.",
                 "icon": "🌊💨",
                 "prerequisites": {
                     "type": "AND",
@@ -8563,7 +10754,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "monsoon",
@@ -8571,7 +10771,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or water damage (use whichever element the target is weakest to). in an area; separate attack roll per target.",
+                "desc": "Spell (wind + water): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or water damage (use whichever the target is weak to). Has a 40% chance to apply Weakened and Weakened.",
                 "icon": "🌧️🌪️",
                 "prerequisites": {
                     "type": "AND",
@@ -8581,15 +10781,24 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "wind_water_hurricane",
-                "name": "Hurricane",
+                "name": "Typhoon",
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Summon a devastating storm dealing 3d6 wind or water damage (whichever each target is weak to) to all enemies. Pushes enemies to storm's center",
+                "desc": "Spell (Momentum + Flow): Devastating storm in a 30ft area. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 wind or water damage (use whichever each target is weak to). Pull all enemies 10ft toward the center. Has a 75% chance to apply Weakened.",
                 "icon": "🌀💫",
                 "prerequisites": {
                     "type": "AND",
@@ -8599,7 +10808,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "mud_slash",
@@ -8607,7 +10825,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (water + earth): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or earth damage (use whichever the target is weak to). Has a 20% chance to apply Weakened and Incapacitated.",
                 "icon": "💧🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -8617,7 +10835,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "quicksand",
@@ -8625,7 +10852,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (water + earth): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or earth damage (use whichever the target is weak to). Has a 40% chance to apply Weakened and Incapacitated.",
                 "icon": "🏖️💫",
                 "prerequisites": {
                     "type": "AND",
@@ -8635,15 +10862,24 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "water_earth_tidal_wave",
-                "name": "Tidal Wave",
+                "name": "Deluge Break",
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Summon a wave of water and debris dealing 3d6 water or earth damage (whichever each target is weak to). Has a 75% chance to apply both Immobilized and Weakened",
+                "desc": "Spell (Flow + Endurance): Wave of water and debris in a 40ft line. One attack roll per creature (d20 + accuracy vs Magical Defence −2); on each hit, 3d6 water or earth damage (use whichever each target is weak to). Has a 75% chance to apply Weakened and Incapacitated.",
                 "icon": "🌊🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -8656,15 +10892,10 @@ const SKILLS_DATA = {
                 "specialEffects": [],
                 "activationEffects": [
                     {
-                        "effectId": "immobilized",
-                        "duration": 3,
+                        "effectId": "incapacitated",
+                        "duration": 2,
                         "potency": 0,
-                        "chance": 0.75
-                    },
-                    {
-                        "effectId": "weakened",
-                        "duration": 4,
-                        "potency": 2,
+                        "applyTo": "target",
                         "chance": 0.75
                     }
                 ]
@@ -8675,7 +10906,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (fire + water): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or water damage (use whichever the target is weak to). Has a 20% chance to apply Burn and Weakened.",
                 "icon": "💧🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8685,7 +10916,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "steam_cloud",
@@ -8693,7 +10933,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or water damage (use whichever element the target is weakest to). in an area; separate attack roll per target. Has a 40% chance to apply the listed status.",
+                "desc": "Spell (fire + water): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or water damage (use whichever the target is weak to). Has a 40% chance to apply Burn and Weakened.",
                 "icon": "💨🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8703,7 +10943,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "geyser_burst",
@@ -8711,7 +10960,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (fire + water): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 fire or water damage (use whichever each target is weak to). Has a 75% chance to apply Burn and Weakened.",
                 "icon": "⛲🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8721,7 +10970,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadow_wind",
@@ -8729,7 +10987,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (wind + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or darkness damage (use whichever the target is weak to). Has a 20% chance to apply Weakened and Mind Controlled.",
                 "icon": "🌫️🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -8739,7 +10997,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "void_tempest",
@@ -8747,7 +11014,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (wind + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or darkness damage (use whichever the target is weak to). Has a 40% chance to apply Weakened and Mind Controlled.",
                 "icon": "🌪️🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -8757,7 +11024,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "dark_cyclone",
@@ -8765,7 +11041,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 darkness damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (wind + darkness): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 wind or darkness damage (use whichever each target is weak to). Has a 75% chance to apply Weakened and Mind Controlled.",
                 "icon": "🌀🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -8775,7 +11051,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "prismatic_breeze",
@@ -8783,7 +11068,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (wind + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 wind or light damage (use whichever the target is weak to). Has a 20% chance to apply Weakened and Blinded.",
                 "icon": "🌈💨",
                 "prerequisites": {
                     "type": "AND",
@@ -8793,7 +11078,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "rainbow_gale",
@@ -8801,7 +11095,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (wind + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 wind or light damage (use whichever the target is weak to). Has a 40% chance to apply Weakened and Blinded.",
                 "icon": "🌈🌪️",
                 "prerequisites": {
                     "type": "AND",
@@ -8811,7 +11105,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "aurora_storm",
@@ -8819,7 +11122,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (wind + light): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 wind or light damage (use whichever each target is weak to). Has a 75% chance to apply Weakened and Blinded.",
                 "icon": "🎆💨",
                 "prerequisites": {
                     "type": "AND",
@@ -8829,7 +11132,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "wind_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "inferno_cyclone",
@@ -8837,7 +11149,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (fire + wind): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or wind damage (use whichever the target is weak to). Has a 20% chance to apply Burn and Weakened.",
                 "icon": "🔥💨",
                 "prerequisites": {
                     "type": "AND",
@@ -8847,7 +11159,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "heat_vacuum",
@@ -8855,7 +11176,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (fire + wind): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or wind damage (use whichever the target is weak to). Has a 40% chance to apply Burn and Weakened.",
                 "icon": "🌪️🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8865,7 +11186,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "phoenix_storm",
@@ -8873,7 +11203,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (fire + wind): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 fire or wind damage (use whichever each target is weak to). Has a 75% chance to apply Burn and Weakened.",
                 "icon": "🦅🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8883,7 +11213,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadowflame",
@@ -8891,7 +11230,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (fire + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or darkness damage (use whichever the target is weak to). Has a 20% chance to apply Burn and Mind Controlled.",
                 "icon": "🔥🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -8901,7 +11240,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "dark_pyre",
@@ -8909,7 +11257,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (fire + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or darkness damage (use whichever the target is weak to). Has a 40% chance to apply Burn and Mind Controlled.",
                 "icon": "🏮🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -8919,7 +11267,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "hellfire",
@@ -8927,7 +11284,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 fire damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (fire + darkness): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 fire or darkness damage (use whichever each target is weak to). Has a 75% chance to apply Burn and Mind Controlled.",
                 "icon": "👿🔥",
                 "prerequisites": {
                     "type": "AND",
@@ -8937,7 +11294,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "fire_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "glacial_spike",
@@ -8945,7 +11311,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or earth damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (ice + earth): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or earth damage (use whichever the target is weak to). Has a 20% chance to apply Immobilized and Incapacitated.",
                 "icon": "❄️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -8955,7 +11321,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "permafrost",
@@ -8963,7 +11338,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or earth damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (ice + earth): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or earth damage (use whichever the target is weak to). Has a 40% chance to apply Immobilized and Incapacitated.",
                 "icon": "❄️🌍",
                 "prerequisites": {
                     "type": "AND",
@@ -8973,7 +11348,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "avalanche",
@@ -8981,7 +11365,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (ice + earth): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice or earth damage (use whichever each target is weak to). Has a 75% chance to apply Immobilized and Incapacitated.",
                 "icon": "🏔️❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -8991,7 +11375,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_earth",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "frost_current",
@@ -8999,7 +11392,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (ice + water): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or water damage (use whichever the target is weak to). Has a 20% chance to apply Immobilized and Weakened.",
                 "icon": "❄️💧",
                 "prerequisites": {
                     "type": "AND",
@@ -9009,7 +11402,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "ice_flow",
@@ -9017,7 +11425,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or water damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (ice + water): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or water damage (use whichever the target is weak to). Has a 40% chance to apply Immobilized and Weakened.",
                 "icon": "🌊❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -9027,7 +11435,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "glacier_tsunami",
@@ -9035,7 +11458,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (ice + water): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice or water damage (use whichever each target is weak to). Has a 75% chance to apply Immobilized and Weakened.",
                 "icon": "🌊❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -9045,7 +11468,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "dark_frost",
@@ -9053,7 +11491,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (ice + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or darkness damage (use whichever the target is weak to). Has a 20% chance to apply Immobilized and Mind Controlled.",
                 "icon": "❄️🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9063,7 +11501,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "void_freeze",
@@ -9071,7 +11518,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (ice + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or darkness damage (use whichever the target is weak to). Has a 40% chance to apply Immobilized and Mind Controlled.",
                 "icon": "🌌❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -9081,7 +11528,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "eternal_winter",
@@ -9089,7 +11545,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (ice + darkness): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice or darkness damage (use whichever each target is weak to). Has a 75% chance to apply Immobilized and Mind Controlled.",
                 "icon": "❄️🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9099,7 +11555,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "crystal_ray",
@@ -9107,7 +11572,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (ice + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or light damage (use whichever the target is weak to). Has a 20% chance to apply Immobilized and Blinded.",
                 "icon": "💎☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -9117,7 +11582,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "aurora_flash",
@@ -9125,7 +11599,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (ice + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or light damage (use whichever the target is weak to). Has a 40% chance to apply Immobilized and Blinded.",
                 "icon": "🎆❄️",
                 "prerequisites": {
                     "type": "AND",
@@ -9135,7 +11609,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "diamond_radiance",
@@ -9143,7 +11626,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 ice damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (ice + light): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice or light damage (use whichever each target is weak to). Has a 75% chance to apply Immobilized and Blinded.",
                 "icon": "💎✨",
                 "prerequisites": {
                     "type": "AND",
@@ -9153,7 +11636,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "ice_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "storm_front",
@@ -9161,7 +11653,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or wind damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (lightning + wind): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or wind damage (use whichever the target is weak to). Has a 20% chance to apply Incapacitated and Weakened.",
                 "icon": "⚡💨",
                 "prerequisites": {
                     "type": "AND",
@@ -9171,7 +11663,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "charged_cyclone",
@@ -9179,7 +11686,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or wind damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (lightning + wind): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or wind damage (use whichever the target is weak to). Has a 40% chance to apply Incapacitated and Weakened.",
                 "icon": "🌪️⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -9189,7 +11696,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "thunderstorm",
@@ -9197,7 +11719,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (lightning + wind): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 lightning or wind damage (use whichever each target is weak to). Has a 75% chance to apply Incapacitated and Weakened.",
                 "icon": "⛈️💨",
                 "prerequisites": {
                     "type": "AND",
@@ -9207,7 +11729,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_wind",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "conductivity",
@@ -9215,7 +11752,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or water damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (lightning + water): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or water damage (use whichever the target is weak to). Has a 20% chance to apply Incapacitated and Weakened.",
                 "icon": "⚡💧",
                 "prerequisites": {
                     "type": "AND",
@@ -9225,15 +11762,30 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "lightning_water_storm_surge",
-                "name": "Storm Surge",
+                "name": "Lightning Deluge",
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Create a wave of electrified water dealing 2d6 lightning or water damage (whichever the target is weak to). Has a 40% chance to apply both Incapacitated and Weakened",
+                "desc": "Spell (Conductivity + Flow): Electrified wave in a 20ft area. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 2d6 lightning or water damage (use whichever the target is weak to). Has a 40% chance to apply Incapacitated and Weakened.",
                 "icon": "🌊⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -9249,13 +11801,14 @@ const SKILLS_DATA = {
                         "effectId": "incapacitated",
                         "duration": 2,
                         "potency": 0,
+                        "applyTo": "target",
                         "chance": 0.4
                     },
                     {
                         "effectId": "weakened",
                         "duration": 4,
                         "potency": 2,
-                        "chance": 0.4
+                        "applyTo": "target"
                     }
                 ]
             },
@@ -9265,7 +11818,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (lightning + water): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 lightning or water damage (use whichever each target is weak to). Has a 75% chance to apply Incapacitated and Weakened.",
                 "icon": "🌊⚡",
                 "prerequisites": {
                     "type": "AND",
@@ -9275,7 +11828,22 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_water",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
             },
             {
                 "id": "dark_lightning",
@@ -9283,7 +11851,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d4 lightning or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (lightning + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or darkness damage (use whichever the target is weak to). Has a 20% chance to apply Incapacitated and Mind Controlled.",
                 "icon": "⚡🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9293,7 +11861,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "void_thunder",
@@ -9301,7 +11878,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (lightning + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or darkness damage (use whichever the target is weak to). Has a 40% chance to apply Incapacitated and Mind Controlled.",
                 "icon": "🌩️🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9311,7 +11888,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "eclipse_storm",
@@ -9319,7 +11905,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (lightning + darkness): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 lightning or darkness damage (use whichever each target is weak to). Has a 75% chance to apply Incapacitated and Mind Controlled.",
                 "icon": "⚡🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9329,7 +11915,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "radiant_bolt",
@@ -9337,7 +11932,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (lightning + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or light damage (use whichever the target is weak to). Has a 20% chance to apply Incapacitated and Blinded.",
                 "icon": "⚡☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -9347,7 +11942,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "divine_thunder",
@@ -9355,7 +11959,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (lightning + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or light damage (use whichever the target is weak to). Has a 40% chance to apply Incapacitated and Blinded.",
                 "icon": "⚡✨",
                 "prerequisites": {
                     "type": "AND",
@@ -9365,7 +11969,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "heavens_wrath",
@@ -9373,7 +11986,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 lightning damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (lightning + light): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 lightning or light damage (use whichever each target is weak to). Has a 75% chance to apply Incapacitated and Blinded.",
                 "icon": "⚡☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -9383,7 +11996,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "lightning_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "shadow_stone",
@@ -9391,7 +12013,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (earth + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or darkness damage (use whichever the target is weak to). Has a 20% chance to apply Incapacitated and Mind Controlled.",
                 "icon": "🪨🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9401,7 +12023,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "obsidian_strike",
@@ -9409,7 +12040,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (earth + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or darkness damage (use whichever the target is weak to). Has a 40% chance to apply Incapacitated and Mind Controlled.",
                 "icon": "🌑🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -9419,7 +12050,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "void_eruption",
@@ -9427,7 +12067,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (earth + darkness): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 earth or darkness damage (use whichever each target is weak to). Has a 75% chance to apply Incapacitated and Mind Controlled.",
                 "icon": "🌋🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9437,7 +12077,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "crystal_light",
@@ -9445,7 +12094,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (earth + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 earth or light damage (use whichever the target is weak to). Has a 20% chance to apply Incapacitated and Blinded.",
                 "icon": "💎☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -9455,7 +12104,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "prismatic_earth",
@@ -9463,7 +12121,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (earth + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 earth or light damage (use whichever the target is weak to). Has a 40% chance to apply Incapacitated and Blinded.",
                 "icon": "🌈🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -9473,7 +12131,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "sacred_ground",
@@ -9481,7 +12148,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 earth damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (earth + light): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 earth or light damage (use whichever each target is weak to). Has a 75% chance to apply Incapacitated and Blinded.",
                 "icon": "⚖️🪨",
                 "prerequisites": {
                     "type": "AND",
@@ -9491,7 +12158,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "earth_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "abyssal_current",
@@ -9499,7 +12175,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or darkness damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (water + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or darkness damage (use whichever the target is weak to). Has a 20% chance to apply Weakened and Mind Controlled.",
                 "icon": "🌊🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9509,7 +12185,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "deep_surge",
@@ -9517,7 +12202,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or darkness damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (water + darkness): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or darkness damage (use whichever the target is weak to). Has a 40% chance to apply Weakened and Mind Controlled.",
                 "icon": "🌊🌑",
                 "prerequisites": {
                     "type": "AND",
@@ -9527,7 +12212,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "drowning_darkness",
@@ -9535,7 +12229,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (water + darkness): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 water or darkness damage (use whichever each target is weak to). Has a 75% chance to apply Weakened and Mind Controlled.",
                 "icon": "🌊🖤",
                 "prerequisites": {
                     "type": "AND",
@@ -9545,7 +12239,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_darkness",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "mind_controlled",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             },
             {
                 "id": "holy_spring",
@@ -9553,7 +12256,7 @@ const SKILLS_DATA = {
                 "tier": 2,
                 "cost": 20,
                 "staminaCost": 4,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or light damage (use whichever element the target is weakest to). Has a 20% chance to apply the listed status.",
+                "desc": "Spell (water + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 water or light damage (use whichever the target is weak to). Has a 20% chance to apply Weakened and Blinded.",
                 "icon": "💧✨",
                 "prerequisites": {
                     "type": "AND",
@@ -9563,7 +12266,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
             },
             {
                 "id": "purifying_wave",
@@ -9571,7 +12283,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 6,
-                "desc": "Action: Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or light damage (use whichever element the target is weakest to). Has a 40% chance to apply the listed status.",
+                "desc": "Spell (water + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 water or light damage (use whichever the target is weak to). Has a 40% chance to apply Weakened and Blinded.",
                 "icon": "🌊✨",
                 "prerequisites": {
                     "type": "AND",
@@ -9581,7 +12293,16 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
             },
             {
                 "id": "blessed_tsunami",
@@ -9589,7 +12310,7 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 65,
                 "staminaCost": 8,
-                "desc": "Action: Separate attack roll per target; Attack roll d20 + accuracy vs Magical Defence; on a hit, 3d6 water damage each. Has a 75% chance to apply the listed status.",
+                "desc": "Spell (water + light): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 water or light damage (use whichever each target is weak to). Has a 75% chance to apply Weakened and Blinded.",
                 "icon": "🌊☀️",
                 "prerequisites": {
                     "type": "AND",
@@ -9599,7 +12320,277 @@ const SKILLS_DATA = {
                     ]
                 },
                 "fusionType": "water_light",
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "sunspark",
+                "name": "Sunspark",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 4,
+                "desc": "Spell (fire + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 fire or light damage (use whichever the target is weak to). Has a 20% chance to apply Burn and Blinded.",
+                "icon": "☀️🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fireball",
+                        "light_ray"
+                    ]
+                },
+                "fusionType": "fire_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "purifying_flame",
+                "name": "Purifying Flame",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Spell (fire + light): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 fire or light damage (use whichever the target is weak to). Has a 40% chance to apply Burn and Blinded.",
+                "icon": "🌅✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sunspark",
+                        "holy_weapon"
+                    ]
+                },
+                "fusionType": "fire_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "dawn_judgment",
+                "name": "Dawn Judgment",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Spell (fire + light): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 fire or light damage (use whichever each target is weak to). Has a 75% chance to apply Burn and Blinded.",
+                "icon": "⚖️☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "purifying_flame",
+                        "solar_flare"
+                    ]
+                },
+                "fusionType": "fire_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "frost_gale",
+                "name": "Frost Gale",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 4,
+                "desc": "Spell (ice + wind): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 ice or wind damage (use whichever the target is weak to). Has a 20% chance to apply Immobilized and Weakened.",
+                "icon": "❄️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_shard",
+                        "gust"
+                    ]
+                },
+                "fusionType": "ice_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
+            },
+            {
+                "id": "blizzard_squall",
+                "name": "Blizzard Squall",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Spell (ice + wind): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 ice or wind damage (use whichever the target is weak to). Has a 40% chance to apply Immobilized and Weakened.",
+                "icon": "🌨️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "frost_gale",
+                        "tornado"
+                    ]
+                },
+                "fusionType": "ice_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
+            },
+            {
+                "id": "arctic_cyclone",
+                "name": "Arctic Cyclone",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Spell (ice + wind): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice or wind damage (use whichever each target is weak to). Has a 75% chance to apply Immobilized and Weakened.",
+                "icon": "🌀❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "blizzard_squall",
+                        "hurricane"
+                    ]
+                },
+                "fusionType": "ice_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    },
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target"
+                    }
+                ]
+            },
+            {
+                "id": "tremor_spark",
+                "name": "Tremor Spark",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 4,
+                "desc": "Spell (lightning + earth): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d4 lightning or earth damage (use whichever the target is weak to). Has a 20% chance to apply Incapacitated and Incapacitated.",
+                "icon": "⚡🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spark",
+                        "stone_throw"
+                    ]
+                },
+                "fusionType": "lightning_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "magnet_storm",
+                "name": "Magnet Storm",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Spell (lightning + earth): Attack roll d20 + accuracy vs Magical Defence; on a hit, 2d6 lightning or earth damage (use whichever the target is weak to). Has a 40% chance to apply Incapacitated and Incapacitated.",
+                "icon": "🧲⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "tremor_spark",
+                        "earth_shield"
+                    ]
+                },
+                "fusionType": "lightning_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "earth_thunder",
+                "name": "Earth Thunder",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Spell (lightning + earth): One attack roll per enemy in a 30ft area (d20 + accuracy vs Magical Defence); on each hit, 3d6 lightning or earth damage (use whichever each target is weak to). Has a 75% chance to apply Incapacitated and Incapacitated.",
+                "icon": "🌋⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "magnet_storm",
+                        "earthquake"
+                    ]
+                },
+                "fusionType": "lightning_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
             }
         ]
     },
@@ -9607,43 +12598,43 @@ const SKILLS_DATA = {
         "unique": [
             {
                 "id": "familiar_summon",
-                "name": "Familiar Summon",
+                "name": "Lesser Familiar",
                 "tier": 3,
                 "cost": 133,
-                "staminaCost": 20,
-                "desc": "Action (once per day): Summon a loyal monster companion (build with 50 Lumens — GM). Lasts until dismissed or slain.",
+                "staminaCost": 12,
+                "desc": "Action (once per day): Summon a small loyal companion (build with 25 Lumens — GM). Lasts until end of encounter or dismissed; weaker than a full monster ally. One familiar at a time.",
                 "icon": "👹",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 5
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
             {
                 "id": "aetherial_reflex",
-                "name": "Aetherial Shift",
+                "name": "Aetherial Reflex",
                 "tier": 4,
                 "cost": 163,
-                "staminaCost": 30,
-                "desc": "Reaction (once per combat): Ignore all damage from one attack. You cannot use Actions or Reactions until the end of your next turn.",
+                "staminaCost": 15,
+                "desc": "Reaction: When you would take damage from one attack, ignore that damage (15 Stamina). You cannot take Actions or Reactions until the end of your next turn.",
                 "icon": "👻",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 8
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
             {
                 "id": "nova_unleashed",
-                "name": "Ultimate Nova",
+                "name": "Nova Unleashed",
                 "tier": 4,
                 "cost": 163,
-                "staminaCost": 30,
-                "desc": "Action: 30ft burst — hits every creature automatically (no attack roll). Each takes 3d20 physical damage (allies too). You are Incapacitated until your next turn.",
+                "staminaCost": 25,
+                "desc": "Action: 15ft burst centered on you — every creature in range is hit automatically (no attack roll). Each takes 2d20 physical damage (allies included). You are Incapacitated until the end of your next turn.",
                 "icon": "⭐",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 10
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9653,11 +12644,11 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 163,
                 "staminaCost": 0,
-                "desc": "Passive: Immune to mind control, illusions, and psychic damage. Cannot be charmed, frightened, or possessed.",
+                "desc": "Passive: Advantage on saves vs mind control, charm, fear, and illusions. Halve magical damage from direct mental assaults (GM decides what counts). Extreme effects may still land on a very bad roll.",
                 "icon": "🛡️",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 8
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": [
                     "mind_shield"
@@ -9669,11 +12660,11 @@ const SKILLS_DATA = {
                 "tier": 5,
                 "cost": 320,
                 "staminaCost": 0,
-                "desc": "Passive: Sense all magical effects, hidden creatures, and dimensional rifts within 100ft. Can see through illusions and invisibility.",
+                "desc": "Passive: +5 Accuracy to notice active magic, hidden creatures, and obvious illusions within 60ft. Does not read minds, reveal plot secrets, or see through solid walls. GM decides borderline cases.",
                 "icon": "👁️",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 12
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": [
                     "magic_sight"
@@ -9685,11 +12676,11 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 163,
                 "staminaCost": 10,
-                "desc": "Reaction (once per combat): When you fail a roll, reroll and keep the better result. Once per combat you may also force one enemy to reroll a successful attack and keep the worse result.",
+                "desc": "Reaction (10 Stamina each use): (1) When you fail a d20 roll, reroll and keep the better result. (2) When an enemy rolls a d20 against you, force them to reroll and keep the worse result.",
                 "icon": "🎲",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 10
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9699,11 +12690,11 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 133,
                 "staminaCost": 1,
-                "desc": "Reaction (once per round): When a single-target attack would hit you, roll d20 + Speed; if you beat the attacker's accuracy, negate the hit. Not vs area effects.",
+                "desc": "Reaction: When a single-target attack would hit you, roll d20 + Speed; if you beat the attacker's accuracy, negate the hit (1 Stamina). Does not work vs area effects.",
                 "icon": "⚡",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 4
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9713,11 +12704,11 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 133,
                 "staminaCost": 5,
-                "desc": "Action: Move up to 2× your normal movement distance for 1 round. Cannot be used again on your next turn.",
+                "desc": "Action: Move up to 2× your normal movement this turn. You cannot use Burst of Speed on your next turn.",
                 "icon": "💨",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 6
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9727,11 +12718,11 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 163,
                 "staminaCost": 5,
-                "desc": "Action: Study one creature within 30ft — learn HP band, elemental resistances and weaknesses (25%/50%/200%/400% tiers), and one special trait (GM). Nearby traps/hazards revealed.",
+                "desc": "Action: Study one creature within 30ft — learn HP band, elemental resistances and weaknesses (25%/50%/200%/400% tiers), and one special trait (GM picks). Obvious nearby traps or hazards are revealed.",
                 "icon": "🔍",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 7
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9741,11 +12732,11 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 133,
                 "staminaCost": 10,
-                "desc": "Action: Emit a pulse revealing all creatures and objects within 50ft. Works through darkness; does not pass solid walls.",
+                "desc": "Action: Pulse reveals creatures and large objects within 50ft. Works in darkness; does not pass solid walls or pinpoint silent, motionless targets (GM).",
                 "icon": "🔊",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 6
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9755,11 +12746,11 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 163,
                 "staminaCost": 15,
-                "desc": "Action: Instantly teleport up to 30ft in any direction, passing through solid objects. Cannot teleport into occupied spaces.",
+                "desc": "Action: Teleport up to 30ft to an unoccupied space you can see. You may pass through thin obstacles; cannot end inside solid matter.",
                 "icon": "👣",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 7
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9769,11 +12760,11 @@ const SKILLS_DATA = {
                 "tier": 4,
                 "cost": 163,
                 "staminaCost": 20,
-                "desc": "Action: Read recent memories of a creature within 30ft. Understand desires and intentions; comprehend creatures without a shared language.",
+                "desc": "Action: Read surface thoughts and recent memories from one creature within 30ft for 1 round. Reveals desires and intent, not deep secrets — GM filters what comes through. Works without a shared language.",
                 "icon": "🧠",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 8
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9783,11 +12774,11 @@ const SKILLS_DATA = {
                 "tier": 5,
                 "cost": 320,
                 "staminaCost": 40,
-                "desc": "Action (once per day): Stop time — take 3 extra turns in a row; enemies cannot react. Skip your next turn afterward.",
+                "desc": "Action (once per day): Stop time for everyone but you — take 1 extra turn immediately while enemies cannot act or react. You skip your entire next turn afterward (no move, actions, or reactions).",
                 "icon": "⌛",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 12
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9797,11 +12788,11 @@ const SKILLS_DATA = {
                 "tier": 5,
                 "cost": 320,
                 "staminaCost": 50,
-                "desc": "Action (once per lifetime): Transfer your mind into another body — take their form and abilities. Your original body falls into a coma.",
+                "desc": "Action (once per lifetime): With GM approval, transfer your mind into a willing or helpless body — you use their form and abilities; your original body falls into a coma. Reversal or consequences are a major story beat (GM).",
                 "icon": "💫",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 12
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             },
@@ -9811,11 +12802,109 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 133,
                 "staminaCost": 12,
-                "desc": "Action: Alter gravity in a 10ft radius for 2 rounds. Enemies halve movement speed; allies double movement speed.",
+                "desc": "Action: For 2 rounds, alter gravity in a 10ft radius centered on you. Enemies halve movement; allies double movement in that area.",
                 "icon": "🌍",
                 "prerequisites": {
-                    "type": "LEVEL",
-                    "level": 4
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ascension_second_wind",
+                "name": "Second Wind",
+                "tier": 3,
+                "cost": 133,
+                "staminaCost": 0,
+                "desc": "Action: When you are below half HP, restore 2d6 + Strength HP and 8 Stamina. Cannot use while Incapacitated.",
+                "icon": "🌬️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ascension_stamina_reserve",
+                "name": "Stamina Reserve",
+                "tier": 3,
+                "cost": 133,
+                "staminaCost": 0,
+                "desc": "Passive (once per day): The first time your Stamina would reach 0 in an encounter, restore 10 Stamina instead (cannot exceed your maximum).",
+                "icon": "🔋",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ascension_battle_focus",
+                "name": "Battle Focus",
+                "tier": 4,
+                "cost": 163,
+                "staminaCost": 5,
+                "desc": "Action: For 3 rounds, gain +3 Accuracy on weapon and unarmed attacks. You cannot cast spells while Battle Focus is active.",
+                "icon": "🎯",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ascension_arcane_surge",
+                "name": "Arcane Surge",
+                "tier": 4,
+                "cost": 163,
+                "staminaCost": 0,
+                "desc": "Action: This skill can be used in addition to any Spell skill. Your next spell this turn costs 2 less Stamina (minimum 0) and deals +1d6 damage of its element on a hit. Cannot stack with other cost-reduction effects.",
+                "icon": "✴️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ascension_guardians_stand",
+                "name": "Guardian's Stand",
+                "tier": 4,
+                "cost": 163,
+                "staminaCost": 8,
+                "desc": "Reaction: When an adjacent ally would take damage from a single-target attack, you become the target instead and take the full damage (8 Stamina).",
+                "icon": "🛡️",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ascension_rally_the_line",
+                "name": "Rally the Line",
+                "tier": 4,
+                "cost": 163,
+                "staminaCost": 10,
+                "desc": "Action: Allies within 15ft gain +2 Physical Defence and +2 Magical Defence for 2 rounds. You must be able to shout or signal — silence zones block this (GM).",
+                "icon": "📣",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ascension_purge_affliction",
+                "name": "Purge Affliction",
+                "tier": 4,
+                "cost": 163,
+                "staminaCost": 6,
+                "desc": "Action: Remove one poison, disease, charm, or fear effect from yourself or one ally within 30ft.",
+                "icon": "🧴",
+                "prerequisites": {
+                    "type": "NONE",
+                    "skills": []
                 },
                 "specialEffects": []
             }
@@ -9828,8 +12917,8 @@ const SKILLS_DATA = {
                 "name": "Monster Summoning",
                 "tier": 5,
                 "cost": 320,
-                "staminaCost": 20,
-                "desc": "Action (once per day): Summon a loyal monster companion (build with 50 Lumens — GM). Lasts until dismissed or slain.",
+                "staminaCost": 35,
+                "desc": "Action: Summon a loyal monster companion (build with 50 Lumens — GM). Full combat ally with its own turns; lasts until dismissed or slain. One companion at a time.",
                 "icon": "👹",
                 "prerequisites": {
                     "type": "OR_WEAPON_MASTERY_AND_DARKNESS",
@@ -9840,6 +12929,8 @@ const SKILLS_DATA = {
                         "hammer_mastery",
                         "dagger_mastery",
                         "ranged_mastery",
+                        "staff_mastery",
+                        "striker_mastery",
                         "darkness_mastery"
                     ]
                 },
@@ -9848,10 +12939,10 @@ const SKILLS_DATA = {
             {
                 "id": "aetherial_shift",
                 "name": "Aetherial Shift",
-                "tier": 4,
-                "cost": 163,
-                "staminaCost": 15,
-                "desc": "Action (3 uses per day): Phase out for 1 round — immune to damage, pass through walls; you cannot attack or interact. Extra rounds cost 2 Stamina each.",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 20,
+                "desc": "Action: Phase out for 1 round — immune to damage, pass through walls; you cannot attack, cast spells, or interact with objects. Each extra consecutive round costs 2 Stamina.",
                 "icon": "👻",
                 "prerequisites": {
                     "type": "AND",
@@ -9866,10 +12957,10 @@ const SKILLS_DATA = {
             {
                 "id": "chronos_rewind",
                 "name": "Chronos Rewind",
-                "tier": 5,
-                "cost": 320,
-                "staminaCost": 12,
-                "desc": "Reaction (once per encounter): Undo the last action you or an ally took — reroll its dice or choose a different target (GM). Cannot undo death or major story beats.",
+                "tier": 6,
+                "cost": 450,
+                "staminaCost": 30,
+                "desc": "Reaction: Undo the last completed action you or one ally within 30ft took — reroll its dice or pick a different legal target. Cannot undo death, permanent transformation, or major story beats (GM).",
                 "icon": "⏪",
                 "prerequisites": {
                     "type": "ALL_LIGHT_MAGIC",
@@ -9886,24 +12977,32 @@ const SKILLS_DATA = {
             {
                 "id": "ultimate_nova",
                 "name": "Ultimate Nova",
-                "tier": 5,
-                "cost": 320,
-                "staminaCost": 25,
-                "desc": "Action (once per day): 100ft explosion — 8d6 damage to all creatures (each may save for half). You are Exhausted for 3 rounds and cannot cast spells for 1 round.",
+                "tier": 6,
+                "cost": 450,
+                "staminaCost": 40,
+                "desc": "Action: 100ft explosion centered on you — each creature makes a save or takes 8d6 physical damage (half on success). Allies use the same save. You are Exhausted for 3 rounds and cannot cast spells for 1 round.",
                 "icon": "💥",
                 "prerequisites": {
                     "type": "THREE_TIER5_MAGIC",
                     "skills": []
                 },
-                "specialEffects": []
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "exhausted",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
             },
             {
                 "id": "soul_link",
                 "name": "Soul Link",
-                "tier": 4,
-                "cost": 163,
-                "staminaCost": 10,
-                "desc": "Action (10 rounds): Link HP with one willing ally within 30ft — add both max HP into one pool; damage and healing split evenly. If the pool hits 0, both fall unconscious. Either may end early.",
+                "tier": 6,
+                "cost": 450,
+                "staminaCost": 18,
+                "desc": "Action: For 10 rounds, link HP with one willing ally within 30ft — combine both max HP into one shared pool; damage and healing split evenly between you. If the pool hits 0, both fall unconscious. Either partner may end the link early.",
                 "icon": "💕",
                 "prerequisites": {
                     "type": "AND",
@@ -9914,10 +13013,340 @@ const SKILLS_DATA = {
                     ]
                 },
                 "alternativePrerequisite": {
-                    "type": "OR",
+                    "type": "AND",
                     "skills": [
                         "revival_draft",
                         "volatile_expert"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "weapon_ultimates": [
+            {
+                "id": "ultimate_perfect_riposte",
+                "name": "Perfect Riposte",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 18,
+                "desc": "Reaction: When a melee attack misses you, immediately counter with one weapon attack at +5 Accuracy. On a hit, deal double weapon damage + Strength. You must be wielding a sword.",
+                "icon": "⚔️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sword_mastery",
+                        "master_parry"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_skyfall_volley",
+                "name": "Skyfall Volley",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 28,
+                "desc": "Action: Choose up to 5 enemies within 120ft line of sight — separate attack roll (d20 + Accuracy) vs each; on a hit, weapon damage + 2d6. You cannot move on the turn you use this.",
+                "icon": "🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ranged_mastery",
+                        "homing_shot"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_worldbreaker_cleave",
+                "name": "Worldbreaker Cleave",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 24,
+                "desc": "Action: 15ft cone weapon attack vs every enemy — one attack roll each; on a hit, weapon damage + Strength. Shields and heavy armour may crack on a crit (GM). You suffer −2 Physical Defence until your next turn.",
+                "icon": "🪓",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "axe_mastery",
+                        "earthquake_slam"
+                    ]
+                },
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "temp_defense",
+                        "duration": 1,
+                        "potency": -2,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "ultimate_archmage_awakening",
+                "name": "Archmage's Awakening",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 0,
+                "desc": "Passive: Your spells cost 1 less Stamina (minimum 0). When you cast a spell, you may spend 5 Stamina to heal one ally within 30ft for 1d6 + Magic Power HP.",
+                "icon": "🔮",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_mastery",
+                        "staff_of_power"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_death_by_cuts",
+                "name": "Death by a Thousand Cuts",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 22,
+                "desc": "Action: Make three dagger attacks as one Action (each at -2 Accuracy). Each hit applies Bleeding — lose 1d4 HP at the start of each turn for 3 rounds. You must wield a dagger.",
+                "icon": "🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "dagger_mastery",
+                        "thousand_cuts"
+                    ]
+                },
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "bleeding",
+                        "duration": 3,
+                        "potency": 4,
+                        "applyTo": "target"
+                    }
+                ]
+            },
+            {
+                "id": "ultimate_impregnable_reach",
+                "name": "Impregnable Reach",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 20,
+                "desc": "Action: For 3 rounds, +2 Physical Defence and enemies entering your weapon reach provoke a free polearm attack (once per enemy per round). You cannot charge or sprint while active.",
+                "icon": "🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "polearm_mastery",
+                        "fortress_stance"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_seismic_judgment",
+                "name": "Seismic Judgment",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 28,
+                "desc": "Action: 10ft radius slam — each enemy saves or is knocked down; they must spend their next movement standing up. On a failed save they take 4d6 bludgeoning + Strength. Objects, armour, and fortifications take double damage (GM). You lose your next Action.",
+                "icon": "🔨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "hammer_mastery",
+                        "apocalypse_slam"
+                    ]
+                },
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "knockdown",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target"
+                    }
+                ]
+            },
+            {
+                "id": "ultimate_flowing_perfection",
+                "name": "Flowing Perfection",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 20,
+                "desc": "Action: Until the end of your next turn, each successful unarmed hit grants +1 Accuracy and +1 Speed (max +3). After each hit you may move 10ft for free. Hands must be empty.",
+                "icon": "🥋",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "striker_mastery",
+                        "iron_reversal"
+                    ]
+                },
+                "specialEffects": []
+            }
+        ],
+        "magic_ultimates": [
+            {
+                "id": "ultimate_inferno_crown",
+                "name": "Inferno Crown",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 28,
+                "desc": "Action: 30ft burst centered on you — each creature saves or takes 6d6 fire + Magic Power and Burn (2d4, 3 rounds). Allies in the burst use the same save. You are Exhausted for 1 round afterward.",
+                "icon": "👑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fire_supremacy",
+                        "inferno"
+                    ]
+                },
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 3,
+                        "potency": 5,
+                        "applyTo": "target"
+                    },
+                    {
+                        "effectId": "exhausted",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "ultimate_absolute_zero",
+                "name": "World of Stillness",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 24,
+                "desc": "Action: 20ft radius — enemies save or take 4d6 ice + Magic Power and are Immobilized for 2 rounds. The next hit on each frozen target deals +50% damage.",
+                "icon": "🧊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_supremacy",
+                        "glacier"
+                    ]
+                },
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target"
+                    }
+                ]
+            },
+            {
+                "id": "ultimate_tempest_sovereign",
+                "name": "Tempest Sovereign",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 22,
+                "desc": "Action: Lightning jumps to up to 4 enemies within 30ft of your first target — each takes 3d6 lightning + Magic Power (separate attack rolls). You act first in initiative next round.",
+                "icon": "⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "lightning_supremacy",
+                        "storm_mastery"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_living_bastion",
+                "name": "Living Bastion",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 22,
+                "desc": "Action: For 5 rounds, raise a 20ft-radius earth bulwark — allies inside gain +4 Physical Defence and +4 Magical Defence. Enemies entering the area must save or stop at the edge.",
+                "icon": "🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earth_supremacy",
+                        "tectonic_shift"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_zephyr_sovereign",
+                "name": "Zephyr Sovereign",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 20,
+                "desc": "Action: For 2 rounds, move up to 60ft per turn (including vertical if open air) and attacks against you take -3 Accuracy. You cannot cast non-Wind spells while soaring.",
+                "icon": "🌪️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "wind_mastery",
+                        "gale_mastery"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_tidal_aegis",
+                "name": "Tidal Aegis",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 22,
+                "desc": "Action: 30ft radius — allies heal 3d6 + Magic Power and lose poison; enemies save or are pushed 15ft and take 2d6 water damage.",
+                "icon": "🌊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "water_mastery",
+                        "tsunami"
+                    ]
+                },
+                "specialEffects": []
+            },
+            {
+                "id": "ultimate_eclipse_dominion",
+                "name": "Eclipse Dominion",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 26,
+                "desc": "Action: 30ft radius of shadow — enemies save or take 4d6 darkness + Magic Power, gain Fear for 2 rounds, and suffer -2 Accuracy for 3 rounds. You heal HP equal to half the damage you dealt (GM).",
+                "icon": "🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "darkness_mastery",
+                        "eclipse"
+                    ]
+                },
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "fear",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target"
+                    }
+                ]
+            },
+            {
+                "id": "ultimate_radiant_ascension",
+                "name": "Crown of Dawn",
+                "tier": 5,
+                "cost": 320,
+                "staminaCost": 22,
+                "desc": "Action: 40ft holy burst — undead, demons, and corrupted foes take 6d6 light + Magic Power; others take 3d6. Allies in the burst lose poison or curse and gain +2 Magical Defence for 2 rounds.",
+                "icon": "☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_mastery",
+                        "divine_judgment"
                     ]
                 },
                 "specialEffects": []

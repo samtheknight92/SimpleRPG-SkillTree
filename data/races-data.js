@@ -465,7 +465,8 @@ try {
                 {
                     "effectId": "mind_controlled",
                     "duration": 2,
-                    "potency": 0
+                    "potency": 0,
+                    "applyTo": "target"
                 }
             ]
         },

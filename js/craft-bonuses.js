@@ -13,16 +13,16 @@ export function deriveCraftBonuses(character, recipe) {
   if (skills.has('field_medic') && (type.includes('consumable') || type.includes('potion') || HEAL_TYPES.has(effectType))) {
     bonuses.healBonus = 2
   }
-  if (skills.has('weaponwright') && (type.includes('weapon') || profession === 'smithing')) {
+  if (skills.has('weaponwright') && (type.includes('weapon') || profession === 'blacksmith' || profession === 'smithing')) {
     if (recipe.statModifiers?.strength != null || recipe.damage || type.includes('weapon')) {
       bonuses.damageBonus = 1
     }
   }
-  if (skills.has('armourer') && (type.includes('armor') || profession === 'smithing' && type.includes('armor'))) {
+  if (skills.has('armourer') && (type.includes('armor') || (profession === 'blacksmith' || profession === 'smithing') && type.includes('armor'))) {
     bonuses.physicalDefenceBonus = 1
     bonuses.magicalDefenceBonus = 1
   }
-  if (skills.has('spice_box') && (profession === 'cooking' || type.includes('food') || type.includes('meal'))) {
+  if (skills.has('spice_box') && (profession === 'chef' || profession === 'cooking' || type.includes('food') || type.includes('meal'))) {
     bonuses.mealHealBonus = 1
   }
   if (skills.has('forge_blessing') && (type.includes('weapon') || type.includes('armor'))) {

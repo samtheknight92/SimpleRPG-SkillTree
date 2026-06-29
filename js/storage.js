@@ -1,5 +1,6 @@
 import { SAVE_VERSION, STORAGE_KEY, LEGACY_STORAGE_KEY, LEGACY_ACTIVE_KEY, RETIRED_SKILL_SUBCATEGORIES } from './constants.js'
 import { state } from './state.js'
+import { applyFusionNavigationState, parseFusionFiltersFromUrl } from './fusion-nav.js'
 import { debounce, toast } from './utils.js'
 import { normalizeCharacter, stripCharacterCache } from './character.js'
 import { serializeHomebrewForSave, applyHomebrewFromSave } from './homebrew.js'
@@ -13,6 +14,7 @@ export function serializeSave() {
       tab: state.tab,
       skillCategory: state.skillCategory,
       skillSubcategory: state.skillSubcategory,
+      skillFusionFilters: state.skillFusionFilters,
       skillSearch: state.skillSearch,
       itemSearch: state.itemSearch,
       itemCategory: state.itemCategory,
@@ -24,6 +26,7 @@ export function serializeSave() {
       gmMode: state.gmMode,
       initiativeTracker: state.initiativeTracker,
       gmNpcTurnCharacterIds: state.gmNpcTurnCharacterIds,
+      gmNpcTurnFolder: state.gmNpcTurnFolder,
       characterFolderNames: state.characterFolderNames,
       characterFolderOrder: state.characterFolderOrder,
       characterFolderOpen: state.characterFolderOpen,
@@ -51,6 +54,12 @@ function applyUiFromSave(ui) {
   if (ui.skillSubcategory) {
     state.skillSubcategory = RETIRED_SKILL_SUBCATEGORIES[ui.skillSubcategory] || ui.skillSubcategory
   }
+  if (ui.skillFusionFilters && typeof ui.skillFusionFilters === 'object') {
+    state.skillFusionFilters = ui.skillFusionFilters
+  } else if (ui.skillFusionNest) {
+    state.skillFusionFilters = parseFusionFiltersFromUrl({ fnest: ui.skillFusionNest })
+  }
+  applyFusionNavigationState(state)
   if (ui.skillSearch != null) state.skillSearch = String(ui.skillSearch)
   if (ui.itemSearch != null) state.itemSearch = String(ui.itemSearch)
   if (ui.itemCategory) state.itemCategory = ui.itemCategory
@@ -74,6 +83,9 @@ function applyUiFromSave(ui) {
   }
   if (Array.isArray(ui.gmNpcTurnCharacterIds)) {
     state.gmNpcTurnCharacterIds = ui.gmNpcTurnCharacterIds
+  }
+  if (ui.gmNpcTurnFolder != null) {
+    state.gmNpcTurnFolder = String(ui.gmNpcTurnFolder || '').trim()
   }
   if (Array.isArray(ui.characterFolderNames)) {
     state.characterFolderNames = ui.characterFolderNames

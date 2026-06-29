@@ -11,21 +11,90 @@ import { titleCase } from './utils.js'
 import { formatStatModifiers } from './format.js'
 import { formatPerformanceMeta } from './instruments.js'
 import { activeMaxStatRewards, maxStatRewardSourceLabel } from './max-stat-rewards.js'
+import { effectUsesPotencyForStats, statusStatModifiers } from './status-stat-modifiers.js'
+
+export { statusStatModifiers } from './status-stat-modifiers.js'
 
 export function effectList() {
   return Object.values(cache.effectDefinitions).sort((a, b) => a.name.localeCompare(b.name))
 }
 
+/** Effects players may add from Character → Effects & Status Manager. */
+export const PLAYER_MANUAL_EFFECT_IDS = [
+  // Common combat & control
+  'burn',
+  'bleeding',
+  'critical_bleeding',
+  'poison',
+  'acid_corrosion',
+  'incapacitated',
+  'immobilized',
+  'mind_controlled',
+  'fear',
+  'charm',
+  'silenced',
+  'blinded',
+  'knockdown',
+  'exhausted',
+  'stagger',
+  'weakened',
+  'cursed',
+  // Protection, mobility & recovery
+  'protected',
+  'spell_warded',
+  'enhanced',
+  'empowered',
+  'regeneration',
+  'hp_regen',
+  'stamina_regen',
+  'enhanced_mobility',
+  'haste',
+  'invisibility',
+  'stone_skin',
+  'weapon_enchanted',
+  // Skill action buffs & debuffs
+  'banquet_planner_buff',
+  'battle_anthem_buff',
+  'battle_breakfast',
+  'called_shot_buff',
+  'career_rage_buff',
+  'dirty_trick_buff',
+  'dissonant_note_debuff',
+  'empower_ally_buff',
+  'field_fit_buff',
+  'hearty_rations_buff',
+  'intimidate_debuff',
+  'intimidating_aura',
+  'marching_tune_buff',
+  'reckless_strike_buff',
+  'sacred_stance_buff',
+  'shield_wall_buff',
+  'soothing_hymn_buff',
+  'suppressing_fire_debuff',
+  'volley_call_buff',
+  'ward_circle_buff',
+  'work_song_buff',
+  'stealth_mastery',
+  // Consumable temp buffs & immunities
+  'cold_immunity',
+  'fire_immunity',
+  'temp_strength',
+  'temp_magic',
+  'temp_speed',
+  'temp_defense'
+]
+
+const PLAYER_MANUAL_EFFECT_SET = new Set(PLAYER_MANUAL_EFFECT_IDS)
+
 /** Effects the GM can apply from the Character tab dropdown. */
 export function manualEffectList() {
-  const manual = effectList().filter(effect => effect.manual)
-  return manual.length ? manual : effectList()
+  return effectList().filter(effect => PLAYER_MANUAL_EFFECT_SET.has(effect.id))
 }
 
 /** Shown first in the Character tab effect picker — common table statuses. */
 export const COMMON_MANUAL_EFFECT_IDS = [
-  'burn', 'poison', 'hp_regen', 'regeneration', 'stamina_regen',
-  'protected', 'enhanced', 'weakened', 'incapacitated', 'immobilized', 'mind_controlled'
+  'burn', 'bleeding', 'poison', 'protected', 'weakened',
+  'incapacitated', 'immobilized', 'exhausted', 'regeneration', 'hp_regen'
 ]
 
 function manualEffectPickerGroup(effect) {
@@ -78,9 +147,10 @@ export function effectDurationLabel(duration) {
   return `${value} turn${value === 1 ? '' : 's'}`
 }
 
-/** Whether potency is meaningful for ticks (DoT/HoT/regen), not resistances or stat auras. */
+/** Whether potency is meaningful for ticks (DoT/HoT/regen) or temp stat buffs. */
 export function effectUsesPotency(effect) {
   if (!effect) return false
+  if (effectUsesPotencyForStats(effect)) return true
   const type = String(effect.type || '').toLowerCase()
   if (type.includes('damageovertime') || type.includes('healovertime')) return true
   if (Number(effect.tickDamage) > 0 || Number(effect.tickHeal) > 0 || Number(effect.tickStamina) > 0) return true
@@ -132,7 +202,8 @@ export function effectTooltip(effectId, source = '', status = null) {
     lines.push(`Potency: ${potencyText}`)
   }
   if (effect.desc) lines.push('', effect.desc)
-  if (effect.statModifiers) lines.push(`Stat modifiers: ${formatStatModifiers(effect.statModifiers)}`)
+  const mods = status ? statusStatModifiers(status, effect) : (effect.statModifiers || {})
+  if (Object.keys(mods).length) lines.push(`Stat modifiers: ${formatStatModifiers(mods)}`)
   if (status?.performance) {
     const perfLine = formatPerformanceMeta(status.performance)
     if (perfLine) lines.push('', `Performance: ${perfLine}`)
