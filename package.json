@@ -2,7 +2,8 @@
   "name": "lumenforge-rpg",
   "version": "5.0.0",
   "private": true,
-  "description": "LumenForge RPG v5 — Nearly Complete (browser character sheet & play aid)",
+  "type": "module",
+  "description": "LumenForge RPG v5 — Table Ready (browser character sheet & play aid)",
   "scripts": {
     "serve": "npx --yes serve -l 8000 .",
     "build-data": "node scripts/build-data.mjs",

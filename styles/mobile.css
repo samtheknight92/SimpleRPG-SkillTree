@@ -480,7 +480,7 @@
   }
 
   .initiative-edit-row {
-    grid-template-columns: 1fr 72px auto;
+    grid-template-columns: 24px 1fr 72px auto;
     gap: 6px;
   }
 
@@ -1055,6 +1055,36 @@
   .effect-add-box .input {
     padding: 9px 10px;
     font-size: 14px;
+  }
+
+  .number-stepper-btn {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    font-size: 1.35rem;
+  }
+
+  .number-stepper input[type="number"] {
+    min-height: 2.75rem;
+    font-size: 15px;
+  }
+
+  .number-stepper-tiny .number-stepper-btn {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
+
+  .number-stepper-tiny input[type="number"] {
+    min-height: 2.5rem;
+  }
+
+  .homebrew-stats .number-stepper-btn {
+    min-width: 3rem;
+    min-height: 3rem;
+  }
+
+  .homebrew-stats .number-stepper input[type="number"] {
+    min-height: 3rem;
+    font-size: 16px;
   }
 
   .effect-add-box .primary-btn.full {

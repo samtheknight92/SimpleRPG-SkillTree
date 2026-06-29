@@ -1237,6 +1237,69 @@ textarea {
   flex: 0 1 auto;
 }
 
+.fusion-filters {
+  margin-bottom: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.fusion-filters-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.fusion-filters-hint {
+  flex: 1 1 180px;
+  font-size: 0.85rem;
+}
+
+.fusion-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.fusion-filter-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  min-width: 4.5rem;
+}
+
+.fusion-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.fusion-filter-chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--surface-border-soft);
+  background: var(--surface-raised, rgba(255, 255, 255, 0.04));
+  color: var(--tab-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.fusion-filter-chip:hover {
+  border-color: var(--tab-active-border);
+}
+
+.fusion-filter-chip.active {
+  color: var(--tab-active-text);
+  font-weight: 800;
+  border-color: var(--tab-active-border);
+  background: linear-gradient(135deg, var(--tab-active-start), var(--tab-active-end) 145%);
+  box-shadow: 0 8px 18px var(--tab-active-shadow);
+}
+
 .skill-tree { display: grid; gap: 18px; }
 
 .skill-tree-intro {
@@ -1531,6 +1594,30 @@ textarea {
   gap: 8px;
 }
 
+.gm-combat-folders {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.initiative-folder-picker {
+  gap: 8px;
+  align-items: center;
+}
+
+.initiative-folder-picker .input {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.gm-combat-folder .character-folder-body {
+  padding-top: 8px;
+}
+
+.gm-folder-actions {
+  margin-bottom: 8px;
+}
+
 .initiative-layout {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) minmax(280px, 1.2fr);
@@ -1593,9 +1680,15 @@ textarea {
 
 .initiative-edit-row {
   display: grid;
-  grid-template-columns: 1fr 88px auto;
+  grid-template-columns: 28px 1fr 88px auto;
   gap: 8px;
   align-items: center;
+}
+
+.initiative-edit-rank {
+  font-size: 12px;
+  color: rgba(220, 230, 248, 0.55);
+  text-align: center;
 }
 
 .initiative-value-input {
@@ -2318,6 +2411,7 @@ body.has-action-bar .content {
 .skill-slot-tier-3 { border-color: rgba(155, 108, 255, 0.6); }
 .skill-slot-tier-4 { border-color: rgba(255, 210, 127, 0.65); }
 .skill-slot-tier-5 { border-color: rgba(255, 126, 167, 0.7); }
+.skill-slot-tier-6 { border-color: rgba(255, 80, 120, 0.85); box-shadow: 0 0 12px rgba(255, 80, 120, 0.25); }
 
 @media (max-width: 980px) {
   .action-bar-inner {
@@ -2578,6 +2672,89 @@ body.skill-sheet-open {
   min-width: 1.75rem;
   padding-inline: 0.35rem;
 }
+
+.number-stepper {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--panel-2, rgba(255, 255, 255, 0.04));
+}
+
+.number-stepper input[type="number"] {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  text-align: center;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  -moz-appearance: textfield;
+}
+
+.number-stepper input[type="number"]::-webkit-outer-spin-button,
+.number-stepper input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number-stepper-btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  padding: 0 0.5rem;
+  border: 0;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.number-stepper-btn:first-child {
+  border-right: 1px solid var(--border);
+}
+
+.number-stepper-btn:last-child {
+  border-left: 1px solid var(--border);
+}
+
+.number-stepper-btn:hover {
+  background: rgba(91, 161, 255, 0.18);
+}
+
+.number-stepper-btn:active {
+  background: rgba(91, 161, 255, 0.28);
+}
+
+.number-stepper-tiny .number-stepper-btn {
+  min-width: 2rem;
+  font-size: 1rem;
+}
+
+.number-stepper-tiny input[type="number"] {
+  padding-inline: 0.35rem;
+}
+
+.number-stepper-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.homebrew-use-effect-row .number-stepper {
+  margin-top: 0.25rem;
+}
+
 .equip-slot-copy .item-counter-controls { display: flex; }
 .inventory-item-copy .item-counter-controls { display: flex; margin-top: 0.5rem; }
 .pill-label { display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; }

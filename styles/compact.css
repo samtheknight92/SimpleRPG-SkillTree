@@ -224,7 +224,7 @@ select,
 
 
 .initiative-edit-row {
-  grid-template-columns: 1fr 72px auto;
+  grid-template-columns: 24px 1fr 72px auto;
   gap: 6px;
 }
 

@@ -21,6 +21,10 @@ LumenForge is a **deliberately simple** tabletop RPG and companion app — **eas
 
 Persistent AI guidance: workspace `.cursor/rules/lumenforge.mdc` + `.cursor/rules/simple-game-design.mdc`
 
+### Weapon & element identity — **Added**
+
+Each weapon type and magic element has **four design traits** (versatility, burning, reach, etc.). Skills should reinforce at least one trait; fusion skills should hit traits from **both** parents. Full guide: **`DESIGN-WEAPON-ELEMENT-IDENTITY.md`** (includes Striker / unarmed martial arts).
+
 ---
 
 ## Homebrew tab (custom items & skills)
@@ -118,7 +122,7 @@ Skill and item text uses **both** the % and plain words (e.g. `Fire weakness 200
 | Analyze | vague reveal | HP band + elemental tiers (25/50/200/400%) + one trait (GM) |
 | Nova / Ultimate Nova | friendly fire buried | auto-hit burst; state ally damage and Incapacitated/Exhausted cost |
 | Soul Link | HP pool jargon | combined max HP pool; split damage/healing; 0 = both unconscious |
-| Eternal Moment | temporal instability | 3 extra turns; enemies can't react; skip next turn |
+| Eternal Moment | temporal instability | 1 extra turn; enemies can't react; skip next turn |
 | Chronos Rewind | — | undo last ally/your action — reroll or retarget (GM) |
 | Aetherial Shift (both tiers) | dimensional instability | ignore one hit OR phase 1 round; clear action lockout |
 
