@@ -345,8 +345,12 @@ export function minLevelToLearnSkill(skill) {
   const capstoneGate = capstoneTierMinLevel(skill)
   const tierGate = capstoneGate ?? TIER_MIN_LEVEL[tier] ?? 1
   const explicit = skill?.prerequisites?.type === 'LEVEL' ? Number(skill.prerequisites.level || 0) : 0
-  const homebrewLock = skill?.source === 'homebrew' ? Number(skill.lockMinLevel || 0) : 0
-  return Math.max(tierGate, explicit, homebrewLock)
+  if (skill?.source === 'homebrew') {
+    const homebrewLock = Number(skill.lockMinLevel || 0)
+    if (homebrewLock > 0) return Math.max(homebrewLock, explicit)
+    return Math.max(tierGate, explicit)
+  }
+  return Math.max(tierGate, explicit)
 }
 
 function countLearnedTier5MagicSkills(character) {
@@ -406,12 +410,14 @@ function evaluatePrerequisiteReq(character, req) {
 }
 
 export function prereqLabel(skill) {
+  if (skill?.source === 'homebrew') {
+    const parts = [`Level ${minLevelToLearnSkill(skill)}+`]
+    const extras = homebrewSkillLockSummary(skill, { skipLevel: true })
+    if (extras) parts.push(extras)
+    return parts.join(' · ')
+  }
   const parts = [`Level ${minLevelToLearnSkill(skill)}+`]
   const req = skill?.prerequisites
-  if (skill?.source === 'homebrew') {
-    const lockText = homebrewSkillLockSummary(skill)
-    if (lockText) parts.push(lockText)
-  }
   const main = formatPrerequisiteReq(req)
   if (main) parts.push(main)
   const alt = formatPrerequisiteReq(skill?.alternativePrerequisite)
@@ -469,7 +475,12 @@ export function canLearnSkill(character, skill) {
   }
   const needLevel = minLevelToLearnSkill(skill)
   if (characterLevelInfo(character).level < needLevel) {
-    return { ok: false, reason: `Requires level ${needLevel} (Tier ${skill.tier || 1})` }
+    return {
+      ok: false,
+      reason: skill?.source === 'homebrew'
+        ? `Requires level ${needLevel}`
+        : `Requires level ${needLevel} (Tier ${skill.tier || 1})`
+    }
   }
   if (!hasPrerequisites(character, skill)) {
     const req = skill?.prerequisites

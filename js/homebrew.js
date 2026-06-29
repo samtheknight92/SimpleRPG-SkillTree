@@ -645,10 +645,10 @@ export function homebrewSkillLockOptions() {
   return rows.sort((a, b) => a.name.localeCompare(b.name))
 }
 
-export function homebrewSkillLockSummary(skill) {
+export function homebrewSkillLockSummary(skill, { skipLevel = false } = {}) {
   if (!skill || skill.source !== 'homebrew') return ''
   const parts = []
-  if (skill.lockMinLevel) parts.push(`Level ${skill.lockMinLevel}+`)
+  if (!skipLevel && skill.lockMinLevel) parts.push(`Level ${skill.lockMinLevel}+`)
   if (skill.lockRaces?.length) {
     const labels = skill.lockRaces.map(id => getHomebrewRace(id)?.name || getRacesData()[id]?.name || id)
     parts.push(`Race: ${labels.join(' / ')}`)
